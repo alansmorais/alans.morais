@@ -1,0 +1,665 @@
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alan da Silva Morais | Automation & Operational Consulting</title>
+    
+    <meta name="description" content="Alan da Silva Morais provides operational consulting, business automation, and web development to help companies reduce manual work and streamline processes." />
+    <meta name="keywords" content="Business Automation, VBA, Google Apps Script, Web Design, Tailwind CSS, SAP S/4HANA, Operational Consulting, Poland" />
+    <meta property="og:title" content="Alan da Silva Morais | Automation & Operational Consulting" />
+    <meta property="og:description" content="Improve business operations through smart automation and modern web presence." />
+    <meta property="og:type" content="website" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass {
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.05);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-white antialiased">
+
+<nav class="fixed top-0 w-full z-50 glass border-b border-slate-800 transition-all duration-300 bg-slate-950/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <a href="#" class="text-xl font-bold tracking-tight text-white">Alan da Silva Morais</a>
+        
+        <div class="flex items-center gap-6">
+            <a href="#services-pricing" data-i18n="nav_services" class="text-slate-300 hover:text-white font-medium transition text-sm md:text-base hidden sm:block">Services & Pricing</a>
+            
+            <div class="flex items-center gap-2 border-l border-slate-700 pl-6">
+                <button onclick="setLanguage('en')" data-lang="en" class="lang-btn text-sm font-bold text-blue-400 hover:text-blue-300 transition focus:outline-none">EN</button>
+                <span class="text-slate-600 text-sm">/</span>
+                <button onclick="setLanguage('pt')" data-lang="pt" class="lang-btn text-sm font-medium text-slate-400 hover:text-white transition focus:outline-none">PT-BR</button>
+                <span class="text-slate-600 text-sm">/</span>
+                <button onclick="setLanguage('pl')" data-lang="pl" class="lang-btn text-sm font-medium text-slate-400 hover:text-white transition focus:outline-none">PL</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<header class="relative overflow-hidden border-b border-slate-800 pt-16">
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-slate-950 to-slate-950"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 py-24 lg:py-32 flex flex-col lg:flex-row items-center justify-between">
+
+        <div class="max-w-3xl z-10">
+
+            <div class="inline-flex items-center px-4 py-2 rounded-full glass border border-slate-700 text-sm text-slate-300 mb-8">
+                <span class="w-2 h-2 rounded-full bg-green-400 mr-3 animate-pulse"></span>
+                <span data-i18n="hero_badge">Available for consulting • Kraków & Remote</span>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
+                <span data-i18n="hero_title_1">Improve Business Operations</span><br>
+                <span class="gradient-text" data-i18n="hero_title_2">Through Smart Automation.</span>
+            </h1>
+
+            <p data-i18n="hero_p1" class="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8 max-w-2xl font-medium">
+                I help organizations reduce manual work, improve data quality, and streamline operations through automation systems built on real enterprise experience.
+            </p>
+
+            <p data-i18n="hero_p2" class="text-slate-400 text-lg leading-relaxed mb-12 max-w-2xl">
+                With 10+ years in global enterprise environments including SAP, Salesforce, and operational teams, I combine business process understanding with practical technical execution.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button onclick="toggleContactForm()" data-i18n="hero_btn_book"
+                   class="bg-blue-600 hover:bg-blue-500 transition-all duration-300 px-8 py-4 rounded-2xl font-semibold text-lg text-center">
+                    Book an Operations Review
+                </button>
+
+                <a href="https://www.linkedin.com/in/alandasm" data-i18n="hero_btn_view"
+                   target="_blank"
+                   class="border border-slate-600 hover:border-white hover:bg-white hover:text-slate-950 transition-all duration-300 px-8 py-4 rounded-2xl font-semibold text-lg text-center">
+                    View Experience
+                </a>
+            </div>
+
+        </div>
+
+        <div class="hidden lg:flex flex-col gap-6 relative z-10 mt-10 lg:mt-0">
+
+            <div class="glass border border-slate-700 p-6 rounded-3xl shadow-2xl transform translate-x-8 animate-[bounce_4s_ease-in-out_infinite]">
+                <div class="flex items-center gap-4">
+                    <div class="text-4xl">⏱️</div>
+                    <div>
+                        <p data-i18n="stat1_title" class="text-sm text-slate-400 font-medium">Average Client Impact</p>
+                        <p data-i18n="stat1_val" class="text-2xl font-bold text-white">15+ Hrs Saved/Wk</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass border border-blue-900/50 p-6 rounded-3xl shadow-2xl transform -translate-x-8 bg-blue-900/10 animate-[bounce_5s_ease-in-out_infinite_reverse]">
+                <div class="flex items-center gap-4">
+                    <div class="text-4xl">📈</div>
+                    <div>
+                        <p data-i18n="stat2_title" class="text-sm text-slate-400 font-medium">Data Accuracy</p>
+                        <p data-i18n="stat2_val" class="text-2xl font-bold text-blue-400">100% Automated</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</header>
+
+<section class="py-16 border-b border-slate-800 bg-slate-900/40">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+        <p data-i18n="trust_title" class="uppercase tracking-[0.3em] text-sm text-slate-500 font-semibold mb-6">
+            Experience Across Enterprise Environments
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-8 md:gap-14 text-2xl font-bold text-slate-400">
+            <span>SAP S/4HANA</span>
+            <span>Ariba</span>
+            <span>Salesforce</span>
+            <span>Shell</span>
+            <span>Google Travel</span>
+        </div>
+    </div>
+</section>
+
+<section class="py-24 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-start">
+
+        <div>
+            <h2 data-i18n="exp_title" class="text-4xl font-bold mb-10">
+                Core Expertise
+            </h2>
+
+            <div class="space-y-6">
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <h3 data-i18n="exp_1_title" class="font-bold text-xl mb-3 text-blue-400">
+                        Data Automation
+                    </h3>
+                    <p data-i18n="exp_1_desc" class="text-slate-400 leading-relaxed">
+                        VBA Macros, Google Apps Script, Excel Automation, Google Sheets Integration, Reporting Optimization.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <h3 data-i18n="exp_2_title" class="font-bold text-xl mb-3 text-blue-400">
+                        Web Development
+                    </h3>
+                    <p data-i18n="exp_2_desc" class="text-slate-400 leading-relaxed">
+                        HTML, CSS, Tailwind CSS, Responsive Design, Landing Pages, Business Websites.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <h3 data-i18n="exp_3_title" class="font-bold text-xl mb-3 text-blue-400">
+                        Enterprise Operations
+                    </h3>
+                    <p data-i18n="exp_3_desc" class="text-slate-400 leading-relaxed">
+                        SAP S/4HANA, Ariba, Salesforce, Master Data Management, Order-to-Cash, ITIL.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div>
+            <h2 data-i18n="prof_exp_title" class="text-4xl font-bold mb-10">
+                Professional Experience
+            </h2>
+
+            <div class="space-y-8 border-l border-slate-700 pl-8">
+
+                <div>
+                    <h3 class="text-xl font-bold mb-1">TTEC (Google Travel)</h3>
+                    <p data-i18n="role_1" class="text-blue-400 font-medium mb-2">Partner Success Manager</p>
+                    <span data-i18n="date_1" class="text-slate-500 text-sm">Mar 2025 – Present</span>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-1">Familia Brazilian Bar</h3>
+                    <p data-i18n="role_2" class="text-blue-400 font-medium mb-2">Owner & Administrator</p>
+                    <span data-i18n="date_2" class="text-slate-500 text-sm">Aug 2024 – Feb 2025</span>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-1">Shell</h3>
+                    <p data-i18n="role_3" class="text-blue-400 font-medium mb-2">Customer Success Specialist</p>
+                    <span data-i18n="date_3" class="text-slate-500 text-sm">Nov 2021 – Jul 2024</span>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-1">Shell</h3>
+                    <p data-i18n="role_4" class="text-blue-400 font-medium mb-2">Procurement Data Specialist</p>
+                    <span data-i18n="date_4" class="text-slate-500 text-sm">Jun 2018 – Nov 2021</span>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-1">HCL Technologies</h3>
+                    <p data-i18n="role_5" class="text-blue-400 font-medium mb-2">IT Service Desk Analyst</p>
+                    <span data-i18n="date_5" class="text-slate-500 text-sm">Jun 2017 – May 2018</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="py-24 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-blue-600/5 blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+            <h2 data-i18n="approach_title" class="text-sm uppercase tracking-[0.3em] text-blue-400 font-bold mb-10">
+                My Approach
+            </h2>
+
+            <div class="mb-10 text-slate-600">
+                <svg class="w-12 h-12 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                </svg>
+            </div>
+
+            <blockquote data-i18n="approach_q1" class="text-2xl md:text-3xl text-white font-medium leading-relaxed mb-8">
+                I always put myself in the position of someone discovering the business for the first time what attracts me, what builds trust, what feels clear, and what makes the experience easier and more meaningful.
+            </blockquote>
+
+            <p data-i18n="approach_q2" class="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+                I naturally look at both the user experience and the bigger picture of the business, focusing on what can create a stronger connection with people while also helping the brand grow and perform better long-term.
+            </p>
+        </div>
+</section>
+
+<section id="services-pricing" class="py-24 bg-slate-950 border-t border-slate-800 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-6">
+        
+        <div class="mb-16 text-center max-w-3xl mx-auto">
+            <h2 data-i18n="pack_sub" class="text-sm uppercase tracking-[0.3em] text-blue-400 font-bold mb-4">Service Packages</h2>
+            <h2 data-i18n="pack_title" class="text-4xl md:text-5xl font-bold mb-6">Partnership & Pricing</h2>
+            <p data-i18n="pack_desc" class="text-slate-400 text-lg leading-relaxed">
+                Clear, transparent packages designed for immediate transformation and sustained operational growth.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8 items-start">
+            
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 flex flex-col h-full hover:border-slate-700 transition-all">
+                <h3 data-i18n="pack1_title" class="text-2xl font-bold mb-2">Basic Support</h3>
+                <p data-i18n="pack1_desc" class="text-slate-400 text-sm mb-6">Technical updates & small changes</p>
+                <div class="mb-6 pb-6 border-b border-slate-800">
+                    <span class="text-4xl font-extrabold text-white">700</span>
+                    <span class="text-slate-500"> PLN / mo</span>
+                </div>
+                <ul class="text-slate-400 space-y-4 mb-8 flex-grow text-sm">
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p1_l1">Updates & fixes</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p1_l2">Secure backups</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p1_l3">Content edits</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p1_l4">Uptime monitoring</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p1_l5">Small system improvements</span></li>
+                </ul>
+                <button onclick="toggleContactForm('Basic Support', '700 PLN/mo')" data-i18n="pack1_btn" class="w-full mt-auto text-center text-blue-400 hover:text-white border border-slate-700 hover:border-slate-500 font-semibold py-3 rounded-xl transition-all">Select Package</button>
+            </div>
+
+            <div class="bg-gradient-to-b from-slate-800 to-slate-900 border border-blue-500/50 rounded-3xl p-8 flex flex-col h-full relative transform lg:-translate-y-4 shadow-[0_0_40px_rgba(37,99,235,0.15)]">
+                <div data-i18n="pack2_badge" class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white text-xs font-bold uppercase tracking-wider py-1.5 px-4 rounded-full">
+                    The Sweet Spot
+                </div>
+                <h3 data-i18n="pack2_title" class="text-2xl font-bold mb-2 text-white">Growth Retainer</h3>
+                <p data-i18n="pack2_desc" class="text-blue-200 text-sm mb-6">Strategy, optimization & continuous updates</p>
+                <div class="mb-6 pb-6 border-b border-slate-700/50">
+                    <span class="text-4xl font-extrabold text-blue-400">1,800</span>
+                    <span class="text-slate-400"> PLN / mo</span>
+                </div>
+                <ul class="text-slate-300 space-y-4 mb-8 flex-grow text-sm">
+                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l1">Ongoing site improvements</span></li>
+                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l2">SEO optimization & blog uploads</span></li>
+                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l3">Landing pages & UX refinements</span></li>
+                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l4">Analytics review & funnel upgrades</span></li>
+                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l5">AI/chatbot integration & automation</span></li>
+                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l9">Social media management</span></li>
+                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l6">Monthly strategy consulting calls</span></li>
+                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l7">Performance/security updates</span></li>
+                </ul>
+                <button onclick="toggleContactForm('Growth Retainer', '1,800 PLN/mo')" data-i18n="pack2_btn" class="w-full mt-auto text-center bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-all shadow-lg hover:shadow-blue-500/25">Select Package</button>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 flex flex-col h-full hover:border-slate-700 transition-all">
+                <h3 data-i18n="pack3_title" class="text-2xl font-bold mb-2">Transformation Project</h3>
+                <p data-i18n="pack3_desc" class="text-slate-400 text-sm mb-6">Redesigning & refining the site experience</p>
+                <div class="mb-6 pb-6 border-b border-slate-800">
+                    <span data-i18n="pack3_price" class="text-2xl font-bold text-white">Custom Quote</span>
+                </div>
+                <ul class="text-slate-400 space-y-4 mb-8 flex-grow text-sm">
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l1">Homepage restructuring & UX improvements</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l2">Visual modernization & copy refinement</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l3">Mobile optimization & SEO cleanup</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l4">Clearer offers & trust/safety sections</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l5">Content organization</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l6">AI onboarding & integration setup guidance</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l7">Core performance improvements</span></li>
+                </ul>
+                <button onclick="toggleContactForm('Transformation Project', 'Custom Quote')" data-i18n="pack3_btn" class="w-full mt-auto text-center text-blue-400 hover:text-white border border-slate-700 hover:border-slate-500 font-semibold py-3 rounded-xl transition-all">Get a Quote</button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="py-24 bg-gradient-to-br from-blue-600 to-blue-800 text-white border-t border-slate-800">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+
+        <h2 data-i18n="cta_title" class="text-4xl md:text-5xl font-extrabold mb-8">
+            Let’s Improve Your Operations
+        </h2>
+
+        <p data-i18n="cta_desc" class="text-xl text-blue-100 mb-10">
+            If your business relies heavily on manual processes, spreadsheets, or disconnected systems, there are often simple automation opportunities that create immediate impact.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+
+            <button onclick="toggleContactForm()" data-i18n="hero_btn_book"
+               class="bg-white text-blue-700 px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl hover:scale-105 transition-all">
+                Book a Review
+            </button>
+
+            <a href="https://www.linkedin.com/in/alandasm"
+               target="_blank"
+               class="border border-white/50 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white hover:text-blue-700 transition-all">
+                LinkedIn
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+<footer class="py-10 bg-slate-950 border-t border-slate-800 text-center relative">
+    <p data-i18n="footer_text" class="text-slate-500">
+        © 2026 Alan da Silva Morais • Operational Automation & Consulting
+    </p>
+</footer>
+
+<div id="contactModal" class="fixed inset-0 bg-black/80 hidden z-[60] flex items-center justify-center p-4 transition-opacity">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl w-full max-w-lg shadow-2xl flex flex-col overflow-hidden relative">
+        <div class="flex justify-between items-center px-6 py-4 border-b border-slate-800">
+            <h3 data-i18n="form_title" class="text-xl font-bold text-white">Send a Message</h3>
+            <button onclick="toggleContactForm()" class="text-slate-400 hover:text-white text-3xl leading-none transition-all focus:outline-none">&times;</button>
+        </div>
+        <div class="p-6">
+            <form action="https://formsubmit.co/ajax/alanpkmorais@gmail.com" method="POST" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-4">
+                <input type="hidden" name="_subject" id="formSubject">
+                <input type="hidden" name="_captcha" value="false">
+                
+                <div>
+                    <label data-i18n="form_name" class="block text-sm font-medium text-slate-400 mb-1">Name</label>
+                    <input type="text" name="name" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-blue-500 transition-colors">
+                </div>
+                <div>
+                    <label data-i18n="form_email" class="block text-sm font-medium text-slate-400 mb-1">Email</label>
+                    <input type="email" name="email" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-blue-500 transition-colors">
+                </div>
+                <div>
+                    <label data-i18n="form_msg" class="block text-sm font-medium text-slate-400 mb-1">Message Details</label>
+                    <textarea name="message" id="formMsg" rows="4" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-blue-500 transition-colors"></textarea>
+                </div>
+                <button type="submit" data-i18n="form_submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-all shadow-lg mt-2">Send Message</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const translations = {
+        en: {
+            nav_services: "Services & Pricing",
+            hero_badge: "Available for consulting • Kraków & Remote",
+            hero_title_1: "Improve Business Operations",
+            hero_title_2: "Through Smart Automation.",
+            hero_p1: "I help organizations reduce manual work, improve data quality, and streamline operations through automation systems built on real enterprise experience.",
+            hero_p2: "With 10+ years in global enterprise environments including SAP, Salesforce, and operational teams, I combine business process understanding with practical technical execution.",
+            hero_btn_book: "Book an Operations Review",
+            hero_btn_view: "View Experience",
+            stat1_title: "Average Client Impact",
+            stat1_val: "15+ Hrs Saved/Wk",
+            stat2_title: "Data Accuracy",
+            stat2_val: "100% Automated",
+            trust_title: "Experience Across Enterprise Environments",
+            exp_title: "Core Expertise",
+            exp_1_title: "Data Automation",
+            exp_1_desc: "VBA Macros, Google Apps Script, Excel Automation, Google Sheets Integration, Reporting Optimization.",
+            exp_2_title: "Web Development",
+            exp_2_desc: "HTML, CSS, Tailwind CSS, Responsive Design, Landing Pages, Business Websites.",
+            exp_3_title: "Enterprise Operations",
+            exp_3_desc: "SAP S/4HANA, Ariba, Salesforce, Master Data Management, Order-to-Cash, ITIL.",
+            prof_exp_title: "Professional Experience",
+            role_1: "Partner Success Manager",
+            date_1: "Mar 2025 – Present",
+            role_2: "Owner & Administrator",
+            date_2: "Aug 2024 – Feb 2025",
+            role_3: "Customer Success Specialist",
+            date_3: "Nov 2021 – Jul 2024",
+            role_4: "Procurement Data Specialist",
+            date_4: "Jun 2018 – Nov 2021",
+            role_5: "IT Service Desk Analyst",
+            date_5: "Jun 2017 – May 2018",
+            approach_title: "My Approach",
+            approach_q1: "I always put myself in the position of someone discovering the business for the first time what attracts me, what builds trust, what feels clear, and what makes the experience easier and more meaningful.",
+            approach_q2: "I naturally look at both the user experience and the bigger picture of the business, focusing on what can create a stronger connection with people while also helping the brand grow and perform better long-term.",
+            pack_sub: "Service Packages",
+            pack_title: "Partnership & Pricing",
+            pack_desc: "Clear, transparent packages designed for immediate transformation and sustained operational growth.",
+            pack1_title: "Basic Support",
+            pack1_desc: "Technical updates & small changes",
+            p1_l1: "Updates & fixes",
+            p1_l2: "Secure backups",
+            p1_l3: "Content edits",
+            p1_l4: "Uptime monitoring",
+            p1_l5: "Small system improvements",
+            pack1_btn: "Select Package",
+            pack2_badge: "The Sweet Spot",
+            pack2_title: "Growth Retainer",
+            pack2_desc: "Strategy, optimization & continuous updates",
+            p2_l1: "Ongoing site improvements",
+            p2_l2: "SEO optimization & blog uploads",
+            p2_l3: "Landing pages & UX refinements",
+            p2_l4: "Analytics review & funnel upgrades",
+            p2_l5: "AI/chatbot integration & automation",
+            p2_l9: "Social media management",
+            p2_l6: "Monthly strategy consulting calls",
+            p2_l7: "Performance/security updates",
+            pack2_btn: "Select Package",
+            pack3_title: "Transformation Project",
+            pack3_desc: "Redesigning & refining the site experience",
+            pack3_price: "Custom Quote",
+            p3_l1: "Homepage restructuring & UX improvements",
+            p3_l2: "Visual modernization & copy refinement",
+            p3_l3: "Mobile optimization & SEO cleanup",
+            p3_l4: "Clearer offers & trust/safety sections",
+            p3_l5: "Content organization",
+            p3_l6: "AI onboarding & integration setup guidance",
+            p3_l7: "Core performance improvements",
+            pack3_btn: "Get a Quote",
+            cta_title: "Let’s Improve Your Operations",
+            cta_desc: "If your business relies heavily on manual processes, spreadsheets, or disconnected systems, there are often simple automation opportunities that create immediate impact.",
+            footer_text: "© 2026 Alan da Silva Morais • Operational Automation & Consulting",
+            form_title: "Send a Message",
+            form_name: "Name",
+            form_email: "Email",
+            form_msg: "Message Details",
+            form_submit: "Send Message"
+        },
+        pt: {
+            nav_services: "Serviços e Preços",
+            hero_badge: "Disponível para consultoria • Cracóvia & Remoto",
+            hero_title_1: "Melhore as Operações de Negócios",
+            hero_title_2: "Através da Automação Inteligente.",
+            hero_p1: "Ajudo organizações a reduzir o trabalho manual, melhorar a qualidade dos dados e simplificar as operações através de sistemas de automação construídos com base em experiência corporativa real.",
+            hero_p2: "Com mais de 10 anos em ambientes corporativos globais, incluindo SAP, Salesforce e equipes operacionais, combino a compreensão de processos de negócios com execução técnica prática.",
+            hero_btn_book: "Agendar uma Revisão",
+            hero_btn_view: "Ver Experiência",
+            stat1_title: "Impacto Médio no Cliente",
+            stat1_val: "15+ Hrs Salvas/Sem",
+            stat2_title: "Precisão de Dados",
+            stat2_val: "100% Automatizado",
+            trust_title: "Experiência em Ambientes Corporativos",
+            exp_title: "Principais Especialidades",
+            exp_1_title: "Automação de Dados",
+            exp_1_desc: "Macros VBA, Google Apps Script, Automação Excel, Integração Google Sheets, Otimização de Relatórios.",
+            exp_2_title: "Desenvolvimento Web",
+            exp_2_desc: "HTML, CSS, Tailwind CSS, Design Responsivo, Landing Pages, Sites de Negócios.",
+            exp_3_title: "Operações Corporativas",
+            exp_3_desc: "SAP S/4HANA, Ariba, Salesforce, Gerenciamento de Dados Mestres, Order-to-Cash, ITIL.",
+            prof_exp_title: "Experiência Profissional",
+            role_1: "Gerente de Sucesso de Parceiros",
+            date_1: "Mar 2025 – Presente",
+            role_2: "Proprietário e Administrador",
+            date_2: "Ago 2024 – Fev 2025",
+            role_3: "Especialista em Sucesso do Cliente",
+            date_3: "Nov 2021 – Jul 2024",
+            role_4: "Especialista em Dados de Compras",
+            date_4: "Jun 2018 – Nov 2021",
+            role_5: "Analista de Service Desk de TI",
+            date_5: "Jun 2017 – Mai 2018",
+            approach_title: "Minha Abordagem",
+            approach_q1: "Sempre me coloco na posição de alguém que está descobrindo o negócio pela primeira vez — o que me atrai, o que gera confiança, o que é claro e o que torna a experiência mais fácil e significativa.",
+            approach_q2: "Naturalmente olho tanto para a experiência do usuário quanto para a visão geral do negócio, focando no que pode criar uma conexão mais forte com as pessoas, ajudando a marca a crescer e performar melhor a longo prazo.",
+            pack_sub: "Pacotes de Serviços",
+            pack_title: "Parceria e Preços",
+            pack_desc: "Pacotes claros e transparentes, projetados para transformação imediata e crescimento operacional sustentado.",
+            pack1_title: "Suporte Básico",
+            pack1_desc: "Atualizações técnicas e pequenas alterações",
+            p1_l1: "Atualizações e correções",
+            p1_l2: "Backups seguros",
+            p1_l3: "Edições de conteúdo",
+            p1_l4: "Monitoramento de tempo de atividade",
+            p1_l5: "Pequenas melhorias no sistema",
+            pack1_btn: "Selecionar Pacote",
+            pack2_badge: "O Mais Escolhido",
+            pack2_title: "Retenção de Crescimento",
+            pack2_desc: "Estratégia, otimização e atualizações contínuas",
+            p2_l1: "Melhorias contínuas no site",
+            p2_l2: "Otimização de SEO e uploads de blog",
+            p2_l3: "Landing pages e refinamentos de UX",
+            p2_l4: "Revisão de análises e melhorias de funil",
+            p2_l5: "Integração de IA/chatbot e automação",
+            p2_l9: "Gestão de redes sociais",
+            p2_l6: "Chamadas mensais de consultoria estratégica",
+            p2_l7: "Atualizações de desempenho e segurança",
+            pack2_btn: "Selecionar Pacote",
+            pack3_title: "Projeto de Transformação",
+            pack3_desc: "Redesenhar e refinar a experiência do site",
+            pack3_price: "Orçamento Personalizado",
+            p3_l1: "Reestruturação da página inicial e melhorias de UX",
+            p3_l2: "Modernização visual e refinamento de textos",
+            p3_l3: "Otimização móvel e limpeza da estrutura de SEO",
+            p3_l4: "Ofertas mais claras e seções de confiança/segurança",
+            p3_l5: "Organização de conteúdo",
+            p3_l6: "Integração de IA e orientação de configuração",
+            p3_l7: "Melhorias de desempenho principal",
+            pack3_btn: "Solicitar Orçamento",
+            cta_title: "Vamos Melhorar Suas Operações",
+            cta_desc: "Se o seu negócio depende fortemente de processos manuais, planilhas ou sistemas desconectados, muitas vezes existem oportunidades simples de automação que criam impacto imediato.",
+            footer_text: "© 2026 Alan da Silva Morais • Automação Operacional e Consultoria",
+            form_title: "Enviar uma Mensagem",
+            form_name: "Nome",
+            form_email: "E-mail",
+            form_msg: "Detalhes da Mensagem",
+            form_submit: "Enviar Mensagem"
+        },
+        pl: {
+            nav_services: "Usługi i Cennik",
+            hero_badge: "Dostępny na konsultacje • Kraków i Zdalnie",
+            hero_title_1: "Usprawnij Operacje Biznesowe",
+            hero_title_2: "Dzięki Inteligentnej Automatyzacji.",
+            hero_p1: "Pomagam organizacjom zredukować pracę ręczną, poprawić jakość danych i usprawnić operacje poprzez systemy automatyzacji oparte na prawdziwym doświadczeniu korporacyjnym.",
+            hero_p2: "Z ponad 10-letnim doświadczeniem w globalnych środowiskach korporacyjnych (SAP, Salesforce) łączę zrozumienie procesów biznesowych z praktycznym wykonaniem technicznym.",
+            hero_btn_book: "Zarezerwuj Przegląd",
+            hero_btn_view: "Zobacz Doświadczenie",
+            stat1_title: "Średni Wpływ na Klienta",
+            stat1_val: "15+ Godz. Zaoszczędzone/Tyg",
+            stat2_title: "Dokładność Danych",
+            stat2_val: "100% Zautomatyzowane",
+            trust_title: "Doświadczenie w Środowiskach Korporacyjnych",
+            exp_title: "Kluczowe Kompetencje",
+            exp_1_title: "Automatyzacja Danych",
+            exp_1_desc: "Makra VBA, Google Apps Script, Automatyzacja Excel, Integracja Google Sheets, Optymalizacja Raportowania.",
+            exp_2_title: "Tworzenie Stron Web",
+            exp_2_desc: "HTML, CSS, Tailwind CSS, Responsive Design, Landing Pages, Strony Biznesowe.",
+            exp_3_title: "Operacje Korporacyjne",
+            exp_3_desc: "SAP S/4HANA, Ariba, Salesforce, Zarządzanie Danymi Podstawowymi, Order-to-Cash, ITIL.",
+            prof_exp_title: "Doświadczenie Zawodowe",
+            role_1: "Menedżer ds. Sukcesu Partnerów",
+            date_1: "Marzec 2025 – Obecnie",
+            role_2: "Właściciel i Administrator",
+            date_2: "Sierpień 2024 – Luty 2025",
+            role_3: "Specjalista ds. Sukcesu Klienta",
+            date_3: "Listopad 2021 – Lipiec 2024",
+            role_4: "Specjalista ds. Danych Zakupowych",
+            date_4: "Czerwiec 2018 – Listopad 2021",
+            role_5: "Analityk IT Service Desk",
+            date_5: "Czerwiec 2017 – Maj 2018",
+            approach_title: "Moje Podejście",
+            approach_q1: "Zawsze stawiam się na miejscu kogoś, kto odkrywa biznes po raz pierwszy — co mnie przyciąga, co buduje zaufanie, co jest jasne i co czyni to doświadczenie łatwiejszym.",
+            approach_q2: "Naturalnie patrzę zarówno na doświadczenie użytkownika, jak i na szerszy obraz biznesu, skupiając się na tym, co buduje silniejszą więź z ludźmi, pomagając marce rosnąć długoterminowo.",
+            pack_sub: "Pakiety Usług",
+            pack_title: "Partnerstwo i Cennik",
+            pack_desc: "Jasne, przejrzyste pakiety zaprojektowane do natychmiastowej transformacji i trwałego wzrostu operacyjnego.",
+            pack1_title: "Podstawowe Wsparcie",
+            pack1_desc: "Aktualizacje techniczne i małe zmiany",
+            p1_l1: "Aktualizacje i poprawki",
+            p1_l2: "Bezpieczne kopie zapasowe",
+            p1_l3: "Edycja treści",
+            p1_l4: "Monitorowanie czasu pracy",
+            p1_l5: "Drobne ulepszenia systemu",
+            pack1_btn: "Wybierz Pakiet",
+            pack2_badge: "Najlepszy Wybór",
+            pack2_title: "Pakiet Wzrostu",
+            pack2_desc: "Strategia, optymalizacja i ciągłe aktualizacje",
+            p2_l1: "Ciągłe ulepszenia strony",
+            p2_l2: "Optymalizacja SEO i wpisy na bloga",
+            p2_l3: "Landing pages i ulepszenia UX",
+            p2_l4: "Przegląd analityki i ulepszenia lejka",
+            p2_l5: "Integracja AI/chatbotów i automatyzacja",
+            p2_l9: "Zarządzanie mediami społecznościowymi",
+            p2_l6: "Miesięczne konsultacje strategiczne",
+            p2_l7: "Aktualizacje wydajności i bezpieczeństwa",
+            pack2_btn: "Wybierz Pakiet",
+            pack3_title: "Projekt Transformacji",
+            pack3_desc: "Przeprojektowanie i udoskonalenie strony",
+            pack3_price: "Wycena Indywidualna",
+            p3_l1: "Restrukturyzacja strony głównej i ulepszenia UX",
+            p3_l2: "Wizualna modernizacja i poprawa tekstów",
+            p3_l3: "Optymalizacja mobilna i czyszczenie SEO",
+            p3_l4: "Zwiększenie zaufania/bezpieczeństwa",
+            p3_l5: "Organizacja treści",
+            p3_l6: "Integracja AI i wsparcie konfiguracji",
+            p3_l7: "Kluczowe ulepszenia wydajności",
+            pack3_btn: "Odbierz Wycenę",
+            cta_title: "Usprawnijmy Twoje Operacje",
+            cta_desc: "Jeśli Twój biznes zależy od procesów ręcznych, arkuszy kalkulacyjnych lub niepołączonych systemów, często istnieją proste automatyzacje, które dają natychmiastowy efekt.",
+            footer_text: "© 2026 Alan da Silva Morais • Automatyzacja Operacyjna i Konsulting",
+            form_title: "Wyślij Wiadomość",
+            form_name: "Imię",
+            form_email: "E-mail",
+            form_msg: "Szczegóły Wiadomości",
+            form_submit: "Wyślij Wiadomość"
+        }
+    };
+
+    function setLanguage(lang) {
+        const buttons = document.querySelectorAll('.lang-btn');
+        buttons.forEach(btn => {
+            if(btn.dataset.lang === lang) {
+                btn.classList.remove('text-slate-400', 'font-medium');
+                btn.classList.add('text-blue-400', 'font-bold');
+            } else {
+                btn.classList.remove('text-blue-400', 'font-bold');
+                btn.classList.add('text-slate-400', 'font-medium');
+            }
+        });
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if(translations[lang] && translations[lang][key]) el.innerHTML = translations[lang][key];
+        });
+    }
+
+    function toggleContactForm(pkgName = null, price = null) {
+        const modal = document.getElementById('contactModal');
+        const subject = document.getElementById('formSubject');
+        const msg = document.getElementById('formMsg');
+        if (pkgName) {
+            subject.value = `Inquiry: ${pkgName} (${price})`;
+            msg.value = `I am interested in the ${pkgName} package (${price}). My request is...`;
+        } else {
+            subject.value = "General Inquiry";
+            msg.value = "";
+        }
+        modal.classList.toggle('hidden');
+    }
+
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        const form = event.target;
+        const btn = form.querySelector('button[type="submit"]');
+        btn.innerHTML = 'Sending...';
+        fetch(form.action, { method: 'POST', body: new FormData(form), headers: {'Accept': 'application/json'} })
+        .then(() => { alert('Message sent!'); toggleContactForm(); form.reset(); btn.innerHTML = 'Send Message'; });
+    }
+</script>
+
+</body>
+</html>
