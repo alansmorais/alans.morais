@@ -135,6 +135,15 @@
     </div>
 </section>
 
+<!-- AUTOMATION EXAMPLES -->
+<section class="py-24 bg-slate-950 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold mb-12">Automation Examples</h2>
+        <p class="text-slate-400 mb-12 max-w-2xl mx-auto">Explore my technical implementation details and automation scripts on GitHub.</p>
+        <a href="https://github.com/alansmorais" target="_blank" class="bg-slate-800 hover:bg-slate-700 px-8 py-4 rounded-xl font-bold transition-all inline-block">View GitHub Repositories →</a>
+    </div>
+</section>
+
 <section class="py-24 bg-slate-950">
     <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-start">
 
@@ -317,18 +326,17 @@
     </div>
 </section>
 
-<section class="py-24 bg-slate-900 border-t border-slate-800">
-    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-        <div>
+<!-- FEATURED PARTNER PROJECT -->
+<section class="py-16 bg-slate-900 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-3xl">
             <h2 class="text-sm uppercase tracking-[0.3em] text-blue-400 font-bold mb-4">Featured Partner Project</h2>
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">Joanna Filek</h2>
-            <p class="text-slate-400 text-lg leading-relaxed mb-8">A collaborative web development and UX project designed to elevate professional brand presence and streamline client interaction.</p>
-            <a href="https://joannafilek.com/" target="_blank" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-2xl font-bold transition-all">Visit Project →</a>
-        </div>
-        <div class="relative group">
-            <a href="https://joannafilek.com/" target="_blank" class="block rounded-2xl overflow-hidden border border-slate-700 shadow-2xl">
-                <img src="https://joannafilek.com/favicon.ico" class="w-full h-80 lg:h-96 object-cover bg-slate-900 opacity-50" alt="Project Preview">
-            </a>
+            <div class="flex items-center gap-4 mb-6">
+                <img src="https://joannafilek.com/images/logo.png" class="w-12 h-12 md:w-16 md:h-16 object-contain" alt="Joanna Filek Logo">
+                <h2 class="text-3xl md:text-4xl font-bold">Joanna Filek</h2>
+            </div>
+            <p class="text-slate-400 text-base md:text-lg leading-relaxed mb-8">A collaborative web development and UX project designed to elevate professional brand presence and streamline client interaction.</p>
+            <a href="https://joannafilek.com/" target="_blank" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold transition-all text-sm">Visit Project →</a>
         </div>
     </div>
 </section>
@@ -574,7 +582,7 @@
             exp_1_desc: "Makra VBA, Google Apps Script, Automatyzacja Excel, Integracja Google Sheets, Optymalizacja Raportowania.",
             exp_2_title: "Tworzenie Stron Web",
             exp_2_desc: "HTML, CSS, Tailwind CSS, Responsive Design, Landing Pages, Strony Biznesowe.",
-            exp_3_title: "Operacje Korporacyjne",
+            exp_3_title: "Operações Korporacyjne",
             exp_3_desc: "SAP S/4HANA, Ariba, Salesforce, Zarządzanie Danymi Podstawowymi, Order-to-Cash, ITIL.",
             prof_exp_title: "Doświadczenie Zawodowe",
             role_1: "Menedżer ds. Sukcesu Partnerów",
@@ -636,15 +644,9 @@
     };
 
     function setLanguage(lang) {
-        const buttons = document.querySelectorAll('.lang-btn');
-        buttons.forEach(btn => {
-            if(btn.dataset.lang === lang) {
-                btn.classList.remove('text-slate-400', 'font-medium');
-                btn.classList.add('text-blue-400', 'font-bold');
-            } else {
-                btn.classList.remove('text-blue-400', 'font-bold');
-                btn.classList.add('text-slate-400', 'font-medium');
-            }
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('text-blue-400', btn.dataset.lang === lang);
+            btn.classList.toggle('font-bold', btn.dataset.lang === lang);
         });
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
@@ -670,10 +672,14 @@
         event.preventDefault();
         const form = event.target;
         const btn = form.querySelector('button[type="submit"]');
+        const originalText = btn.innerHTML;
         btn.innerHTML = 'Sending...';
         fetch(form.action, { method: 'POST', body: new FormData(form), headers: {'Accept': 'application/json'} })
-        .then(() => { alert('Message sent!'); toggleContactForm(); form.reset(); btn.innerHTML = 'Send Message'; });
+        .then(() => { alert('Message sent!'); toggleContactForm(); form.reset(); btn.innerHTML = originalText; })
+        .catch(() => { alert('Error sending message. Please try again.'); btn.innerHTML = originalText; });
     }
+    
+    document.addEventListener('DOMContentLoaded', () => setLanguage('en'));
 </script>
 
 </body>
