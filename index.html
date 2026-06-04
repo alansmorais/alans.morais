@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alan da Silva Morais | Automation & Operational Solutions</title>
+    <title>Alan da Silva Morais | Automation & Operational Consulting</title>
     
     <!-- Added Favicon -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo%20dark.png">
     
-    <meta name="description" content="Alan da Silva Morais provides operational solutions, business automation, and web development to help companies reduce manual work and streamline processes." />
-    <meta name="keywords" content="Business Automation, VBA, Google Apps Script, Web Design, Tailwind CSS, SAP S/4HANA, Operational Solutions, Poland" />
-    <meta property="og:title" content="Alan da Silva Morais | Automation & Operational Solutions" />
+    <!-- OPTIMIZED SEO META TAGS -->
+    <meta name="description" content="Alan da Silva Morais provides operational efficiency consulting, business process automation services, and custom web development. Specialist in automated booking systems and workflow automation in Kraków and worldwide." />
+    
+    <!-- MASSIVELY EXPANDED KEYWORDS (EN, PT-BR, PL) -->
+    <meta name="keywords" content="
+    Business Automation, Custom web development, Operational efficiency consulting, Business process automation, Workflow automation consultant, Automated booking system, Web design agency, Freelance web developer, Digital transformation, API integration, Zapier expert, Make.com integration, CRM setup, Website redesign, High converting landing pages, Tech ops consulting, Business systems optimization, Hospitality tech setup, 
+    Consultoria em automação de processos, Criação de sites, Desenvolvedor web freelance, Automação de marketing, Especialista Zapier Brasil, Landing pages de alta conversão, Site para médicos, Site para advogados, Agência de web design, Integração de sistemas, Site profissional para empresas, Funil de vendas automático, Sistema de reservas online, Automação de WhatsApp, Otimização de tempo, 
+    Automatyzacja procesów biznesowych Kraków, Tworzenie nowoczesnych stron internetowych, Strony internetowe Kraków, Projektowanie stron www, Automatyzacja zadań, Integracja API, Optymalizacja kosztów w firmie, Landing page dla biznesu, Programista webowy Kraków, Systemy do rezerwacji, Wsparcie techniczne dla firm, Cyfryzacja biznesu, Strony dla restauracji, Agencja interaktywna Kraków, SAP S/4HANA" />
+    
+    <meta property="og:title" content="Alan da Silva Morais | Automation & Operational Consulting" />
     <meta property="og:description" content="Improve business operations through smart automation and modern web presence." />
     <meta property="og:type" content="website" />
 
@@ -21,6 +28,15 @@
 
     <style>
         body { font-family: 'Inter', sans-serif; }
+
+        /* PRE-LOADER FADE IN EFFECT */
+        body {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+        body.loaded {
+            opacity: 1;
+        }
 
         .gradient-text {
             background: linear-gradient(to right, #3b82f6, #60a5fa);
@@ -39,9 +55,9 @@
 
 <nav class="fixed top-0 w-full z-50 glass border-b border-slate-800 transition-all duration-300 bg-slate-950/80 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <!-- New Structured Logo Area -->
         <a href="#" class="flex items-center gap-4">
-            <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo%20dark.png" alt="Logo" class="w-12 h-12 rounded-full border border-slate-700">
+            <!-- LOGO FIX: Added width and height attributes to prevent layout shift -->
+            <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo%20dark.png" alt="Logo" width="48" height="48" style="width: 48px; height: 48px;" class="rounded-full border border-slate-700">
             <div class="flex flex-col">
                 <span class="text-xl font-bold tracking-tight text-white leading-tight">Alan da Silva Morais</span>
                 <span class="text-xs text-blue-400 font-medium tracking-wide uppercase">Automation & Solutions</span>
@@ -64,46 +80,36 @@
 
 <header class="relative overflow-hidden border-b border-slate-800 pt-2">
     <div class="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-slate-950 to-slate-950"></div>
-
     <div class="relative max-w-7xl mx-auto px-6 py-24 lg:py-32 flex flex-col lg:flex-row items-center justify-between">
-
         <div class="max-w-3xl z-10">
-
             <div class="inline-flex items-center px-4 py-2 rounded-full glass border border-slate-700 text-sm text-slate-300 mb-8">
                 <span class="w-2 h-2 rounded-full bg-green-400 mr-3 animate-pulse"></span>
                 <span data-i18n="hero_badge">Available for consulting • Kraków & Remote</span>
             </div>
-
             <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
                 <span data-i18n="hero_title_1">Improve Business Operations</span><br>
                 <span class="gradient-text" data-i18n="hero_title_2">Through Smart Automation.</span>
             </h1>
-
             <p data-i18n="hero_p1" class="text-xl md:text-2xl text-slate-300 leading-relaxed mb-8 max-w-2xl font-medium">
                 I help organizations reduce manual work, improve data quality, and streamline operations through automation systems built on real enterprise experience.
             </p>
-
             <p data-i18n="hero_p2" class="text-slate-400 text-lg leading-relaxed mb-12 max-w-2xl">
                 With 10+ years in global enterprise environments including SAP, Salesforce, and operational teams, I combine business process understanding with practical technical execution.
             </p>
-
             <div class="flex flex-col sm:flex-row gap-4">
                 <button onclick="toggleContactForm()" data-i18n="hero_btn_book"
                    class="bg-blue-600 hover:bg-blue-500 transition-all duration-300 px-8 py-4 rounded-2xl font-semibold text-lg text-center">
                     Book an Operations Review
                 </button>
-
                 <a href="https://www.linkedin.com/in/alandasm" data-i18n="hero_btn_view"
                    target="_blank"
                    class="border border-slate-600 hover:border-white hover:bg-white hover:text-slate-950 transition-all duration-300 px-8 py-4 rounded-2xl font-semibold text-lg text-center">
                     View Experience
                 </a>
             </div>
-
         </div>
 
         <div class="hidden lg:flex flex-col gap-6 relative z-10 mt-10 lg:mt-0">
-
             <div class="glass border border-slate-700 p-6 rounded-3xl shadow-2xl transform translate-x-8 animate-[bounce_4s_ease-in-out_infinite]">
                 <div class="flex items-center gap-4">
                     <div class="text-4xl">⏱️</div>
@@ -113,7 +119,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="glass border border-blue-900/50 p-6 rounded-3xl shadow-2xl transform -translate-x-8 bg-blue-900/10 animate-[bounce_5s_ease-in-out_infinite_reverse]">
                 <div class="flex items-center gap-4">
                     <div class="text-4xl">📈</div>
@@ -123,9 +128,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 </header>
 
@@ -134,7 +137,6 @@
         <p data-i18n="trust_title" class="uppercase tracking-[0.3em] text-sm text-slate-500 font-semibold mb-6">
             Experience Across Enterprise Environments
         </p>
-
         <div class="flex flex-wrap justify-center gap-8 md:gap-14 text-2xl font-bold text-slate-400">
             <span>SAP S/4HANA</span>
             <span>Ariba</span>
@@ -156,14 +158,11 @@
 
 <section class="py-24 bg-slate-950">
     <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-start">
-
         <div>
             <h2 data-i18n="exp_title" class="text-4xl font-bold mb-10">
                 Core Expertise
             </h2>
-
             <div class="space-y-6">
-
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
                     <h3 data-i18n="exp_1_title" class="font-bold text-xl mb-3 text-blue-400">
                         Data Automation
@@ -172,7 +171,6 @@
                         VBA Macros, Google Apps Script, Excel Automation, Google Sheets Integration, Reporting Optimization.
                     </p>
                 </div>
-
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
                     <h3 data-i18n="exp_2_title" class="font-bold text-xl mb-3 text-blue-400">
                         Web Development
@@ -181,7 +179,6 @@
                         HTML, CSS, Tailwind CSS, Responsive Design, Landing Pages, Business Websites.
                     </p>
                 </div>
-
                 <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
                     <h3 data-i18n="exp_3_title" class="font-bold text-xl mb-3 text-blue-400">
                         Enterprise Operations
@@ -190,7 +187,6 @@
                         SAP S/4HANA, Ariba, Salesforce, Master Data Management, Order-to-Cash, ITIL.
                     </p>
                 </div>
-
             </div>
         </div>
 
@@ -198,69 +194,58 @@
             <h2 data-i18n="prof_exp_title" class="text-4xl font-bold mb-10">
                 Professional Experience
             </h2>
-
             <div class="space-y-8 border-l border-slate-700 pl-8">
-
                 <div>
                     <h3 class="text-xl font-bold mb-1">TTEC (Google Travel)</h3>
                     <p data-i18n="role_1" class="text-blue-400 font-medium mb-2">Partner Success Manager</p>
                     <span data-i18n="date_1" class="text-slate-500 text-sm">Mar 2025 – Present</span>
                 </div>
-
                 <div>
                     <h3 class="text-xl font-bold mb-1">Familia Brazilian Bar</h3>
                     <p data-i18n="role_2" class="text-blue-400 font-medium mb-2">Owner & Administrator</p>
                     <span data-i18n="date_2" class="text-slate-500 text-sm">Aug 2024 – Nov 2025</span>
                 </div>
-
                 <div>
                     <h3 class="text-xl font-bold mb-1">Shell</h3>
                     <p data-i18n="role_3" class="text-blue-400 font-medium mb-2">Customer Success Specialist</p>
                     <span data-i18n="date_3" class="text-slate-500 text-sm">Nov 2021 – Jul 2024</span>
                 </div>
-
                 <div>
                     <h3 class="text-xl font-bold mb-1">Shell</h3>
                     <p data-i18n="role_4" class="text-blue-400 font-medium mb-2">Procurement Data Specialist</p>
                     <span data-i18n="date_4" class="text-slate-500 text-sm">Jun 2018 – Nov 2021</span>
                 </div>
-
                 <div>
                     <h3 class="text-xl font-bold mb-1">HCL Technologies</h3>
                     <p data-i18n="role_5" class="text-blue-400 font-medium mb-2">IT Service Desk Analyst</p>
                     <span data-i18n="date_5" class="text-slate-500 text-sm">Jun 2017 – May 2018</span>
                 </div>
-
             </div>
         </div>
-
     </div>
 </section>
 
 <section class="py-24 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-blue-600/5 blur-[100px] rounded-full pointer-events-none"></div>
-
         <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
             <h2 data-i18n="approach_title" class="text-sm uppercase tracking-[0.3em] text-blue-400 font-bold mb-10">
                 My Approach
             </h2>
-
             <div class="mb-10 text-slate-600">
                 <svg class="w-12 h-12 mx-auto" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                 </svg>
             </div>
-
             <blockquote data-i18n="approach_q1" class="text-2xl md:text-3xl text-white font-medium leading-relaxed mb-8">
                 I always put myself in the position of someone discovering the business for the first time what attracts me, what builds trust, what feels clear, and what makes the experience easier and more meaningful.
             </blockquote>
-
             <p data-i18n="approach_q2" class="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
                 I naturally look at both the user experience and the bigger picture of the business, focusing on what can create a stronger connection with people while also helping the brand grow and perform better long-term.
             </p>
         </div>
 </section>
 
+<!-- SERVICES & PRICING SECTION -->
 <section id="services-pricing" class="py-24 bg-slate-950 border-t border-slate-800 scroll-mt-20">
     <div class="max-w-7xl mx-auto px-6">
         
@@ -268,73 +253,133 @@
             <h2 data-i18n="pack_sub" class="text-sm uppercase tracking-[0.3em] text-blue-400 font-bold mb-4">Service Packages</h2>
             <h2 data-i18n="pack_title" class="text-4xl md:text-5xl font-bold mb-6">Partnership & Pricing</h2>
             <p data-i18n="pack_desc" class="text-slate-400 text-lg leading-relaxed">
-                Clear, transparent packages designed for immediate transformation and sustained operational growth.
+                A two-step operational model: First, we build your premium infrastructure. Then, we put your platform's management and updates on autopilot.
             </p>
         </div>
 
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 mb-16 text-center max-w-4xl mx-auto shadow-lg relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-bl-lg z-10">
+                50% Discount Applied
+            </div>
+            <h3 data-i18n="setup_title" class="text-2xl font-bold mb-3 text-white">Phase 1: Project Setup & Engineering</h3>
+            <p data-i18n="setup_desc" class="text-slate-400 mb-6 text-lg">Complete structural development, premium web design, SEO foundation, and smart automation workflows.</p>
+            <div data-i18n="setup_price" class="text-3xl font-extrabold text-blue-400">One-time investment starting at 2,900 PLN</div>
+        </div>
+
+        <h3 data-i18n="retainer_title" class="text-2xl font-bold mb-10 text-center text-white">Phase 2: Tech Ops & Monthly Management</h3>
+
         <div class="grid lg:grid-cols-3 gap-8 items-start">
-            
             <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 flex flex-col h-full hover:border-slate-700 transition-all">
-                <h3 data-i18n="pack1_title" class="text-2xl font-bold mb-2">Basic Support</h3>
-                <p data-i18n="pack1_desc" class="text-slate-400 text-sm mb-6">Technical updates & small changes</p>
+                <h3 data-i18n="pack1_title" class="text-2xl font-bold mb-2">3-Month Contract</h3>
+                <p data-i18n="pack1_desc" class="text-slate-400 text-sm mb-6">Short-term management & stabilization.</p>
                 <div class="mb-6 pb-6 border-b border-slate-800">
-                    <span class="text-4xl font-extrabold text-white">700</span>
+                    <span class="text-4xl font-extrabold text-white">1,400</span>
                     <span class="text-slate-500"> PLN / mo</span>
                 </div>
                 <ul class="text-slate-400 space-y-4 mb-8 flex-grow text-sm">
-                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p1_l1">Updates & fixes</span></li>
-                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p1_l2">Secure backups</span></li>
-                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p1_l3">Content edits</span></li>
-                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p1_l4">Uptime monitoring</span></li>
-                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p1_l5">Small system improvements</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p_l1">Premium Hosting Included</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p_l2">Monthly Content Updates (Photos/Text)</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p_l3">Automation & Forms Maintenance</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p_l4">Security & Uptime Monitoring</span></li>
                 </ul>
-                <button onclick="toggleContactForm('Basic Support', '700 PLN/mo')" data-i18n="pack1_btn" class="w-full mt-auto text-center text-blue-400 hover:text-white border border-slate-700 hover:border-slate-500 font-semibold py-3 rounded-xl transition-all">Select Package</button>
+                <button onclick="toggleContactForm('3-Month Tech Ops', '1,400 PLN/mo')" data-i18n="pack_btn" class="w-full mt-auto text-center text-blue-400 hover:text-white border border-slate-700 hover:border-slate-500 font-semibold py-3 rounded-xl transition-all">Select Package</button>
             </div>
 
-            <div class="bg-gradient-to-b from-slate-800 to-slate-900 border border-blue-500/50 rounded-3xl p-8 flex flex-col h-full relative transform lg:-translate-y-4 shadow-[0_0_40px_rgba(37,99,235,0.15)]">
-                <div data-i18n="pack2_badge" class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white text-xs font-bold uppercase tracking-wider py-1.5 px-4 rounded-full">
-                    The Sweet Spot
+            <div class="bg-gradient-to-b from-slate-800 to-slate-900 border border-blue-500/50 rounded-3xl p-8 flex flex-col h-full relative transform lg:-translate-y-4 shadow-[0_0_40px_rgba(37,99,235,0.15)] order-first lg:order-none">
+                <div data-i18n="pack3_badge" class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white text-xs font-bold uppercase tracking-wider py-1.5 px-4 rounded-full">
+                    Best Value
                 </div>
-                <h3 data-i18n="pack2_title" class="text-2xl font-bold mb-2 text-white">Growth Retainer</h3>
-                <p data-i18n="pack2_desc" class="text-blue-200 text-sm mb-6">Strategy, optimization & continuous updates</p>
+                <h3 data-i18n="pack3_title" class="text-2xl font-bold mb-2 text-white">12-Month Contract</h3>
+                <p data-i18n="pack3_desc" class="text-blue-200 text-sm mb-6">Long-term partnership & sustained growth.</p>
                 <div class="mb-6 pb-6 border-b border-slate-700/50">
-                    <span class="text-4xl font-extrabold text-blue-400">1,800</span>
+                    <span class="text-4xl font-extrabold text-blue-400">850</span>
                     <span class="text-slate-400"> PLN / mo</span>
                 </div>
                 <ul class="text-slate-300 space-y-4 mb-8 flex-grow text-sm">
-                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l1">Ongoing site improvements</span></li>
-                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l2">SEO optimization & blog uploads</span></li>
-                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l3">Landing pages & UX refinements</span></li>
-                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l4">Analytics review & funnel upgrades</span></li>
-                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l5">AI/chatbot integration & automation</span></li>
-                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l9">Social media management</span></li>
-                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l6">Monthly strategy consulting calls</span></li>
-                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p2_l7">Performance/security updates</span></li>
+                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p_l1">Premium Hosting Included</span></li>
+                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p_l2">Monthly Content Updates (Photos/Text)</span></li>
+                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p_l3">Automation & Forms Maintenance</span></li>
+                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p_l4">Security & Uptime Monitoring</span></li>
+                    <li class="flex items-start"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="p_l5">Priority Support & Strategy Consulting</span></li>
                 </ul>
-                <button onclick="toggleContactForm('Growth Retainer', '1,800 PLN/mo')" data-i18n="pack2_btn" class="w-full mt-auto text-center bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-all shadow-lg hover:shadow-blue-500/25">Select Package</button>
+                <button onclick="toggleContactForm('12-Month Tech Ops', '850 PLN/mo')" data-i18n="pack_btn_primary" class="w-full mt-auto text-center bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-all shadow-lg hover:shadow-blue-500/25">Select Package</button>
             </div>
 
             <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 flex flex-col h-full hover:border-slate-700 transition-all">
-                <h3 data-i18n="pack3_title" class="text-2xl font-bold mb-2">Transformation Project</h3>
-                <p data-i18n="pack3_desc" class="text-slate-400 text-sm mb-6">Redesigning & refining the site experience</p>
+                <h3 data-i18n="pack2_title" class="text-2xl font-bold mb-2">6-Month Contract</h3>
+                <p data-i18n="pack2_desc" class="text-slate-400 text-sm mb-6">The sweet spot for SEO & system maturity.</p>
                 <div class="mb-6 pb-6 border-b border-slate-800">
-                    <span data-i18n="pack3_price" class="text-2xl font-bold text-white">Custom Quote</span>
+                    <span class="text-4xl font-extrabold text-white">1,150</span>
+                    <span class="text-slate-500"> PLN / mo</span>
                 </div>
                 <ul class="text-slate-400 space-y-4 mb-8 flex-grow text-sm">
-                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l1">Homepage restructuring & UX improvements</span></li>
-                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l2">Visual modernization & copy refinement</span></li>
-                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l3">Mobile optimization & SEO cleanup</span></li>
-                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l4">Clearer offers & trust/safety sections</span></li>
-                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l5">Content organization</span></li>
-                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l6">AI onboarding & integration setup guidance</span></li>
-                    <li class="flex items-start"><span class="text-slate-600 mr-3">•</span> <span data-i18n="p3_l7">Core performance improvements</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p_l1">Premium Hosting Included</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p_l2">Monthly Content Updates (Photos/Text)</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p_l3">Automation & Forms Maintenance</span></li>
+                    <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span> <span data-i18n="p_l4">Security & Uptime Monitoring</span></li>
                 </ul>
-                <button onclick="toggleContactForm('Transformation Project', 'Custom Quote')" data-i18n="pack3_btn" class="w-full mt-auto text-center text-blue-400 hover:text-white border border-slate-700 hover:border-slate-500 font-semibold py-3 rounded-xl transition-all">Get a Quote</button>
+                <button onclick="toggleContactForm('6-Month Tech Ops', '1,150 PLN/mo')" data-i18n="pack_btn" class="w-full mt-auto text-center text-blue-400 hover:text-white border border-slate-700 hover:border-slate-500 font-semibold py-3 rounded-xl transition-all">Select Package</button>
             </div>
 
         </div>
     </div>
 </section>
+<!-- END OF SERVICES SECTION -->
+
+<!-- NEW SEO FAQ SECTION -->
+<section id="faq" class="py-24 bg-slate-900 border-t border-slate-800">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 data-i18n="faq_title" class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+            <p data-i18n="faq_desc" class="text-slate-400">Common questions about custom web development and business automation services.</p>
+        </div>
+        
+        <div class="space-y-4">
+            <!-- FAQ 1 -->
+            <details class="group bg-slate-950 border border-slate-800 rounded-2xl [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-white">
+                    <h2 data-i18n="faq1_q" class="font-semibold text-lg">What exactly does a workflow automation consultant do?</h2>
+                    <span class="relative size-5 shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 size-5 opacity-100 group-open:opacity-0 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 size-5 opacity-0 group-open:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg>
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-slate-400 leading-relaxed" data-i18n="faq1_a">
+                    As a specialist in business process automation services, I help companies eliminate manual tasks. This includes operational efficiency consulting for small businesses, streamlining data entry, and creating a seamless automated client onboarding setup so you can focus on growth instead of admin work.
+                </div>
+            </details>
+
+            <!-- FAQ 2 -->
+            <details class="group bg-slate-950 border border-slate-800 rounded-2xl [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-white">
+                    <h2 data-i18n="faq2_q" class="font-semibold text-lg">Do you build websites with integrated booking systems?</h2>
+                    <span class="relative size-5 shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 size-5 opacity-100 group-open:opacity-0 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 size-5 opacity-0 group-open:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg>
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-slate-400 leading-relaxed" data-i18n="faq2_a">
+                    Yes, combining custom web development and automation is my core expertise. I build high-conversion platforms, such as an automated booking system for clinics, medical practices, or a restaurant reservation system website integration. This ensures you capture leads 24/7 without lifting a finger.
+                </div>
+            </details>
+
+            <!-- FAQ 3 -->
+            <details class="group bg-slate-950 border border-slate-800 rounded-2xl [&_summary::-webkit-details-marker]:hidden">
+                <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-white">
+                    <h2 data-i18n="faq3_q" class="font-semibold text-lg">Do you provide services in Kraków or worldwide?</h2>
+                    <span class="relative size-5 shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 size-5 opacity-100 group-open:opacity-0 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 size-5 opacity-0 group-open:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg>
+                    </span>
+                </summary>
+                <div class="px-6 pb-6 text-slate-400 leading-relaxed" data-i18n="faq3_a">
+                    Both! I am based locally offering Tech Ops specialist services for service businesses in Poland, but I work with clients globally. I am fluent in English, Portuguese, and Polish, allowing me to deliver top-tier operational support across borders.
+                </div>
+            </details>
+        </div>
+    </div>
+</section>
+<!-- END FAQ SECTION -->
 
 <!-- FEATURED PARTNER PROJECT -->
 <section class="py-16 bg-slate-900 border-t border-slate-800">
@@ -353,36 +398,29 @@
 
 <section class="py-24 bg-gradient-to-br from-blue-600 to-blue-800 text-white border-t border-slate-800">
     <div class="max-w-4xl mx-auto px-6 text-center">
-
         <h2 data-i18n="cta_title" class="text-4xl md:text-5xl font-extrabold mb-8">
             Let’s Improve Your Operations
         </h2>
-
         <p data-i18n="cta_desc" class="text-xl text-blue-100 mb-10">
             If your business relies heavily on manual processes, spreadsheets, or disconnected systems, there are often simple automation opportunities that create immediate impact.
         </p>
-
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-
             <button onclick="toggleContactForm()" data-i18n="hero_btn_book"
                class="bg-white text-blue-700 px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-xl hover:scale-105 transition-all">
                 Book a Review
             </button>
-
             <a href="https://www.linkedin.com/in/alandasm"
                target="_blank"
                class="border border-white/50 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-white hover:text-blue-700 transition-all">
                 LinkedIn
             </a>
-
         </div>
-
     </div>
 </section>
 
 <footer class="py-10 bg-slate-950 border-t border-slate-800 text-center relative">
     <p data-i18n="footer_text" class="text-slate-500">
-        © 2026 Alan da Silva Morais • Operational Automation & Solutions
+        © 2026 Alan da Silva Morais • Operational Automation & Consulting
     </p>
 </footer>
 
@@ -411,6 +449,39 @@
                 </div>
                 <button type="submit" data-i18n="form_submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-xl transition-all shadow-lg mt-2">Send Message</button>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- EXCLUSIVE OFFER POP-UP -->
+<div id="offerPopup" class="fixed inset-0 bg-black/80 hidden z-[70] flex items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-500">
+    <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-blue-500/30 rounded-3xl w-full max-w-lg shadow-[0_0_50px_rgba(37,99,235,0.2)] flex flex-col overflow-hidden relative transform scale-95 transition-transform duration-500" id="offerPopupContent">
+        
+        <button onclick="closeOfferPopup()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-3xl leading-none transition-all focus:outline-none z-10">&times;</button>
+        
+        <div class="bg-blue-600/10 border-b border-blue-500/20 px-6 py-5 text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+            <span class="inline-block bg-blue-600 text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full mb-3 animate-pulse" data-i18n="popup_badge">
+                50% Discount Applied
+            </span>
+            <h3 class="text-2xl font-extrabold text-white leading-tight" data-i18n="popup_title">Operations Upgrade <br><span class="text-blue-400">5 Spots Remaining</span></h3>
+        </div>
+        
+        <div class="p-8 text-center">
+            <p class="text-slate-300 text-lg mb-6 leading-relaxed" data-i18n="popup_desc">
+                Stop losing billable hours to manual admin work. I am accepting <strong class="text-white">5 new service-based partners</strong> for end-to-end web development and smart automation with an exclusive <strong class="text-blue-400">50% discount</strong> on your setup and retainer structure.
+            </p>
+            
+            <ul class="text-left text-slate-400 space-y-3 mb-8 text-sm inline-block">
+                <li class="flex items-center"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="popup_l1">Premium Web Presence</span></li>
+                <li class="flex items-center"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="popup_l2">Automated Client Onboarding</span></li>
+                <li class="flex items-center"><span class="text-blue-500 mr-3">✔</span> <span data-i18n="popup_l3">Monthly Tech Ops Retainer</span></li>
+            </ul>
+            
+            <button onclick="claimOffer()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] transform hover:-translate-y-1" data-i18n="popup_btn">
+                Claim Your Strategy Session
+            </button>
+            <p class="text-xs text-slate-500 mt-4" data-i18n="popup_footer">No commitment required for the initial review.</p>
         </div>
     </div>
 </div>
@@ -454,46 +525,49 @@
             approach_q2: "I naturally look at both the user experience and the bigger picture of the business, focusing on what can create a stronger connection with people while also helping the brand grow and perform better long-term.",
             pack_sub: "Service Packages",
             pack_title: "Partnership & Pricing",
-            pack_desc: "Clear, transparent packages designed for immediate transformation and sustained operational growth.",
-            pack1_title: "Basic Support",
-            pack1_desc: "Technical updates & small changes",
-            p1_l1: "Updates & fixes",
-            p1_l2: "Secure backups",
-            p1_l3: "Content edits",
-            p1_l4: "Uptime monitoring",
-            p1_l5: "Small system improvements",
-            pack1_btn: "Select Package",
-            pack2_badge: "The Sweet Spot",
-            pack2_title: "Growth Retainer",
-            pack2_desc: "Strategy, optimization & continuous updates",
-            p2_l1: "Ongoing site improvements",
-            p2_l2: "SEO optimization & blog uploads",
-            p2_l3: "Landing pages & UX refinements",
-            p2_l4: "Analytics review & funnel upgrades",
-            p2_l5: "AI/chatbot integration & automation",
-            p2_l9: "Social media management",
-            p2_l6: "Monthly strategy consulting calls",
-            p2_l7: "Performance/security updates",
-            pack2_btn: "Select Package",
-            pack3_title: "Transformation Project",
-            pack3_desc: "Redesigning & refining the site experience",
-            pack3_price: "Custom Quote",
-            p3_l1: "Homepage restructuring & UX improvements",
-            p3_l2: "Visual modernization & copy refinement",
-            p3_l3: "Mobile optimization & SEO cleanup",
-            p3_l4: "Clearer offers & trust/safety sections",
-            p3_l5: "Content organization",
-            p3_l6: "AI onboarding & integration setup guidance",
-            p3_l7: "Core performance improvements",
-            pack3_btn: "Get a Quote",
+            pack_desc: "A two-step operational model: First, we build your premium infrastructure. Then, we put your platform's management and updates on autopilot.",
+            setup_title: "Phase 1: Project Setup & Engineering",
+            setup_desc: "Complete structural development, premium web design, SEO foundation, and smart automation workflows.",
+            setup_price: "One-time investment starting at 2,900 PLN",
+            retainer_title: "Phase 2: Tech Ops & Monthly Management",
+            pack1_title: "3-Month Contract",
+            pack1_desc: "Short-term management & stabilization.",
+            pack2_title: "6-Month Contract",
+            pack2_desc: "The sweet spot for SEO & system maturity.",
+            pack3_badge: "Best Value",
+            pack3_title: "12-Month Contract",
+            pack3_desc: "Long-term partnership & sustained growth.",
+            p_l1: "Premium Hosting Included",
+            p_l2: "Monthly Content Updates (Photos/Text)",
+            p_l3: "Automation & Forms Maintenance",
+            p_l4: "Security & Uptime Monitoring",
+            p_l5: "Priority Support & Strategy Consulting",
+            pack_btn: "Select Package",
+            pack_btn_primary: "Select Package",
+            faq_title: "Frequently Asked Questions",
+            faq_desc: "Common questions about custom web development and business automation services.",
+            faq1_q: "What exactly does a workflow automation consultant do?",
+            faq1_a: "As a specialist in business process automation services, I help companies eliminate manual tasks. This includes operational efficiency consulting for small businesses, streamlining data entry, and creating a seamless automated client onboarding setup so you can focus on growth instead of admin work.",
+            faq2_q: "Do you build websites with integrated booking systems?",
+            faq2_a: "Yes, combining custom web development and automation is my core expertise. I build high-conversion platforms, such as an automated booking system for clinics, medical practices, or a restaurant reservation system website integration. This ensures you capture leads 24/7 without lifting a finger.",
+            faq3_q: "Do you provide services in Kraków or worldwide?",
+            faq3_a: "Both! I am based locally offering Tech Ops specialist services for service businesses in Poland, but I work with clients globally. I am fluent in English, Portuguese, and Polish, allowing me to deliver top-tier operational support across borders.",
             cta_title: "Let’s Improve Your Operations",
             cta_desc: "If your business relies heavily on manual processes, spreadsheets, or disconnected systems, there are often simple automation opportunities that create immediate impact.",
-            footer_text: "© 2026 Alan da Silva Morais • Operational Automation & Solutions",
+            footer_text: "© 2026 Alan da Silva Morais • Operational Automation & Consulting",
             form_title: "Send a Message",
             form_name: "Name",
             form_email: "Email",
             form_msg: "Message Details",
-            form_submit: "Send Message"
+            form_submit: "Send Message",
+            popup_badge: "50% Discount Applied",
+            popup_title: "Operations Upgrade <br><span class='text-blue-400'>5 Spots Remaining</span>",
+            popup_desc: "Stop losing billable hours to manual admin work. I am accepting <strong class='text-white'>5 new service-based partners</strong> for end-to-end web development and smart automation with an exclusive <strong class='text-blue-400'>50% discount</strong> on your setup and retainer structure.",
+            popup_l1: "Premium Web Presence",
+            popup_l2: "Automated Client Onboarding",
+            popup_l3: "Monthly Tech Ops Retainer",
+            popup_btn: "Claim Your Strategy Session",
+            popup_footer: "No commitment required for the initial review."
         },
         pt: {
             nav_services: "Serviços e Preços",
@@ -532,38 +606,33 @@
             approach_q2: "Naturalmente olho tanto para a experiência do usuário quanto para a visão geral do negócio, focando no que pode criar uma conexão mais forte com as pessoas, ajudando a marca a crescer e performar melhor a longo prazo.",
             pack_sub: "Pacotes de Serviços",
             pack_title: "Parceria e Preços",
-            pack_desc: "Pacotes claros e transparentes, projetados para transformação imediata e crescimento operacional sustentado.",
-            pack1_title: "Suporte Básico",
-            pack1_desc: "Atualizações técnicas e pequenas alterações",
-            p1_l1: "Atualizações e correções",
-            p1_l2: "Backups seguros",
-            p1_l3: "Edições de conteúdo",
-            p1_l4: "Monitoramento de tempo de atividade",
-            p1_l5: "Pequenas melhorias no sistema",
-            pack1_btn: "Selecionar Pacote",
-            pack2_badge: "O Mais Escolhido",
-            pack2_title: "Retenção de Crescimento",
-            pack2_desc: "Estratégia, otimização e atualizações contínuas",
-            p2_l1: "Melhorias contínuas no site",
-            p2_l2: "Otimização de SEO e uploads de blog",
-            p2_l3: "Landing pages e refinamentos de UX",
-            p2_l4: "Revisão de análises e melhorias de funil",
-            p2_l5: "Integração de IA/chatbot e automação",
-            p2_l9: "Gestão de redes sociais",
-            p2_l6: "Chamadas mensais de consultoria estratégica",
-            p2_l7: "Atualizações de desempenho e segurança",
-            pack2_btn: "Selecionar Pacote",
-            pack3_title: "Projeto de Transformação",
-            pack3_desc: "Redesenhar e refinar a experiência do site",
-            pack3_price: "Orçamento Personalizado",
-            p3_l1: "Reestruturação da página inicial e melhorias de UX",
-            p3_l2: "Modernização visual e refinamento de textos",
-            p3_l3: "Otimização móvel e limpeza da estrutura de SEO",
-            p3_l4: "Ofertas mais claras e seções de confiança/segurança",
-            p3_l5: "Organização de conteúdo",
-            p3_l6: "Integração de IA e orientação de configuração",
-            p3_l7: "Melhorias de desempenho principal",
-            pack3_btn: "Solicitar Orçamento",
+            pack_desc: "Um modelo operacional em duas etapas: Primeiro construímos sua infraestrutura premium. Depois, colocamos a gestão e atualizações da sua plataforma no piloto automático.",
+            setup_title: "Fase 1: Setup e Estruturação do Projeto",
+            setup_desc: "Desenvolvimento estrutural completo, web design premium, base de SEO e fluxos de automação inteligente.",
+            setup_price: "Investimento único a partir de 2.900 PLN",
+            retainer_title: "Fase 2: Tech Ops e Gestão Mensal",
+            pack1_title: "Contrato de 3 Meses",
+            pack1_desc: "Gestão e estabilização de curto prazo.",
+            pack2_title: "Contrato de 6 Meses",
+            pack2_desc: "O ponto de equilíbrio para SEO e maturidade do sistema.",
+            pack3_badge: "O Mais Vantajoso",
+            pack3_title: "Contrato de 12 Meses",
+            pack3_desc: "Parceria de longo prazo e crescimento sustentado.",
+            p_l1: "Hospedagem Premium Inclusa",
+            p_l2: "Atualizações Mensais de Conteúdo (Fotos/Texto)",
+            p_l3: "Manutenção de Automação e Formulários",
+            p_l4: "Monitoramento de Segurança e Uptime",
+            p_l5: "Suporte Prioritário e Consultoria Estratégica",
+            pack_btn: "Selecionar Pacote",
+            pack_btn_primary: "Selecionar Pacote",
+            faq_title: "Perguntas Frequentes",
+            faq_desc: "Principais dúvidas sobre o desenvolvimento web e automação de negócios.",
+            faq1_q: "O que faz um especialista em automação de negócios?",
+            faq1_a: "Como especialista, eu ofereço consultoria em automação de processos empresariais e otimização de processos operacionais. Ajudo a criar um funil de vendas e qualificação automática, para que sua empresa ganhe escala e você pare de perder tempo com tarefas manuais.",
+            faq2_q: "Você cria sites com agendamento integrado?",
+            faq2_a: "Sim, o foco do meu trabalho é o desenvolvimento de sites profissionais de alta conversão. Eu faço desde a criação de sites com automação de WhatsApp até a construção de um site com sistema de agendamento para clínicas ou automação de reservas para restaurantes e bares.",
+            faq3_q: "Os serviços são apenas para a Polônia?",
+            faq3_a: "Não! Trabalho localmente em Cracóvia, mas possuo clientes globalmente. Por ser fluente em Português, Inglês e Polonês, atendo empresas no Brasil e na Europa, conectando design premium e automação sem barreiras.",
             cta_title: "Vamos Melhorar Suas Operações",
             cta_desc: "Se o seu negócio depende fortemente de processos manuais, planilhas ou sistemas desconectados, muitas vezes existem oportunidades simples de automação que criam impacto imediato.",
             footer_text: "© 2026 Alan da Silva Morais • Automação Operacional e Consultoria",
@@ -571,7 +640,15 @@
             form_name: "Nome",
             form_email: "E-mail",
             form_msg: "Detalhes da Mensagem",
-            form_submit: "Enviar Mensagem"
+            form_submit: "Enviar Mensagem",
+            popup_badge: "50% de Desconto Aplicado",
+            popup_title: "Evolução Operacional <br><span class='text-blue-400'>5 Vagas Restantes</span>",
+            popup_desc: "Pare de perder tempo com tarefas manuais. Estou aceitando <strong class='text-white'>5 novos parceiros</strong> para estruturar automação inteligente e web design com <strong class='text-blue-400'>50% de desconto</strong> no valor do setup e gestão.",
+            popup_l1: "Presença Digital Premium",
+            popup_l2: "Qualificação de Clientes Automática",
+            popup_l3: "Gestão Tecnológica Mensal (Retainer)",
+            popup_btn: "Garantir Sessão Estratégica",
+            popup_footer: "Nenhum compromisso exigido para a revisão inicial."
         },
         pl: {
             nav_services: "Usługi i Cennik",
@@ -610,38 +687,33 @@
             approach_q2: "Naturalnie patrzę zarówno na doświadczenie użytkownika, jak i na szerszy obraz biznesu, skupiając się na tym, co buduje silniejszą więź z ludźmi, pomagając marce rosnąć długoterminowo.",
             pack_sub: "Pakiety Usług",
             pack_title: "Partnerstwo i Cennik",
-            pack_desc: "Jasne, przejrzyste pakiety zaprojektowane do natychmiastowej transformacji i trwałego wzrostu operacyjnego.",
-            pack1_title: "Podstawowe Wsparcie",
-            pack1_desc: "Aktualizacje techniczne i małe zmiany",
-            p1_l1: "Aktualizacje i poprawki",
-            p1_l2: "Bezpieczne kopie zapasowe",
-            p1_l3: "Edycja treści",
-            p1_l4: "Monitorowanie czasu pracy",
-            p1_l5: "Drobne ulepszenia systemu",
-            pack1_btn: "Wybierz Pakiet",
-            pack2_badge: "Najlepszy Wybór",
-            pack2_title: "Pakiet Wzrostu",
-            pack2_desc: "Strategia, optymalizacja i ciągłe aktualizacje",
-            p2_l1: "Ciągłe ulepszenia strony",
-            p2_l2: "Optymalizacja SEO i wpisy na bloga",
-            p2_l3: "Landing pages i ulepszenia UX",
-            p2_l4: "Przegląd analityki i ulepszenia lejka",
-            p2_l5: "Integracja AI/chatbotów i automatyzacja",
-            p2_l9: "Zarządzanie mediami społecznościowymi",
-            p2_l6: "Miesięczne konsultacje strategiczne",
-            p2_l7: "Aktualizacje wydajności i bezpieczeństwa",
-            pack2_btn: "Wybierz Pakiet",
-            pack3_title: "Projekt Transformacji",
-            pack3_desc: "Przeprojektowanie i udoskonalenie strony",
-            pack3_price: "Wycena Indywidualna",
-            p3_l1: "Restrukturyzacja strony głównej i ulepszenia UX",
-            p3_l2: "Wizualna modernizacja i poprawa tekstów",
-            p3_l3: "Optymalizacja mobilna i czyszczenie SEO",
-            p3_l4: "Zwiększenie zaufania/bezpieczeństwa",
-            p3_l5: "Organizacja treści",
-            p3_l6: "Integracja AI i wsparcie konfiguracji",
-            p3_l7: "Kluczowe ulepszenia wydajności",
-            pack3_btn: "Odbierz Wycenę",
+            pack_desc: "Dwustopniowy model operacyjny: Najpierw budujemy Twoją infrastrukturę premium. Następnie automatyzujemy zarządzanie i aktualizacje Twojej platformy.",
+            setup_title: "Faza 1: Konfiguracja Projektu i Struktura",
+            setup_desc: "Pełen rozwój strukturalny, projektowanie stron premium, fundamenty SEO i inteligentne przepływy automatyzacji.",
+            setup_price: "Jednorazowa inwestycja od 2 900 PLN",
+            retainer_title: "Faza 2: Zarządzanie i Tech Ops",
+            pack1_title: "Umowa na 3 Miesiące",
+            pack1_desc: "Krótkoterminowe zarządzanie i stabilizacja.",
+            pack2_title: "Umowa na 6 Miesięcy",
+            pack2_desc: "Idealny czas na wyniki SEO i dojrzałość systemu.",
+            pack3_badge: "Najlepszy Wybór",
+            pack3_title: "Umowa na 12 Miesięcy",
+            pack3_desc: "Długoterminowe partnerstwo i trwały wzrost.",
+            p_l1: "Hosting Premium w Cenie",
+            p_l2: "Miesięczne Aktualizacje Treści (Zdjęcia/Tekst)",
+            p_l3: "Utrzymanie Automatyzacji i Formularzy",
+            p_l4: "Monitorowanie Bezpieczeństwa i Dostępności",
+            p_l5: "Priorytetowe Wsparcie i Konsultacje Strategiczne",
+            pack_btn: "Wybierz Pakiet",
+            pack_btn_primary: "Wybierz Pakiet",
+            faq_title: "Często Zadawane Pytania",
+            faq_desc: "Najczęstsze pytania dotyczące tworzenia stron i usług automatyzacji.",
+            faq1_q: "Czym zajmuje się konsultant ds. optymalizacji operacyjnej?",
+            faq1_a: "Przeprowadzam kompleksowe wdrożenia systemów automatyzacji w firmie. Specjalizuję się w usługach takich jak automatyzacja procesów biznesowych Kraków, pomagając firmom eliminować ręczną pracę i przyspieszać onboarding klientów.",
+            faq2_q: "Czy budujesz strony ze zintegrowanymi systemami rezerwacji?",
+            faq2_a: "Tak, oferuję tworzenie nowoczesnych stron internetowych oraz tworzenie stron www z automatyzacją. Obejmuje to rozwiązania takie jak strona internetowa z systemem rezerwacji, automatyzacja rezerwacji dla restauracji oraz systemy rezerwacji online dla klinik i salonów.",
+            faq3_q: "Czy świadczysz usługi tylko w Krakowie?",
+            faq3_a: "Nie! Pracuję lokalnie, ale obsługuję firmy na całym świecie. Dzięki płynnej znajomości języka polskiego, angielskiego i portugalskiego, dostarczam najwyższej jakości usługi bez barier językowych.",
             cta_title: "Usprawnijmy Twoje Operacje",
             cta_desc: "Jeśli Twój biznes zależy od procesów ręcznych, arkuszy kalkulacyjnych lub niepołączonych systemów, często istnieją proste automatyzacje, które dają natychmiastowy efekt.",
             footer_text: "© 2026 Alan da Silva Morais • Automatyzacja Operacyjna i Konsulting",
@@ -649,7 +721,15 @@
             form_name: "Imię",
             form_email: "E-mail",
             form_msg: "Szczegóły Wiadomości",
-            form_submit: "Wyślij Wiadomość"
+            form_submit: "Wyślij Wiadomość",
+            popup_badge: "Dodano 50% Zniżki",
+            popup_title: "Upgrade Operacyjny <br><span class='text-blue-400'>Pozostało 5 Miejsc</span>",
+            popup_desc: "Przestań tracić czas na ręczną administrację. Przyjmuję <strong class='text-white'>5 nowych partnerów</strong> na wdrożenie nowoczesnych stron i automatyzacji z <strong class='text-blue-400'>50% zniżką</strong> na konfigurację i obsługę.",
+            popup_l1: "Strona Premium HTML/CSS",
+            popup_l2: "Zautomatyzowana Obsługa Klienta",
+            popup_l3: "Miesięczne Wsparcie Tech Ops",
+            popup_btn: "Zarezerwuj Sesję Strategiczną",
+            popup_footer: "Brak zobowiązań po wstępnej konsultacji."
         }
     };
 
@@ -689,7 +769,56 @@
         .catch(() => { alert('Error sending message. Please try again.'); btn.innerHTML = originalText; });
     }
     
-    document.addEventListener('DOMContentLoaded', () => setLanguage('en'));
+    // Smooth Fade-in Script with Auto-Detect Language
+    window.addEventListener('load', () => {
+        document.body.classList.add('loaded'); // Reveals the page
+        
+        // Auto-detect language based on browser settings
+        const userLang = navigator.language || navigator.userLanguage;
+        let initialLang = 'en'; // Default to English for the rest of the world
+        
+        if (userLang.toLowerCase().includes('pl')) {
+            initialLang = 'pl';
+        } else if (userLang.toLowerCase().includes('pt')) {
+            initialLang = 'pt';
+        }
+        
+        setLanguage(initialLang);
+
+        setTimeout(() => {
+            const popup = document.getElementById('offerPopup');
+            const content = document.getElementById('offerPopupContent');
+            
+            popup.classList.remove('hidden');
+            setTimeout(() => {
+                popup.classList.remove('opacity-0');
+                popup.classList.add('opacity-100');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 50);
+        }, 500); // 500ms delay after page load
+    });
+
+    function closeOfferPopup() {
+        const popup = document.getElementById('offerPopup');
+        const content = document.getElementById('offerPopupContent');
+        
+        popup.classList.remove('opacity-100');
+        popup.classList.add('opacity-0');
+        content.classList.remove('scale-100');
+        content.classList.add('scale-95');
+        
+        setTimeout(() => {
+            popup.classList.add('hidden');
+        }, 500);
+    }
+
+    function claimOffer() {
+        closeOfferPopup();
+        setTimeout(() => {
+            toggleContactForm('Exclusive 5-Spot Offer', '50% Off Rate');
+        }, 500);
+    }
 </script>
 
 </body>
