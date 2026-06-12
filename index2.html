@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -64,15 +65,19 @@
 <body class="bg-slate-950 text-white antialiased">
 
 <nav class="fixed top-0 w-full z-50 glass border-b border-slate-800 bg-slate-950/80 backdrop-blur-md">
+    <!-- Altura expandida para h-24 para acomodar branding maior -->
     <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
         <a href="#top" class="flex items-center gap-4 md:gap-5" aria-label="Alan da Silva Morais home">
+            <!-- Logo aumentada -->
             <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg"
                  alt="Alan da Silva Morais logo"
                  width="64"
                  height="64"
                  class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-slate-700" />
             <div class="flex flex-col justify-center">
+                <!-- Nome em destaque maior -->
                 <span class="text-2xl md:text-3xl font-extrabold tracking-tight text-white leading-none">Alan da Silva Morais</span>
+                <!-- Subtítulo mais nítido e espaçado -->
                 <span data-i18n="brand_subtitle" class="text-[13px] md:text-sm text-blue-400 font-semibold tracking-widest uppercase mt-1.5">Automation & Solutions</span>
             </div>
         </a>
@@ -91,9 +96,11 @@
     </div>
 </nav>
 
+<!-- Conteúdo com pt-24 para compensar a nav mais alta -->
 <main id="top" class="pt-24">
     <header class="relative overflow-hidden border-b border-slate-800">
         <div class="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-slate-950 to-slate-950"></div>
+        <!-- Padding reduzido para a hero section ser mais direta -->
         <div class="relative max-w-7xl mx-auto px-6 py-16 lg:py-20 flex flex-col lg:flex-row items-center justify-between gap-10">
             <div class="max-w-3xl z-10 fade-up">
                 <div class="inline-flex items-center px-4 py-2 rounded-full glass border border-slate-700 text-sm text-slate-300 mb-6">
@@ -169,15 +176,16 @@
                 <div class="bg-slate-950/50 border border-slate-800 rounded-2xl p-6">
                     <p data-i18n="trust_env" class="text-xs uppercase tracking-[0.25em] text-blue-400 font-bold mb-3">Professional Environments</p>
                     <div class="space-y-1.5 text-base md:text-lg font-bold text-slate-300">
-                        <p>Shell Business Operations Kraków</p>
-                        <p>TTEC Digital — a Global Google Partnership</p>
-                        <p>HCL Technologies</p>
+                        <p>Shell Business Operations</p>
+                        <p>Ttec Digital Global Google Partnership</p>
+                        <p>HTC technologies</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Espaçamentos internos reduzidos para compactação visual -->
     <section class="py-14 bg-slate-950 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-10">
@@ -226,6 +234,7 @@
     </section>
 
     <section class="py-14 bg-slate-950">
+        <!-- Redução do gap lateral entre textos para a leitura fluir melhor -->
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div>
                 <h2 data-i18n="exp_title" class="text-3xl md:text-4xl font-bold mb-8">Core Expertise</h2>
@@ -302,7 +311,28 @@
         </div>
     </section>
 
-    <section class="py-14 bg-slate-950 border-t border-slate-800">
+    <!-- SEÇÃO DE PARCEIROS OFICIAIS -->
+    <section class="py-12 border-b border-slate-800 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 data-i18n="partners_label" class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-8">
+                Official Technology Partners
+            </h2>
+
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+                <!-- Soublox Logo -->
+                <div class="opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://via.placeholder.com/160x50/020617/FFFFFF?text=SOUBLOX" alt="Soublox Partner" class="h-8 md:h-10 object-contain" />
+                </div>
+
+                <!-- IBComp Logo -->
+                <div class="opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src="https://via.placeholder.com/160x50/020617/FFFFFF?text=IBCOMP" alt="IBComp Partner" class="h-8 md:h-10 object-contain" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-14 bg-slate-950 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center bg-slate-900/50 border border-blue-900/30 rounded-3xl p-8 md:p-10 shadow-lg relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
@@ -310,19 +340,15 @@
                 <div>
                     <div class="flex flex-wrap items-center gap-3 mb-4">
                         <span data-i18n="sf_badge" class="bg-blue-900/40 text-blue-400 text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full border border-blue-500/20">Enterprise Add-on</span>
-                        <span class="bg-slate-800 text-slate-300 text-[10px] font-bold uppercase tracking-wider py-1 px-2 rounded flex items-center gap-1.5 border border-slate-700">
-                            <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
-                            <span data-i18n="sf_partner">Official Soublox Partner</span>
-                        </span>
                     </div>
 
-                    <h2 data-i18n="sf_title" class="text-3xl font-bold mb-3 text-white">Salesforce & CRM Automation</h2>
+                    <h2 data-i18n="sf_title" class="text-3xl md:text-4xl font-bold mb-4 text-white">Salesforce & CRM Automation</h2>
 
-                    <p data-i18n="sf_desc" class="text-slate-400 text-base md:text-lg leading-relaxed mb-3">
+                    <p data-i18n="sf_desc" class="text-slate-400 text-base md:text-lg leading-relaxed mb-4">
                         Advanced data architecture, native Salesforce automation, document generation, and intelligent WhatsApp integration for complex operations.
                     </p>
 
-                    <p data-i18n="sf_note" class="text-slate-500 text-sm leading-relaxed mb-5">
+                    <p data-i18n="sf_note" class="text-slate-500 text-sm leading-relaxed mb-6">
                         Suitable for organizations that need a tailored architecture discussion rather than a fixed monthly package.
                     </p>
 
@@ -346,6 +372,7 @@
         </div>
     </section>
 
+    <!-- Scroll target ajustado para a navbar de h-24 (scroll-mt-28 compensa a barra fixa) -->
     <section id="services-pricing" class="py-16 bg-slate-950 border-t border-slate-800 scroll-mt-28">
         <div class="max-w-7xl mx-auto px-6">
             <div class="mb-12 text-center max-w-3xl mx-auto">
@@ -407,6 +434,7 @@
                         <li class="flex items-start"><span class="text-blue-500 mr-2">✔</span><span data-i18n="p_l2">Monthly Content Updates (Photos/Text)</span></li>
                         <li class="flex items-start"><span class="text-blue-500 mr-2">✔</span><span data-i18n="p_l3">Automation & Forms Maintenance</span></li>
                         <li class="flex items-start"><span class="text-blue-500 mr-2">✔</span><span data-i18n="p_l4">Security & Uptime Monitoring</span></li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2">✔</span><span data-i18n="p_l6">Basic Analytics Reports</span></li>
                         <li class="flex items-start"><span class="text-blue-500 mr-2">✔</span><span data-i18n="p_l5">Priority Support & Strategy Consulting</span></li>
                     </ul>
 
@@ -426,10 +454,11 @@
                     </div>
 
                     <ul class="text-slate-400 space-y-3 mb-6 flex-grow text-sm">
-                        <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span><span data-i18n="p_l1">Premium Hosting Included</span></li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span><span data-i18n="p_l2">Monthly Content Updates (Photos/Text)</span></li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span><span data-i18n="p_l3">Automation & Forms Maintenance</span></li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-3">✔</span><span data-i18n="p_l4">Security & Uptime Monitoring</span></li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span><span data-i18n="p_l1">Premium Hosting Included</span></li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span><span data-i18n="p_l2">Monthly Content Updates (Photos/Text)</span></li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span><span data-i18n="p_l3">Automation & Forms Maintenance</span></li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span><span data-i18n="p_l4">Security & Uptime Monitoring</span></li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span><span data-i18n="p_l6">Basic Analytics Reports</span></li>
                     </ul>
 
                     <button type="button" onclick="openContactForm('six_month', '1150')" data-i18n="pack_btn"
@@ -544,6 +573,7 @@
     <p data-i18n="footer_text" class="text-sm text-slate-500">© 2026 Alan da Silva Morais • Operational Automation & Consulting</p>
 </footer>
 
+<!-- Compact offer banner: appears once per browser session after engagement. -->
 <div id="offerBanner"
      class="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-[55] hidden opacity-0 translate-y-4 transition-all duration-300 bg-slate-900 border border-blue-500/40 rounded-2xl p-5 shadow-2xl"
      role="region"
@@ -566,6 +596,7 @@
     </div>
 </div>
 
+<!-- Contact Modal -->
 <div id="contactModal"
      class="fixed inset-0 modal-backdrop hidden z-[70] flex items-center justify-center p-4"
      role="dialog"
@@ -582,7 +613,7 @@
         </div>
 
         <div class="p-6">
-            <form action="https://formsubmit.co/ajax/Contact@alansmsolutions.com" method="POST" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-4">
+            <form action="https://formsubmit.co/ajax/contact@alansmsolutions.com" method="POST" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-4">
                 <input type="hidden" name="_subject" id="formSubject" />
                 <input type="hidden" name="_captcha" value="false" />
 
@@ -669,8 +700,8 @@
             approach_title: "My Approach",
             approach_q1: "I put myself in the position of someone discovering a business for the first time: what attracts attention, builds trust, feels clear, and makes the experience easier?",
             approach_q2: "I look at both user experience and the larger operational picture, focusing on improvements that strengthen customer relationships and support sustainable growth.",
+            partners_label: "Official Technology Partners",
             sf_badge: "Enterprise Add-on",
-            sf_partner: "Official Soublox Partner",
             sf_title: "Salesforce & CRM Automation",
             sf_desc: "Advanced data architecture, native Salesforce automation, document generation, and intelligent WhatsApp integration for complex operations.",
             sf_note: "Suitable for organizations that need a tailored architecture discussion rather than a fixed monthly package.",
@@ -697,6 +728,7 @@
             p_l3: "Automation & Forms Maintenance",
             p_l4: "Security & Uptime Monitoring",
             p_l5: "Priority Support & Strategy Consulting",
+            p_l6: "Basic Analytics Reports",
             pack_btn: "Select Package",
             pack_btn_primary: "Select Package",
             faq_title: "Frequently Asked Questions",
@@ -784,8 +816,8 @@
             approach_title: "Minha Abordagem",
             approach_q1: "Eu me coloco na posição de alguém descobrindo um negócio pela primeira vez: o que chama atenção, gera confiança, parece claro e torna a experiência mais fácil?",
             approach_q2: "Analiso a experiência do usuário e o cenário operacional mais amplo, com foco em melhorias que fortaleçam o relacionamento com clientes e apoiem um crescimento sustentável.",
+            partners_label: "Parceiros Oficiais de Tecnologia",
             sf_badge: "Solução Corporativa",
-            sf_partner: "Parceiro Oficial Soublox",
             sf_title: "Automação de CRM e Salesforce",
             sf_desc: "Arquitetura avançada de dados, automações nativas no Salesforce, geração de documentos e integração inteligente com WhatsApp para operações complexas.",
             sf_note: "Indicado para organizações que precisam de uma conversa personalizada sobre arquitetura em vez de um pacote mensal fixo.",
@@ -812,6 +844,7 @@
             p_l3: "Manutenção de Automações e Formulários",
             p_l4: "Monitoramento de Segurança e Disponibilidade",
             p_l5: "Suporte Prioritário e Consultoria Estratégica",
+            p_l6: "Relatórios Básicos de Desempenho",
             pack_btn: "Selecionar Pacote",
             pack_btn_primary: "Selecionar Pacote",
             faq_title: "Perguntas Frequentes",
@@ -899,8 +932,8 @@
             approach_title: "Moje Podejście",
             approach_q1: "Stawiam się na miejscu osoby odkrywającej firmę po raz pierwszy: co przyciąga uwagę, buduje zaufanie, jest jasne i ułatwia doświadczenie?",
             approach_q2: "Analizuję zarówno doświadczenie użytkownika, jak i szerszy obraz operacyjny, koncentrując się na usprawnieniach, które wzmacniają relacje z klientami i wspierają trwały rozwój.",
+            partners_label: "Oficjalni Partnerzy Technologiczni",
             sf_badge: "Rozwiązanie Korporacyjne",
-            sf_partner: "Oficjalny Partner Soublox",
             sf_title: "Automatyzacja CRM i Salesforce",
             sf_desc: "Zaawansowana architektura danych, natywne automatyzacje Salesforce, generowanie dokumentów i inteligentna integracja WhatsApp dla złożonych operacji.",
             sf_note: "Rozwiązanie dla organizacji, które potrzebują indywidualnej rozmowy o architekturze zamiast stałego miesięcznego pakietu.",
@@ -927,6 +960,7 @@
             p_l3: "Utrzymanie Automatyzacji i Formularzy",
             p_l4: "Monitoring Bezpieczeństwa i Dostępności",
             p_l5: "Priorytetowe Wsparcie i Konsultacje Strategiczne",
+            p_l6: "Podstawowe Raporty Wyników",
             pack_btn: "Wybierz Pakiet",
             pack_btn_primary: "Wybierz Pakiet",
             faq_title: "Często Zadawane Pytania",
