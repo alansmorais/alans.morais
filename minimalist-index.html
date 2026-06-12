@@ -47,6 +47,277 @@
 <body class="antialiased selection:bg-blue-500 selection:text-white">
 
 <nav class="fixed top-0 w-full z-50 bg-slate-950 border-b border-slate-800">
+    <!-- Altura aumentada para h-20 -->
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <a href="#top" class="flex items-center gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded" aria-label="Alan da Silva Morais home">
+            <!-- Logo e texto aumentados -->
+            <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg"
+                 alt="Alan da Silva Morais logo"
+                 width="48"
+                 height="48"
+                 class="w-12 h-12 rounded-full border border-slate-700" />
+            <div class="flex flex-col">
+                <span class="text-xl md:text-2xl font-bold tracking-tight text-slate-100 leading-tight">Alan da Silva Morais</span>
+                <span data-i18n="brand_subtitle" class="text-xs text-blue-500 font-semibold tracking-widest uppercase mt-0.5">Automation & Solutions</span>
+            </div>
+        </a>
+
+        <div class="flex items-center gap-6">
+            <a href="#services-pricing" data-i18n="nav_services" class="text-slate-400 hover:text-slate-100 font-medium transition-colors text-sm hidden sm:block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded px-2 py-1">Services & Pricing</a>
+
+            <div class="flex items-center gap-2 border-l border-slate-800 pl-6" aria-label="Language selector">
+                <button type="button" onclick="setLanguage('en')" data-lang="en" class="lang-btn text-xs font-bold text-blue-500 hover:text-blue-400 transition-colors focus:outline-none rounded px-1">EN</button>
+                <span class="text-slate-700 text-xs">/</span>
+                <button type="button" onclick="setLanguage('pt')" data-lang="pt" class="lang-btn text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors focus:outline-none rounded px-1">PT-BR</button>
+                <span class="text-slate-700 text-xs">/</span>
+                <button type="button" onclick="setLanguage('pl')" data-lang="pl" class="lang-btn text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors focus:outline-none rounded px-1">PL</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Padding top ajustado para a nova barra de h-20 -->
+<main id="top" class="pt-20">
+    <header class="border-b border-slate-800 bg-slate-950">
+        <!-- Espaçamento reduzido de py-20/32 para py-16/24 -->
+        <div class="max-w-7xl mx-auto px-6 py-16 lg:py-24 flex flex-col lg:flex-row items-center justify-between gap-10">
+            <div class="max-w-3xl fade-up">
+                <div class="inline-flex items-center px-3 py-1.5 rounded bg-slate-900 border border-slate-800 text-xs text-slate-400 mb-6 font-medium tracking-wide">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-2"></span>
+                    <span data-i18n="hero_badge">Available for consulting • Kraków & Remote</span>
+                </div>
+
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-slate-100 tracking-tight">
+                    <span data-i18n="hero_title_1">Improve Business Operations</span><br />
+                    <span class="text-blue-500" data-i18n="hero_title_2">Through Smart Automation.</span>
+                </h1>
+
+                <p data-i18n="hero_p1" class="text-lg md:text-xl text-slate-400 leading-relaxed mb-6 max-w-2xl">
+                    I help organizations reduce manual work, improve data quality, and streamline operations through practical automation systems.
+                </p>
+
+                <p data-i18n="hero_p2" class="text-base text-slate-500 leading-relaxed mb-8 max-w-2xl">
+                    With nearly a decade of experience in global enterprise environments, including SAP, Salesforce, and operational teams, I combine business process understanding with practical technical execution.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button type="button" onclick="openContactForm()" data-i18n="hero_btn_book"
+                            class="bg-blue-600 hover:bg-blue-500 text-white transition-colors px-6 py-3.5 rounded-lg font-semibold text-base text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
+                        Book an Operations Review
+                    </button>
+
+                    <a href="https://www.linkedin.com/in/alandasm"
+                       data-i18n="hero_btn_view"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="bg-slate-900 border border-slate-700 hover:border-slate-500 hover:bg-slate-800 text-slate-300 transition-colors px-6 py-3.5 rounded-lg font-semibold text-base text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
+                        View Experience
+                    </a>
+                </div>
+            </div>
+
+            <!-- Flattened static cards without bouncing -->
+            <div class="hidden lg:flex flex-col gap-4 w-full max-w-sm">
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="text-3xl" aria-hidden="true">⏱️</div>
+                        <div>
+                            <p data-i18n="stat1_title" class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Example Workflow Impact</p>
+                            <p data-i18n="stat1_val" class="text-lg font-semibold text-slate-100">Up to 15 Hrs Saved/Wk</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
+                    <div class="flex items-center gap-4">
+                        <div class="text-3xl" aria-hidden="true">📈</div>
+                        <div>
+                            <p data-i18n="stat2_title" class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Data Quality Controls</p>
+                            <p data-i18n="stat2_val" class="text-lg font-semibold text-blue-500">Automated Validation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Espaçamento de blocos internos reduzido para py-12 -->
+    <section class="py-12 border-b border-slate-800 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p data-i18n="trust_title" class="uppercase tracking-[0.2em] text-xs text-slate-500 font-semibold mb-6">
+                Experience with Enterprise Platforms and Global Operations
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 hover:border-slate-700 transition-colors">
+                    <p data-i18n="trust_platforms" class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Platforms</p>
+                    <p class="text-lg font-medium text-slate-300 leading-snug">SAP S/4HANA · Ariba · Salesforce</p>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 hover:border-slate-700 transition-colors">
+                    <p data-i18n="trust_env" class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Professional Environments</p>
+                    <p class="text-lg font-medium text-slate-300 leading-snug">Shell Business Operations · TTEC Digital Global Google Partnership · HTC Technologies</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Espaçamento reduzido de py-24 para py-16 -->
+    <section class="py-16 bg-slate-950 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="max-w-3xl mb-10">
+                <h2 data-i18n="automation_title" class="text-3xl font-bold mb-4 text-slate-100">Automation Examples</h2>
+                <p data-i18n="automation_desc" class="text-slate-400 text-base leading-relaxed">
+                    Practical implementation examples focused on reporting, CRM architecture, and modern client-facing platforms.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-10">
+                <article class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                    <p data-i18n="case1_tag" class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Reporting Automation</p>
+                    <h3 data-i18n="case1_title" class="text-lg font-semibold text-slate-200">Reduce repetitive spreadsheet preparation</h3>
+                    <p data-i18n="case1_desc" class="text-slate-400 mt-2 text-sm leading-relaxed">
+                        Automate validation, formatting, and recurring report generation through structured data workflows.
+                    </p>
+                </article>
+
+                <article class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                    <p data-i18n="case2_tag" class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">CRM Architecture</p>
+                    <h3 data-i18n="case2_title" class="text-lg font-semibold text-slate-200">Connect lead capture with operations</h3>
+                    <p data-i18n="case2_desc" class="text-slate-400 mt-2 text-sm leading-relaxed">
+                        Design intake flows, document generation, and follow-up automation for more consistent customer handling.
+                    </p>
+                </article>
+
+                <article class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                    <p data-i18n="case3_tag" class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Web Experience</p>
+                    <h3 data-i18n="case3_title" class="text-lg font-semibold text-slate-200">Improve professional brand presentation</h3>
+                    <p data-i18n="case3_desc" class="text-slate-400 mt-2 text-sm leading-relaxed">
+                        Build responsive pages with clearer calls to action and simplified client interaction.
+                    </p>
+                </article>
+            </div>
+
+            <div>
+                <a href="https://github.com/alansmorais"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   data-i18n="automation_btn"
+                   class="inline-flex items-center text-sm font-semibold text-slate-300 hover:text-white transition-colors bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 px-5 py-2.5 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500">
+                    View GitHub Repositories →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Espaçamento reduzido de py-24 para py-16, gap reduzido de 16 para 12 -->
+    <section class="py-16 bg-slate-950 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-start">
+            <div>
+                <h2 data-i18n="exp_title" class="text-3xl font-bold mb-8 text-slate-100">Core Expertise</h2>
+
+                <div class="space-y-4">
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                        <h3 data-i18n="exp_1_title" class="font-semibold text-lg mb-1 text-slate-200">Data Automation</h3>
+                        <p data-i18n="exp_1_desc" class="text-slate-400 text-sm">VBA Macros, Google Apps Script, Excel Automation, Google Sheets Integration, Reporting Optimization.</p>
+                    </div>
+
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                        <h3 data-i18n="exp_2_title" class="font-semibold text-lg mb-1 text-slate-200">Web Platforms</h3>
+                        <p data-i18n="exp_2_desc" class="text-slate-400 text-sm">HTML, CSS, Tailwind CSS, Responsive Design, Landing Pages, Business Websites.</p>
+                    </div>
+
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                        <h3 data-i18n="exp_3_title" class="font-semibold text-lg mb-1 text-slate-200">Enterprise Operations</h3>
+                        <p data-i18n="exp_3_desc" class="text-slate-400 text-sm">SAP S/4HANA, Ariba, Salesforce, Master Data Management, Order-to-Cash, ITIL.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 data-i18n="prof_exp_title" class="text-3xl font-bold mb-8 text-slate-100">Professional Experience</h2>
+
+                <div class="space-y-6 border-l-2 border-slate-800 pl-6 ml-2">
+                    <div class="relative">
+                        <div class="absolute w-3 h-3 bg-slate-700 rounded-full -left-[31px] top-1.5 border-4 border-slate-950"></div>
+                        <h3 class="text-lg font-semibold text-slate-200">TTEC Digital Global Google Partnership</h3>
+                        <p data-i18n="role_1" class="text-blue-500 text-sm font-medium mt-0.5">Partner Success Manager</p>
+                        <span data-i18n="date_1" class="text-slate-500 text-xs tracking-wide">Mar 2025 – Present</span>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute w-3 h-3 bg-slate-800 rounded-full -left-[31px] top-1.5 border-4 border-slate-950"></div>
+                        <h3 class="text-lg font-semibold text-slate-200">Shell Business Operations</h3>
+                        <p data-i18n="role_2" class="text-slate-400 text-sm font-medium mt-0.5">Customer Success Specialist</p>
+                        <span data-i18n="date_2" class="text-slate-500 text-xs tracking-wide">Nov 2021 – Jul 2024</span>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute w-3 h-3 bg-slate-800 rounded-full -left-[31px] top-1.5 border-4 border-slate-950"></div>
+                        <h3 class="text-lg font-semibold text-slate-200">Shell Business Operations</h3>
+                        <p data-i18n="role_3" class="text-slate-400 text-sm font-medium mt-0.5">Procurement Data Specialist</p>
+                        <span data-i18n="date_3" class="text-slate-500 text-xs tracking-wide">Jun 2018 – Nov 2021</span>
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute w-3 h-3 bg-slate-800 rounded-full -left-[31px] top-1.5 border-4 border-slate-950"></div>
+                        <h3 class="text-lg font-semibold text-slate-200">HTC Technologies</h3>
+                        <p data-i18n="role_4" class="text-slate-400 text-sm font-medium mt-0.5">IT Service Desk Analyst</p>
+                        <span data-i18n="date_4" class="text-slate-500 text-xs tracking-wide">Jun 2017 – May 2018</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Espaçamento reduzido py-16 -->
+    <section class="py-16 bg-slate-900 border-b border-slate-800">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <h2 data-i18n="approach_title" class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-6">My Approach</h2>
+
+            <blockquote data-i18n="approach_q1" class="text-xl md:text-2xl text-slate-200 font-medium leading-relaxed mb-6">
+                "I put myself in the position of someone discovering a business for the first time: what attracts attention, builds trust, feels clear, and makes the experience easier?"
+            </blockquote>
+
+            <p data-i18n="approach_q2" class="text-base text-slate-400 leading-relaxed">
+                I look at both user experience and the larger operational picture, focusing on improvements that strengthen customer relationships and support sustainable growth.
+            </p>
+        </div>
+    </section>
+
+    <!-- Espaçamento reduzido py-16 -->
+    <section class="py-16 bg-slate-950 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row gap-8 bg-slate-900 border border-slate-800 rounded-xl p-8 items-center">
+                <div class="w-1 h-full bg-blue-600 hidden md:block rounded"></div>
+                
+                <div class="flex-1">
+                    <div class="flex flex-wrap items-center gap-2 mb-3">
+                        <span data-i18n="sf_badge" class="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-2 rounded">Enterprise Add-on</span>
+                        <span data-i18n="sf_partner" class="bg-slate-800 text-slate-300 text-[10px] font-bold uppercase tracking-wider py-1 px-2 rounded">Soublox Collaboration</span>
+                    </div>
+
+                    <h2 data-i18n="sf_title" class="text-2xl font-bold mb-2 text-slate-100">Salesforce & CRM Automation</h2>
+
+                    <p data-i18n="sf_desc" class="text-slate-400 text-sm leading-relaxed mb-4 max-w-2xl">
+                        Advanced data architecture, native Salesforce automation, document generation, and intelligent WhatsApp integration for complex operations.
+                    </p>
+
+                    <div class="flex items-center gap-2 mt-4 text-slate-300">
+                        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2            animation: fadeUp 0.6s ease-out both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+<nav class="fixed top-0 w-full z-50 bg-slate-950 border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#top" class="flex items-center gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded" aria-label="Alan da Silva Morais home">
             <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg"
