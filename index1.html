@@ -21,36 +21,7 @@
     <meta name="twitter:title" content="Alan da Silva Morais | Automation & Operational Consulting" />
     <meta name="twitter:description" content="Operational automation consulting, CRM architecture, business process optimization, and modern web platforms." />
 
-    <script src="https://cdn.tailwindcss.com">
-    function openLegalModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (!modal) return;
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        document.body.classList.add('overflow-hidden');
-    }
-
-    function closeLegalModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (!modal) return;
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        document.body.classList.remove('overflow-hidden');
-    }
-
-    document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape') {
-            closeLegalModal('termsModal');
-            closeLegalModal('privacyModal');
-        }
-    });
-
-    document.addEventListener('click', function (event) {
-        if (event.target && event.target.id === 'termsModal') closeLegalModal('termsModal');
-        if (event.target && event.target.id === 'privacyModal') closeLegalModal('privacyModal');
-    });
-
-</script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1106,7 +1077,7 @@
             privacy_7_body: "You may request access, correction or deletion of your personal data, subject to legal and business record requirements.",
             privacy_8_title: "8. Contact",
             privacy_8_body: "For privacy questions or data requests, contact contact@alansmsolutions.com.",
-            legal_disclaimer: "These website terms are a practical business draft and should be reviewed by a qualified legal professional if needed.",
+            legal_disclaimer: "These terms are provided for transparency and may be updated from time to time.",
             brand_subtitle: "Automation & Solutions",
             nav_services: "Services & Pricing",
             hero_badge: "Available for consulting • Skalica, Kraków - Remote",
@@ -1402,7 +1373,7 @@ form_title: "Send a Message",
             privacy_7_body: "Você pode solicitar acesso, correção ou exclusão de seus dados pessoais, sujeito a exigências legais e de manutenção de registros comerciais.",
             privacy_8_title: "8. Contato",
             privacy_8_body: "Para dúvidas de privacidade ou solicitações de dados, entre em contato por contact@alansmsolutions.com.",
-            legal_disclaimer: "Estes termos do website são um rascunho comercial prático e devem ser revisados por um profissional jurídico qualificado, se necessário.",
+            legal_disclaimer: "Estes termos são fornecidos para transparência e podem ser atualizados periodicamente.",
             brand_subtitle: "Automação e Soluções",
             nav_services: "Serviços e Preços",
             hero_badge: "Disponível para consultoria • Skalica, Cracóvia - Remoto",
@@ -1698,7 +1669,7 @@ form_title: "Enviar uma Mensagem",
             privacy_7_body: "Możesz poprosić o dostęp, poprawienie lub usunięcie swoich danych osobowych, z zastrzeżeniem wymogów prawnych i wymogów dokumentacji biznesowej.",
             privacy_8_title: "8. Kontakt",
             privacy_8_body: "W sprawach prywatności lub żądań dotyczących danych skontaktuj się przez contact@alansmsolutions.com.",
-            legal_disclaimer: "Te warunki na stronie są praktycznym szkicem biznesowym i w razie potrzeby powinny zostać sprawdzone przez wykwalifikowanego prawnika.",
+            legal_disclaimer: "Niniejsze warunki są udostępniane w celu przejrzystości i mogą być okresowo aktualizowane.",
             brand_subtitle: "Automatyzacja i Rozwiązania",
             nav_services: "Usługi i Cennik",
             hero_badge: "Dostępny na konsultacje • Skalica, Kraków - Zdalnie",
@@ -2297,6 +2268,38 @@ form_title: "Wyślij Wiadomość",
         window.addEventListener('scroll', handleScroll, { passive: true });
         window.setTimeout(triggerBanner, 12000);
     });
+    function openLegalModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closeLegalModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+    }
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeLegalModal('termsModal');
+            closeLegalModal('privacyModal');
+        }
+    });
+
+    document.addEventListener('click', function (event) {
+        if (event.target && event.target.id === 'termsModal') {
+            closeLegalModal('termsModal');
+        }
+        if (event.target && event.target.id === 'privacyModal') {
+            closeLegalModal('privacyModal');
+        }
+    });
+
 </script>
 
 
