@@ -245,7 +245,7 @@
               <div class="rounded-3xl border border-sky-200 bg-sky-50 p-5">
                 <h4 class="font-black text-sky-950 mb-2">Real implementation note</h4>
                 <p class="text-sm text-sky-900/80 leading-relaxed">
-                  This demo is connected to Apps Script. When submitted, it creates a Google Calendar event. For production, availability checks should be added to prevent double-booking.
+                  This demo is connected to Apps Script. When submitted, it creates a Google Calendar event. If the backend returns an error, the page now shows the real error message for easier testing.
                 </p>
               </div>
             </div>
@@ -483,10 +483,21 @@
         method: 'POST',
         body: body
       }).then(function (response) {
-        if (!response.ok) {
-          throw new Error('Booking request failed');
-        }
-        return response.json();
+        return response.text().then(function (text) {
+          let result;
+
+          try {
+            result = JSON.parse(text);
+          } catch (error) {
+            throw new Error('Backend did not return JSON. Redeploy the Apps Script Web App and check permissions.');
+          }
+
+          if (!response.ok) {
+            throw new Error(result.message || 'Booking request failed.');
+          }
+
+          return result;
+        });
       });
     }
 
@@ -551,7 +562,7 @@
       submitClinicBooking(payload)
         .then(function (result) {
           if (!result || result.status !== 'ok') {
-            throw new Error(result && result.message ? result.message : 'Unknown backend error');
+            throw new Error(result && result.message ? result.message : 'Unknown backend error. Check Apps Script Executions.');
           }
 
           status.textContent =
@@ -575,8 +586,8 @@
           });
           updateBookingSummary();
         })
-        .catch(function () {
-          status.textContent = 'Something went wrong. Please try again or contact the clinic.';
+        .catch(function (error) {
+          status.textContent = error.message || 'Something went wrong. Please try again or contact the clinic.';
           status.classList.remove('text-slate-600', 'text-emerald-700');
           status.classList.add('text-amber-700');
         })
