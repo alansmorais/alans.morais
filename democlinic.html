@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo Concept — Clinic Booking Page | AlanSM Solutions</title>
+  <meta name="description" content="Demo clinic booking page concept with services, location, FAQ, booking button, contact form, Google Calendar guidance, and patient intake guidance." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(14,165,233,0.18), transparent 36%),
+        radial-gradient(circle at top right, rgba(16,185,129,0.14), transparent 34%),
+        #f8fafc;
+    }
+    .glass {
+      background: rgba(255,255,255,0.84);
+      backdrop-filter: blur(18px);
+    }
+  </style>
+</head>
+
+<body class="text-slate-900">
+  <header class="sticky top-0 z-40 bg-white/85 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
+      <a href="#" class="font-black tracking-tight text-xl">
+        Demo<span class="text-sky-600">Clinic</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <a href="#services" class="hover:text-sky-700">Services</a>
+        <a href="#booking" class="hover:text-sky-700">Booking</a>
+        <a href="#intake" class="hover:text-sky-700">Patient Intake</a>
+        <a href="#location" class="hover:text-sky-700">Location</a>
+        <a href="#faq" class="hover:text-sky-700">FAQ</a>
+      </nav>
+
+      <a href="#booking" class="rounded-full bg-sky-600 px-5 py-2.5 text-white text-sm font-bold shadow-lg shadow-sky-600/20 hover:bg-sky-700">
+        Book Appointment
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="relative overflow-hidden">
+      <div class="max-w-6xl mx-auto px-5 py-20 lg:py-28 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="inline-flex items-center gap-2 rounded-full bg-sky-100 text-sky-800 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] mb-6">
+            Demo Concept
+          </p>
+
+          <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight mb-6">
+            Clinic booking page for faster patient inquiries.
+          </h1>
+
+          <p class="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl">
+            A clean clinic landing page concept with services, location, FAQ, booking call-to-action,
+            contact form, Google Calendar guidance, and patient-intake instructions.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#booking" class="rounded-2xl bg-sky-600 px-7 py-4 text-white font-black text-center shadow-xl shadow-sky-600/20 hover:bg-sky-700">
+              Book Appointment
+            </a>
+            <a href="#services" class="rounded-2xl border border-slate-300 bg-white px-7 py-4 font-black text-center hover:border-sky-400 hover:text-sky-700">
+              View Services
+            </a>
+          </div>
+
+          <div class="mt-8 grid grid-cols-3 gap-3 max-w-xl">
+            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+              <p class="text-2xl font-black text-sky-700">24h</p>
+              <p class="text-xs text-slate-500">response target</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+              <p class="text-2xl font-black text-emerald-700">3</p>
+              <p class="text-xs text-slate-500">core services</p>
+            </div>
+            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+              <p class="text-2xl font-black text-indigo-700">1</p>
+              <p class="text-xs text-slate-500">simple form</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass rounded-[2rem] border border-white shadow-2xl p-6 md:p-8">
+          <div class="rounded-[1.5rem] bg-gradient-to-br from-sky-600 to-emerald-500 p-1">
+            <div class="bg-white rounded-[1.35rem] p-6">
+              <p class="text-sm font-bold text-slate-500 mb-2">Demo availability</p>
+              <div class="space-y-3">
+                <div class="flex items-center justify-between rounded-2xl bg-slate-50 border border-slate-200 p-4">
+                  <div>
+                    <p class="font-black">General Consultation</p>
+                    <p class="text-sm text-slate-500">30 minutes</p>
+                  </div>
+                  <span class="text-sm font-bold text-emerald-700">Available</span>
+                </div>
+                <div class="flex items-center justify-between rounded-2xl bg-slate-50 border border-slate-200 p-4">
+                  <div>
+                    <p class="font-black">Follow-up Visit</p>
+                    <p class="text-sm text-slate-500">20 minutes</p>
+                  </div>
+                  <span class="text-sm font-bold text-emerald-700">Available</span>
+                </div>
+                <div class="flex items-center justify-between rounded-2xl bg-slate-50 border border-slate-200 p-4">
+                  <div>
+                    <p class="font-black">Online Consultation</p>
+                    <p class="text-sm text-slate-500">Video call</p>
+                  </div>
+                  <span class="text-sm font-bold text-sky-700">Request</span>
+                </div>
+              </div>
+              <a href="#booking" class="mt-6 block w-full rounded-2xl bg-slate-900 py-4 text-center font-black text-white hover:bg-slate-800">
+                Book Appointment
+              </a>
+            </div>
+          </div>
+
+          <p class="mt-5 text-xs text-slate-500 leading-relaxed">
+            Demo only. Replace services, calendar link, address and patient instructions with the real clinic details.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="max-w-2xl mb-10">
+          <p class="text-sky-700 font-black uppercase tracking-[0.2em] text-xs mb-3">Services</p>
+          <h2 class="text-3xl md:text-4xl font-black mb-4">Clear services before the patient books.</h2>
+          <p class="text-slate-600 leading-relaxed">
+            This section helps patients choose the right appointment type before submitting a request.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="rounded-3xl border border-slate-200 p-6 hover:shadow-xl transition-shadow">
+            <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center font-black mb-5">01</div>
+            <h3 class="text-xl font-black mb-3">General Consultation</h3>
+            <p class="text-slate-600 leading-relaxed mb-5">Initial visit for symptoms, routine concerns, medical advice, or next-step guidance.</p>
+            <p class="text-sm font-bold text-slate-500">Typical duration: 30 minutes</p>
+          </article>
+
+          <article class="rounded-3xl border border-slate-200 p-6 hover:shadow-xl transition-shadow">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black mb-5">02</div>
+            <h3 class="text-xl font-black mb-3">Follow-up Visit</h3>
+            <p class="text-slate-600 leading-relaxed mb-5">For patients who already had a consultation and need review, continuation, or results discussion.</p>
+            <p class="text-sm font-bold text-slate-500">Typical duration: 20 minutes</p>
+          </article>
+
+          <article class="rounded-3xl border border-slate-200 p-6 hover:shadow-xl transition-shadow">
+            <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-black mb-5">03</div>
+            <h3 class="text-xl font-black mb-3">Online Consultation</h3>
+            <p class="text-slate-600 leading-relaxed mb-5">Remote consultation request for eligible cases, subject to clinic confirmation.</p>
+            <p class="text-sm font-bold text-slate-500">Format: video or phone</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="booking" class="py-20">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="max-w-3xl mb-10">
+          <p class="text-sky-700 font-black uppercase tracking-[0.2em] text-xs mb-3">Booking</p>
+          <h2 class="text-3xl md:text-4xl font-black mb-4">Pick a service, date, and time.</h2>
+          <p class="text-slate-600 leading-relaxed">
+            This demo shows the patient-facing booking experience directly on the page. In a real clinic version,
+            the selected service and time can be connected to Google Calendar, Calendly, SimplyBook, Booksy,
+            ZnanyLekarz, or a custom booking workflow.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
+          <div class="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden">
+            <div class="p-6 border-b border-slate-200 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <h3 class="text-xl font-black">Appointment Booking</h3>
+                <p class="text-sm text-slate-500 mt-1">Interactive demo booking widget</p>
+              </div>
+              <span class="inline-flex w-fit rounded-full bg-emerald-100 text-emerald-800 px-4 py-2 text-xs font-black uppercase tracking-[0.15em]">
+                Demo booking flow
+              </span>
+            </div>
+
+            <div class="p-6 md:p-8 space-y-8">
+              <div>
+                <h4 class="text-sm font-black uppercase tracking-[0.18em] text-slate-500 mb-4">1. Choose service</h4>
+                <div class="grid md:grid-cols-3 gap-4" id="serviceOptions">
+                  <button type="button" class="service-option rounded-3xl border-2 border-sky-500 bg-sky-50 p-5 text-left transition-all" data-service="General Consultation" data-duration="30 minutes">
+                    <p class="font-black text-slate-900">General Consultation</p>
+                    <p class="text-sm text-slate-500 mt-1">30 minutes</p>
+                  </button>
+                  <button type="button" class="service-option rounded-3xl border-2 border-slate-200 bg-white p-5 text-left hover:border-sky-300 transition-all" data-service="Follow-up Visit" data-duration="20 minutes">
+                    <p class="font-black text-slate-900">Follow-up Visit</p>
+                    <p class="text-sm text-slate-500 mt-1">20 minutes</p>
+                  </button>
+                  <button type="button" class="service-option rounded-3xl border-2 border-slate-200 bg-white p-5 text-left hover:border-sky-300 transition-all" data-service="Online Consultation" data-duration="25 minutes">
+                    <p class="font-black text-slate-900">Online Consultation</p>
+                    <p class="text-sm text-slate-500 mt-1">25 minutes</p>
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="text-sm font-black uppercase tracking-[0.18em] text-slate-500 mb-4">2. Choose date</h4>
+                <input id="appointmentDate" type="date" class="w-full md:w-auto rounded-2xl border border-slate-300 px-4 py-3 font-bold focus:outline-none focus:ring-2 focus:ring-sky-500" />
+                <p class="text-xs text-slate-500 mt-2">Demo availability is generated for the selected date.</p>
+              </div>
+
+              <div>
+                <h4 class="text-sm font-black uppercase tracking-[0.18em] text-slate-500 mb-4">3. Choose time</h4>
+                <div id="timeSlots" class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  <button type="button" class="time-slot rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 font-black hover:border-sky-400" data-time="09:00">09:00</button>
+                  <button type="button" class="time-slot rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 font-black hover:border-sky-400" data-time="10:30">10:30</button>
+                  <button type="button" class="time-slot rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 font-black hover:border-sky-400" data-time="12:00">12:00</button>
+                  <button type="button" class="time-slot rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 font-black hover:border-sky-400" data-time="14:30">14:30</button>
+                  <button type="button" class="time-slot rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 font-black hover:border-sky-400" data-time="15:30">15:30</button>
+                  <button type="button" class="time-slot rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 font-black hover:border-sky-400" data-time="16:30">16:30</button>
+                  <button type="button" class="rounded-2xl border-2 border-slate-100 bg-slate-100 px-4 py-3 font-black text-slate-400 cursor-not-allowed" disabled>17:00</button>
+                  <button type="button" class="rounded-2xl border-2 border-slate-100 bg-slate-100 px-4 py-3 font-black text-slate-400 cursor-not-allowed" disabled>17:30</button>
+                </div>
+              </div>
+
+              <div class="rounded-3xl bg-slate-900 text-white p-6">
+                <h4 class="font-black text-lg mb-3">Selected appointment</h4>
+                <div class="grid md:grid-cols-3 gap-3 text-sm">
+                  <div class="rounded-2xl bg-white/10 p-4">
+                    <p class="text-slate-300">Service</p>
+                    <p id="selectedServiceText" class="font-black mt-1">General Consultation</p>
+                  </div>
+                  <div class="rounded-2xl bg-white/10 p-4">
+                    <p class="text-slate-300">Date</p>
+                    <p id="selectedDateText" class="font-black mt-1">Select date</p>
+                  </div>
+                  <div class="rounded-2xl bg-white/10 p-4">
+                    <p class="text-slate-300">Time</p>
+                    <p id="selectedTimeText" class="font-black mt-1">Select time</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="rounded-3xl border border-sky-200 bg-sky-50 p-5">
+                <h4 class="font-black text-sky-950 mb-2">Real implementation note</h4>
+                <p class="text-sm text-sky-900/80 leading-relaxed">
+                  This demo is connected to Apps Script. When submitted, it creates a Google Calendar event. For production, availability checks should be added to prevent double-booking.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <form id="bookingForm" class="bg-white rounded-[2rem] border border-slate-200 shadow-xl p-6 md:p-8">
+              <div class="mb-6">
+                <h3 class="text-xl font-black mb-2">Patient intake details</h3>
+                <p class="text-sm text-slate-500 leading-relaxed">
+                  After selecting the appointment details, the patient sends basic intake information.
+                  Avoid collecting sensitive medical history unless the clinic uses a secure intake system.
+                </p>
+              </div>
+
+              <input type="hidden" id="selectedServiceInput" name="selectedService" value="General Consultation" />
+              <input type="hidden" id="selectedDateInput" name="selectedDate" />
+              <input type="hidden" id="selectedTimeInput" name="selectedTime" />
+
+              <div class="space-y-4">
+                <div>
+                  <label for="name" class="block text-sm font-bold text-slate-600 mb-2">Full name</label>
+                  <input id="name" name="name" required class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Jane Patient" />
+                </div>
+
+                <div>
+                  <label for="email" class="block text-sm font-bold text-slate-600 mb-2">Email</label>
+                  <input id="email" name="email" type="email" required class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="patient@email.com" />
+                </div>
+
+                <div>
+                  <label for="phone" class="block text-sm font-bold text-slate-600 mb-2">Phone</label>
+                  <input id="phone" name="phone" class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="+48 ..." />
+                </div>
+
+                <div>
+                  <label for="message" class="block text-sm font-bold text-slate-600 mb-2">Short note</label>
+                  <textarea id="message" name="message" rows="4" class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Basic reason for appointment or practical questions. Do not include highly sensitive medical details in this demo form."></textarea>
+                </div>
+              </div>
+
+              <label class="mt-4 flex items-start gap-3 text-sm text-slate-600 leading-relaxed">
+                <input type="checkbox" required class="mt-1 accent-sky-600" />
+                <span>I understand this is patient-intake information and the clinic will confirm the final appointment details.</span>
+              </label>
+
+              <button type="submit" class="mt-6 w-full rounded-2xl bg-sky-600 py-4 text-white font-black shadow-lg shadow-sky-600/20 hover:bg-sky-700">
+                Send Patient Details
+              </button>
+
+              <p id="formStatus" class="mt-4 text-center text-sm font-bold text-emerald-700 hidden">
+                Demo intake received. In the real page, this would create the appointment request or send it to the clinic workflow.
+              </p>
+            </form>
+
+            <div class="mt-6 rounded-3xl border border-amber-200 bg-amber-50 p-6">
+              <h3 class="font-black text-amber-900 mb-2">Urgent care note</h3>
+              <p class="text-amber-900/80 text-sm leading-relaxed">
+                For emergency symptoms or urgent medical situations, patients should contact local emergency services instead of using the website form.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="intake" class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <p class="text-sky-700 font-black uppercase tracking-[0.2em] text-xs mb-3">Patient Intake Guidance</p>
+          <h2 class="text-3xl md:text-4xl font-black mb-4">Help patients arrive prepared.</h2>
+          <p class="text-slate-600 leading-relaxed">
+            The page can guide patients on what to prepare before a visit, without collecting unnecessary sensitive details on the public form.
+          </p>
+        </div>
+
+        <div class="grid gap-4">
+          <div class="rounded-3xl border border-slate-200 p-5">
+            <h3 class="font-black mb-1">Before your visit</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">Bring ID, insurance details if applicable, medication list, and previous test results when relevant.</p>
+          </div>
+          <div class="rounded-3xl border border-slate-200 p-5">
+            <h3 class="font-black mb-1">For online consultations</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">Use a private space, stable internet connection, and keep important documents nearby.</p>
+          </div>
+          <div class="rounded-3xl border border-slate-200 p-5">
+            <h3 class="font-black mb-1">Privacy guidance</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">Avoid entering sensitive medical history into a general website form unless the clinic provides a secure intake process.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="location" class="py-20">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="grid lg:grid-cols-2 gap-10">
+          <div>
+            <p class="text-sky-700 font-black uppercase tracking-[0.2em] text-xs mb-3">Location</p>
+            <h2 class="text-3xl md:text-4xl font-black mb-4">Easy to find. Easy to contact.</h2>
+            <div class="space-y-3 text-slate-600 leading-relaxed">
+              <p><strong class="text-slate-900">Clinic:</strong> Demo Health Clinic</p>
+              <p><strong class="text-slate-900">Address:</strong> 123 Wellness Street, Kraków</p>
+              <p><strong class="text-slate-900">Hours:</strong> Monday–Friday, 09:00–17:00</p>
+              <p><strong class="text-slate-900">Phone:</strong> +48 000 000 000</p>
+              <p><strong class="text-slate-900">Email:</strong> hello@democlinic.example</p>
+            </div>
+          </div>
+
+          <div class="rounded-[2rem] overflow-hidden border border-slate-200 bg-slate-200 min-h-[320px] flex items-center justify-center">
+            <div class="text-center p-8">
+              <p class="text-5xl mb-4">📍</p>
+              <p class="font-black text-xl mb-2">Google Maps placeholder</p>
+              <p class="text-slate-600 max-w-sm">Replace with an embedded Google Maps location for the real clinic address.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="py-20 bg-white">
+      <div class="max-w-4xl mx-auto px-5">
+        <p class="text-sky-700 font-black uppercase tracking-[0.2em] text-xs mb-3">FAQ</p>
+        <h2 class="text-3xl md:text-4xl font-black mb-8">Common booking questions.</h2>
+
+        <div class="space-y-4">
+          <details class="group rounded-3xl border border-slate-200 p-5">
+            <summary class="cursor-pointer font-black flex justify-between gap-4">Is the appointment confirmed after submitting the form?<span>+</span></summary>
+            <p class="mt-3 text-slate-600 leading-relaxed">If a real embedded calendar is connected, the selected time can be confirmed automatically or reviewed by the clinic depending on the clinic’s booking rules.</p>
+          </details>
+
+          <details class="group rounded-3xl border border-slate-200 p-5">
+            <summary class="cursor-pointer font-black flex justify-between gap-4">Can patients book online consultations?<span>+</span></summary>
+            <p class="mt-3 text-slate-600 leading-relaxed">Yes, if the clinic offers online consultations and the case is suitable for remote care.</p>
+          </details>
+
+          <details class="group rounded-3xl border border-slate-200 p-5">
+            <summary class="cursor-pointer font-black flex justify-between gap-4">Should patients send medical documents through the form?<span>+</span></summary>
+            <p class="mt-3 text-slate-600 leading-relaxed">For privacy, the public form should avoid sensitive medical details. The clinic can provide a secure intake process when needed.</p>
+          </details>
+
+          <details class="group rounded-3xl border border-slate-200 p-5">
+            <summary class="cursor-pointer font-black flex justify-between gap-4">Can this page connect to Google Calendar?<span>+</span></summary>
+            <p class="mt-3 text-slate-600 leading-relaxed">Yes. The page can embed Google Calendar appointment scheduling or another booking provider directly inside the booking section.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20">
+      <div class="max-w-5xl mx-auto px-5">
+        <div class="rounded-[2rem] bg-slate-900 text-white p-8 md:p-12 text-center">
+          <h2 class="text-3xl md:text-4xl font-black mb-4">Need a page like this for your clinic?</h2>
+          <p class="text-slate-300 max-w-2xl mx-auto mb-8">
+            This demo concept can be adapted for clinics, therapists, wellness providers, dentists, consultants, and local service businesses.
+          </p>
+          <a href="#booking" class="inline-block rounded-2xl bg-white text-slate-900 px-8 py-4 font-black hover:bg-slate-100">
+            View Booking Flow
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-10 bg-white border-t border-slate-200">
+    <div class="max-w-6xl mx-auto px-5 flex flex-col md:flex-row justify-between gap-4 text-sm text-slate-500">
+      <p>© 2026 Demo Clinic Page Concept. Built for AlanSM Solutions portfolio.</p>
+      <p>This is a demo layout. Replace all clinic details before real use.</p>
+    </div>
+  </footer>
+
+  <script>
+    const CLINIC_BOOKING_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwB1ZZ7IogMiF85eqtYM3CawA2g8brOVQJ2PAlJL-oSTKZ5wis4TrTKwuQEs2n9Dluv/exec";
+
+    const bookingState = {
+      service: 'General Consultation',
+      date: '',
+      time: ''
+    };
+
+    const serviceButtons = document.querySelectorAll('.service-option');
+    const timeButtons = document.querySelectorAll('.time-slot');
+    const dateInput = document.getElementById('appointmentDate');
+
+    const selectedServiceText = document.getElementById('selectedServiceText');
+    const selectedDateText = document.getElementById('selectedDateText');
+    const selectedTimeText = document.getElementById('selectedTimeText');
+
+    const selectedServiceInput = document.getElementById('selectedServiceInput');
+    const selectedDateInput = document.getElementById('selectedDateInput');
+    const selectedTimeInput = document.getElementById('selectedTimeInput');
+
+    function setDefaultDate() {
+      const today = new Date();
+      today.setDate(today.getDate() + 1);
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      const value = `${yyyy}-${mm}-${dd}`;
+
+      dateInput.value = value;
+      dateInput.min = value;
+      bookingState.date = value;
+      updateBookingSummary();
+    }
+
+    function updateBookingSummary() {
+      selectedServiceText.textContent = bookingState.service || 'Select service';
+      selectedDateText.textContent = bookingState.date || 'Select date';
+      selectedTimeText.textContent = bookingState.time || 'Select time';
+
+      selectedServiceInput.value = bookingState.service || '';
+      selectedDateInput.value = bookingState.date || '';
+      selectedTimeInput.value = bookingState.time || '';
+    }
+
+    function activateButton(buttons, activeButton) {
+      buttons.forEach(function (button) {
+        button.classList.remove('border-sky-500', 'bg-sky-50');
+        button.classList.add('border-slate-200', 'bg-white');
+      });
+
+      activeButton.classList.remove('border-slate-200', 'bg-white');
+      activeButton.classList.add('border-sky-500', 'bg-sky-50');
+    }
+
+    function submitClinicBooking(payload) {
+      const body = new URLSearchParams();
+
+      Object.keys(payload).forEach(function (key) {
+        body.append(key, payload[key] == null ? '' : String(payload[key]));
+      });
+
+      return fetch(CLINIC_BOOKING_BACKEND_URL, {
+        method: 'POST',
+        body: body
+      }).then(function (response) {
+        if (!response.ok) {
+          throw new Error('Booking request failed');
+        }
+        return response.json();
+      });
+    }
+
+    serviceButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        bookingState.service = button.dataset.service;
+        activateButton(serviceButtons, button);
+        updateBookingSummary();
+      });
+    });
+
+    timeButtons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        bookingState.time = button.dataset.time;
+        activateButton(timeButtons, button);
+        updateBookingSummary();
+      });
+    });
+
+    dateInput.addEventListener('change', function () {
+      bookingState.date = dateInput.value;
+      bookingState.time = '';
+      timeButtons.forEach(function (button) {
+        button.classList.remove('border-sky-500', 'bg-sky-50');
+        button.classList.add('border-slate-200', 'bg-white');
+      });
+      updateBookingSummary();
+    });
+
+    const form = document.getElementById('bookingForm');
+    const status = document.getElementById('formStatus');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      if (!bookingState.date || !bookingState.time) {
+        status.textContent = 'Please select a date and time before sending patient details.';
+        status.classList.remove('hidden', 'text-emerald-700');
+        status.classList.add('text-amber-700');
+        return;
+      }
+
+      const payload = {
+        action: 'createClinicBooking',
+        service: bookingState.service,
+        appointmentDate: bookingState.date,
+        appointmentTime: bookingState.time,
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        message: document.getElementById('message').value,
+        source: 'clinic-demo-page'
+      };
+
+      submitButton.disabled = true;
+      submitButton.textContent = 'Creating calendar event...';
+      status.textContent = 'Creating appointment in Google Calendar...';
+      status.classList.remove('hidden', 'text-amber-700', 'text-emerald-700');
+      status.classList.add('text-slate-600');
+
+      submitClinicBooking(payload)
+        .then(function (result) {
+          if (!result || result.status !== 'ok') {
+            throw new Error(result && result.message ? result.message : 'Unknown backend error');
+          }
+
+          status.textContent =
+            'Appointment created: ' +
+            bookingState.service +
+            ' on ' +
+            bookingState.date +
+            ' at ' +
+            bookingState.time +
+            '.';
+
+          status.classList.remove('text-slate-600', 'text-amber-700');
+          status.classList.add('text-emerald-700');
+
+          form.reset();
+          setDefaultDate();
+          bookingState.time = '';
+          timeButtons.forEach(function (button) {
+            button.classList.remove('border-sky-500', 'bg-sky-50');
+            button.classList.add('border-slate-200', 'bg-white');
+          });
+          updateBookingSummary();
+        })
+        .catch(function () {
+          status.textContent = 'Something went wrong. Please try again or contact the clinic.';
+          status.classList.remove('text-slate-600', 'text-emerald-700');
+          status.classList.add('text-amber-700');
+        })
+        .finally(function () {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Send Patient Details';
+        });
+    });
+
+    setDefaultDate();
+  </script>
+
+</body>
+</html>
