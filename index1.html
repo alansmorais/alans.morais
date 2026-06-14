@@ -21,7 +21,36 @@
     <meta name="twitter:title" content="Alan da Silva Morais | Automation & Operational Consulting" />
     <meta name="twitter:description" content="Operational automation consulting, CRM architecture, business process optimization, and modern web platforms." />
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com">
+    function openLegalModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closeLegalModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+    }
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closeLegalModal('termsModal');
+            closeLegalModal('privacyModal');
+        }
+    });
+
+    document.addEventListener('click', function (event) {
+        if (event.target && event.target.id === 'termsModal') closeLegalModal('termsModal');
+        if (event.target && event.target.id === 'privacyModal') closeLegalModal('privacyModal');
+    });
+
+</script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -865,6 +894,12 @@
 
 <footer class="py-8 bg-slate-950 border-t border-slate-800 text-center relative">
     <p data-i18n="footer_text" class="text-sm text-slate-500">© 2026 Alan da Silva Morais • Operational Automation & Consulting</p>
+
+            <div class="mt-4 flex flex-wrap justify-center gap-4 text-sm">
+                <button type="button" onclick="openLegalModal('termsModal')" data-i18n="terms_link" class="text-slate-400 hover:text-blue-400 transition-colors">Terms of Service</button>
+                <span class="text-slate-700">|</span>
+                <button type="button" onclick="openLegalModal('privacyModal')" data-i18n="privacy_link" class="text-slate-400 hover:text-blue-400 transition-colors">Privacy Notice</button>
+            </div>
 </footer>
 
 <!-- Compact offer banner: appears once per browser session after engagement. -->
@@ -1002,6 +1037,13 @@
                     </span>
                 </label>
 
+                
+                <div id="formLegalLinks" class="text-xs text-slate-500 -mt-2">
+                    <button type="button" onclick="openLegalModal('termsModal')" data-i18n="terms_link" class="underline hover:text-blue-400">Terms of Service</button>
+                    <span class="mx-1">•</span>
+                    <button type="button" onclick="openLegalModal('privacyModal')" data-i18n="privacy_link" class="underline hover:text-blue-400">Privacy Notice</button>
+                </div>
+
                 <button type="submit" data-i18n="form_submit"
                         class="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-all shadow-lg mt-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white">
                     Send Message
@@ -1021,6 +1063,50 @@
     const ALANSM_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwB1ZZ7IogMiF85eqtYM3CawA2g8brOVQJ2PAlJL-oSTKZ5wis4TrTKwuQEs2n9Dluv/exec";
     const translations = {
         en: {
+
+            terms_link: "Terms of Service",
+            privacy_link: "Privacy Notice",
+            legal_last_updated: "Last updated: June 2026",
+            terms_title: "Terms of Service",
+            terms_intro: "These terms explain how AlanSM Solutions provides website, booking, automation, CRM and business systems services.",
+            terms_1_title: "1. Services",
+            terms_1_body: "Services may include website design, booking flows, CRM setup, workflow automation, consulting, training, integrations and related support. The exact scope is confirmed in the Order Form or written project agreement.",
+            terms_2_title: "2. Quotes, prices and discounts",
+            terms_2_body: "Prices shown on the website are starting prices or package prices unless stated otherwise. Final pricing depends on the reviewed scope. Launch discounts are only confirmed after scope review and signed agreement, while discount slots remain available.",
+            terms_3_title: "3. Client responsibilities",
+            terms_3_body: "The client is responsible for providing accurate information, text, images, account access, brand assets, approvals and timely feedback needed to complete the project.",
+            terms_4_title: "4. Payments",
+            terms_4_body: "Payment terms are confirmed in the Order Form. Work may pause if required payments, information or approvals are delayed.",
+            terms_5_title: "5. Third-party tools",
+            terms_5_body: "Projects may use third-party platforms such as hosting providers, booking tools, Google services, CRM systems, email tools or automation platforms. The client is responsible for third-party subscriptions, accounts and platform rules unless agreed otherwise.",
+            terms_6_title: "6. Revisions and scope changes",
+            terms_6_body: "Reasonable revisions are included only within the agreed scope. Extra features, additional pages, new integrations or major changes may require a separate quote.",
+            terms_7_title: "7. No guarantee of business results",
+            terms_7_body: "AlanSM Solutions aims to deliver professional systems and practical improvements, but does not guarantee sales, leads, search rankings, revenue or specific business outcomes.",
+            terms_8_title: "8. Limitation of liability",
+            terms_8_body: "To the maximum extent permitted by law, AlanSM Solutions is not responsible for indirect losses, lost profits, platform outages, third-party failures or issues caused by incorrect client information or access changes.",
+            terms_9_title: "9. Governing law",
+            terms_9_body: "Unless otherwise agreed in writing, these terms are governed by the laws of Poland.",
+            terms_contact: "Questions about these terms can be sent to contact@alansmsolutions.com.",
+            privacy_title: "Privacy Notice",
+            privacy_intro: "This notice explains how AlanSM Solutions collects and uses information submitted through this website and project communication.",
+            privacy_1_title: "1. Who collects the data",
+            privacy_1_body: "The data controller is AlanSM Solutions / Alan da Silva Morais. Contact: contact@alansmsolutions.com.",
+            privacy_2_title: "2. Data collected",
+            privacy_2_body: "The website form may collect your name, email, phone number, business name, business type, selected service, project message and related communication details.",
+            privacy_3_title: "3. Why the data is used",
+            privacy_3_body: "Your data is used to respond to your inquiry, prepare a quote, manage project communication, create project documents, provide services and maintain business records.",
+            privacy_4_title: "4. Storage and tools",
+            privacy_4_body: "Information may be stored in Google Sheets, Google Drive, Gmail and related business tools used to manage inquiries, contracts and project communication.",
+            privacy_5_title: "5. Sharing",
+            privacy_5_body: "Your information is not sold. It may be shared only when needed to provide the service, comply with legal obligations or use trusted service providers.",
+            privacy_6_title: "6. Retention",
+            privacy_6_body: "Inquiry and project records are kept only as long as needed for business, legal, tax, security and client-support purposes.",
+            privacy_7_title: "7. Your rights",
+            privacy_7_body: "You may request access, correction or deletion of your personal data, subject to legal and business record requirements.",
+            privacy_8_title: "8. Contact",
+            privacy_8_body: "For privacy questions or data requests, contact contact@alansmsolutions.com.",
+            legal_disclaimer: "These website terms are a practical business draft and should be reviewed by a qualified legal professional if needed.",
             brand_subtitle: "Automation & Solutions",
             nav_services: "Services & Pricing",
             hero_badge: "Available for consulting • Skalica, Kraków - Remote",
@@ -1273,6 +1359,50 @@ form_title: "Send a Message",
             inquiry_message: "I am interested in the {package} option ({price}). My request is..."
         },
         pt: {
+
+            terms_link: "Termos de Serviço",
+            privacy_link: "Aviso de Privacidade",
+            legal_last_updated: "Última atualização: junho de 2026",
+            terms_title: "Termos de Serviço",
+            terms_intro: "Estes termos explicam como a AlanSM Solutions fornece serviços de websites, agendamento, automação, CRM e sistemas de negócio.",
+            terms_1_title: "1. Serviços",
+            terms_1_body: "Os serviços podem incluir design de websites, fluxos de agendamento, configuração de CRM, automação de processos, consultoria, treinamento, integrações e suporte relacionado. O escopo exato é confirmado na Ordem de Serviço ou acordo escrito do projeto.",
+            terms_2_title: "2. Propostas, preços e descontos",
+            terms_2_body: "Os preços exibidos no website são preços iniciais ou de pacote, salvo indicação em contrário. O preço final depende da revisão do escopo. Descontos de lançamento só são confirmados após revisão do escopo e acordo assinado, enquanto houver vagas disponíveis.",
+            terms_3_title: "3. Responsabilidades do cliente",
+            terms_3_body: "O cliente é responsável por fornecer informações corretas, textos, imagens, acessos, materiais de marca, aprovações e feedback no prazo necessário para concluir o projeto.",
+            terms_4_title: "4. Pagamentos",
+            terms_4_body: "As condições de pagamento são confirmadas na Ordem de Serviço. O trabalho pode ser pausado se pagamentos, informações ou aprovações necessárias forem atrasados.",
+            terms_5_title: "5. Ferramentas de terceiros",
+            terms_5_body: "Os projetos podem usar plataformas de terceiros como hospedagem, ferramentas de agendamento, serviços Google, sistemas CRM, ferramentas de email ou plataformas de automação. O cliente é responsável por assinaturas, contas e regras dessas plataformas, salvo acordo em contrário.",
+            terms_6_title: "6. Revisões e mudanças de escopo",
+            terms_6_body: "Revisões razoáveis estão incluídas apenas dentro do escopo acordado. Recursos extras, páginas adicionais, novas integrações ou mudanças grandes podem exigir uma nova proposta.",
+            terms_7_title: "7. Sem garantia de resultados comerciais",
+            terms_7_body: "A AlanSM Solutions busca entregar sistemas profissionais e melhorias práticas, mas não garante vendas, leads, posicionamento em buscadores, receita ou resultados comerciais específicos.",
+            terms_8_title: "8. Limitação de responsabilidade",
+            terms_8_body: "Na extensão máxima permitida por lei, a AlanSM Solutions não é responsável por perdas indiretas, lucros cessantes, falhas de plataformas, falhas de terceiros ou problemas causados por informações incorretas do cliente ou mudanças de acesso.",
+            terms_9_title: "9. Lei aplicável",
+            terms_9_body: "Salvo acordo escrito em contrário, estes termos são regidos pelas leis da Polônia.",
+            terms_contact: "Dúvidas sobre estes termos podem ser enviadas para contact@alansmsolutions.com.",
+            privacy_title: "Aviso de Privacidade",
+            privacy_intro: "Este aviso explica como a AlanSM Solutions coleta e usa informações enviadas por este website e pela comunicação do projeto.",
+            privacy_1_title: "1. Quem coleta os dados",
+            privacy_1_body: "O controlador dos dados é AlanSM Solutions / Alan da Silva Morais. Contato: contact@alansmsolutions.com.",
+            privacy_2_title: "2. Dados coletados",
+            privacy_2_body: "O formulário do website pode coletar seu nome, email, telefone, nome do negócio, tipo de negócio, serviço selecionado, mensagem do projeto e detalhes relacionados à comunicação.",
+            privacy_3_title: "3. Por que os dados são usados",
+            privacy_3_body: "Seus dados são usados para responder à sua solicitação, preparar uma proposta, gerenciar comunicação do projeto, criar documentos do projeto, prestar serviços e manter registros comerciais.",
+            privacy_4_title: "4. Armazenamento e ferramentas",
+            privacy_4_body: "As informações podem ser armazenadas no Google Sheets, Google Drive, Gmail e ferramentas de negócio relacionadas usadas para gerenciar solicitações, contratos e comunicação de projetos.",
+            privacy_5_title: "5. Compartilhamento",
+            privacy_5_body: "Suas informações não são vendidas. Elas podem ser compartilhadas apenas quando necessário para prestar o serviço, cumprir obrigações legais ou usar provedores de serviço confiáveis.",
+            privacy_6_title: "6. Retenção",
+            privacy_6_body: "Registros de solicitações e projetos são mantidos apenas pelo tempo necessário para fins comerciais, legais, fiscais, de segurança e suporte ao cliente.",
+            privacy_7_title: "7. Seus direitos",
+            privacy_7_body: "Você pode solicitar acesso, correção ou exclusão de seus dados pessoais, sujeito a exigências legais e de manutenção de registros comerciais.",
+            privacy_8_title: "8. Contato",
+            privacy_8_body: "Para dúvidas de privacidade ou solicitações de dados, entre em contato por contact@alansmsolutions.com.",
+            legal_disclaimer: "Estes termos do website são um rascunho comercial prático e devem ser revisados por um profissional jurídico qualificado, se necessário.",
             brand_subtitle: "Automação e Soluções",
             nav_services: "Serviços e Preços",
             hero_badge: "Disponível para consultoria • Skalica, Cracóvia - Remoto",
@@ -1525,6 +1655,50 @@ form_title: "Enviar uma Mensagem",
             inquiry_message: "Tenho interesse na opção {package} ({price}). Minha solicitação é..."
         },
         pl: {
+
+            terms_link: "Regulamin usług",
+            privacy_link: "Informacja o prywatności",
+            legal_last_updated: "Ostatnia aktualizacja: czerwiec 2026",
+            terms_title: "Regulamin usług",
+            terms_intro: "Niniejszy regulamin wyjaśnia, jak AlanSM Solutions świadczy usługi stron internetowych, rezerwacji, automatyzacji, CRM i systemów biznesowych.",
+            terms_1_title: "1. Usługi",
+            terms_1_body: "Usługi mogą obejmować projektowanie stron, procesy rezerwacji, konfigurację CRM, automatyzację pracy, konsultacje, szkolenia, integracje i powiązane wsparcie. Dokładny zakres jest potwierdzany w formularzu zamówienia lub pisemnej umowie projektowej.",
+            terms_2_title: "2. Wyceny, ceny i zniżki",
+            terms_2_body: "Ceny pokazane na stronie są cenami początkowymi lub pakietowymi, chyba że wskazano inaczej. Ostateczna cena zależy od zweryfikowanego zakresu. Zniżki startowe są potwierdzane dopiero po przeglądzie zakresu i podpisanej umowie, gdy miejsca ze zniżką są nadal dostępne.",
+            terms_3_title: "3. Obowiązki klienta",
+            terms_3_body: "Klient odpowiada za dostarczenie poprawnych informacji, tekstów, zdjęć, dostępów do kont, materiałów marki, akceptacji i terminowego feedbacku potrzebnego do realizacji projektu.",
+            terms_4_title: "4. Płatności",
+            terms_4_body: "Warunki płatności są potwierdzane w formularzu zamówienia. Prace mogą zostać wstrzymane, jeśli wymagane płatności, informacje lub akceptacje są opóźnione.",
+            terms_5_title: "5. Narzędzia zewnętrzne",
+            terms_5_body: "Projekty mogą korzystać z platform zewnętrznych, takich jak hosting, narzędzia rezerwacji, usługi Google, systemy CRM, narzędzia email lub platformy automatyzacji. Klient odpowiada za subskrypcje, konta i zasady tych platform, chyba że uzgodniono inaczej.",
+            terms_6_title: "6. Poprawki i zmiany zakresu",
+            terms_6_body: "Rozsądne poprawki są uwzględnione tylko w ramach uzgodnionego zakresu. Dodatkowe funkcje, strony, integracje lub większe zmiany mogą wymagać osobnej wyceny.",
+            terms_7_title: "7. Brak gwarancji wyników biznesowych",
+            terms_7_body: "AlanSM Solutions dąży do dostarczenia profesjonalnych systemów i praktycznych usprawnień, ale nie gwarantuje sprzedaży, leadów, pozycji w wyszukiwarkach, przychodów ani konkretnych wyników biznesowych.",
+            terms_8_title: "8. Ograniczenie odpowiedzialności",
+            terms_8_body: "W maksymalnym zakresie dozwolonym przez prawo AlanSM Solutions nie odpowiada za straty pośrednie, utracone zyski, awarie platform, błędy stron trzecich ani problemy wynikające z nieprawidłowych informacji klienta lub zmian dostępów.",
+            terms_9_title: "9. Prawo właściwe",
+            terms_9_body: "O ile nie uzgodniono inaczej na piśmie, niniejszy regulamin podlega prawu polskiemu.",
+            terms_contact: "Pytania dotyczące regulaminu można wysłać na contact@alansmsolutions.com.",
+            privacy_title: "Informacja o prywatności",
+            privacy_intro: "Ta informacja wyjaśnia, jak AlanSM Solutions zbiera i wykorzystuje dane przesłane przez stronę oraz w komunikacji projektowej.",
+            privacy_1_title: "1. Kto zbiera dane",
+            privacy_1_body: "Administratorem danych jest AlanSM Solutions / Alan da Silva Morais. Kontakt: contact@alansmsolutions.com.",
+            privacy_2_title: "2. Zbierane dane",
+            privacy_2_body: "Formularz na stronie może zbierać imię i nazwisko, email, numer telefonu, nazwę firmy, typ firmy, wybraną usługę, wiadomość projektową oraz powiązane szczegóły komunikacji.",
+            privacy_3_title: "3. Cel wykorzystania danych",
+            privacy_3_body: "Dane są używane do odpowiedzi na zapytanie, przygotowania wyceny, zarządzania komunikacją projektową, tworzenia dokumentów projektowych, świadczenia usług i prowadzenia dokumentacji biznesowej.",
+            privacy_4_title: "4. Przechowywanie i narzędzia",
+            privacy_4_body: "Informacje mogą być przechowywane w Google Sheets, Google Drive, Gmail i powiązanych narzędziach biznesowych używanych do zarządzania zapytaniami, umowami i komunikacją projektową.",
+            privacy_5_title: "5. Udostępnianie",
+            privacy_5_body: "Dane nie są sprzedawane. Mogą być udostępniane tylko wtedy, gdy jest to potrzebne do świadczenia usługi, spełnienia obowiązków prawnych lub korzystania z zaufanych dostawców usług.",
+            privacy_6_title: "6. Okres przechowywania",
+            privacy_6_body: "Zapytania i dokumentacja projektowa są przechowywane tylko tak długo, jak jest to potrzebne do celów biznesowych, prawnych, podatkowych, bezpieczeństwa i obsługi klienta.",
+            privacy_7_title: "7. Twoje prawa",
+            privacy_7_body: "Możesz poprosić o dostęp, poprawienie lub usunięcie swoich danych osobowych, z zastrzeżeniem wymogów prawnych i wymogów dokumentacji biznesowej.",
+            privacy_8_title: "8. Kontakt",
+            privacy_8_body: "W sprawach prywatności lub żądań dotyczących danych skontaktuj się przez contact@alansmsolutions.com.",
+            legal_disclaimer: "Te warunki na stronie są praktycznym szkicem biznesowym i w razie potrzeby powinny zostać sprawdzone przez wykwalifikowanego prawnika.",
             brand_subtitle: "Automatyzacja i Rozwiązania",
             nav_services: "Usługi i Cennik",
             hero_badge: "Dostępny na konsultacje • Skalica, Kraków - Zdalnie",
@@ -1739,11 +1913,7 @@ form_title: "Enviar uma Mensagem",
             banner_title: "Limitowana oferta wdrożeniowa",
             banner_desc: "Obniżona cena konfiguracji jest dostępna dla wybranych nowych projektów konsultingowych.",
             banner_btn: "Omów Swój Projekt",
-                                    light_discount: "20% zniżki startowej dla kolejnych 5 podpisanych projektów: 1 440 PLN",
-            light_discount_condition: "Zniżka jest rezerwowana dopiero po przesłaniu pełnego formularza projektu i podpisaniu umowy. Liczba miejsc jest śledzona ręcznie.",
-            estimate_discount_note: "Jeśli jesteś wśród kolejnych 5 podpisanych projektów lekkiego pakietu, 20% zniżki startowej może obniżyć setup z 1 800 PLN do 1 440 PLN. Zniżka jest potwierdzana dopiero po pełnym formularzu i podpisanej umowie.",
-            fit_advanced_note: "Takie potrzeby nadal mogą być objęte usługą Full Website + Automation Setup albo Enterprise CRM / Salesforce po przeglądzie zakresu.",
-live_counter_label: "Licznik zniżki startowej na żywo",
+                        live_counter_label: "Licznik zniżki startowej na żywo",
             counter_checking: "Sprawdzanie dostępnych miejsc ze zniżką...",
             counter_available: "Pozostało {remaining} z {total} miejsc ze zniżką startową.",
             counter_last: "Ostatnie miejsce ze zniżką startową jest dostępne.",
@@ -2128,6 +2298,58 @@ form_title: "Wyślij Wiadomość",
         window.setTimeout(triggerBanner, 12000);
     });
 </script>
+
+
+<!-- Legal Modals -->
+<div id="termsModal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm px-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[86vh] overflow-y-auto">
+        <div class="sticky top-0 bg-slate-900 border-b border-slate-700 p-5 flex items-start justify-between gap-4">
+            <div>
+                <h2 data-i18n="terms_title" class="text-2xl font-bold text-white">Terms of Service</h2>
+                <p data-i18n="legal_last_updated" class="text-xs text-slate-400 mt-1">Last updated: June 2026</p>
+            </div>
+            <button type="button" onclick="closeLegalModal('termsModal')" class="text-slate-400 hover:text-white text-2xl leading-none" aria-label="Close">&times;</button>
+        </div>
+        <div class="p-6 space-y-5 text-sm text-slate-300 leading-relaxed">
+            <p data-i18n="terms_intro"></p>
+            <section><h3 data-i18n="terms_1_title" class="font-bold text-white mb-1"></h3><p data-i18n="terms_1_body"></p></section>
+            <section><h3 data-i18n="terms_2_title" class="font-bold text-white mb-1"></h3><p data-i18n="terms_2_body"></p></section>
+            <section><h3 data-i18n="terms_3_title" class="font-bold text-white mb-1"></h3><p data-i18n="terms_3_body"></p></section>
+            <section><h3 data-i18n="terms_4_title" class="font-bold text-white mb-1"></h3><p data-i18n="terms_4_body"></p></section>
+            <section><h3 data-i18n="terms_5_title" class="font-bold text-white mb-1"></h3><p data-i18n="terms_5_body"></p></section>
+            <section><h3 data-i18n="terms_6_title" class="font-bold text-white mb-1"></h3><p data-i18n="terms_6_body"></p></section>
+            <section><h3 data-i18n="terms_7_title" class="font-bold text-white mb-1"></h3><p data-i18n="terms_7_body"></p></section>
+            <section><h3 data-i18n="terms_8_title" class="font-bold text-white mb-1"></h3><p data-i18n="terms_8_body"></p></section>
+            <section><h3 data-i18n="terms_9_title" class="font-bold text-white mb-1"></h3><p data-i18n="terms_9_body"></p></section>
+            <p data-i18n="terms_contact"></p>
+            <p data-i18n="legal_disclaimer" class="text-xs text-slate-500 border-t border-slate-700 pt-4"></p>
+        </div>
+    </div>
+</div>
+
+<div id="privacyModal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm px-4">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[86vh] overflow-y-auto">
+        <div class="sticky top-0 bg-slate-900 border-b border-slate-700 p-5 flex items-start justify-between gap-4">
+            <div>
+                <h2 data-i18n="privacy_title" class="text-2xl font-bold text-white">Privacy Notice</h2>
+                <p data-i18n="legal_last_updated" class="text-xs text-slate-400 mt-1">Last updated: June 2026</p>
+            </div>
+            <button type="button" onclick="closeLegalModal('privacyModal')" class="text-slate-400 hover:text-white text-2xl leading-none" aria-label="Close">&times;</button>
+        </div>
+        <div class="p-6 space-y-5 text-sm text-slate-300 leading-relaxed">
+            <p data-i18n="privacy_intro"></p>
+            <section><h3 data-i18n="privacy_1_title" class="font-bold text-white mb-1"></h3><p data-i18n="privacy_1_body"></p></section>
+            <section><h3 data-i18n="privacy_2_title" class="font-bold text-white mb-1"></h3><p data-i18n="privacy_2_body"></p></section>
+            <section><h3 data-i18n="privacy_3_title" class="font-bold text-white mb-1"></h3><p data-i18n="privacy_3_body"></p></section>
+            <section><h3 data-i18n="privacy_4_title" class="font-bold text-white mb-1"></h3><p data-i18n="privacy_4_body"></p></section>
+            <section><h3 data-i18n="privacy_5_title" class="font-bold text-white mb-1"></h3><p data-i18n="privacy_5_body"></p></section>
+            <section><h3 data-i18n="privacy_6_title" class="font-bold text-white mb-1"></h3><p data-i18n="privacy_6_body"></p></section>
+            <section><h3 data-i18n="privacy_7_title" class="font-bold text-white mb-1"></h3><p data-i18n="privacy_7_body"></p></section>
+            <section><h3 data-i18n="privacy_8_title" class="font-bold text-white mb-1"></h3><p data-i18n="privacy_8_body"></p></section>
+            <p data-i18n="legal_disclaimer" class="text-xs text-slate-500 border-t border-slate-700 pt-4"></p>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
