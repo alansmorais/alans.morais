@@ -10,24 +10,27 @@
     <meta name="description" content="Operational automation consulting, CRM architecture, business process optimization, and modern web platforms for organizations in Skalica, Kraków and worldwide." />
     <meta name="robots" content="index, follow" />
 
+    <link rel="alternate" hreflang="en" href="https://alansmsolutions.com/" />
+    <link rel="alternate" hreflang="pt-br" href="https://alansmsolutions.com/br/" />
+    <link rel="alternate" hreflang="pl" href="https://alansmsolutions.com/pl/" />
+    <link rel="alternate" hreflang="x-default" href="https://alansmsolutions.com/" />
+    <link rel="canonical" href="https://alansmsolutions.com/" />
+
     <meta property="og:title" content="Alan da Silva Morais | Automation & Operational Solutions" />
     <meta property="og:description" content="Improve business operations through practical automation, CRM architecture, and modern web platforms." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://alansmsolutions.com/" />
 
-    <link rel="canonical" href="https://alansmsolutions.com/" />
-
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Alan da Silva Morais | Automation & Operational Solutions" />
     <meta name="twitter:description" content="Operational automation consulting, CRM architecture, business process optimization, and modern web platforms." />
 
-    <!-- SCRIPT DE REDIRECIONAMENTO AUTOMÁTICO -->
     <script>
         (function() {
             var savedLang = localStorage.getItem('preferredLanguage');
             var path = window.location.pathname;
             
-            // Só executa o redirecionamento se estiver na raiz
+            // Execute redirect only if on the root path
             if (path === '/' || path === '/index.html') {
                 if (savedLang === 'pt') {
                     window.location.replace('/br/');
@@ -46,36 +49,18 @@
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
     <style>
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: #020617; /* Slate 950 */
-            color: #f8fafc; /* Slate 50 */
+            background-color: #020617; 
+            color: #f8fafc; 
         }
-
-        :focus-visible {
-            outline: 2px solid #60a5fa;
-            outline-offset: 3px;
-        }
-
-        .modal-backdrop {
-            background: rgba(2, 6, 23, 0.85); 
-            backdrop-filter: blur(4px);
-        }
-
-        .fade-up {
-            animation: fadeUp 0.6s ease-out both;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        :focus-visible { outline: 2px solid #60a5fa; outline-offset: 3px; }
+        .modal-backdrop { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(4px); }
+        .fade-up { animation: fadeUp 0.6s ease-out both; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 
@@ -84,23 +69,19 @@
 <nav class="fixed top-0 w-full z-50 bg-slate-950 border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
         <a href="#top" class="flex items-center gap-4 md:gap-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded" aria-label="Alan da Silva Morais home">
-            <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg"
-                 alt="Alan da Silva Morais logo"
-                 width="64"
-                 height="64"
-                 class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-slate-700" />
+            <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="Alan da Silva Morais logo" width="64" height="64" class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-slate-700" />
             <div class="flex flex-col justify-center">
                 <span class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-100 leading-none">Alan da Silva Morais</span>
-                <span data-i18n="brand_subtitle" class="text-[13px] md:text-sm text-blue-500 font-semibold tracking-widest uppercase mt-1.5">Automation & Solutions</span>
+                <span class="text-[13px] md:text-sm text-blue-500 font-semibold tracking-widest uppercase mt-1.5">Automation & Solutions</span>
             </div>
         </a>
 
         <div class="flex items-center gap-4 md:gap-6">
-            <a href="#services-pricing" data-i18n="nav_services" class="text-slate-400 hover:text-slate-100 font-medium transition-colors text-sm hidden lg:block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded px-2 py-1">Services & Pricing</a>
+            <a href="#services-pricing" class="text-slate-400 hover:text-slate-100 font-medium transition-colors text-sm hidden lg:block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded px-2 py-1">Services & Pricing</a>
 
             <div class="flex flex-col md:flex-row items-end md:items-center gap-1.5 md:gap-3 border-l border-slate-800 pl-4 md:pl-6" aria-label="Preferences">
                 
-                <!-- Language Selector -->
+                <!-- Language Selector Links (Fixes the Redirect Loop) -->
                 <div class="flex items-center gap-1 md:gap-2">
                     <a href="/" onclick="localStorage.setItem('preferredLanguage', 'en');" class="text-xs font-bold text-blue-500 hover:text-blue-400 transition-colors focus:outline-none rounded px-1">EN</a>
                     <span class="text-slate-700 text-xs">/</span>
@@ -114,10 +95,10 @@
                 <!-- Currency Selector Dropdown -->
                 <div class="relative inline-block text-left">
                     <select id="currencySelect" onchange="setCurrency(this.value)" aria-label="Select Currency" class="appearance-none bg-slate-950 border border-slate-800 text-slate-400 hover:text-slate-200 text-xs font-medium rounded px-2 py-1 pr-6 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors cursor-pointer">
+                        <option value="USD">USD</option>
+                        <option value="EUR">EUR</option>
                         <option value="PLN">PLN</option>
                         <option value="BRL">BRL</option>
-                        <option value="EUR">EUR</option>
-                        <option value="USD">USD</option>
                     </select>
                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1.5 text-slate-500">
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -134,33 +115,27 @@
             <div class="max-w-3xl fade-up z-10">
                 <div class="inline-flex items-center px-3 py-1.5 rounded bg-slate-900 border border-slate-800 text-xs text-slate-400 mb-6 font-medium tracking-wide">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-2 animate-pulse"></span>
-                    <span data-i18n="hero_badge">Available for consulting • Skalica, Kraków - Remote</span>
+                    <span>Available for consulting • Kraków & Remote</span>
                 </div>
 
                 <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-5 text-slate-100 tracking-tight">
-                    <span data-i18n="hero_title_1">Improve Business Operations</span><br />
-                    <span class="text-blue-500" data-i18n="hero_title_2">Through Smart Automation.</span>
+                    <span>Improve Business Operations</span><br />
+                    <span class="text-blue-500">Through Smart Automation.</span>
                 </h1>
 
-                <p data-i18n="hero_p1" class="text-lg md:text-xl text-slate-400 leading-relaxed mb-6 max-w-2xl">
+                <p class="text-lg md:text-xl text-slate-400 leading-relaxed mb-6 max-w-2xl">
                     I help organizations reduce manual work, improve data quality, and streamline operations through practical automation systems.
                 </p>
 
-                <p data-i18n="hero_p2" class="text-base text-slate-500 leading-relaxed mb-8 max-w-2xl">
+                <p class="text-base text-slate-500 leading-relaxed mb-8 max-w-2xl">
                     With nearly a decade of experience in global enterprise environments, including SAP, Salesforce, and operational teams, I combine business process understanding with practical technical execution.
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <button type="button" onclick="openContactForm()" data-i18n="hero_btn_book"
-                            class="bg-blue-600 hover:bg-blue-500 text-white transition-colors px-6 py-3.5 rounded-lg font-semibold text-base text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
+                    <button type="button" onclick="openContactForm()" class="bg-blue-600 hover:bg-blue-500 text-white transition-colors px-6 py-3.5 rounded-lg font-semibold text-base text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
                         Book an Operations Review
                     </button>
-
-                    <a href="https://www.linkedin.com/in/alandasm"
-                       data-i18n="hero_btn_view"
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       class="bg-slate-900 border border-slate-700 hover:border-slate-500 hover:bg-slate-800 text-slate-300 transition-colors px-6 py-3.5 rounded-lg font-semibold text-base text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
+                    <a href="https://www.linkedin.com/in/alandasm" target="_blank" rel="noopener noreferrer" class="bg-slate-900 border border-slate-700 hover:border-slate-500 hover:bg-slate-800 text-slate-300 transition-colors px-6 py-3.5 rounded-lg font-semibold text-base text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
                         View Experience
                     </a>
                 </div>
@@ -171,18 +146,17 @@
                     <div class="flex items-center gap-4">
                         <div class="text-3xl" aria-hidden="true">⏱️</div>
                         <div>
-                            <p data-i18n="stat1_title" class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Example Workflow Impact</p>
-                            <p data-i18n="stat1_val" class="text-lg font-semibold text-slate-100">Up to 15 Hrs Saved/Wk</p>
+                            <p class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Example Workflow Impact</p>
+                            <p class="text-lg font-semibold text-slate-100">Up to 15 Hrs Saved/Wk</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
                     <div class="flex items-center gap-4">
                         <div class="text-3xl" aria-hidden="true">📈</div>
                         <div>
-                            <p data-i18n="stat2_title" class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Data Quality Controls</p>
-                            <p data-i18n="stat2_val" class="text-lg font-semibold text-blue-500">Automated Validation</p>
+                            <p class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Data Quality Controls</p>
+                            <p class="text-lg font-semibold text-blue-500">Automated Validation</p>
                         </div>
                     </div>
                 </div>
@@ -192,22 +166,18 @@
 
     <section class="py-12 border-b border-slate-800 bg-slate-900/30">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <p data-i18n="trust_title" class="uppercase tracking-[0.2em] text-xs text-slate-500 font-semibold mb-6">
-                Experience with Enterprise Platforms and Global Operations
-            </p>
-
+            <p class="uppercase tracking-[0.2em] text-xs text-slate-500 font-semibold mb-6">Experience with Enterprise Platforms and Global Operations</p>
             <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
                 <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 hover:border-slate-700 transition-colors">
-                    <p data-i18n="trust_platforms" class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Platforms</p>
-                    <p class="text-lg font-medium text-slate-300 leading-snug">SAP S/4HANA · Ariba · Salesforce</p>
+                    <p class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Platforms</p>
+                    <p class="text-lg font-medium text-slate-300 leading-snug">SAP (S/4HANA, ECC 6.0) · Ariba · Salesforce</p>
                 </div>
-
                 <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 hover:border-slate-700 transition-colors">
-                    <p data-i18n="trust_env" class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Professional Environments</p>
+                    <p class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Professional Environments</p>
                     <div class="space-y-1.5 text-base font-medium text-slate-300">
-                        <p>Shell Business Operations</p>
+                        <p>Shell Business Operations Kraków</p>
                         <p>TTEC Digital Global Google Partnership</p>
-                        <p>HTC Technologies</p>
+                        <p>HCL Technologies</p>
                     </div>
                 </div>
             </div>
@@ -217,46 +187,28 @@
     <section class="py-14 bg-slate-950 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-10">
-                <h2 data-i18n="automation_title" class="text-3xl font-bold mb-3 text-slate-100">Automation Examples</h2>
-                <p data-i18n="automation_desc" class="text-slate-400 text-base leading-relaxed">
-                    Practical implementation examples focused on reporting, CRM architecture, and modern client-facing platforms.
-                </p>
+                <h2 class="text-3xl font-bold mb-3 text-slate-100">Automation Examples</h2>
+                <p class="text-slate-400 text-base leading-relaxed">Practical implementation examples focused on reporting, CRM architecture, and modern client-facing platforms.</p>
             </div>
-
             <div class="grid md:grid-cols-3 gap-6 mb-8">
                 <article class="bg-slate-900 border border-slate-800 rounded-xl p-6">
-                    <p data-i18n="case1_tag" class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Reporting Automation</p>
-                    <h3 data-i18n="case1_title" class="text-lg font-semibold text-slate-200">Reduce repetitive spreadsheet preparation</h3>
-                    <p data-i18n="case1_desc" class="text-slate-400 mt-2 text-sm leading-relaxed">
-                        Automate validation, formatting, and recurring report generation through structured data workflows.
-                    </p>
+                    <p class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Reporting Automation</p>
+                    <h3 class="text-lg font-semibold text-slate-200">Reduce repetitive spreadsheet preparation</h3>
+                    <p class="text-slate-400 mt-2 text-sm leading-relaxed">Automate validation, formatting, and recurring report generation through structured data workflows.</p>
                 </article>
-
                 <article class="bg-slate-900 border border-slate-800 rounded-xl p-6">
-                    <p data-i18n="case2_tag" class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">CRM Architecture</p>
-                    <h3 data-i18n="case2_title" class="text-lg font-semibold text-slate-200">Connect lead capture with operations</h3>
-                    <p data-i18n="case2_desc" class="text-slate-400 mt-2 text-sm leading-relaxed">
-                        Design intake flows, document generation, and follow-up automation for more consistent customer handling.
-                    </p>
+                    <p class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">CRM Architecture</p>
+                    <h3 class="text-lg font-semibold text-slate-200">Connect lead capture with operations</h3>
+                    <p class="text-slate-400 mt-2 text-sm leading-relaxed">Design intake flows, document generation, and follow-up automation for more consistent customer handling.</p>
                 </article>
-
                 <article class="bg-slate-900 border border-slate-800 rounded-xl p-6">
-                    <p data-i18n="case3_tag" class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Web Experience</p>
-                    <h3 data-i18n="case3_title" class="text-lg font-semibold text-slate-200">Improve professional brand presentation</h3>
-                    <p data-i18n="case3_desc" class="text-slate-400 mt-2 text-sm leading-relaxed">
-                        Build responsive pages with clearer calls to action and simplified client interaction.
-                    </p>
+                    <p class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Web Experience</p>
+                    <h3 class="text-lg font-semibold text-slate-200">Improve professional brand presentation</h3>
+                    <p class="text-slate-400 mt-2 text-sm leading-relaxed">Build responsive pages with clearer calls to action and simplified client interaction.</p>
                 </article>
             </div>
-
             <div class="text-center">
-                <a href="https://github.com/alansmorais"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   data-i18n="automation_btn"
-                   class="inline-flex items-center text-sm font-semibold text-slate-300 hover:text-white transition-colors bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 px-5 py-2.5 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500">
-                    View GitHub Repositories →
-                </a>
+                <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold text-slate-300 hover:text-white transition-colors bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 px-5 py-2.5 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500">View GitHub Repositories →</a>
             </div>
         </div>
     </section>
@@ -264,56 +216,48 @@
     <section class="py-14 bg-slate-950 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div>
-                <h2 data-i18n="exp_title" class="text-3xl font-bold mb-8 text-slate-100">Core Expertise</h2>
-
+                <h2 class="text-3xl font-bold mb-8 text-slate-100">Core Expertise</h2>
                 <div class="space-y-4">
                     <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
-                        <h3 data-i18n="exp_1_title" class="font-semibold text-lg mb-1 text-blue-400">Data Automation</h3>
-                        <p data-i18n="exp_1_desc" class="text-slate-400 text-sm leading-relaxed">VBA Macros, Google Apps Script, Excel Automation, Google Sheets Integration, Reporting Optimization.</p>
+                        <h3 class="font-semibold text-lg mb-1 text-blue-400">Data Automation</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">VBA Macros, Google Apps Script, Excel Automation, Google Sheets Integration, Reporting Optimization.</p>
                     </div>
-
                     <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
-                        <h3 data-i18n="exp_2_title" class="font-semibold text-lg mb-1 text-blue-400">Web Platforms</h3>
-                        <p data-i18n="exp_2_desc" class="text-slate-400 text-sm leading-relaxed">HTML, CSS, Tailwind CSS, Responsive Design, Landing Pages, Business Websites.</p>
+                        <h3 class="font-semibold text-lg mb-1 text-blue-400">Web Platforms</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">HTML, CSS, Tailwind CSS, Responsive Design, Landing Pages, Business Websites.</p>
                     </div>
-
                     <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
-                        <h3 data-i18n="exp_3_title" class="font-semibold text-lg mb-1 text-blue-400">Enterprise Operations</h3>
-                        <p data-i18n="exp_3_desc" class="text-slate-400 text-sm leading-relaxed">SAP S/4HANA, SAP GUI (ECC 6.0 MM, SD & TS), Ariba, Salesforce, Master Data Management, Order-to-Cash, ITIL.</p>
+                        <h3 class="font-semibold text-lg mb-1 text-blue-400">Enterprise Operations</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">SAP S/4HANA, SAP GUI (ECC 6.0 MM, SD & TS), Ariba, Salesforce, Master Data Management, Order-to-Cash, ITIL.</p>
                     </div>
                 </div>
             </div>
-
             <div>
-                <h2 data-i18n="prof_exp_title" class="text-3xl font-bold mb-8 text-slate-100">Professional Experience</h2>
-
+                <h2 class="text-3xl font-bold mb-8 text-slate-100">Professional Experience</h2>
                 <div class="space-y-6 border-l-2 border-slate-800 pl-6 ml-2">
                     <div class="relative">
                         <div class="absolute w-3 h-3 bg-slate-700 rounded-full -left-[31px] top-1.5 border-4 border-slate-950"></div>
                         <h3 class="text-lg font-semibold text-slate-200">TTEC Digital Global Google Partnership</h3>
-                        <p data-i18n="role_1" class="text-blue-500 text-sm font-medium mt-0.5">Partner Success Manager</p>
-                        <span data-i18n="date_1" class="text-slate-500 text-xs tracking-wide">Mar 2025 – Present</span>
+                        <p class="text-blue-500 text-sm font-medium mt-0.5">Partner Success Manager</p>
+                        <span class="text-slate-500 text-xs tracking-wide">Mar 2025 – Present</span>
                     </div>
-
                     <div class="relative">
                         <div class="absolute w-3 h-3 bg-slate-800 rounded-full -left-[31px] top-1.5 border-4 border-slate-950"></div>
                         <h3 class="text-lg font-semibold text-slate-200">Shell Business Operations</h3>
-                        <p data-i18n="role_2" class="text-slate-400 text-sm font-medium mt-0.5">Customer Success Specialist</p>
-                        <span data-i18n="date_2" class="text-slate-500 text-xs tracking-wide">Nov 2021 – Jul 2024</span>
+                        <p class="text-slate-400 text-sm font-medium mt-0.5">Customer Success Specialist</p>
+                        <span class="text-slate-500 text-xs tracking-wide">Nov 2021 – Jul 2024</span>
                     </div>
-
                     <div class="relative">
                         <div class="absolute w-3 h-3 bg-slate-800 rounded-full -left-[31px] top-1.5 border-4 border-slate-950"></div>
                         <h3 class="text-lg font-semibold text-slate-200">Shell Business Operations</h3>
-                        <p data-i18n="role_3" class="text-slate-400 text-sm font-medium mt-0.5">Procurement Data Specialist</p>
-                        <span data-i18n="date_3" class="text-slate-500 text-xs tracking-wide">Jun 2018 – Nov 2021</span>
+                        <p class="text-slate-400 text-sm font-medium mt-0.5">Procurement Data Specialist</p>
+                        <span class="text-slate-500 text-xs tracking-wide">Jun 2018 – Nov 2021</span>
                     </div>
-
                     <div class="relative">
                         <div class="absolute w-3 h-3 bg-slate-800 rounded-full -left-[31px] top-1.5 border-4 border-slate-950"></div>
-                        <h3 class="text-lg font-semibold text-slate-200">HTC Technologies</h3>
-                        <p data-i18n="role_4" class="text-slate-400 text-sm font-medium mt-0.5">IT Service Desk Analyst</p>
-                        <span data-i18n="date_4" class="text-slate-500 text-xs tracking-wide">Jun 2017 – May 2018</span>
+                        <h3 class="text-lg font-semibold text-slate-200">HCL Technologies</h3>
+                        <p class="text-slate-400 text-sm font-medium mt-0.5">IT Service Desk Analyst</p>
+                        <span class="text-slate-500 text-xs tracking-wide">Jun 2017 – May 2018</span>
                     </div>
                 </div>
             </div>
@@ -322,40 +266,20 @@
 
     <section class="py-14 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-blue-600/5 blur-[100px] rounded-full pointer-events-none"></div>
-
         <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
-            <h2 data-i18n="approach_title" class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-6">My Approach</h2>
-
-            <div class="mb-6 text-slate-600" aria-hidden="true">
-                <svg class="w-10 h-10 mx-auto" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                </svg>
-            </div>
-
-            <blockquote data-i18n="approach_q1" class="text-xl md:text-2xl text-slate-200 font-medium leading-relaxed mb-6">
-                "I put myself in the position of someone discovering a business for the first time: what attracts attention, builds trust, feels clear, and makes the experience easier?"
-            </blockquote>
-
-            <p data-i18n="approach_q2" class="text-base text-slate-400 max-w-3xl mx-auto leading-relaxed">
-                I look at both user experience and the larger operational picture, focusing on improvements that strengthen customer relationships and support sustainable growth.
-            </p>
+            <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-6">My Approach</h2>
+            <div class="mb-6 text-slate-600" aria-hidden="true"><svg class="w-10 h-10 mx-auto" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg></div>
+            <blockquote class="text-xl md:text-2xl text-slate-200 font-medium leading-relaxed mb-6">"I put myself in the position of someone discovering a business for the first time: what attracts attention, builds trust, feels clear, and makes the experience easier?"</blockquote>
+            <p class="text-base text-slate-400 max-w-3xl mx-auto leading-relaxed">I look at both user experience and the larger operational picture, focusing on improvements that strengthen customer relationships and support sustainable growth.</p>
         </div>
     </section>
 
     <section class="py-12 border-b border-slate-800 bg-slate-950">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 data-i18n="partners_label" class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-8">
-                Official Technology Partners
-            </h2>
-
+            <h2 class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-8">Official Technology Partners</h2>
             <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20">
-                <div class="opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://via.placeholder.com/160x50/020617/FFFFFF?text=SOUBLOX" alt="Soublox Partner" class="h-8 md:h-10 object-contain" />
-                </div>
-
-                <div class="opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://via.placeholder.com/160x50/020617/FFFFFF?text=IBCOMP" alt="IBComp Partner" class="h-8 md:h-10 object-contain" />
-                </div>
+                <div class="opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300"><img src="https://via.placeholder.com/160x50/020617/FFFFFF?text=SOUBLOX" alt="Soublox Partner" class="h-8 md:h-10 object-contain" /></div>
+                <div class="opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300"><img src="https://via.placeholder.com/160x50/020617/FFFFFF?text=IBCOMP" alt="IBComp Partner" class="h-8 md:h-10 object-contain" /></div>
             </div>
         </div>
     </section>
@@ -364,33 +288,19 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row gap-8 bg-slate-900 border border-slate-800 rounded-xl p-8 items-center">
                 <div class="w-1 h-full bg-blue-600 hidden md:block rounded"></div>
-                
                 <div class="flex-1">
                     <div class="flex flex-wrap items-center gap-2 mb-3">
-                        <span data-i18n="sf_badge" class="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-2 rounded">Enterprise Add-on</span>
+                        <span class="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-2 rounded">Enterprise Add-on</span>
                     </div>
-
-                    <h2 data-i18n="sf_title" class="text-2xl md:text-3xl font-bold mb-2 text-slate-100">Salesforce & CRM Automation</h2>
-
-                    <p data-i18n="sf_desc" class="text-slate-400 text-sm md:text-base leading-relaxed mb-4 max-w-2xl">
-                        Advanced data architecture, native Salesforce automation, document generation, and intelligent WhatsApp integration for complex operations.
-                    </p>
-
+                    <h2 class="text-2xl md:text-3xl font-bold mb-2 text-slate-100">Salesforce & CRM Automation</h2>
+                    <p class="text-slate-400 text-sm md:text-base leading-relaxed mb-4 max-w-2xl">Advanced data architecture, native Salesforce automation, document generation, and intelligent WhatsApp integration for complex operations.</p>
                     <div class="flex items-center gap-2 mt-4 text-slate-300">
-                        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                        </svg>
-                        <span data-i18n="sf_price" class="text-sm font-semibold">Custom Quote Based on Operational Scope</span>
+                        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        <span class="text-sm font-semibold">Custom Quote Based on Operational Scope</span>
                     </div>
                 </div>
-
                 <div class="w-full md:w-auto mt-4 md:mt-0 shrink-0">
-                    <button type="button"
-                            onclick="openContactForm('enterprise_crm', 'custom_quote')"
-                            data-i18n="sf_btn"
-                            class="w-full bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-medium py-3 px-6 rounded-lg transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400">
-                        Discuss Architecture
-                    </button>
+                    <button type="button" onclick="openContactForm('enterprise_crm', 'custom_quote')" class="w-full bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-medium py-3 px-6 rounded-lg transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400">Discuss Architecture</button>
                 </div>
             </div>
         </div>
@@ -399,207 +309,150 @@
     <section id="services-pricing" class="py-16 bg-slate-950 border-t border-slate-800 scroll-mt-28">
         <div class="max-w-7xl mx-auto px-6">
             <div class="mb-12 text-center max-w-3xl mx-auto">
-                <h2 data-i18n="pack_sub" class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-3">Web Platforms & Tech Ops</h2>
-                <h2 data-i18n="pack_title" class="text-3xl md:text-4xl font-bold mb-4 text-slate-100">Partnership & Pricing</h2>
-                <p data-i18n="pack_desc" class="text-slate-400 text-sm md:text-base leading-relaxed">
-                    Transparent starting prices for websites, booking flows, and automation systems. Use the estimator below to calculate a more realistic project range before requesting a final review.
-                </p>
+                <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-3">Web Platforms & Tech Ops</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-100">Partnership & Pricing</h2>
+                <p class="text-slate-400 text-sm md:text-base leading-relaxed">A two-step model for service businesses: first, we build your platform. Then, ongoing updates, monitoring, and improvements are managed through a monthly partnership.</p>
             </div>
 
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-8 mb-12 flex flex-col lg:flex-row gap-8 items-start relative overflow-hidden">
-                <div data-i18n="light_badge" class="absolute top-0 right-0 bg-green-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-bl-lg z-10">
-                    Small Business Starter • 20% off for next 5 signed projects
-                </div>
-
+                <div class="absolute top-0 right-0 bg-green-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-bl-lg z-10">Small Business Starter • 20% off for next 5 signed projects</div>
                 <div class="flex-1">
-                    <h3 data-i18n="light_title" class="text-xl md:text-2xl font-bold mb-3 text-slate-100">Light Booking Website</h3>
-                    <p data-i18n="light_desc" class="text-slate-400 mb-5 text-sm md:text-base leading-relaxed">
-                        A clean one-page website for small businesses that need a professional online presence and an easy way for clients to book appointments.
-                    </p>
-
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 text-slate-100">Light Booking Website</h3>
+                    <p class="text-slate-400 mb-5 text-sm md:text-base leading-relaxed">A clean one-page website for small businesses that need a professional online presence and an easy way for clients to book appointments.</p>
                     <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 mb-6">
-                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span><span data-i18n="light_l1">One-page responsive website</span></li>
-                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span><span data-i18n="light_l2">Booking system integration</span></li>
-                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span><span data-i18n="light_l3">Contact form</span></li>
-                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span><span data-i18n="light_l4">Google Maps integration</span></li>
-                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span><span data-i18n="light_l5">Basic SEO setup</span></li>
-                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span><span data-i18n="light_l6">GitHub Pages hosting setup</span></li>
-                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span><span data-i18n="light_l7">Existing domain connection</span></li>
-                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span><span data-i18n="light_l8">Launch support</span></li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>One-page responsive website</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Booking system integration</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Contact form</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Google Maps integration</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Basic SEO setup</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>GitHub Pages hosting setup</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Existing domain connection</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Launch support</li>
                     </ul>
-
-                    <p data-i18n="light_note" class="text-xs text-slate-500 leading-relaxed">Domain renewal, paid booking tools, business email and third-party subscriptions are billed separately.</p>
-                    <p data-i18n="light_discount_condition" class="text-xs text-slate-500 leading-relaxed mt-1">Discount is reserved only after a full project form is submitted and the contract is signed.</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">Domain renewal, paid booking tools, business email and third-party subscriptions are billed separately.</p>
                 </div>
-
                 <div class="lg:w-72 bg-slate-950 border border-slate-800 rounded-lg p-6 text-center shrink-0">
-                    <p data-i18n="starting_at" class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Starting at</p>
+                    <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Starting at</p>
                     <div class="mb-2 text-2xl font-bold text-green-500" data-price-display="1800">1,800 PLN</div>
-                    
-                    <p class="text-xs text-green-400 font-medium mb-3">
-                        <span data-i18n="light_discount_prefix">20% launch discount: </span>
-                        <span data-price-display="1440" class="font-bold text-sm">1,440 PLN</span>
-                    </p>
-
+                    <p class="text-xs text-green-400 font-medium mb-3">20% launch discount: <br><span data-price-display="1440" class="font-bold text-sm">1,440 PLN</span></p>
                     <div class="bg-slate-900 border border-slate-800 rounded p-3 mb-4 text-left">
-                        <p data-i18n="live_counter_label" class="text-[10px] uppercase tracking-wider text-green-500 font-bold mb-1">Live discount counter</p>
+                        <p class="text-[10px] uppercase tracking-wider text-green-500 font-bold mb-1">Live discount counter</p>
                         <p id="discountCounterText" class="text-xs text-slate-300">Checking availability...</p>
                     </div>
-
-                    <p class="text-xs text-slate-400 mb-4">
-                        <span data-i18n="light_care">Optional care plan: </span>
-                        <span data-price-display="199">199 PLN</span><span data-i18n="per_month"> / mo</span>
-                    </p>
-                    <button type="button" onclick="openContactForm('light_booking', '1800')" data-i18n="light_btn" class="w-full bg-green-600 hover:bg-green-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Estimate My Project</button>
+                    <p class="text-xs text-slate-400 mb-4">Optional care plan: <br><span data-price-display="199">199 PLN</span> / mo</p>
+                    <button type="button" onclick="openContactForm('light_booking', '1800')" class="w-full bg-green-600 hover:bg-green-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Estimate My Project</button>
                 </div>
             </div>
 
             <div id="quote-estimator" class="bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8 mb-12 max-w-4xl mx-auto shadow-lg">
                 <div class="grid lg:grid-cols-[1fr_0.8fr] gap-8 items-start">
                     <div>
-                        <p data-i18n="estimator_badge" class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-2">Project Quote Assistant</p>
-                        <h3 data-i18n="estimator_title" class="text-xl md:text-2xl font-bold mb-3 text-slate-100">Estimate your project range</h3>
-                        <p data-i18n="estimator_desc" class="text-slate-400 text-sm leading-relaxed mb-5">Answer a few questions to understand the likely range before requesting a final quote.</p>
-
+                        <p class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-2">Project Quote Assistant</p>
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 text-slate-100">Estimate your project range</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-5">Answer a few questions to understand the likely range before requesting a final quote.</p>
                         <div class="grid sm:grid-cols-2 gap-4">
                             <label class="block">
-                                <span data-i18n="estimator_domain" class="block text-xs font-semibold text-slate-400 mb-1">Domain status</span>
+                                <span class="block text-xs font-semibold text-slate-400 mb-1">Domain status</span>
                                 <select id="estimateDomain" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
-                                    <option value="0" data-i18n="estimator_domain_existing" data-price="0">Existing domain</option>
-                                    <option value="150" data-i18n="estimator_domain_new" data-price="150">New domain setup</option>
+                                    <option value="0" data-price="0">Existing domain</option>
+                                    <option value="150" data-price="150">New domain setup</option>
                                 </select>
                             </label>
                             <label class="block">
-                                <span data-i18n="estimator_booking" class="block text-xs font-semibold text-slate-400 mb-1">Booking setup</span>
+                                <span class="block text-xs font-semibold text-slate-400 mb-1">Booking setup</span>
                                 <select id="estimateBooking" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
-                                    <option value="0" data-i18n="estimator_booking_link" data-price="0">Booking link only</option>
-                                    <option value="250" data-i18n="estimator_booking_embed" data-price="250">Embedded widget</option>
-                                    <option value="650" data-i18n="estimator_booking_multi" data-price="650">Multi-staff flow</option>
+                                    <option value="0" data-price="0">Booking link only</option>
+                                    <option value="250" data-price="250">Embedded widget</option>
+                                    <option value="650" data-price="650">Multi-staff flow</option>
                                 </select>
                             </label>
                             <label class="block">
-                                <span data-i18n="estimator_languages" class="block text-xs font-semibold text-slate-400 mb-1">Languages</span>
+                                <span class="block text-xs font-semibold text-slate-400 mb-1">Languages</span>
                                 <select id="estimateLanguages" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
-                                    <option value="0" data-i18n="estimator_lang_one" data-price="0">One language</option>
-                                    <option value="400" data-i18n="estimator_lang_two" data-price="400">Two languages</option>
-                                    <option value="750" data-i18n="estimator_lang_three" data-price="750">Three languages</option>
+                                    <option value="0" data-price="0">One language</option>
+                                    <option value="400" data-price="400">Two languages</option>
+                                    <option value="750" data-price="750">Three languages</option>
                                 </select>
                             </label>
                             <label class="block">
-                                <span data-i18n="estimator_content" class="block text-xs font-semibold text-slate-400 mb-1">Content</span>
+                                <span class="block text-xs font-semibold text-slate-400 mb-1">Content</span>
                                 <select id="estimateContent" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
-                                    <option value="0" data-i18n="estimator_content_client" data-price="0">Client provides content</option>
-                                    <option value="450" data-i18n="estimator_content_help" data-price="450">Content polish</option>
-                                    <option value="750" data-i18n="estimator_content_full" data-price="750">Copywriting support</option>
+                                    <option value="0" data-price="0">Client provides content</option>
+                                    <option value="450" data-price="450">Content polish</option>
+                                    <option value="750" data-price="750">Copywriting support</option>
                                 </select>
                             </label>
                         </div>
                         <div class="grid sm:grid-cols-2 gap-3 mt-5 text-sm text-slate-300">
-                            <label class="flex items-center gap-2">
-                                <input id="estimateExtraPage" type="checkbox" value="400" onchange="updateEstimate()" class="accent-blue-600" />
-                                <span data-i18n="estimator_extra_page">Extra page</span>
-                            </label>
-                            <label class="flex items-center gap-2">
-                                <input id="estimateWhatsapp" type="checkbox" value="700" onchange="updateEstimate()" class="accent-blue-600" />
-                                <span data-i18n="estimator_whatsapp">WhatsApp automation</span>
-                            </label>
-                            <label class="flex items-center gap-2">
-                                <input id="estimatePayments" type="checkbox" value="800" onchange="updateEstimate()" class="accent-blue-600" />
-                                <span data-i18n="estimator_payments">Online payments</span>
-                            </label>
-                            <label class="flex items-center gap-2">
-                                <input id="estimateCare" type="checkbox" value="199" onchange="updateEstimate()" class="accent-blue-600" />
-                                <span data-i18n="estimator_care">Monthly care plan</span>
-                            </label>
+                            <label class="flex items-center gap-2"><input id="estimateExtraPage" type="checkbox" value="400" onchange="updateEstimate()" class="accent-blue-600" /><span>Extra page</span></label>
+                            <label class="flex items-center gap-2"><input id="estimateWhatsapp" type="checkbox" value="700" onchange="updateEstimate()" class="accent-blue-600" /><span>WhatsApp automation</span></label>
+                            <label class="flex items-center gap-2"><input id="estimatePayments" type="checkbox" value="800" onchange="updateEstimate()" class="accent-blue-600" /><span>Online payments</span></label>
+                            <label class="flex items-center gap-2"><input id="estimateCare" type="checkbox" value="199" onchange="updateEstimate()" class="accent-blue-600" /><span>Monthly care plan</span></label>
                         </div>
                     </div>
-
                     <div class="bg-slate-950 border border-slate-800 rounded-lg p-6 text-center sticky top-28">
-                        <p data-i18n="estimator_result_label" class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Estimated range</p>
+                        <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Estimated range</p>
                         <div id="estimateResult" class="text-2xl font-bold text-blue-500 mb-3">1,800–2,000 PLN</div>
-                        <p id="estimateCareNote" class="text-[11px] text-slate-400 mb-4 leading-relaxed" data-i18n="estimator_result_note">Final quote confirmed after a short project review.</p>
-                        <p data-i18n="estimate_discount_note" class="text-[10px] text-slate-500 leading-relaxed">
-                            Discount applies to the base setup if slots are available.
-                        </p>
-                        <button type="button" onclick="openEstimatedContactForm()" data-i18n="estimator_btn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition-colors mt-4 focus:outline-none">
-                            Request This Estimate
-                        </button>
+                        <p id="estimateCareNote" class="text-[11px] text-slate-400 mb-4 leading-relaxed">Final quote confirmed after a short project review.</p>
+                        <p class="text-[10px] text-slate-500 leading-relaxed">Discount applies to the base setup if slots are available.</p>
+                        <button type="button" onclick="openEstimatedContactForm()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition-colors mt-4 focus:outline-none">Request This Estimate</button>
                     </div>
                 </div>
             </div>
 
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-                <div data-i18n="setup_badge" class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-br-lg z-10">Introductory Setup</div>
+                <div class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-br-lg z-10">Introductory Setup</div>
                 <div class="pt-4 md:pt-0">
-                    <h3 data-i18n="setup_title" class="text-xl font-bold mb-2 text-slate-100">Full Website + Automation Setup</h3>
-                    <p data-i18n="setup_desc" class="text-slate-400 text-sm max-w-xl">For businesses that need more than a booking website: advanced forms, workflows, CRM structure, automation, and ongoing operational improvements.</p>
+                    <h3 class="text-xl font-bold mb-2 text-slate-100">Phase 1: Project Setup & Engineering</h3>
+                    <p class="text-slate-400 text-sm max-w-xl">Complete structural development, premium web design, SEO foundation, and smart automation workflows.</p>
                 </div>
                 <div class="text-left md:text-right shrink-0">
-                    <p data-i18n="starting_at" class="text-xs uppercase text-slate-500 font-bold mb-1">Starting at</p>
+                    <p class="text-xs uppercase text-slate-500 font-bold mb-1">Starting at</p>
                     <div data-price-display="2900" class="text-2xl font-bold text-blue-500">2,900 PLN</div>
                 </div>
             </div>
 
-            <h3 data-i18n="retainer_title" class="text-xl font-bold mb-6 text-center text-slate-100">Phase 2: Tech Ops & Monthly Management</h3>
-
+            <h3 class="text-xl font-bold mb-6 text-center text-slate-100">Phase 2: Tech Ops & Monthly Management</h3>
             <div class="grid lg:grid-cols-3 gap-6 items-stretch">
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col hover:border-slate-700 transition-colors">
-                    <h3 data-i18n="pack1_title" class="text-lg font-bold mb-1 text-slate-200">3-Month Contract</h3>
-                    <p data-i18n="pack1_desc" class="text-slate-400 text-xs mb-6 h-8">Short-term management and stabilization.</p>
-
-                    <div class="mb-6 pb-6 border-b border-slate-800">
-                        <span class="text-3xl font-bold text-slate-100" data-price-display="1400">1,400 PLN</span>
-                        <span data-i18n="per_month" class="text-slate-500 text-sm font-medium"> / mo</span>
-                    </div>
-
+                    <h3 class="text-lg font-bold mb-1 text-slate-200">3-Month Contract</h3>
+                    <p class="text-slate-400 text-xs mb-6 h-8">Short-term management and stabilization.</p>
+                    <div class="mb-6 pb-6 border-b border-slate-800"><span class="text-3xl font-bold text-slate-100" data-price-display="1400">1,400 PLN</span><span class="text-slate-500 text-sm font-medium"> / mo</span></div>
                     <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span><span data-i18n="p_l1">Premium Hosting Included</span></li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span><span data-i18n="p_l2">Monthly Content Updates</span></li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span><span data-i18n="p_l3">Automation Maintenance</span></li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span><span data-i18n="p_l4">Security Monitoring</span></li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Premium Hosting Included</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Monthly Content Updates</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Automation Maintenance</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Security Monitoring</li>
                     </ul>
-                    <button type="button" onclick="openContactForm('three_month', '1400')" data-i18n="pack_btn" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Select Package</button>
+                    <button type="button" onclick="openContactForm('three_month', '1400')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Select Package</button>
                 </div>
-
                 <div class="bg-slate-950 border-2 border-blue-600 rounded-xl p-6 flex flex-col relative order-first lg:order-none">
-                    <div data-i18n="pack3_badge" class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded">Best Value</div>
-
-                    <h3 data-i18n="pack3_title" class="text-lg font-bold mb-1 text-slate-200 mt-2">12-Month Contract</h3>
-                    <p data-i18n="pack3_desc" class="text-slate-400 text-xs mb-6 h-8">Long-term partnership and sustained improvement.</p>
-
-                    <div class="mb-6 pb-6 border-b border-slate-800">
-                        <span class="text-3xl font-bold text-slate-100" data-price-display="850">850 PLN</span>
-                        <span data-i18n="per_month" class="text-slate-500 text-sm font-medium"> / mo</span>
-                    </div>
-
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded">Best Value</div>
+                    <h3 class="text-lg font-bold mb-1 text-slate-200 mt-2">12-Month Contract</h3>
+                    <p class="text-slate-400 text-xs mb-6 h-8">Long-term partnership and sustained improvement.</p>
+                    <div class="mb-6 pb-6 border-b border-slate-800"><span class="text-3xl font-bold text-slate-100" data-price-display="850">850 PLN</span><span class="text-slate-500 text-sm font-medium"> / mo</span></div>
                     <ul class="text-slate-300 space-y-3 mb-8 flex-grow text-sm">
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span><span data-i18n="p_l1">Premium Hosting Included</span></li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span><span data-i18n="p_l2">Monthly Content Updates</span></li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span><span data-i18n="p_l3">Automation Maintenance</span></li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span><span data-i18n="p_l4">Security Monitoring</span></li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span><span data-i18n="p_l6">Basic Analytics Reports</span></li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span><span data-i18n="p_l5">Priority Support & Strategy</span></li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Premium Hosting Included</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Monthly Content Updates</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Automation Maintenance</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Security Monitoring</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Basic Analytics Reports</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Priority Support & Strategy</li>
                     </ul>
-                    <button type="button" onclick="openContactForm('twelve_month', '850')" data-i18n="pack_btn_primary" class="w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Select Package</button>
+                    <button type="button" onclick="openContactForm('twelve_month', '850')" class="w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Select Package</button>
                 </div>
-
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col hover:border-slate-700 transition-colors">
-                    <h3 data-i18n="pack2_title" class="text-lg font-bold mb-1 text-slate-200">6-Month Contract</h3>
-                    <p data-i18n="pack2_desc" class="text-slate-400 text-xs mb-6 h-8">A balanced period for optimization.</p>
-
-                    <div class="mb-6 pb-6 border-b border-slate-800">
-                        <span class="text-3xl font-bold text-slate-100" data-price-display="1150">1,150 PLN</span>
-                        <span data-i18n="per_month" class="text-slate-500 text-sm font-medium"> / mo</span>
-                    </div>
-
+                    <h3 class="text-lg font-bold mb-1 text-slate-200">6-Month Contract</h3>
+                    <p class="text-slate-400 text-xs mb-6 h-8">A balanced period for optimization.</p>
+                    <div class="mb-6 pb-6 border-b border-slate-800"><span class="text-3xl font-bold text-slate-100" data-price-display="1150">1,150 PLN</span><span class="text-slate-500 text-sm font-medium"> / mo</span></div>
                     <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span><span data-i18n="p_l1">Premium Hosting Included</span></li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span><span data-i18n="p_l2">Monthly Content Updates</span></li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span><span data-i18n="p_l3">Automation Maintenance</span></li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span><span data-i18n="p_l4">Security Monitoring</span></li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span><span data-i18n="p_l6">Basic Analytics Reports</span></li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Premium Hosting Included</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Monthly Content Updates</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Automation Maintenance</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Security Monitoring</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Basic Analytics Reports</li>
                     </ul>
-                    <button type="button" onclick="openContactForm('six_month', '1150')" data-i18n="pack_btn" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Select Package</button>
+                    <button type="button" onclick="openContactForm('six_month', '1150')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Select Package</button>
                 </div>
             </div>
         </div>
@@ -607,14 +460,11 @@
 
     <section id="faq" class="py-16 bg-slate-900 border-b border-slate-800">
         <div class="max-w-3xl mx-auto px-6">
-            <div class="mb-10 text-center">
-                <h2 data-i18n="faq_title" class="text-2xl font-bold mb-2 text-slate-100">Frequently Asked Questions</h2>
-                <p data-i18n="faq_desc" class="text-slate-400 text-sm">Common questions about web platforms, automation, and operational consulting.</p>
-            </div>
+            <div class="mb-10 text-center"><h2 class="text-2xl font-bold mb-2 text-slate-100">Frequently Asked Questions</h2><p class="text-slate-400 text-sm">Common questions about web platforms, automation, and operational consulting.</p></div>
             <div class="space-y-3">
-                <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 data-i18n="faq1_q" class="font-medium text-sm">What does an automation consultant do?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div data-i18n="faq1_a" class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">I identify repetitive or disconnected processes, map the required information flow, and build practical systems that reduce manual work and improve consistency.</div></details>
-                <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 data-i18n="faq2_q" class="font-medium text-sm">Do you build websites with integrated forms and booking flows?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div data-i18n="faq2_a" class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Yes. I build professional client-facing platforms with lead capture, contact forms, workflow automation, and booking integrations when they fit the business process.</div></details>
-                <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 data-i18n="faq3_q" class="font-medium text-sm">Do you provide services in Kraków or worldwide?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div data-i18n="faq3_a" class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Both. I am based in Kraków and work remotely with clients in Poland and internationally in English, Portuguese, and Polish.</div></details>
+                <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">What does an automation consultant do?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">I identify repetitive or disconnected processes, map the required information flow, and build practical systems that reduce manual work and improve consistency.</div></details>
+                <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">Do you build websites with integrated forms and booking flows?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Yes. I build professional client-facing platforms with lead capture, contact forms, workflow automation, and booking integrations when they fit the business process.</div></details>
+                <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">Do you provide services in Kraków or worldwide?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Both. I am based in Kraków and work remotely with clients in Poland and internationally in English, Portuguese, and Polish.</div></details>
             </div>
         </div>
     </section>
@@ -622,23 +472,23 @@
     <section class="py-12 bg-slate-950 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="max-w-3xl">
-                <h2 data-i18n="partner_label" class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-4">Featured Partner Project</h2>
+                <h2 class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-4">Featured Partner Project</h2>
                 <div class="flex items-center gap-4 mb-4">
                     <img src="https://joannafilek.com/images/logo.png" class="w-10 h-10 object-contain grayscale opacity-80" alt="Joanna Filek logo" loading="lazy" />
                     <h2 class="text-xl font-bold text-slate-200">Joanna Filek</h2>
                 </div>
-                <p data-i18n="partner_desc" class="text-slate-400 text-xs leading-relaxed mb-4">A collaborative web-development and UX project designed to elevate professional brand presence and streamline client interaction.</p>
-                <a href="https://joannafilek.com/" target="_blank" rel="noopener noreferrer" data-i18n="partner_btn" class="inline-flex items-center text-xs font-semibold text-blue-500 hover:text-blue-400 transition-colors">Visit Project →</a>
+                <p class="text-slate-400 text-xs leading-relaxed mb-4">A collaborative web-development and UX project designed to elevate professional brand presence and streamline client interaction.</p>
+                <a href="https://joannafilek.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-blue-500 hover:text-blue-400 transition-colors">Visit Project →</a>
             </div>
         </div>
     </section>
 
     <section class="py-16 bg-blue-600 text-white">
         <div class="max-w-3xl mx-auto px-6 text-center">
-            <h2 data-i18n="cta_title" class="text-2xl md:text-3xl font-bold mb-4">Let’s Improve Your Operations</h2>
-            <p data-i18n="cta_desc" class="text-sm text-blue-100 mb-8 leading-relaxed">If your business depends on repetitive work, spreadsheets, or disconnected systems, there may be practical automation opportunities that create immediate value.</p>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Let’s Improve Your Operations</h2>
+            <p class="text-sm text-blue-100 mb-8 leading-relaxed">If your business depends on repetitive work, spreadsheets, or disconnected systems, there may be practical automation opportunities that create immediate value.</p>
             <div class="flex flex-col sm:flex-row justify-center gap-3">
-                <button type="button" onclick="openContactForm()" data-i18n="hero_btn_book" class="bg-slate-950 text-white px-6 py-3 rounded-lg font-medium text-sm hover:bg-slate-900 transition-colors focus:outline-none">Book an Operations Review</button>
+                <button type="button" onclick="openContactForm()" class="bg-slate-950 text-white px-6 py-3 rounded-lg font-medium text-sm hover:bg-slate-900 transition-colors focus:outline-none">Book an Operations Review</button>
                 <a href="https://www.linkedin.com/in/alandasm" target="_blank" rel="noopener noreferrer" class="bg-transparent border border-blue-400 text-white px-6 py-3 rounded-lg font-medium text-sm hover:bg-blue-700 transition-colors focus:outline-none">LinkedIn</a>
             </div>
         </div>
@@ -646,20 +496,20 @@
 </main>
 
 <footer class="py-8 bg-slate-950 border-t border-slate-800 text-center text-xs">
-    <p data-i18n="footer_text" class="text-slate-500">© 2026 Alan da Silva Morais • Operational Automation & Consulting</p>
+    <p class="text-slate-500">© 2026 Alan da Silva Morais • Operational Automation & Consulting</p>
     <div class="mt-3 flex flex-wrap justify-center gap-3 text-[10px]">
-        <button type="button" onclick="openLegalModal('termsModal')" data-i18n="terms_link" class="text-slate-400 hover:text-blue-400 transition-colors">Terms of Service</button>
+        <button type="button" onclick="openLegalModal('termsModal')" class="text-slate-400 hover:text-blue-400 transition-colors">Terms of Service</button>
         <span class="text-slate-800">|</span>
-        <button type="button" onclick="openLegalModal('privacyModal')" data-i18n="privacy_link" class="text-slate-400 hover:text-blue-400 transition-colors">Privacy Notice</button>
+        <button type="button" onclick="openLegalModal('privacyModal')" class="text-slate-400 hover:text-blue-400 transition-colors">Privacy Notice</button>
     </div>
 </footer>
 
 <div id="offerBanner" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-sm z-[55] hidden opacity-0 translate-y-4 transition-all duration-300 bg-slate-900 border border-slate-700 rounded-xl p-5 shadow-xl" role="region" aria-label="Limited onboarding offer">
     <div class="flex items-start gap-3">
         <div class="flex-1">
-            <p data-i18n="banner_title" class="text-xs font-bold uppercase tracking-wider text-blue-500">Limited offer</p>
-            <p data-i18n="banner_desc" class="text-xs text-slate-300 mt-2 leading-relaxed">Reduced setup pricing is available for selected new consulting projects.</p>
-            <button type="button" onclick="claimOffer()" data-i18n="banner_btn" class="mt-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white text-[10px] font-semibold px-4 py-2 rounded transition-colors w-full focus:outline-none">Discuss Your Project</button>
+            <p class="text-xs font-bold uppercase tracking-wider text-blue-500">Limited offer</p>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">Reduced setup pricing is available for selected new consulting projects.</p>
+            <button type="button" onclick="claimOffer()" class="mt-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white text-[10px] font-semibold px-4 py-2 rounded transition-colors w-full focus:outline-none">Discuss Your Project</button>
         </div>
         <button type="button" onclick="closeOfferBanner()" aria-label="Close offer banner" class="text-slate-500 hover:text-white text-lg leading-none focus:outline-none p-1">&times;</button>
     </div>
@@ -668,66 +518,62 @@
 <div id="contactModal" class="fixed inset-0 modal-backdrop hidden z-[70] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" aria-hidden="true">
     <div class="bg-slate-950 border border-slate-800 rounded-xl w-full max-w-md shadow-2xl flex flex-col overflow-hidden" role="document">
         <div class="flex justify-between items-center px-5 py-3 border-b border-slate-800 bg-slate-900">
-            <h2 id="contactModalTitle" data-i18n="form_title" class="text-sm font-bold text-slate-100">Send a Message</h2>
+            <h2 id="contactModalTitle" class="text-sm font-bold text-slate-100">Send a Message</h2>
             <button type="button" onclick="closeContactForm()" aria-label="Close contact form" class="text-slate-500 hover:text-white text-xl leading-none transition-colors focus:outline-none">&times;</button>
         </div>
         <div class="p-5">
             <form action="https://formsubmit.co/ajax/Contact@alansmsolutions.com" method="POST" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-3">
                 <input type="hidden" name="_subject" id="formSubject" />
                 <input type="hidden" name="_captcha" value="false" />
-
                 <div>
-                    <label data-i18n="form_name" for="formName" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Name</label>
+                    <label for="formName" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Name</label>
                     <input id="formName" type="text" name="name" autocomplete="name" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
                 </div>
                 <div>
-                    <label data-i18n="form_email" for="formEmail" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Email</label>
+                    <label for="formEmail" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Email</label>
                     <input id="formEmail" type="email" name="email" autocomplete="email" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
                 </div>
                 <div>
-                    <label data-i18n="form_phone" for="formPhone" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Phone / WhatsApp</label>
+                    <label for="formPhone" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Phone / WhatsApp</label>
                     <input id="formPhone" type="text" name="phone" autocomplete="tel" class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
                 </div>
                 <div>
-                    <label data-i18n="form_msg" for="formMsg" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Message Details</label>
+                    <label for="formMsg" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Message Details</label>
                     <textarea id="formMsg" name="message" rows="3" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors resize-none"></textarea>
                 </div>
-                
                 <label class="flex items-start gap-2 text-[10px] text-slate-500 mt-1">
                     <input id="formConsent" type="checkbox" name="consent" required class="mt-0.5 accent-blue-600" />
-                    <span data-i18n="form_consent">I agree that my details may be used to respond to my inquiry and manage project communication.</span>
+                    <span>I agree that my details may be used to respond to my inquiry and manage project communication.</span>
                 </label>
-
-                <button type="submit" data-i18n="form_submit" class="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-medium py-2 rounded-md transition-colors mt-2 text-xs focus:outline-none">Send Message</button>
-                <p data-i18n="privacy_note" class="text-[9px] text-slate-600 text-center mt-1">Your details will only be used to respond to your inquiry.</p>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-medium py-2 rounded-md transition-colors mt-2 text-xs focus:outline-none">Send Message</button>
+                <p class="text-[9px] text-slate-600 text-center mt-1">Your details will only be used to respond to your inquiry.</p>
                 <p id="formStatus" class="text-[10px] text-center min-h-[16px]"></p>
             </form>
         </div>
     </div>
 </div>
 
-<!-- Legal Modals -->
 <div id="termsModal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm px-4">
     <div class="bg-slate-900 border border-slate-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
         <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 flex items-start justify-between gap-4">
             <div>
-                <h2 data-i18n="terms_title" class="text-lg font-bold text-slate-100">Terms of Service</h2>
-                <p data-i18n="legal_last_updated" class="text-[10px] text-slate-500 mt-0.5">Last updated: June 2026</p>
+                <h2 class="text-lg font-bold text-slate-100">Terms of Service</h2>
+                <p class="text-[10px] text-slate-500 mt-0.5">Last updated: June 2026</p>
             </div>
             <button type="button" onclick="closeLegalModal('termsModal')" class="text-slate-500 hover:text-white text-xl leading-none" aria-label="Close">&times;</button>
         </div>
         <div class="p-5 space-y-4 text-xs text-slate-400 leading-relaxed">
-            <p data-i18n="terms_intro"></p>
-            <section><h3 data-i18n="terms_1_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="terms_1_body"></p></section>
-            <section><h3 data-i18n="terms_2_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="terms_2_body"></p></section>
-            <section><h3 data-i18n="terms_3_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="terms_3_body"></p></section>
-            <section><h3 data-i18n="terms_4_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="terms_4_body"></p></section>
-            <section><h3 data-i18n="terms_5_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="terms_5_body"></p></section>
-            <section><h3 data-i18n="terms_6_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="terms_6_body"></p></section>
-            <section><h3 data-i18n="terms_7_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="terms_7_body"></p></section>
-            <section><h3 data-i18n="terms_8_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="terms_8_body"></p></section>
-            <p data-i18n="terms_contact"></p>
-            <p data-i18n="legal_disclaimer" class="text-[10px] text-slate-600 border-t border-slate-800 pt-3"></p>
+            <p>These terms explain how AlanSM Solutions provides website, booking, automation, CRM and business systems services.</p>
+            <section><h3 class="font-bold text-slate-200 mb-1">1. Services</h3><p>Services may include website design, booking flows, CRM setup, workflow automation, consulting, training, integrations and related support. The exact scope is confirmed in the Order Form or written project agreement.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">2. Quotes, prices and discounts</h3><p>Prices shown on the website are starting prices or package prices unless stated otherwise. Final pricing depends on the reviewed scope. Launch discounts are only confirmed after scope review and signed agreement, while discount slots remain available.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">3. Client responsibilities</h3><p>The client is responsible for providing accurate information, text, images, account access, brand assets, approvals and timely feedback needed to complete the project.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">4. Payments</h3><p>Payment terms are confirmed in the Order Form. Work may pause if required payments, information or approvals are delayed.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">5. Third-party tools</h3><p>Projects may use third-party platforms such as hosting providers, booking tools, Google services, CRM systems, email tools or automation platforms. The client is responsible for third-party subscriptions, accounts and platform rules unless agreed otherwise.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">6. Revisions and scope changes</h3><p>Reasonable revisions are included only within the agreed scope. Extra features, additional pages, new integrations or major changes may require a separate quote.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">7. No guarantee of business results</h3><p>AlanSM Solutions aims to deliver professional systems and practical improvements, but does not guarantee sales, leads, search rankings, revenue or specific business outcomes.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">8. Limitation of liability</h3><p>To the maximum extent permitted by law, AlanSM Solutions is not responsible for indirect losses, lost profits, platform outages, third-party failures or issues caused by incorrect client information or access changes.</p></section>
+            <p>Questions about these terms can be sent to contact@alansmsolutions.com.</p>
+            <p class="text-[10px] text-slate-600 border-t border-slate-800 pt-3">These terms are provided for transparency and may be updated from time to time.</p>
         </div>
     </div>
 </div>
@@ -736,22 +582,22 @@
     <div class="bg-slate-900 border border-slate-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
         <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 flex items-start justify-between gap-4">
             <div>
-                <h2 data-i18n="privacy_title" class="text-lg font-bold text-slate-100">Privacy Notice</h2>
-                <p data-i18n="legal_last_updated" class="text-[10px] text-slate-500 mt-0.5">Last updated: June 2026</p>
+                <h2 class="text-lg font-bold text-slate-100">Privacy Notice</h2>
+                <p class="text-[10px] text-slate-500 mt-0.5">Last updated: June 2026</p>
             </div>
             <button type="button" onclick="closeLegalModal('privacyModal')" class="text-slate-500 hover:text-white text-xl leading-none" aria-label="Close">&times;</button>
         </div>
         <div class="p-5 space-y-4 text-xs text-slate-400 leading-relaxed">
-            <p data-i18n="privacy_intro"></p>
-            <section><h3 data-i18n="privacy_1_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="privacy_1_body"></p></section>
-            <section><h3 data-i18n="privacy_2_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="privacy_2_body"></p></section>
-            <section><h3 data-i18n="privacy_3_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="privacy_3_body"></p></section>
-            <section><h3 data-i18n="privacy_4_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="privacy_4_body"></p></section>
-            <section><h3 data-i18n="privacy_5_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="privacy_5_body"></p></section>
-            <section><h3 data-i18n="privacy_6_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="privacy_6_body"></p></section>
-            <section><h3 data-i18n="privacy_7_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="privacy_7_body"></p></section>
-            <section><h3 data-i18n="privacy_8_title" class="font-bold text-slate-200 mb-1"></h3><p data-i18n="privacy_8_body"></p></section>
-            <p data-i18n="legal_disclaimer" class="text-[10px] text-slate-600 border-t border-slate-800 pt-3"></p>
+            <p>This notice explains how AlanSM Solutions collects and uses information submitted through this website and project communication.</p>
+            <section><h3 class="font-bold text-slate-200 mb-1">1. Who collects the data</h3><p>The data controller is AlanSM Solutions / Alan da Silva Morais. Contact: contact@alansmsolutions.com.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">2. Data collected</h3><p>The website form may collect your name, email, phone number, business name, business type, selected service, project message and related communication details.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">3. Why the data is used</h3><p>Your data is used to respond to your inquiry, prepare a quote, manage project communication, create project documents, provide services and maintain business records.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">4. Storage and tools</h3><p>Information may be stored in Google Sheets, Google Drive, Gmail and related business tools used to manage inquiries, contracts and project communication.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">5. Sharing</h3><p>Your information is not sold. It may be shared only when needed to provide the service, comply with legal obligations or use trusted service providers.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">6. Retention</h3><p>Inquiry and project records are kept only as long as needed for business, legal, tax, security and client-support purposes.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">7. Your rights</h3><p>You may request access, correction or deletion of your personal data, subject to legal and business record requirements.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">8. Contact</h3><p>For privacy questions or data requests, contact contact@alansmsolutions.com.</p></section>
+            <p class="text-[10px] text-slate-600 border-t border-slate-800 pt-3">These terms are provided for transparency and may be updated from time to time.</p>
         </div>
     </div>
 </div>
@@ -759,583 +605,13 @@
 <script>
     const ALANSM_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwWA6kBWtOKNY-5nko59ny9kAkWGmgcyRLG898n6dcPrUUazazPGUuPRkvIZ4YPs_Lp/exec";
     
-    // CURRENCY CONFIGURATION
-    const exchangeRates = { PLN: 1, BRL: 1.38, EUR: 0.23, USD: 0.25 };
-    
-    // GLOBAL TRANSLATIONS
-    const translations = {
-        en: {
-            terms_link: "Terms of Service",
-            privacy_link: "Privacy Notice",
-            legal_last_updated: "Last updated: June 2026",
-            terms_title: "Terms of Service",
-            terms_intro: "These terms explain how AlanSM Solutions provides website, booking, automation, CRM and business systems services.",
-            terms_1_title: "1. Services",
-            terms_1_body: "Services may include website design, booking flows, CRM setup, workflow automation, consulting, training, integrations and related support. The exact scope is confirmed in the Order Form or written project agreement.",
-            terms_2_title: "2. Quotes, prices and discounts",
-            terms_2_body: "Prices shown on the website are starting prices or package prices unless stated otherwise. Final pricing depends on the reviewed scope. Launch discounts are only confirmed after scope review and signed agreement, while discount slots remain available.",
-            terms_3_title: "3. Client responsibilities",
-            terms_3_body: "The client is responsible for providing accurate information, text, images, account access, brand assets, approvals and timely feedback needed to complete the project.",
-            terms_4_title: "4. Payments",
-            terms_4_body: "Payment terms are confirmed in the Order Form. Work may pause if required payments, information or approvals are delayed.",
-            terms_5_title: "5. Third-party tools",
-            terms_5_body: "Projects may use third-party platforms such as hosting providers, booking tools, Google services, CRM systems, email tools or automation platforms. The client is responsible for third-party subscriptions, accounts and platform rules unless agreed otherwise.",
-            terms_6_title: "6. Revisions and scope changes",
-            terms_6_body: "Reasonable revisions are included only within the agreed scope. Extra features, additional pages, new integrations or major changes may require a separate quote.",
-            terms_7_title: "7. No guarantee of business results",
-            terms_7_body: "AlanSM Solutions aims to deliver professional systems and practical improvements, but does not guarantee sales, leads, search rankings, revenue or specific business outcomes.",
-            terms_8_title: "8. Limitation of liability",
-            terms_8_body: "To the maximum extent permitted by law, AlanSM Solutions is not responsible for indirect losses, lost profits, platform outages, third-party failures or issues caused by incorrect client information or access changes.",
-            terms_9_title: "9. Governing law",
-            terms_9_body: "Unless otherwise agreed in writing, these terms are governed by the laws of Poland.",
-            terms_contact: "Questions about these terms can be sent to contact@alansmsolutions.com.",
-            privacy_title: "Privacy Notice",
-            privacy_intro: "This notice explains how AlanSM Solutions collects and uses information submitted through this website and project communication.",
-            privacy_1_title: "1. Who collects the data",
-            privacy_1_body: "The data controller is AlanSM Solutions / Alan da Silva Morais. Contact: contact@alansmsolutions.com.",
-            privacy_2_title: "2. Data collected",
-            privacy_2_body: "The website form may collect your name, email, phone number, business name, business type, selected service, project message and related communication details.",
-            privacy_3_title: "3. Why the data is used",
-            privacy_3_body: "Your data is used to respond to your inquiry, prepare a quote, manage project communication, create project documents, provide services and maintain business records.",
-            privacy_4_title: "4. Storage and tools",
-            privacy_4_body: "Information may be stored in Google Sheets, Google Drive, Gmail and related business tools used to manage inquiries, contracts and project communication.",
-            privacy_5_title: "5. Sharing",
-            privacy_5_body: "Your information is not sold. It may be shared only when needed to provide the service, comply with legal obligations or use trusted service providers.",
-            privacy_6_title: "6. Retention",
-            privacy_6_body: "Inquiry and project records are kept only as long as needed for business, legal, tax, security and client-support purposes.",
-            privacy_7_title: "7. Your rights",
-            privacy_7_body: "You may request access, correction or deletion of your personal data, subject to legal and business record requirements.",
-            privacy_8_title: "8. Contact",
-            privacy_8_body: "For privacy questions or data requests, contact contact@alansmsolutions.com.",
-            legal_disclaimer: "These terms are provided for transparency and may be updated from time to time.",
-            brand_subtitle: "Automation & Solutions",
-            nav_services: "Services & Pricing",
-            hero_badge: "Available for consulting • Kraków & Remote",
-            hero_title_1: "Improve Business Operations",
-            hero_title_2: "Through Smart Automation.",
-            hero_p1: "I help organizations reduce manual work, improve data quality, and streamline operations through practical automation systems.",
-            hero_p2: "With nearly a decade of experience in global enterprise environments, including SAP, Salesforce, and operational teams, I combine business process understanding with practical technical execution.",
-            hero_btn_book: "Book an Operations Review",
-            hero_btn_view: "View Experience",
-            stat1_title: "Example Workflow Impact",
-            stat1_val: "Up to 15 Hrs Saved/Wk",
-            stat2_title: "Data Quality Controls",
-            stat2_val: "Automated Validation",
-            trust_title: "Experience with Enterprise Platforms and Global Operations",
-            trust_platforms: "Platforms",
-            trust_env: "Professional Environments",
-            automation_title: "Automation Examples",
-            automation_desc: "Practical implementation examples focused on reporting, CRM architecture, and modern client-facing platforms.",
-            automation_btn: "View GitHub Repositories →",
-            case1_tag: "Reporting Automation",
-            case1_title: "Reduce repetitive spreadsheet preparation",
-            case1_desc: "Automate validation, formatting, and recurring report generation through structured data workflows.",
-            case2_tag: "CRM Architecture",
-            case2_title: "Connect lead capture with operations",
-            case2_desc: "Design intake flows, document generation, and follow-up automation for more consistent customer handling.",
-            case3_tag: "Web Experience",
-            case3_title: "Improve professional brand presentation",
-            case3_desc: "Build responsive pages with clearer calls to action and simplified client interaction.",
-            exp_title: "Core Expertise",
-            exp_1_title: "Data Automation",
-            exp_1_desc: "VBA Macros, Google Apps Script, Excel Automation, Google Sheets Integration, Reporting Optimization.",
-            exp_2_title: "Web Platforms",
-            exp_2_desc: "HTML, CSS, Tailwind CSS, Responsive Design, Landing Pages, Business Websites.",
-            exp_3_title: "Enterprise Operations",
-            exp_3_desc: "SAP S/4HANA, Ariba, Salesforce, Master Data Management, Order-to-Cash, ITIL.",
-            prof_exp_title: "Professional Experience",
-            role_1: "Partner Success Manager",
-            date_1: "Mar 2025 – Present",
-            role_2: "Customer Success Specialist",
-            date_2: "Nov 2021 – Jul 2024",
-            role_3: "Procurement Data Specialist",
-            date_3: "Jun 2018 – Nov 2021",
-            role_4: "IT Service Desk Analyst",
-            date_4: "Jun 2017 – May 2018",
-            approach_title: "My Approach",
-            approach_q1: "\"I put myself in the position of someone discovering a business for the first time: what attracts attention, builds trust, feels clear, and makes the experience easier?\"",
-            approach_q2: "I look at both user experience and the larger operational picture, focusing on improvements that strengthen customer relationships and support sustainable growth.",
-            partners_label: "Official Technology Partners",
-            sf_badge: "Enterprise Add-on",
-            sf_partner: "Official Soublox Partner",
-            sf_title: "Salesforce & CRM Automation",
-            sf_desc: "Advanced data architecture, native Salesforce automation, document generation, and intelligent WhatsApp integration for complex operations.",
-            sf_note: "Suitable for organizations that need a tailored architecture discussion rather than a fixed monthly package.",
-            sf_price: "Custom Quote Based on Operational Scope",
-            sf_btn: "Discuss Architecture",
-            pack_sub: "Web Platforms & Tech Ops",
-            pack_title: "Partnership & Pricing",
-            pack_desc: "A two-step model for service businesses: first, we build your platform. Then, ongoing updates, monitoring, and improvements are managed through a monthly partnership.",
-            
-            // Estimator strings
-            estimator_badge: "Project Quote Assistant",
-            estimator_title: "Estimate your project range",
-            estimator_desc: "Starting prices are shown for transparency. Use this quick estimator to understand how domain setup, booking, languages, and automation change the final range.",
-            estimator_domain: "Domain status",
-            estimator_domain_existing: "Existing domain",
-            estimator_domain_new: "New domain setup",
-            estimator_booking: "Booking setup",
-            estimator_booking_link: "Booking link only",
-            estimator_booking_embed: "Embedded widget",
-            estimator_booking_multi: "Multi-staff flow",
-            estimator_languages: "Languages",
-            estimator_lang_one: "One language",
-            estimator_lang_two: "Two languages",
-            estimator_lang_three: "Three languages",
-            estimator_content: "Content support",
-            estimator_content_client: "Client provides content",
-            estimator_content_help: "Content polish",
-            estimator_content_full: "Copywriting support",
-            estimator_extra_page: "Extra page",
-            estimator_whatsapp: "WhatsApp automation",
-            estimator_payments: "Online payments",
-            estimator_care: "Monthly care plan",
-            estimator_result_label: "Estimated range",
-            estimator_result_note: "Final quote confirmed after a short project review.",
-            estimate_discount_note: "Discount applies to the base setup if slots are available.",
-            estimator_btn: "Request This Estimate",
-            
-            light_badge: "Small Business Starter • 20% off for next 5 signed projects",
-            light_title: "Light Booking Website",
-            light_desc: "A clean one-page website for small businesses that need a professional online presence and an easy way for clients to book appointments.",
-            light_l1: "One-page responsive website",
-            light_l2: "Booking system integration",
-            light_l3: "Contact form",
-            light_l4: "Google Maps integration",
-            light_l5: "Basic SEO setup",
-            light_l6: "GitHub Pages hosting setup",
-            light_l7: "Existing domain connection",
-            light_l8: "Launch support",
-            light_note: "Domain renewal, paid booking tools, business email and third-party subscriptions are billed separately.",
-            light_discount_condition: "Discount is reserved only after a full project form is submitted and the contract is signed.",
-            starting_at: "Starting at",
-            light_care: "Optional care plan: ",
-            light_discount_prefix: "20% launch discount: ",
-            live_counter_label: "Live discount counter",
-            light_btn: "Estimate My Project",
-
-            setup_badge: "Introductory",
-            setup_title: "Phase 1: Project Setup & Engineering",
-            setup_desc: "Complete structural development, premium web design, SEO foundation, and smart automation workflows.",
-            retainer_title: "Phase 2: Tech Ops & Monthly Management",
-            pack1_title: "3-Month Contract",
-            pack1_desc: "Short-term management and stabilization.",
-            pack2_title: "6-Month Contract",
-            pack2_desc: "A balanced period for optimization and system maturity.",
-            pack3_badge: "Best Value",
-            pack3_title: "12-Month Contract",
-            pack3_desc: "Long-term partnership and sustained improvement.",
-            per_month: " / mo",
-            p_l1: "Premium Hosting Included",
-            p_l2: "Monthly Content Updates",
-            p_l3: "Automation Maintenance",
-            p_l4: "Security Monitoring",
-            p_l5: "Priority Support & Strategy",
-            p_l6: "Basic Analytics Reports",
-            pack_btn: "Select Package",
-            pack_btn_primary: "Select Package",
-            faq_title: "Frequently Asked Questions",
-            faq_desc: "Common questions about web platforms, automation, and operational consulting.",
-            faq1_q: "What does an automation consultant do?",
-            faq1_a: "I identify repetitive or disconnected processes, map the required information flow, and build practical systems that reduce manual work and improve consistency.",
-            faq2_q: "Do you build websites with integrated forms and booking flows?",
-            faq2_a: "Yes. I build professional client-facing platforms with lead capture, contact forms, workflow automation, and booking integrations when they fit the business process.",
-            faq3_q: "Do you provide services in Kraków or worldwide?",
-            faq3_a: "Both. I am based in Kraków and work remotely with clients in Poland and internationally in English, Portuguese, and Polish.",
-            partner_label: "Featured Partner Project",
-            partner_desc: "A collaborative web-development and UX project designed to elevate professional brand presence and streamline client interaction.",
-            partner_btn: "Visit Project →",
-            cta_title: "Let’s Improve Your Operations",
-            cta_desc: "If your business depends on repetitive work, spreadsheets, or disconnected systems, there may be practical automation opportunities that create immediate value.",
-            footer_text: "© 2026 Alan da Silva Morais • Operational Automation & Consulting",
-            banner_title: "Limited offer",
-            banner_desc: "Reduced setup pricing is available for selected new consulting projects.",
-            banner_btn: "Discuss Your Project",
-            form_title: "Send a Message",
-            form_name: "Name",
-            form_email: "Email",
-            form_phone: "Phone / WhatsApp",
-            form_msg: "Message Details",
-            form_submit: "Send Message",
-            form_consent: "I agree that my details may be used to respond to my inquiry and manage project communication.",
-            privacy_note: "Your details will only be used to respond to your inquiry.",
-            sending: "Sending...",
-            sent: "Message sent successfully.",
-            error: "The message could not be sent. Please try again or contact me through LinkedIn.",
-            general_subject: "General inquiry",
-            inquiry_subject: "Inquiry",
-            special_rate: "Special rate",
-            offer_subject: "Inquiry: Introductory onboarding offer",
-            package_three: "3-Month Tech Ops",
-            package_six: "6-Month Tech Ops",
-            package_twelve: "12-Month Tech Ops",
-            package_enterprise: "Enterprise CRM & Salesforce",
-            package_custom_quote: "Custom quote",
-            inquiry_message: "I am interested in the {package} option ({price}). My request is...",
-            estimate_subject: "Project Estimate",
-            estimate_message: "I am interested in the Project Estimate ({range}). My request is...",
-            counter_checking: "Checking availability...",
-            counter_available: "{remaining} of {total} discount spots remaining.",
-            counter_last: "Last discount spot available.",
-            counter_sold_out: "Discount spots are currently full. Standard setup applies.",
-            counter_error: "Live counter unavailable. Final availability confirmed after review."
-        },
-        pt: {
-            brand_subtitle: "Automação e Soluções",
-            nav_services: "Serviços e Preços",
-            hero_badge: "Disponível para consultoria • Cracóvia e Remoto",
-            hero_title_1: "Melhore as Operações do Negócio",
-            hero_title_2: "Com Automação Inteligente.",
-            hero_p1: "Ajudo organizações a reduzir o trabalho manual, melhorar a qualidade dos dados e simplificar operações através de sistemas práticos de automação.",
-            hero_p2: "Com quase uma década de experiência em ambientes corporativos globais, incluindo SAP, Salesforce e equipes operacionais, combino entendimento de processos com execução técnica prática.",
-            hero_btn_book: "Agendar uma Revisão Operacional",
-            hero_btn_view: "Ver Experiência",
-            stat1_title: "Exemplo de Impacto",
-            stat1_val: "Até 15 Horas Salvas/Sem",
-            stat2_title: "Controles de Qualidade",
-            stat2_val: "Validação Automatizada",
-            trust_title: "Experiência com Plataformas Corporativas e Operações Globais",
-            trust_platforms: "Plataformas",
-            trust_env: "Ambientes Profissionais",
-            automation_title: "Exemplos de Automação",
-            automation_desc: "Exemplos práticos de implementação em relatórios, arquitetura de CRM e plataformas modernas para clientes.",
-            automation_btn: "Ver Repositórios no GitHub →",
-            case1_tag: "Automação de Relatórios",
-            case1_title: "Reduza a preparação repetitiva de planilhas",
-            case1_desc: "Automatize validação, formatação e geração recorrente de relatórios com fluxos estruturados de dados.",
-            case2_tag: "Arquitetura de CRM",
-            case2_title: "Conecte a captura de leads às operações",
-            case2_desc: "Estruture entrada de dados, geração de documentos e acompanhamento automático para um atendimento mais consistente.",
-            case3_tag: "Experiência Web",
-            case3_title: "Melhore a apresentação profissional da marca",
-            case3_desc: "Crie páginas responsivas com chamadas mais claras e uma interação simplificada com clientes.",
-            exp_title: "Principais Especialidades",
-            exp_1_title: "Automação de Dados",
-            exp_1_desc: "Macros VBA, Google Apps Script, Automação Excel, Integração Google Sheets, Otimização de Relatórios.",
-            exp_2_title: "Plataformas Web",
-            exp_2_desc: "HTML, CSS, Tailwind CSS, Design Responsivo, Landing Pages, Sites Empresariais.",
-            exp_3_title: "Operações Corporativas",
-            exp_3_desc: "SAP S/4HANA, Ariba, Salesforce, Gestão de Dados Mestres, Order-to-Cash, ITIL.",
-            prof_exp_title: "Experiência Profissional",
-            role_1: "Gerente de Sucesso de Parceiros",
-            date_1: "Mar 2025 – Presente",
-            role_2: "Especialista em Sucesso do Cliente",
-            date_2: "Nov 2021 – Jul 2024",
-            role_3: "Especialista em Dados de Compras",
-            date_3: "Jun 2018 – Nov 2021",
-            role_4: "Analista de Service Desk de TI",
-            date_4: "Jun 2017 – Mai 2018",
-            approach_title: "Minha Abordagem",
-            approach_q1: "\"Eu me coloco na posição de alguém descobrindo um negócio pela primeira vez: o que chama atenção, gera confiança, parece claro e torna a experiência mais fácil?\"",
-            approach_q2: "Analiso a experiência do usuário e o cenário operacional mais amplo, com foco em melhorias que fortaleçam o relacionamento com clientes e apoiem um crescimento sustentável.",
-            partners_label: "Parceiros Oficiais de Tecnologia",
-            sf_badge: "Solução Corporativa",
-            sf_partner: "Parceiro Oficial Soublox",
-            sf_title: "Automação de CRM e Salesforce",
-            sf_desc: "Arquitetura avançada de dados, automações nativas no Salesforce, geração de documentos e integração inteligente com WhatsApp para operações complexas.",
-            sf_note: "Indicado para organizações que precisam de uma conversa personalizada sobre arquitetura em vez de um pacote mensal fixo.",
-            sf_price: "Orçamento Personalizado Conforme o Escopo",
-            sf_btn: "Discutir Arquitetura",
-            pack_sub: "Plataformas Web e Tech Ops",
-            pack_title: "Parceria e Preços",
-            pack_desc: "Um modelo em duas etapas para empresas de serviços: primeiro criamos sua plataforma. Depois, atualizações, monitoramento e melhorias são gerenciados através de uma parceria mensal.",
-            
-            // Estimator strings
-            estimator_badge: "Assistente de Orçamento",
-            estimator_title: "Estime a faixa do projeto",
-            estimator_desc: "Use este estimador rápido para entender como recursos mudam o orçamento antes de solicitar uma proposta.",
-            estimator_domain: "Domínio",
-            estimator_domain_existing: "Domínio existente",
-            estimator_domain_new: "Novo domínio",
-            estimator_booking: "Agendamento",
-            estimator_booking_link: "Apenas link",
-            estimator_booking_embed: "Widget na página",
-            estimator_booking_multi: "Fluxo avançado",
-            estimator_languages: "Idiomas",
-            estimator_lang_one: "1 Idioma",
-            estimator_lang_two: "2 Idiomas",
-            estimator_lang_three: "3 Idiomas",
-            estimator_content: "Conteúdo",
-            estimator_content_client: "Cliente fornece",
-            estimator_content_help: "Revisão e polimento",
-            estimator_content_full: "Criação completa",
-            estimator_extra_page: "Página extra",
-            estimator_whatsapp: "Automação WhatsApp",
-            estimator_payments: "Pagamentos online",
-            estimator_care: "Plano mensal de suporte",
-            estimator_result_label: "Faixa estimada",
-            estimator_result_note: "Orçamento final confirmado após rápida revisão.",
-            estimate_discount_note: "Desconto aplicado ao setup se houver vagas disponíveis.",
-            estimator_btn: "Solicitar Orçamento",
-
-            light_badge: "Pacote Inicial • 20% off para os próximos 5",
-            light_title: "Site Leve com Agendamento",
-            light_desc: "Um site limpo para pequenos negócios que precisam de presença online e agendamento simplificado.",
-            light_l1: "Site responsivo (One-page)",
-            light_l2: "Integração de agendamento",
-            light_l3: "Formulário de contato",
-            light_l4: "Google Maps",
-            light_l5: "Configuração básica de SEO",
-            light_l6: "Configuração de hospedagem",
-            light_l7: "Conexão com domínio existente",
-            light_l8: "Suporte no lançamento",
-            light_note: "Renovação de domínio, ferramentas de agendamento e e-mail são cobrados separadamente.",
-            light_discount_condition: "Desconto confirmado apenas após assinatura do contrato.",
-            starting_at: "A partir de",
-            light_care: "Plano opcional de suporte: ",
-            light_discount_prefix: "20% desconto inicial: ",
-            live_counter_label: "Contador de desconto",
-            light_btn: "Estimar Meu Projeto",
-
-            setup_badge: "Setup Inicial",
-            setup_title: "Fase 1: Setup e Engenharia",
-            setup_desc: "Desenvolvimento estrutural completo, web design premium, base de SEO e fluxos inteligentes de automação.",
-            retainer_title: "Fase 2: Tech Ops e Gestão Mensal",
-            pack1_title: "Contrato de 3 Meses",
-            pack1_desc: "Gestão e estabilização de curto prazo.",
-            pack2_title: "Contrato de 6 Meses",
-            pack2_desc: "Período equilibrado para otimização.",
-            pack3_badge: "Melhor Custo-Benefício",
-            pack3_title: "Contrato de 12 Meses",
-            pack3_desc: "Parceria de longo prazo e melhorias.",
-            per_month: " / mês",
-            p_l1: "Hospedagem Premium Inclusa",
-            p_l2: "Atualizações de Conteúdo",
-            p_l3: "Manutenção de Automações",
-            p_l4: "Monitoramento de Segurança",
-            p_l5: "Suporte Prioritário e Consultoria",
-            p_l6: "Relatórios Básicos de Desempenho",
-            pack_btn: "Selecionar Pacote",
-            pack_btn_primary: "Selecionar Pacote",
-            faq_title: "Perguntas Frequentes",
-            faq_desc: "Perguntas comuns sobre plataformas web, automação e consultoria operacional.",
-            faq1_q: "O que faz um consultor de automação?",
-            faq1_a: "Identifico processos repetitivos ou desconectados, mapeio o fluxo necessário de informações e construo sistemas práticos que reduzem tarefas manuais e melhoram a consistência.",
-            faq2_q: "Você cria sites com formulários e fluxos de agendamento integrados?",
-            faq2_a: "Sim. Desenvolvo plataformas profissionais para clientes com captação de leads, formulários, automação de fluxos e integrações de agendamento quando fazem sentido para o processo do negócio.",
-            faq3_q: "Você atende apenas em Cracóvia ou também internacionalmente?",
-            faq3_a: "Ambos. Trabalho a partir de Cracóvia e atendo remotamente clientes na Polônia e internacionalmente em inglês, português e polonês.",
-            partner_label: "Projeto Parceiro em Destaque",
-            partner_desc: "Projeto colaborativo de desenvolvimento web e UX criado para fortalecer a presença profissional da marca e simplificar a interação com clientes.",
-            partner_btn: "Visitar Projeto →",
-            cta_title: "Vamos Melhorar Suas Operações",
-            cta_desc: "Se o seu negócio depende de tarefas repetitivas, planilhas ou sistemas desconectados, podem existir oportunidades práticas de automação com valor imediato.",
-            footer_text: "© 2026 Alan da Silva Morais • Automação Operacional e Consultoria",
-            banner_title: "Oferta limitada",
-            banner_desc: "Condições reduzidas de setup estão disponíveis para novos projetos selecionados.",
-            banner_btn: "Discutir Seu Projeto",
-            form_title: "Enviar Mensagem",
-            form_name: "Nome",
-            form_email: "E-mail",
-            form_phone: "WhatsApp / Telefone",
-            form_msg: "Mensagem",
-            form_submit: "Enviar Mensagem",
-            form_consent: "Concordo que meus dados sejam usados para responder à minha solicitação e gerenciar a comunicação.",
-            privacy_note: "Seus dados serão usados apenas para responder à sua solicitação.",
-            sending: "Enviando...",
-            sent: "Mensagem enviada com sucesso.",
-            error: "Erro. Tente novamente ou fale comigo pelo LinkedIn.",
-            general_subject: "Solicitação geral",
-            inquiry_subject: "Solicitação",
-            special_rate: "Condição especial",
-            offer_subject: "Solicitação: oferta inicial de onboarding",
-            package_three: "Tech Ops (3 Meses)",
-            package_six: "Tech Ops (6 Meses)",
-            package_twelve: "Tech Ops (12 Meses)",
-            package_enterprise: "CRM Corporativo e Salesforce",
-            package_custom_quote: "Orçamento personalizado",
-            inquiry_message: "Tenho interesse na opção {package} ({price}). Minha solicitação é...",
-            estimate_subject: "Orçamento Estimado",
-            estimate_message: "Tenho interesse na opção de Orçamento Estimado ({range}). Minha solicitação é...",
-            counter_checking: "Verificando vagas...",
-            counter_available: "{remaining} de {total} vagas de desconto restantes.",
-            counter_last: "Última vaga de desconto disponível.",
-            counter_sold_out: "Vagas esgotadas no momento.",
-            counter_error: "Contador indisponível. Confirmação após revisão."
-        },
-        pl: {
-            brand_subtitle: "Automatyzacja i Rozwiązania",
-            nav_services: "Usługi i Cennik",
-            hero_badge: "Dostępny na konsultacje • Kraków i Zdalnie",
-            hero_title_1: "Usprawnij Operacje Biznesowe",
-            hero_title_2: "Dzięki Inteligentnej Automatyzacji.",
-            hero_p1: "Pomagam organizacjom ograniczać pracę ręczną, poprawiać jakość danych i usprawniać operacje dzięki praktycznym systemom automatyzacji.",
-            hero_p2: "Dzięki niemal dziesięcioletniemu doświadczeniu w globalnych środowiskach korporacyjnych, w tym SAP, Salesforce i zespołach operacyjnych, łączę znajomość procesów biznesowych z praktycznym wykonaniem technicznym.",
-            hero_btn_book: "Umów Przegląd Operacyjny",
-            hero_btn_view: "Zobacz Doświadczenie",
-            stat1_title: "Przykładowy Efekt",
-            stat1_val: "Do 15 Godz. Oszczędności/Tydz.",
-            stat2_title: "Kontrola Jakości Danych",
-            stat2_val: "Automatyczna Walidacja",
-            trust_title: "Doświadczenie z Platformami Korporacyjnymi",
-            trust_platforms: "Platformy",
-            trust_env: "Środowiska Zawodowe",
-            automation_title: "Przykłady Automatyzacji",
-            automation_desc: "Praktyczne przykłady wdrożeń z obszaru raportowania, architektury CRM i nowoczesnych platform dla klientów.",
-            automation_btn: "Zobacz Repozytoria GitHub →",
-            case1_tag: "Automatyzacja Raportów",
-            case1_title: "Ogranicz powtarzalne przygotowanie arkuszy",
-            case1_desc: "Zautomatyzuj walidację, formatowanie i cykliczne generowanie raportów dzięki uporządkowanym przepływom danych.",
-            case2_tag: "Architektura CRM",
-            case2_title: "Połącz pozyskiwanie leadów z operacjami",
-            case2_desc: "Zaprojektuj proces przyjmowania danych, generowania dokumentów i automatycznego kontaktu dla spójniejszej obsługi klienta.",
-            case3_tag: "Doświadczenie Web",
-            case3_title: "Wzmocnij profesjonalny wizerunek marki",
-            case3_desc: "Twórz responsywne strony z czytelnymi wezwaniami do działania i prostszą interakcją z klientem.",
-            exp_title: "Kluczowe Kompetencje",
-            exp_1_title: "Automatyzacja Danych",
-            exp_1_desc: "Makra VBA, Google Apps Script, Automatyzacja Excel, Integracja Google Sheets, Optymalizacja Raportowania.",
-            exp_2_title: "Platformy Web",
-            exp_2_desc: "HTML, CSS, Tailwind CSS, Responsive Design, Landing Pages, Strony Biznesowe.",
-            exp_3_title: "Operacje Korporacyjne",
-            exp_3_desc: "SAP S/4HANA, Ariba, Salesforce, Zarządzanie Danymi Podstawowymi, Order-to-Cash, ITIL.",
-            prof_exp_title: "Doświadczenie Zawodowe",
-            role_1: "Menedżer ds. Sukcesu Partnerów",
-            date_1: "Marzec 2025 – Obecnie",
-            role_2: "Specjalista ds. Sukcesu Klienta",
-            date_2: "Listopad 2021 – Lipiec 2024",
-            role_3: "Specjalista ds. Danych Zakupowych",
-            date_3: "Czerwiec 2018 – Listopad 2021",
-            role_4: "Analityk IT Service Desk",
-            date_4: "Czerwiec 2017 – Maj 2018",
-            approach_title: "Moje Podejście",
-            approach_q1: "Stawiam się na miejscu osoby odkrywającej firmę po raz pierwszy: co przyciąga uwagę, buduje zaufanie, jest jasne i ułatwia doświadczenie?",
-            approach_q2: "Analizuję zarówno doświadczenie użytkownika, jak i szerszy obraz operacyjny, koncentrując się na usprawnieniach, które wzmacniają relacje z klientami i wspierają trwały rozwój.",
-            partners_label: "Oficjalni Partnerzy Technologiczni",
-            sf_badge: "Rozwiązanie Korporacyjne",
-            sf_partner: "Oficjalny Partner Soublox",
-            sf_title: "Automatyzacja CRM i Salesforce",
-            sf_desc: "Zaawansowana architektura danych, natywne automatyzacje Salesforce, generowanie dokumentów i inteligentna integracja WhatsApp dla złożonych operacji.",
-            sf_note: "Rozwiązanie dla organizacji, które potrzebują indywidualnej rozmowy o architekturze zamiast stałego pakietu.",
-            sf_price: "Indywidualna Wycena Zależna od Zakresu",
-            sf_btn: "Omów Architekturę",
-            pack_sub: "Platformy Web i Tech Ops",
-            pack_title: "Partnerstwo i Cennik",
-            pack_desc: "Dwustopniowy model dla firm usługowych: najpierw tworzymy platformę. Następnie aktualizacje, monitoring i usprawnienia są zarządzane w ramach współpracy.",
-            
-            // Estimator strings
-            estimator_badge: "Asystent Wyceny",
-            estimator_title: "Oszacuj zakres projektu",
-            estimator_desc: "Odpowiedz na kilka pytań, aby poznać prawdopodobny zakres przed finalną wyceną.",
-            estimator_domain: "Domena",
-            estimator_domain_existing: "Istniejąca domena",
-            estimator_domain_new: "Nowa domena",
-            estimator_booking: "Rezerwacje",
-            estimator_booking_link: "Tylko link",
-            estimator_booking_embed: "Wbudowany widget",
-            estimator_booking_multi: "Wielu pracowników",
-            estimator_languages: "Języki",
-            estimator_lang_one: "Jeden język",
-            estimator_lang_two: "Dwa języki",
-            estimator_lang_three: "Trzy języki",
-            estimator_content: "Treść",
-            estimator_content_client: "Klient dostarcza",
-            estimator_content_help: "Dopracowanie",
-            estimator_content_full: "Copywriting",
-            estimator_extra_page: "Dodatkowa strona",
-            estimator_whatsapp: "Automatyzacja WhatsApp",
-            estimator_payments: "Płatności online",
-            estimator_care: "Miesięczny plan opieki",
-            estimator_result_label: "Szacowany zakres",
-            estimator_result_note: "Finalna wycena po krótkim przeglądzie projektu.",
-            estimate_discount_note: "Zniżka dotyczy podstawowej konfiguracji, jeśli są dostępne miejsca.",
-            estimator_btn: "Poproś o tę wycenę",
-
-            light_badge: "Pakiet Startowy • 20% zniżki",
-            light_title: "Lekka Strona z Rezerwacją",
-            light_desc: "Profesjonalna strona dla małych firm, które potrzebują obecności online i prostego sposobu rezerwacji.",
-            light_l1: "Responsywna strona (One-page)",
-            light_l2: "Integracja systemu rezerwacji",
-            light_l3: "Formularz kontaktowy",
-            light_l4: "Integracja Google Maps",
-            light_l5: "Podstawowa konfiguracja SEO",
-            light_l6: "Konfiguracja hostingu",
-            light_l7: "Podłączenie istniejącej domeny",
-            light_l8: "Wsparcie przy publikacji",
-            light_note: "Odnowienie domeny, narzędzia rezerwacji i e-mail są rozliczane osobno.",
-            light_discount_condition: "Zniżka rezerwowana po podpisaniu umowy.",
-            starting_at: "Od",
-            light_care: "Plan opieki: ",
-            light_discount_prefix: "Zniżka 20%: ",
-            live_counter_label: "Licznik zniżki na żywo",
-            light_btn: "Oszacuj Projekt",
-
-            setup_badge: "Na Start",
-            setup_title: "Etap 1: Konfiguracja i Inżynieria",
-            setup_desc: "Kompletny rozwój struktury, premium web design, fundamenty SEO i inteligentne przepływy automatyzacji.",
-            retainer_title: "Etap 2: Tech Ops i Zarządzanie Miesięczne",
-            pack1_title: "Umowa na 3 Miesiące",
-            pack1_desc: "Krótkoterminowe zarządzanie i stabilizacja.",
-            pack2_title: "Umowa na 6 Miesięcy",
-            pack2_desc: "Zrównoważony okres optymalizacji.",
-            pack3_badge: "Najlepsza Wartość",
-            pack3_title: "Umowa na 12 Miesięcy",
-            pack3_desc: "Długoterminowa współpraca i ciągłe usprawnienia.",
-            per_month: " / mies.",
-            p_l1: "Hosting Premium w Cenie",
-            p_l2: "Aktualizacje Treści",
-            p_l3: "Utrzymanie Automatyzacji",
-            p_l4: "Monitoring Bezpieczeństwa",
-            p_l5: "Priorytetowe Wsparcie",
-            p_l6: "Podstawowe Raporty Wyników", 
-            pack_btn: "Wybierz Pakiet",
-            pack_btn_primary: "Wybierz Pakiet",
-            faq_title: "Często Zadawane Pytania",
-            faq_desc: "Najczęstsze pytania dotyczące platform webowych, automatyzacji i konsultingu.",
-            faq1_q: "Czym zajmuje się konsultant ds. automatyzacji?",
-            faq1_a: "Identyfikuję powtarzalne procesy, mapuję przepływ informacji i buduję systemy, które ograniczają ręczną pracę.",
-            faq2_q: "Czy tworzysz strony z procesem rezerwacji?",
-            faq2_a: "Tak. Tworzę profesjonalne platformy z formularzami, automatyzacją procesów oraz integracjami rezerwacji.",
-            faq3_q: "Czy świadczysz usługi w Krakowie czy również zdalnie?",
-            faq3_a: "Oba modele są możliwe. Pracuję z Krakowa i obsługuję klientów międzynarodowo.",
-            partner_label: "Wyróżniony Projekt Partnerski",
-            partner_desc: "Wspólny projekt web developmentu i UX zaprojektowany w celu wzmocnienia wizerunku marki.",
-            partner_btn: "Zobacz Projekt →",
-            cta_title: "Usprawnijmy Twoje Operacje",
-            cta_desc: "Jeśli Twój biznes opiera się na powtarzalnych zadaniach lub niepołączonych systemach, automatyzacja szybko przyniesie wartość.",
-            footer_text: "© 2026 Alan da Silva Morais • Automatyzacja Operacyjna i Konsulting",
-            banner_title: "Oferta limitowana",
-            banner_desc: "Obniżona cena konfiguracji dla wybranych nowych projektów.",
-            banner_btn: "Omów Swój Projekt",
-            form_title: "Wyślij Wiadomość",
-            form_name: "Imię",
-            form_email: "E-mail",
-            form_phone: "Telefon / WhatsApp",
-            form_msg: "Wiadomość",
-            form_submit: "Wyślij Wiadomość",
-            form_consent: "Wyrażam zgodę na wykorzystanie moich danych w celu odpowiedzi na zapytanie i prowadzenia komunikacji.",
-            privacy_note: "Twoje dane zostaną wykorzystane wyłącznie do odpowiedzi na zapytanie.",
-            sending: "Wysyłanie...",
-            sent: "Wiadomość została wysłana.",
-            error: "Błąd. Spróbuj ponownie lub skontaktuj się przez LinkedIn.",
-            general_subject: "Zapytanie ogólne",
-            inquiry_subject: "Zapytanie",
-            special_rate: "Cena promocyjna",
-            offer_subject: "Zapytanie: oferta wdrożeniowa",
-            package_three: "Tech Ops (3 Miesiące)",
-            package_six: "Tech Ops (6 Miesięcy)",
-            package_twelve: "Tech Ops (12 Miesięcy)",
-            package_enterprise: "CRM Korporacyjny",
-            package_custom_quote: "Wycena indywidualna",
-            inquiry_message: "Interesuje mnie opcja {package} ({price}). Moje zapytanie to...",
-            estimate_subject: "Wycena Projektu",
-            estimate_message: "Interesuje mnie Wycena Projektu ({range}). Moje zapytanie to...",
-            counter_checking: "Sprawdzanie miejsc...",
-            counter_available: "Pozostało {remaining} z {total} miejsc ze zniżką.",
-            counter_last: "Ostatnie miejsce ze zniżką.",
-            counter_sold_out: "Brak miejsc ze zniżką. Obowiązuje standardowa cena.",
-            counter_error: "Licznik niedostępny. Dostępność zostanie potwierdzona."
-        }
-    };
-
-    let currentLang = 'en';
-    let currentCurrency = 'PLN';
+    // Explicitly set language for the root index file
+    const currentLang = 'en';
+    let currentCurrency = 'USD';
     let previouslyFocusedElement = null;
     let currentPackageInfo = { packageName: '', price: '' };
 
-    function t(key) {
-        return translations[currentLang]?.[key] ?? translations.en[key] ?? key;
-    }
+    const exchangeRates = { PLN: 1, BRL: 1.38, EUR: 0.23, USD: 0.25 };
 
     function formatPrice(plnAmount) {
         if (!plnAmount) return '';
@@ -1345,8 +621,7 @@
             converted = Math.ceil(converted / 10) * 10;
         }
 
-        const locale = currentLang === 'pt' ? 'pt-BR' : (currentLang === 'pl' ? 'pl-PL' : 'en-US');
-        const formatted = converted.toLocaleString(locale);
+        const formatted = converted.toLocaleString('en-US');
 
         if (currentCurrency === 'BRL') return 'R$ ' + formatted;
         if (currentCurrency === 'EUR') return '€' + formatted;
@@ -1358,11 +633,6 @@
         const currSelect = document.getElementById('currencySelect');
         if (currSelect) currSelect.value = currentCurrency;
 
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
-        });
-
         document.querySelectorAll('[data-price-display]').forEach(el => {
             const basePln = parseInt(el.getAttribute('data-price-display'), 10);
             if (!isNaN(basePln)) {
@@ -1370,14 +640,19 @@
             }
         });
 
+        // Estimator options formatting
         const optIds = ['estimateDomain', 'estimateBooking', 'estimateLanguages', 'estimateContent'];
         optIds.forEach(id => {
             const select = document.getElementById(id);
             if (select) {
                 Array.from(select.options).forEach(opt => {
-                    const i18nKey = opt.getAttribute('data-i18n');
                     const val = parseInt(opt.getAttribute('data-price') || opt.value, 10);
-                    let text = t(i18nKey);
+                    // Reset to base text to prevent stacking (+ $100) (+ $100)
+                    if (!opt.hasAttribute('data-base-text')) {
+                        opt.setAttribute('data-base-text', opt.textContent.split(' (+')[0]);
+                    }
+                    let text = opt.getAttribute('data-base-text');
+                    
                     if (val > 0) {
                         text += ` (+ ${formatPrice(val)})`;
                     }
@@ -1399,7 +674,7 @@
 
     function getEstimatorTotal() {
         const ids = ['estimateDomain', 'estimateBooking', 'estimateLanguages', 'estimateContent'];
-        let total = 1800;
+        let total = 1800; // Base setup
         ids.forEach(id => { 
             const el = document.getElementById(id); 
             if (el) total += Number(el.options[el.selectedIndex].getAttribute('data-price') || el.value || 0); 
@@ -1423,32 +698,32 @@
         const note = document.getElementById('estimateCareNote');
         if (care && note) {
             note.textContent = care.checked
-                ? `${t('estimator_result_note')} ${formatPrice(199)}${t('per_month')} care plan selected.`
-                : t('estimator_result_note');
+                ? `Final quote confirmed after a short project review. ${formatPrice(199)} / mo care plan selected.`
+                : "Final quote confirmed after a short project review.";
         }
     }
 
     function packageDetails(packageKey, priceBaseKey) {
         const packages = {
-            light_booking: t('light_title'),
-            three_month: t('package_three'),
-            six_month: t('package_six'),
-            twelve_month: t('package_twelve'),
-            enterprise_crm: t('package_enterprise'),
-            offer: t('banner_title')
+            light_booking: "Light Booking Website",
+            three_month: "3-Month Tech Ops",
+            six_month: "6-Month Tech Ops",
+            twelve_month: "12-Month Tech Ops",
+            enterprise_crm: "Enterprise CRM & Salesforce",
+            offer: "Limited offer"
         };
 
         let priceStr = '';
         if (priceBaseKey === 'custom_quote') {
-            priceStr = t('package_custom_quote');
+            priceStr = "Custom quote";
         } else if (priceBaseKey === 'introductory_offer') {
-            priceStr = t('special_rate');
+            priceStr = "Special rate";
         } else if (priceBaseKey) {
             const baseAmount = parseInt(priceBaseKey, 10);
             if (!isNaN(baseAmount)) {
                 priceStr = formatPrice(baseAmount);
                 if (['1400', '1150', '850', '199'].includes(priceBaseKey)) {
-                    priceStr += t('per_month');
+                    priceStr += " / mo";
                 }
             }
         }
@@ -1463,9 +738,9 @@
         updateEstimate();
         const range = document.getElementById('estimateResult')?.textContent || '';
         openContactForm();
-        currentPackageInfo = { packageName: t('estimate_subject'), price: range };
-        document.getElementById('formSubject').value = t('estimate_subject');
-        document.getElementById('formMsg').value = t('estimate_message').replace('{range}', range);
+        currentPackageInfo = { packageName: "Project Estimate", price: range };
+        document.getElementById('formSubject').value = "Project Estimate";
+        document.getElementById('formMsg').value = `I am interested in the Project Estimate (${range}). My request is...`;
     }
 
     function openContactForm(packageKey = null, priceKey = null) {
@@ -1481,13 +756,11 @@
         if (packageKey) {
             const details = packageDetails(packageKey, priceKey);
             currentPackageInfo = details;
-            subject.value = packageKey === 'offer' ? t('offer_subject') : `${t('inquiry_subject')}: ${details.packageName}`;
-            message.value = t('inquiry_message')
-                .replace('{package}', details.packageName)
-                .replace('{price}', details.price);
+            subject.value = packageKey === 'offer' ? "Inquiry: Introductory onboarding offer" : `Inquiry: ${details.packageName}`;
+            message.value = `I am interested in the ${details.packageName} option (${details.price}). My request is...`;
         } else {
-            currentPackageInfo = { packageName: t('general_subject'), price: '' };
-            subject.value = t('general_subject');
+            currentPackageInfo = { packageName: "General inquiry", price: '' };
+            subject.value = "General inquiry";
             message.value = '';
         }
 
@@ -1502,17 +775,11 @@
         if (previouslyFocusedElement) previouslyFocusedElement.focus();
     }
 
-    function formatTranslation(template, values = {}) {
-        return String(template || '').replace(/\{(\w+)\}/g, function (_, key) {
-            return Object.prototype.hasOwnProperty.call(values, key) ? values[key] : '';
-        });
-    }
-
     async function loadDiscountCounter() {
         const counterText = document.getElementById('discountCounterText');
         if (!counterText || !ALANSM_BACKEND_URL) return;
 
-        counterText.textContent = t('counter_checking');
+        counterText.textContent = "Checking availability...";
 
         try {
             const response = await fetch(ALANSM_BACKEND_URL + '?action=counter', { method: 'GET', cache: 'no-store' });
@@ -1520,14 +787,14 @@
             const data = await response.json();
 
             if (data.soldOut || Number(data.remaining) <= 0) {
-                counterText.textContent = t('counter_sold_out');
+                counterText.textContent = "Discount spots are currently full. Standard setup applies.";
             } else if (Number(data.remaining) === 1) {
-                counterText.textContent = t('counter_last');
+                counterText.textContent = "Last discount spot available.";
             } else {
-                counterText.textContent = formatTranslation(t('counter_available'), { remaining: data.remaining, total: data.totalSlots });
+                counterText.textContent = `${data.remaining} of ${data.totalSlots} discount spots remaining.`;
             }
         } catch (error) {
-            counterText.textContent = t('counter_error');
+            counterText.textContent = "Live counter unavailable. Final availability confirmed after review.";
         }
     }
 
@@ -1546,19 +813,19 @@
         const consent = document.getElementById('formConsent')?.checked;
 
         if (!consent) {
-            status.textContent = t('form_consent');
+            status.textContent = "I agree that my details may be used to respond to my inquiry and manage project communication.";
             status.className = 'text-xs text-center min-h-[20px] text-yellow-400 mt-2 font-medium';
             return;
         }
 
-        const packageInfo = currentPackageInfo || { packageName: t('general_subject'), price: '' };
+        const packageInfo = currentPackageInfo || { packageName: "General inquiry", price: '' };
 
         const payload = {
             action: 'submitLead',
             name: name,
             email: email,
             phone: phone,
-            packageName: packageInfo.packageName || t('general_subject'),
+            packageName: packageInfo.packageName || "General inquiry",
             estimatedPrice: packageInfo.price || '',
             discountRequested: String(packageInfo.packageName || '').toLowerCase().includes('light') ? 'YES' : 'NO',
             message: message,
@@ -1569,7 +836,7 @@
         Object.keys(payload).forEach(key => body.append(key, payload[key]));
 
         button.disabled = true;
-        button.textContent = t('sending');
+        button.textContent = "Sending...";
         status.textContent = '';
 
         try {
@@ -1579,14 +846,14 @@
             
             if (result.status !== 'ok') throw new Error();
 
-            status.textContent = formatTranslation(t('lead_submit_success'), { leadId: result.leadId || '0000' });
+            status.textContent = `Message sent successfully. Ref: ${result.leadId || '0000'}`;
             status.className = 'text-xs text-center min-h-[20px] text-green-500 mt-2 font-medium';
             form.reset();
             loadDiscountCounter();
 
             window.setTimeout(closeContactForm, 3000);
         } catch (error) {
-            status.textContent = t('error');
+            status.textContent = "The message could not be sent. Please try again or contact me through LinkedIn.";
             status.className = 'text-xs text-center min-h-[20px] text-red-500 mt-2 font-medium';
         } finally {
             button.disabled = false;
@@ -1641,13 +908,11 @@
     document.addEventListener('DOMContentLoaded', () => {
         const savedCurr = localStorage.getItem('preferredCurrency');
         
-        // Root is explicitly English
-        currentLang = 'en';
-
+        // Use saved currency, or default to USD for English root.
         if (savedCurr) {
             currentCurrency = savedCurr;
         } else {
-            currentCurrency = 'USD'; // Default for EN
+            currentCurrency = 'USD';
         }
 
         updateDynamicContent();
