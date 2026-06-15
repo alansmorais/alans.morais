@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alan da Silva Morais | Automation & Operational Consulting</title>
+    <title>Alan da Silva Morais | Automation & Operational Solutions</title>
 
     <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" />
 
     <meta name="description" content="Operational automation consulting, CRM architecture, business process optimization, and modern web platforms for organizations in Skalica, Kraków and worldwide." />
     <meta name="robots" content="index, follow" />
 
-    <meta property="og:title" content="Alan da Silva Morais | Automation & Operational Consulting" />
+    <meta property="og:title" content="Alan da Silva Morais | Automation & Operational Solutions" />
     <meta property="og:description" content="Improve business operations through practical automation, CRM architecture, and modern web platforms." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://alansmsolutions.com/" />
@@ -18,8 +18,32 @@
     <link rel="canonical" href="https://alansmsolutions.com/" />
 
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Alan da Silva Morais | Automation & Operational Consulting" />
+    <meta name="twitter:title" content="Alan da Silva Morais | Automation & Operational Solutions" />
     <meta name="twitter:description" content="Operational automation consulting, CRM architecture, business process optimization, and modern web platforms." />
+
+    <!-- SCRIPT DE REDIRECIONAMENTO AUTOMÁTICO -->
+    <script>
+        (function() {
+            var savedLang = localStorage.getItem('preferredLanguage');
+            var path = window.location.pathname;
+            
+            // Só executa o redirecionamento se estiver na raiz
+            if (path === '/' || path === '/index.html') {
+                if (savedLang === 'pt') {
+                    window.location.replace('/br/');
+                } else if (savedLang === 'pl') {
+                    window.location.replace('/pl/');
+                } else if (!savedLang) {
+                    var browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
+                    if (browserLang.startsWith('pt')) {
+                        window.location.replace('/br/');
+                    } else if (browserLang.startsWith('pl')) {
+                        window.location.replace('/pl/');
+                    }
+                }
+            }
+        })();
+    </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -78,11 +102,11 @@
                 
                 <!-- Language Selector -->
                 <div class="flex items-center gap-1 md:gap-2">
-                    <button type="button" onclick="setLanguage('en')" data-lang="en" class="lang-btn text-xs font-bold text-blue-500 hover:text-blue-400 transition-colors focus:outline-none rounded px-1">EN</button>
+                    <a href="/" onclick="localStorage.setItem('preferredLanguage', 'en');" class="text-xs font-bold text-blue-500 hover:text-blue-400 transition-colors focus:outline-none rounded px-1">EN</a>
                     <span class="text-slate-700 text-xs">/</span>
-                    <button type="button" onclick="setLanguage('pt')" data-lang="pt" class="lang-btn text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors focus:outline-none rounded px-1">PT-BR</button>
+                    <a href="/br/" onclick="localStorage.setItem('preferredLanguage', 'pt');" class="text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors focus:outline-none rounded px-1">PT-BR</a>
                     <span class="text-slate-700 text-xs">/</span>
-                    <button type="button" onclick="setLanguage('pl')" data-lang="pl" class="lang-btn text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors focus:outline-none rounded px-1">PL</button>
+                    <a href="/pl/" onclick="localStorage.setItem('preferredLanguage', 'pl');" class="text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors focus:outline-none rounded px-1">PL</a>
                 </div>
 
                 <span class="text-slate-800 text-sm hidden md:block">|</span>
@@ -1331,25 +1355,14 @@
     }
 
     function updateDynamicContent() {
-        // Toggles da Nav
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            const isActive = btn.dataset.lang === currentLang;
-            btn.classList.toggle('text-blue-500', isActive);
-            btn.classList.toggle('font-bold', isActive);
-            btn.classList.toggle('text-slate-500', !isActive);
-            btn.classList.toggle('font-medium', !isActive);
-        });
-
         const currSelect = document.getElementById('currencySelect');
         if (currSelect) currSelect.value = currentCurrency;
 
-        // Textos Traduzidos
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (translations[currentLang][key]) el.textContent = translations[currentLang][key];
         });
 
-        // Preços Fixos
         document.querySelectorAll('[data-price-display]').forEach(el => {
             const basePln = parseInt(el.getAttribute('data-price-display'), 10);
             if (!isNaN(basePln)) {
@@ -1357,7 +1370,6 @@
             }
         });
 
-        // Opções do Estimador (Dropdowns)
         const optIds = ['estimateDomain', 'estimateBooking', 'estimateLanguages', 'estimateContent'];
         optIds.forEach(id => {
             const select = document.getElementById(id);
@@ -1376,22 +1388,6 @@
 
         updateEstimate();
         loadDiscountCounter();
-    }
-
-    function setLanguage(lang) {
-        if (!translations[lang]) return;
-        currentLang = lang;
-        document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
-        localStorage.setItem('preferredLanguage', lang);
-        
-        // Auto-switch currency based on language if user hasn't explicitly set one
-        if (!localStorage.getItem('preferredCurrency')) {
-            if (lang === 'pt') currentCurrency = 'BRL';
-            else if (lang === 'pl') currentCurrency = 'PLN';
-            else currentCurrency = 'USD';
-        }
-        
-        updateDynamicContent();
     }
 
     function setCurrency(curr) {
@@ -1643,25 +1639,18 @@
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-        const savedLang = localStorage.getItem('preferredLanguage');
         const savedCurr = localStorage.getItem('preferredCurrency');
-        const browserLang = (navigator.language || 'en').toLowerCase();
-
-        let initialLang = savedLang || 'en';
-        if (!savedLang) {
-            if (browserLang.includes('pl')) initialLang = 'pl';
-            if (browserLang.includes('pt')) initialLang = 'pt';
-        }
+        
+        // Root is explicitly English
+        currentLang = 'en';
 
         if (savedCurr) {
             currentCurrency = savedCurr;
         } else {
-            if (initialLang === 'pt') currentCurrency = 'BRL';
-            else if (initialLang === 'pl') currentCurrency = 'PLN';
-            else currentCurrency = 'USD';
+            currentCurrency = 'USD'; // Default for EN
         }
 
-        setLanguage(initialLang);
+        updateDynamicContent();
 
         let bannerTriggered = false;
         const triggerBanner = () => {
