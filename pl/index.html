@@ -7,10 +7,9 @@
 
     <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" />
 
-    <meta name="description" content="Strony internetowe, procesy rezerwacji, systemy automatyzacji, architektura CRM i doradztwo operacyjne dla firm usługowych w Krakowie i na świecie." />
+    <meta name="description" content="Strony internetowe, procesy rezerwacji, systemy automatyzacji, architektura CRM i doradztwo operacyjne dla firm usługowych." />
     <meta name="robots" content="index, follow" />
 
-    <!-- SEO Multi-language Tags -->
     <link rel="alternate" hreflang="en" href="https://alansmsolutions.com/" />
     <link rel="alternate" hreflang="pt-br" href="https://alansmsolutions.com/br/" />
     <link rel="alternate" hreflang="pl" href="https://alansmsolutions.com/pl/" />
@@ -18,7 +17,7 @@
     <link rel="canonical" href="https://alansmsolutions.com/pl/" />
 
     <meta property="og:title" content="Alan da Silva Morais | Automatyzacja i Konsulting Operacyjny" />
-    <meta property="og:description" content="Strony internetowe, procesy rezerwacji i systemy automatyzacji dla firm usługowych, które potrzebują przejrzystej obsługi klienta." />
+    <meta property="og:description" content="Strony internetowe, procesy rezerwacji i systemy automatyzacji dla firm usługowych." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://alansmsolutions.com/pl/" />
 
@@ -26,84 +25,101 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
         :focus-visible { outline: 2px solid #60a5fa; outline-offset: 3px; }
-        .gradient-text { background: linear-gradient(to right, #3b82f6, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .glass { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.05); }
-        .modal-backdrop { background: rgba(0, 0, 0, 0.82); }
-        .fade-up { animation: fadeUp 0.65s ease-out both; }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-backdrop { background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(4px); }
+        .fade-up { animation: fadeUp 0.6s ease-out both; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 
-<body class="bg-slate-950 text-white antialiased">
+<body class="antialiased selection:bg-blue-500 selection:text-white">
 
-<nav class="fixed top-0 w-full z-50 glass border-b border-slate-800 bg-slate-950/80 backdrop-blur-md">
+<nav class="fixed top-0 w-full z-50 bg-slate-950 border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-        <a href="/pl/" class="flex items-center gap-4 md:gap-5" aria-label="Alan da Silva Morais home">
-            <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="Logo" width="64" height="64" class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-slate-700" />
+        <a href="#top" class="flex items-center gap-4 md:gap-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded" aria-label="Alan da Silva Morais home">
+            <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="Alan da Silva Morais logo" width="64" height="64" class="w-14 h-14 md:w-16 md:h-16 rounded-full border border-slate-700" />
             <div class="flex flex-col justify-center">
-                <span class="text-2xl md:text-3xl font-extrabold tracking-tight text-white leading-none">Alan da Silva Morais</span>
-                <span class="text-[13px] md:text-sm text-blue-400 font-semibold tracking-widest uppercase mt-1.5">Automatyzacja i Rozwiązania</span>
+                <span class="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-100 leading-none">Alan da Silva Morais</span>
+                <span class="text-[13px] md:text-sm text-blue-500 font-semibold tracking-widest uppercase mt-1.5">Automatyzacja i Rozwiązania</span>
             </div>
         </a>
 
         <div class="flex items-center gap-4 md:gap-6">
-            <a href="#services-pricing" class="text-slate-300 hover:text-white font-medium transition text-sm md:text-base hidden sm:block">Usługi i Cennik</a>
-            <div class="flex items-center gap-2 border-l border-slate-700 pl-4 md:pl-6">
-                <a href="/" onclick="localStorage.setItem('preferredLanguage', 'en');" class="text-sm font-medium text-slate-400 hover:text-white transition focus:outline-none">EN</a>
-                <span class="text-slate-600 text-sm">/</span>
-                <a href="/br/" onclick="localStorage.setItem('preferredLanguage', 'pt');" class="text-sm font-medium text-slate-400 hover:text-white transition focus:outline-none">PT-BR</a>
-                <span class="text-slate-600 text-sm">/</span>
-                <a href="/pl/" onclick="localStorage.setItem('preferredLanguage', 'pl');" class="text-sm font-bold text-blue-400 transition focus:outline-none">PL</a>
+            <a href="#services-pricing" class="text-slate-400 hover:text-slate-100 font-medium transition-colors text-sm hidden lg:block focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded px-2 py-1">Usługi i Cennik</a>
+
+            <div class="flex flex-col md:flex-row items-end md:items-center gap-1.5 md:gap-3 border-l border-slate-800 pl-4 md:pl-6" aria-label="Preferencje">
+                <div class="flex items-center gap-1 md:gap-2">
+                    <a href="/" onclick="localStorage.setItem('preferredLanguage', 'en');" class="text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors focus:outline-none rounded px-1">EN</a>
+                    <span class="text-slate-700 text-xs">/</span>
+                    <a href="/br/" onclick="localStorage.setItem('preferredLanguage', 'pt');" class="text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors focus:outline-none rounded px-1">PT-BR</a>
+                    <span class="text-slate-700 text-xs">/</span>
+                    <a href="/pl/" onclick="localStorage.setItem('preferredLanguage', 'pl');" class="text-xs font-bold text-blue-500 hover:text-blue-400 transition-colors focus:outline-none rounded px-1">PL</a>
+                </div>
+
+                <span class="text-slate-800 text-sm hidden md:block">|</span>
+
+                <div class="relative inline-block text-left">
+                    <select id="currencySelect" onchange="setCurrency(this.value)" aria-label="Wybierz Walutę" class="appearance-none bg-slate-950 border border-slate-800 text-slate-400 hover:text-slate-200 text-xs font-medium rounded px-2 py-1 pr-6 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors cursor-pointer">
+                        <option value="PLN">PLN</option>
+                        <option value="BRL">BRL</option>
+                        <option value="EUR">EUR</option>
+                        <option value="USD">USD</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-1.5 text-slate-500">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </nav>
 
 <main id="top" class="pt-24">
-    <header class="relative overflow-hidden border-b border-slate-800">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-slate-950 to-slate-950"></div>
-        <div class="relative max-w-7xl mx-auto px-6 py-16 lg:py-20 flex flex-col lg:flex-row items-center justify-between gap-10">
-            <div class="max-w-3xl z-10 fade-up">
-                <div class="inline-flex items-center px-4 py-2 rounded-full glass border border-slate-700 text-sm text-slate-300 mb-6">
-                    <span class="w-2 h-2 rounded-full bg-green-400 mr-3 animate-pulse"></span>
-                    <span>Dostępny na konsultacje • Skalica, Kraków - Zdalnie</span>
+    <header class="border-b border-slate-800 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-6 py-16 lg:py-20 flex flex-col lg:flex-row items-center justify-between gap-10">
+            <div class="max-w-3xl fade-up z-10">
+                <div class="inline-flex items-center px-3 py-1.5 rounded bg-slate-900 border border-slate-800 text-xs text-slate-400 mb-6 font-medium tracking-wide">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-2 animate-pulse"></span>
+                    <span>Dostępny na konsultacje • Kraków i Zdalnie</span>
                 </div>
 
-                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-5">
-                    <span>Strony, Rezerwacje</span><br />
-                    <span class="gradient-text">i Automatyzacja dla Firm Usługowych.</span>
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-5 text-slate-100 tracking-tight">
+                    <span>Usprawnij Operacje Biznesowe</span><br />
+                    <span class="text-blue-500">Dzięki Inteligentnej Automatyzacji.</span>
                 </h1>
 
-                <p class="text-xl md:text-2xl text-slate-300 leading-relaxed mb-6 max-w-2xl font-medium">
-                    Pomagam klinikom, biurom księgowym, konsultantom, studiom i lokalnym firmom usługowym wyglądać profesjonalnie online, zbierać zapytania, przyjmować rezerwacje i ograniczać ręczny follow-up.
+                <p class="text-lg md:text-xl text-slate-400 leading-relaxed mb-6 max-w-2xl">
+                    Pomagam organizacjom ograniczać pracę ręczną, poprawiać jakość danych i usprawniać operacje dzięki praktycznym systemom automatyzacji.
                 </p>
 
-                <p class="text-slate-400 text-lg leading-relaxed mb-8 max-w-2xl">
-                    Otrzymujesz praktyczną konfigurację: przejrzystą stronę, ścieżkę rezerwacji, formularze kontaktowe, wsparcie przy publikacji i opcje automatyzacji oparte na doświadczeniu w SAP, Salesforce i globalnych środowiskach usługowych.
+                <p class="text-base text-slate-500 leading-relaxed mb-8 max-w-2xl">
+                    Dzięki niemal dziesięcioletniemu doświadczeniu w globalnych środowiskach korporacyjnych, w tym SAP, Salesforce i zespołach operacyjnych, łączę znajomość procesów biznesowych z praktycznym wykonaniem technicznym.
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <button onclick="openContactForm()" class="bg-blue-600 hover:bg-blue-500 transition-all duration-300 px-8 py-4 rounded-2xl font-semibold text-lg text-center">Oszacuj Projekt</button>
-                    <a href="https://www.linkedin.com/in/alandasm" target="_blank" rel="noopener noreferrer" class="border border-slate-600 hover:border-white hover:bg-white hover:text-slate-950 transition-all duration-300 px-8 py-4 rounded-2xl font-semibold text-lg text-center">Zobacz Doświadczenie</a>
+                    <button type="button" onclick="openContactForm()" class="bg-blue-600 hover:bg-blue-500 text-white transition-colors px-6 py-3.5 rounded-lg font-semibold text-base text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
+                        Umów Przegląd Operacyjny
+                    </button>
+                    <a href="https://www.linkedin.com/in/alandasm" target="_blank" rel="noopener noreferrer" class="bg-slate-900 border border-slate-700 hover:border-slate-500 hover:bg-slate-800 text-slate-300 transition-colors px-6 py-3.5 rounded-lg font-semibold text-base text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400">
+                        Zobacz Doświadczenie
+                    </a>
                 </div>
             </div>
 
             <div class="hidden lg:flex flex-col gap-4 w-full max-w-sm relative z-10">
-                <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl shadow-xl">
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
                     <div class="flex items-center gap-4">
-                        <div class="text-3xl">⏱️</div>
+                        <div class="text-3xl" aria-hidden="true">⏱️</div>
                         <div>
-                            <p class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Przykładowy Efekt Automatyzacji</p>
+                            <p class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Przykładowy Efekt</p>
                             <p class="text-lg font-semibold text-slate-100">Do 15 Godz. Oszczędności/Tydz.</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl shadow-xl">
+                <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl">
                     <div class="flex items-center gap-4">
-                        <div class="text-3xl">📈</div>
+                        <div class="text-3xl" aria-hidden="true">📈</div>
                         <div>
                             <p class="text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Kontrola Jakości Danych</p>
                             <p class="text-lg font-semibold text-blue-500">Automatyczna Walidacja</p>
@@ -114,22 +130,20 @@
         </div>
     </header>
 
-    <section class="py-12 border-b border-slate-800 bg-slate-900/40">
+    <section class="py-12 border-b border-slate-800 bg-slate-900/30">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <p class="uppercase tracking-[0.3em] text-sm text-slate-500 font-semibold mb-6">Doświadczenie z Platformami Korporacyjnymi i Operacjami Globalnymi</p>
-
+            <p class="uppercase tracking-[0.2em] text-xs text-slate-500 font-semibold mb-6">Doświadczenie z Platformami Korporacyjnymi</p>
             <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
-                <div class="bg-slate-950/50 border border-slate-800 rounded-2xl p-6">
-                    <p class="text-xs uppercase tracking-[0.25em] text-blue-400 font-bold mb-3">Platformy</p>
-                    <p class="text-lg md:text-xl font-bold text-slate-300">SAP (S/4HANA, ECC 6.0) · Ariba · Salesforce</p>
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 hover:border-slate-700 transition-colors">
+                    <p class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Platformy</p>
+                    <p class="text-lg font-medium text-slate-300 leading-snug">SAP S/4HANA · Ariba · Salesforce</p>
                 </div>
-
-                <div class="bg-slate-950/50 border border-slate-800 rounded-2xl p-6">
-                    <p class="text-xs uppercase tracking-[0.25em] text-blue-400 font-bold mb-3">Środowiska Zawodowe</p>
-                    <div class="space-y-1.5 text-base md:text-lg font-bold text-slate-300">
-                        <p>Shell Business Operations Kraków</p>
-                        <p>TTEC Digital — a Global Google Partnership</p>
-                        <p>HCL Technologies</p>
+                <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 hover:border-slate-700 transition-colors">
+                    <p class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Środowiska Zawodowe</p>
+                    <div class="space-y-1.5 text-base font-medium text-slate-300">
+                        <p>Shell Business Operations</p>
+                        <p>TTEC Digital Global Google Partnership</p>
+                        <p>HTC Technologies</p>
                     </div>
                 </div>
             </div>
@@ -139,149 +153,79 @@
     <section class="py-14 bg-slate-950 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-10">
-                <h2 class="text-4xl font-bold mb-3">Przykłady Automatyzacji</h2>
-                <p class="text-slate-400 text-lg leading-relaxed">Praktyczne przykłady wdrożeń z obszaru raportowania, architektury CRM i nowoczesnych platform dla klientów.</p>
+                <h2 class="text-3xl font-bold mb-3 text-slate-100">Przykłady Automatyzacji</h2>
+                <p class="text-slate-400 text-base leading-relaxed">Praktyczne przykłady wdrożeń z obszaru raportowania, architektury CRM i nowoczesnych platform dla klientów.</p>
             </div>
-
             <div class="grid md:grid-cols-3 gap-6 mb-8">
-                <article class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-                    <p class="text-xs uppercase tracking-wider text-blue-400 font-bold">Automatyzacja Raportów</p>
-                    <h3 class="text-xl font-bold mt-3">Ogranicz powtarzalne przygotowanie arkuszy</h3>
+                <article class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                    <p class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Automatyzacja Raportów</p>
+                    <h3 class="text-lg font-semibold text-slate-200">Ogranicz powtarzalne przygotowanie arkuszy</h3>
                     <p class="text-slate-400 mt-2 text-sm leading-relaxed">Zautomatyzuj walidację, formatowanie i cykliczne generowanie raportów dzięki uporządkowanym przepływom danych.</p>
                 </article>
-
-                <article class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-                    <p class="text-xs uppercase tracking-wider text-blue-400 font-bold">Architektura CRM</p>
-                    <h3 class="text-xl font-bold mt-3">Połącz pozyskiwanie leadów z operacjami</h3>
+                <article class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                    <p class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Architektura CRM</p>
+                    <h3 class="text-lg font-semibold text-slate-200">Połącz pozyskiwanie leadów z operacjami</h3>
                     <p class="text-slate-400 mt-2 text-sm leading-relaxed">Zaprojektuj proces przyjmowania danych, generowania dokumentów i automatycznego kontaktu dla spójniejszej obsługi klienta.</p>
                 </article>
-
-                <article class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-                    <p class="text-xs uppercase tracking-wider text-blue-400 font-bold">Doświadczenie Web</p>
-                    <h3 class="text-xl font-bold mt-3">Wzmocnij profesjonalny wizerunek marki</h3>
+                <article class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+                    <p class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-3">Doświadczenie Web</p>
+                    <h3 class="text-lg font-semibold text-slate-200">Wzmocnij profesjonalny wizerunek marki</h3>
                     <p class="text-slate-400 mt-2 text-sm leading-relaxed">Twórz responsywne strony z czytelnymi wezwaniami do działania i prostszą interakcją z klientem.</p>
                 </article>
             </div>
-
             <div class="text-center">
-                <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 px-8 py-3.5 rounded-xl font-bold transition-all inline-block">Zobacz Repozytoria GitHub →</a>
+                <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold text-slate-300 hover:text-white transition-colors bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 px-5 py-2.5 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500">Zobacz Repozytoria GitHub →</a>
             </div>
         </div>
     </section>
 
     <section class="py-14 bg-slate-950 border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold mb-3">Stworzone dla Firm Usługowych</h2>
-                <p class="text-slate-400 text-lg leading-relaxed">Przejrzyste strony, rezerwacje, formularze kontaktowe i follow-up dla firm, w których każde zapytanie ma znaczenie.</p>
-            </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                <article class="bg-slate-950 border border-slate-800 rounded-2xl p-5"><div class="text-3xl mb-3">🩺</div><h3 class="font-bold text-lg mb-2">Kliniki i Wellness</h3><p class="text-slate-400 text-sm leading-relaxed">Rezerwacje, formularze wstępne, przypomnienia i follow-up z klientami.</p></article>
-                <article class="bg-slate-950 border border-slate-800 rounded-2xl p-5"><div class="text-3xl mb-3">📑</div><h3 class="font-bold text-lg mb-2">Księgowość i Prawo</h3><p class="text-slate-400 text-sm leading-relaxed">Kwalifikacja zapytań, listy dokumentów i cykliczne przypomnienia.</p></article>
-                <article class="bg-slate-950 border border-slate-800 rounded-2xl p-5"><div class="text-3xl mb-3">🏡</div><h3 class="font-bold text-lg mb-2">Design i Nieruchomości</h3><p class="text-slate-400 text-sm leading-relaxed">Briefy projektowe, zapytania ofertowe, konsultacje i follow-up ofert.</p></article>
-                <article class="bg-slate-950 border border-slate-800 rounded-2xl p-5"><div class="text-3xl mb-3">🎉</div><h3 class="font-bold text-lg mb-2">Eventy i Usługi Osobiste</h3><p class="text-slate-400 text-sm leading-relaxed">Pozyskiwanie leadów, sprawdzanie dostępności, zapytania rezerwacyjne i uporządkowany follow-up.</p></article>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-14 bg-slate-950 border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold mb-3">Jak To Wygląda w Praktyce</h2>
-                <p class="text-slate-400 text-lg leading-relaxed">Praktyczne ścieżki klienta, które ułatwiają kontakt, rezerwację i zarządzanie firmą.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <article class="bg-slate-900 border border-slate-800 rounded-2xl p-6"><p class="text-xs uppercase tracking-wider text-green-400 font-bold">Przykład Kliniki</p><h3 class="text-xl font-bold mt-3 mb-3">Rezerwacje bez chaosu w wiadomościach</h3><p class="text-slate-300 text-sm leading-relaxed">Formularz rezerwacji → potwierdzenie → przypomnienie → follow-up po wizycie.</p></article>
-                <article class="bg-slate-900 border border-slate-800 rounded-2xl p-6"><p class="text-xs uppercase tracking-wider text-green-400 font-bold">Przykład Księgowości</p><h3 class="text-xl font-bold mt-3 mb-3">Mniej gonienia za dokumentami</h3><p class="text-slate-300 text-sm leading-relaxed">Formularz zapytania → lista dokumentów → przypomnienia → aktualizacja statusu.</p></article>
-                <article class="bg-slate-900 border border-slate-800 rounded-2xl p-6"><p class="text-xs uppercase tracking-wider text-green-400 font-bold">Przykład Eventowy</p><h3 class="text-xl font-bold mt-3 mb-3">Lepsza kwalifikacja zapytań</h3><p class="text-slate-300 text-sm leading-relaxed">Formularz → pytania o budżet/datę → rezerwacja konsultacji → follow-up oferty.</p></article>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-14 bg-slate-950 border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-10"><h2 class="text-3xl md:text-4xl font-bold mb-3">Przykłady, które łatwo sobie wyobrazić</h2><p class="text-slate-400 text-lg leading-relaxed">Koncepcyjne przykłady pokazujące praktyczną stronę i system rezerwacji, które mała firma może szybko uruchomić.</p></div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <article class="bg-slate-950 border border-slate-800 rounded-3xl overflow-hidden"><div class="h-36 bg-gradient-to-br from-green-500/20 to-blue-500/10 flex items-center justify-center text-5xl">🩺</div><div class="p-6"><p class="text-xs uppercase tracking-wider text-green-400 font-bold mb-2">Koncepcja Demo</p><h3 class="text-xl font-bold mb-2">Strona Rezerwacji dla Kliniki</h3><p class="text-slate-400 text-sm leading-relaxed">Usługi, lokalizacja, FAQ, przycisk rezerwacji, formularz kontaktowy i wskazówki dla pacjenta.</p></div></article>
-                <article class="bg-slate-950 border border-slate-800 rounded-3xl overflow-hidden"><div class="h-36 bg-gradient-to-br from-blue-500/20 to-purple-500/10 flex items-center justify-center text-5xl">📑</div><div class="p-6"><p class="text-xs uppercase tracking-wider text-green-400 font-bold mb-2">Koncepcja Demo</p><h3 class="text-xl font-bold mb-2">Przyjmowanie Klientów w Księgowości</h3><p class="text-slate-400 text-sm leading-relaxed">Formularz zapytania, lista dokumentów, cykliczne przypomnienia i jasne kolejne kroki dla nowych klientów.</p></div></article>
-                <article class="bg-slate-950 border border-slate-800 rounded-3xl overflow-hidden"><div class="h-36 bg-gradient-to-br from-pink-500/20 to-orange-500/10 flex items-center justify-center text-5xl">🎉</div><div class="p-6"><p class="text-xs uppercase tracking-wider text-green-400 font-bold mb-2">Koncepcja Demo</p><h3 class="text-xl font-bold mb-2">Proces Zapytania Eventowego</h3><p class="text-slate-400 text-sm leading-relaxed">Budżet, data, liczba gości, rezerwacja konsultacji, follow-up oferty i śledzenie zapytań.</p></div></article>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-14 bg-slate-950 border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-[0.95fr_1.05fr] gap-8 items-stretch">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-7 md:p-8">
-                <p class="text-xs uppercase tracking-[0.25em] text-green-400 font-bold mb-3">Przykład Wdrożenia</p>
-                <h2 class="text-3xl font-bold mb-4">Strona Rezerwacji dla Małej Kliniki</h2>
-                <p class="text-slate-400 leading-relaxed mb-6">Praktyczny przykład, jak mała firma usługowa może przejść od rozproszonych wiadomości do bardziej przejrzystej ścieżki klienta.</p>
-                <div class="space-y-4 text-sm">
-                    <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4"><strong class="text-white block mb-1">Problem</strong><span class="text-slate-400">Klienci kontaktują się telefonicznie, przez WhatsApp, e-mail i social media bez uporządkowanego procesu.</span></div>
-                    <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4"><strong class="text-white block mb-1">Rozwiązanie</strong><span class="text-slate-400">Strona one-page, ścieżka rezerwacji, formularz kontaktowy, Google Maps, FAQ i instrukcje follow-up.</span></div>
-                    <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4"><strong class="text-white block mb-1">Efekt</strong><span class="text-slate-400">Bardziej profesjonalne pierwsze wrażenie i jaśniejszy sposób obsługi zapytań bez ciągłego powtarzania tych samych odpowiedzi.</span></div>
-                </div>
-            </div>
-            <div class="bg-gradient-to-br from-blue-600/15 to-slate-900 border border-blue-500/30 rounded-3xl p-7 md:p-8">
-                <p class="text-xs uppercase tracking-[0.25em] text-blue-400 font-bold mb-3">Gwarancja Kontroli Przed Publikacją</p>
-                <h2 class="text-3xl font-bold mb-4">Sprawdzone przed oddaniem</h2>
-                <p class="text-slate-300 leading-relaxed mb-6">Przed publikacją sprawdzam kluczowe elementy ważne dla strony małej firmy.</p>
-                <div class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 mb-6">
-                    <p><span class="text-blue-400 mr-2">✔</span>Układ na telefonie i desktopie</p>
-                    <p><span class="text-blue-400 mr-2">✔</span>Link lub widget rezerwacji</p>
-                    <p><span class="text-blue-400 mr-2">✔</span>Test formularza kontaktowego</p>
-                    <p><span class="text-blue-400 mr-2">✔</span>Domena i HTTPS</p>
-                    <p><span class="text-blue-400 mr-2">✔</span>Podstawowe metadane SEO</p>
-                    <p><span class="text-blue-400 mr-2">✔</span>7 dni wsparcia po publikacji</p>
-                </div>
-                <button onclick="openEstimatedContactForm()" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-all">Oszacuj Projekt</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-14 bg-slate-900 border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center max-w-3xl mx-auto mb-10"><h2 class="text-3xl md:text-4xl font-bold mb-3">Czy To Dobre Dopasowanie?</h2><p class="text-slate-400 text-lg leading-relaxed">Jasne oczekiwania chronią obie strony przed rozpoczęciem projektu.</p></div>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-slate-950 border border-green-500/30 rounded-3xl p-6">
-                    <h3 class="text-xl font-bold text-green-400 mb-4">Dobre dopasowanie, jeśli potrzebujesz</h3>
-                    <ul class="space-y-3 text-sm text-slate-300 list-disc list-inside">
-                        <li>Profesjonalnej strony one-page</li>
-                        <li>Prostego procesu rezerwacji lub zapytań</li>
-                        <li>Jasnej prezentacji usług i treści budujących zaufanie</li>
-                        <li>Formularzy, follow-upu, przypomnień lub lekkiej automatyzacji</li>
-                    </ul>
-                </div>
-                <div class="bg-slate-950 border border-red-500/30 rounded-3xl p-6">
-                    <h3 class="text-xl font-bold text-red-400 mb-4">Lekki Pakiet nie jest najlepszym rozwiązaniem, jeśli potrzebujesz</h3>
-                    <ul class="space-y-3 text-sm text-slate-300 list-disc list-inside">
-                        <li>Dużego sklepu e-commerce</li>
-                        <li>Złożonej aplikacji webowej z kontami użytkowników</li>
-                        <li>Codziennej edycji treści przez nietechniczny zespół</li>
-                        <li>Zaawansowanego zarządzania płatnymi reklamami</li>
-                    </ul>
-                    <p class="text-sm text-blue-300 leading-relaxed mt-4">Te potrzeby mogą być zrealizowane w ramach Pełna Strona + Konfiguracja Automatyzacji lub usługi CRM / Salesforce po przeglądzie zakresu.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-14 bg-slate-950">
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <div>
-                <h2 class="text-3xl md:text-4xl font-bold mb-8">Kluczowe Kompetencje</h2>
-                <div class="space-y-4 md:space-y-6">
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 md:p-6"><h3 class="font-bold text-xl mb-2 text-blue-400">Automatyzacja Danych</h3><p class="text-slate-400 leading-relaxed">Makra VBA, Google Apps Script, Automatyzacja Excel, Integracja Google Sheets, Optymalizacja Raportowania.</p></div>
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 md:p-6"><h3 class="font-bold text-xl mb-2 text-blue-400">Platformy Web</h3><p class="text-slate-400 leading-relaxed">HTML, CSS, Tailwind CSS, Responsive Design, Landing Pages, Strony Biznesowe.</p></div>
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 md:p-6"><h3 class="font-bold text-xl mb-2 text-blue-400">Operacje Korporacyjne</h3><p class="text-slate-400 leading-relaxed">SAP S/4HANA · SAP ECC 6.0 (MM, SD & TS) · SAP GUI · Ariba · Salesforce · Zarządzanie Danymi Podstawowymi · Order-to-Cash · ITIL.</p></div>
+                <h2 class="text-3xl font-bold mb-8 text-slate-100">Kluczowe Kompetencje</h2>
+                <div class="space-y-4">
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                        <h3 class="font-semibold text-lg mb-1 text-blue-400">Automatyzacja Danych</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Makra VBA, Google Apps Script, Automatyzacja Excel, Integracja Google Sheets, Optymalizacja Raportowania.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                        <h3 class="font-semibold text-lg mb-1 text-blue-400">Platformy Web</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">HTML, CSS, Tailwind CSS, Responsive Design, Landing Pages, Strony Biznesowe.</p>
+                    </div>
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                        <h3 class="font-semibold text-lg mb-1 text-blue-400">Operacje Korporacyjne</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">SAP S/4HANA, SAP GUI (ECC 6.0 MM, SD & TS), Ariba, Salesforce, Zarządzanie Danymi Podstawowymi, Order-to-Cash, ITIL.</p>
+                    </div>
                 </div>
             </div>
+
             <div>
-                <h2 class="text-3xl md:text-4xl font-bold mb-8">Doświadczenie Zawodowe</h2>
-                <div class="space-y-6 border-l border-slate-700 pl-6">
-                    <div><h3 class="text-lg md:text-xl font-bold mb-1">TTEC (Google Travel)</h3><p class="text-blue-400 font-medium mb-1">Menedżer ds. Sukcesu Partnerów</p><span class="text-slate-500 text-sm">Marzec 2025 – Obecnie</span></div>
-                    <div><h3 class="text-lg md:text-xl font-bold mb-1">Shell</h3><p class="text-blue-400 font-medium mb-1">Specjalista ds. Sukcesu Klienta</p><span class="text-slate-500 text-sm">Listopad 2021 – Lipiec 2024</span></div>
-                    <div><h3 class="text-lg md:text-xl font-bold mb-1">Shell</h3><p class="text-blue-400 font-medium mb-1">Specjalista ds. Danych Zakupowych</p><span class="text-slate-500 text-sm">Czerwiec 2018 – Listopad 2021</span></div>
-                    <div><h3 class="text-lg md:text-xl font-bold mb-1">HCL Technologies</h3><p class="text-blue-400 font-medium mb-1">Analityk IT Service Desk</p><span class="text-slate-500 text-sm">Czerwiec 2017 – Maj 2018</span></div>
+                <h2 class="text-3xl font-bold mb-8 text-slate-100">Doświadczenie Zawodowe</h2>
+                <div class="space-y-6 border-l-2 border-slate-800 pl-6 ml-2">
+                    <div class="relative">
+                        <div class="absolute w-3 h-3 bg-slate-700 rounded-full -left-[31px] top-1.5 border-4 border-slate-950"></div>
+                        <h3 class="text-lg font-semibold text-slate-200">TTEC Digital Global Google Partnership</h3>
+                        <p class="text-blue-500 text-sm font-medium mt-0.5">Menedżer ds. Sukcesu Partnerów</p>
+                        <span class="text-slate-500 text-xs tracking-wide">Marzec 2025 – Obecnie</span>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute w-3 h-3 bg-slate-800 rounded-full -left-[31px] top-1.5 border-4 border-slate-950"></div>
+                        <h3 class="text-lg font-semibold text-slate-200">Shell Business Operations</h3>
+                        <p class="text-slate-400 text-sm font-medium mt-0.5">Specjalista ds. Sukcesu Klienta</p>
+                        <span class="text-slate-500 text-xs tracking-wide">Listopad 2021 – Lipiec 2024</span>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute w-3 h-3 bg-slate-800 rounded-full -left-[31px] top-1.5 border-4 border-slate-950"></div>
+                        <h3 class="text-lg font-semibold text-slate-200">Shell Business Operations</h3>
+                        <p class="text-slate-400 text-sm font-medium mt-0.5">Specjalista ds. Danych Zakupowych</p>
+                        <span class="text-slate-500 text-xs tracking-wide">Czerwiec 2018 – Listopad 2021</span>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute w-3 h-3 bg-slate-800 rounded-full -left-[31px] top-1.5 border-4 border-slate-950"></div>
+                        <h3 class="text-lg font-semibold text-slate-200">HTC Technologies</h3>
+                        <p class="text-slate-400 text-sm font-medium mt-0.5">Analityk IT Service Desk</p>
+                        <span class="text-slate-500 text-xs tracking-wide">Czerwiec 2017 – Maj 2018</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -290,9 +234,10 @@
     <section class="py-14 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-blue-600/5 blur-[100px] rounded-full pointer-events-none"></div>
         <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
-            <h2 class="text-sm uppercase tracking-[0.3em] text-blue-400 font-bold mb-6">Moje Podejście</h2>
-            <blockquote class="text-xl md:text-3xl text-white font-medium leading-relaxed mb-6">Stawiam się na miejscu osoby odkrywającej firmę po raz pierwszy: co przyciąga uwagę, buduje zaufanie, jest jasne i ułatwia doświadczenie?</blockquote>
-            <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">Analizuję zarówno doświadczenie użytkownika, jak i szerszy obraz operacyjny, koncentrując się na usprawnieniach, które wzmacniają relacje z klientami i wspierają trwały rozwój.</p>
+            <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-6">Moje Podejście</h2>
+            <div class="mb-6 text-slate-600" aria-hidden="true"><svg class="w-10 h-10 mx-auto" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg></div>
+            <blockquote class="text-xl md:text-2xl text-slate-200 font-medium leading-relaxed mb-6">"Stawiam się na miejscu osoby odkrywającej firmę po raz pierwszy: co przyciąga uwagę, buduje zaufanie, jest jasne i ułatwia doświadczenie?"</blockquote>
+            <p class="text-base text-slate-400 max-w-3xl mx-auto leading-relaxed">Analizuję zarówno doświadczenie użytkownika, jak i szerszy obraz operacyjny, koncentrując się na usprawnieniach, które wzmacniają relacje z klientami i wspierają trwały rozwój.</p>
         </div>
     </section>
 
@@ -308,21 +253,21 @@
 
     <section class="py-14 bg-slate-950 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center bg-slate-900/50 border border-blue-900/30 rounded-3xl p-8 md:p-10 shadow-lg relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
-                <div>
-                    <div class="flex flex-wrap items-center gap-3 mb-4">
-                        <span class="bg-blue-900/40 text-blue-400 text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full border border-blue-500/20">Rozwiązanie Korporacyjne</span>
+            <div class="flex flex-col md:flex-row gap-8 bg-slate-900 border border-slate-800 rounded-xl p-8 items-center">
+                <div class="w-1 h-full bg-blue-600 hidden md:block rounded"></div>
+                <div class="flex-1">
+                    <div class="flex flex-wrap items-center gap-2 mb-3">
+                        <span class="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-2 rounded">Rozwiązanie Korporacyjne</span>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Automatyzacja CRM i Salesforce</h2>
-                    <p class="text-slate-400 text-base md:text-lg leading-relaxed mb-4">Zaawansowana architektura danych, natywne automatyzacje Salesforce, generowanie dokumentów i inteligentna integracja WhatsApp dla złożonych operacji.</p>
-                    <p class="text-slate-500 text-sm leading-relaxed mb-6">Rozwiązanie dla organizacji, które potrzebują indywidualnej rozmowy o architekturze zamiast stałego miesięcznego pakietu.</p>
-                    <div class="flex items-center gap-2">
-                        <span class="text-base md:text-lg font-semibold text-slate-300">Indywidualna Wycena Zależna od Zakresu</span>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-2 text-slate-100">Automatyzacja CRM i Salesforce</h2>
+                    <p class="text-slate-400 text-sm md:text-base leading-relaxed mb-4 max-w-2xl">Zaawansowana architektura danych, natywne automatyzacje Salesforce, generowanie dokumentów i inteligentna integracja WhatsApp dla złożonych operacji.</p>
+                    <div class="flex items-center gap-2 mt-4 text-slate-300">
+                        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                        <span class="text-sm font-semibold">Indywidualna Wycena Zależna od Zakresu</span>
                     </div>
                 </div>
-                <div class="lg:text-right mt-4 lg:mt-0">
-                    <button onclick="openContactForm('enterprise_crm', 'custom_quote')" class="w-full lg:w-auto bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 hover:border-slate-400 font-bold py-4 px-8 rounded-xl transition-all">Omów Architekturę</button>
+                <div class="w-full md:w-auto mt-4 md:mt-0 shrink-0">
+                    <button type="button" onclick="openContactForm('enterprise_crm', 'custom_quote')" class="w-full bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 font-medium py-3 px-6 rounded-lg transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400">Omów Architekturę</button>
                 </div>
             </div>
         </div>
@@ -331,160 +276,473 @@
     <section id="services-pricing" class="py-16 bg-slate-950 border-t border-slate-800 scroll-mt-28">
         <div class="max-w-7xl mx-auto px-6">
             <div class="mb-12 text-center max-w-3xl mx-auto">
-                <h2 class="text-sm uppercase tracking-[0.3em] text-blue-400 font-bold mb-3">Platformy Web i Tech Ops</h2>
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Partnerstwo i Cennik</h2>
-                <p class="text-slate-400 text-base md:text-lg leading-relaxed">Przejrzyste ceny początkowe dla stron, rezerwacji i systemów automatyzacji. Użyj estymatora poniżej, aby obliczyć bardziej realistyczny zakres przed finalną konsultacją.</p>
+                <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-3">Platformy Web i Tech Ops</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-100">Partnerstwo i Cennik</h2>
+                <p class="text-slate-400 text-sm md:text-base leading-relaxed">Dwustopniowy model dla firm usługowych: najpierw tworzymy platformę. Następnie aktualizacje, monitoring i usprawnienia są zarządzane w ramach współpracy.</p>
             </div>
 
-            <div class="bg-gradient-to-br from-slate-900 to-slate-950 border border-green-500/40 rounded-3xl p-6 md:p-8 mb-8 max-w-4xl mx-auto shadow-lg relative overflow-hidden">
-                <div class="absolute top-0 right-0 bg-green-600 text-white text-[10px] md:text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-bl-lg z-10">Pakiet Startowy • 20% zniżki dla kolejnych 5 podpisanych projektów</div>
-                <div class="grid md:grid-cols-[1.2fr_0.8fr] gap-8 items-center">
-                    <div>
-                        <h3 class="text-2xl md:text-3xl font-bold mb-3 text-white">Lekka Strona z Rezerwacją</h3>
-                        <p class="text-slate-400 mb-5 text-base md:text-lg leading-relaxed">Profesjonalna jednostronicowa strona dla małych firm, które potrzebują obecności online i prostego sposobu rezerwacji terminów przez klientów.</p>
-                        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 mb-6">
-                            <li class="flex items-start"><span class="text-green-400 mr-2">✔</span>Responsywna strona one-page</li>
-                            <li class="flex items-start"><span class="text-green-400 mr-2">✔</span>Integracja systemu rezerwacji</li>
-                            <li class="flex items-start"><span class="text-green-400 mr-2">✔</span>Formularz kontaktowy</li>
-                            <li class="flex items-start"><span class="text-green-400 mr-2">✔</span>Integracja z Google Maps</li>
-                            <li class="flex items-start"><span class="text-green-400 mr-2">✔</span>Podstawowa konfiguracja SEO</li>
-                            <li class="flex items-start"><span class="text-green-400 mr-2">✔</span>Konfiguracja hostingu GitHub Pages</li>
-                            <li class="flex items-start"><span class="text-green-400 mr-2">✔</span>Podłączenie istniejącej domeny</li>
-                            <li class="flex items-start"><span class="text-green-400 mr-2">✔</span>Wsparcie przy publikacji</li>
-                        </ul>
-                        <p class="text-xs text-slate-500 leading-relaxed">Odnowienie domeny, płatne narzędzia rezerwacji, firmowy e-mail i subskrypcje zewnętrzne są rozliczane osobno.</p>
-                        <p class="text-xs text-slate-500 leading-relaxed mt-2">Zniżka jest rezerwowana dopiero po przesłaniu pełnego formularza projektu i podpisaniu umowy.</p>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-8 mb-12 flex flex-col lg:flex-row gap-8 items-start relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-green-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-bl-lg z-10">Pakiet Startowy • 20% zniżki dla kolejnych 5</div>
+                <div class="flex-1">
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 text-slate-100">Lekka Strona z Rezerwacją</h3>
+                    <p class="text-slate-400 mb-5 text-sm md:text-base leading-relaxed">Profesjonalna strona dla małych firm, które potrzebują obecności online i prostego sposobu rezerwacji.</p>
+                    <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 mb-6">
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Responsywna strona (One-page)</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Integracja systemu rezerwacji</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Formularz kontaktowy</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Integracja Google Maps</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Podstawowa konfiguracja SEO</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Konfiguracja hostingu</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Podłączenie istniejącej domeny</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Wsparcie przy publikacji</li>
+                    </ul>
+                    <p class="text-xs text-slate-500 leading-relaxed">Odnowienie domeny, narzędzia rezerwacji i e-mail są rozliczane osobno.</p>
+                </div>
+                <div class="lg:w-72 bg-slate-950 border border-slate-800 rounded-lg p-6 text-center shrink-0">
+                    <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Od</p>
+                    <div class="mb-2 text-2xl font-bold text-green-500" data-price-display="1800">1.800 PLN</div>
+                    <p class="text-xs text-green-400 font-medium mb-3">Zniżka 20%: <br><span data-price-display="1440" class="font-bold text-sm">1.440 PLN</span></p>
+                    <div class="bg-slate-900 border border-slate-800 rounded p-3 mb-4 text-left">
+                        <p class="text-[10px] uppercase tracking-wider text-green-500 font-bold mb-1">Licznik zniżki</p>
+                        <p id="discountCounterText" class="text-xs text-slate-300">Sprawdzanie miejsc...</p>
                     </div>
-                    <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 text-center">
-                        <p class="text-xs uppercase tracking-[0.25em] text-slate-500 font-bold mb-2">Od</p>
-                        <div class="mb-2"><span class="text-4xl font-extrabold text-green-400">1 800</span><span class="text-slate-400 font-semibold"> PLN</span></div>
-                        <p class="text-sm text-green-300 font-semibold mb-2">20% zniżki dla kolejnych 5 podpisanych projektów: 1 440 PLN</p>
-                        <div id="discountCounterBox" class="mt-4 mb-4 bg-green-950/40 border border-green-500/30 rounded-xl p-4 text-left">
-                            <p class="text-xs uppercase tracking-[0.2em] text-green-400 font-bold mb-1">Licznik zniżki na żywo</p>
-                            <p id="discountCounterText" class="text-sm text-slate-300 leading-relaxed">Sprawdzanie dostępnych miejsc...</p>
-                        </div>
-                        <p class="text-sm text-slate-400 mb-6">Opcjonalny plan opieki: 199 PLN / mies.</p>
-                        <button onclick="openContactForm('light_booking', '1800')" class="w-full bg-green-600 hover:bg-green-500 text-white font-semibold py-3 rounded-xl transition-all shadow-lg">Oszacuj Projekt</button>
-                    </div>
+                    <p class="text-xs text-slate-400 mb-4">Plan opieki: <br><span data-price-display="199">199 PLN</span> / mies.</p>
+                    <button type="button" onclick="openContactForm('light_booking', '1800')" class="w-full bg-green-600 hover:bg-green-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Oszacuj Projekt</button>
                 </div>
             </div>
 
-            <div id="quote-estimator" class="bg-slate-900/70 border border-slate-800 rounded-3xl p-6 md:p-8 mb-12 max-w-4xl mx-auto shadow-lg">
-                <div class="grid lg:grid-cols-[1fr_0.9fr] gap-8 items-start">
+            <div id="quote-estimator" class="bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8 mb-12 max-w-4xl mx-auto shadow-lg">
+                <div class="grid lg:grid-cols-[1fr_0.8fr] gap-8 items-start">
                     <div>
-                        <p class="text-xs uppercase tracking-[0.25em] text-green-400 font-bold mb-3">Asystent Wyceny Projektu</p>
-                        <h3 class="text-2xl md:text-3xl font-bold mb-3 text-white">Oszacuj zakres projektu</h3>
-                        <p class="text-slate-400 leading-relaxed mb-5">Przejrzyste ceny początkowe. Odpowiedz na kilka pytań, aby poznać prawdopodobny zakres przed finalną wyceną.</p>
-
+                        <p class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-2">Asystent Wyceny</p>
+                        <h3 class="text-xl md:text-2xl font-bold mb-3 text-slate-100">Oszacuj zakres projektu</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-5">Odpowiedz na kilka pytań, aby poznać prawdopodobny zakres przed finalną wyceną.</p>
                         <div class="grid sm:grid-cols-2 gap-4">
-                            <label class="block"><span class="block text-sm font-semibold text-slate-300 mb-1">Status domeny</span><select id="estimateDomain" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white" onchange="updateEstimate()"><option value="0">Istniejąca domena</option><option value="150">Konfiguracja nowej</option></select></label>
-                            <label class="block"><span class="block text-sm font-semibold text-slate-300 mb-1">Rezerwacje</span><select id="estimateBooking" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white" onchange="updateEstimate()"><option value="0">Tylko link</option><option value="250">Wbudowany widget</option><option value="650">Dla wielu osób</option></select></label>
-                            <label class="block"><span class="block text-sm font-semibold text-slate-300 mb-1">Języki</span><select id="estimateLanguages" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white" onchange="updateEstimate()"><option value="0">Jeden język</option><option value="400">Dwa języki</option><option value="750">Trzy języki</option></select></label>
-                            <label class="block"><span class="block text-sm font-semibold text-slate-300 mb-1">Treść</span><select id="estimateContent" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white" onchange="updateEstimate()"><option value="0">Klient dostarcza</option><option value="450">Dopracowanie treści</option><option value="750">Wsparcie copywritingowe</option></select></label>
+                            <label class="block"><span class="block text-xs font-semibold text-slate-400 mb-1">Domena</span><select id="estimateDomain" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()"><option value="0" data-price="0">Istniejąca domena</option><option value="150" data-price="150">Nowa domena</option></select></label>
+                            <label class="block"><span class="block text-xs font-semibold text-slate-400 mb-1">Rezerwacje</span><select id="estimateBooking" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()"><option value="0" data-price="0">Tylko link</option><option value="250" data-price="250">Wbudowany widget</option><option value="650" data-price="650">Wielu pracowników</option></select></label>
+                            <label class="block"><span class="block text-xs font-semibold text-slate-400 mb-1">Języki</span><select id="estimateLanguages" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()"><option value="0" data-price="0">Jeden język</option><option value="400" data-price="400">Dwa języki</option><option value="750" data-price="750">Trzy języki</option></select></label>
+                            <label class="block"><span class="block text-xs font-semibold text-slate-400 mb-1">Treść</span><select id="estimateContent" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()"><option value="0" data-price="0">Klient dostarcza</option><option value="450" data-price="450">Dopracowanie</option><option value="750" data-price="750">Copywriting</option></select></label>
                         </div>
                         <div class="grid sm:grid-cols-2 gap-3 mt-5 text-sm text-slate-300">
-                            <label class="flex items-center gap-2"><input id="estimateExtraPage" type="checkbox" value="400" onchange="updateEstimate()" class="accent-green-500" /><span>Dodatkowa strona</span></label>
-                            <label class="flex items-center gap-2"><input id="estimateWhatsapp" type="checkbox" value="700" onchange="updateEstimate()" class="accent-green-500" /><span>Automatyzacja WhatsApp</span></label>
-                            <label class="flex items-center gap-2"><input id="estimatePayments" type="checkbox" value="800" onchange="updateEstimate()" class="accent-green-500" /><span>Płatności online</span></label>
-                            <label class="flex items-center gap-2"><input id="estimateCare" type="checkbox" value="199" onchange="updateEstimate()" class="accent-green-500" /><span>Miesięczny plan opieki</span></label>
+                            <label class="flex items-center gap-2"><input id="estimateExtraPage" type="checkbox" value="400" onchange="updateEstimate()" class="accent-blue-600" /><span>Dodatkowa strona</span></label>
+                            <label class="flex items-center gap-2"><input id="estimateWhatsapp" type="checkbox" value="700" onchange="updateEstimate()" class="accent-blue-600" /><span>Automatyzacja WhatsApp</span></label>
+                            <label class="flex items-center gap-2"><input id="estimatePayments" type="checkbox" value="800" onchange="updateEstimate()" class="accent-blue-600" /><span>Płatności online</span></label>
+                            <label class="flex items-center gap-2"><input id="estimateCare" type="checkbox" value="199" onchange="updateEstimate()" class="accent-blue-600" /><span>Miesięczny plan opieki</span></label>
                         </div>
                     </div>
-
-                    <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 text-center sticky top-28">
-                        <p class="text-xs uppercase tracking-[0.25em] text-slate-500 font-bold mb-2">Szacowany zakres</p>
-                        <div id="estimateResult" class="text-3xl md:text-4xl font-extrabold text-green-400 mb-3">1 800–2 000 PLN</div>
-                        <p id="estimateCareNote" class="text-sm text-slate-400 mb-6">Finalna wycena po krótkim przeglądzie projektu.</p>
-                        <p class="text-xs text-green-300 mt-3 leading-relaxed">Jeśli znajdziesz się wśród następnych 5 podpisanych projektów, 20% zniżki na start może obniżyć koszt pakietu z 1 800 PLN do 1 440 PLN.</p>
-                        <button onclick="openEstimatedContactForm()" class="w-full bg-green-600 hover:bg-green-500 text-white font-semibold py-3 rounded-xl transition-all shadow-lg mt-4">Poproś o tę wycenę</button>
+                    <div class="bg-slate-950 border border-slate-800 rounded-lg p-6 text-center sticky top-28">
+                        <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Szacowany zakres</p>
+                        <div id="estimateResult" class="text-2xl font-bold text-blue-500 mb-3">1 800–2 000 PLN</div>
+                        <p id="estimateCareNote" class="text-[11px] text-slate-400 mb-4 leading-relaxed">Finalna wycena po krótkim przeglądzie projektu.</p>
+                        <p class="text-[10px] text-slate-500 leading-relaxed">Zniżka dotyczy podstawowej konfiguracji.</p>
+                        <button type="button" onclick="openEstimatedContactForm()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition-colors mt-4 focus:outline-none">Poproś o tę wycenę</button>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 md:p-8 mb-12 text-center max-w-4xl mx-auto shadow-lg relative overflow-hidden">
-                <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] md:text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-bl-lg z-10">Cena Wdrożeniowa na Start</div>
-                <h3 class="text-xl md:text-2xl font-bold mb-3 text-white">Pełna Strona + Konfiguracja Automatyzacji</h3>
-                <p class="text-slate-400 mb-5 text-base md:text-lg">Dla firm, które potrzebują więcej niż strony z rezerwacją: zaawansowanych formularzy, przepływów pracy, struktury CRM i ciągłych usprawnień.</p>
-                <div class="text-2xl md:text-3xl font-extrabold text-blue-400">Jednorazowa inwestycja od 2 900 PLN</div>
-            </div>
-
-            <h3 class="text-xl md:text-2xl font-bold mb-8 text-center text-white">Etap 2: Tech Ops i Zarządzanie Miesięczne</h3>
-
-            <div class="grid lg:grid-cols-3 gap-6 items-start">
-                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 flex flex-col h-full hover:border-slate-700 transition-all">
-                    <h3 class="text-xl font-bold mb-2">Umowa na 3 Miesiące</h3>
-                    <p class="text-slate-400 text-sm mb-5">Krótkoterminowe zarządzanie i stabilizacja.</p>
-                    <div class="mb-5 pb-5 border-b border-slate-800"><span class="text-3xl font-extrabold text-white">1 400</span><span class="text-slate-500"> PLN / mies.</span></div>
-                    <ul class="text-slate-400 space-y-3 mb-6 flex-grow text-sm">
-                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span>Hosting Premium w Cenie</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span>Aktualizacje Treści</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span>Utrzymanie Automatyzacji</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span>Monitoring Bezpieczeństwa</li>
-                    </ul>
-                    <button onclick="openContactForm('three_month', '1400')" class="w-full mt-auto text-center text-blue-400 border border-slate-700 py-3 rounded-xl hover:bg-slate-800 transition-all">Wybierz Pakiet</button>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+                <div class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-br-lg z-10">Na Start</div>
+                <div class="pt-4 md:pt-0">
+                    <h3 class="text-xl font-bold mb-2 text-slate-100">Etap 1: Konfiguracja i Inżynieria</h3>
+                    <p class="text-slate-400 text-sm max-w-xl">Kompletny rozwój struktury, premium web design, fundamenty SEO i inteligentne przepływy automatyzacji.</p>
                 </div>
-
-                <div class="bg-gradient-to-b from-slate-800 to-slate-900 border border-blue-500/50 rounded-3xl p-6 flex flex-col h-full relative transform lg:-translate-y-2 shadow-[0_0_40px_rgba(37,99,235,0.15)] order-first lg:order-none">
-                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white text-xs font-bold uppercase tracking-wider py-1.5 px-4 rounded-full">Najlepsza Wartość</div>
-                    <h3 class="text-xl font-bold mb-2 text-white">Umowa na 12 Miesięcy</h3>
-                    <p class="text-blue-200 text-sm mb-5">Długoterminowa współpraca i ciągłe usprawnienia.</p>
-                    <div class="mb-5 pb-5 border-b border-slate-700/50"><span class="text-3xl font-extrabold text-blue-400">850</span><span class="text-slate-400"> PLN / mies.</span></div>
-                    <ul class="text-slate-300 space-y-3 mb-6 flex-grow text-sm">
-                        <li class="flex items-start"><span class="text-blue-500 mr-2">✔</span>Hosting Premium w Cenie</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2">✔</span>Aktualizacje Treści</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2">✔</span>Utrzymanie Automatyzacji</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2">✔</span>Monitoring Bezpieczeństwa</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2">✔</span>Podstawowe Raporty Wyników</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2">✔</span>Priorytetowe Wsparcie</li>
-                    </ul>
-                    <button onclick="openContactForm('twelve_month', '850')" class="w-full mt-auto text-center bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-500 transition-all">Wybierz Pakiet</button>
-                </div>
-
-                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 flex flex-col h-full hover:border-slate-700 transition-all">
-                    <h3 class="text-xl font-bold mb-2">Umowa na 6 Miesięcy</h3>
-                    <p class="text-slate-400 text-sm mb-5">Zrównoważony okres optymalizacji.</p>
-                    <div class="mb-5 pb-5 border-b border-slate-800"><span class="text-3xl font-extrabold text-white">1 150</span><span class="text-slate-500"> PLN / mies.</span></div>
-                    <ul class="text-slate-400 space-y-3 mb-6 flex-grow text-sm">
-                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span>Hosting Premium w Cenie</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span>Aktualizacje Treści</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span>Utrzymanie Automatyzacji</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span>Monitoring Bezpieczeństwa</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2">✔</span>Podstawowe Raporty Wyników</li>
-                    </ul>
-                    <button onclick="openContactForm('six_month', '1150')" class="w-full mt-auto text-center text-blue-400 border border-slate-700 py-3 rounded-xl hover:bg-slate-800 transition-all">Wybierz Pakiet</button>
+                <div class="text-left md:text-right shrink-0">
+                    <p class="text-xs uppercase text-slate-500 font-bold mb-1">Od</p>
+                    <div data-price-display="2900" class="text-2xl font-bold text-blue-500">2 900 PLN</div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section id="faq" class="py-14 bg-slate-900 border-t border-slate-800">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-10"><h2 class="text-3xl font-bold mb-3">Często Zadawane Pytania</h2><p class="text-slate-400">Najczęstsze pytania dotyczące platform webowych i automatyzacji.</p></div>
-            <div class="space-y-4">
-                <details class="group bg-slate-950 border border-slate-800 rounded-2xl [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-white"><h3 class="font-semibold text-base md:text-lg">Czym zajmuje się konsultant ds. automatyzacji?</h3><span class="relative size-5 shrink-0"><svg class="absolute inset-0 size-5 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-5 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-sm leading-relaxed">Identyfikuję powtarzalne procesy, mapuję przepływ informacji i buduję praktyczne systemy, które ograniczają ręczną pracę.</div></details>
-                <details class="group bg-slate-950 border border-slate-800 rounded-2xl [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-white"><h3 class="font-semibold text-base md:text-lg">Czy tworzysz strony z procesem rezerwacji?</h3><span class="relative size-5 shrink-0"><svg class="absolute inset-0 size-5 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-5 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-sm leading-relaxed">Tak. Tworzę profesjonalne platformy z pozyskiwaniem leadów, formularzami i integracjami rezerwacji.</div></details>
-                <details class="group bg-slate-950 border border-slate-800 rounded-2xl [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-white"><h3 class="font-semibold text-base md:text-lg">Czy świadczysz usługi tylko w Krakowie?</h3><span class="relative size-5 shrink-0"><svg class="absolute inset-0 size-5 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-5 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-sm leading-relaxed">Pracuję ze Skalicy w Krakowie i zdalnie obsługuję klientów w Polsce oraz międzynarodowo.</div></details>
+            <h3 class="text-xl font-bold mb-6 text-center text-slate-100">Etap 2: Tech Ops i Zarządzanie Miesięczne</h3>
+            <div class="grid lg:grid-cols-3 gap-6 items-stretch">
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col hover:border-slate-700 transition-colors">
+                    <h3 class="text-lg font-bold mb-1 text-slate-200">Umowa na 3 Miesiące</h3>
+                    <p class="text-slate-400 text-xs mb-6 h-8">Krótkoterminowe zarządzanie i stabilizacja.</p>
+                    <div class="mb-6 pb-6 border-b border-slate-800"><span class="text-3xl font-bold text-slate-100" data-price-display="1400">1 400 PLN</span><span class="text-slate-500 text-sm font-medium"> / mies.</span></div>
+                    <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Hosting Premium w Cenie</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Aktualizacje Treści</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Utrzymanie Automatyzacji</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Monitoring Bezpieczeństwa</li>
+                    </ul>
+                    <button type="button" onclick="openContactForm('three_month', '1400')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Wybierz Pakiet</button>
+                </div>
+                <div class="bg-slate-950 border-2 border-blue-600 rounded-xl p-6 flex flex-col relative order-first lg:order-none">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded">Najlepsza Wartość</div>
+                    <h3 class="text-lg font-bold mb-1 text-slate-200 mt-2">Umowa na 12 Miesięcy</h3>
+                    <p class="text-slate-400 text-xs mb-6 h-8">Długoterminowa współpraca i ciągłe usprawnienia.</p>
+                    <div class="mb-6 pb-6 border-b border-slate-800"><span class="text-3xl font-bold text-slate-100" data-price-display="850">850 PLN</span><span class="text-slate-500 text-sm font-medium"> / mies.</span></div>
+                    <ul class="text-slate-300 space-y-3 mb-8 flex-grow text-sm">
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Hosting Premium w Cenie</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Aktualizacje Treści</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Utrzymanie Automatyzacji</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Monitoring Bezpieczeństwa</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Raporty Wyników</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Priorytetowe Wsparcie</li>
+                    </ul>
+                    <button type="button" onclick="openContactForm('twelve_month', '850')" class="w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Wybierz Pakiet</button>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col hover:border-slate-700 transition-colors">
+                    <h3 class="text-lg font-bold mb-1 text-slate-200">Umowa na 6 Miesięcy</h3>
+                    <p class="text-slate-400 text-xs mb-6 h-8">Zrównoważony okres optymalizacji.</p>
+                    <div class="mb-6 pb-6 border-b border-slate-800"><span class="text-3xl font-bold text-slate-100" data-price-display="1150">1 150 PLN</span><span class="text-slate-500 text-sm font-medium"> / mies.</span></div>
+                    <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Hosting Premium w Cenie</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Aktualizacje Treści</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Utrzymanie Automatyzacji</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Monitoring Bezpieczeństwa</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Raporty Wyników</li>
+                    </ul>
+                    <button type="button" onclick="openContactForm('six_month', '1150')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Wybierz Pakiet</button>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="py-14 bg-slate-900 border-t border-slate-800">
+    <section id="faq" class="py-16 bg-slate-900 border-b border-slate-800">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="mb-10 text-center"><h2 class="text-2xl font-bold mb-2 text-slate-100">Często Zadawane Pytania</h2><p class="text-slate-400 text-sm">Najczęstsze pytania dotyczące platform webowych i automatyzacji.</p></div>
+            <div class="space-y-3">
+                <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">Czym zajmuje się konsultant ds. automatyzacji?</h3><span class="relative size-4 shrink-0 text-slate-500"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Identyfikuję powtarzalne procesy, mapuję przepływ informacji i buduję systemy, które ograniczają ręczną pracę.</div></details>
+                <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">Czy tworzysz strony z procesem rezerwacji?</h3><span class="relative size-4 shrink-0 text-slate-500"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Tak. Tworzę profesjonalne platformy z formularzami, automatyzacją procesów oraz integracjami rezerwacji.</div></details>
+                <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">Czy świadczysz usługi w Krakowie czy również zdalnie?</h3><span class="relative size-4 shrink-0 text-slate-500"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Oba modele są możliwe. Pracuję z Krakowa i obsługuję klientów międzynarodowo.</div></details>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-slate-950 border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-6">
             <div class="max-w-3xl">
-                <h2 class="text-sm uppercase tracking-[0.3em] text-blue-400 font-bold mb-4">Wyróżniony Projekt Partnerski</h2>
-                <div class="flex items-center gap-4 mb-5">
-                    <img src="https://joannafilek.com/images/logo.png" width="56" height="56" class="w-12 h-12 object-contain" alt="Joanna Filek logo" />
-                    <h2 class="text-2xl md:text-3xl font-bold">Joanna Filek</h2>
+                <h2 class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-4">Wyróżniony Projekt Partnerski</h2>
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="https://joannafilek.com/images/logo.png" class="w-10 h-10 object-contain grayscale opacity-80" alt="Joanna Filek logo" loading="lazy" />
+                    <h2 class="text-xl font-bold text-slate-200">Joanna Filek</h2>
                 </div>
-                <p class="text-slate-400 text-base leading-relaxed mb-6">Wspólny projekt web developmentu i UX zaprojektowany w celu wzmocnienia profesjonalnego wizerunku marki i uproszczenia kontaktu z klientami.</p>
-                <a href="https://joannafilek.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl font-bold transition-all text-sm">Zobacz Projekt →</a>
+                <p class="text-slate-400 text-xs leading-relaxed mb-4">Wspólny projekt web developmentu i UX zaprojektowany w celu wzmocnienia wizerunku marki.</p>
+                <a href="https://joannafilek.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-blue-500 hover:text-blue-400 transition-colors">Zobacz Projekt →</a>
             </div>
         </div>
     </section>
 
-    <section class="py-16 bg-gradient-to-br from-blue-600 to-blue-800 text-white border-t border-slate-800">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-5xl font-extrabold mb-6">Usprawnijmy Twoje Operacje</h2>
-            <p class="text-lg md:text-xl text-blue-100 mb-8">Jeśli Twój biznes opiera się na powtarzalnych zadaniach, arkuszach lub niepołączonych systemach, mogą istnieć praktyczne możliwości automatyzacji, które szybko przyniosą wartość.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <button onclick="openContactForm()" class="bg-white text-blue-700 px-8 py-3.5 rounded-2xl font-bold text-lg hover:shadow-xl hover:scale-105 transition-all">Oszacuj Projekt</button>
-                <a href="https://www.linkedin.com/in/alandasm" target="_
+    <section class="py-16 bg-blue-600 text-white">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Usprawnijmy Twoje Operacje</h2>
+            <p class="text-sm text-blue-100 mb-8 leading-relaxed">Jeśli Twój biznes opiera się na powtarzalnych zadaniach lub niepołączonych systemach, automatyzacja szybko przyniesie wartość.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-3">
+                <button type="button" onclick="openContactForm()" class="bg-slate-950 text-white px-6 py-3 rounded-lg font-medium text-sm hover:bg-slate-900 transition-colors focus:outline-none">Umów Przegląd Operacyjny</button>
+                <a href="https://www.linkedin.com/in/alandasm" target="_blank" rel="noopener noreferrer" class="bg-transparent border border-blue-400 text-white px-6 py-3 rounded-lg font-medium text-sm hover:bg-blue-700 transition-colors focus:outline-none">LinkedIn</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="py-8 bg-slate-950 border-t border-slate-800 text-center text-xs">
+    <p class="text-slate-500">© 2026 Alan da Silva Morais • Automatyzacja Operacyjna i Konsulting</p>
+    <div class="mt-3 flex flex-wrap justify-center gap-3 text-[10px]">
+        <button type="button" onclick="openLegalModal('termsModal')" class="text-slate-400 hover:text-blue-400 transition-colors">Regulamin usług</button>
+        <span class="text-slate-800">|</span>
+        <button type="button" onclick="openLegalModal('privacyModal')" class="text-slate-400 hover:text-blue-400 transition-colors">Informacja o prywatności</button>
+    </div>
+</footer>
+
+<div id="offerBanner" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-sm z-[55] hidden opacity-0 translate-y-4 transition-all duration-300 bg-slate-900 border border-slate-700 rounded-xl p-5 shadow-xl" role="region" aria-label="Oferta limitowana">
+    <div class="flex items-start gap-3">
+        <div class="flex-1">
+            <p class="text-xs font-bold uppercase tracking-wider text-blue-500">Oferta limitowana</p>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">Obniżona cena konfiguracji dla wybranych nowych projektów.</p>
+            <button type="button" onclick="claimOffer()" class="mt-3 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white text-[10px] font-semibold px-4 py-2 rounded transition-colors w-full focus:outline-none">Omów Swój Projekt</button>
+        </div>
+        <button type="button" onclick="closeOfferBanner()" aria-label="Zamknij banner" class="text-slate-500 hover:text-white text-lg leading-none focus:outline-none p-1">&times;</button>
+    </div>
+</div>
+
+<div id="contactModal" class="fixed inset-0 modal-backdrop hidden z-[70] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="bg-slate-950 border border-slate-800 rounded-xl w-full max-w-md shadow-2xl flex flex-col overflow-hidden" role="document">
+        <div class="flex justify-between items-center px-5 py-3 border-b border-slate-800 bg-slate-900">
+            <h2 id="contactModalTitle" class="text-sm font-bold text-slate-100">Wyślij Wiadomość</h2>
+            <button type="button" onclick="closeContactForm()" aria-label="Zamknij formularz" class="text-slate-500 hover:text-white text-xl leading-none transition-colors focus:outline-none">&times;</button>
+        </div>
+        <div class="p-5">
+            <form action="https://formsubmit.co/ajax/Contact@alansmsolutions.com" method="POST" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-3">
+                <input type="hidden" name="_subject" id="formSubject" />
+                <input type="hidden" name="_captcha" value="false" />
+                <div>
+                    <label for="formName" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Imię</label>
+                    <input id="formName" type="text" name="name" autocomplete="name" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
+                </div>
+                <div>
+                    <label for="formEmail" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">E-mail</label>
+                    <input id="formEmail" type="email" name="email" autocomplete="email" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
+                </div>
+                <div>
+                    <label for="formPhone" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Telefon / WhatsApp</label>
+                    <input id="formPhone" type="text" name="phone" autocomplete="tel" class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
+                </div>
+                <div>
+                    <label for="formMsg" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Wiadomość</label>
+                    <textarea id="formMsg" name="message" rows="3" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors resize-none"></textarea>
+                </div>
+                <label class="flex items-start gap-2 text-[10px] text-slate-500 mt-1">
+                    <input id="formConsent" type="checkbox" name="consent" required class="mt-0.5 accent-blue-600" />
+                    <span>Wyrażam zgodę na wykorzystanie moich danych w celu odpowiedzi na zapytanie i prowadzenia komunikacji.</span>
+                </label>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-medium py-2 rounded-md transition-colors mt-2 text-xs focus:outline-none">Wyślij Wiadomość</button>
+                <p class="text-[9px] text-slate-600 text-center mt-1">Twoje dane zostaną wykorzystane wyłącznie do odpowiedzi na zapytanie.</p>
+                <p id="formStatus" class="text-[10px] text-center min-h-[16px]"></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="termsModal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm px-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+        <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 flex items-start justify-between gap-4">
+            <div>
+                <h2 class="text-lg font-bold text-slate-100">Regulamin usług</h2>
+                <p class="text-[10px] text-slate-500 mt-0.5">Ostatnia aktualizacja: czerwiec 2026</p>
+            </div>
+            <button type="button" onclick="closeLegalModal('termsModal')" class="text-slate-500 hover:text-white text-xl leading-none">&times;</button>
+        </div>
+        <div class="p-5 space-y-4 text-xs text-slate-400 leading-relaxed">
+            <p>Niniejszy regulamin wyjaśnia, jak AlanSM Solutions świadczy usługi stron internetowych, rezerwacji i automatyzacji.</p>
+            <section><h3 class="font-bold text-slate-200 mb-1">1. Usługi</h3><p>Dokładny zakres usług jest potwierdzany w formularzu zamówienia lub pisemnej umowie projektowej.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">2. Wyceny i zniżki</h3><p>Ostateczna cena zależy od zweryfikowanego zakresu. Zniżki startowe są potwierdzane dopiero po podpisaniu umowy.</p></section>
+            <p>Pytania można wysłać na contact@alansmsolutions.com.</p>
+        </div>
+    </div>
+</div>
+
+<div id="privacyModal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm px-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+        <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 flex items-start justify-between gap-4">
+            <div>
+                <h2 class="text-lg font-bold text-slate-100">Informacja o prywatności</h2>
+                <p class="text-[10px] text-slate-500 mt-0.5">Ostatnia aktualizacja: czerwiec 2026</p>
+            </div>
+            <button type="button" onclick="closeLegalModal('privacyModal')" class="text-slate-500 hover:text-white text-xl leading-none">&times;</button>
+        </div>
+        <div class="p-5 space-y-4 text-xs text-slate-400 leading-relaxed">
+            <p>Ta informacja wyjaśnia, jak AlanSM Solutions zbiera i wykorzystuje dane przesłane przez stronę.</p>
+            <section><h3 class="font-bold text-slate-200 mb-1">1. Administrator danych</h3><p>AlanSM Solutions / Alan da Silva Morais. Kontakt: contact@alansmsolutions.com.</p></section>
+            <section><h3 class="font-bold text-slate-200 mb-1">2. Cel wykorzystania danych</h3><p>Dane są używane wyłącznie do odpowiedzi na zapytanie, zarządzania komunikacją i przygotowania wyceny.</p></section>
+        </div>
+    </div>
+</div>
+
+<script>
+    const ALANSM_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwWA6kBWtOKNY-5nko59ny9kAkWGmgcyRLG898n6dcPrUUazazPGUuPRkvIZ4YPs_Lp/exec";
+    const exchangeRates = { PLN: 1, BRL: 1.38, EUR: 0.23, USD: 0.25 };
+    
+    let currentLang = 'pl';
+    let currentCurrency = 'PLN';
+    let previouslyFocusedElement = null;
+    let currentPackageInfo = { packageName: 'Zapytanie ogólne', price: '' };
+
+    const t = {
+        per_month: " / mies.",
+        estimator_result_note: "Finalna wycena po krótkim przeglądzie projektu.",
+        counter_checking: "Sprawdzanie miejsc...",
+        counter_available: "Pozostało {remaining} z {total} miejsc ze zniżką.",
+        counter_last: "Ostatnie miejsce ze zniżką.",
+        counter_sold_out: "Brak miejsc ze zniżką. Obowiązuje standardowa cena.",
+        counter_error: "Licznik niedostępny. Dostępność zostanie potwierdzona.",
+        sending: "Wysyłanie...",
+        sent: "Wiadomość została wysłana.",
+        error: "Błąd. Spróbuj ponownie lub skontaktuj się przez LinkedIn.",
+        form_consent: "Musisz wyrazić zgodę na użycie danych.",
+        lead_submit_success: "Twoje zapytanie zostało odebrane. Ref: {leadId}"
+    };
+
+    function formatPrice(plnAmount) {
+        if (!plnAmount) return '';
+        let converted = plnAmount * exchangeRates[currentCurrency];
+        if (currentCurrency !== 'PLN') converted = Math.ceil(converted / 10) * 10;
+        const formatted = converted.toLocaleString('pl-PL');
+        if (currentCurrency === 'BRL') return 'R$ ' + formatted;
+        if (currentCurrency === 'EUR') return '€' + formatted;
+        if (currentCurrency === 'USD') return '$' + formatted;
+        return formatted + ' PLN';
+    }
+
+    function updateDynamicContent() {
+        const currSelect = document.getElementById('currencySelect');
+        if (currSelect) currSelect.value = currentCurrency;
+
+        document.querySelectorAll('[data-price-display]').forEach(el => {
+            const basePln = parseInt(el.getAttribute('data-price-display'), 10);
+            if (!isNaN(basePln)) el.textContent = formatPrice(basePln);
+        });
+
+        const optIds = ['estimateDomain', 'estimateBooking', 'estimateLanguages', 'estimateContent'];
+        optIds.forEach(id => {
+            const select = document.getElementById(id);
+            if (select) {
+                Array.from(select.options).forEach(opt => {
+                    const val = parseInt(opt.getAttribute('data-price') || opt.value, 10);
+                    const baseText = opt.getAttribute('data-base-text') || opt.textContent.split(' (+')[0];
+                    if (!opt.hasAttribute('data-base-text')) opt.setAttribute('data-base-text', baseText);
+                    opt.textContent = val > 0 ? `${baseText} (+ ${formatPrice(val)})` : baseText;
+                });
+            }
+        });
+
+        updateEstimate();
+        loadDiscountCounter();
+    }
+
+    function setCurrency(curr) {
+        if (!exchangeRates[curr]) return;
+        currentCurrency = curr;
+        localStorage.setItem('preferredCurrency', curr);
+        updateDynamicContent();
+    }
+
+    function getEstimatorTotal() {
+        const ids = ['estimateDomain', 'estimateBooking', 'estimateLanguages', 'estimateContent'];
+        let total = 1800;
+        ids.forEach(id => { 
+            const el = document.getElementById(id); 
+            if (el) total += Number(el.options[el.selectedIndex].getAttribute('data-price') || el.value || 0); 
+        });
+        ['estimateExtraPage', 'estimateWhatsapp', 'estimatePayments'].forEach(id => { 
+            const el = document.getElementById(id); 
+            if (el && el.checked) total += Number(el.value || 0); 
+        });
+        return total;
+    }
+
+    function updateEstimate() {
+        const result = document.getElementById('estimateResult');
+        if (!result) return;
+        const totalPln = getEstimatorTotal();
+        result.textContent = `${formatPrice(totalPln)}–${formatPrice(totalPln + 200)}`;
+
+        const care = document.getElementById('estimateCare');
+        const note = document.getElementById('estimateCareNote');
+        if (care && note) {
+            note.textContent = care.checked ? `${t.estimator_result_note} Plan opieki ${formatPrice(199)}${t.per_month} wybrany.` : t.estimator_result_note;
+        }
+    }
+
+    function openEstimatedContactForm() {
+        updateEstimate();
+        const range = document.getElementById('estimateResult')?.textContent || '';
+        openContactForm();
+        currentPackageInfo = { packageName: "Wycena Projektu", price: range };
+        document.getElementById('formSubject').value = "Wycena Projektu";
+        document.getElementById('formMsg').value = `Interesuje mnie Wycena Projektu (${range}). Moje zapytanie to...`;
+    }
+
+    function packageDetails(packageKey, priceBaseKey) {
+        const packages = { light_booking: "Lekka Strona z Rezerwacją", three_month: "Tech Ops (3 Miesiące)", six_month: "Tech Ops (6 Miesięcy)", twelve_month: "Tech Ops (12 Miesięcy)", enterprise_crm: "CRM Korporacyjny", offer: "Oferta wdrożeniowa" };
+        let priceStr = priceBaseKey === 'custom_quote' ? "Wycena indywidualna" : (priceBaseKey === 'introductory_offer' ? "Cena promocyjna" : "");
+        
+        if (priceBaseKey && !isNaN(parseInt(priceBaseKey, 10))) {
+            priceStr = formatPrice(parseInt(priceBaseKey, 10));
+            if (['1400', '1150', '850', '199'].includes(priceBaseKey)) priceStr += t.per_month;
+        }
+        return { packageName: packages[packageKey] || '', price: priceStr };
+    }
+
+    function openContactForm(packageKey = null, priceKey = null) {
+        const modal = document.getElementById('contactModal');
+        const subject = document.getElementById('formSubject');
+        const message = document.getElementById('formMsg');
+        const status = document.getElementById('formStatus');
+
+        previouslyFocusedElement = document.activeElement;
+        status.textContent = ''; status.className = 'text-[10px] text-center min-h-[16px]';
+
+        if (packageKey) {
+            const details = packageDetails(packageKey, priceKey);
+            currentPackageInfo = details;
+            subject.value = packageKey === 'offer' ? "Zapytanie: oferta wdrożeniowa" : `Zapytanie: ${details.packageName}`;
+            message.value = `Interesuje mnie opcja ${details.packageName} (${details.price}). Moje zapytanie to...`;
+        } else {
+            currentPackageInfo = { packageName: "Zapytanie ogólne", price: '' };
+            subject.value = "Zapytanie ogólne"; message.value = '';
+        }
+
+        modal.classList.remove('hidden'); document.body.classList.add('overflow-hidden');
+        window.setTimeout(() => document.getElementById('formName').focus(), 0);
+    }
+
+    function closeContactForm() {
+        document.getElementById('contactModal').classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+        if (previouslyFocusedElement) previouslyFocusedElement.focus();
+    }
+
+    async function loadDiscountCounter() {
+        const counterText = document.getElementById('discountCounterText');
+        if (!counterText || !ALANSM_BACKEND_URL) return;
+        counterText.textContent = t.counter_checking;
+        try {
+            const response = await fetch(ALANSM_BACKEND_URL + '?action=counter', { method: 'GET', cache: 'no-store' });
+            if (!response.ok) throw new Error();
+            const data = await response.json();
+            if (data.soldOut || Number(data.remaining) <= 0) counterText.textContent = t.counter_sold_out;
+            else if (Number(data.remaining) === 1) counterText.textContent = t.counter_last;
+            else counterText.textContent = t.counter_available.replace('{remaining}', data.remaining).replace('{total}', data.totalSlots);
+        } catch { counterText.textContent = t.counter_error; }
+    }
+
+    async function handleFormSubmit(event) {
+        event.preventDefault();
+        const form = event.target, button = form.querySelector('button[type="submit"]'), status = document.getElementById('formStatus');
+        const originalText = button.textContent;
+
+        if (!document.getElementById('formConsent')?.checked) {
+            status.textContent = t.form_consent; status.className = 'text-[10px] text-center min-h-[16px] text-yellow-400 mt-1 font-medium'; return;
+        }
+
+        const payload = {
+            action: 'submitLead',
+            name: document.getElementById('formName')?.value || '',
+            email: document.getElementById('formEmail')?.value || '',
+            phone: document.getElementById('formPhone')?.value || '',
+            packageName: currentPackageInfo.packageName || 'Zapytanie ogólne',
+            estimatedPrice: currentPackageInfo.price || '',
+            discountRequested: String(currentPackageInfo.packageName || '').toLowerCase().includes('lekka') ? 'YES' : 'NO',
+            message: document.getElementById('formMsg')?.value || '',
+            source: 'website'
+        };
+
+        const body = new URLSearchParams(); Object.keys(payload).forEach(k => body.append(k, payload[k]));
+        button.disabled = true; button.textContent = t.sending; status.textContent = '';
+
+        try {
+            const response = await fetch(ALANSM_BACKEND_URL, { method: 'POST', body: body });
+            if (!response.ok) throw new Error();
+            const result = await response.json();
+            if (result.status !== 'ok') throw new Error();
+
+            status.textContent = t.lead_submit_success.replace('{leadId}', result.leadId || '0000');
+            status.className = 'text-[10px] text-center min-h-[16px] text-green-500 mt-1 font-medium';
+            form.reset(); loadDiscountCounter(); window.setTimeout(closeContactForm, 3000);
+        } catch {
+            status.textContent = t.error; status.className = 'text-[10px] text-center min-h-[16px] text-red-500 mt-1 font-medium';
+        } finally { button.disabled = false; button.textContent = originalText; }
+    }
+
+    function openLegalModal(mId) { const m = document.getElementById(mId); if(m){ m.classList.remove('hidden'); m.classList.add('flex'); document.body.classList.add('overflow-hidden'); } }
+    function closeLegalModal(mId) { const m = document.getElementById(mId); if(m){ m.classList.add('hidden'); m.classList.remove('flex'); document.body.classList.remove('overflow-hidden'); } }
+    function closeOfferBanner() { const b = document.getElementById('offerBanner'); b.classList.add('opacity-0', 'translate-y-4'); sessionStorage.setItem('offerBannerDismissed', 'true'); window.setTimeout(() => b.classList.add('hidden'), 300); }
+    function showOfferBanner() { if (sessionStorage.getItem('offerBannerDismissed') === 'true') return; const b = document.getElementById('offerBanner'); b.classList.remove('hidden'); window.setTimeout(() => b.classList.remove('opacity-0', 'translate-y-4'), 20); }
+    function claimOffer() { closeOfferBanner(); window.setTimeout(() => openContactForm('offer', 'introductory_offer'), 320); }
+
+    document.addEventListener('keydown', e => { const m = document.getElementById('contactModal'); if (e.key === 'Escape') { if(!m.classList.contains('hidden')) closeContactForm(); closeLegalModal('termsModal'); closeLegalModal('privacyModal'); } });
+    document.addEventListener('click', e => { if (e.target.id === 'contactModal') closeContactForm(); if (e.target.id === 'termsModal' || e.target.id === 'privacyModal') closeLegalModal(e.target.id); });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedCurr = localStorage.getItem('preferredCurrency');
+        currentCurrency = savedCurr ? savedCurr : 'PLN'; // Default PL
+
+        updateDynamicContent();
+        let bannerTriggered = false;
+        const handleScroll = () => { if (window.scrollY > 500 && !bannerTriggered) { bannerTriggered = true; showOfferBanner(); window.removeEventListener('scroll', handleScroll); } };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.setTimeout(() => { if(!bannerTriggered) { bannerTriggered = true; showOfferBanner(); } }, 12000);
+    });
+</script>
+</body>
+</html>
