@@ -1,818 +1,608 @@
-function getSetting_(key, fallback) {
-  const sheet = getSheet_(SHEET_NAMES.SETTINGS);
-  const values = sheet.getRange(1, 1, sheet.getLastRow(), 2).getValues();
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DeliveryHub Ilhabela | Connected Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#14532d;--green2:#166534;--soft:#ecfdf5;--orange:#f97316;--blue:#2563eb;
+  --dark:#111827;--text:#1f2937;--muted:#6b7280;--line:#e5e7eb;--bg:#f8fafc;--white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.container{width:min(1160px,calc(100% - 32px));margin:auto}
+.header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.header-inner{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,var(--green),var(--orange));display:grid;place-items:center;color:white;font-size:24px}
+.brand strong{display:block;color:var(--green);font-weight:900;font-size:1.1rem;line-height:1}
+.brand span{display:block;color:var(--muted);font-size:.82rem;font-weight:600;margin-top:4px}
+.nav{display:flex;gap:20px;font-weight:700;font-size:.92rem;color:#374151}
+.nav a:hover{color:var(--green)}
+.btn{min-height:44px;border:0;border-radius:12px;padding:0 16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:800;white-space:nowrap}
+.btn.green{background:var(--green);color:white}
+.btn.orange{background:var(--orange);color:white}
+.btn.blue{background:var(--blue);color:white}
+.btn.light{background:white;color:var(--green);border:1px solid rgba(20,83,45,.25)}
+.hero{padding:58px 0 34px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
+h1{font-size:clamp(2.4rem,4.8vw,5rem);line-height:.96;letter-spacing:-.06em;margin:0 0 18px;font-weight:900;color:var(--dark)}
+h1 span{color:var(--green)}
+.hero p{font-size:1.12rem;color:#4b5563;max-width:640px;margin:0 0 22px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:22px}
+.pills{display:flex;flex-wrap:wrap;gap:10px}
+.pill{background:white;border:1px solid var(--line);border-radius:99px;padding:9px 12px;font-weight:700;color:#374151;font-size:.9rem}
+.mock{background:white;border:1px solid var(--line);border-radius:28px;padding:20px;box-shadow:0 18px 45px rgba(15,23,42,.08)}
+.phone{background:#0f172a;color:white;border-radius:26px;padding:18px;min-height:440px;display:grid;gap:14px}
+.phone-top{display:flex;justify-content:space-between;color:#cbd5e1;font-weight:700;font-size:.85rem}
+.phone-box{background:#111827;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:15px}
+.delivery{background:white;color:var(--text);border-left:5px solid var(--orange);border-radius:16px;padding:14px}
+.delivery strong{color:var(--green);display:block;margin-bottom:5px}
+.delivery p{margin:4px 0;font-size:.9rem;color:#4b5563}
+.section{padding:58px 0}
+.section.white{background:white;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.eyebrow{text-transform:uppercase;letter-spacing:.08em;color:var(--orange);font-weight:900;font-size:.78rem;margin-bottom:7px}
+h2{font-size:clamp(1.7rem,2vw + 1rem,2.8rem);line-height:1.05;letter-spacing:-.04em;margin:0 0 8px;font-weight:900;color:var(--dark)}
+.sub{color:var(--muted);max-width:760px;margin:0 0 24px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:white;border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 10px 26px rgba(15,23,42,.05)}
+.icon{width:52px;height:52px;border-radius:16px;background:var(--soft);color:var(--green);display:grid;place-items:center;font-size:26px;margin-bottom:12px}
+.card:nth-child(2) .icon{background:#fff7ed;color:var(--orange)}
+.card:nth-child(3) .icon{background:#eff6ff;color:var(--blue)}
+.card h3{margin:0 0 8px;font-size:1.25rem}
+.card p{margin:0;color:var(--muted)}
+.card ul{margin:12px 0 0;padding-left:18px;color:#4b5563;display:grid;gap:6px}
+.app-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.panel{background:white;border:1px solid var(--line);border-radius:26px;padding:22px;box-shadow:0 18px 45px rgba(15,23,42,.08)}
+.panel.dark{background:#0f172a;color:white}
+.panel.dark h3{color:white}
+.panel-title{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:18px}
+.panel-title h3{margin:0;font-size:1.35rem;color:var(--dark)}
+.panel-title p{margin:4px 0 0;color:var(--muted);font-size:.94rem}
+.panel.dark .panel-title p{color:#cbd5e1}
+.tag{display:inline-flex;align-items:center;min-height:28px;padding:0 10px;border-radius:99px;background:var(--soft);color:var(--green);font-weight:900;font-size:.78rem}
+.tag.orange{background:#fff7ed;color:#c2410c}.tag.blue{background:#eff6ff;color:var(--blue)}
+.form{display:grid;gap:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:grid;gap:6px;color:#374151;font-weight:800;font-size:.9rem}
+input,select,textarea{width:100%;border:1px solid #d1d5db;border-radius:13px;min-height:46px;padding:0 12px;background:white;color:var(--text);outline:none}
+textarea{min-height:86px;padding:12px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 4px rgba(20,83,45,.08)}
+.notice{padding:12px 14px;border-radius:14px;background:#f9fafb;border:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.notice.success{background:#ecfdf5;border-color:#bbf7d0;color:#15803d;font-weight:800}
+.notice.error{background:#fef2f2;border-color:#fecaca;color:#b91c1c;font-weight:800}
+.list{display:grid;gap:12px;min-height:100px}
+.empty{border:1px dashed #cbd5e1;border-radius:16px;background:#f8fafc;color:var(--muted);padding:18px;text-align:center;font-weight:700}
+.item{border:1px solid var(--line);border-radius:16px;background:white;padding:14px;color:var(--text)}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.top strong{display:block;color:var(--dark);line-height:1.2}
+.top small{display:block;color:var(--muted);margin-top:3px}
+.meta{color:#4b5563;font-size:.92rem;display:grid;gap:4px;margin-top:8px}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.mini{border:0;border-radius:10px;padding:8px 10px;font-size:.82rem;font-weight:900;background:#f3f4f6;color:#374151}
+.mini.green{background:var(--green);color:white}.mini.orange{background:var(--orange);color:white}.mini.blue{background:var(--blue);color:white}.mini.red{background:#fee2e2;color:#dc2626}
+.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.food{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.food-img{height:118px;background:linear-gradient(135deg,#dcfce7,#fed7aa);display:grid;place-items:center;font-size:42px}
+.food-body{padding:12px;display:grid;gap:8px}
+.food-body h4{margin:0}.food-body p{margin:0;color:var(--muted);font-size:.85rem}.price{color:var(--green);font-weight:900}
+.total{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:12px;margin-top:12px;font-weight:900;font-size:1.15rem}
+.flow{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-top:24px}
+.step{background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:15px;text-align:center;display:grid;gap:8px}
+.num{width:34px;height:34px;border-radius:99px;background:var(--green);color:white;display:grid;place-items:center;font-weight:900;margin:auto}
+.step:nth-child(even) .num{background:var(--orange)}
+.step strong{font-size:.9rem}.step small{color:var(--muted);line-height:1.25}
+.footer{background:#0f172a;color:#cbd5e1;padding:26px 0}
+.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.9rem}
+.toast{position:fixed;z-index:200;right:18px;top:95px;max-width:340px;background:#111827;color:white;padding:14px 16px;border-radius:16px;box-shadow:0 18px 45px rgba(15,23,42,.18);display:none;font-weight:800}
+.toast.show{display:block;animation:toast 2.4s ease both}
+@keyframes toast{0%{opacity:0;transform:translateY(-8px)}15%{opacity:1;transform:translateY(0)}85%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-8px)}}
+@media(max-width:1050px){.nav{display:none}.hero-grid,.app-grid{grid-template-columns:1fr}.grid3,.menu{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.section{padding:46px 0}.hero{padding:40px 0 26px}h1{font-size:2.45rem}.hero-actions,.pills{flex-direction:column}.btn{width:100%}.two{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.phone{min-height:auto}}
+</style>
+</head>
 
-  const normalizedKey = normalizeKey_(key);
+<body>
+<div class="toast" id="toast">Demo atualizado.</div>
 
-  for (let i = 0; i < values.length; i++) {
-    const setting = values[i][0];
-    const value = values[i][1];
+<header class="header">
+  <div class="container header-inner">
+    <a class="brand" href="#inicio">
+      <div class="logo">🛵</div>
+      <div>
+        <strong>DeliveryHub Ilhabela</strong>
+        <span>Cliente · Restaurante · Motoboys</span>
+      </div>
+    </a>
+    <nav class="nav">
+      <a href="#modulos">Módulos</a>
+      <a href="#motoboy">Motoboys</a>
+      <a href="#cliente">Cliente</a>
+      <a href="#restaurante">Restaurante</a>
+      <a href="#fluxo">Fluxo</a>
+    </nav>
+    <a class="btn green" href="#motoboy">Cadastro motoboy</a>
+  </div>
+</header>
 
-    if (!setting) continue;
-    if (normalizeKey_(setting) === 'setting') continue;
+<main>
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div>
+      <h1>Sistema de delivery para <span>Ilhabela</span></h1>
+      <p>Demo com três áreas para Ilhabela: cliente faz o pedido, restaurante gerencia no painel e motoboys cadastrados por bairro podem aceitar entregas disponíveis.</p>
+      <div class="hero-actions">
+        <a class="btn green" href="#motoboy">Ver módulo motoboy</a>
+        <a class="btn light" href="#cliente">Simular pedido</a>
+        <a class="btn orange" href="#restaurante">Painel restaurante</a>
+      </div>
+      <div class="pills">
+        <span class="pill">✅ Cadastro de motoboy</span>
+        <span class="pill">📍 Bairro, Ilhabela/SP</span>
+        <span class="pill">🛵 Aceite de entregas</span>
+        <span class="pill">🔔 Painel privado</span><span class="pill">🔗 Conectado ao Web App</span>
+      </div>
+    </div>
+    <div class="mock">
+      <div class="phone">
+        <div class="phone-top"><span>Motoboy App</span><span>16:48</span></div>
+        <div class="phone-box">
+          <strong>Entregas disponíveis</strong>
+          <p style="margin:6px 0 0;color:#cbd5e1">Pedidos liberados pelo restaurante aparecem aqui.</p>
+        </div>
+        <div class="delivery">
+          <strong>Pedido #1042 · Cantina Fellini</strong>
+          <p>Retirada: Centro</p><p>Entrega: Itaguaçu</p><p>Valor motoboy: <b>R$ 12,00</b></p>
+          <span class="tag orange">Disponível</span> <span class="tag">3.8 km</span>
+        </div>
+        <div class="delivery">
+          <strong>Pedido #1043 · Cozinha Corpus</strong>
+          <p>Retirada: Barra Velha</p><p>Entrega: Perequê</p><p>Valor motoboy: <b>R$ 9,00</b></p>
+          <span class="tag orange">Disponível</span> <span class="tag">2.1 km</span>
+        </div>
+        <button class="btn orange">Aceitar entrega</button>
+      </div>
+    </div>
+  </div>
+</section>
 
-    if (normalizeKey_(setting) === normalizedKey) {
-      return value !== '' && value !== null && value !== undefined ? value : fallback;
-    }
-  }
+<section class="section" id="modulos">
+  <div class="container">
+    <div class="eyebrow">Estrutura do sistema</div>
+    <h2>3 módulos conectados</h2>
+    <p class="sub">Cada área tem uma função diferente. O foco principal desta demo é o módulo dos motoboys.</p>
 
-  return fallback;
+    <div class="grid3">
+      <article class="card"><div class="icon">🛒</div><h3>1. Cliente</h3><p>Escolhe itens, define entrega ou retirada e envia o pedido.</p><ul><li>Cardápio online</li><li>Carrinho</li><li>Endereço e bairro</li><li>Pagamento</li></ul></article>
+      <article class="card"><div class="icon">🍽️</div><h3>2. Restaurante</h3><p>Recebe pedidos, muda status e libera entrega.</p><ul><li>Painel privado</li><li>Status do pedido</li><li>Liberação para motoboys</li><li>Controle operacional</li></ul></article>
+      <article class="card"><div class="icon">🛵</div><h3>3. Motoboy</h3><p>Cadastra área de atuação, aguarda aprovação e aceita entregas.</p><ul><li>Bairro, cidade e estado</li><li>Aprovação</li><li>Entregas disponíveis</li><li>Em rota e entregue</li></ul></article>
+    </div>
+  </div>
+</section>
+
+<section class="section white" id="motoboy">
+  <div class="container">
+    <div class="eyebrow">Módulo principal</div>
+    <h2>Cadastro e painel do motoboy</h2>
+    <p class="sub">O motoboy informa os dados básicos, localização de atuação e aguarda aprovação antes de aceitar entregas.</p>
+
+    <div class="app-grid">
+      <div class="panel">
+        <div class="panel-title"><div><h3>Cadastro de motoboy</h3><p>Campos principais para registrar área de atendimento.</p></div><span class="tag blue">Demo</span></div>
+        <form class="form" id="driverForm">
+          <div class="two">
+            <label>Nome completo<input id="driverName" placeholder="Ex: João Silva" required></label>
+            <label>WhatsApp<input id="driverPhone" placeholder="Ex: (12) 99999-9999" required></label>
+          </div>
+          <div class="two">
+            <label>Estado<select id="driverState" required><option value="">Selecione</option><option>SP</option><option>RJ</option><option>MG</option><option>PR</option><option>SC</option><option>RS</option><option>BA</option><option>PE</option><option>Outro</option></select></label>
+            <label>Cidade<input id="driverCity" placeholder="Ex: Ilhabela" required></label>
+          </div>
+          <label>Bairro principal<input id="driverNeighborhood" list="ilhabelaBairros" placeholder="Ex: Centro, Perequê, Barra Velha, Itaguaçu..." required>
+<datalist id="ilhabelaBairros"><option value="Centro"></option><option value="Perequê"></option><option value="Barra Velha"></option><option value="Itaguaçu"></option><option value="Água Branca"></option><option value="Saco da Capela"></option><option value="Curral"></option><option value="Portinho"></option></datalist></label>
+          <div class="two">
+            <label>Veículo<select id="driverVehicle"><option>Moto</option><option>Bike</option><option>Carro</option></select></label>
+            <label>Disponibilidade<select id="driverAvailability"><option>Almoço e jantar</option><option>Somente almoço</option><option>Somente jantar</option><option>Fim de semana</option><option>Horário flexível</option></select></label>
+          </div>
+          <label>Observação<textarea id="driverNotes" placeholder="Ex: Atendo Centro, Perequê, Barra Velha e Itaguaçu. Tenho bag térmica."></textarea></label>
+          <button class="btn blue" type="submit">Registrar motoboy demo</button>
+          <div class="notice" id="driverStatus">Após o cadastro, o motoboy aparece como “aguardando aprovação”.</div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><div><h3>Motoboys cadastrados</h3><p>O restaurante aprova antes de liberar entregas.</p></div><span class="tag" id="driverCounter">0 cadastrados</span></div>
+        <div class="list" id="driverList"><div class="empty">Nenhum motoboy cadastrado ainda.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="cliente">
+  <div class="container">
+    <div class="eyebrow">Módulo cliente</div>
+    <h2>Pedido online</h2>
+    <p class="sub">O cliente faz o pedido sem depender de mensagem manual no WhatsApp.</p>
+
+    <div class="app-grid">
+      <div class="panel">
+        <div class="panel-title"><div><h3>Cardápio demo</h3><p>Adicione itens ao pedido.</p></div></div>
+        <div class="menu">
+          <article class="food"><div class="food-img">🍝</div><div class="food-body"><h4>Parmegiana</h4><p>Arroz, fritas e salada.</p><div class="price">R$ 39,90</div><button class="mini green" onclick="addToCart('Parmegiana',39.90)">Adicionar</button></div></article>
+          <article class="food"><div class="food-img">🍕</div><div class="food-body"><h4>Pizza Média</h4><p>Molho artesanal e queijo.</p><div class="price">R$ 49,90</div><button class="mini green" onclick="addToCart('Pizza Média',49.90)">Adicionar</button></div></article>
+          <article class="food"><div class="food-img">🥗</div><div class="food-body"><h4>Salada Especial</h4><p>Leve e saudável.</p><div class="price">R$ 24,90</div><button class="mini green" onclick="addToCart('Salada Especial',24.90)">Adicionar</button></div></article>
+        </div>
+        <div class="list" id="cartList"><div class="empty">Carrinho vazio.</div></div>
+        <div class="total"><span>Total</span><span id="cartTotal">R$ 0,00</span></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><div><h3>Checkout</h3><p>Dados do cliente e entrega.</p></div></div>
+        <form class="form" id="orderForm">
+          <div class="two"><label>Nome<input id="customerName" required></label><label>WhatsApp<input id="customerPhone" required></label></div>
+          <div class="two"><label>Tipo<select id="deliveryType"><option>Entrega</option><option>Retirada</option></select></label><label>Pagamento<select id="paymentMethod"><option>Pix</option><option>Cartão na entrega</option><option>Dinheiro</option><option>Pago online</option></select></label></div>
+          <label>Endereço de entrega<input id="customerAddress" placeholder="Rua, número e complemento"></label>
+          <div class="two"><label>Bairro<input id="customerNeighborhood" list="ilhabelaBairrosPedido" placeholder="Ex: Perequê" required>
+<datalist id="ilhabelaBairrosPedido"><option value="Centro"></option><option value="Perequê"></option><option value="Barra Velha"></option><option value="Itaguaçu"></option><option value="Água Branca"></option><option value="Saco da Capela"></option><option value="Curral"></option><option value="Portinho"></option></datalist></label><label>Cidade/UF<input id="customerCity" value="Ilhabela/SP" required></label></div>
+          <label>Observação<textarea id="orderNotes" placeholder="Ex: Sem cebola, troco para R$ 100..."></textarea></label>
+          <button class="btn orange" type="submit">Enviar pedido demo</button>
+          <div class="notice" id="orderStatus">O pedido aparecerá no painel do restaurante.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section white" id="restaurante">
+  <div class="container">
+    <div class="eyebrow">Módulo restaurante</div>
+    <h2>Painel privado do restaurante</h2>
+    <p class="sub">O restaurante recebe o pedido, confirma e libera para motoboys aprovados.</p>
+
+    <div class="app-grid">
+      <div class="panel dark">
+        <div class="panel-title"><div><h3>Pedidos recebidos</h3><p>Controle operacional do restaurante.</p></div><span class="tag orange" id="orderCounter">0 pedidos</span></div>
+        <div class="list" id="restaurantOrders"><div class="empty" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:#cbd5e1;">Nenhum pedido recebido ainda.</div></div>
+        <div class="notice" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1);color:#cbd5e1">Quando o restaurante marca como “liberar entrega”, o pedido aparece para motoboys aprovados.</div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><div><h3>Entregas disponíveis</h3><p>Somente motoboys aprovados podem aceitar.</p></div><span class="tag blue" id="deliveryCounter">0 entregas</span></div>
+        <div class="list" id="availableDeliveries"><div class="empty">Nenhuma entrega disponível ainda.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="fluxo">
+  <div class="container">
+    <div class="eyebrow">Fluxo completo</div>
+    <h2>Como o sistema funciona</h2>
+    <p class="sub">Pedido, restaurante, entrega e motoboy ficam organizados em um fluxo único.</p>
+    <div class="flow">
+      <div class="step"><div class="num">1</div><strong>Cliente pede</strong><small>Escolhe itens no site.</small></div>
+      <div class="step"><div class="num">2</div><strong>Restaurante recebe</strong><small>Pedido entra no painel.</small></div>
+      <div class="step"><div class="num">3</div><strong>Pedido aceito</strong><small>Equipe começa preparo.</small></div>
+      <div class="step"><div class="num">4</div><strong>Liberar entrega</strong><small>Pedido aparece para motoboys.</small></div>
+      <div class="step"><div class="num">5</div><strong>Motoboy aceita</strong><small>Entregador aprovado pega a rota.</small></div>
+      <div class="step"><div class="num">6</div><strong>Em rota</strong><small>Status atualizado.</small></div>
+      <div class="step"><div class="num">7</div><strong>Entregue</strong><small>Pedido finalizado.</small></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer"><div class="container footer-inner"><div>DeliveryHub Demo · Sistema com módulo de motoboys</div><div>Cliente · Restaurante · Motoboy</div></div></footer>
+
+<script>
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzEHeYQm4gsQa1s_KhCEodbpXproeYESNoe8uhjJaKRQ0ab3-9drjx2yGpXrWZyfkTA/exec';
+
+
+function makeFrontId(prefix) {
+  const now = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  const stamp =
+    now.getFullYear() +
+    pad(now.getMonth() + 1) +
+    pad(now.getDate()) +
+    '-' +
+    pad(now.getHours()) +
+    pad(now.getMinutes()) +
+    pad(now.getSeconds());
+  const rand = Math.floor(Math.random() * 9000) + 1000;
+  return prefix + '-' + stamp + '-' + rand;
 }
 
-/*******************************************************
- * DELIVERYHUB ILHABELA
- * Google Sheets + Apps Script backend
- *
- * Actions:
- * - createMotoboy
- * - approveMotoboy
- * - getMotoboys
- * - createOrder
- * - getOrders
- * - releaseDelivery
- * - getAvailableDeliveries
- * - acceptDelivery
- * - updateDeliveryStatus
- * - getSettings
- *******************************************************/
-
-const DELIVERYHUB = {
-  SHEETS: {
-    SETTINGS: 'Settings',
-    ADMIN_LOG: 'Admin_Log',
-    RESTAURANTS: 'Restaurants',
-    MOTOBOYS: 'Motoboys',
-    ORDERS: 'Orders',
-    DELIVERIES: 'Deliveries',
-    APPROVALS: 'Approvals',
-  },
-
-  STATUSES: {
-    MOTOBOY_PENDING: 'Aguardando aprovação',
-    MOTOBOY_APPROVED: 'Aprovado',
-    MOTOBOY_REJECTED: 'Recusado',
-    MOTOBOY_BLOCKED: 'Bloqueado',
-
-    ORDER_NEW: 'Novo pedido',
-    ORDER_ACCEPTED: 'Aceito',
-    ORDER_PREPARING: 'Em preparo',
-    ORDER_READY_FOR_DELIVERY: 'Pronto para entrega',
-    ORDER_COMPLETED: 'Finalizado',
-    ORDER_CANCELLED: 'Cancelado',
-
-    DELIVERY_AVAILABLE: 'Disponível',
-    DELIVERY_ACCEPTED: 'Aceita',
-    DELIVERY_ON_ROUTE: 'Em rota',
-    DELIVERY_DELIVERED: 'Entregue',
-    DELIVERY_CANCELLED: 'Cancelada',
-  },
-};
-
-/*******************************************************
- * WEB APP ENTRY POINTS
- *******************************************************/
-
-function doGet(e) {
-  return handleRequest_(e);
-}
-
-function doPost(e) {
-  return handleRequest_(e);
-}
-
-function handleRequest_(e) {
+async function sendToBackend(payload) {
   try {
-    const payload = parsePayload_(e);
-    const action = normalizeAction_(payload.action);
+    await fetch(WEB_APP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(payload)
+    });
 
-    let result;
-
-    switch (action) {
-      case 'getsettings':
-        result = getSettingsPublic_();
-        break;
-
-      case 'createmotoboy':
-        result = createMotoboy_(payload);
-        break;
-
-      case 'getmotoboys':
-        result = getMotoboys_(payload);
-        break;
-
-      case 'approvemotoboy':
-        result = approveMotoboy_(payload);
-        break;
-
-      case 'createorder':
-        result = createOrder_(payload);
-        break;
-
-      case 'getorders':
-        result = getOrders_(payload);
-        break;
-
-      case 'releaseDelivery':
-      case 'releasedelivery':
-        result = releaseDelivery_(payload);
-        break;
-
-      case 'getavailabledeliveries':
-        result = getAvailableDeliveries_(payload);
-        break;
-
-      case 'acceptdelivery':
-        result = acceptDelivery_(payload);
-        break;
-
-      case 'updatedeliverystatus':
-        result = updateDeliveryStatus_(payload);
-        break;
-
-      default:
-        result = {
-          status: 'error',
-          message: 'Unknown action: ' + (payload.action || ''),
-        };
-    }
-
-    return jsonResponse_(result);
-  } catch (err) {
-    logAdmin_('Backend error', 'SYSTEM', '', err.message);
-    return jsonResponse_({
+    return {
+      status: 'sent'
+    };
+  } catch (error) {
+    console.error('Backend send failed:', error);
+    return {
       status: 'error',
-      message: err.message,
-    });
+      message: error.message
+    };
   }
 }
 
-/*******************************************************
- * SETTINGS
- *******************************************************/
+const currency=new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'});
+let drivers=[],cart=[],orders=[],deliveries=[],orderNumber=1040;
+const $=id=>document.getElementById(id);
+function toast(m){const t=$('toast');t.textContent=m;t.classList.remove('show');void t.offsetWidth;t.classList.add('show');}
+function renderDrivers(){
+  $('driverCounter').textContent=drivers.length===1?'1 cadastrado':drivers.length+' cadastrados';
+  if(!drivers.length){$('driverList').innerHTML='<div class="empty">Nenhum motoboy cadastrado ainda.</div>';return;}
+  $('driverList').innerHTML=drivers.map(d=>`<article class="item"><div class="top"><div><strong>${d.name}</strong><small>${d.phone}</small></div><span class="tag ${d.status==='Aprovado'?'':'orange'}">${d.status}</span></div><div class="meta"><div>📍 ${d.neighborhood} · ${d.city}/${d.state}</div><div>🛵 ${d.vehicle} · ${d.availability}</div>${d.notes?`<div>📝 ${d.notes}</div>`:''}</div><div class="actions"><button class="mini green" onclick="approveDriver(${d.id})">Aprovar</button><button class="mini red" onclick="removeDriver(${d.id})">Remover</button></div></article>`).join('');
+}
+async function approveDriver(id){
+ drivers=drivers.map(d=>d.id===id?{...d,status:'Aprovado'}:d);
+ renderDrivers();
+ toast('Aprovando motoboy no backend...');
 
-function getSettingsPublic_() {
-  return {
-    status: 'ok',
-    settings: {
-      platformName: getSetting_('Platform Name', 'DeliveryHub Ilhabela'),
-      defaultCity: getSetting_('Default City', 'Ilhabela'),
-      defaultState: getSetting_('Default State', 'SP'),
-      deliveryBaseFee: Number(getSetting_('Delivery Base Fee', 8)),
-      perequeFee: Number(getSetting_('Perequê Fee', 10)),
-      barraVelhaFee: Number(getSetting_('Barra Velha Fee', 10)),
-      itaguacuFee: Number(getSetting_('Itaguaçu Fee', 12)),
-      aguaBrancaFee: Number(getSetting_('Água Branca Fee', 12)),
-      sacoDaCapelaFee: Number(getSetting_('Saco da Capela Fee', 14)),
-      curralPortinhoFee: Number(getSetting_('Curral / Portinho Fee', 18)),
-    },
-  };
+ await sendToBackend({
+   action: 'approveMotoboy',
+   motoboyId: id,
+   status: 'Aprovado',
+   approvedBy: 'Restaurante Demo',
+   restaurantId: 'REST-DEMO',
+   notes: 'Aprovado pelo painel do restaurante'
+ });
+
+ toast('Motoboy aprovado e enviado ao Google Sheets.');
+}
+function removeDriver(id){drivers=drivers.filter(d=>d.id!==id);renderDrivers();renderDeliveries();toast('Motoboy removido.');}
+$('driverForm').addEventListener('submit', async e=>{
+ e.preventDefault();
+
+ const motoboyId = makeFrontId('MOTO');
+
+ const driverPayload = {
+   action: 'createMotoboy',
+   motoboyId: motoboyId,
+   name: $('driverName').value.trim(),
+   phone: $('driverPhone').value.trim(),
+   email: '',
+   state: $('driverState').value,
+   city: $('driverCity').value.trim() || 'Ilhabela',
+   neighborhood: $('driverNeighborhood').value.trim(),
+   mainNeighborhood: $('driverNeighborhood').value.trim(),
+   serviceAreas: $('driverNeighborhood').value.trim(),
+   vehicle: $('driverVehicle').value,
+   availability: $('driverAvailability').value,
+   notes: $('driverNotes').value.trim()
+ };
+
+ drivers.unshift({
+   id: motoboyId,
+   backendMotoboyId: motoboyId,
+   name: driverPayload.name,
+   phone: driverPayload.phone,
+   state: driverPayload.state,
+   city: driverPayload.city,
+   neighborhood: driverPayload.neighborhood,
+   vehicle: driverPayload.vehicle,
+   availability: driverPayload.availability,
+   notes: driverPayload.notes,
+   status:'Aguardando aprovação'
+ });
+
+ $('driverStatus').className='notice success';
+ $('driverStatus').textContent='Enviando cadastro para Google Sheets...';
+ renderDrivers();
+
+ const result = await sendToBackend(driverPayload);
+
+ $('driverForm').reset();
+
+ if (result.status === 'sent') {
+   $('driverStatus').className='notice success';
+   $('driverStatus').textContent='Motoboy enviado para o Google Sheets. Status inicial: aguardando aprovação.';
+   toast('Motoboy enviado para o backend.');
+ } else {
+   $('driverStatus').className='notice error';
+   $('driverStatus').textContent='Erro ao enviar para backend. O demo local continua funcionando.';
+   toast('Erro ao enviar para backend.');
+ }
+});
+function addToCart(name,price){const x=cart.find(i=>i.name===name);x?x.qty++:cart.push({name,price,qty:1});renderCart();toast('Item adicionado.');}
+function renderCart(){
+ if(!cart.length){$('cartList').innerHTML='<div class="empty">Carrinho vazio.</div>';$('cartTotal').textContent=currency.format(0);return;}
+ $('cartList').innerHTML=cart.map(i=>`<div class="item"><div class="top"><div><strong>${i.qty}x ${i.name}</strong><small>${currency.format(i.price)} cada</small></div><strong>${currency.format(i.price*i.qty)}</strong></div></div>`).join('');
+ $('cartTotal').textContent=currency.format(cart.reduce((s,i)=>s+i.price*i.qty,0));
+}
+$('orderForm').addEventListener('submit', async e=>{
+ e.preventDefault();
+ if(!cart.length){$('orderStatus').className='notice error';$('orderStatus').textContent='Adicione pelo menos um item.';return;}
+
+ const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+ const localOrderId = makeFrontId('ORDER');
+
+ const orderPayload = {
+   action: 'createOrder',
+   orderId: localOrderId,
+   restaurantId: 'REST-DEMO',
+   customerName: $('customerName').value.trim(),
+   customerPhone: $('customerPhone').value.trim(),
+   deliveryType: $('deliveryType').value,
+   paymentMethod: $('paymentMethod').value,
+   address: $('customerAddress').value.trim(),
+   neighborhood: $('customerNeighborhood').value.trim(),
+   city: 'Ilhabela',
+   state: 'SP',
+   notes: $('orderNotes').value.trim(),
+   items: cart.map(item => ({
+     name: item.name,
+     qty: item.qty,
+     price: item.price
+   })),
+   total: total
+ };
+
+ orders.unshift({
+   id: localOrderId,
+   backendOrderId: '',
+   customerName: orderPayload.customerName,
+   customerPhone: orderPayload.customerPhone,
+   deliveryType: orderPayload.deliveryType,
+   paymentMethod: orderPayload.paymentMethod,
+   address: orderPayload.address,
+   neighborhood: orderPayload.neighborhood,
+   city: 'Ilhabela/SP',
+   notes: orderPayload.notes,
+   items: [...cart],
+   total,
+   status:'Novo pedido'
+ });
+
+ $('orderStatus').className='notice success';
+ $('orderStatus').textContent='Enviando pedido para Google Sheets...';
+ renderOrders();
+
+ const result = await sendToBackend(orderPayload);
+
+ cart=[];
+ $('orderForm').reset();
+ $('customerCity').value='Ilhabela/SP';
+ renderCart();
+
+ if (result.status === 'sent') {
+   $('orderStatus').className='notice success';
+   $('orderStatus').textContent='Pedido enviado para o Google Sheets. Veja também no painel visual do restaurante.';
+   toast('Pedido enviado para o backend.');
+ } else {
+   $('orderStatus').className='notice error';
+   $('orderStatus').textContent='Erro ao enviar para backend. O demo local continua funcionando.';
+   toast('Erro ao enviar para backend.');
+ }
+
+ $('restaurante').scrollIntoView({behavior:'smooth'});
+});
+function renderOrders(){
+ $('orderCounter').textContent=orders.length===1?'1 pedido':orders.length+' pedidos';
+ if(!orders.length){$('restaurantOrders').innerHTML='<div class="empty" style="background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:#cbd5e1;">Nenhum pedido recebido ainda.</div>';return;}
+ $('restaurantOrders').innerHTML=orders.map(o=>`<article class="item"><div class="top"><div><strong>Pedido #${o.id}</strong><small>${o.customerName} · ${o.customerPhone}</small></div><span class="tag orange">${o.status}</span></div><div class="meta"><div>📍 ${o.neighborhood} · ${o.city}</div><div>💳 ${o.paymentMethod} · ${o.deliveryType}</div><div>💰 ${currency.format(o.total)}</div>${o.address?`<div>🏠 ${o.address}</div>`:''}</div><ul>${o.items.map(i=>`<li>${i.qty}x ${i.name} — ${currency.format(i.price*i.qty)}</li>`).join('')}</ul><div class="actions"><button class="mini green" onclick="updateOrder(${o.id},'Aceito')">Aceitar</button><button class="mini orange" onclick="updateOrder(${o.id},'Em preparo')">Em preparo</button><button class="mini blue" onclick="releaseDelivery(${o.id})">Liberar entrega</button></div></article>`).join('');
+}
+function updateOrder(id,status){orders=orders.map(o=>o.id===id?{...o,status}:o);renderOrders();toast('Status atualizado.');}
+function fee(n){n=String(n||'').toLowerCase();if(n.includes('centro'))return 8;if(n.includes('perequê')||n.includes('pereque'))return 10;if(n.includes('barra velha'))return 10;if(n.includes('itaguaçu')||n.includes('itaguacu'))return 12;if(n.includes('água branca')||n.includes('agua branca'))return 12;if(n.includes('saco da capela'))return 14;if(n.includes('curral')||n.includes('portinho'))return 18;return 12;}
+async function releaseDelivery(id){
+ const order=orders.find(o=>o.id===id);
+ if(!order) return;
+
+ const deliveryFee = fees[order.neighborhood] || 12;
+ const deliveryId = makeFrontId('DELIVERY');
+
+ deliveries.unshift({
+   id: deliveryId,
+   orderId: id,
+   customerName: order.customerName,
+   neighborhood: order.neighborhood,
+   address: order.address,
+   fee: deliveryFee,
+   status: 'Disponível',
+   motoboyId: '',
+   motoboyName: ''
+ });
+
+ orders=orders.map(o=>o.id===id?{...o,status:'Pronto para entrega'}:o);
+ renderOrders();
+ renderDeliveries();
+ toast('Liberando entrega no backend...');
+
+ await sendToBackend({
+   action: 'releaseDelivery',
+   orderId: id,
+   restaurantId: 'REST-DEMO',
+   pickupNeighborhood: 'Centro',
+   notes: 'Liberado pelo painel do restaurante'
+ });
+
+ toast('Entrega liberada e enviada ao Google Sheets.');
+}
+function renderDeliveries(){
+ $('deliveryCounter').textContent=deliveries.length===1?'1 entrega':deliveries.length+' entregas';
+ if(!deliveries.length){$('availableDeliveries').innerHTML='<div class="empty">Nenhuma entrega disponível ainda.</div>';return;}
+ const approved=drivers.filter(d=>d.status==='Aprovado');
+ $('availableDeliveries').innerHTML=deliveries.map(d=>`<article class="item"><div class="top"><div><strong>Entrega do Pedido #${d.id}</strong><small>${d.restaurant}</small></div><span class="tag ${d.status==='Disponível'?'orange':''}">${d.status}</span></div><div class="meta"><div>📦 Retirada: ${d.pickup}</div><div>📍 Entrega: ${d.destination}</div><div>💰 Valor motoboy: ${currency.format(d.fee)}</div>${d.driver?`<div>🛵 Motoboy: ${d.driver}</div>`:''}</div><div class="actions">${approved.length?approved.map(a=>`<button class="mini blue" onclick="acceptDelivery(${d.id}, '${a.name.replace(/'/g,"\'")}')">${a.name} aceitar</button>`).join(''):'<span class="notice">Nenhum motoboy aprovado ainda.</span>'}<button class="mini orange" onclick="deliveryStatus(${d.id},'Em rota')">Em rota</button><button class="mini green" onclick="deliveryStatus(${d.id},'Entregue')">Entregue</button></div></article>`).join('');
+}
+function acceptDelivery(id,name){deliveries=deliveries.map(d=>d.id===id?{...d,driver:name,status:'Aceita'}:d);renderDeliveries();toast(name+' aceitou a entrega.');}
+function deliveryStatus(id,status){deliveries=deliveries.map(d=>d.id===id?{...d,status}:d);renderDeliveries();toast('Status da entrega atualizado.');}
+renderDrivers();renderCart();renderOrders();renderDeliveries();
+
+async function markDeliveryDelivered(deliveryId){
+ const delivery = deliveries.find(d => d.id === deliveryId);
+ if (!delivery) return;
+
+ deliveries = deliveries.map(d => d.id === deliveryId ? {
+   ...d,
+   status: 'Entregue'
+ } : d);
+
+ orders = orders.map(o => String(o.id) === String(delivery.orderId) ? {
+   ...o,
+   status: 'Finalizado'
+ } : o);
+
+ renderDeliveries();
+ renderOrders();
+ toast('Marcando entrega como finalizada no backend...');
+
+ await sendToBackend({
+   action: 'updateDeliveryStatus',
+   deliveryId: deliveryId,
+   status: 'Entregue',
+   orderId: delivery.orderId,
+   restaurantId: 'REST-DEMO',
+   notes: 'Motoboy marcou como entregue pelo painel'
+ });
+
+ toast('Entrega finalizada. Restaurante atualizado.');
 }
 
-function getSetting_(key, fallback) {
-  const sheet = getSheet_(DELIVERYHUB.SHEETS.SETTINGS);
-  const lastRow = sheet.getLastRow();
+async function markDeliveryOnRoute(deliveryId){
+ deliveries = deliveries.map(d => d.id === deliveryId ? {
+   ...d,
+   status: 'Em rota'
+ } : d);
 
-  if (lastRow < 1) return fallback;
+ renderDeliveries();
+ toast('Atualizando status para em rota...');
 
-  const values = sheet.getRange(1, 1, lastRow, 2).getValues();
-  const wanted = normalizeKey_(key);
+ await sendToBackend({
+   action: 'updateDeliveryStatus',
+   deliveryId: deliveryId,
+   status: 'Em rota',
+   notes: 'Motoboy marcou como em rota'
+ });
 
-  for (let i = 0; i < values.length; i++) {
-    const setting = values[i][0];
-    const value = values[i][1];
-
-    if (!setting) continue;
-    if (normalizeKey_(setting) === 'setting') continue;
-
-    if (normalizeKey_(setting) === wanted) {
-      return value !== '' && value !== null && value !== undefined ? value : fallback;
-    }
-  }
-
-  return fallback;
+ toast('Status em rota enviado ao backend.');
 }
 
-/*******************************************************
- * MOTOBOYS
- *******************************************************/
 
-function createMotoboy_(payload) {
-  const sheet = getSheet_(DELIVERYHUB.SHEETS.MOTOBOYS);
-
-  const motoboyId = clean_(payload.motoboyId) || createId_('MOTO');
-  const city = clean_(payload.city || getSetting_('Default City', 'Ilhabela'));
-  const state = clean_(payload.state || getSetting_('Default State', 'SP'));
-
-  const row = {
-    'Created At': new Date(),
-    'Motoboy ID': motoboyId,
-    'Name': clean_(payload.name),
-    'Phone': clean_(payload.phone),
-    'Email': clean_(payload.email),
-    'Vehicle': clean_(payload.vehicle || 'Moto'),
-    'State': state,
-    'City': city,
-    'Main Neighborhood': clean_(payload.neighborhood || payload.mainNeighborhood),
-    'Service Areas': clean_(payload.serviceAreas),
-    'Availability': clean_(payload.availability),
-    'Status': DELIVERYHUB.STATUSES.MOTOBOY_PENDING,
-    'Approved By': '',
-    'Approved At': '',
-    'Notes': clean_(payload.notes),
-  };
-
-  if (!row['Name']) throw new Error('Motoboy name is required.');
-  if (!row['Phone']) throw new Error('Motoboy phone is required.');
-  if (!row['Main Neighborhood']) throw new Error('Motoboy neighborhood is required.');
-
-  appendObjectRow_(sheet, row);
-
-  logAdmin_(
-    'Motoboy registered',
-    motoboyId,
-    row['Email'] || row['Phone'],
-    row['Name'] + ' | ' + row['Main Neighborhood'] + ' | ' + row['City'] + '/' + row['State']
-  );
-
-  return {
-    status: 'ok',
-    message: 'Motoboy registered successfully.',
-    motoboyId: motoboyId,
-    motoboy: row,
-  };
-}
-
-function getMotoboys_(payload) {
-  const rows = getRowsAsObjects_(DELIVERYHUB.SHEETS.MOTOBOYS);
-
-  const statusFilter = clean_(payload.status);
-  const cityFilter = clean_(payload.city);
-  const stateFilter = clean_(payload.state);
-
-  let result = rows;
-
-  if (statusFilter) {
-    result = result.filter(r => normalizeKey_(r['Status']) === normalizeKey_(statusFilter));
-  }
-
-  if (cityFilter) {
-    result = result.filter(r => normalizeKey_(r['City']) === normalizeKey_(cityFilter));
-  }
-
-  if (stateFilter) {
-    result = result.filter(r => normalizeKey_(r['State']) === normalizeKey_(stateFilter));
-  }
-
-  return {
-    status: 'ok',
-    count: result.length,
-    motoboys: result,
-  };
-}
-
-function approveMotoboy_(payload) {
-  const motoboyId = clean_(payload.motoboyId);
-  const newStatus = clean_(payload.status || DELIVERYHUB.STATUSES.MOTOBOY_APPROVED);
-  const approvedBy = clean_(payload.approvedBy || payload.user || 'Admin');
-
-  if (!motoboyId) throw new Error('motoboyId is required.');
-
-  const sheet = getSheet_(DELIVERYHUB.SHEETS.MOTOBOYS);
-  const match = findRowByValue_(sheet, 'Motoboy ID', motoboyId);
-
-  if (!match) throw new Error('Motoboy not found: ' + motoboyId);
-
-  updateRowByHeaders_(sheet, match.rowNumber, {
-    'Status': newStatus,
-    'Approved By': approvedBy,
-    'Approved At': new Date(),
-  });
-
-  appendApproval_(motoboyId, newStatus, approvedBy, clean_(payload.restaurantId), clean_(payload.notes));
-
-  logAdmin_(
-    'Motoboy approval updated',
-    motoboyId,
-    '',
-    newStatus + ' by ' + approvedBy
-  );
-
-  return {
-    status: 'ok',
-    message: 'Motoboy status updated.',
-    motoboyId: motoboyId,
-    newStatus: newStatus,
-  };
-}
-
-function appendApproval_(motoboyId, status, approvedBy, restaurantId, notes) {
-  const sheet = getSheet_(DELIVERYHUB.SHEETS.APPROVALS);
-
-  appendObjectRow_(sheet, {
-    'Timestamp': new Date(),
-    'Approval ID': createId_('APPROVAL'),
-    'Motoboy ID': motoboyId,
-    'Restaurant ID': restaurantId || '',
-    'Status': status,
-    'Approved By': approvedBy,
-    'Notes': notes || '',
-  });
-}
-
-/*******************************************************
- * ORDERS
- *******************************************************/
-
-function createOrder_(payload) {
-  const sheet = getSheet_(DELIVERYHUB.SHEETS.ORDERS);
-
-  const orderId = clean_(payload.orderId) || createId_('ORDER');
-  const city = clean_(payload.city || getSetting_('Default City', 'Ilhabela'));
-  const state = clean_(payload.state || getSetting_('Default State', 'SP'));
-
-  const itemsText = typeof payload.items === 'string'
-    ? payload.items
-    : JSON.stringify(payload.items || []);
-
-  const total = Number(payload.total || 0);
-
-  const row = {
-    'Created At': new Date(),
-    'Order ID': orderId,
-    'Restaurant ID': clean_(payload.restaurantId || 'REST-DEMO'),
-    'Customer Name': clean_(payload.customerName),
-    'Customer Phone': clean_(payload.customerPhone),
-    'Items': itemsText,
-    'Total': total,
-    'Payment Method': clean_(payload.paymentMethod),
-    'Delivery Type': clean_(payload.deliveryType || 'Entrega'),
-    'Address': clean_(payload.address),
-    'Neighborhood': clean_(payload.neighborhood),
-    'City': city,
-    'State': state,
-    'Order Status': DELIVERYHUB.STATUSES.ORDER_NEW,
-    'Notes': clean_(payload.notes),
-  };
-
-  if (!row['Customer Name']) throw new Error('Customer name is required.');
-  if (!row['Customer Phone']) throw new Error('Customer phone is required.');
-  if (!row['Neighborhood']) throw new Error('Customer neighborhood is required.');
-
-  appendObjectRow_(sheet, row);
-
-  logAdmin_(
-    'Order created',
-    orderId,
-    '',
-    row['Customer Name'] + ' | ' + row['Neighborhood'] + ' | ' + row['City'] + ' | ' + total
-  );
-
-  return {
-    status: 'ok',
-    message: 'Order created successfully.',
-    orderId: orderId,
-    order: row,
-  };
-}
-
-function getOrders_(payload) {
-  const rows = getRowsAsObjects_(DELIVERYHUB.SHEETS.ORDERS);
-
-  const restaurantId = clean_(payload.restaurantId);
-  const orderStatus = clean_(payload.orderStatus || payload.status);
-  const city = clean_(payload.city);
-
-  let result = rows;
-
-  if (restaurantId) {
-    result = result.filter(r => normalizeKey_(r['Restaurant ID']) === normalizeKey_(restaurantId));
-  }
-
-  if (orderStatus) {
-    result = result.filter(r => normalizeKey_(r['Order Status']) === normalizeKey_(orderStatus));
-  }
-
-  if (city) {
-    result = result.filter(r => normalizeKey_(r['City']) === normalizeKey_(city));
-  }
-
-  return {
-    status: 'ok',
-    count: result.length,
-    orders: result,
-  };
-}
-
-/*******************************************************
- * DELIVERIES
- *******************************************************/
-function testReleaseDelivery() {
-  const result = releaseDelivery_({
-    orderId: 'ORDER-20260616-191932-1071',
-    restaurantId: 'REST-DEMO',
-    pickupNeighborhood: 'Centro',
-    notes: 'Teste de liberação de entrega.'
-  });
-
-  Logger.log(JSON.stringify(result, null, 2));
-}
-function releaseDelivery_(payload) {
-  const orderId = clean_(payload.orderId);
-  const restaurantId = clean_(payload.restaurantId || 'REST-DEMO');
-
-  if (!orderId) throw new Error('orderId is required.');
-
-  const ordersSheet = getSheet_(DELIVERYHUB.SHEETS.ORDERS);
-  const orderMatch = findRowByValue_(ordersSheet, 'Order ID', orderId);
-
-  if (!orderMatch) throw new Error('Order not found: ' + orderId);
-
-  const order = orderMatch.object;
-  const deliveryId = createId_('DELIVERY');
-
-  const neighborhood = clean_(order['Neighborhood']);
-  const city = clean_(order['City'] || getSetting_('Default City', 'Ilhabela'));
-  const state = clean_(order['State'] || getSetting_('Default State', 'SP'));
-  const fee = calculateDeliveryFee_(neighborhood);
-
-  const deliveryRow = {
-    'Created At': new Date(),
-    'Delivery ID': deliveryId,
-    'Order ID': orderId,
-    'Restaurant ID': restaurantId || order['Restaurant ID'],
-    'Motoboy ID': '',
-    'Pickup Neighborhood': clean_(payload.pickupNeighborhood || 'Centro'),
-    'Delivery Neighborhood': neighborhood,
-    'City': city,
-    'State': state,
-    'Delivery Fee': fee,
-    'Delivery Status': DELIVERYHUB.STATUSES.DELIVERY_AVAILABLE,
-    'Accepted At': '',
-    'Picked Up At': '',
-    'Delivered At': '',
-    'Notes': clean_(payload.notes),
-  };
-
-  appendObjectRow_(getSheet_(DELIVERYHUB.SHEETS.DELIVERIES), deliveryRow);
-
-  updateRowByHeaders_(ordersSheet, orderMatch.rowNumber, {
-    'Order Status': DELIVERYHUB.STATUSES.ORDER_READY_FOR_DELIVERY,
-  });
-
-  logAdmin_(
-    'Delivery released',
-    deliveryId,
-    '',
-    'Order ' + orderId + ' | ' + neighborhood + ' | Fee ' + fee
-  );
-
-  return {
-    status: 'ok',
-    message: 'Delivery released successfully.',
-    deliveryId: deliveryId,
-    delivery: deliveryRow,
-  };
-}
-
-function getAvailableDeliveries_(payload) {
-  const rows = getRowsAsObjects_(DELIVERYHUB.SHEETS.DELIVERIES);
-
-  const city = clean_(payload.city || getSetting_('Default City', 'Ilhabela'));
-  const state = clean_(payload.state || getSetting_('Default State', 'SP'));
-
-  const result = rows.filter(r => {
-    const isAvailable = normalizeKey_(r['Delivery Status']) === normalizeKey_(DELIVERYHUB.STATUSES.DELIVERY_AVAILABLE);
-    const sameCity = !city || normalizeKey_(r['City']) === normalizeKey_(city);
-    const sameState = !state || normalizeKey_(r['State']) === normalizeKey_(state);
-
-    return isAvailable && sameCity && sameState;
-  });
-
-  return {
-    status: 'ok',
-    count: result.length,
-    deliveries: result,
-  };
-}
-
-function acceptDelivery_(payload) {
-  const deliveryId = clean_(payload.deliveryId);
-  const motoboyId = clean_(payload.motoboyId);
-
-  if (!deliveryId) throw new Error('deliveryId is required.');
-  if (!motoboyId) throw new Error('motoboyId is required.');
-
-  const motoboy = getMotoboyById_(motoboyId);
-
-  if (!motoboy) throw new Error('Motoboy not found: ' + motoboyId);
-
-  if (normalizeKey_(motoboy['Status']) !== normalizeKey_(DELIVERYHUB.STATUSES.MOTOBOY_APPROVED)) {
-    throw new Error('Motoboy is not approved yet.');
-  }
-
-  const sheet = getSheet_(DELIVERYHUB.SHEETS.DELIVERIES);
-  const match = findRowByValue_(sheet, 'Delivery ID', deliveryId);
-
-  if (!match) throw new Error('Delivery not found: ' + deliveryId);
-
-  const currentStatus = clean_(match.object['Delivery Status']);
-
-  if (normalizeKey_(currentStatus) !== normalizeKey_(DELIVERYHUB.STATUSES.DELIVERY_AVAILABLE)) {
-    throw new Error('Delivery is not available.');
-  }
-
-  updateRowByHeaders_(sheet, match.rowNumber, {
-    'Motoboy ID': motoboyId,
-    'Delivery Status': DELIVERYHUB.STATUSES.DELIVERY_ACCEPTED,
-    'Accepted At': new Date(),
-  });
-
-  logAdmin_(
-    'Delivery accepted',
-    deliveryId,
-    motoboy['Email'] || motoboy['Phone'] || '',
-    'Motoboy ' + motoboyId + ' accepted delivery'
-  );
-
-  return {
-    status: 'ok',
-    message: 'Delivery accepted successfully.',
-    deliveryId: deliveryId,
-    motoboyId: motoboyId,
-  };
-}
-
-function updateDeliveryStatus_(payload) {
-  const deliveryId = clean_(payload.deliveryId);
-  const newStatus = clean_(payload.status);
-
-  if (!deliveryId) throw new Error('deliveryId is required.');
-  if (!newStatus) throw new Error('status is required.');
-
-  const sheet = getSheet_(DELIVERYHUB.SHEETS.DELIVERIES);
-  const match = findRowByValue_(sheet, 'Delivery ID', deliveryId);
-
-  if (!match) throw new Error('Delivery not found: ' + deliveryId);
-
-  const updates = {
-    'Delivery Status': newStatus,
-  };
-
-  if (normalizeKey_(newStatus) === normalizeKey_(DELIVERYHUB.STATUSES.DELIVERY_ON_ROUTE)) {
-    updates['Picked Up At'] = new Date();
-  }
-
-  if (normalizeKey_(newStatus) === normalizeKey_(DELIVERYHUB.STATUSES.DELIVERY_DELIVERED)) {
-    updates['Delivered At'] = new Date();
-  }
-
-  updateRowByHeaders_(sheet, match.rowNumber, updates);
-
-  logAdmin_(
-    'Delivery status updated',
-    deliveryId,
-    '',
-    newStatus
-  );
-
-  return {
-    status: 'ok',
-    message: 'Delivery status updated.',
-    deliveryId: deliveryId,
-    newStatus: newStatus,
-  };
-}
-
-function calculateDeliveryFee_(neighborhood) {
-  const n = normalizeKey_(neighborhood);
-
-  if (n.indexOf('centro') !== -1) return Number(getSetting_('Delivery Base Fee', 8));
-  if (n.indexOf('pereque') !== -1) return Number(getSetting_('Perequê Fee', 10));
-  if (n.indexOf('barra velha') !== -1) return Number(getSetting_('Barra Velha Fee', 10));
-  if (n.indexOf('itaguacu') !== -1) return Number(getSetting_('Itaguaçu Fee', 12));
-  if (n.indexOf('agua branca') !== -1) return Number(getSetting_('Água Branca Fee', 12));
-  if (n.indexOf('saco da capela') !== -1) return Number(getSetting_('Saco da Capela Fee', 14));
-  if (n.indexOf('curral') !== -1 || n.indexOf('portinho') !== -1) return Number(getSetting_('Curral / Portinho Fee', 18));
-
-  return Number(getSetting_('Delivery Base Fee', 8));
-}
-
-/*******************************************************
- * HELPERS
- *******************************************************/
-
-function getMotoboyById_(motoboyId) {
-  const sheet = getSheet_(DELIVERYHUB.SHEETS.MOTOBOYS);
-  const match = findRowByValue_(sheet, 'Motoboy ID', motoboyId);
-
-  return match ? match.object : null;
-}
-
-function parsePayload_(e) {
-  if (!e) return {};
-
-  if (e.postData && e.postData.contents) {
-    try {
-      return JSON.parse(e.postData.contents);
-    } catch (err) {
-      throw new Error('Invalid JSON payload.');
-    }
-  }
-
-  return e.parameter || {};
-}
-
-function jsonResponse_(data) {
-  return ContentService
-    .createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-function getSheet_(name) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName(name);
-
-  if (!sheet) {
-    throw new Error('Missing sheet: ' + name);
-  }
-
-  return sheet;
-}
-
-function getHeaders_(sheet) {
-  const lastColumn = sheet.getLastColumn();
-
-  if (lastColumn < 1) return [];
-
-  return sheet
-    .getRange(1, 1, 1, lastColumn)
-    .getValues()[0]
-    .map(h => clean_(h));
-}
-
-function appendObjectRow_(sheet, object) {
-  const headers = getHeaders_(sheet);
-
-  if (!headers.length) {
-    throw new Error('Sheet has no headers: ' + sheet.getName());
-  }
-
-  const row = headers.map(header => {
-    return object.hasOwnProperty(header) ? object[header] : '';
-  });
-
-  sheet.appendRow(row);
-}
-
-function getRowsAsObjects_(sheetName) {
-  const sheet = getSheet_(sheetName);
-  const lastRow = sheet.getLastRow();
-  const lastCol = sheet.getLastColumn();
-
-  if (lastRow < 2 || lastCol < 1) return [];
-
-  const headers = getHeaders_(sheet);
-  const values = sheet.getRange(2, 1, lastRow - 1, lastCol).getValues();
-
-  return values
-    .filter(row => row.some(cell => cell !== '' && cell !== null))
-    .map((row, index) => {
-      const object = {};
-
-      headers.forEach((header, colIndex) => {
-        object[header] = row[colIndex];
-      });
-
-      object['_rowNumber'] = index + 2;
-
-      return object;
-    });
-}
-
-function findRowByValue_(sheet, headerName, value) {
-  const headers = getHeaders_(sheet);
-  const targetCol = headers.findIndex(h => normalizeKey_(h) === normalizeKey_(headerName));
-
-  if (targetCol === -1) {
-    throw new Error('Missing header "' + headerName + '" in sheet ' + sheet.getName());
-  }
-
-  const lastRow = sheet.getLastRow();
-  const lastCol = sheet.getLastColumn();
-
-  if (lastRow < 2) return null;
-
-  const values = sheet.getRange(2, 1, lastRow - 1, lastCol).getValues();
-
-  for (let i = 0; i < values.length; i++) {
-    const row = values[i];
-
-    if (normalizeKey_(row[targetCol]) === normalizeKey_(value)) {
-      const object = {};
-
-      headers.forEach((header, colIndex) => {
-        object[header] = row[colIndex];
-      });
-
-      return {
-        rowNumber: i + 2,
-        object: object,
-      };
-    }
-  }
-
-  return null;
-}
-
-function updateRowByHeaders_(sheet, rowNumber, updates) {
-  const headers = getHeaders_(sheet);
-
-  Object.keys(updates).forEach(headerName => {
-    const colIndex = headers.findIndex(h => normalizeKey_(h) === normalizeKey_(headerName));
-
-    if (colIndex !== -1) {
-      sheet.getRange(rowNumber, colIndex + 1).setValue(updates[headerName]);
-    }
-  });
-}
-
-function logAdmin_(action, leadId, email, details) {
-  const sheet = getSheet_(DELIVERYHUB.SHEETS.ADMIN_LOG);
-
-  sheet.appendRow([
-    new Date(),
-    action || '',
-    leadId || '',
-    email || '',
-    details || '',
-  ]);
-}
-
-function createId_(prefix) {
-  const timestamp = Utilities.formatDate(new Date(), Session.getScriptTimeZone(), 'yyyyMMdd-HHmmss');
-  const random = Math.floor(Math.random() * 9000) + 1000;
-
-  return prefix + '-' + timestamp + '-' + random;
-}
-
-function clean_(value) {
-  if (value === null || value === undefined) return '';
-  return String(value).trim();
-}
-
-function normalizeAction_(value) {
-  return clean_(value).toLowerCase();
-}
-
-function normalizeKey_(value) {
-  return clean_(value)
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\\u0300-\\u036f]/g, '')
-    .replace(/[_\\-\\/]+/g, ' ')
-    .replace(/\\s+/g, ' ')
-    .trim();
-}
-
-/*******************************************************
- * OPTIONAL TEST FUNCTIONS
- *******************************************************/
-
-function testCreateMotoboy() {
-  const result = createMotoboy_({
-    name: 'João Motoboy Teste',
-    phone: '(12) 99999-9999',
-    email: 'teste@example.com',
-    vehicle: 'Moto',
-    state: 'SP',
-    city: 'Ilhabela',
-    neighborhood: 'Perequê',
-    serviceAreas: 'Centro, Perequê, Barra Velha',
-    availability: 'Almoço e jantar',
-    notes: 'Teste manual do Apps Script.',
-  });
-
-  Logger.log(JSON.stringify(result, null, 2));
-}
-
-function testCreateOrder() {
-  const result = createOrder_({
-    restaurantId: 'REST-DEMO',
-    customerName: 'Cliente Teste',
-    customerPhone: '(12) 98888-8888',
-    items: [
-      { name: 'Pizza Média', qty: 1, price: 49.90 },
-      { name: 'Suco Natural', qty: 2, price: 8.00 },
-    ],
-    total: 65.90,
-    paymentMethod: 'Pix',
-    deliveryType: 'Entrega',
-    address: 'Rua Teste, 123',
-    neighborhood: 'Perequê',
-    city: 'Ilhabela',
-    state: 'SP',
-    notes: 'Pedido de teste.',
-  });
-
-  Logger.log(JSON.stringify(result, null, 2));
-}
+async function setDeliveryOnRoute(id){ return markDeliveryOnRoute(id); }
+async function completeDelivery(id){ return markDeliveryDelivered(id); }
+async function deliveredDelivery(id){ return markDeliveryDelivered(id); }
+async function finishDelivery(id){ return markDeliveryDelivered(id); }
+async function markAsDelivered(id){ return markDeliveryDelivered(id); }
+
+</script>
+</body>
+</html>
