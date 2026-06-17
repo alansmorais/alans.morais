@@ -1,822 +1,843 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DeliveryHub Ilhabela | Sistema Completo</title>
-<style>
-:root {
-  --bg:#f5f4ef;
-  --card:#ffffff;
-  --ink:#1f2933;
-  --muted:#6b7280;
-  --line:#e6e1d8;
-  --brand:#0f766e;
-  --dark:#073b36;
-  --orange:#f59e0b;
-  --green:#16a34a;
-  --red:#dc2626;
-  --blue:#2563eb;
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
-header{background:linear-gradient(135deg,var(--dark),var(--brand));color:white;padding:28px 18px}
-.wrap{max-width:1180px;margin:0 auto}
-.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:center}
-h1{font-size:clamp(30px,5vw,56px);line-height:1;margin:0 0 12px}
-h2{font-size:26px;margin:0 0 12px}
-h3{margin:0 0 10px}
-p{line-height:1.55}
-.sub{color:rgba(255,255,255,.82);font-size:18px;max-width:720px}
-.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.badge{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);padding:8px 10px;border-radius:999px;font-size:13px}
-.panel{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:24px;padding:18px}
-.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:18px}
-.card{grid-column:span 6;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 10px 30px rgba(15,23,42,.07)}
-.card.full{grid-column:1/-1}
-.card.third{grid-column:span 4}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
-.tab{border:1px solid var(--line);background:white;border-radius:999px;padding:10px 14px;cursor:pointer;font-weight:700}
-.tab.active{background:var(--dark);color:white;border-color:var(--dark)}
-.section{display:none}
-.section.active{display:block}
-label{font-size:13px;font-weight:800;color:#344054;display:block;margin:10px 0 6px}
-input,select,textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff;font:inherit}
-textarea{min-height:74px;resize:vertical}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-button{border:0;border-radius:12px;padding:11px 13px;font-weight:900;cursor:pointer;background:var(--dark);color:white}
-button:hover{filter:brightness(.96)}
-button:disabled{opacity:.55;cursor:not-allowed}
-button.green{background:var(--green)}
-button.orange{background:var(--orange);color:#271600}
-button.red{background:var(--red)}
-button.blue{background:var(--blue)}
-button.light{background:#eef2f7;color:#111827}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.item{border:1px solid var(--line);background:#fff;border-radius:18px;padding:14px;margin:10px 0}
-.itemTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-small,.muted{color:var(--muted)}
-.tag{display:inline-flex;align-items:center;border-radius:999px;padding:5px 9px;font-size:12px;font-weight:900;background:#eef2f7;color:#334155}
-.tag.green{background:#dcfce7;color:#166534}
-.tag.orange{background:#fef3c7;color:#92400e}
-.tag.red{background:#fee2e2;color:#991b1b}
-.tag.blue{background:#dbeafe;color:#1e40af}
-.meta{display:grid;gap:4px;margin-top:8px;color:#475467;font-size:14px}
-.notice{border-radius:14px;padding:12px;background:#f8fafc;border:1px solid var(--line);font-size:14px;margin-top:10px}
-.notice.ok{background:#dcfce7;border-color:#86efac}
-.notice.err{background:#fee2e2;border-color:#fecaca}
-.notice.warn{background:#fef3c7;border-color:#fde68a}
-.menu{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.menu button{background:#fff;color:#111827;border:1px solid var(--line);text-align:left}
-.cartLine{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:8px 0}
-.toast{position:fixed;bottom:18px;right:18px;background:#111827;color:white;padding:13px 16px;border-radius:16px;box-shadow:0 12px 32px rgba(0,0,0,.25);z-index:10;opacity:0;transform:translateY(10px);transition:.25s}
-.toast.show{opacity:1;transform:translateY(0)}
-code{background:#eef2f7;border-radius:8px;padding:2px 6px}
-@media(max-width:860px){
-  .hero,.row{grid-template-columns:1fr}
-  .card,.card.third{grid-column:1/-1}
-  .menu{grid-template-columns:1fr}
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DeliveryHub Ilhabela | Sistema Completo</title>
+  <style>
+    :root {
+      --bg: #f5f4ef;
+      --card: #ffffff;
+      --ink: #1f2933;
+      --muted: #6b7280;
+      --line: #e6e1d8;
+      --brand: #0f766e;
+      --dark: #073b36;
+      --orange: #f59e0b;
+      --green: #16a34a;
+      --red: #dc2626;
+      --blue: #2563eb;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif; }
+    header { background: linear-gradient(135deg, var(--dark), var(--brand)); color: white; padding: 28px 18px; }
+    .wrap { max-width: 1180px; margin: 0 auto; }
+    
+    .hero { padding: 10px 0; }
+    h1 { font-size: clamp(30px, 5vw, 56px); line-height: 1; margin: 0 0 12px; }
+    h2 { font-size: 26px; margin: 0 0 12px; }
+    h3 { margin: 0 0 10px; }
+    p { line-height: 1.55; }
+    .sub { color: rgba(255, 255, 255, .82); font-size: 18px; max-width: 720px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .badge { border: 1px solid rgba(255, 255, 255, .25); background: rgba(255, 255, 255, .12); padding: 8px 10px; border-radius: 999px; font-size: 13px; }
+    
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: 18px; }
+    .card { grid-column: span 6; background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 18px; box-shadow: 0 10px 30px rgba(15, 23, 42, .07); }
+    .card.full { grid-column: 1 / -1; }
+    .card.third { grid-column: span 4; }
+    
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0; justify-content: space-between; align-items: center; }
+    .tabs-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tab { border: 1px solid var(--line); background: white; color: var(--ink); border-radius: 999px; padding: 10px 14px; cursor: pointer; font-weight: 700; transition: 0.2s; }
+    .tab.active { background: var(--dark); color: white; border-color: var(--dark); }
+    .section { display: none; }
+    .section.active { display: block; }
+    
+    label { font-size: 13px; font-weight: 800; color: #344054; display: block; margin: 10px 0 6px; }
+    input, select, textarea { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 11px 12px; background: #fff; font: inherit; outline: none; transition: 0.2s; }
+    input:focus, select:focus, textarea:focus { border-color: var(--brand); }
+    textarea { min-height: 74px; resize: vertical; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    
+    button { border: 0; border-radius: 12px; padding: 11px 13px; font-weight: 900; cursor: pointer; background: var(--dark); color: white; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: 0.2s; }
+    button:hover { filter: brightness(0.96); }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    button.green { background: var(--green); }
+    button.orange { background: var(--orange); color: #271600; }
+    button.red { background: var(--red); }
+    button.blue { background: var(--blue); }
+    button.light { background: #eef2f7; color: #111827; border: 1px solid var(--line); }
+    button.light:hover { background: #e2e8f0; }
+    
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .item { border: 1px solid var(--line); background: #fff; border-radius: 18px; padding: 14px; margin: 10px 0; }
+    .itemTop { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+    small, .muted { color: var(--muted); }
+    .tag { display: inline-flex; align-items: center; border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 900; background: #eef2f7; color: #334155; }
+    .tag.green { background: #dcfce7; color: #166534; }
+    .tag.orange { background: #fef3c7; color: #92400e; }
+    .tag.red { background: #fee2e2; color: #991b1b; }
+    .tag.blue { background: #dbeafe; color: #1e40af; }
+    .meta { display: grid; gap: 4px; margin-top: 8px; color: #475467; font-size: 14px; }
+    
+    .notice { border-radius: 14px; padding: 12px; background: #f8fafc; border: 1px solid var(--line); font-size: 14px; margin-top: 10px; }
+    .notice.ok { background: #dcfce7; border-color: #86efac; color: #166534; }
+    .notice.err { background: #fee2e2; border-color: #fecaca; color: #991b1b; }
+    .notice.warn { background: #fef3c7; border-color: #fde68a; color: #92400e; }
+    
+    .menu { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .menu button { background: #fff; color: #111827; border: 1px solid var(--line); text-align: left; display: block; height: 100%; }
+    .menu button:hover { border-color: var(--brand); background: #f8fafc; }
+    .cartLine { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--line); padding: 8px 0; }
+    
+    .toast { position: fixed; bottom: 18px; right: 18px; background: #111827; color: white; padding: 13px 16px; border-radius: 16px; box-shadow: 0 12px 32px rgba(0, 0, 0, .25); z-index: 10; opacity: 0; transform: translateY(10px); transition: .25s; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    code { background: #eef2f7; border-radius: 8px; padding: 2px 6px; }
+    
+    @media(max-width: 860px) {
+      .row { grid-template-columns: 1fr; }
+      .card, .card.third { grid-column: 1 / -1; }
+      .menu { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-<header>
-  <div class="wrap hero">
-    <div>
+
+  <header>
+    <div class="wrap hero">
       <h1>DeliveryHub Ilhabela</h1>
-      <p class="sub">Demo completo: cadastro de motoboy, aprovação pelo restaurante, pedidos, entrega linear para motoboys e atualização automática do painel.</p>
+      <p class="sub">Sistema completo de pedidos, gestão de motoboys e acompanhamento em tempo real.</p>
       <div class="badges">
-        <span class="badge">Google Sheets + Apps Script</span>
-        <span class="badge">Motoboy em fila linear</span>
-        <span class="badge">Admin_Log A:E</span>
+        <span class="badge">Aprovação de Motoboys</span>
+        <span class="badge">Fila Linear Inteligente</span>
         <span class="badge">Ilhabela/SP</span>
       </div>
     </div>
-    <div class="panel">
-      <strong>Status do backend</strong>
-      <p id="backendStatus">Conectado ao Web App configurado.</p>
-      <small>URL: <code id="shortUrl"></code></small>
-      <div class="actions">
-        <button onclick="refreshFromBackend()" class="orange">Sincronizar com Google Sheets</button>
-        <button onclick="resetLocal()" class="light">Limpar demo local</button>
+  </header>
+
+  <main class="wrap">
+    
+    <div class="tabs">
+      <div class="tabs-group">
+        <button class="tab active" onclick="showSection('cliente', this)">Área do Cliente</button>
+        <button class="tab" onclick="showSection('motoboy', this)">Portal do Motoboy</button>
+        <button class="tab" onclick="showSection('restaurante', this)">Painel do Restaurante</button>
       </div>
+      <!-- Botão utilitário caso queiram limpar cache local em testes -->
+      <button onclick="resetLocal()" class="light" style="font-size: 12px; padding: 8px 12px;">Limpar Cache App</button>
     </div>
-  </div>
-</header>
 
-<main class="wrap">
-  <div class="tabs">
-    <button class="tab active" onclick="showSection('cliente', this)">Cliente</button>
-    <button class="tab" onclick="showSection('motoboy', this)">Motoboy</button>
-    <button class="tab" onclick="showSection('restaurante', this)">Restaurante</button>
-    <button class="tab" onclick="showSection('fluxo', this)">Fluxo</button>
-  </div>
-
-  <section id="cliente" class="section active">
-    <div class="grid">
-      <div class="card">
-        <h2>Cardápio</h2>
-        <div class="menu" id="menu"></div>
-      </div>
-      <div class="card">
-        <h2>Carrinho</h2>
-        <div id="cart"></div>
-        <form id="orderForm">
-          <div class="row">
-            <div>
-              <label>Nome</label>
-              <input id="customerName" required placeholder="Cliente">
+    <!-- ÁREA DO CLIENTE -->
+    <section id="cliente" class="section active">
+      <div class="grid">
+        <div class="card">
+          <h2>Cardápio</h2>
+          <div class="menu" id="menu"></div>
+        </div>
+        <div class="card">
+          <h2>Seu Pedido</h2>
+          <div id="cart"></div>
+          <form id="orderForm">
+            <div class="row">
+              <div>
+                <label>Nome</label>
+                <input id="customerName" required placeholder="Seu nome">
+              </div>
+              <div>
+                <label>WhatsApp</label>
+                <input id="customerPhone" required placeholder="(12) 99999-9999">
+              </div>
             </div>
-            <div>
-              <label>WhatsApp</label>
-              <input id="customerPhone" required placeholder="(12) 99999-9999">
+            <label>Endereço de Entrega</label>
+            <input id="customerAddress" placeholder="Rua, número, complemento">
+            <div class="row">
+              <div>
+                <label>Bairro</label>
+                <input id="customerNeighborhood" required list="bairros" placeholder="Perequê">
+              </div>
+              <div>
+                <label>Forma de Pagamento</label>
+                <select id="paymentMethod">
+                  <option>Pix</option><option>Cartão</option><option>Dinheiro</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <label>Endereço</label>
-          <input id="customerAddress" placeholder="Rua, número, referência">
-          <div class="row">
-            <div>
-              <label>Bairro</label>
-              <input id="customerNeighborhood" required list="bairros" placeholder="Perequê">
-            </div>
-            <div>
-              <label>Pagamento</label>
-              <select id="paymentMethod">
-                <option>Pix</option><option>Cartão</option><option>Dinheiro</option>
-              </select>
-            </div>
-          </div>
-          <label>Observações</label>
-          <textarea id="orderNotes" placeholder="Sem cebola, troco, referência..."></textarea>
-          <button type="submit" class="green">Enviar pedido</button>
-        </form>
-        <div id="orderStatus" class="notice">O pedido será enviado para o Google Sheets e aparecerá no painel do restaurante.</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="motoboy" class="section">
-    <div class="grid">
-      <div class="card">
-        <h2>Cadastro de motoboy</h2>
-        <form id="driverForm">
-          <label>Nome</label>
-          <input id="driverName" required placeholder="Nome do motoboy">
-          <div class="row">
-            <div>
-              <label>WhatsApp</label>
-              <input id="driverPhone" required placeholder="(12) 99999-9999">
-            </div>
-            <div>
-              <label>Veículo</label>
-              <select id="driverVehicle">
-                <option>Moto</option><option>Bicicleta</option><option>Carro</option>
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div>
-              <label>Cidade</label>
-              <input id="driverCity" value="Ilhabela" required>
-            </div>
-            <div>
-              <label>Estado</label>
-              <input id="driverState" value="SP" required>
-            </div>
-          </div>
-          <label>Bairro principal</label>
-          <input id="driverNeighborhood" required list="bairros" placeholder="Perequê">
-          <label>Bairros atendidos</label>
-          <input id="driverAreas" placeholder="Centro, Perequê, Barra Velha">
-          <label>Disponibilidade</label>
-          <input id="driverAvailability" placeholder="Almoço e jantar">
-          <label>Observações</label>
-          <textarea id="driverNotes"></textarea>
-          <button type="submit" class="green">Cadastrar motoboy</button>
-        </form>
-        <div id="driverStatus" class="notice">Depois do cadastro, o restaurante precisa aprovar.</div>
-      </div>
-
-      <div class="card">
-        <h2>Painel do motoboy</h2>
-        <label>Entrar como motoboy aprovado</label>
-        <select id="driverLogin" onchange="renderDriverPanel()"></select>
-        <div class="notice warn">Na versão oficial, cada motoboy teria seu próprio link/login. Nesta demo, escolha um motoboy aprovado.</div>
-        <div id="driverPanel"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="restaurante" class="section">
-    <div class="grid">
-      <div class="card">
-        <h2>Aprovar motoboys</h2>
-        <div id="driverApprovals"></div>
-      </div>
-      <div class="card">
-        <h2>Pedidos do restaurante</h2>
-        <div id="restaurantOrders"></div>
-      </div>
-      <div class="card full">
-        <h2>Entregas</h2>
-        <div id="restaurantDeliveries"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="fluxo" class="section">
-    <div class="grid">
-      <div class="card full">
-        <h2>Fluxo completo</h2>
-        <div class="grid">
-          <div class="card third"><h3>1. Motoboy</h3><p>Motoboy se cadastra. Status inicial: <strong>Aguardando aprovação</strong>.</p></div>
-          <div class="card third"><h3>2. Restaurante</h3><p>Restaurante aprova ou recusa. Motoboy aprovado entra na fila linear.</p></div>
-          <div class="card third"><h3>3. Pedido</h3><p>Cliente faz pedido. Restaurante aceita, prepara e libera entrega.</p></div>
-          <div class="card third"><h3>4. Fila linear</h3><p>Sistema oferece a entrega para 1 motoboy aprovado disponível.</p></div>
-          <div class="card third"><h3>5. Motoboy</h3><p>Motoboy aceita, recusa, marca em rota ou entregue.</p></div>
-          <div class="card third"><h3>6. Finalização</h3><p>Ao marcar entregue, o pedido vira <strong>Finalizado</strong> e o Admin_Log registra.</p></div>
+            <label>Observações</label>
+            <textarea id="orderNotes" placeholder="Ex: Sem cebola, levar troco para R$ 100..."></textarea>
+            <button type="submit" class="green" style="width: 100%; margin-top: 10px;">Confirmar Pedido</button>
+          </form>
+          <div id="orderStatus" class="notice">Selecione seus itens e confirme o pedido para enviar ao restaurante.</div>
         </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
 
-<datalist id="bairros">
-  <option value="Centro"><option value="Perequê"><option value="Barra Velha"><option value="Itaguaçu">
-  <option value="Água Branca"><option value="Saco da Capela"><option value="Curral"><option value="Portinho">
-</datalist>
+    <!-- ÁREA DO MOTOBOY -->
+    <section id="motoboy" class="section">
+      <div class="grid">
+        <div class="card">
+          <h2>Cadastro de Motoboy</h2>
+          <form id="driverForm">
+            <label>Nome Completo</label>
+            <input id="driverName" required placeholder="Nome do entregador">
+            <div class="row">
+              <div>
+                <label>WhatsApp</label>
+                <input id="driverPhone" required placeholder="(12) 99999-9999">
+              </div>
+              <div>
+                <label>Tipo de Veículo</label>
+                <select id="driverVehicle">
+                  <option>Moto</option><option>Bicicleta</option><option>Carro</option>
+                </select>
+              </div>
+            </div>
+            <div class="row" style="display: none;">
+              <div><input id="driverCity" value="Ilhabela"></div>
+              <div><input id="driverState" value="SP"></div>
+            </div>
+            <label>Bairro Principal de Atuação</label>
+            <input id="driverNeighborhood" required list="bairros" placeholder="Perequê">
+            <label>Bairros Secundários Atendidos</label>
+            <input id="driverAreas" placeholder="Centro, Perequê, Barra Velha">
+            <label>Disponibilidade</label>
+            <input id="driverAvailability" placeholder="Ex: Almoço e Jantar, Finais de semana">
+            <label>Informações Adicionais</label>
+            <textarea id="driverNotes"></textarea>
+            <button type="submit" class="green">Solicitar Cadastro</button>
+          </form>
+          <div id="driverStatus" class="notice">Após o envio, seu cadastro passará por análise do estabelecimento.</div>
+        </div>
+        
+        <div class="card">
+          <h2>Meu Painel (Entregador)</h2>
+          <label>Acessar como (Simulação de Login)</label>
+          <select id="driverLogin" onchange="renderDriverPanel()"></select>
+          <div class="notice warn">Na versão oficial em produção, cada entregador possuirá seu próprio link/login individualizado.</div>
+          <div id="driverPanel" style="margin-top: 15px;"></div>
+        </div>
+      </div>
+    </section>
 
-<div class="toast" id="toast"></div>
+    <!-- ÁREA DO RESTAURANTE -->
+    <section id="restaurante" class="section">
+      <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+        <button onclick="refreshFromBackend()" class="light">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+          Sincronizar Dados Novos
+        </button>
+      </div>
+      
+      <div class="grid" style="margin-top: 0;">
+        <div class="card">
+          <h2>Solicitações de Motoboys</h2>
+          <div id="driverApprovals"></div>
+        </div>
+        <div class="card">
+          <h2>Gestão de Pedidos</h2>
+          <div id="restaurantOrders"></div>
+        </div>
+        <div class="card full">
+          <h2>Central de Entregas (Despacho)</h2>
+          <div id="restaurantDeliveries"></div>
+        </div>
+      </div>
+    </section>
 
-<script>
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzEHeYQm4gsQa1s_KhCEodbpXproeYESNoe8uhjJaKRQ0ab3-9drjx2yGpXrWZyfkTA/exec';
-const RESTAURANT_ID = 'REST-DEMO';
-const currency = new Intl.NumberFormat('pt-BR', {style:'currency', currency:'BRL'});
-const $ = id => document.getElementById(id);
+  </main>
 
-$('shortUrl').textContent = WEB_APP_URL.replace('https://script.google.com/macros/s/', '').slice(0, 22) + '...';
+  <datalist id="bairros">
+    <option value="Centro"></option>
+    <option value="Perequê"></option>
+    <option value="Barra Velha"></option>
+    <option value="Itaguaçu"></option>
+    <option value="Água Branca"></option>
+    <option value="Saco da Capela"></option>
+    <option value="Curral"></option>
+    <option value="Portinho"></option>
+  </datalist>
 
-let motoboys = JSON.parse(localStorage.getItem('dh_motoboys') || '[]');
-let orders = JSON.parse(localStorage.getItem('dh_orders') || '[]');
-let deliveries = JSON.parse(localStorage.getItem('dh_deliveries') || '[]');
-let cart = [];
+  <div class="toast" id="toast"></div>
 
-const menuItems = [
-  {id:'m1', name:'Combo Executivo', price:42.90, desc:'Prato completo do dia'},
-  {id:'m2', name:'Marmita Proteica', price:36.90, desc:'Frango, legumes e arroz'},
-  {id:'m3', name:'Pizza Média', price:49.90, desc:'Mussarela ou calabresa'},
-  {id:'m4', name:'Açaí 500ml', price:24.90, desc:'Com banana e granola'},
-  {id:'m5', name:'Suco Natural', price:9.90, desc:'Laranja ou limão'},
-  {id:'m6', name:'Sobremesa', price:14.90, desc:'Doce do dia'}
-];
+  <script>
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzEHeYQm4gsQa1s_KhCEodbpXproeYESNoe8uhjJaKRQ0ab3-9drjx2yGpXrWZyfkTA/exec';
+    const RESTAURANT_ID = 'REST-DEMO';
+    const currency = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+    const $ = id => document.getElementById(id);
 
-function saveLocal(){
-  localStorage.setItem('dh_motoboys', JSON.stringify(motoboys));
-  localStorage.setItem('dh_orders', JSON.stringify(orders));
-  localStorage.setItem('dh_deliveries', JSON.stringify(deliveries));
-}
+    let motoboys = JSON.parse(localStorage.getItem('dh_motoboys') || '[]');
+    let orders = JSON.parse(localStorage.getItem('dh_orders') || '[]');
+    let deliveries = JSON.parse(localStorage.getItem('dh_deliveries') || '[]');
+    let cart = [];
 
-function resetLocal(){
-  if(!confirm('Limpar apenas os dados locais desta tela? A planilha Google Sheets não será apagada.')) return;
-  motoboys=[];orders=[];deliveries=[];cart=[];
-  saveLocal(); renderAll();
-  toast('Demo local limpa.');
-}
+    const menuItems = [
+      { id: 'm1', name: 'Combo Executivo', price: 42.90, desc: 'Prato completo do dia' },
+      { id: 'm2', name: 'Marmita Proteica', price: 36.90, desc: 'Frango, legumes e arroz integral' },
+      { id: 'm3', name: 'Pizza Média', price: 49.90, desc: 'Mussarela, Calabresa ou Marguerita' },
+      { id: 'm4', name: 'Açaí 500ml', price: 24.90, desc: 'Acompanha banana e granola premium' },
+      { id: 'm5', name: 'Suco Natural', price: 9.90, desc: 'Laranja, limão ou maracujá (400ml)' },
+      { id: 'm6', name: 'Sobremesa do Dia', price: 14.90, desc: 'Pudim ou mousse artesanal' }
+    ];
 
-function toast(msg){
-  const el=$('toast');
-  el.textContent=msg;
-  el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),2800);
-}
+    function saveLocal() {
+      localStorage.setItem('dh_motoboys', JSON.stringify(motoboys));
+      localStorage.setItem('dh_orders', JSON.stringify(orders));
+      localStorage.setItem('dh_deliveries', JSON.stringify(deliveries));
+    }
 
-function showSection(id, btn){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  $(id).classList.add('active');
-  btn.classList.add('active');
-}
+    function resetLocal() {
+      if (!confirm('Limpar os dados de cache armazenados no seu navegador?')) return;
+      motoboys = []; orders = []; deliveries = []; cart = [];
+      saveLocal();
+      renderAll();
+      toast('Cache local limpo.');
+    }
 
-function makeId(prefix){
-  const d=new Date();
-  const pad=n=>String(n).padStart(2,'0');
-  const stamp=d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'-'+pad(d.getHours())+pad(d.getMinutes())+pad(d.getSeconds());
-  const rand=Math.floor(Math.random()*9000)+1000;
-  return prefix+'-'+stamp+'-'+rand;
-}
+    function toast(msg) {
+      const el = $('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 3000);
+    }
 
-async function sendToBackend(payload){
-  try{
-    await fetch(WEB_APP_URL,{
-      method:'POST',
-      mode:'no-cors',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body:JSON.stringify(payload)
-    });
-    return {status:'sent'};
-  }catch(err){
-    console.error(err);
-    return {status:'error', message:err.message};
-  }
-}
+    function showSection(id, btn) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      $(id).classList.add('active');
+      btn.classList.add('active');
+    }
 
-function readFromBackend(action, params={}){
-  return new Promise((resolve,reject)=>{
-    const cb='dh_cb_'+Date.now()+'_'+Math.floor(Math.random()*9999);
-    const qs=new URLSearchParams({...params, action, callback:cb});
-    const s=document.createElement('script');
-    window[cb]=data=>{
-      resolve(data);
-      delete window[cb];
-      s.remove();
-    };
-    s.onerror=()=>{
-      delete window[cb];
-      s.remove();
-      reject(new Error('Could not read backend.'));
-    };
-    s.src=WEB_APP_URL+'?'+qs.toString();
-    document.body.appendChild(s);
-    setTimeout(()=>{
-      if(window[cb]){
-        delete window[cb];
-        s.remove();
-        reject(new Error('Backend read timeout.'));
+    function makeId(prefix) {
+      const d = new Date();
+      const pad = n => String(n).padStart(2, '0');
+      const stamp = d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + '-' + pad(d.getHours()) + pad(d.getMinutes()) + pad(d.getSeconds());
+      const rand = Math.floor(Math.random() * 9000) + 1000;
+      return prefix + '-' + stamp + '-' + rand;
+    }
+
+    async function sendToBackend(payload) {
+      try {
+        await fetch(WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        return { status: 'sent' };
+      } catch (err) {
+        console.error(err);
+        return { status: 'error', message: err.message };
       }
-    },10000);
-  });
-}
+    }
 
-async function refreshFromBackend(){
-  $('backendStatus').textContent='Sincronizando com Google Sheets...';
-  try{
-    const data=await readFromBackend('getDashboardData', {restaurantId:RESTAURANT_ID});
-    if(data.status!=='ok') throw new Error(data.message || 'Backend returned error');
+    function readFromBackend(action, params = {}) {
+      return new Promise((resolve, reject) => {
+        const cb = 'dh_cb_' + Date.now() + '_' + Math.floor(Math.random() * 9999);
+        const qs = new URLSearchParams({ ...params, action, callback: cb });
+        const s = document.createElement('script');
+        window[cb] = data => {
+          resolve(data);
+          delete window[cb];
+          s.remove();
+        };
+        s.onerror = () => {
+          delete window[cb];
+          s.remove();
+          reject(new Error('Falha na comunicação.'));
+        };
+        s.src = WEB_APP_URL + '?' + qs.toString();
+        document.body.appendChild(s);
+        
+        setTimeout(() => {
+          if (window[cb]) {
+            delete window[cb];
+            s.remove();
+            reject(new Error('Timeout.'));
+          }
+        }, 12000);
+      });
+    }
 
-    motoboys=(data.motoboys||[]).map(mapMotoboy);
-    orders=(data.orders||[]).map(mapOrder);
-    deliveries=(data.deliveries||[]).map(mapDelivery);
+    async function refreshFromBackend() {
+      toast('Buscando atualizações...');
+      try {
+        const data = await readFromBackend('getDashboardData', { restaurantId: RESTAURANT_ID });
+        if (data.status !== 'ok') throw new Error(data.message || 'Erro no servidor');
+        
+        motoboys = (data.motoboys || []).map(mapMotoboy);
+        orders = (data.orders || []).map(mapOrder);
+        deliveries = (data.deliveries || []).map(mapDelivery);
+        
+        saveLocal();
+        renderAll();
+        toast('Painel sincronizado com sucesso.');
+      } catch (err) {
+        toast('Erro de rede. Mantendo versão local.');
+        console.error(err);
+      }
+    }
 
-    saveLocal();
+    function mapMotoboy(r) {
+      return {
+        id: r['Motoboy ID'] || r.id,
+        name: r['Name'] || '',
+        phone: r['Phone'] || '',
+        email: r['Email'] || '',
+        vehicle: r['Vehicle'] || 'Moto',
+        state: r['State'] || 'SP',
+        city: r['City'] || 'Ilhabela',
+        neighborhood: r['Main Neighborhood'] || '',
+        serviceAreas: r['Service Areas'] || '',
+        availability: r['Availability'] || '',
+        status: r['Status'] || 'Aguardando aprovação',
+        notes: r['Notes'] || ''
+      };
+    }
+
+    function mapOrder(r) {
+      let items = [];
+      try { items = JSON.parse(r['Items'] || '[]') } catch (e) { items = [] }
+      return {
+        id: r['Order ID'] || r.id,
+        restaurantId: r['Restaurant ID'] || RESTAURANT_ID,
+        customerName: r['Customer Name'] || '',
+        customerPhone: r['Customer Phone'] || '',
+        items,
+        total: Number(r['Total'] || 0),
+        paymentMethod: r['Payment Method'] || '',
+        deliveryType: r['Delivery Type'] || 'Entrega',
+        address: r['Address'] || '',
+        neighborhood: r['Neighborhood'] || '',
+        city: (r['City'] || 'Ilhabela') + '/' + (r['State'] || 'SP'),
+        state: r['State'] || 'SP',
+        status: r['Order Status'] || 'Novo pedido',
+        notes: r['Notes'] || ''
+      };
+    }
+
+    function mapDelivery(r) {
+      return {
+        id: r['Delivery ID'] || r.id,
+        orderId: r['Order ID'] || '',
+        restaurantId: r['Restaurant ID'] || RESTAURANT_ID,
+        motoboyId: r['Motoboy ID'] || '',
+        pickup: r['Pickup Neighborhood'] || 'Centro',
+        neighborhood: r['Delivery Neighborhood'] || '',
+        city: (r['City'] || 'Ilhabela') + '/' + (r['State'] || 'SP'),
+        fee: Number(r['Delivery Fee'] || 0),
+        status: r['Delivery Status'] || 'Disponível',
+        acceptedAt: r['Accepted At'] || '',
+        notes: r['Notes'] || ''
+      };
+    }
+
+    function statusTag(status) {
+      const s = (status || '').toLowerCase();
+      let c = '';
+      if (s.includes('aprov') || s.includes('aceit') || s.includes('final') || s.includes('entreg')) c = 'green';
+      else if (s.includes('aguard') || s.includes('novo') || s.includes('preparo') || s.includes('oferec') || s.includes('pronto')) c = 'orange';
+      else if (s.includes('recus') || s.includes('cancel') || s.includes('bloq')) c = 'red';
+      else if (s.includes('rota') || s.includes('design')) c = 'blue';
+      return `<span class="tag ${c}">${status || ''}</span>`;
+    }
+
+    function renderMenu() {
+      $('menu').innerHTML = menuItems.map(i => `<button onclick="addToCart('${i.id}')"><strong>${i.name}</strong><br><small>${i.desc}</small><br><b style="color: var(--brand); margin-top:4px; display:inline-block;">${currency.format(i.price)}</b></button>`).join('');
+    }
+
+    function addToCart(id) {
+      const item = menuItems.find(i => i.id === id);
+      const existing = cart.find(i => i.id === id);
+      if (existing) existing.qty++;
+      else cart.push({ ...item, qty: 1 });
+      renderCart();
+      toast('Item adicionado.');
+    }
+
+    function renderCart() {
+      if (!cart.length) {
+        $('cart').innerHTML = '<div class="notice">Seu carrinho está vazio.</div>';
+        return;
+      }
+      const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      $('cart').innerHTML = cart.map(i => `<div class="cartLine"><span>${i.qty}x ${i.name}</span><b>${currency.format(i.price * i.qty)}</b></div>`).join('') +
+        `<div class="cartLine" style="border:0; padding-top: 12px; font-size: 18px;"><strong>Total do Pedido</strong><strong style="color: var(--brand)">${currency.format(total)}</strong></div>`;
+    }
+
+    $('orderForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!cart.length) {
+        toast('Adicione pelo menos um item ao carrinho.');
+        return;
+      }
+      
+      const id = makeId('ORDER');
+      const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      
+      const order = {
+        id,
+        restaurantId: RESTAURANT_ID,
+        customerName: $('customerName').value.trim(),
+        customerPhone: $('customerPhone').value.trim(),
+        items: [...cart],
+        total,
+        paymentMethod: $('paymentMethod').value,
+        deliveryType: 'Entrega',
+        address: $('customerAddress').value.trim(),
+        neighborhood: $('customerNeighborhood').value.trim(),
+        city: 'Ilhabela/SP',
+        state: 'SP',
+        status: 'Novo pedido',
+        notes: $('orderNotes').value.trim()
+      };
+      
+      orders.unshift(order);
+      saveLocal();
+      renderOrders();
+      
+      $('orderStatus').className = 'notice warn';
+      $('orderStatus').textContent = 'Processando pedido e enviando ao restaurante...';
+      
+      await sendToBackend({
+        action: 'createOrder',
+        orderId: id,
+        restaurantId: RESTAURANT_ID,
+        customerName: order.customerName,
+        customerPhone: order.customerPhone,
+        items: order.items.map(i => ({ name: i.name, qty: i.qty, price: i.price })),
+        total: order.total,
+        paymentMethod: order.paymentMethod,
+        deliveryType: 'Entrega',
+        address: order.address,
+        neighborhood: order.neighborhood,
+        city: 'Ilhabela',
+        state: 'SP',
+        notes: order.notes
+      });
+      
+      cart = [];
+      $('orderForm').reset();
+      renderCart();
+      
+      $('orderStatus').className = 'notice ok';
+      $('orderStatus').innerHTML = `<strong>Pedido Confirmado!</strong> O restaurante já recebeu sua solicitação (ID: ${id}).`;
+      toast('Pedido enviado ao Restaurante.');
+    });
+
+    $('driverForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      
+      const id = makeId('MOTO');
+      const driver = {
+        id,
+        name: $('driverName').value.trim(),
+        phone: $('driverPhone').value.trim(),
+        email: '',
+        vehicle: $('driverVehicle').value,
+        state: $('driverState').value.trim() || 'SP',
+        city: $('driverCity').value.trim() || 'Ilhabela',
+        neighborhood: $('driverNeighborhood').value.trim(),
+        serviceAreas: $('driverAreas').value.trim() || $('driverNeighborhood').value.trim(),
+        availability: $('driverAvailability').value.trim(),
+        status: 'Aguardando aprovação',
+        notes: $('driverNotes').value.trim()
+      };
+      
+      motoboys.unshift(driver);
+      saveLocal();
+      renderDrivers();
+      
+      $('driverStatus').className = 'notice warn';
+      $('driverStatus').textContent = 'Processando e enviando solicitação de cadastro...';
+      
+      await sendToBackend({
+        action: 'createMotoboy',
+        motoboyId: id,
+        name: driver.name,
+        phone: driver.phone,
+        email: driver.email,
+        vehicle: driver.vehicle,
+        state: driver.state,
+        city: driver.city,
+        neighborhood: driver.neighborhood,
+        mainNeighborhood: driver.neighborhood,
+        serviceAreas: driver.serviceAreas,
+        availability: driver.availability,
+        notes: driver.notes
+      });
+      
+      $('driverForm').reset();
+      $('driverStatus').className = 'notice ok';
+      $('driverStatus').textContent = 'Cadastro concluído. A documentação está sob análise do estabelecimento.';
+      toast('Cadastro efetuado.');
+    });
+
+    async function approveDriver(id, status = 'Aprovado') {
+      motoboys = motoboys.map(d => d.id === id ? { ...d, status } : d);
+      saveLocal();
+      renderDrivers();
+      
+      await sendToBackend({
+        action: 'approveMotoboy',
+        motoboyId: id,
+        status,
+        approvedBy: 'Sistema Admin',
+        restaurantId: RESTAURANT_ID,
+        notes: status === 'Aprovado' ? 'Liberação via Painel' : 'Recusado via Painel'
+      });
+      toast(`Status do Entregador alterado para: ${status}`);
+    }
+
+    async function updateOrder(id, status) {
+      orders = orders.map(o => o.id === id ? { ...o, status } : o);
+      saveLocal();
+      renderOrders();
+      
+      await sendToBackend({
+        action: 'updateOrderStatus',
+        orderId: id,
+        status,
+        restaurantId: RESTAURANT_ID,
+        updatedBy: 'Sistema Admin'
+      });
+      toast(`Pedido atualizado para: ${status}`);
+    }
+
+    function nextAvailableDriverFor(order) {
+      const approved = motoboys.filter(d => d.status === 'Aprovado');
+      const free = approved.filter(d => !deliveries.some(del => del.motoboyId === d.id && ['Oferecida ao motoboy', 'Aceita', 'Em rota'].includes(del.status)));
+      if (!free.length) return null;
+      
+      const active = deliveries.filter(d => d.motoboyId).slice().reverse();
+      const last = active[0]?.motoboyId || '';
+      const idx = free.findIndex(d => d.id === last);
+      return idx < 0 ? free[0] : free[(idx + 1) % free.length];
+    }
+
+    async function releaseDelivery(id) {
+      const order = orders.find(o => o.id === id);
+      if (!order) return;
+      
+      const existing = deliveries.find(d => d.orderId === id && !['Entregue', 'Cancelada'].includes(d.status));
+      if (existing) {
+        toast('Aviso: Uma entrega já está ativa para este pedido.');
+        return;
+      }
+      
+      const driver = nextAvailableDriverFor(order);
+      const deliveryId = makeId('DELIVERY');
+      const fee = feeByNeighborhood(order.neighborhood);
+      
+      const delivery = {
+        id: deliveryId,
+        orderId: id,
+        restaurantId: RESTAURANT_ID,
+        motoboyId: driver ? driver.id : '',
+        pickup: 'Ponto de Retirada Central',
+        neighborhood: order.neighborhood,
+        city: 'Ilhabela/SP',
+        fee,
+        status: driver ? 'Oferecida ao motoboy' : 'Disponível',
+        notes: 'Liberação expressa'
+      };
+      
+      deliveries.unshift(delivery);
+      orders = orders.map(o => o.id === id ? { ...o, status: driver ? 'Motoboy designado' : 'Aguardando motoboy' } : o);
+      
+      saveLocal();
+      renderAll();
+      
+      await sendToBackend({
+        action: 'releaseDelivery',
+        deliveryId,
+        orderId: id,
+        restaurantId: RESTAURANT_ID,
+        pickupNeighborhood: 'Centro',
+        notes: 'Despacho via Painel Web'
+      });
+      
+      toast(driver ? `Corrida atribuída automaticamente a: ${driver.name}` : 'Atenção: Nenhum entregador livre. Ficou na fila.');
+    }
+
+    async function acceptDelivery(deliveryId, motoboyId) {
+      const driver = motoboys.find(d => d.id === motoboyId);
+      deliveries = deliveries.map(d => d.id === deliveryId ? { ...d, status: 'Aceita', motoboyId } : d);
+      
+      const del = deliveries.find(d => d.id === deliveryId);
+      if (del) orders = orders.map(o => o.id === del.orderId ? { ...o, status: 'Saiu para entrega' } : o);
+      
+      saveLocal();
+      renderAll();
+      
+      await sendToBackend({
+        action: 'acceptDelivery',
+        deliveryId,
+        motoboyId
+      });
+      toast(`Corrida assumida com sucesso.`);
+    }
+
+    async function rejectDelivery(deliveryId, motoboyId) {
+      const del = deliveries.find(d => d.id === deliveryId);
+      const order = orders.find(o => o.id === del?.orderId);
+      const next = order ? nextAvailableDriverFor(order) : null;
+      
+      deliveries = deliveries.map(d => d.id === deliveryId ? { ...d, status: next ? 'Oferecida ao motoboy' : 'Disponível', motoboyId: next ? next.id : '' } : d);
+      
+      if (del) orders = orders.map(o => o.id === del.orderId ? { ...o, status: next ? 'Motoboy designado' : 'Aguardando motoboy' } : o);
+      
+      saveLocal();
+      renderAll();
+      
+      await sendToBackend({
+        action: 'rejectDelivery',
+        deliveryId,
+        motoboyId,
+        reason: 'Rejeição via App do Motoboy'
+      });
+      toast(next ? 'Corrida repassada para o próximo da fila.' : 'Corrida devolvida ao mural principal.');
+    }
+
+    async function updateDelivery(deliveryId, status) {
+      const del = deliveries.find(d => d.id === deliveryId);
+      deliveries = deliveries.map(d => d.id === deliveryId ? { ...d, status } : d);
+      
+      if (del) {
+        let orderStatus = '';
+        if (status === 'Em rota') orderStatus = 'Saiu para entrega';
+        if (status === 'Entregue') orderStatus = 'Finalizado';
+        if (orderStatus) orders = orders.map(o => o.id === del.orderId ? { ...o, status: orderStatus } : o);
+      }
+      
+      saveLocal();
+      renderAll();
+      
+      await sendToBackend({
+        action: 'updateDeliveryStatus',
+        deliveryId,
+        status,
+        orderId: del?.orderId || '',
+        motoboyId: del?.motoboyId || ''
+      });
+      toast(`Status da entrega atualizado: ${status}`);
+    }
+
+    function feeByNeighborhood(n) {
+      const k = (n || '').toLowerCase();
+      if (k.includes('centro')) return 8;
+      if (k.includes('perequê') || k.includes('pereque') || k.includes('barra velha')) return 10;
+      if (k.includes('itaguaçu') || k.includes('itaguacu') || k.includes('água branca') || k.includes('agua branca')) return 12;
+      if (k.includes('saco da capela')) return 14;
+      if (k.includes('curral') || k.includes('portinho')) return 18;
+      return 12;
+    }
+
+    function renderDrivers() {
+      const approved = motoboys.filter(d => d.status === 'Aprovado');
+      
+      $('driverApprovals').innerHTML = motoboys.length ? motoboys.map(d => `
+        <article class="item">
+          <div class="itemTop">
+            <div><strong>${escapeHtml(d.name)}</strong><br><small>${escapeHtml(d.phone)} · ${escapeHtml(d.vehicle)} · Bairro: ${escapeHtml(d.neighborhood)}</small></div>
+            ${statusTag(d.status)}
+          </div>
+          <div class="meta">
+            <div>ID App: <code>${escapeHtml(d.id.slice(-8))}</code></div>
+            <div>Rota Principal: ${escapeHtml(d.serviceAreas || d.neighborhood)}</div>
+          </div>
+          <div class="actions">
+            <button class="green" onclick="approveDriver('${d.id}','Aprovado')" ${d.status === 'Aprovado' ? 'disabled' : ''}>Aprovar Conta</button>
+            <button class="red" onclick="approveDriver('${d.id}','Recusado')" ${d.status === 'Recusado' ? 'disabled' : ''}>Bloquear</button>
+          </div>
+        </article>
+      `).join('') : '<div class="notice">Ainda não há solicitações de entregadores no sistema.</div>';
+      
+      $('driverLogin').innerHTML = approved.length ? approved.map(d => `<option value="${d.id}">${escapeHtml(d.name)} — ${escapeHtml(d.neighborhood)}</option>`).join('') : '<option value="">Sem perfis aprovados</option>';
+      renderDriverPanel();
+    }
+
+    function renderOrders() {
+      $('restaurantOrders').innerHTML = orders.length ? orders.map(o => `
+        <article class="item">
+          <div class="itemTop">
+            <div><strong>#${escapeHtml(o.id.slice(-6))}</strong><br><small>Cliente: ${escapeHtml(o.customerName)} (${escapeHtml(o.customerPhone)})</small></div>
+            ${statusTag(o.status)}
+          </div>
+          <div class="meta">
+            <div>📍 <strong>${escapeHtml(o.neighborhood)}</strong> · ${escapeHtml(o.address || '-')}</div>
+            <div>💳 ${escapeHtml(o.paymentMethod)} · 💰 <strong style="color:var(--brand)">${currency.format(o.total)}</strong></div>
+            <div style="background:#f8fafc; padding:8px; border-radius:8px; border:1px solid var(--line); margin-top:4px;">
+                ${o.items.map(i => `<b>${i.qty}x</b> ${escapeHtml(i.name)}`).join('<br>')}
+            </div>
+            ${o.notes ? `<div style="color:var(--orange)">📝 Nota: ${escapeHtml(o.notes)}</div>` : ''}
+          </div>
+          <div class="actions">
+            <button class="light" onclick="updateOrder('${o.id}','Aceito')">Aceitar Recebimento</button>
+            <button class="orange" onclick="updateOrder('${o.id}','Em preparo')">Cozinha / Em preparo</button>
+            <button class="blue" onclick="releaseDelivery('${o.id}')" style="margin-left:auto">Despachar Entrega</button>
+            <button class="red" onclick="updateOrder('${o.id}','Cancelado')">X</button>
+          </div>
+        </article>
+      `).join('') : '<div class="notice">Caixa de entrada vazia. Aguardando novos clientes.</div>';
+    }
+
+    function renderDeliveries() {
+      $('restaurantDeliveries').innerHTML = deliveries.length ? deliveries.map(d => {
+        const driver = motoboys.find(m => m.id === d.motoboyId);
+        return `
+        <article class="item">
+          <div class="itemTop">
+            <div><strong>Corrida #${escapeHtml(d.id.slice(-6))}</strong><br><small>Ref. Pedido #${escapeHtml(d.orderId.slice(-6))}</small></div>
+            ${statusTag(d.status)}
+          </div>
+          <div class="meta">
+            <div>📍 Destino: <strong>${escapeHtml(d.neighborhood)}</strong></div>
+            <div>🏍️ Responsável: <strong>${driver ? escapeHtml(driver.name) : 'Buscando entregador...'}</strong></div>
+            <div>💵 Taxa Repassada: <strong style="color:var(--brand)">${currency.format(Number(d.fee || 0))}</strong></div>
+          </div>
+        </article>`;
+      }).join('') : '<div class="notice">Sem expedições em andamento no momento.</div>';
+    }
+
+    function renderDriverPanel() {
+      const motoboyId = $('driverLogin').value;
+      if (!motoboyId) {
+        $('driverPanel').innerHTML = '<div class="notice">Aguardando vínculo de um perfil aprovado na gestão.</div>';
+        return;
+      }
+      
+      const mine = deliveries.filter(d => {
+        const assigned = d.motoboyId === motoboyId && ['Oferecida ao motoboy', 'Aceita', 'Em rota'].includes(d.status);
+        const open = !d.motoboyId && d.status === 'Disponível';
+        return assigned || open;
+      });
+      
+      $('driverPanel').innerHTML = mine.length ? mine.map(d => `
+        <article class="item" style="border: 2px solid ${d.status === 'Oferecida ao motoboy' ? 'var(--orange)' : 'var(--line)'};">
+          <div class="itemTop">
+            <div><strong>Pacote: Pedido #${escapeHtml(d.orderId.slice(-6))}</strong><br><small>De: Retirada Central<br>Para: <strong>${escapeHtml(d.neighborhood)}</strong></small></div>
+            ${statusTag(d.status)}
+          </div>
+          <div class="meta" style="font-size: 16px; margin: 12px 0;">
+            Ganho da Corrida: <strong style="color: var(--green);">${currency.format(Number(d.fee || 0))}</strong>
+          </div>
+          <div class="actions">
+            <button class="green" onclick="acceptDelivery('${d.id}','${motoboyId}')" ${d.status === 'Aceita' || d.status === 'Em rota' ? 'disabled' : ''}>Assumir Corrida</button>
+            <button class="red" onclick="rejectDelivery('${d.id}','${motoboyId}')" ${d.status === 'Em rota' ? 'disabled' : ''}>Recusar</button>
+            <button class="blue" onclick="updateDelivery('${d.id}','Em rota')" style="margin-left:auto;">Iniciar Rota</button>
+            <button class="dark" onclick="updateDelivery('${d.id}','Entregue')">Concluir Entrega</button>
+          </div>
+        </article>
+      `).join('') : '<div class="notice ok">Nenhuma entrega atribuída. Aguarde novas chamadas da central.</div>';
+    }
+
+    function renderAll() {
+      renderMenu();
+      renderCart();
+      renderDrivers();
+      renderOrders();
+      renderDeliveries();
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
+    }
+
     renderAll();
-    $('backendStatus').textContent='Sincronizado com Google Sheets.';
-    toast('Dados sincronizados.');
-  }catch(err){
-    $('backendStatus').textContent='Não foi possível ler o backend. A demo local continua funcionando.';
-    toast('Falha ao sincronizar. Verifique deploy e permissões.');
-    console.error(err);
-  }
-}
+    
+    // Auto-sync initial
+    setTimeout(refreshFromBackend, 1200);
 
-function mapMotoboy(r){
-  return {
-    id:r['Motoboy ID']||r.id,
-    name:r['Name']||'',
-    phone:r['Phone']||'',
-    email:r['Email']||'',
-    vehicle:r['Vehicle']||'Moto',
-    state:r['State']||'SP',
-    city:r['City']||'Ilhabela',
-    neighborhood:r['Main Neighborhood']||'',
-    serviceAreas:r['Service Areas']||'',
-    availability:r['Availability']||'',
-    status:r['Status']||'Aguardando aprovação',
-    notes:r['Notes']||''
-  };
-}
-
-function mapOrder(r){
-  let items=[];
-  try{items=JSON.parse(r['Items']||'[]')}catch(e){items=[]}
-  return {
-    id:r['Order ID']||r.id,
-    restaurantId:r['Restaurant ID']||RESTAURANT_ID,
-    customerName:r['Customer Name']||'',
-    customerPhone:r['Customer Phone']||'',
-    items,
-    total:Number(r['Total']||0),
-    paymentMethod:r['Payment Method']||'',
-    deliveryType:r['Delivery Type']||'Entrega',
-    address:r['Address']||'',
-    neighborhood:r['Neighborhood']||'',
-    city:(r['City']||'Ilhabela')+'/'+(r['State']||'SP'),
-    state:r['State']||'SP',
-    status:r['Order Status']||'Novo pedido',
-    notes:r['Notes']||''
-  };
-}
-
-function mapDelivery(r){
-  return {
-    id:r['Delivery ID']||r.id,
-    orderId:r['Order ID']||'',
-    restaurantId:r['Restaurant ID']||RESTAURANT_ID,
-    motoboyId:r['Motoboy ID']||'',
-    pickup:r['Pickup Neighborhood']||'Centro',
-    neighborhood:r['Delivery Neighborhood']||'',
-    city:(r['City']||'Ilhabela')+'/'+(r['State']||'SP'),
-    fee:Number(r['Delivery Fee']||0),
-    status:r['Delivery Status']||'Disponível',
-    acceptedAt:r['Accepted At']||'',
-    notes:r['Notes']||''
-  };
-}
-
-function statusTag(status){
-  const s=(status||'').toLowerCase();
-  let c='';
-  if(s.includes('aprov')||s.includes('aceit')||s.includes('final')||s.includes('entreg')) c='green';
-  else if(s.includes('aguard')||s.includes('novo')||s.includes('preparo')||s.includes('oferec')||s.includes('pronto')) c='orange';
-  else if(s.includes('recus')||s.includes('cancel')||s.includes('bloq')) c='red';
-  else if(s.includes('rota')||s.includes('design')) c='blue';
-  return `<span class="tag ${c}">${status||''}</span>`;
-}
-
-function renderMenu(){
-  $('menu').innerHTML=menuItems.map(i=>`<button onclick="addToCart('${i.id}')"><strong>${i.name}</strong><br><small>${i.desc}</small><br><b>${currency.format(i.price)}</b></button>`).join('');
-}
-
-function addToCart(id){
-  const item=menuItems.find(i=>i.id===id);
-  const existing=cart.find(i=>i.id===id);
-  if(existing) existing.qty++;
-  else cart.push({...item, qty:1});
-  renderCart();
-}
-
-function renderCart(){
-  if(!cart.length){
-    $('cart').innerHTML='<div class="notice">Carrinho vazio.</div>';
-    return;
-  }
-  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
-  $('cart').innerHTML=cart.map(i=>`<div class="cartLine"><span>${i.qty}x ${i.name}</span><b>${currency.format(i.price*i.qty)}</b></div>`).join('')+
-  `<div class="cartLine"><strong>Total</strong><strong>${currency.format(total)}</strong></div>`;
-}
-
-$('orderForm').addEventListener('submit', async e=>{
-  e.preventDefault();
-  if(!cart.length){ toast('Adicione item ao carrinho.'); return; }
-
-  const id=makeId('ORDER');
-  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
-  const order={
-    id,
-    restaurantId:RESTAURANT_ID,
-    customerName:$('customerName').value.trim(),
-    customerPhone:$('customerPhone').value.trim(),
-    items:[...cart],
-    total,
-    paymentMethod:$('paymentMethod').value,
-    deliveryType:'Entrega',
-    address:$('customerAddress').value.trim(),
-    neighborhood:$('customerNeighborhood').value.trim(),
-    city:'Ilhabela/SP',
-    state:'SP',
-    status:'Novo pedido',
-    notes:$('orderNotes').value.trim()
-  };
-
-  orders.unshift(order);
-  saveLocal(); renderOrders();
-  $('orderStatus').className='notice warn';
-  $('orderStatus').textContent='Enviando pedido para Google Sheets...';
-
-  await sendToBackend({
-    action:'createOrder',
-    orderId:id,
-    restaurantId:RESTAURANT_ID,
-    customerName:order.customerName,
-    customerPhone:order.customerPhone,
-    items:order.items.map(i=>({name:i.name, qty:i.qty, price:i.price})),
-    total:order.total,
-    paymentMethod:order.paymentMethod,
-    deliveryType:'Entrega',
-    address:order.address,
-    neighborhood:order.neighborhood,
-    city:'Ilhabela',
-    state:'SP',
-    notes:order.notes
-  });
-
-  cart=[];
-  $('orderForm').reset();
-  renderCart();
-  $('orderStatus').className='notice ok';
-  $('orderStatus').textContent='Pedido enviado. O restaurante já pode aceitar.';
-  toast('Pedido enviado.');
-});
-
-$('driverForm').addEventListener('submit', async e=>{
-  e.preventDefault();
-
-  const id=makeId('MOTO');
-  const driver={
-    id,
-    name:$('driverName').value.trim(),
-    phone:$('driverPhone').value.trim(),
-    email:'',
-    vehicle:$('driverVehicle').value,
-    state:$('driverState').value.trim()||'SP',
-    city:$('driverCity').value.trim()||'Ilhabela',
-    neighborhood:$('driverNeighborhood').value.trim(),
-    serviceAreas:$('driverAreas').value.trim()||$('driverNeighborhood').value.trim(),
-    availability:$('driverAvailability').value.trim(),
-    status:'Aguardando aprovação',
-    notes:$('driverNotes').value.trim()
-  };
-
-  motoboys.unshift(driver);
-  saveLocal(); renderDrivers();
-
-  $('driverStatus').className='notice warn';
-  $('driverStatus').textContent='Enviando cadastro para Google Sheets...';
-
-  await sendToBackend({
-    action:'createMotoboy',
-    motoboyId:id,
-    name:driver.name,
-    phone:driver.phone,
-    email:driver.email,
-    vehicle:driver.vehicle,
-    state:driver.state,
-    city:driver.city,
-    neighborhood:driver.neighborhood,
-    mainNeighborhood:driver.neighborhood,
-    serviceAreas:driver.serviceAreas,
-    availability:driver.availability,
-    notes:driver.notes
-  });
-
-  $('driverForm').reset();
-  $('driverCity').value='Ilhabela';
-  $('driverState').value='SP';
-  $('driverStatus').className='notice ok';
-  $('driverStatus').textContent='Motoboy cadastrado. Agora aprove no painel do restaurante.';
-  toast('Motoboy cadastrado.');
-});
-
-async function approveDriver(id, status='Aprovado'){
-  motoboys=motoboys.map(d=>d.id===id?{...d,status}:d);
-  saveLocal(); renderDrivers();
-
-  await sendToBackend({
-    action:'approveMotoboy',
-    motoboyId:id,
-    status,
-    approvedBy:'Restaurante Demo',
-    restaurantId:RESTAURANT_ID,
-    notes: status==='Aprovado' ? 'Aprovado pelo painel do restaurante' : 'Recusado pelo painel do restaurante'
-  });
-
-  toast('Status do motoboy atualizado: '+status);
-}
-
-async function updateOrder(id,status){
-  orders=orders.map(o=>o.id===id?{...o,status}:o);
-  saveLocal(); renderOrders();
-
-  await sendToBackend({
-    action:'updateOrderStatus',
-    orderId:id,
-    status,
-    restaurantId:RESTAURANT_ID,
-    updatedBy:'Restaurante Demo'
-  });
-
-  toast('Pedido atualizado: '+status);
-}
-
-function nextAvailableDriverFor(order){
-  const approved=motoboys.filter(d=>d.status==='Aprovado');
-  const free=approved.filter(d=>!deliveries.some(del=>del.motoboyId===d.id && ['Oferecida ao motoboy','Aceita','Em rota'].includes(del.status)));
-  if(!free.length) return null;
-  const active=deliveries.filter(d=>d.motoboyId).slice().reverse();
-  const last=active[0]?.motoboyId || '';
-  const idx=free.findIndex(d=>d.id===last);
-  return idx<0 ? free[0] : free[(idx+1)%free.length];
-}
-
-async function releaseDelivery(id){
-  const order=orders.find(o=>o.id===id);
-  if(!order) return;
-
-  const existing=deliveries.find(d=>d.orderId===id && !['Entregue','Cancelada'].includes(d.status));
-  if(existing){ toast('Entrega já liberada para esse pedido.'); return; }
-
-  const driver=nextAvailableDriverFor(order);
-  const deliveryId=makeId('DELIVERY');
-  const fee=feeByNeighborhood(order.neighborhood);
-  const delivery={
-    id:deliveryId,
-    orderId:id,
-    restaurantId:RESTAURANT_ID,
-    motoboyId:driver?driver.id:'',
-    pickup:'Centro',
-    neighborhood:order.neighborhood,
-    city:'Ilhabela/SP',
-    fee,
-    status:driver?'Oferecida ao motoboy':'Disponível',
-    notes:'Liberado pelo restaurante'
-  };
-
-  deliveries.unshift(delivery);
-  orders=orders.map(o=>o.id===id?{...o,status:driver?'Motoboy designado':'Aguardando motoboy'}:o);
-  saveLocal(); renderAll();
-
-  await sendToBackend({
-    action:'releaseDelivery',
-    deliveryId,
-    orderId:id,
-    restaurantId:RESTAURANT_ID,
-    pickupNeighborhood:'Centro',
-    notes:'Liberado pelo painel do restaurante'
-  });
-
-  toast(driver ? 'Entrega enviada para '+driver.name : 'Sem motoboy aprovado disponível.');
-}
-
-async function acceptDelivery(deliveryId,motoboyId){
-  const driver=motoboys.find(d=>d.id===motoboyId);
-  deliveries=deliveries.map(d=>d.id===deliveryId?{...d,status:'Aceita',motoboyId}:d);
-  const del=deliveries.find(d=>d.id===deliveryId);
-  if(del) orders=orders.map(o=>o.id===del.orderId?{...o,status:'Saiu para entrega'}:o);
-  saveLocal(); renderAll();
-
-  await sendToBackend({
-    action:'acceptDelivery',
-    deliveryId,
-    motoboyId
-  });
-
-  toast((driver?.name||'Motoboy')+' aceitou a entrega.');
-}
-
-async function rejectDelivery(deliveryId,motoboyId){
-  const del=deliveries.find(d=>d.id===deliveryId);
-  const order=orders.find(o=>o.id===del?.orderId);
-  const next=order ? nextAvailableDriverFor(order) : null;
-
-  deliveries=deliveries.map(d=>d.id===deliveryId?{...d,status:next?'Oferecida ao motoboy':'Disponível',motoboyId:next?next.id:''}:d);
-  if(del) orders=orders.map(o=>o.id===del.orderId?{...o,status:next?'Motoboy designado':'Aguardando motoboy'}:o);
-  saveLocal(); renderAll();
-
-  await sendToBackend({
-    action:'rejectDelivery',
-    deliveryId,
-    motoboyId,
-    reason:'Recusada pelo painel do motoboy'
-  });
-
-  toast(next ? 'Entrega passou para próximo motoboy.' : 'Entrega ficou disponível.');
-}
-
-async function updateDelivery(deliveryId,status){
-  const del=deliveries.find(d=>d.id===deliveryId);
-  deliveries=deliveries.map(d=>d.id===deliveryId?{...d,status}:d);
-  if(del){
-    let orderStatus='';
-    if(status==='Em rota') orderStatus='Saiu para entrega';
-    if(status==='Entregue') orderStatus='Finalizado';
-    if(orderStatus) orders=orders.map(o=>o.id===del.orderId?{...o,status:orderStatus}:o);
-  }
-  saveLocal(); renderAll();
-
-  await sendToBackend({
-    action:'updateDeliveryStatus',
-    deliveryId,
-    status,
-    orderId:del?.orderId || '',
-    motoboyId:del?.motoboyId || ''
-  });
-
-  toast('Entrega atualizada: '+status);
-}
-
-function feeByNeighborhood(n){
-  const k=(n||'').toLowerCase();
-  if(k.includes('centro')) return 8;
-  if(k.includes('perequê')||k.includes('pereque')) return 10;
-  if(k.includes('barra velha')) return 10;
-  if(k.includes('itaguaçu')||k.includes('itaguacu')) return 12;
-  if(k.includes('água branca')||k.includes('agua branca')) return 12;
-  if(k.includes('saco da capela')) return 14;
-  if(k.includes('curral')||k.includes('portinho')) return 18;
-  return 12;
-}
-
-function renderDrivers(){
-  const pending=motoboys.filter(d=>d.status==='Aguardando aprovação');
-  const approved=motoboys.filter(d=>d.status==='Aprovado');
-
-  $('driverApprovals').innerHTML = motoboys.length ? motoboys.map(d=>`
-    <article class="item">
-      <div class="itemTop">
-        <div><strong>${escapeHtml(d.name)}</strong><br><small>${escapeHtml(d.phone)} · ${escapeHtml(d.vehicle)} · ${escapeHtml(d.neighborhood)}</small></div>
-        ${statusTag(d.status)}
-      </div>
-      <div class="meta">
-        <div>ID: <code>${escapeHtml(d.id)}</code></div>
-        <div>Áreas: ${escapeHtml(d.serviceAreas||d.neighborhood)}</div>
-      </div>
-      <div class="actions">
-        <button class="green" onclick="approveDriver('${d.id}','Aprovado')" ${d.status==='Aprovado'?'disabled':''}>Aprovar</button>
-        <button class="red" onclick="approveDriver('${d.id}','Recusado')" ${d.status==='Recusado'?'disabled':''}>Recusar</button>
-      </div>
-    </article>
-  `).join('') : '<div class="notice">Nenhum motoboy cadastrado ainda.</div>';
-
-  $('driverLogin').innerHTML = approved.length
-    ? approved.map(d=>`<option value="${d.id}">${escapeHtml(d.name)} — ${escapeHtml(d.neighborhood)}</option>`).join('')
-    : '<option value="">Nenhum motoboy aprovado</option>';
-
-  renderDriverPanel();
-}
-
-function renderOrders(){
-  $('restaurantOrders').innerHTML = orders.length ? orders.map(o=>`
-    <article class="item">
-      <div class="itemTop">
-        <div><strong>Pedido ${escapeHtml(o.id)}</strong><br><small>${escapeHtml(o.customerName)} · ${escapeHtml(o.customerPhone)}</small></div>
-        ${statusTag(o.status)}
-      </div>
-      <div class="meta">
-        <div>📍 ${escapeHtml(o.neighborhood)} · ${escapeHtml(o.city)}</div>
-        <div>🏠 ${escapeHtml(o.address||'-')}</div>
-        <div>💳 ${escapeHtml(o.paymentMethod)} · 💰 ${currency.format(o.total)}</div>
-        <div>${o.items.map(i=>`${i.qty}x ${escapeHtml(i.name)}`).join(', ')}</div>
-      </div>
-      <div class="actions">
-        <button class="green" onclick="updateOrder('${o.id}','Aceito')">Aceitar</button>
-        <button class="orange" onclick="updateOrder('${o.id}','Em preparo')">Em preparo</button>
-        <button class="blue" onclick="releaseDelivery('${o.id}')">Liberar entrega</button>
-        <button class="red" onclick="updateOrder('${o.id}','Cancelado')">Cancelar</button>
-      </div>
-    </article>
-  `).join('') : '<div class="notice">Nenhum pedido ainda.</div>';
-}
-
-function renderDeliveries(){
-  $('restaurantDeliveries').innerHTML = deliveries.length ? deliveries.map(d=>{
-    const driver=motoboys.find(m=>m.id===d.motoboyId);
-    return `
-    <article class="item">
-      <div class="itemTop">
-        <div><strong>Entrega ${escapeHtml(d.id)}</strong><br><small>Pedido ${escapeHtml(d.orderId)}</small></div>
-        ${statusTag(d.status)}
-      </div>
-      <div class="meta">
-        <div>Retirada: ${escapeHtml(d.pickup)} · Entrega: ${escapeHtml(d.neighborhood)}</div>
-        <div>Motoboy: ${driver?escapeHtml(driver.name):'Ainda não definido'}</div>
-        <div>Taxa: ${currency.format(Number(d.fee||0))}</div>
-      </div>
-    </article>`;
-  }).join('') : '<div class="notice">Nenhuma entrega liberada.</div>';
-}
-
-function renderDriverPanel(){
-  const motoboyId=$('driverLogin').value;
-  if(!motoboyId){
-    $('driverPanel').innerHTML='<div class="notice">Aprove um motoboy no painel do restaurante primeiro.</div>';
-    return;
-  }
-
-  const mine=deliveries.filter(d=>{
-    const assigned=d.motoboyId===motoboyId && ['Oferecida ao motoboy','Aceita','Em rota'].includes(d.status);
-    const open=!d.motoboyId && d.status==='Disponível';
-    return assigned || open;
-  });
-
-  $('driverPanel').innerHTML = mine.length ? mine.map(d=>`
-    <article class="item">
-      <div class="itemTop">
-        <div><strong>Entrega do pedido ${escapeHtml(d.orderId)}</strong><br><small>${escapeHtml(d.neighborhood)} · ${currency.format(Number(d.fee||0))}</small></div>
-        ${statusTag(d.status)}
-      </div>
-      <div class="actions">
-        <button class="green" onclick="acceptDelivery('${d.id}','${motoboyId}')" ${d.status==='Aceita'||d.status==='Em rota'?'disabled':''}>Aceitar</button>
-        <button class="red" onclick="rejectDelivery('${d.id}','${motoboyId}')" ${d.status==='Em rota'?'disabled':''}>Recusar</button>
-        <button class="blue" onclick="updateDelivery('${d.id}','Em rota')">Em rota</button>
-        <button class="green" onclick="updateDelivery('${d.id}','Entregue')">Entregue</button>
-      </div>
-    </article>
-  `).join('') : '<div class="notice">Nenhuma entrega disponível para este motoboy.</div>';
-}
-
-function renderAll(){
-  renderMenu();
-  renderCart();
-  renderDrivers();
-  renderOrders();
-  renderDeliveries();
-}
-
-function escapeHtml(value){
-  return String(value??'').replace(/[&<>"']/g, s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
-}
-
-renderAll();
-setTimeout(refreshFromBackend, 800);
-</script>
+  </script>
 </body>
 </html>
