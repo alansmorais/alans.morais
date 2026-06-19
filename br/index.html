@@ -83,11 +83,11 @@
                 
                 <!-- Language Selector Links (Fixes the Redirect Loop) -->
                 <div class="flex items-center gap-1 md:gap-2">
-                    <a href="/" onclick="localStorage.setItem('preferredLanguage', 'en');" class="text-xs font-bold text-blue-500 hover:text-blue-400 transition-colors focus:outline-none rounded px-1">EN</a>
+                    <a href="/" onclick="localStorage.setItem('preferredLanguage', 'en'); localStorage.setItem('preferredCurrency', 'USD');" class="text-xs font-bold text-blue-500 hover:text-blue-400 transition-colors focus:outline-none rounded px-1">EN</a>
                     <span class="text-slate-700 text-xs">/</span>
-                    <a href="/br/" onclick="localStorage.setItem('preferredLanguage', 'pt');" class="text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors focus:outline-none rounded px-1">PT-BR</a>
+                    <a href="/br/" onclick="localStorage.setItem('preferredLanguage', 'pt'); localStorage.setItem('preferredCurrency', 'BRL');" class="text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors focus:outline-none rounded px-1">PT-BR</a>
                     <span class="text-slate-700 text-xs">/</span>
-                    <a href="/pl/" onclick="localStorage.setItem('preferredLanguage', 'pl');" class="text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors focus:outline-none rounded px-1">PL</a>
+                    <a href="/pl/" onclick="localStorage.setItem('preferredLanguage', 'pl'); localStorage.setItem('preferredCurrency', 'PLN');" class="text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors focus:outline-none rounded px-1">PL</a>
                 </div>
 
                 <span class="text-slate-800 text-sm hidden md:block">|</span>
@@ -325,7 +325,7 @@
                         <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Formulário de contato</li>
                         <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Integração com Google Maps</li>
                         <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Configuração básica de SEO</li>
-                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Configuração de hospedagem</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Configuração de hospedagem no GitHub Pages</li>
                         <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Conexão com domínio existente</li>
                         <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Suporte no lançamento</li>
                     </ul>
@@ -357,15 +357,15 @@
                         <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Painel do entregador</li>
                         <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Fluxo de status do pedido e entrega</li>
                         <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Distribuição regional de entregadores</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Registros e relatórios</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Registros e relatórios em Google Sheets</li>
                         <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Suporte de implantação piloto</li>
                     </ul>
                     <p class="text-xs text-slate-500 leading-relaxed">Ferramentas de pagamento, mensagens pagas, domínios personalizados e custos externos de entrega são cobrados separadamente.</p>
                 </div>
                 <div class="lg:w-72 bg-slate-950 border border-slate-800 rounded-lg p-6 text-center shrink-0">
                     <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Implantação piloto</p>
-                    <div class="mb-2 text-2xl font-bold text-blue-500">R$ 900–1.500</div>
-                    <p class="text-xs text-blue-400 font-medium mb-4">Mensalidade piloto: <br><span class="font-bold text-sm">R$ 197–297 / mês</span></p>
+                    <div class="mb-2 text-2xl font-bold text-blue-500" data-price-range="650,1080">R$ 900–1.500</div>
+                    <p class="text-xs text-blue-400 font-medium mb-4">Mensalidade piloto: <br><span data-price-range="143,215" class="font-bold text-sm">R$ 197–297</span> / mês</p>
                     <p class="text-xs text-slate-400 mb-4">Criado para restaurantes que querem mais pedidos diretos e melhor controle operacional.</p>
                     <button type="button" onclick="openContactForm('deliveryhub', 'custom_quote')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir DeliveryHub</button>
                 </div>
@@ -382,39 +382,39 @@
                                 <span class="block text-xs font-semibold text-slate-400 mb-1">Status do domínio</span>
                                 <select id="estimateDomain" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
                                     <option value="0" data-price="0">Domínio existente</option>
-                                    <option value="150" data-price="150">Configuração de novo domínio</option>
+                                    <option value="70" data-price="70">Configuração de novo domínio</option>
                                 </select>
                             </label>
                             <label class="block">
                                 <span class="block text-xs font-semibold text-slate-400 mb-1">Configuração de agendamento</span>
                                 <select id="estimateBooking" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
                                     <option value="0" data-price="0">Apenas link de agendamento</option>
-                                    <option value="250" data-price="250">Widget incorporado</option>
-                                    <option value="650" data-price="650">Fluxo com múltiplos profissionais</option>
+                                    <option value="145" data-price="145">Widget incorporado</option>
+                                    <option value="360" data-price="360">Fluxo com múltiplos profissionais</option>
                                 </select>
                             </label>
                             <label class="block">
                                 <span class="block text-xs font-semibold text-slate-400 mb-1">Idiomas</span>
                                 <select id="estimateIdiomas" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
                                     <option value="0" data-price="0">Um idioma</option>
-                                    <option value="400" data-price="400">Dois idiomas</option>
-                                    <option value="750" data-price="750">Três idiomas</option>
+                                    <option value="180" data-price="180">Dois idiomas</option>
+                                    <option value="325" data-price="325">Três idiomas</option>
                                 </select>
                             </label>
                             <label class="block">
                                 <span class="block text-xs font-semibold text-slate-400 mb-1">Conteúdo</span>
                                 <select id="estimateConteúdo" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
                                     <option value="0" data-price="0">Cliente fornece o conteúdo</option>
-                                    <option value="450" data-price="450">Ajuste de conteúdo</option>
-                                    <option value="750" data-price="750">Suporte de copywriting</option>
+                                    <option value="180" data-price="180">Ajuste de conteúdo</option>
+                                    <option value="360" data-price="360">Suporte de copywriting</option>
                                 </select>
                             </label>
                         </div>
                         <div class="grid sm:grid-cols-2 gap-3 mt-5 text-sm text-slate-300">
-                            <label class="flex items-center gap-2"><input id="estimateExtraPage" type="checkbox" value="400" onchange="updateEstimate()" class="accent-blue-600" /><span>Página extra</span></label>
-                            <label class="flex items-center gap-2"><input id="estimateWhatsapp" type="checkbox" value="700" onchange="updateEstimate()" class="accent-blue-600" /><span>Automação de WhatsApp</span></label>
-                            <label class="flex items-center gap-2"><input id="estimatePayments" type="checkbox" value="800" onchange="updateEstimate()" class="accent-blue-600" /><span>Pagamentos online</span></label>
-                            <label class="flex items-center gap-2"><input id="estimateCare" type="checkbox" value="199" onchange="updateEstimate()" class="accent-blue-600" /><span>Plano mensal de cuidado</span></label>
+                            <label class="flex items-center gap-2"><input id="estimateExtraPage" type="checkbox" value="215" onchange="updateEstimate()" class="accent-blue-600" /><span>Página extra</span></label>
+                            <label class="flex items-center gap-2"><input id="estimateWhatsapp" type="checkbox" value="360" onchange="updateEstimate()" class="accent-blue-600" /><span>Automação de WhatsApp</span></label>
+                            <label class="flex items-center gap-2"><input id="estimatePayments" type="checkbox" value="430" onchange="updateEstimate()" class="accent-blue-600" /><span>Pagamentos online</span></label>
+                            <label class="flex items-center gap-2"><input id="estimateCare" type="checkbox" value="70" onchange="updateEstimate()" class="accent-blue-600" /><span>Plano mensal de cuidado</span></label>
                         </div>
                     </div>
                     <div class="bg-slate-950 border border-slate-800 rounded-lg p-6 text-center sticky top-28">
@@ -428,10 +428,10 @@
             </div>
 
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-                <div class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-br-lg z-10">Implantação Inicial</div>
+                <div class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-br-lg z-10">Implantação de Automação</div>
                 <div class="pt-4 md:pt-0">
-                    <h3 class="text-xl font-bold mb-2 text-slate-100">Fase 1: Estruturação e Engenharia do Projeto</h3>
-                    <p class="text-slate-400 text-sm max-w-xl">Desenvolvimento estrutural completo, design web profissional, base de SEO e fluxos inteligentes de automação.</p>
+                    <h3 class="text-xl font-bold mb-2 text-slate-100">Fase 1: Arquitetura de Automação & Implementação</h3>
+                    <p class="text-slate-400 text-sm max-w-xl">Estrutura multipágina, formulários avançados, captação de leads, apoio na implementação de CRM/Salesforce/ERP, planejamento de integrações e testes de fluxo. Projetos completos de ERP podem ser implementados em conjunto com parceiros especializados.</p>
                 </div>
                 <div class="text-left md:text-right shrink-0">
                     <p class="text-xs uppercase text-slate-500 font-bold mb-1">A partir de</p>
@@ -439,45 +439,45 @@
                 </div>
             </div>
 
-            <h3 class="text-xl font-bold mb-6 text-center text-slate-100">Fase 2: Tech Ops e Gestão Mensal</h3>
+            <h3 class="text-xl font-bold mb-6 text-center text-slate-100">Fase 2: Tech Ops de Automação & Suporte Mensal</h3>
             <div class="grid lg:grid-cols-3 gap-6 items-stretch">
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col hover:border-slate-700 transition-colors">
                     <h3 class="text-lg font-bold mb-1 text-slate-200">Contrato de 3 Meses</h3>
-                    <p class="text-slate-400 text-xs mb-6 h-8">Gestão e estabilização de curto prazo.</p>
+                    <p class="text-slate-400 text-xs mb-6 h-8">Suporte de curto prazo para estabilizar páginas, formulários, automações e integrações após o lançamento.</p>
                     <div class="mb-6 pb-6 border-b border-slate-800"><span class="text-3xl font-bold text-slate-100" data-price-display="720">R$ 997</span><span class="text-slate-500 text-sm font-medium"> / mês</span></div>
                     <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Hospedagem Premium Incluída</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Atualizações Mensais de Conteúdo</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Manutenção de Automação</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Monitoramento de Segurança</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Publicação do site / plataforma</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Atualizações mensais de conteúdo e páginas</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Manutenção de formulários e automações</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Monitoramento de integrações</li>
                     </ul>
                     <button type="button" onclick="openContactForm('three_month', '720')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Selecionar Pacote</button>
                 </div>
                 <div class="bg-slate-950 border-2 border-blue-600 rounded-xl p-6 flex flex-col relative order-first lg:order-none">
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded">Melhor Valor</div>
                     <h3 class="text-lg font-bold mb-1 text-slate-200 mt-2">Contrato de 12 Meses</h3>
-                    <p class="text-slate-400 text-xs mb-6 h-8">Parceria de longo prazo e melhoria contínua.</p>
+                    <p class="text-slate-400 text-xs mb-6 h-8">Suporte de longo prazo para melhorias de fluxo, relatórios e manutenção de integrações.</p>
                     <div class="mb-6 pb-6 border-b border-slate-800"><span class="text-3xl font-bold text-slate-100" data-price-display="430">R$ 597</span><span class="text-slate-500 text-sm font-medium"> / mês</span></div>
                     <ul class="text-slate-300 space-y-3 mb-8 flex-grow text-sm">
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Hospedagem Premium Incluída</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Atualizações Mensais de Conteúdo</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Manutenção de Automação</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Monitoramento de Segurança</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Relatórios Básicos de Analytics</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Suporte Prioritário e Estratégia</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Publicação do site / plataforma</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Atualizações mensais de conteúdo e páginas</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Manutenção de formulários e automações</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Monitoramento de integrações</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Relatórios e analytics básicos</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Suporte prioritário e estratégia de fluxos</li>
                     </ul>
                     <button type="button" onclick="openContactForm('twelve_month', '430')" class="w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Selecionar Pacote</button>
                 </div>
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col hover:border-slate-700 transition-colors">
                     <h3 class="text-lg font-bold mb-1 text-slate-200">Contrato de 6 Meses</h3>
-                    <p class="text-slate-400 text-xs mb-6 h-8">Um período equilibrado para otimização.</p>
+                    <p class="text-slate-400 text-xs mb-6 h-8">Um período equilibrado para otimização, monitoramento e melhorias graduais de automação.</p>
                     <div class="mb-6 pb-6 border-b border-slate-800"><span class="text-3xl font-bold text-slate-100" data-price-display="580">R$ 797</span><span class="text-slate-500 text-sm font-medium"> / mês</span></div>
                     <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Hospedagem Premium Incluída</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Atualizações Mensais de Conteúdo</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Manutenção de Automação</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Monitoramento de Segurança</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Relatórios Básicos de Analytics</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Publicação do site / plataforma</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Atualizações mensais de conteúdo e páginas</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Manutenção de formulários e automações</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Monitoramento de integrações</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Relatórios e analytics básicos</li>
                     </ul>
                     <button type="button" onclick="openContactForm('six_month', '580')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Selecionar Pacote</button>
                 </div>
@@ -667,6 +667,15 @@
             }
         });
 
+        document.querySelectorAll('[data-price-range]').forEach(el => {
+            const values = String(el.getAttribute('data-price-range') || '').split(',');
+            const lowPln = parseInt(values[0], 10);
+            const highPln = parseInt(values[1], 10);
+            if (!isNaN(lowPln) && !isNaN(highPln)) {
+                el.textContent = `${formatPrice(lowPln)}–${formatPrice(highPln)}`;
+            }
+        });
+
         // Estimator options formatting
         const optIds = ['estimateDomain', 'estimateBooking', 'estimateIdiomas', 'estimateConteúdo'];
         optIds.forEach(id => {
@@ -725,7 +734,7 @@
         const note = document.getElementById('estimateCareNote');
         if (care && note) {
             note.textContent = care.checked
-                ? `Orçamento final confirmado após uma breve análise do projeto. ${formatPrice(199)} / mês care plan selected.`
+                ? `Orçamento final confirmado após uma breve análise do projeto. ${formatPrice(70)} / mês care plan selected.`
                 : "Orçamento final confirmado após uma breve análise do projeto.";
         }
     }
@@ -992,14 +1001,8 @@
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-        const savedCurr = localStorage.getItem('preferredCurrency');
-        
-        // Use saved currency, or default to USD for English root.
-        if (savedCurr) {
-            currentCurrency = savedCurr;
-        } else {
-            currentCurrency = 'USD';
-        }
+        currentCurrency = 'BRL';
+        localStorage.setItem('preferredCurrency', 'BRL');
 
         updateDynamicContent();
 
