@@ -858,6 +858,52 @@
         document.head.appendChild(script);
     }
 
+    function submitLeadViaJsonp(payload) {
+        return new Promise((resolve, reject) => {
+            const callbackName = 'alansmLeadCallback_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+            const script = document.createElement('script');
+
+            const cleanup = () => {
+                try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
+                if (script && script.parentNode) script.parentNode.removeChild(script);
+            };
+
+            const timeout = window.setTimeout(() => {
+                cleanup();
+                reject(new Error('Lead submission timed out.'));
+            }, 15000);
+
+            window[callbackName] = function(result) {
+                window.clearTimeout(timeout);
+                cleanup();
+
+                if (!result || result.status !== 'ok') {
+                    reject(new Error(result && result.message ? result.message : 'Lead submission failed.'));
+                    return;
+                }
+
+                resolve(result);
+            };
+
+            script.onerror = function() {
+                window.clearTimeout(timeout);
+                cleanup();
+                reject(new Error('Lead submission request failed.'));
+            };
+
+            const params = new URLSearchParams();
+            Object.keys(payload).forEach(key => {
+                params.append(key, payload[key] == null ? '' : String(payload[key]));
+            });
+            params.set('action', 'submitLead');
+            params.set('callback', callbackName);
+            params.set('_ts', Date.now());
+
+            script.src = ALANSM_BACKEND_URL + '?' + params.toString();
+            document.head.appendChild(script);
+        });
+    }
+
     async function handleFormSubmit(event) {
         event.preventDefault();
 
@@ -892,19 +938,12 @@
             source: 'website'
         };
 
-        const body = new URLSearchParams();
-        Object.keys(payload).forEach(key => body.append(key, payload[key]));
-
         button.disabled = true;
         button.textContent = "Sending...";
         status.textContent = '';
 
         try {
-            const response = await fetch(ALANSM_BACKEND_URL, { method: 'POST', body: body });
-            if (!response.ok) throw new Error();
-            const result = await response.json();
-            
-            if (result.status !== 'ok') throw new Error();
+            const result = await submitLeadViaJsonp(payload);
 
             status.textContent = `Message sent successfully. Ref: ${result.leadId || '0000'}`;
             status.className = 'text-xs text-center min-h-[20px] text-green-500 mt-2 font-medium';
@@ -913,6 +952,7 @@
 
             window.setTimeout(closeContactForm, 3000);
         } catch (error) {
+            console.error(error);
             status.textContent = "The message could not be sent. Please try again or contact me through LinkedIn.";
             status.className = 'text-xs text-center min-h-[20px] text-red-500 mt-2 font-medium';
         } finally {
