@@ -397,8 +397,8 @@
                 </div>
                 <div class="lg:w-72 bg-slate-950 border border-slate-800 rounded-lg p-6 text-center shrink-0">
                     <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Pilot setup</p>
-                    <div class="mb-2 text-2xl font-bold text-blue-500">1,500–2,500 PLN</div>
-                    <p class="text-xs text-blue-400 font-medium mb-4">Monthly pilot: <br><span class="font-bold text-sm">299–499 PLN / mo</span></p>
+                    <div class="mb-2 text-2xl font-bold text-blue-500" data-price-range="1500,2500">1,500–2,500 PLN</div>
+                    <p class="text-xs text-blue-400 font-medium mb-4">Monthly pilot: <br><span data-price-range="299,499" class="font-bold text-sm">299–499 PLN</span> / mo</p>
                     <p class="text-xs text-slate-400 mb-4">Built for restaurants that want more direct orders and better operational control.</p>
                     <button type="button" onclick="openContactForm('deliveryhub', 'custom_quote')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discuss DeliveryHub</button>
                 </div>
@@ -697,6 +697,15 @@
             const basePln = parseInt(el.getAttribute('data-price-display'), 10);
             if (!isNaN(basePln)) {
                 el.textContent = formatPrice(basePln);
+            }
+        });
+
+        document.querySelectorAll('[data-price-range]').forEach(el => {
+            const values = String(el.getAttribute('data-price-range') || '').split(',');
+            const lowPln = parseInt(values[0], 10);
+            const highPln = parseInt(values[1], 10);
+            if (!isNaN(lowPln) && !isNaN(highPln)) {
+                el.textContent = `${formatPrice(lowPln)}–${formatPrice(highPln)}`;
             }
         });
 
