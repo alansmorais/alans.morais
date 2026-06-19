@@ -29,21 +29,55 @@
         (function() {
             var savedLang = localStorage.getItem('preferredLanguage');
             var path = window.location.pathname;
-            
-            // Execute redirect only if on the root path
+
+            // Execute redirect only if on the root path.
             if (path === '/' || path === '/index.html') {
+                // Respect a manual language choice if the visitor already selected one.
                 if (savedLang === 'pt') {
+                    localStorage.setItem('preferredCurrency', 'BRL');
                     window.location.replace('/br/');
-                } else if (savedLang === 'pl') {
-                    window.location.replace('/pl/');
-                } else if (!savedLang) {
-                    var browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
-                    if (browserLang.startsWith('pt')) {
-                        window.location.replace('/br/');
-                    } else if (browserLang.startsWith('pl')) {
-                        window.location.replace('/pl/');
-                    }
+                    return;
                 }
+
+                if (savedLang === 'pl') {
+                    localStorage.setItem('preferredCurrency', 'PLN');
+                    window.location.replace('/pl/');
+                    return;
+                }
+
+                if (savedLang === 'en') {
+                    localStorage.setItem('preferredCurrency', 'USD');
+                    return;
+                }
+
+                var browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+                var timeZone = '';
+
+                try {
+                    timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+                } catch (error) {
+                    timeZone = '';
+                }
+
+                var isBrazil = browserLang === 'pt-br' || timeZone === 'America/Sao_Paulo';
+                var isPoland = browserLang.startsWith('pl') || timeZone === 'Europe/Warsaw';
+
+                if (isBrazil) {
+                    localStorage.setItem('preferredLanguage', 'pt');
+                    localStorage.setItem('preferredCurrency', 'BRL');
+                    window.location.replace('/br/');
+                    return;
+                }
+
+                if (isPoland) {
+                    localStorage.setItem('preferredLanguage', 'pl');
+                    localStorage.setItem('preferredCurrency', 'PLN');
+                    window.location.replace('/pl/');
+                    return;
+                }
+
+                localStorage.setItem('preferredLanguage', 'en');
+                localStorage.setItem('preferredCurrency', 'USD');
             }
         })();
     </script>
@@ -427,10 +461,10 @@
             </div>
 
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-                <div class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-br-lg z-10">Introductory Setup</div>
+                <div class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-br-lg z-10">Automation Setup</div>
                 <div class="pt-4 md:pt-0">
-                    <h3 class="text-xl font-bold mb-2 text-slate-100">Phase 1: Project Setup & Engineering</h3>
-                    <p class="text-slate-400 text-sm max-w-xl">Complete structural development, premium web design, SEO foundation, and smart automation workflows.</p>
+                    <h3 class="text-xl font-bold mb-2 text-slate-100">Phase 1: Automation Architecture & Implementation</h3>
+                    <p class="text-slate-400 text-sm max-w-xl">Multi-page web structure, advanced forms, lead capture, CRM/Salesforce/ERP implementation support, integration planning, and workflow testing. For full ERP projects, implementation can be delivered together with specialized ERP partners.</p>
                 </div>
                 <div class="text-left md:text-right shrink-0">
                     <p class="text-xs uppercase text-slate-500 font-bold mb-1">Starting at</p>
@@ -438,45 +472,45 @@
                 </div>
             </div>
 
-            <h3 class="text-xl font-bold mb-6 text-center text-slate-100">Phase 2: Tech Ops & Monthly Management</h3>
+            <h3 class="text-xl font-bold mb-6 text-center text-slate-100">Phase 2: Automation Tech Ops & Monthly Support</h3>
             <div class="grid lg:grid-cols-3 gap-6 items-stretch">
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col hover:border-slate-700 transition-colors">
                     <h3 class="text-lg font-bold mb-1 text-slate-200">3-Month Contract</h3>
-                    <p class="text-slate-400 text-xs mb-6 h-8">Short-term management and stabilization.</p>
+                    <p class="text-slate-400 text-xs mb-6 h-8">Short-term support to stabilize pages, forms, automations, and integrations after launch.</p>
                     <div class="mb-6 pb-6 border-b border-slate-800"><span class="text-3xl font-bold text-slate-100" data-price-display="1400">1,400 PLN</span><span class="text-slate-500 text-sm font-medium"> / mo</span></div>
                     <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Premium Hosting Included</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Monthly Content Updates</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Automation Maintenance</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Security Monitoring</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Website / Platform Publishing</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Monthly Content & Page Updates</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Form & Automation Maintenance</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Integration Monitoring</li>
                     </ul>
                     <button type="button" onclick="openContactForm('three_month', '1400')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Select Package</button>
                 </div>
                 <div class="bg-slate-950 border-2 border-blue-600 rounded-xl p-6 flex flex-col relative order-first lg:order-none">
                     <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded">Best Value</div>
                     <h3 class="text-lg font-bold mb-1 text-slate-200 mt-2">12-Month Contract</h3>
-                    <p class="text-slate-400 text-xs mb-6 h-8">Long-term partnership and sustained improvement.</p>
+                    <p class="text-slate-400 text-xs mb-6 h-8">Long-term support for ongoing workflow improvements, reporting, and integration maintenance.</p>
                     <div class="mb-6 pb-6 border-b border-slate-800"><span class="text-3xl font-bold text-slate-100" data-price-display="850">850 PLN</span><span class="text-slate-500 text-sm font-medium"> / mo</span></div>
                     <ul class="text-slate-300 space-y-3 mb-8 flex-grow text-sm">
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Premium Hosting Included</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Monthly Content Updates</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Automation Maintenance</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Security Monitoring</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Basic Analytics Reports</li>
-                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Priority Support & Strategy</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Website / Platform Publishing</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Monthly Content & Page Updates</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Form & Automation Maintenance</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Integration Monitoring</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Basic Analytics & Reports</li>
+                        <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Priority Support & Workflow Strategy</li>
                     </ul>
                     <button type="button" onclick="openContactForm('twelve_month', '850')" class="w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Select Package</button>
                 </div>
                 <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col hover:border-slate-700 transition-colors">
                     <h3 class="text-lg font-bold mb-1 text-slate-200">6-Month Contract</h3>
-                    <p class="text-slate-400 text-xs mb-6 h-8">A balanced period for optimization.</p>
+                    <p class="text-slate-400 text-xs mb-6 h-8">A balanced period for optimization, monitoring, and gradual automation improvements.</p>
                     <div class="mb-6 pb-6 border-b border-slate-800"><span class="text-3xl font-bold text-slate-100" data-price-display="1150">1,150 PLN</span><span class="text-slate-500 text-sm font-medium"> / mo</span></div>
                     <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Premium Hosting Included</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Monthly Content Updates</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Automation Maintenance</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Security Monitoring</li>
-                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Basic Analytics Reports</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Website / Platform Publishing</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Monthly Content & Page Updates</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Form & Automation Maintenance</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Integration Monitoring</li>
+                        <li class="flex items-start"><span class="text-slate-600 mr-2 font-bold">•</span>Basic Analytics & Reports</li>
                     </ul>
                     <button type="button" onclick="openContactForm('six_month', '1150')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Select Package</button>
                 </div>
