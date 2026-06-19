@@ -636,7 +636,7 @@
     const currentLang = 'pt';
     let currentCurrency = 'BRL';
     let previouslyFocusedElement = null;
-    let currentPackageInfo = { packageNome: '', price: '' };
+    let currentPackageInfo = { packageName: '', price: '' };
 
     const exchangeRates = { PLN: 1, BRL: 1.38, EUR: 0.23, USD: 0.25 };
 
@@ -656,14 +656,14 @@
         return formatted + ' PLN';
     }
 
-    function updateDynamicConteúdo() {
+    function updateDynamicContent() {
         const currSelect = document.getElementById('currencySelect');
         if (currSelect) currSelect.value = currentCurrency;
 
         document.querySelectorAll('[data-price-display]').forEach(el => {
             const basePln = parseInt(el.getAttribute('data-price-display'), 10);
             if (!isNaN(basePln)) {
-                el.textConteúdo = formatPrice(basePln);
+                el.textContent = formatPrice(basePln);
             }
         });
 
@@ -676,14 +676,14 @@
                     const val = parseInt(opt.getAttribute('data-price') || opt.value, 10);
                     // Reset to base text to prevent stacking (+ $100) (+ $100)
                     if (!opt.hasAttribute('data-base-text')) {
-                        opt.setAttribute('data-base-text', opt.textConteúdo.split(' (+')[0]);
+                        opt.setAttribute('data-base-text', opt.textContent.split(' (+')[0]);
                     }
                     let text = opt.getAttribute('data-base-text');
                     
                     if (val > 0) {
                         text += ` (+ ${formatPrice(val)})`;
                     }
-                    opt.textConteúdo = text;
+                    opt.textContent = text;
                 });
             }
         });
@@ -696,7 +696,7 @@
         if (!exchangeRates[curr]) return;
         currentCurrency = curr;
         localStorage.setItem('preferredCurrency', curr);
-        updateDynamicConteúdo();
+        updateDynamicContent();
     }
 
     function getEstimatorTotal() {
@@ -719,12 +719,12 @@
         const totalPln = getEstimatorTotal();
         const highPln = totalPln + 200;
         
-        result.textConteúdo = `${formatPrice(totalPln)}–${formatPrice(highPln)}`;
+        result.textContent = `${formatPrice(totalPln)}–${formatPrice(highPln)}`;
 
         const care = document.getElementById('estimateCare');
         const note = document.getElementById('estimateCareNote');
         if (care && note) {
-            note.textConteúdo = care.checked
+            note.textContent = care.checked
                 ? `Orçamento final confirmado após uma breve análise do projeto. ${formatPrice(199)} / mês care plan selected.`
                 : "Orçamento final confirmado após uma breve análise do projeto.";
         }
@@ -757,16 +757,16 @@
         }
 
         return {
-            packageNome: packages[packageKey] || '',
+            packageName: packages[packageKey] || '',
             price: priceStr
         };
     }
 
     function openEstimatedContactForm() {
         updateEstimate();
-        const range = document.getElementById('estimateResult')?.textConteúdo || '';
+        const range = document.getElementById('estimateResult')?.textContent || '';
         openContactForm();
-        currentPackageInfo = { packageNome: "Project Estimate", price: range };
+        currentPackageInfo = { packageName: "Project Estimate", price: range };
         document.getElementById('formSubject').value = "Project Estimate";
         document.getElementById('formMsg').value = `I am interested in the Project Estimate (${range}). My request is...`;
     }
@@ -778,16 +778,16 @@
         const status = document.getElementById('formStatus');
 
         previouslyFocusedElement = document.activeElement;
-        status.textConteúdo = '';
-        status.classNome = 'text-xs text-center min-h-[20px]';
+        status.textContent = '';
+        status.className = 'text-xs text-center min-h-[20px]';
 
         if (packageKey) {
             const details = packageDetails(packageKey, priceKey);
             currentPackageInfo = details;
-            subject.value = packageKey === 'offer' ? "Inquiry: Introductory onboarding offer" : `Inquiry: ${details.packageNome}`;
-            message.value = `I am interested in the ${details.packageNome} option (${details.price}). My request is...`;
+            subject.value = packageKey === 'offer' ? "Inquiry: Introductory onboarding offer" : `Inquiry: ${details.packageName}`;
+            message.value = `I am interested in the ${details.packageName} option (${details.price}). My request is...`;
         } else {
-            currentPackageInfo = { packageNome: "General inquiry", price: '' };
+            currentPackageInfo = { packageName: "General inquiry", price: '' };
             subject.value = "General inquiry";
             message.value = '';
         }
@@ -858,13 +858,13 @@
         document.head.appendChild(script);
     }
 
-    async function handleFormSubmit(event) {
+    function handleFormSubmit(event) {
         event.preventDefault();
 
         const form = event.target;
         const button = form.querySelector('button[type="submit"]');
         const status = document.getElementById('formStatus');
-        const originalText = button.textConteúdo;
+        const originalText = button.textContent;
 
         const name = document.getElementById('formNome')?.value || '';
         const email = document.getElementById('formEmail')?.value || '';
@@ -873,52 +873,78 @@
         const consent = document.getElementById('formConsent')?.checked;
 
         if (!consent) {
-            status.textConteúdo = "Concordo que meus dados sejam usados para responder à solicitação e gerenciar a comunicação do projeto.";
-            status.classNome = 'text-xs text-center min-h-[20px] text-yellow-400 mt-2 font-medium';
+            status.textContent = "Concordo que meus dados sejam usados para responder à solicitação e gerenciar a comunicação do projeto.";
+            status.className = 'text-xs text-center min-h-[20px] text-yellow-400 mt-2 font-medium';
             return;
         }
 
-        const packageInfo = currentPackageInfo || { packageNome: "General inquiry", price: '' };
+        const packageInfo = currentPackageInfo || { packageName: "Consulta geral", price: '' };
 
-        const payload = {
-            action: 'submitLead',
-            name: name,
-            email: email,
-            phone: phone,
-            packageNome: packageInfo.packageNome || "General inquiry",
-            estimatedPrice: packageInfo.price || '',
-            discountRequested: String(packageInfo.packageNome || '').toLowerCase().includes('light') ? 'YES' : 'NO',
-            message: message,
-            source: 'website'
+        const callbackName = 'alansmLeadCallback_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+        const script = document.createElement('script');
+
+        const cleanup = () => {
+            try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
+            if (script && script.parentNode) script.parentNode.removeChild(script);
         };
 
-        const body = new URLSearchParams();
-        Object.keys(payload).forEach(key => body.append(key, payload[key]));
+        const timeout = window.setTimeout(() => {
+            cleanup();
+            button.disabled = false;
+            button.textContent = originalText;
+            status.textContent = "A mensagem não pôde ser enviada. Tente novamente ou entre em contato pelo LinkedIn.";
+            status.className = 'text-xs text-center min-h-[20px] text-red-500 mt-2 font-medium';
+        }, 15000);
 
-        button.disabled = true;
-        button.textConteúdo = "Sending...";
-        status.textConteúdo = '';
+        window[callbackName] = function(result) {
+            window.clearTimeout(timeout);
+            cleanup();
 
-        try {
-            const response = await fetch(ALANSM_BACKEND_URL, { method: 'POST', body: body });
-            if (!response.ok) throw new Error();
-            const result = await response.json();
-            
-            if (result.status !== 'ok') throw new Error();
+            button.disabled = false;
+            button.textContent = originalText;
 
-            status.textConteúdo = `Message sent successfully. Ref: ${result.leadId || '0000'}`;
-            status.classNome = 'text-xs text-center min-h-[20px] text-green-500 mt-2 font-medium';
+            if (!result || result.status !== 'ok') {
+                status.textContent = result && result.message ? result.message : "A mensagem não pôde ser enviada. Tente novamente ou entre em contato pelo LinkedIn.";
+                status.className = 'text-xs text-center min-h-[20px] text-red-500 mt-2 font-medium';
+                return;
+            }
+
+            status.textContent = `Mensagem enviada com sucesso. Ref: ${result.leadId || '0000'}`;
+            status.className = 'text-xs text-center min-h-[20px] text-green-500 mt-2 font-medium';
             form.reset();
             loadDiscountCounter();
 
             window.setTimeout(closeContactForm, 3000);
-        } catch (error) {
-            status.textConteúdo = "The message could not be sent. Please try again or contact me through LinkedIn.";
-            status.classNome = 'text-xs text-center min-h-[20px] text-red-500 mt-2 font-medium';
-        } finally {
+        };
+
+        script.onerror = function() {
+            window.clearTimeout(timeout);
+            cleanup();
             button.disabled = false;
-            button.textConteúdo = originalText;
-        }
+            button.textContent = originalText;
+            status.textContent = "A mensagem não pôde ser enviada. Tente novamente ou entre em contato pelo LinkedIn.";
+            status.className = 'text-xs text-center min-h-[20px] text-red-500 mt-2 font-medium';
+        };
+
+        const params = new URLSearchParams();
+        params.set('action', 'submitLead');
+        params.set('callback', callbackName);
+        params.set('name', name);
+        params.set('email', email);
+        params.set('phone', phone);
+        params.set('packageName', packageInfo.packageName || "Consulta geral");
+        params.set('estimatedPrice', packageInfo.price || '');
+        params.set('discountRequested', String(packageInfo.packageName || '').toLowerCase().includes('light') ? 'YES' : 'NO');
+        params.set('message', message);
+        params.set('source', 'website');
+        params.set('_ts', String(Date.now()));
+
+        button.disabled = true;
+        button.textContent = "Enviando...";
+        status.textContent = '';
+
+        script.src = ALANSM_BACKEND_URL + '?' + params.toString();
+        document.head.appendChild(script);
     }
 
     function openLegalModal(modalId) {
@@ -965,7 +991,7 @@
         if (event.target.id === 'termsModal' || event.target.id === 'privacyModal') closeLegalModal(event.target.id);
     });
 
-    document.addEventListener('DOMConteúdoLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
         const savedCurr = localStorage.getItem('preferredCurrency');
         
         // Use saved currency, or default to USD for English root.
@@ -975,7 +1001,7 @@
             currentCurrency = 'USD';
         }
 
-        updateDynamicConteúdo();
+        updateDynamicContent();
 
         let bannerTriggered = false;
         const triggerBanner = () => {
