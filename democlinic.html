@@ -1,604 +1,577 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Demo Concept — Clinic Booking Page | AlanSM Solutions</title>
-  <meta name="description" content="Demo clinic booking page concept with services, location, FAQ, booking button, contact form, Google Calendar guidance, and patient intake guidance." />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lumina | Clínica de Estética Avançada</title>
+  <meta name="description" content="Clínica de Estética Avançada. Realce sua beleza com naturalidade e protocolos exclusivos.">
+  <meta name="theme-color" content="#FCFAFA">
+  
   <style>
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(14,165,233,0.18), transparent 36%),
-        radial-gradient(circle at top right, rgba(16,185,129,0.14), transparent 34%),
-        #f8fafc;
+    /* Tipografia Elegante */
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
+    :root {
+      /* Paleta Rose Gold & Pérola */
+      --cor-primaria: #C58B82; /* Rose Gold / Blush */
+      --cor-primaria-hover: #B0746A;
+      --cor-fundo: #FCFAFA; /* Branco Pérola */
+      --cor-cartao: #FFFFFF;
+      --cor-texto: #2D2828; /* Cinza Chumbo Escuro */
+      --cor-texto-mutado: #6D6363;
+      --cor-borda: #E8DFDF;
+      --cor-destaque: #F4EAE8; /* Fundo suave para seções */
+      
+      --sombra-suave: 0 10px 30px rgba(197, 139, 130, 0.08);
+      --radius-lg: 16px;
+      --radius-md: 8px;
+      --container: 1120px;
     }
-    .glass {
-      background: rgba(255,255,255,0.84);
-      backdrop-filter: blur(18px);
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Lato', sans-serif;
+      background: var(--cor-fundo);
+      color: var(--cor-texto);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .container {
+      width: min(100% - 32px, var(--container));
+      margin-inline: auto;
+    }
+
+    /* HEADER */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(252, 250, 250, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--cor-borda);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 70px;
+    }
+
+    .brand-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--cor-texto);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .brand-text span { color: var(--cor-primaria); }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nav-menu a { text-decoration: none; color: var(--cor-texto-mutado); transition: 0.3s; }
+    .nav-menu a:hover { color: var(--cor-primaria); }
+
+    .menu-toggle { display: none; border: 0; background: transparent; padding: 8px; cursor: pointer; }
+    .menu-toggle span { display: block; width: 24px; height: 2px; margin: 5px 0; background: var(--cor-texto); }
+
+    /* LAYOUT GERAL */
+    .section { padding: 80px 0; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--cor-primaria);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--cor-texto);
+      line-height: 1.15;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    h1 { font-size: clamp(2.8rem, 5vw, 4.2rem); }
+    h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); }
+    h3 { font-size: 1.4rem; }
+    p { margin-top: 0; color: var(--cor-texto-mutado); }
+
+    /* BOTÕES */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 28px;
+      border-radius: 999px; /* Bordas arredondadas para estética feminina */
+      border: 1px solid transparent;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--cor-primaria);
+      color: #FFF;
+      box-shadow: 0 8px 20px rgba(197, 139, 130, 0.25);
+    }
+    .btn-primary:hover { background: var(--cor-primaria-hover); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--cor-texto);
+      border-color: var(--cor-primaria);
+    }
+    .btn-ghost:hover { background: var(--cor-destaque); }
+
+    /* HERO SECTION */
+    .hero {
+      background: linear-gradient(135deg, var(--cor-fundo) 0%, var(--cor-destaque) 100%);
+      padding-top: 80px;
+      padding-bottom: 80px;
+      text-align: center;
+    }
+    .hero-content { max-width: 700px; margin: 0 auto; }
+    .hero-text { font-size: 1.1rem; margin: 24px 0 32px; }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; }
+
+    /* CARDS E SERVIÇOS */
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+    .service-card {
+      background: var(--cor-cartao);
+      padding: 40px 32px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--cor-borda);
+      box-shadow: var(--sombra-suave);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover { transform: translateY(-8px); border-color: var(--cor-primaria); }
+    .service-card .icon {
+      width: 56px; height: 56px; margin: 0 auto 24px;
+      background: var(--cor-destaque); color: var(--cor-primaria);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-family: 'Playfair Display', serif; font-style: italic;
+    }
+
+    /* SEÇÃO DE AGENDAMENTO */
+    .scheduling { background: var(--cor-cartao); border-top: 1px solid var(--cor-borda); border-bottom: 1px solid var(--cor-borda); }
+    .booking-shell {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border: 1px solid var(--cor-borda); border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--sombra-suave); margin-top: 40px;
+    }
+    
+    .booking-calendar { padding: 40px; border-right: 1px solid var(--cor-borda); background: var(--cor-fundo); }
+    .booking-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    
+    .date-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 32px; }
+    .date-card {
+      border: 1px solid var(--cor-borda); background: var(--cor-cartao); border-radius: var(--radius-md);
+      padding: 12px 8px; text-align: center; cursor: pointer; transition: 0.2s ease;
+    }
+    .date-card:hover { border-color: var(--cor-primaria); }
+    .date-card.is-active { background: var(--cor-destaque); border-color: var(--cor-primaria); color: var(--cor-primaria); }
+    .date-card strong { display: block; font-size: 1.2rem; font-family: 'Playfair Display', serif; color: var(--cor-texto); }
+    .date-card.is-active strong { color: var(--cor-primaria); }
+    .date-card span { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--cor-texto-mutado); }
+
+    .hours-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hour-chip {
+      border: 1px solid var(--cor-borda); background: var(--cor-cartao); color: var(--cor-texto);
+      border-radius: 999px; padding: 10px 16px; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: 0.2s;
+    }
+    .hour-chip:hover, .hour-chip.is-active { background: var(--cor-primaria); color: #FFF; border-color: var(--cor-primaria); }
+
+    /* FORMULÁRIO DE AGENDAMENTO */
+    .booking-form { padding: 40px; display: grid; gap: 16px; background: var(--cor-cartao); }
+    .selected-box { padding: 16px; background: var(--cor-destaque); border-radius: var(--radius-md); border: 1px dashed var(--cor-primaria); text-align: center; }
+    .selected-box strong { display: block; color: var(--cor-primaria); font-size: 1.1rem; font-family: 'Playfair Display', serif; }
+
+    form label { display: grid; gap: 6px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--cor-texto); }
+    input, select, textarea {
+      width: 100%; border: 1px solid var(--cor-borda); border-radius: var(--radius-md);
+      padding: 14px; font: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; background: var(--cor-fundo);
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--cor-primaria); background: var(--cor-cartao); box-shadow: 0 0 0 3px rgba(197, 139, 130, 0.1); }
+
+    .checkbox { display: flex !important; align-items: flex-start; gap: 12px !important; font-weight: 400 !important; text-transform: none; font-size: 0.85rem; }
+    .checkbox input { width: auto; margin-top: 4px; }
+
+    /* WHATSAPP FLOAT & MODAL */
+    .whatsapp-float {
+      position: fixed; bottom: 32px; right: 32px;
+      background-color: #25D366; color: #FFF;
+      width: 60px; height: 60px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4); z-index: 100;
+      transition: all 0.3s ease; cursor: pointer; border: none;
+    }
+    .whatsapp-float:hover { transform: scale(1.05); }
+    .whatsapp-float svg { width: 32px; height: 32px; fill: currentColor; }
+
+    .wa-modal-overlay {
+      position: fixed; inset: 0; background: rgba(45, 40, 40, 0.8); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center; z-index: 1000;
+      opacity: 0; visibility: hidden; transition: 0.3s ease; padding: 16px;
+    }
+    .wa-modal-overlay.is-active { opacity: 1; visibility: visible; }
+    .wa-modal-container {
+      background: var(--cor-cartao); width: 100%; max-width: 440px; padding: 40px;
+      border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      position: relative; transform: translateY(20px); transition: 0.3s ease;
+    }
+    .wa-modal-overlay.is-active .wa-modal-container { transform: translateY(0); }
+    .wa-modal-close {
+      position: absolute; top: 16px; right: 16px; background: var(--cor-destaque);
+      border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 1.2rem;
+      color: var(--cor-primaria); cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* FOOTER */
+    .site-footer { padding: 60px 0 40px; background: var(--cor-texto); color: #FFF; text-align: center; }
+    .site-footer h2 { color: var(--cor-fundo); margin-bottom: 16px; }
+
+    @media (max-width: 980px) {
+      .menu-toggle { display: block; }
+      .nav-menu {
+        position: fixed; inset: 70px 16px auto 16px; display: none; flex-direction: column;
+        padding: 32px; background: var(--cor-cartao); border: 1px solid var(--cor-borda);
+        border-radius: var(--radius-md); box-shadow: var(--sombra-suave);
+      }
+      .nav-menu.is-open { display: flex; }
+      .split, .booking-shell { grid-template-columns: 1fr; gap: 32px; }
+      .booking-calendar { border-right: none; border-bottom: 1px solid var(--cor-borda); }
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 620px) {
+      .section { padding: 48px 0; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .booking-calendar, .booking-form { padding: 24px; }
+      .date-strip { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
+<body>
 
-<body class="text-slate-900">
-  <header class="sticky top-0 z-40 bg-white/85 backdrop-blur border-b border-slate-200">
-    <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
-      <a href="#" class="font-black tracking-tight text-xl">
-        Demo<span class="text-sky-600">Clinic</span>
-      </a>
-
-      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-        <a href="#services" class="hover:text-sky-700">Services</a>
-        <a href="#booking" class="hover:text-sky-700">Booking</a>
-        <a href="#intake" class="hover:text-sky-700">Patient Intake</a>
-        <a href="#location" class="hover:text-sky-700">Location</a>
-        <a href="#faq" class="hover:text-sky-700">FAQ</a>
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="#inicio" class="brand-text">LUMINA<span>.</span></a>
+      <button class="menu-toggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+      <nav class="nav-menu">
+        <a href="#sobre">A Clínica</a>
+        <a href="#servicos">Tratamentos</a>
+        <a href="#agendamento">Agendar</a>
       </nav>
-
-      <a href="#booking" class="rounded-full bg-sky-600 px-5 py-2.5 text-white text-sm font-bold shadow-lg shadow-sky-600/20 hover:bg-sky-700">
-        Book Appointment
-      </a>
     </div>
   </header>
 
   <main>
-    <section class="relative overflow-hidden">
-      <div class="max-w-6xl mx-auto px-5 py-20 lg:py-28 grid lg:grid-cols-2 gap-12 items-center">
+    <section id="inicio" class="hero">
+      <div class="container hero-content">
+        <p class="eyebrow">Estética Avançada</p>
+        <h1>Beleza que reflete<br>a sua essência.</h1>
+        <p class="hero-text">Uma clínica especializada em realçar os seus traços com naturalidade, segurança e protocolos estéticos de alto padrão.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#agendamento">Agendar Avaliação</a>
+          <a class="btn btn-ghost" href="#servicos">Conhecer Tratamentos</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" class="section">
+      <div class="container split">
         <div>
-          <p class="inline-flex items-center gap-2 rounded-full bg-sky-100 text-sky-800 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] mb-6">
-            Demo Concept
-          </p>
-
-          <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight mb-6">
-            Clinic booking page for faster patient inquiries.
-          </h1>
-
-          <p class="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl">
-            A clean clinic landing page concept with services, location, FAQ, booking call-to-action,
-            contact form, Google Calendar guidance, and patient-intake instructions.
-          </p>
-
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="#booking" class="rounded-2xl bg-sky-600 px-7 py-4 text-white font-black text-center shadow-xl shadow-sky-600/20 hover:bg-sky-700">
-              Book Appointment
-            </a>
-            <a href="#services" class="rounded-2xl border border-slate-300 bg-white px-7 py-4 font-black text-center hover:border-sky-400 hover:text-sky-700">
-              View Services
-            </a>
-          </div>
-
-          <div class="mt-8 grid grid-cols-3 gap-3 max-w-xl">
-            <div class="rounded-2xl bg-white border border-slate-200 p-4">
-              <p class="text-2xl font-black text-sky-700">24h</p>
-              <p class="text-xs text-slate-500">response target</p>
-            </div>
-            <div class="rounded-2xl bg-white border border-slate-200 p-4">
-              <p class="text-2xl font-black text-emerald-700">3</p>
-              <p class="text-xs text-slate-500">core services</p>
-            </div>
-            <div class="rounded-2xl bg-white border border-slate-200 p-4">
-              <p class="text-2xl font-black text-indigo-700">1</p>
-              <p class="text-xs text-slate-500">simple form</p>
-            </div>
-          </div>
+          <p class="eyebrow">Nossa Filosofia</p>
+          <h2>Cuidado pensado para você.</h2>
         </div>
-
-        <div class="glass rounded-[2rem] border border-white shadow-2xl p-6 md:p-8">
-          <div class="rounded-[1.5rem] bg-gradient-to-br from-sky-600 to-emerald-500 p-1">
-            <div class="bg-white rounded-[1.35rem] p-6">
-              <p class="text-sm font-bold text-slate-500 mb-2">Demo availability</p>
-              <div class="space-y-3">
-                <div class="flex items-center justify-between rounded-2xl bg-slate-50 border border-slate-200 p-4">
-                  <div>
-                    <p class="font-black">General Consultation</p>
-                    <p class="text-sm text-slate-500">30 minutes</p>
-                  </div>
-                  <span class="text-sm font-bold text-emerald-700">Available</span>
-                </div>
-                <div class="flex items-center justify-between rounded-2xl bg-slate-50 border border-slate-200 p-4">
-                  <div>
-                    <p class="font-black">Follow-up Visit</p>
-                    <p class="text-sm text-slate-500">20 minutes</p>
-                  </div>
-                  <span class="text-sm font-bold text-emerald-700">Available</span>
-                </div>
-                <div class="flex items-center justify-between rounded-2xl bg-slate-50 border border-slate-200 p-4">
-                  <div>
-                    <p class="font-black">Online Consultation</p>
-                    <p class="text-sm text-slate-500">Video call</p>
-                  </div>
-                  <span class="text-sm font-bold text-sky-700">Request</span>
-                </div>
-              </div>
-              <a href="#booking" class="mt-6 block w-full rounded-2xl bg-slate-900 py-4 text-center font-black text-white hover:bg-slate-800">
-                Book Appointment
-              </a>
-            </div>
-          </div>
-
-          <p class="mt-5 text-xs text-slate-500 leading-relaxed">
-            Demo only. Replace services, calendar link, address and patient instructions with the real clinic details.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="py-20 bg-white">
-      <div class="max-w-6xl mx-auto px-5">
-        <div class="max-w-2xl mb-10">
-          <p class="text-sky-700 font-black uppercase tracking-[0.2em] text-xs mb-3">Services</p>
-          <h2 class="text-3xl md:text-4xl font-black mb-4">Clear services before the patient books.</h2>
-          <p class="text-slate-600 leading-relaxed">
-            This section helps patients choose the right appointment type before submitting a request.
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6">
-          <article class="rounded-3xl border border-slate-200 p-6 hover:shadow-xl transition-shadow">
-            <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center font-black mb-5">01</div>
-            <h3 class="text-xl font-black mb-3">General Consultation</h3>
-            <p class="text-slate-600 leading-relaxed mb-5">Initial visit for symptoms, routine concerns, medical advice, or next-step guidance.</p>
-            <p class="text-sm font-bold text-slate-500">Typical duration: 30 minutes</p>
-          </article>
-
-          <article class="rounded-3xl border border-slate-200 p-6 hover:shadow-xl transition-shadow">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-black mb-5">02</div>
-            <h3 class="text-xl font-black mb-3">Follow-up Visit</h3>
-            <p class="text-slate-600 leading-relaxed mb-5">For patients who already had a consultation and need review, continuation, or results discussion.</p>
-            <p class="text-sm font-bold text-slate-500">Typical duration: 20 minutes</p>
-          </article>
-
-          <article class="rounded-3xl border border-slate-200 p-6 hover:shadow-xl transition-shadow">
-            <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center font-black mb-5">03</div>
-            <h3 class="text-xl font-black mb-3">Online Consultation</h3>
-            <p class="text-slate-600 leading-relaxed mb-5">Remote consultation request for eligible cases, subject to clinic confirmation.</p>
-            <p class="text-sm font-bold text-slate-500">Format: video or phone</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-
-    <section id="booking" class="py-20">
-      <div class="max-w-6xl mx-auto px-5">
-        <div class="max-w-3xl mb-10">
-          <p class="text-sky-700 font-black uppercase tracking-[0.2em] text-xs mb-3">Booking</p>
-          <h2 class="text-3xl md:text-4xl font-black mb-4">Pick a service, date, and time.</h2>
-          <p class="text-slate-600 leading-relaxed">
-            This demo shows the patient-facing booking experience directly on the page. In a real clinic version,
-            the selected service and time can be connected to Google Calendar, Calendly, SimplyBook, Booksy,
-            ZnanyLekarz, or a custom booking workflow.
-          </p>
-        </div>
-
-        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
-          <div class="bg-white rounded-[2rem] border border-slate-200 shadow-xl overflow-hidden">
-            <div class="p-6 border-b border-slate-200 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <h3 class="text-xl font-black">Appointment Booking</h3>
-                <p class="text-sm text-slate-500 mt-1">Interactive demo booking widget</p>
-              </div>
-              <span class="inline-flex w-fit rounded-full bg-emerald-100 text-emerald-800 px-4 py-2 text-xs font-black uppercase tracking-[0.15em]">
-                Demo booking flow
-              </span>
-            </div>
-
-            <div class="p-6 md:p-8 space-y-8">
-              <div>
-                <h4 class="text-sm font-black uppercase tracking-[0.18em] text-slate-500 mb-4">1. Choose service</h4>
-                <div class="grid md:grid-cols-3 gap-4" id="serviceOptions">
-                  <button type="button" class="service-option rounded-3xl border-2 border-sky-500 bg-sky-50 p-5 text-left transition-all" data-service="General Consultation" data-duration="30 minutes">
-                    <p class="font-black text-slate-900">General Consultation</p>
-                    <p class="text-sm text-slate-500 mt-1">30 minutes</p>
-                  </button>
-                  <button type="button" class="service-option rounded-3xl border-2 border-slate-200 bg-white p-5 text-left hover:border-sky-300 transition-all" data-service="Follow-up Visit" data-duration="20 minutes">
-                    <p class="font-black text-slate-900">Follow-up Visit</p>
-                    <p class="text-sm text-slate-500 mt-1">20 minutes</p>
-                  </button>
-                  <button type="button" class="service-option rounded-3xl border-2 border-slate-200 bg-white p-5 text-left hover:border-sky-300 transition-all" data-service="Online Consultation" data-duration="25 minutes">
-                    <p class="font-black text-slate-900">Online Consultation</p>
-                    <p class="text-sm text-slate-500 mt-1">25 minutes</p>
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <h4 class="text-sm font-black uppercase tracking-[0.18em] text-slate-500 mb-4">2. Choose date</h4>
-                <input id="appointmentDate" type="date" class="w-full md:w-auto rounded-2xl border border-slate-300 px-4 py-3 font-bold focus:outline-none focus:ring-2 focus:ring-sky-500" />
-                <p class="text-xs text-slate-500 mt-2">Demo availability is generated for the selected date.</p>
-              </div>
-
-              <div>
-                <h4 class="text-sm font-black uppercase tracking-[0.18em] text-slate-500 mb-4">3. Choose time</h4>
-                <div id="timeSlots" class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  <button type="button" class="time-slot rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 font-black hover:border-sky-400" data-time="09:00">09:00</button>
-                  <button type="button" class="time-slot rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 font-black hover:border-sky-400" data-time="10:30">10:30</button>
-                  <button type="button" class="time-slot rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 font-black hover:border-sky-400" data-time="12:00">12:00</button>
-                  <button type="button" class="time-slot rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 font-black hover:border-sky-400" data-time="14:30">14:30</button>
-                  <button type="button" class="time-slot rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 font-black hover:border-sky-400" data-time="15:30">15:30</button>
-                  <button type="button" class="time-slot rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 font-black hover:border-sky-400" data-time="16:30">16:30</button>
-                  <button type="button" class="rounded-2xl border-2 border-slate-100 bg-slate-100 px-4 py-3 font-black text-slate-400 cursor-not-allowed" disabled>17:00</button>
-                  <button type="button" class="rounded-2xl border-2 border-slate-100 bg-slate-100 px-4 py-3 font-black text-slate-400 cursor-not-allowed" disabled>17:30</button>
-                </div>
-              </div>
-
-              <div class="rounded-3xl bg-slate-900 text-white p-6">
-                <h4 class="font-black text-lg mb-3">Selected appointment</h4>
-                <div class="grid md:grid-cols-3 gap-3 text-sm">
-                  <div class="rounded-2xl bg-white/10 p-4">
-                    <p class="text-slate-300">Service</p>
-                    <p id="selectedServiceText" class="font-black mt-1">General Consultation</p>
-                  </div>
-                  <div class="rounded-2xl bg-white/10 p-4">
-                    <p class="text-slate-300">Date</p>
-                    <p id="selectedDateText" class="font-black mt-1">Select date</p>
-                  </div>
-                  <div class="rounded-2xl bg-white/10 p-4">
-                    <p class="text-slate-300">Time</p>
-                    <p id="selectedTimeText" class="font-black mt-1">Select time</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="rounded-3xl border border-sky-200 bg-sky-50 p-5">
-                <h4 class="font-black text-sky-950 mb-2">Real implementation note</h4>
-                <p class="text-sm text-sky-900/80 leading-relaxed">
-                  This demo is connected to Apps Script. When submitted, it creates a Google Calendar event. If the backend returns an error, the page now shows the real error message for easier testing.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <form id="bookingForm" class="bg-white rounded-[2rem] border border-slate-200 shadow-xl p-6 md:p-8">
-              <div class="mb-6">
-                <h3 class="text-xl font-black mb-2">Patient intake details</h3>
-                <p class="text-sm text-slate-500 leading-relaxed">
-                  After selecting the appointment details, the patient sends basic intake information.
-                  Avoid collecting sensitive medical history unless the clinic uses a secure intake system.
-                </p>
-              </div>
-
-              <input type="hidden" id="selectedServiceInput" name="selectedService" value="General Consultation" />
-              <input type="hidden" id="selectedDateInput" name="selectedDate" />
-              <input type="hidden" id="selectedTimeInput" name="selectedTime" />
-
-              <div class="space-y-4">
-                <div>
-                  <label for="name" class="block text-sm font-bold text-slate-600 mb-2">Full name</label>
-                  <input id="name" name="name" required class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Jane Patient" />
-                </div>
-
-                <div>
-                  <label for="email" class="block text-sm font-bold text-slate-600 mb-2">Email</label>
-                  <input id="email" name="email" type="email" required class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="patient@email.com" />
-                </div>
-
-                <div>
-                  <label for="phone" class="block text-sm font-bold text-slate-600 mb-2">Phone</label>
-                  <input id="phone" name="phone" class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="+48 ..." />
-                </div>
-
-                <div>
-                  <label for="message" class="block text-sm font-bold text-slate-600 mb-2">Short note</label>
-                  <textarea id="message" name="message" rows="4" class="w-full rounded-2xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Basic reason for appointment or practical questions. Do not include highly sensitive medical details in this demo form."></textarea>
-                </div>
-              </div>
-
-              <label class="mt-4 flex items-start gap-3 text-sm text-slate-600 leading-relaxed">
-                <input type="checkbox" required class="mt-1 accent-sky-600" />
-                <span>I understand this is patient-intake information and the clinic will confirm the final appointment details.</span>
-              </label>
-
-              <button type="submit" class="mt-6 w-full rounded-2xl bg-sky-600 py-4 text-white font-black shadow-lg shadow-sky-600/20 hover:bg-sky-700">
-                Send Patient Details
-              </button>
-
-              <p id="formStatus" class="mt-4 text-center text-sm font-bold text-emerald-700 hidden">
-                Demo intake received. In the real page, this would create the appointment request or send it to the clinic workflow.
-              </p>
-            </form>
-
-            <div class="mt-6 rounded-3xl border border-amber-200 bg-amber-50 p-6">
-              <h3 class="font-black text-amber-900 mb-2">Urgent care note</h3>
-              <p class="text-amber-900/80 text-sm leading-relaxed">
-                For emergency symptoms or urgent medical situations, patients should contact local emergency services instead of using the website form.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <section id="intake" class="py-20 bg-white">
-      <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-10 items-center">
         <div>
-          <p class="text-sky-700 font-black uppercase tracking-[0.2em] text-xs mb-3">Patient Intake Guidance</p>
-          <h2 class="text-3xl md:text-4xl font-black mb-4">Help patients arrive prepared.</h2>
-          <p class="text-slate-600 leading-relaxed">
-            The page can guide patients on what to prepare before a visit, without collecting unnecessary sensitive details on the public form.
-          </p>
-        </div>
-
-        <div class="grid gap-4">
-          <div class="rounded-3xl border border-slate-200 p-5">
-            <h3 class="font-black mb-1">Before your visit</h3>
-            <p class="text-slate-600 text-sm leading-relaxed">Bring ID, insurance details if applicable, medication list, and previous test results when relevant.</p>
-          </div>
-          <div class="rounded-3xl border border-slate-200 p-5">
-            <h3 class="font-black mb-1">For online consultations</h3>
-            <p class="text-slate-600 text-sm leading-relaxed">Use a private space, stable internet connection, and keep important documents nearby.</p>
-          </div>
-          <div class="rounded-3xl border border-slate-200 p-5">
-            <h3 class="font-black mb-1">Privacy guidance</h3>
-            <p class="text-slate-600 text-sm leading-relaxed">Avoid entering sensitive medical history into a general website form unless the clinic provides a secure intake process.</p>
-          </div>
+          <p>A Lumina nasceu do desejo de oferecer uma estética que respeita a individualidade. Não acreditamos em padrões, acreditamos na sua melhor versão.</p>
+          <p style="margin-bottom:0;">Nosso ambiente foi planejado para ser o seu refúgio de autocuidado, aliando tecnologia de ponta, produtos premium e profissionais altamente qualificados.</p>
         </div>
       </div>
     </section>
 
-    <section id="location" class="py-20">
-      <div class="max-w-6xl mx-auto px-5">
-        <div class="grid lg:grid-cols-2 gap-10">
-          <div>
-            <p class="text-sky-700 font-black uppercase tracking-[0.2em] text-xs mb-3">Location</p>
-            <h2 class="text-3xl md:text-4xl font-black mb-4">Easy to find. Easy to contact.</h2>
-            <div class="space-y-3 text-slate-600 leading-relaxed">
-              <p><strong class="text-slate-900">Clinic:</strong> Demo Health Clinic</p>
-              <p><strong class="text-slate-900">Address:</strong> 123 Wellness Street, Kraków</p>
-              <p><strong class="text-slate-900">Hours:</strong> Monday–Friday, 09:00–17:00</p>
-              <p><strong class="text-slate-900">Phone:</strong> +48 000 000 000</p>
-              <p><strong class="text-slate-900">Email:</strong> hello@democlinic.example</p>
+    <section id="servicos" class="section" style="background: var(--cor-destaque);">
+      <div class="container">
+        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+          <p class="eyebrow">Expertise</p>
+          <h2>Protocolos Exclusivos</h2>
+        </div>
+        <div class="cards-grid">
+          <article class="service-card">
+            <div class="icon">L</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 12px;">Estética Facial</h3>
+            <p>Toxina botulínica, bioestimuladores e preenchimento focados na naturalidade.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">C</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 12px;">Estética Corporal</h3>
+            <p>Tratamentos avançados para gordura localizada, flacidez e contorno corporal.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">P</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 12px;">Skin Care Avançado</h3>
+            <p>Limpeza de pele premium, peelings químicos e microagulhamento.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="agendamento" class="section scheduling">
+      <div class="container">
+        <div style="max-width: 600px;">
+          <p class="eyebrow">Agendamento Online</p>
+          <h2>Reserve seu Momento.</h2>
+          <p>Escolha a data e o horário desejados. Nossa equipe receberá seu pedido e retornará rapidamente para confirmar a sua reserva.</p>
+        </div>
+
+        <div class="booking-shell">
+          <div class="booking-calendar">
+            <div class="booking-header">
+              <h3 style="font-size: 1.1rem; color: var(--cor-primaria);">Datas Disponíveis</h3>
+              <button class="btn btn-ghost" style="padding: 6px 16px; min-height: auto; font-size: 0.75rem;" id="nextDays">Avançar Semana</button>
             </div>
+            <div class="date-strip" id="dateStrip"></div>
+            
+            <h3 style="font-size: 1.1rem; color: var(--cor-primaria); margin-bottom: 16px;">Horários</h3>
+            <div class="hours-grid" id="hoursGrid"></div>
           </div>
 
-          <div class="rounded-[2rem] overflow-hidden border border-slate-200 bg-slate-200 min-h-[320px] flex items-center justify-center">
-            <div class="text-center p-8">
-              <p class="text-5xl mb-4">📍</p>
-              <p class="font-black text-xl mb-2">Google Maps placeholder</p>
-              <p class="text-slate-600 max-w-sm">Replace with an embedded Google Maps location for the real clinic address.</p>
+          <form class="booking-form" id="frontendBookingForm">
+            <input type="hidden" name="data_agendamento" id="selectedDateInput">
+            <input type="hidden" name="horario_agendamento" id="selectedHourInput">
+
+            <div class="selected-box">
+              <span style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Horário Selecionado</span>
+              <strong id="selectedSummary">Selecione data e hora</strong>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section id="faq" class="py-20 bg-white">
-      <div class="max-w-4xl mx-auto px-5">
-        <p class="text-sky-700 font-black uppercase tracking-[0.2em] text-xs mb-3">FAQ</p>
-        <h2 class="text-3xl md:text-4xl font-black mb-8">Common booking questions.</h2>
-
-        <div class="space-y-4">
-          <details class="group rounded-3xl border border-slate-200 p-5">
-            <summary class="cursor-pointer font-black flex justify-between gap-4">Is the appointment confirmed after submitting the form?<span>+</span></summary>
-            <p class="mt-3 text-slate-600 leading-relaxed">If a real embedded calendar is connected, the selected time can be confirmed automatically or reviewed by the clinic depending on the clinic’s booking rules.</p>
-          </details>
-
-          <details class="group rounded-3xl border border-slate-200 p-5">
-            <summary class="cursor-pointer font-black flex justify-between gap-4">Can patients book online consultations?<span>+</span></summary>
-            <p class="mt-3 text-slate-600 leading-relaxed">Yes, if the clinic offers online consultations and the case is suitable for remote care.</p>
-          </details>
-
-          <details class="group rounded-3xl border border-slate-200 p-5">
-            <summary class="cursor-pointer font-black flex justify-between gap-4">Should patients send medical documents through the form?<span>+</span></summary>
-            <p class="mt-3 text-slate-600 leading-relaxed">For privacy, the public form should avoid sensitive medical details. The clinic can provide a secure intake process when needed.</p>
-          </details>
-
-          <details class="group rounded-3xl border border-slate-200 p-5">
-            <summary class="cursor-pointer font-black flex justify-between gap-4">Can this page connect to Google Calendar?<span>+</span></summary>
-            <p class="mt-3 text-slate-600 leading-relaxed">Yes. The page can embed Google Calendar appointment scheduling or another booking provider directly inside the booking section.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-20">
-      <div class="max-w-5xl mx-auto px-5">
-        <div class="rounded-[2rem] bg-slate-900 text-white p-8 md:p-12 text-center">
-          <h2 class="text-3xl md:text-4xl font-black mb-4">Need a page like this for your clinic?</h2>
-          <p class="text-slate-300 max-w-2xl mx-auto mb-8">
-            This demo concept can be adapted for clinics, therapists, wellness providers, dentists, consultants, and local service businesses.
-          </p>
-          <a href="#booking" class="inline-block rounded-2xl bg-white text-slate-900 px-8 py-4 font-black hover:bg-slate-100">
-            View Booking Flow
-          </a>
+            <label>Nome Completo
+              <input type="text" name="nome" placeholder="Como podemos chamar você?" required>
+            </label>
+            <label>Telefone / WhatsApp
+              <input type="tel" name="telefone" placeholder="(00) 00000-0000" required>
+            </label>
+            <label>Tratamento Desejado
+              <select name="servico" required>
+                <option value="">Selecione uma opção</option>
+                <option>Primeira Avaliação Gratuita</option>
+                <option>Toxina Botulínica (Botox)</option>
+                <option>Preenchimento Labial / Facial</option>
+                <option>Limpeza de Pele Premium</option>
+                <option>Tratamento Corporal</option>
+                <option>Retorno</option>
+              </select>
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" required>
+              <span>Aceito os termos de agendamento e política de cancelamento da clínica.</span>
+            </label>
+            <button class="btn btn-primary" type="submit" style="margin-top: 8px;">Solicitar Agendamento</button>
+          </form>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="py-10 bg-white border-t border-slate-200">
-    <div class="max-w-6xl mx-auto px-5 flex flex-col md:flex-row justify-between gap-4 text-sm text-slate-500">
-      <p>© 2026 Demo Clinic Page Concept. Built for AlanSM Solutions portfolio.</p>
-      <p>This is a demo layout. Replace all clinic details before real use.</p>
+  <footer class="site-footer">
+    <div class="container">
+      <h2 style="font-family: 'Playfair Display', serif;">LUMINA<span>.</span></h2>
+      <p>Estética Avançada e Bem-Estar.</p>
+      <p style="font-size: 0.8rem; margin-top: 32px; color: #A09A9A;">Modelo de Negócios • Sistema de Agendamento Inteligente</p>
     </div>
   </footer>
 
-  <script>
-    const CLINIC_BOOKING_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwWA6kBWtOKNY-5nko59ny9kAkWGmgcyRLG898n6dcPrUUazazPGUuPRkvIZ4YPs_Lp/exec";
+  <button class="whatsapp-float" id="waBtnTrigger" aria-label="Fale conosco no WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-5.824 4.74-10.563 10.568-10.563 5.822 0 10.565 4.742 10.566 10.565.001 5.823-4.743 10.563-10.565 10.563z"/></svg>
+  </button>
 
-    const bookingState = {
-      service: 'General Consultation',
-      date: '',
-      time: ''
+  <div class="wa-modal-overlay" id="waModal">
+    <div class="wa-modal-container">
+      <button class="wa-modal-close" id="waModalClose">&times;</button>
+      <h3 style="margin-bottom: 8px;">Atendimento Rápido</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 24px;">Para agilizar seu atendimento no WhatsApp, por favor informe o que você precisa hoje:</p>
+      
+      <form id="waForm" style="display: grid; gap: 16px;">
+        <label>Seu Nome
+          <input type="text" id="waName" placeholder="Como se chama?" required>
+        </label>
+        <label>Qual o motivo do contato?
+          <select id="waIntent" required>
+            <option value="">Selecione uma opção</option>
+            <option>Agendar Avaliação</option>
+            <option>Dúvida sobre Tratamentos</option>
+            <option>Emergência ou Retorno</option>
+          </select>
+        </label>
+        <button type="submit" class="btn btn-primary" style="background: #25D366; border-color: #25D366; color: #FFF; width: 100%;">Ir para o WhatsApp</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // --- MENU MOBILE ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    if (menuToggle && navMenu) {
+      menuToggle.addEventListener('click', () => { navMenu.classList.toggle('is-open'); });
+      navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navMenu.classList.remove('is-open')));
+    }
+
+    // --- AGENDA INTERATIVA FRONT-END ---
+    const weekdayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    const monthNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+    
+    // Disponibilidade Exemplo
+    const availabilityPattern = {
+      1: ['10:00', '11:00', '14:00', '16:00'], 2: ['09:00', '10:30', '15:00'], 
+      3: ['10:30', '13:30', '15:30'], 4: ['09:00', '11:00', '14:00', '17:00'], 
+      5: ['10:00', '12:00', '15:00', '16:30']
     };
 
-    const serviceButtons = document.querySelectorAll('.service-option');
-    const timeButtons = document.querySelectorAll('.time-slot');
-    const dateInput = document.getElementById('appointmentDate');
-
-    const selectedServiceText = document.getElementById('selectedServiceText');
-    const selectedDateText = document.getElementById('selectedDateText');
-    const selectedTimeText = document.getElementById('selectedTimeText');
-
-    const selectedServiceInput = document.getElementById('selectedServiceInput');
+    const state = { offset: 0, selectedDate: null, selectedHour: null, days: [] };
+    const dateStrip = document.getElementById('dateStrip');
+    const hoursGrid = document.getElementById('hoursGrid');
+    const selectedSummary = document.getElementById('selectedSummary');
     const selectedDateInput = document.getElementById('selectedDateInput');
-    const selectedTimeInput = document.getElementById('selectedTimeInput');
+    const selectedHourInput = document.getElementById('selectedHourInput');
 
-    function setDefaultDate() {
-      const today = new Date();
-      today.setDate(today.getDate() + 1);
-      const yyyy = today.getFullYear();
-      const mm = String(today.getMonth() + 1).padStart(2, '0');
-      const dd = String(today.getDate()).padStart(2, '0');
-      const value = `${yyyy}-${mm}-${dd}`;
+    function formatISO(date) { return date.toISOString().slice(0, 10); }
+    function formatHuman(date) { return `${weekdayNames[date.getDay()]}, ${String(date.getDate()).padStart(2, '0')} ${monthNames[date.getMonth()]}`; }
 
-      dateInput.value = value;
-      dateInput.min = value;
-      bookingState.date = value;
-      updateBookingSummary();
+    function generateDays(offset) {
+      const res = []; const t = new Date(); t.setHours(0,0,0,0);
+      let c = new Date(t); c.setDate(t.getDate() + offset);
+      while(res.length < 4) { if(availabilityPattern[c.getDay()]) res.push(new Date(c)); c.setDate(c.getDate() + 1); }
+      return res;
     }
 
-    function updateBookingSummary() {
-      selectedServiceText.textContent = bookingState.service || 'Select service';
-      selectedDateText.textContent = bookingState.date || 'Select date';
-      selectedTimeText.textContent = bookingState.time || 'Select time';
-
-      selectedServiceInput.value = bookingState.service || '';
-      selectedDateInput.value = bookingState.date || '';
-      selectedTimeInput.value = bookingState.time || '';
-    }
-
-    function activateButton(buttons, activeButton) {
-      buttons.forEach(function (button) {
-        button.classList.remove('border-sky-500', 'bg-sky-50');
-        button.classList.add('border-slate-200', 'bg-white');
+    function renderDates() {
+      state.days = generateDays(state.offset);
+      if(!state.selectedDate || !state.days.some(d => formatISO(d) === state.selectedDate)) { state.selectedDate = formatISO(state.days[0]); state.selectedHour = null; }
+      dateStrip.innerHTML = '';
+      state.days.forEach(date => {
+        const dISO = formatISO(date); const btn = document.createElement('div');
+        btn.className = `date-card ${dISO === state.selectedDate ? 'is-active' : ''}`;
+        btn.innerHTML = `<span>${weekdayNames[date.getDay()]}</span><strong>${String(date.getDate()).padStart(2,'0')}</strong><span>${monthNames[date.getMonth()]}</span>`;
+        btn.onclick = () => { state.selectedDate = dISO; state.selectedHour = null; renderDates(); };
+        dateStrip.appendChild(btn);
       });
-
-      activeButton.classList.remove('border-slate-200', 'bg-white');
-      activeButton.classList.add('border-sky-500', 'bg-sky-50');
+      renderHours(); updateSummary();
     }
 
-    function submitClinicBooking(payload) {
-      const body = new URLSearchParams();
-
-      Object.keys(payload).forEach(function (key) {
-        body.append(key, payload[key] == null ? '' : String(payload[key]));
-      });
-
-      return fetch(CLINIC_BOOKING_BACKEND_URL, {
-        method: 'POST',
-        body: body
-      }).then(function (response) {
-        return response.text().then(function (text) {
-          let result;
-
-          try {
-            result = JSON.parse(text);
-          } catch (error) {
-            throw new Error('Backend did not return JSON. Redeploy the Apps Script Web App and check permissions.');
-          }
-
-          if (!response.ok) {
-            throw new Error(result.message || 'Booking request failed.');
-          }
-
-          return result;
-        });
+    function renderHours() {
+      const d = state.days.find(day => formatISO(day) === state.selectedDate);
+      const hours = availabilityPattern[d ? d.getDay() : 1] || [];
+      hoursGrid.innerHTML = '';
+      hours.forEach(hour => {
+        const btn = document.createElement('div');
+        btn.className = `hour-chip ${hour === state.selectedHour ? 'is-active' : ''}`;
+        btn.textContent = hour;
+        btn.onclick = () => { state.selectedHour = hour; renderHours(); updateSummary(); };
+        hoursGrid.appendChild(btn);
       });
     }
 
-    serviceButtons.forEach(function (button) {
-      button.addEventListener('click', function () {
-        bookingState.service = button.dataset.service;
-        activateButton(serviceButtons, button);
-        updateBookingSummary();
-      });
-    });
+    function updateSummary() {
+      const d = state.days.find(day => formatISO(day) === state.selectedDate);
+      const txt = d ? formatHuman(d) : '';
+      if(selectedDateInput) selectedDateInput.value = txt;
+      if(selectedHourInput) selectedHourInput.value = state.selectedHour || '';
+      selectedSummary.textContent = (txt && state.selectedHour) ? `${txt} às ${state.selectedHour}` : (txt ? `${txt} • escolha horário` : 'Selecione data e hora');
+    }
 
-    timeButtons.forEach(function (button) {
-      button.addEventListener('click', function () {
-        bookingState.time = button.dataset.time;
-        activateButton(timeButtons, button);
-        updateBookingSummary();
-      });
-    });
+    document.getElementById('nextDays').onclick = () => { state.offset += 4; renderDates(); };
+    renderDates();
 
-    dateInput.addEventListener('change', function () {
-      bookingState.date = dateInput.value;
-      bookingState.time = '';
-      timeButtons.forEach(function (button) {
-        button.classList.remove('border-sky-500', 'bg-sky-50');
-        button.classList.add('border-slate-200', 'bg-white');
-      });
-      updateBookingSummary();
-    });
+    // --- FORMULÁRIO DE AGENDAMENTO (Integração Real com Google Sheets) ---
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxVAS3rrnuPGdiyVTYol6za1H9cZjd134EFquV-DJTsqwxhVigfW2ZdaJ4ohLFoXU4/exec';
+    const form = document.getElementById('frontendBookingForm');
 
-    const form = document.getElementById('bookingForm');
-    const status = document.getElementById('formStatus');
-    const submitButton = form.querySelector('button[type="submit"]');
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      if (!bookingState.date || !bookingState.time) {
-        status.textContent = 'Please select a date and time before sending patient details.';
-        status.classList.remove('hidden', 'text-emerald-700');
-        status.classList.add('text-amber-700');
-        return;
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      
+      if(!state.selectedDate || !state.selectedHour) { 
+        alert("Por favor, selecione um dia e horário na agenda primeiro."); 
+        return; 
       }
 
-      const payload = {
-        action: 'createClinicBooking',
-        service: bookingState.service,
-        appointmentDate: bookingState.date,
-        appointmentTime: bookingState.time,
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        message: document.getElementById('message').value,
-        source: 'clinic-demo-page'
-      };
-
+      const submitButton = form.querySelector('button[type="submit"]');
+      const originalText = submitButton.innerText;
+      submitButton.innerText = 'Processando...';
       submitButton.disabled = true;
-      submitButton.textContent = 'Creating calendar event...';
-      status.textContent = 'Creating appointment in Google Calendar...';
-      status.classList.remove('hidden', 'text-amber-700', 'text-emerald-700');
-      status.classList.add('text-slate-600');
 
-      submitClinicBooking(payload)
-        .then(function (result) {
-          if (!result || result.status !== 'ok') {
-            throw new Error(result && result.message ? result.message : 'Unknown backend error. Check Apps Script Executions.');
+      const formData = new FormData(form);
+
+      fetch(scriptURL, { method: 'POST', body: formData })
+        .then(response => response.json())
+        .then(data => {
+          if(data.resultado === 'sucesso') {
+            alert(`✅ Agendamento solicitado com sucesso!\n\nStatus: ${data.status_gerado}\nNossa equipe foi notificada.`);
+            form.reset();
+            state.selectedDate = null;
+            state.selectedHour = null;
+            renderDates();
+            updateSummary();
+          } else {
+            throw new Error('Erro no servidor');
           }
-
-          status.textContent =
-            'Appointment created: ' +
-            bookingState.service +
-            ' on ' +
-            bookingState.date +
-            ' at ' +
-            bookingState.time +
-            '.';
-
-          status.classList.remove('text-slate-600', 'text-amber-700');
-          status.classList.add('text-emerald-700');
-
-          form.reset();
-          setDefaultDate();
-          bookingState.time = '';
-          timeButtons.forEach(function (button) {
-            button.classList.remove('border-sky-500', 'bg-sky-50');
-            button.classList.add('border-slate-200', 'bg-white');
-          });
-          updateBookingSummary();
         })
-        .catch(function (error) {
-          status.textContent = error.message || 'Something went wrong. Please try again or contact the clinic.';
-          status.classList.remove('text-slate-600', 'text-emerald-700');
-          status.classList.add('text-amber-700');
+        .catch(error => {
+          console.error('Erro!', error.message);
+          alert("❌ Ocorreu um erro ao enviar. Por favor, tente novamente ou use nosso WhatsApp.");
         })
-        .finally(function () {
+        .finally(() => {
+          submitButton.innerText = originalText;
           submitButton.disabled = false;
-          submitButton.textContent = 'Send Patient Details';
         });
     });
 
-    setDefaultDate();
-  </script>
+    // --- MODAL DO WHATSAPP ---
+    const waBtn = document.getElementById('waBtnTrigger');
+    const waModal = document.getElementById('waModal');
+    const waClose = document.getElementById('waModalClose');
+    
+    waBtn.onclick = () => waModal.classList.add('is-active');
+    waClose.onclick = () => waModal.classList.remove('is-active');
+    waModal.onclick = (e) => { if(e.target === waModal) waModal.classList.remove('is-active'); }
 
+    document.getElementById('waForm').onsubmit = (e) => {
+      e.preventDefault();
+      const nome = document.getElementById('waName').value;
+      const intent = document.getElementById('waIntent').value;
+      const text = encodeURIComponent(`Olá, me chamo ${nome}. Motivo do contato: ${intent}.`);
+      window.open(`https://wa.me/5500000000000?text=${text}`, '_blank');
+      waModal.classList.remove('is-active');
+    };
+  </script>
 </body>
 </html>
