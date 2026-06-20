@@ -13,14 +13,14 @@
 
     :root {
       /* Paleta Rose Gold & Pérola */
-      --cor-primaria: #C58B82; /* Rose Gold / Blush */
+      --cor-primaria: #C58B82; 
       --cor-primaria-hover: #B0746A;
-      --cor-fundo: #FCFAFA; /* Branco Pérola */
+      --cor-fundo: #FCFAFA; 
       --cor-cartao: #FFFFFF;
-      --cor-texto: #2D2828; /* Cinza Chumbo Escuro */
+      --cor-texto: #2D2828; 
       --cor-texto-mutado: #6D6363;
       --cor-borda: #E8DFDF;
-      --cor-destaque: #F4EAE8; /* Fundo suave para seções */
+      --cor-destaque: #F4EAE8; 
       
       --sombra-suave: 0 10px 30px rgba(197, 139, 130, 0.08);
       --radius-lg: 16px;
@@ -123,7 +123,7 @@
       justify-content: center;
       min-height: 48px;
       padding: 12px 28px;
-      border-radius: 999px; /* Bordas arredondadas para estética feminina */
+      border-radius: 999px;
       border: 1px solid transparent;
       font-size: 0.85rem;
       font-weight: 700;
@@ -281,6 +281,7 @@
 </head>
 <body>
 
+  <!-- HEADER -->
   <header class="site-header">
     <div class="container nav-wrapper">
       <a href="#inicio" class="brand-text">LUMINA<span>.</span></a>
@@ -294,6 +295,7 @@
   </header>
 
   <main>
+    <!-- HERO -->
     <section id="inicio" class="hero">
       <div class="container hero-content">
         <p class="eyebrow">Estética Avançada</p>
@@ -306,6 +308,7 @@
       </div>
     </section>
 
+    <!-- SOBRE -->
     <section id="sobre" class="section">
       <div class="container split">
         <div>
@@ -319,6 +322,7 @@
       </div>
     </section>
 
+    <!-- SERVIÇOS -->
     <section id="servicos" class="section" style="background: var(--cor-destaque);">
       <div class="container">
         <div style="text-align: center; max-width: 600px; margin: 0 auto;">
@@ -345,6 +349,7 @@
       </div>
     </section>
 
+    <!-- AGENDAMENTO -->
     <section id="agendamento" class="section scheduling">
       <div class="container">
         <div style="max-width: 600px;">
@@ -354,10 +359,11 @@
         </div>
 
         <div class="booking-shell">
+          <!-- Calendário Front-end -->
           <div class="booking-calendar">
             <div class="booking-header">
               <h3 style="font-size: 1.1rem; color: var(--cor-primaria);">Datas Disponíveis</h3>
-              <button class="btn btn-ghost" style="padding: 6px 16px; min-height: auto; font-size: 0.75rem;" id="nextDays">Avançar Semana</button>
+              <button type="button" class="btn btn-ghost" style="padding: 6px 16px; min-height: auto; font-size: 0.75rem;" id="nextDays">Avançar Semana</button>
             </div>
             <div class="date-strip" id="dateStrip"></div>
             
@@ -365,11 +371,11 @@
             <div class="hours-grid" id="hoursGrid"></div>
           </div>
 
+          <!-- Formulário Ligado ao Google Sheets -->
           <form class="booking-form" id="frontendBookingForm">
-            <!-- Adicione esta nova linha "data_iso" aos seus inputs ocultos -->
+            <!-- Campos Ocultos preenchidos pelo JS -->
             <input type="hidden" name="data_agendamento" id="selectedDateInput">
             <input type="hidden" name="horario_agendamento" id="selectedHourInput">
-            <input type="hidden" name="data_iso" id="selectedIsoInput">
 
             <div class="selected-box">
               <span style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Horário Selecionado</span>
@@ -381,6 +387,9 @@
             </label>
             <label>Telefone / WhatsApp
               <input type="tel" name="telefone" placeholder="(00) 00000-0000" required>
+            </label>
+            <label>E-mail
+              <input type="email" name="email" placeholder="seuemail@exemplo.com" required>
             </label>
             <label>Tratamento Desejado
               <select name="servico" required>
@@ -412,10 +421,12 @@
     </div>
   </footer>
 
+  <!-- Botão WhatsApp -->
   <button class="whatsapp-float" id="waBtnTrigger" aria-label="Fale conosco no WhatsApp">
     <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-5.824 4.74-10.563 10.568-10.563 5.822 0 10.565 4.742 10.566 10.565.001 5.823-4.743 10.563-10.565 10.563z"/></svg>
   </button>
 
+  <!-- Modal WhatsApp Triagem -->
   <div class="wa-modal-overlay" id="waModal">
     <div class="wa-modal-container">
       <button class="wa-modal-close" id="waModalClose">&times;</button>
@@ -440,6 +451,10 @@
   </div>
 
   <script>
+    // --- LINK OFICIAL DO GOOGLE APPS SCRIPT ---
+    // COLOQUE AQUI O SEU NOVO LINK DO GOOGLE APPS SCRIPT:
+    const scriptURL = 'SEU_LINK_DO_GOOGLE_APP_SCRIPT_NOVO_AQUI';
+
     // --- MENU MOBILE ---
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
@@ -462,12 +477,9 @@
     const state = { offset: 0, selectedDate: null, selectedHour: null, days: [] };
     const dateStrip = document.getElementById('dateStrip');
     const hoursGrid = document.getElementById('hoursGrid');
-    const nextDaysButton = document.getElementById('nextDays');
     const selectedSummary = document.getElementById('selectedSummary');
     const selectedDateInput = document.getElementById('selectedDateInput');
     const selectedHourInput = document.getElementById('selectedHourInput');
-    /* Adicione esta variável */
-    const selectedIsoInput = document.getElementById('selectedIsoInput');
 
     function formatISO(date) { return date.toISOString().slice(0, 10); }
     function formatHuman(date) { return `${weekdayNames[date.getDay()]}, ${String(date.getDate()).padStart(2, '0')} ${monthNames[date.getMonth()]}`; }
@@ -480,8 +492,14 @@
     }
 
     function renderDates() {
+      if(!dateStrip) return;
       state.days = generateDays(state.offset);
-      if(!state.selectedDate || !state.days.some(d => formatISO(d) === state.selectedDate)) { state.selectedDate = formatISO(state.days[0]); state.selectedHour = null; }
+      
+      if(!state.selectedDate || !state.days.some(d => formatISO(d) === state.selectedDate)) { 
+        state.selectedDate = formatISO(state.days[0]); 
+        state.selectedHour = null; 
+      }
+      
       dateStrip.innerHTML = '';
       state.days.forEach(date => {
         const dISO = formatISO(date); const btn = document.createElement('div');
@@ -490,10 +508,12 @@
         btn.onclick = () => { state.selectedDate = dISO; state.selectedHour = null; renderDates(); };
         dateStrip.appendChild(btn);
       });
-      renderHours(); updateSummary();
+      renderHours(); 
+      updateSummary();
     }
 
     function renderHours() {
+      if(!hoursGrid) return;
       const d = state.days.find(day => formatISO(day) === state.selectedDate);
       const hours = availabilityPattern[d ? d.getDay() : 1] || [];
       hoursGrid.innerHTML = '';
@@ -507,31 +527,26 @@
     }
 
     function updateSummary() {
-      if (!selectedSummary) return;
+      if(!selectedSummary) return;
+      const d = state.days.find(day => formatISO(day) === state.selectedDate);
+      const txt = d ? formatHuman(d) : '';
+      if(selectedDateInput) selectedDateInput.value = txt;
+      if(selectedHourInput) selectedHourInput.value = state.selectedHour || '';
+      selectedSummary.textContent = (txt && state.selectedHour) ? `${txt} às ${state.selectedHour}` : (txt ? `${txt} • escolha horário` : 'Selecione data e hora');
+    }
 
-      const selectedDate = state.days.find((day) => formatISO(day) === state.selectedDate);
-      const dateText = selectedDate ? formatHuman(selectedDate) : '';
+    const nextDaysBtn = document.getElementById('nextDays');
+    if(nextDaysBtn) {
+      nextDaysBtn.onclick = () => { state.offset += 4; renderDates(); };
+    }
+    
+    // ATIVA O CALENDÁRIO NA TELA
+    renderDates();
 
-      if (selectedDateInput) selectedDateInput.value = dateText;
-      if (selectedHourInput) selectedHourInput.value = state.selectedHour || '';
-      
-      /* Envia a data formatada ao Calendário (YYYY-MM-DD) */
-      if (selectedIsoInput) selectedIsoInput.value = state.selectedDate || '';
-
-      if (dateText && state.selectedHour) {
-        selectedSummary.textContent = `${dateText} às ${state.selectedHour}`;
-      } else if (dateText) {
-        selectedSummary.textContent = `${dateText} • escolha um horário`;
-      } else {
-        selectedSummary.textContent = 'Selecione data e hora';
-      }
-    } // AQUI: Chaveta corretamente fechada da função updateSummary()
-
-    // --- FORMULÁRIO DE AGENDAMENTO (Fora do updateSummary) ---
+    // --- FORMULÁRIO DE AGENDAMENTO (Sincronizado com Google Sheets) ---
     const form = document.getElementById('frontendBookingForm');
-
-    if (form) {
-      form.addEventListener('submit', e => {
+    if(form) {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         if(!state.selectedDate || !state.selectedHour) { 
@@ -539,35 +554,34 @@
           return; 
         }
 
-        const submitButton = form.querySelector('button[type="submit"]');
-        const originalText = submitButton.innerText;
-        submitButton.innerText = 'Processando...';
-        submitButton.disabled = true;
+        const btn = form.querySelector('button[type="submit"]');
+        const originalText = btn.textContent;
+        btn.textContent = 'Processando...';
+        btn.disabled = true;
 
         const formData = new FormData(form);
+        // Garante que o formato técnico vai para a Planilha para facilitar a integração do Calendário
+        formData.append('data_iso', state.selectedDate);
 
-        fetch(scriptURL, { method: 'POST', body: formData })
-          .then(response => response.json())
-          .then(data => {
-            if(data.resultado === 'sucesso') {
-              alert(`✅ Agendamento solicitado com sucesso!\n\nStatus: ${data.status_gerado}\nNossa equipe foi notificada e a agenda atualizada.`);
-              form.reset();
-              state.selectedDate = null;
-              state.selectedHour = null;
-              renderDates();
-              updateSummary();
-            } else {
-              throw new Error('Erro no servidor');
-            }
-          })
-          .catch(error => {
-            console.error('Erro!', error.message);
-            alert("❌ Ocorreu um erro ao enviar. Por favor, tente novamente ou use nosso WhatsApp.");
-          })
-          .finally(() => {
-            submitButton.innerText = originalText;
-            submitButton.disabled = false;
-          });
+        try {
+          const response = await fetch(scriptURL, { method: 'POST', body: formData });
+          const result = await response.json();
+          
+          if(result.resultado === 'sucesso') {
+            alert('✅ Agendamento solicitado com sucesso! A clínica entrará em contato para confirmar.');
+            form.reset();
+            state.selectedDate = null;
+            state.selectedHour = null;
+            renderDates();
+          } else {
+            alert('❌ Ocorreu um erro ao agendar: ' + result.detalhe);
+          }
+        } catch (error) {
+          alert('❌ Falha na conexão. Por favor, verifique se o link do Apps Script está correto.');
+        } finally {
+          btn.textContent = originalText;
+          btn.disabled = false;
+        }
       });
     }
 
@@ -576,18 +590,22 @@
     const waModal = document.getElementById('waModal');
     const waClose = document.getElementById('waModalClose');
     
-    waBtn.onclick = () => waModal.classList.add('is-active');
-    waClose.onclick = () => waModal.classList.remove('is-active');
-    waModal.onclick = (e) => { if(e.target === waModal) waModal.classList.remove('is-active'); }
+    if(waBtn && waModal && waClose) {
+      waBtn.onclick = () => waModal.classList.add('is-active');
+      waClose.onclick = () => waModal.classList.remove('is-active');
+      waModal.onclick = (e) => { if(e.target === waModal) waModal.classList.remove('is-active'); }
 
-    document.getElementById('waForm').onsubmit = (e) => {
-      e.preventDefault();
-      const nome = document.getElementById('waName').value;
-      const intent = document.getElementById('waIntent').value;
-      const text = encodeURIComponent(`Olá, me chamo ${nome}. Motivo do contato: ${intent}.`);
-      window.open(`https://wa.me/5500000000000?text=${text}`, '_blank');
-      waModal.classList.remove('is-active');
-    };
+      document.getElementById('waForm').onsubmit = (e) => {
+        e.preventDefault();
+        const nome = document.getElementById('waName').value;
+        const intent = document.getElementById('waIntent').value;
+        const text = encodeURIComponent(`Olá, me chamo ${nome}. Motivo do contato: ${intent}.`);
+        
+        // Substitua pelo número real da clínica!
+        window.open(`https://wa.me/5500000000000?text=${text}`, '_blank');
+        waModal.classList.remove('is-active');
+      };
+    }
   </script>
 </body>
 </html>
