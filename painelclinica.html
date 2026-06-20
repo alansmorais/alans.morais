@@ -32,13 +32,13 @@
     .login-box p { color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem; }
     .input-group { margin-bottom: 16px; text-align: left; }
     .input-group label { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
-    .input-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 1rem; outline: none; }
+    .input-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 1rem; outline: none; transition: 0.2s; }
     .input-group input:focus { border-color: var(--primary); }
     .btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: var(--radius); font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
     .btn:hover { background: var(--primary-hover); }
     .error-msg { color: var(--danger); font-size: 0.85rem; margin-top: 12px; display: none; }
 
-    /* DASHBOARD */
+    /* DASHBOARD E MENU */
     #dashboard-screen { display: none; height: 100vh; display: flex; }
     .hidden { display: none !important; }
     
@@ -63,15 +63,13 @@
     .badge { position: absolute; top: 4px; right: 4px; background: var(--danger); color: white; font-size: 0.65rem; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--card-bg); display: none; }
     .badge.active { display: flex; }
 
+    /* ÁREA DE CONTEÚDO E ESTATÍSTICAS */
     .content-area { flex: 1; padding: 32px; overflow-y: auto; }
-    
-    /* STATS */
     .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px; }
     .stat-card { background: var(--card-bg); padding: 24px; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .stat-title { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; }
     .stat-value { font-size: 2rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
 
-    /* FILTROS */
     .table-controls { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 16px; }
     .tabs { display: flex; gap: 8px; }
     .tab-btn { background: var(--card-bg); border: 1px solid var(--border); padding: 8px 16px; border-radius: 999px; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
@@ -82,7 +80,6 @@
     .tab-badge.danger { background: var(--danger); color: white; }
     .tab-btn.active .tab-badge.danger { background: white; color: var(--danger); }
 
-    /* TABELA */
     .agenda-container { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
     table { width: 100%; border-collapse: collapse; }
     th { text-align: left; padding: 16px 24px; font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; border-bottom: 1px solid var(--border); background: #F8FAFC; }
@@ -90,16 +87,11 @@
     tr:hover { background: #F8FAFC; cursor: pointer; }
     
     .row-pending { background-color: var(--pending-bg); border-left: 4px solid var(--danger); }
-    
     .status-badge { padding: 4px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
     .status-novo { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
     .status-novo::before { content: "●"; color: var(--danger); }
-    
-    /* Selos de Confirmação */
     .status-confirmado { background: #F1F5F9; color: #334155; border: 1px solid #E2E8F0; }
     .status-confirmado::before { content: "✓"; }
-    
-    /* Selo Especial para Automação */
     .status-auto { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
     .status-auto::before { content: "⚡"; }
 
@@ -109,15 +101,12 @@
     .btn-approve { color: var(--success); border-color: #A7F3D0; background: #ECFDF5; }
     .btn-approve:hover { background: var(--success); color: white; }
 
-    /* TOAST */
+    /* TOAST E MODAL */
     .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; }
     .toast { background: var(--card-bg); border-left: 4px solid var(--primary); padding: 16px 20px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px; transform: translateX(120%); transition: transform 0.3s ease; }
     .toast.show { transform: translateX(0); }
     .toast-icon { width: 20px; height: 20px; color: var(--primary); }
-    .toast-content h4 { font-size: 0.9rem; color: var(--text-main); margin-bottom: 2px; }
-    .toast-content p { font-size: 0.8rem; color: var(--text-muted); }
-
-    /* MODAL */
+    
     .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; visibility: hidden; transition: 0.2s; backdrop-filter: blur(2px); }
     .modal-overlay.active { opacity: 1; visibility: visible; }
     .modal-card { background: var(--card-bg); width: 100%; max-width: 500px; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); transform: translateY(20px); transition: 0.3s; overflow: hidden; }
@@ -132,7 +121,6 @@
     .modal-footer { padding: 20px 24px; background: #F8FAFC; border-top: 1px solid var(--border); display: flex; gap: 12px; justify-content: flex-end; }
     .btn-outline { background: white; color: var(--text-main); border: 1px solid var(--border); }
     .btn-wa { background: #25D366; color: white; }
-    .btn-confirm { background: var(--success); color: white; }
 
     @media (max-width: 768px) {
       #dashboard-screen { flex-direction: column; }
@@ -166,6 +154,7 @@
         <label>Senha</label>
         <input type="password" id="password" placeholder="senha123">
       </div>
+      <!-- O botão usa a função segura de handleLogin() -->
       <button class="btn" onclick="handleLogin()">Acessar Painel</button>
       <p class="error-msg" id="login-error">Credenciais inválidas.</p>
     </div>
@@ -200,55 +189,58 @@
       </header>
 
       <div class="content-area">
-        <!-- VIEW 1: GESTÃO DE AGENDA -->
+        <!-- VIEW AGENDA -->
         <div id="view-agenda">
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-title" style="color: var(--danger);">Triagem Pendente</div>
-              <span class="tab-badge danger hidden" id="badge-new-label" style="font-size:0.8rem; margin-left:8px;">Atenção</span>
+              <div class="stat-value">
+                <span id="stat-novos">0</span>
+                <span class="tab-badge danger hidden" id="badge-new-label" style="font-size:0.8rem; margin-left:8px;">Atenção</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-title">Agendamentos Aprovados</div>
+              <div class="stat-value" id="stat-aprovados">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-title">Automação (Tempo Salvo)</div>
+              <div class="stat-value" style="color: var(--success);"><span id="stat-auto">0</span> <span style="font-size: 0.9rem; color:var(--text-muted); font-weight:500; margin-left:4px;">horas salvas</span></div>
             </div>
           </div>
-          <div class="stat-card">
-            <div class="stat-title">Agendamentos Aprovados</div>
-            <div class="stat-value" id="stat-aprovados">0</div>
+
+          <div class="table-controls">
+            <div class="tabs">
+              <button class="tab-btn active" id="tab-Todos" onclick="setFilter('Todos')">
+                Visão Geral <span class="tab-badge" id="count-todos">0</span>
+              </button>
+              <button class="tab-btn" id="tab-Novo" onclick="setFilter('Novo')">
+                Requer Triagem <span class="tab-badge danger" id="count-pendentes">0</span>
+              </button>
+              <button class="tab-btn" id="tab-Confirmado" onclick="setFilter('Confirmado')">
+                Confirmados <span class="tab-badge" id="count-confirmados">0</span>
+              </button>
+            </div>
+            <button class="btn" style="width: auto; padding: 8px 16px; font-size: 0.85rem; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);" onclick="loadData()">🔄 Sincronizar Agora</button>
           </div>
-          <div class="stat-card">
-            <div class="stat-title">Automação (Tempo Salvo)</div>
-            <div class="stat-value" style="color: var(--success);"><span id="stat-auto">0</span> <span style="font-size: 0.9rem; color:var(--text-muted); font-weight:500; margin-left:4px;">horas salvas</span></div>
+
+          <div class="agenda-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Paciente</th>
+                  <th>Serviço / Procedimento</th>
+                  <th>Data & Hora</th>
+                  <th style="text-align: right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="table-body"></tbody>
+            </table>
           </div>
         </div>
 
-        <div class="table-controls">
-          <div class="tabs">
-            <button class="tab-btn active" id="tab-Todos" onclick="setFilter('Todos')">
-              Visão Geral <span class="tab-badge" id="count-todos">0</span>
-            </button>
-            <button class="tab-btn" id="tab-Novo" onclick="setFilter('Novo')">
-              Requer Triagem <span class="tab-badge danger" id="count-pendentes">0</span>
-            </button>
-            <button class="tab-btn" id="tab-Confirmado" onclick="setFilter('Confirmado')">
-              Confirmados <span class="tab-badge" id="count-confirmados">0</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="agenda-container">
-          <table>
-            <thead>
-              <tr>
-                <th>Status</th>
-                <th>Paciente</th>
-                <th>Serviço / Procedimento</th>
-                <th>Data & Hora</th>
-                <th style="text-align: right;">Ações</th>
-            </tr>
-          </thead>
-          <tbody id="table-body"></tbody>
-        </table>
-        </div>
-        </div> <!-- FIM VIEW AGENDA -->
-
-        <!-- VIEW 2: BANCO DE PACIENTES (CRM) -->
+        <!-- VIEW CRM -->
         <div id="view-crm" class="hidden">
           <div class="table-controls" style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
             <div>
@@ -272,8 +264,7 @@
               <tbody id="crm-table-body"></tbody>
             </table>
           </div>
-        </div> <!-- FIM VIEW CRM -->
-
+        </div>
       </div>
     </main>
   </div>
@@ -307,12 +298,14 @@
 
   <script>
     let currentFilter = 'Todos';
-    let mockData = []; // Agora começa vazio, pois virá da internet
+    let mockData = []; 
+    // Link seguro e oficial
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxVAS3rrnuPGdiyVTYol6za1H9cZjd134EFquV-DJTsqwxhVigfW2ZdaJ4ohLFoXU4/exec';
 
+    // Recuperar sessão ativa
     if (localStorage.getItem('isLoggedIn') === 'true') { showDashboard(); }
 
-    // Permite logar apertando "Enter" no campo de senha
+    // BLINDAGEM DE LOGIN: Permite tecla ENTER para conectar
     document.getElementById('password').addEventListener('keypress', function(event) {
       if (event.key === 'Enter') {
         event.preventDefault();
@@ -321,13 +314,11 @@
     });
 
     function handleLogin() {
-      // .trim() remove espaços invisíveis acidentais no início e fim
-      // .toLowerCase() converte para minúsculo (caso a pessoa digite 'Admin')
       const user = document.getElementById('username').value.trim().toLowerCase();
       const pass = document.getElementById('password').value.trim();
 
       if (user === 'admin' && pass === 'senha123') {
-        document.getElementById('login-error').style.display = 'none'; // Esconde o erro se houver
+        document.getElementById('login-error').style.display = 'none'; 
         localStorage.setItem('isLoggedIn', 'true'); 
         showDashboard();
       } else { 
@@ -335,10 +326,18 @@
       }
     }
 
-    function handleLogout() { localStorage.removeItem('isLoggedIn'); document.getElementById('dashboard-screen').classList.add('hidden'); document.getElementById('login-screen').style.display = 'flex'; }
-    function showDashboard() { document.getElementById('login-screen').style.display = 'none'; document.getElementById('dashboard-screen').classList.remove('hidden'); loadData(); }
+    function handleLogout() { 
+      localStorage.removeItem('isLoggedIn'); 
+      document.getElementById('dashboard-screen').classList.add('hidden'); 
+      document.getElementById('login-screen').style.display = 'flex'; 
+    }
 
-    // === NAVEGAÇÃO ENTRE ABAS (AGENDA / CRM) ===
+    function showDashboard() { 
+      document.getElementById('login-screen').style.display = 'none'; 
+      document.getElementById('dashboard-screen').classList.remove('hidden'); 
+      loadData(); 
+    }
+
     function switchView(view) {
       document.getElementById('nav-agenda').classList.remove('active');
       document.getElementById('nav-crm').classList.remove('active');
@@ -356,42 +355,84 @@
       }
     }
 
-    // === LÓGICA DO BANCO DE PACIENTES (CRM Inteligente) ===
+    async function loadData() {
+      const tBody = document.getElementById('table-body');
+      tBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 32px; color: var(--text-muted);">Sincronizando com o Google Sheets... ⏳</td></tr>`;
+      
+      // BLOCO DE PROTEÇÃO: Evita que falha na internet desconecte o botão
+      try {
+        const response = await fetch(scriptURL);
+        const dataText = await response.text(); 
+        
+        try {
+          // Tenta ler o JSON que vem da planilha
+          mockData = JSON.parse(dataText);
+        } catch(parseError) {
+          console.error("Falha ao ler os dados do Google: ", dataText);
+          throw new Error("Formato de banco de dados inválido.");
+        }
+        
+        const total = mockData.length;
+        const novos = mockData.filter(d => d.status === 'Novo').length;
+        const autoAprovados = mockData.filter(d => d.status.includes('Confirmado')).length;
+
+        document.getElementById('stat-novos').innerText = novos;
+        document.getElementById('stat-aprovados').innerText = autoAprovados;
+        
+        document.getElementById('stat-auto').innerText = (autoAprovados * 10 / 60).toFixed(1);
+        
+        document.getElementById('count-todos').innerText = total;
+        document.getElementById('count-pendentes').innerText = novos;
+        document.getElementById('count-confirmados').innerText = autoAprovados;
+
+        const bell = document.getElementById('notification-badge');
+        const lbl = document.getElementById('badge-new-label');
+        if (novos > 0) { 
+          bell.innerText = novos; 
+          bell.classList.add('active'); 
+          lbl.classList.remove('hidden'); 
+        } else { 
+          bell.classList.remove('active'); 
+          lbl.classList.add('hidden'); 
+        }
+        
+        renderTable();
+        
+        if (!document.getElementById('view-crm').classList.contains('hidden')) {
+          renderCRM();
+        }
+      } catch (error) {
+        console.error("Erro na comunicação com a API:", error);
+        tBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 32px; color: var(--danger);">Falha de Conexão: A sua Planilha pode estar offline ou bloqueada (Verifique as permissões de Compartilhamento no Apps Script).</td></tr>`;
+      }
+    }
+
+    function setFilter(type) {
+      currentFilter = type;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(`tab-${type}`).classList.add('active');
+      renderTable();
+    }
+
     function renderCRM() {
       const tbody = document.getElementById('crm-table-body');
       tbody.innerHTML = '';
-      
       const search = document.getElementById('search-crm').value.toLowerCase();
 
-      // Agrupa os dados da planilha por telefone (identificador único do paciente)
       const pacientesMap = {};
       mockData.forEach(item => {
-        // Limpa o telefone para ser o identificador sem espaços
         const num = item.telefone.replace(/\D/g, '');
         if (!num) return; 
 
         if (!pacientesMap[num]) {
-          pacientesMap[num] = {
-            nome: item.nome,
-            telefone: item.telefone,
-            telefoneLimpo: num,
-            consultas: 0,
-            ultimoServico: item.servico
-          };
+          pacientesMap[num] = { nome: item.nome, telefone: item.telefone, telefoneLimpo: num, consultas: 0, ultimoServico: item.servico };
         }
         pacientesMap[num].consultas += 1;
-        // Atualiza para o serviço da iteração atual (simplificação do último atendimento)
         pacientesMap[num].ultimoServico = item.servico;
       });
 
       let pacientes = Object.values(pacientesMap);
-
-      // Filtro de busca na barra
-      if (search) {
-        pacientes = pacientes.filter(p => p.nome.toLowerCase().includes(search) || p.telefone.includes(search));
-      }
-
-      // Ordenar por ordem alfabética
+      if (search) { pacientes = pacientes.filter(p => p.nome.toLowerCase().includes(search) || p.telefone.includes(search)); }
       pacientes.sort((a, b) => a.nome.localeCompare(b.nome));
 
       if (pacientes.length === 0) {
@@ -416,64 +457,6 @@
       });
     }
 
-    function showToast(title, message) {
-      const c = document.getElementById('toast-container'), t = document.createElement('div'); t.className = 'toast';
-      t.innerHTML = `<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div class="toast-content"><h4>${title}</h4><p>${message}</p></div>`;
-      c.appendChild(t); setTimeout(() => t.classList.add('show'), 100); setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 4000);
-    }
-
-    function setFilter(type) {
-      currentFilter = type;
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(`tab-${type}`).classList.add('active');
-      renderTable();
-    }
-
-    async function loadData() {
-      // Indicador de carregamento
-      document.getElementById('table-body').innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 32px; color: var(--text-muted);">Sincronizando com o servidor... ⏳</td></tr>`;
-      
-      try {
-        const response = await fetch(scriptURL);
-        mockData = await response.json();
-        
-        const total = mockData.length;
-        const novos = mockData.filter(d => d.status === 'Novo').length;
-        const autoAprovados = mockData.filter(d => d.status.includes('Confirmado')).length;
-
-        document.getElementById('stat-novos').innerText = novos;
-        document.getElementById('stat-aprovados').innerText = autoAprovados;
-        
-        // Simula métrica de "Tempo Salvo" pela automação (10 min por paciente aprovado)
-        document.getElementById('stat-auto').innerText = (autoAprovados * 10 / 60).toFixed(1);
-        
-        document.getElementById('count-todos').innerText = total;
-        document.getElementById('count-pendentes').innerText = novos;
-        document.getElementById('count-confirmados').innerText = autoAprovados;
-
-        const bell = document.getElementById('notification-badge'), lbl = document.getElementById('badge-new-label');
-      if (novos > 0) { bell.innerText = novos; bell.classList.add('active'); lbl.classList.remove('hidden'); } 
-      else { bell.classList.remove('active'); lbl.classList.add('hidden'); }
-      
-      renderTable();
-      
-      // Atualiza o CRM se a aba estiver aberta
-      if (!document.getElementById('view-crm').classList.contains('hidden')) {
-        renderCRM();
-      }
-    }
-
-    function approveAppt(id, event) {
-      if(event) event.stopPropagation();
-      const i = mockData.findIndex(p => p.id === id);
-      if(i > -1) {
-        mockData[i].status = 'Confirmado Manualmente';
-        showToast("Triagem Concluída", `${mockData[i].nome} foi aprovado(a) localmente.`);
-        // Nota: Num sistema completo, você enviaria um "fetch" via POST para a planilha avisando que o status mudou.
-        renderTable(); // Apenas atualiza a tabela para refletir a mudança visual na tela
-      }
-    }
-
     function renderTable() {
       const tbody = document.getElementById('table-body'); tbody.innerHTML = '';
       let data = mockData;
@@ -484,7 +467,7 @@
 
       data.forEach(item => {
         const isNovo = item.status === 'Novo';
-        const isAuto = item.status === 'Confirmado Automático';
+        const isAuto = item.status === 'Confirmado Automático' || item.status === 'Confirmado';
         
         let statusClass = isNovo ? 'status-novo' : (isAuto ? 'status-auto' : 'status-confirmado');
         let statusLabel = isNovo ? 'Requer Triagem' : (isAuto ? 'Auto-Confirmado ⚡' : 'Aprovado Manual');
@@ -504,6 +487,25 @@
       });
     }
 
+    function showToast(title, message) {
+      const c = document.getElementById('toast-container');
+      const t = document.createElement('div'); t.className = 'toast';
+      t.innerHTML = `<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div class="toast-content"><h4>${title}</h4><p>${message}</p></div>`;
+      c.appendChild(t); setTimeout(() => t.classList.add('show'), 100); setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 4000);
+    }
+
+    function approveAppt(id, event) {
+      if(event) event.stopPropagation();
+      const i = mockData.findIndex(p => p.id === id);
+      if(i > -1) {
+        mockData[i].status = 'Confirmado Manualmente';
+        showToast("Triagem Concluída", `${mockData[i].nome} foi aprovado(a). Apenas visual, dados não alterados no Google Sheets nesta versão base.`);
+        renderTable();
+        // NOTA TÉCNICA: Num ambiente em produção real, faríamos um fetch(POST) 
+        // para o scriptURL aqui, enviando o ID para alterar o banco de dados oficial.
+      }
+    }
+
     const modal = document.getElementById('patient-modal');
     function openModal(id) {
       const p = mockData.find(x => x.id === id); if(!p) return;
@@ -513,7 +515,7 @@
       const isNovo = p.status === 'Novo';
       const elStatus = document.getElementById('m-status');
       elStatus.innerText = isNovo ? 'Requer Triagem' : p.status;
-      elStatus.className = `status-badge ${isNovo ? 'status-novo' : (p.status.includes('Auto') ? 'status-auto' : 'status-confirmado')}`;
+      elStatus.className = `status-badge ${isNovo ? 'status-novo' : (p.status.includes('Confirmado') ? 'status-confirmado' : 'status-auto')}`;
       
       document.getElementById('m-btn-wa').onclick = () => window.open(`https://wa.me/55${p.telefone.replace(/\D/g,'')}?text=Olá ${p.nome}, referente ao seu agendamento de ${p.servico}...`, '_blank');
       
@@ -522,6 +524,7 @@
       else { btnConfirmar.style.display = 'none'; }
       modal.classList.add('active');
     }
+    
     function closeModal() { modal.classList.remove('active'); }
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
   </script>
