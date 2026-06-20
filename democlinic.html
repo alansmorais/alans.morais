@@ -366,8 +366,10 @@
           </div>
 
           <form class="booking-form" id="frontendBookingForm">
+            <!-- Adicione esta nova linha "data_iso" aos seus inputs ocultos -->
             <input type="hidden" name="data_agendamento" id="selectedDateInput">
             <input type="hidden" name="horario_agendamento" id="selectedHourInput">
+            <input type="hidden" name="data_iso" id="selectedIsoInput">
 
             <div class="selected-box">
               <span style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Horário Selecionado</span>
@@ -460,9 +462,12 @@
     const state = { offset: 0, selectedDate: null, selectedHour: null, days: [] };
     const dateStrip = document.getElementById('dateStrip');
     const hoursGrid = document.getElementById('hoursGrid');
+    const nextDaysButton = document.getElementById('nextDays');
     const selectedSummary = document.getElementById('selectedSummary');
     const selectedDateInput = document.getElementById('selectedDateInput');
     const selectedHourInput = document.getElementById('selectedHourInput');
+    /* Adicione esta variável */
+    const selectedIsoInput = document.getElementById('selectedIsoInput');
 
     function formatISO(date) { return date.toISOString().slice(0, 10); }
     function formatHuman(date) { return `${weekdayNames[date.getDay()]}, ${String(date.getDate()).padStart(2, '0')} ${monthNames[date.getMonth()]}`; }
@@ -502,58 +507,69 @@
     }
 
     function updateSummary() {
-      const d = state.days.find(day => formatISO(day) === state.selectedDate);
-      const txt = d ? formatHuman(d) : '';
-      if(selectedDateInput) selectedDateInput.value = txt;
-      if(selectedHourInput) selectedHourInput.value = state.selectedHour || '';
-      selectedSummary.textContent = (txt && state.selectedHour) ? `${txt} às ${state.selectedHour}` : (txt ? `${txt} • escolha horário` : 'Selecione data e hora');
-    }
+      if (!selectedSummary) return;
 
-    document.getElementById('nextDays').onclick = () => { state.offset += 4; renderDates(); };
-    renderDates();
+      const selectedDate = state.days.find((day) => formatISO(day) === state.selectedDate);
+      const dateText = selectedDate ? formatHuman(selectedDate) : '';
 
-    // --- FORMULÁRIO DE AGENDAMENTO (Integração Real com Google Sheets) ---
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxVAS3rrnuPGdiyVTYol6za1H9cZjd134EFquV-DJTsqwxhVigfW2ZdaJ4ohLFoXU4/exec';
+      if (selectedDateInput) selectedDateInput.value = dateText;
+      if (selectedHourInput) selectedHourInput.value = state.selectedHour || '';
+      
+      /* Envia a data formatada ao Calendário (YYYY-MM-DD) */
+      if (selectedIsoInput) selectedIsoInput.value = state.selectedDate || '';
+
+      if (dateText && state.selectedHour) {
+        selectedSummary.textContent = `${dateText} às ${state.selectedHour}`;
+      } else if (dateText) {
+        selectedSummary.textContent = `${dateText} • escolha um horário`;
+      } else {
+        selectedSummary.textContent = 'Selecione data e hora';
+      }
+    } // AQUI: Chaveta corretamente fechada da função updateSummary()
+
+    // --- FORMULÁRIO DE AGENDAMENTO (Fora do updateSummary) ---
     const form = document.getElementById('frontendBookingForm');
 
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      
-      if(!state.selectedDate || !state.selectedHour) { 
-        alert("Por favor, selecione um dia e horário na agenda primeiro."); 
-        return; 
-      }
+    if (form) {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        
+        if(!state.selectedDate || !state.selectedHour) { 
+          alert("Por favor, selecione um dia e horário na agenda primeiro."); 
+          return; 
+        }
 
-      const submitButton = form.querySelector('button[type="submit"]');
-      const originalText = submitButton.innerText;
-      submitButton.innerText = 'Processando...';
-      submitButton.disabled = true;
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.innerText;
+        submitButton.innerText = 'Processando...';
+        submitButton.disabled = true;
 
-      const formData = new FormData(form);
+        const formData = new FormData(form);
 
-      fetch(scriptURL, { method: 'POST', body: formData })
-        .then(response => response.json())
-        .then(data => {
-          if(data.resultado === 'sucesso') {
-            alert(`✅ Agendamento solicitado com sucesso!\n\nStatus: ${data.status_gerado}\nNossa equipe foi notificada.`);
-            form.reset();
-            state.selectedDate = null;
-            state.selectedHour = null;
-            renderDates();
-            updateSummary();
-          } else {
-            throw new Error('Erro no servidor');
-          }
-        })
-        .catch(error => {
-          console.error('Erro!', error.message);
-          alert("❌ Ocorreu um erro ao enviar. Por favor, tente novamente ou use nosso WhatsApp.");
-        })
-        .finally(() => {
-          submitButton.innerText = originalText;
-          submitButton.disabled = false;
-        });
-    });
+        fetch(scriptURL, { method: 'POST', body: formData })
+          .then(response => response.json())
+          .then(data => {
+            if(data.resultado === 'sucesso') {
+              alert(`✅ Agendamento solicitado com sucesso!\n\nStatus: ${data.status_gerado}\nNossa equipe foi notificada e a agenda atualizada.`);
+              form.reset();
+              state.selectedDate = null;
+              state.selectedHour = null;
+              renderDates();
+              updateSummary();
+            } else {
+              throw new Error('Erro no servidor');
+            }
+          })
+          .catch(error => {
+            console.error('Erro!', error.message);
+            alert("❌ Ocorreu um erro ao enviar. Por favor, tente novamente ou use nosso WhatsApp.");
+          })
+          .finally(() => {
+            submitButton.innerText = originalText;
+            submitButton.disabled = false;
+          });
+      });
+    }
 
     // --- MODAL DO WHATSAPP ---
     const waBtn = document.getElementById('waBtnTrigger');
