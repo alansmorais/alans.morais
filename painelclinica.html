@@ -1,532 +1,577 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel do Especialista | Gestão Inteligente</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lumina | Clínica de Estética Avançada</title>
+  <meta name="description" content="Clínica de Estética Avançada. Realce sua beleza com naturalidade e protocolos exclusivos.">
+  <meta name="theme-color" content="#FCFAFA">
+  
   <style>
+    /* Tipografia Elegante */
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
     :root {
-      --primary: #2563EB;
-      --primary-hover: #1D4ED8;
-      --bg-color: #F8FAFC;
-      --sidebar-bg: #0F172A;
-      --card-bg: #FFFFFF;
-      --text-main: #1E293B;
-      --text-muted: #64748B;
-      --border: #E2E8F0;
-      --success: #10B981;
-      --warning: #F59E0B;
-      --danger: #EF4444;
-      --pending-bg: #FEF2F2;
-      --radius: 8px;
+      /* Paleta Rose Gold & Pérola */
+      --cor-primaria: #C58B82; /* Rose Gold / Blush */
+      --cor-primaria-hover: #B0746A;
+      --cor-fundo: #FCFAFA; /* Branco Pérola */
+      --cor-cartao: #FFFFFF;
+      --cor-texto: #2D2828; /* Cinza Chumbo Escuro */
+      --cor-texto-mutado: #6D6363;
+      --cor-borda: #E8DFDF;
+      --cor-destaque: #F4EAE8; /* Fundo suave para seções */
+      
+      --sombra-suave: 0 10px 30px rgba(197, 139, 130, 0.08);
+      --radius-lg: 16px;
+      --radius-md: 8px;
+      --container: 1120px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg-color); color: var(--text-main); height: 100vh; overflow: hidden; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Lato', sans-serif;
+      background: var(--cor-fundo);
+      color: var(--cor-texto);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .container {
+      width: min(100% - 32px, var(--container));
+      margin-inline: auto;
+    }
+
+    /* HEADER */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(252, 250, 250, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--cor-borda);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 70px;
+    }
+
+    .brand-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--cor-texto);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .brand-text span { color: var(--cor-primaria); }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nav-menu a { text-decoration: none; color: var(--cor-texto-mutado); transition: 0.3s; }
+    .nav-menu a:hover { color: var(--cor-primaria); }
+
+    .menu-toggle { display: none; border: 0; background: transparent; padding: 8px; cursor: pointer; }
+    .menu-toggle span { display: block; width: 24px; height: 2px; margin: 5px 0; background: var(--cor-texto); }
+
+    /* LAYOUT GERAL */
+    .section { padding: 80px 0; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--cor-primaria);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--cor-texto);
+      line-height: 1.15;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    h1 { font-size: clamp(2.8rem, 5vw, 4.2rem); }
+    h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); }
+    h3 { font-size: 1.4rem; }
+    p { margin-top: 0; color: var(--cor-texto-mutado); }
+
+    /* BOTÕES */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 28px;
+      border-radius: 999px; /* Bordas arredondadas para estética feminina */
+      border: 1px solid transparent;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--cor-primaria);
+      color: #FFF;
+      box-shadow: 0 8px 20px rgba(197, 139, 130, 0.25);
+    }
+    .btn-primary:hover { background: var(--cor-primaria-hover); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--cor-texto);
+      border-color: var(--cor-primaria);
+    }
+    .btn-ghost:hover { background: var(--cor-destaque); }
+
+    /* HERO SECTION */
+    .hero {
+      background: linear-gradient(135deg, var(--cor-fundo) 0%, var(--cor-destaque) 100%);
+      padding-top: 80px;
+      padding-bottom: 80px;
+      text-align: center;
+    }
+    .hero-content { max-width: 700px; margin: 0 auto; }
+    .hero-text { font-size: 1.1rem; margin: 24px 0 32px; }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; }
+
+    /* CARDS E SERVIÇOS */
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+    .service-card {
+      background: var(--cor-cartao);
+      padding: 40px 32px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--cor-borda);
+      box-shadow: var(--sombra-suave);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover { transform: translateY(-8px); border-color: var(--cor-primaria); }
+    .service-card .icon {
+      width: 56px; height: 56px; margin: 0 auto 24px;
+      background: var(--cor-destaque); color: var(--cor-primaria);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-family: 'Playfair Display', serif; font-style: italic;
+    }
+
+    /* SEÇÃO DE AGENDAMENTO */
+    .scheduling { background: var(--cor-cartao); border-top: 1px solid var(--cor-borda); border-bottom: 1px solid var(--cor-borda); }
+    .booking-shell {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border: 1px solid var(--cor-borda); border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--sombra-suave); margin-top: 40px;
+    }
     
-    /* LOGIN */
-    #login-screen { position: fixed; inset: 0; background: var(--sidebar-bg); display: flex; align-items: center; justify-content: center; z-index: 1000; }
-    .login-box { background: var(--card-bg); padding: 40px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); width: 100%; max-width: 400px; text-align: center; }
-    .login-box h2 { margin-bottom: 8px; color: var(--sidebar-bg); }
-    .login-box p { color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem; }
-    .input-group { margin-bottom: 16px; text-align: left; }
-    .input-group label { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
-    .input-group input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 1rem; outline: none; transition: 0.2s; }
-    .input-group input:focus { border-color: var(--primary); }
-    .btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: var(--radius); font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
-    .btn:hover { background: var(--primary-hover); }
-    .error-msg { color: var(--danger); font-size: 0.85rem; margin-top: 12px; display: none; }
-
-    /* DASHBOARD E MENU */
-    #dashboard-screen { display: none; height: 100vh; display: flex; }
-    .hidden { display: none !important; }
+    .booking-calendar { padding: 40px; border-right: 1px solid var(--cor-borda); background: var(--cor-fundo); }
+    .booking-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
     
-    .sidebar { width: 260px; background: var(--sidebar-bg); color: white; display: flex; flex-direction: column; }
-    .brand { padding: 24px; font-size: 1.2rem; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .nav-items { flex: 1; padding: 20px 0; }
-    .nav-item { padding: 12px 24px; display: flex; align-items: center; gap: 12px; color: #CBD5E1; text-decoration: none; cursor: pointer; transition: 0.2s; border-left: 3px solid transparent; }
-    .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.05); color: white; border-left-color: var(--primary); }
-    .user-info { padding: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 12px; }
-    .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: bold; }
-    .logout-btn { background: none; border: none; color: #EF4444; cursor: pointer; font-size: 0.85rem; margin-top: 4px; }
-    
-    .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-    .header { height: 70px; background: var(--card-bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 32px; flex-shrink: 0; }
-    .header-left { display: flex; align-items: center; gap: 16px; }
-    .header h1 { font-size: 1.25rem; font-weight: 600; }
-    .sync-status { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted); background: var(--bg-color); padding: 4px 10px; border-radius: 999px; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); }
-    
-    .notifications { position: relative; cursor: pointer; padding: 8px; }
-    .notifications svg { width: 24px; height: 24px; color: var(--text-muted); }
-    .badge { position: absolute; top: 4px; right: 4px; background: var(--danger); color: white; font-size: 0.65rem; font-weight: bold; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--card-bg); display: none; }
-    .badge.active { display: flex; }
+    .date-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 32px; }
+    .date-card {
+      border: 1px solid var(--cor-borda); background: var(--cor-cartao); border-radius: var(--radius-md);
+      padding: 12px 8px; text-align: center; cursor: pointer; transition: 0.2s ease;
+    }
+    .date-card:hover { border-color: var(--cor-primaria); }
+    .date-card.is-active { background: var(--cor-destaque); border-color: var(--cor-primaria); color: var(--cor-primaria); }
+    .date-card strong { display: block; font-size: 1.2rem; font-family: 'Playfair Display', serif; color: var(--cor-texto); }
+    .date-card.is-active strong { color: var(--cor-primaria); }
+    .date-card span { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--cor-texto-mutado); }
 
-    /* ÁREA DE CONTEÚDO E ESTATÍSTICAS */
-    .content-area { flex: 1; padding: 32px; overflow-y: auto; }
-    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 32px; }
-    .stat-card { background: var(--card-bg); padding: 24px; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .stat-title { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; }
-    .stat-value { font-size: 2rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
+    .hours-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .hour-chip {
+      border: 1px solid var(--cor-borda); background: var(--cor-cartao); color: var(--cor-texto);
+      border-radius: 999px; padding: 10px 16px; font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: 0.2s;
+    }
+    .hour-chip:hover, .hour-chip.is-active { background: var(--cor-primaria); color: #FFF; border-color: var(--cor-primaria); }
 
-    .table-controls { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 16px; }
-    .tabs { display: flex; gap: 8px; }
-    .tab-btn { background: var(--card-bg); border: 1px solid var(--border); padding: 8px 16px; border-radius: 999px; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
-    .tab-btn:hover { background: var(--bg-color); }
-    .tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
-    .tab-badge { background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 10px; font-size: 0.75rem; }
-    .tab-btn.active .tab-badge { background: rgba(255,255,255,0.2); }
-    .tab-badge.danger { background: var(--danger); color: white; }
-    .tab-btn.active .tab-badge.danger { background: white; color: var(--danger); }
+    /* FORMULÁRIO DE AGENDAMENTO */
+    .booking-form { padding: 40px; display: grid; gap: 16px; background: var(--cor-cartao); }
+    .selected-box { padding: 16px; background: var(--cor-destaque); border-radius: var(--radius-md); border: 1px dashed var(--cor-primaria); text-align: center; }
+    .selected-box strong { display: block; color: var(--cor-primaria); font-size: 1.1rem; font-family: 'Playfair Display', serif; }
 
-    .agenda-container { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-    table { width: 100%; border-collapse: collapse; }
-    th { text-align: left; padding: 16px 24px; font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; border-bottom: 1px solid var(--border); background: #F8FAFC; }
-    td { padding: 16px 24px; border-bottom: 1px solid var(--border); font-size: 0.95rem; vertical-align: middle; }
-    tr:hover { background: #F8FAFC; cursor: pointer; }
-    
-    .row-pending { background-color: var(--pending-bg); border-left: 4px solid var(--danger); }
-    .status-badge { padding: 4px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
-    .status-novo { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
-    .status-novo::before { content: "●"; color: var(--danger); }
-    .status-confirmado { background: #F1F5F9; color: #334155; border: 1px solid #E2E8F0; }
-    .status-confirmado::before { content: "✓"; }
-    .status-auto { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
-    .status-auto::before { content: "⚡"; }
+    form label { display: grid; gap: 6px; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--cor-texto); }
+    input, select, textarea {
+      width: 100%; border: 1px solid var(--cor-borda); border-radius: var(--radius-md);
+      padding: 14px; font: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; background: var(--cor-fundo);
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--cor-primaria); background: var(--cor-cartao); box-shadow: 0 0 0 3px rgba(197, 139, 130, 0.1); }
 
-    .action-cell { display: flex; gap: 8px; align-items: center; justify-content: flex-end; }
-    .btn-icon { width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border); background: white; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; color: var(--text-muted); }
-    .btn-icon:hover { background: var(--bg-color); }
-    .btn-approve { color: var(--success); border-color: #A7F3D0; background: #ECFDF5; }
-    .btn-approve:hover { background: var(--success); color: white; }
+    .checkbox { display: flex !important; align-items: flex-start; gap: 12px !important; font-weight: 400 !important; text-transform: none; font-size: 0.85rem; }
+    .checkbox input { width: auto; margin-top: 4px; }
 
-    /* TOAST E MODAL */
-    .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 3000; display: flex; flex-direction: column; gap: 10px; }
-    .toast { background: var(--card-bg); border-left: 4px solid var(--primary); padding: 16px 20px; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px; transform: translateX(120%); transition: transform 0.3s ease; }
-    .toast.show { transform: translateX(0); }
-    .toast-icon { width: 20px; height: 20px; color: var(--primary); }
-    
-    .modal-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; visibility: hidden; transition: 0.2s; backdrop-filter: blur(2px); }
-    .modal-overlay.active { opacity: 1; visibility: visible; }
-    .modal-card { background: var(--card-bg); width: 100%; max-width: 500px; border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); transform: translateY(20px); transition: 0.3s; overflow: hidden; }
-    .modal-overlay.active .modal-card { transform: translateY(0); }
-    .modal-header { padding: 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-start; }
-    .modal-header h2 { font-size: 1.25rem; margin-bottom: 4px; }
-    .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); }
-    .modal-body { padding: 24px; display: grid; gap: 16px; }
-    .detail-group { display: flex; flex-direction: column; gap: 4px; }
-    .detail-label { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
-    .detail-value { font-size: 1rem; color: var(--text-main); font-weight: 500; }
-    .modal-footer { padding: 20px 24px; background: #F8FAFC; border-top: 1px solid var(--border); display: flex; gap: 12px; justify-content: flex-end; }
-    .btn-outline { background: white; color: var(--text-main); border: 1px solid var(--border); }
-    .btn-wa { background: #25D366; color: white; }
+    /* WHATSAPP FLOAT & MODAL */
+    .whatsapp-float {
+      position: fixed; bottom: 32px; right: 32px;
+      background-color: #25D366; color: #FFF;
+      width: 60px; height: 60px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4); z-index: 100;
+      transition: all 0.3s ease; cursor: pointer; border: none;
+    }
+    .whatsapp-float:hover { transform: scale(1.05); }
+    .whatsapp-float svg { width: 32px; height: 32px; fill: currentColor; }
 
-    @media (max-width: 768px) {
-      #dashboard-screen { flex-direction: column; }
-      .sidebar { width: 100%; flex-direction: row; align-items: center; justify-content: space-between; padding: 0 16px; }
-      .nav-items, .user-info { display: none; }
-      .header { padding: 0 16px; }
-      .content-area { padding: 16px; }
-      .stats-grid { grid-template-columns: 1fr; gap: 16px; }
-      .table-controls { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .tabs { flex-wrap: wrap; }
-      thead { display: none; }
-      table, tbody, tr, td { display: block; width: 100%; }
-      tr { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; padding: 12px; }
-      td { border: none; padding: 6px 0; }
-      td::before { content: attr(data-label); font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; display: block; font-weight: 600; margin-bottom: 2px; }
-      .action-cell { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+    .wa-modal-overlay {
+      position: fixed; inset: 0; background: rgba(45, 40, 40, 0.8); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center; z-index: 1000;
+      opacity: 0; visibility: hidden; transition: 0.3s ease; padding: 16px;
+    }
+    .wa-modal-overlay.is-active { opacity: 1; visibility: visible; }
+    .wa-modal-container {
+      background: var(--cor-cartao); width: 100%; max-width: 440px; padding: 40px;
+      border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      position: relative; transform: translateY(20px); transition: 0.3s ease;
+    }
+    .wa-modal-overlay.is-active .wa-modal-container { transform: translateY(0); }
+    .wa-modal-close {
+      position: absolute; top: 16px; right: 16px; background: var(--cor-destaque);
+      border: none; width: 32px; height: 32px; border-radius: 50%; font-size: 1.2rem;
+      color: var(--cor-primaria); cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* FOOTER */
+    .site-footer { padding: 60px 0 40px; background: var(--cor-texto); color: #FFF; text-align: center; }
+    .site-footer h2 { color: var(--cor-fundo); margin-bottom: 16px; }
+
+    @media (max-width: 980px) {
+      .menu-toggle { display: block; }
+      .nav-menu {
+        position: fixed; inset: 70px 16px auto 16px; display: none; flex-direction: column;
+        padding: 32px; background: var(--cor-cartao); border: 1px solid var(--cor-borda);
+        border-radius: var(--radius-md); box-shadow: var(--sombra-suave);
+      }
+      .nav-menu.is-open { display: flex; }
+      .split, .booking-shell { grid-template-columns: 1fr; gap: 32px; }
+      .booking-calendar { border-right: none; border-bottom: 1px solid var(--cor-borda); }
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 620px) {
+      .section { padding: 48px 0; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .booking-calendar, .booking-form { padding: 24px; }
+      .date-strip { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
-  <div id="login-screen">
-    <div class="login-box">
-      <h2>Painel Gerencial</h2>
-      <p>Acesse com suas credenciais seguras.</p>
-      <div class="input-group">
-        <label>Usuário</label>
-        <input type="text" id="username" placeholder="admin">
-      </div>
-      <div class="input-group">
-        <label>Senha</label>
-        <input type="password" id="password" placeholder="senha123">
-      </div>
-      <!-- O botão usa a função segura de handleLogin() -->
-      <button class="btn" onclick="handleLogin()">Acessar Painel</button>
-      <p class="error-msg" id="login-error">Credenciais inválidas.</p>
-    </div>
-  </div>
-
-  <div id="dashboard-screen" class="hidden">
-    <aside class="sidebar">
-      <div class="brand">Clínica Admin</div>
-      <nav class="nav-items">
-        <a class="nav-item active" id="nav-agenda" onclick="switchView('agenda')">Gestão de Agenda</a>
-        <a class="nav-item" id="nav-crm" onclick="switchView('crm')">Banco de Pacientes</a>
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="#inicio" class="brand-text">LUMINA<span>.</span></a>
+      <button class="menu-toggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+      <nav class="nav-menu">
+        <a href="#sobre">A Clínica</a>
+        <a href="#servicos">Tratamentos</a>
+        <a href="#agendamento">Agendar</a>
       </nav>
-      <div class="user-info">
-        <div class="avatar">C</div>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="container hero-content">
+        <p class="eyebrow">Estética Avançada</p>
+        <h1>Beleza que reflete<br>a sua essência.</h1>
+        <p class="hero-text">Uma clínica especializada em realçar os seus traços com naturalidade, segurança e protocolos estéticos de alto padrão.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#agendamento">Agendar Avaliação</a>
+          <a class="btn btn-ghost" href="#servicos">Conhecer Tratamentos</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" class="section">
+      <div class="container split">
         <div>
-          <div style="font-size: 0.9rem; font-weight: 600;">Concierge</div>
-          <button class="logout-btn" onclick="handleLogout()">Sair</button>
+          <p class="eyebrow">Nossa Filosofia</p>
+          <h2>Cuidado pensado para você.</h2>
         </div>
-      </div>
-    </aside>
-
-    <main class="main-content">
-      <header class="header">
-        <div class="header-left">
-          <h1 id="header-title">Central de Agendamentos</h1>
-          <div class="sync-status"><div class="dot"></div> Online</div>
-        </div>
-        <div class="notifications" onclick="setFilter('Novo'); switchView('agenda');">
-          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-          <span class="badge" id="notification-badge">0</span>
-        </div>
-      </header>
-
-      <div class="content-area">
-        <!-- VIEW AGENDA -->
-        <div id="view-agenda">
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-title" style="color: var(--danger);">Triagem Pendente</div>
-              <div class="stat-value">
-                <span id="stat-novos">0</span>
-                <span class="tab-badge danger hidden" id="badge-new-label" style="font-size:0.8rem; margin-left:8px;">Atenção</span>
-              </div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-title">Agendamentos Aprovados</div>
-              <div class="stat-value" id="stat-aprovados">0</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-title">Automação (Tempo Salvo)</div>
-              <div class="stat-value" style="color: var(--success);"><span id="stat-auto">0</span> <span style="font-size: 0.9rem; color:var(--text-muted); font-weight:500; margin-left:4px;">horas salvas</span></div>
-            </div>
-          </div>
-
-          <div class="table-controls">
-            <div class="tabs">
-              <button class="tab-btn active" id="tab-Todos" onclick="setFilter('Todos')">
-                Visão Geral <span class="tab-badge" id="count-todos">0</span>
-              </button>
-              <button class="tab-btn" id="tab-Novo" onclick="setFilter('Novo')">
-                Requer Triagem <span class="tab-badge danger" id="count-pendentes">0</span>
-              </button>
-              <button class="tab-btn" id="tab-Confirmado" onclick="setFilter('Confirmado')">
-                Confirmados <span class="tab-badge" id="count-confirmados">0</span>
-              </button>
-            </div>
-            <button class="btn" style="width: auto; padding: 8px 16px; font-size: 0.85rem; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);" onclick="loadData()">🔄 Sincronizar Agora</button>
-          </div>
-
-          <div class="agenda-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Status</th>
-                  <th>Paciente</th>
-                  <th>Serviço / Procedimento</th>
-                  <th>Data & Hora</th>
-                  <th style="text-align: right;">Ações</th>
-                </tr>
-              </thead>
-              <tbody id="table-body"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- VIEW CRM -->
-        <div id="view-crm" class="hidden">
-          <div class="table-controls" style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-            <div>
-              <h2 style="font-size: 1.25rem; font-weight: 600; color: var(--text-main);">Ficha de Pacientes</h2>
-              <p style="font-size: 0.85rem; color: var(--text-muted);">Histórico e unificação de cadastros (CRM).</p>
-            </div>
-            <input type="text" id="search-crm" placeholder="Buscar por nome ou telefone..." onkeyup="renderCRM()" style="width: 100%; max-width: 320px; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border); font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none;">
-          </div>
-          
-          <div class="agenda-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Paciente</th>
-                  <th>Contato (WhatsApp)</th>
-                  <th>Total de Consultas</th>
-                  <th>Último Serviço</th>
-                  <th style="text-align: right;">Ação Rápida</th>
-                </tr>
-              </thead>
-              <tbody id="crm-table-body"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <div class="toast-container" id="toast-container"></div>
-
-  <div class="modal-overlay" id="patient-modal">
-    <div class="modal-card">
-      <div class="modal-header">
         <div>
-          <h2 id="m-nome">Nome</h2>
-          <span class="status-badge" id="m-status">Status</span>
+          <p>A Lumina nasceu do desejo de oferecer uma estética que respeita a individualidade. Não acreditamos em padrões, acreditamos na sua melhor versão.</p>
+          <p style="margin-bottom:0;">Nosso ambiente foi planejado para ser o seu refúgio de autocuidado, aliando tecnologia de ponta, produtos premium e profissionais altamente qualificados.</p>
         </div>
-        <button class="modal-close" onclick="closeModal()">&times;</button>
       </div>
-      <div class="modal-body">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-          <div class="detail-group"><span class="detail-label">Data Reservada</span><span class="detail-value" id="m-data">--</span></div>
-          <div class="detail-group"><span class="detail-label">Horário</span><span class="detail-value" id="m-hora">--</span></div>
+    </section>
+
+    <section id="servicos" class="section" style="background: var(--cor-destaque);">
+      <div class="container">
+        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+          <p class="eyebrow">Expertise</p>
+          <h2>Protocolos Exclusivos</h2>
         </div>
-        <div class="detail-group"><span class="detail-label">Procedimento</span><span class="detail-value" id="m-servico">--</span></div>
-        <div class="detail-group"><span class="detail-label">WhatsApp</span><span class="detail-value" id="m-telefone">--</span></div>
+        <div class="cards-grid">
+          <article class="service-card">
+            <div class="icon">L</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 12px;">Estética Facial</h3>
+            <p>Toxina botulínica, bioestimuladores e preenchimento focados na naturalidade.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">C</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 12px;">Estética Corporal</h3>
+            <p>Tratamentos avançados para gordura localizada, flacidez e contorno corporal.</p>
+          </article>
+          <article class="service-card">
+            <div class="icon">P</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 12px;">Skin Care Avançado</h3>
+            <p>Limpeza de pele premium, peelings químicos e microagulhamento.</p>
+          </article>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-outline" style="width:auto;" onclick="closeModal()">Voltar</button>
-        <button class="btn btn-wa" style="width:auto;" id="m-btn-wa">Abrir WhatsApp</button>
-        <button class="btn btn-confirm" style="width:auto;" id="m-btn-confirmar">✅ Aprovar Manualmente</button>
+    </section>
+
+    <section id="agendamento" class="section scheduling">
+      <div class="container">
+        <div style="max-width: 600px;">
+          <p class="eyebrow">Agendamento Online</p>
+          <h2>Reserve seu Momento.</h2>
+          <p>Escolha a data e o horário desejados. Nossa equipe receberá seu pedido e retornará rapidamente para confirmar a sua reserva.</p>
+        </div>
+
+        <div class="booking-shell">
+          <div class="booking-calendar">
+            <div class="booking-header">
+              <h3 style="font-size: 1.1rem; color: var(--cor-primaria);">Datas Disponíveis</h3>
+              <button class="btn btn-ghost" style="padding: 6px 16px; min-height: auto; font-size: 0.75rem;" id="nextDays">Avançar Semana</button>
+            </div>
+            <div class="date-strip" id="dateStrip"></div>
+            
+            <h3 style="font-size: 1.1rem; color: var(--cor-primaria); margin-bottom: 16px;">Horários</h3>
+            <div class="hours-grid" id="hoursGrid"></div>
+          </div>
+
+          <form class="booking-form" id="frontendBookingForm">
+            <input type="hidden" name="data_agendamento" id="selectedDateInput">
+            <input type="hidden" name="horario_agendamento" id="selectedHourInput">
+
+            <div class="selected-box">
+              <span style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Horário Selecionado</span>
+              <strong id="selectedSummary">Selecione data e hora</strong>
+            </div>
+
+            <label>Nome Completo
+              <input type="text" name="nome" placeholder="Como podemos chamar você?" required>
+            </label>
+            <label>Telefone / WhatsApp
+              <input type="tel" name="telefone" placeholder="(00) 00000-0000" required>
+            </label>
+            <label>Tratamento Desejado
+              <select name="servico" required>
+                <option value="">Selecione uma opção</option>
+                <option>Primeira Avaliação Gratuita</option>
+                <option>Toxina Botulínica (Botox)</option>
+                <option>Preenchimento Labial / Facial</option>
+                <option>Limpeza de Pele Premium</option>
+                <option>Tratamento Corporal</option>
+                <option>Retorno</option>
+              </select>
+            </label>
+            <label class="checkbox">
+              <input type="checkbox" required>
+              <span>Aceito os termos de agendamento e política de cancelamento da clínica.</span>
+            </label>
+            <button class="btn btn-primary" type="submit" style="margin-top: 8px;">Solicitar Agendamento</button>
+          </form>
+        </div>
       </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <h2 style="font-family: 'Playfair Display', serif;">LUMINA<span>.</span></h2>
+      <p>Estética Avançada e Bem-Estar.</p>
+      <p style="font-size: 0.8rem; margin-top: 32px; color: #A09A9A;">Modelo de Negócios • Sistema de Agendamento Inteligente</p>
+    </div>
+  </footer>
+
+  <button class="whatsapp-float" id="waBtnTrigger" aria-label="Fale conosco no WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-5.824 4.74-10.563 10.568-10.563 5.822 0 10.565 4.742 10.566 10.565.001 5.823-4.743 10.563-10.565 10.563z"/></svg>
+  </button>
+
+  <div class="wa-modal-overlay" id="waModal">
+    <div class="wa-modal-container">
+      <button class="wa-modal-close" id="waModalClose">&times;</button>
+      <h3 style="margin-bottom: 8px;">Atendimento Rápido</h3>
+      <p style="font-size: 0.9rem; margin-bottom: 24px;">Para agilizar seu atendimento no WhatsApp, por favor informe o que você precisa hoje:</p>
+      
+      <form id="waForm" style="display: grid; gap: 16px;">
+        <label>Seu Nome
+          <input type="text" id="waName" placeholder="Como se chama?" required>
+        </label>
+        <label>Qual o motivo do contato?
+          <select id="waIntent" required>
+            <option value="">Selecione uma opção</option>
+            <option>Agendar Avaliação</option>
+            <option>Dúvida sobre Tratamentos</option>
+            <option>Emergência ou Retorno</option>
+          </select>
+        </label>
+        <button type="submit" class="btn btn-primary" style="background: #25D366; border-color: #25D366; color: #FFF; width: 100%;">Ir para o WhatsApp</button>
+      </form>
     </div>
   </div>
 
   <script>
-    let currentFilter = 'Todos';
-    let mockData = []; 
-    // Link seguro e oficial
+    // --- MENU MOBILE ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    if (menuToggle && navMenu) {
+      menuToggle.addEventListener('click', () => { navMenu.classList.toggle('is-open'); });
+      navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navMenu.classList.remove('is-open')));
+    }
+
+    // --- AGENDA INTERATIVA FRONT-END ---
+    const weekdayNames = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    const monthNames = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+    
+    // Disponibilidade Exemplo
+    const availabilityPattern = {
+      1: ['10:00', '11:00', '14:00', '16:00'], 2: ['09:00', '10:30', '15:00'], 
+      3: ['10:30', '13:30', '15:30'], 4: ['09:00', '11:00', '14:00', '17:00'], 
+      5: ['10:00', '12:00', '15:00', '16:30']
+    };
+
+    const state = { offset: 0, selectedDate: null, selectedHour: null, days: [] };
+    const dateStrip = document.getElementById('dateStrip');
+    const hoursGrid = document.getElementById('hoursGrid');
+    const selectedSummary = document.getElementById('selectedSummary');
+    const selectedDateInput = document.getElementById('selectedDateInput');
+    const selectedHourInput = document.getElementById('selectedHourInput');
+
+    function formatISO(date) { return date.toISOString().slice(0, 10); }
+    function formatHuman(date) { return `${weekdayNames[date.getDay()]}, ${String(date.getDate()).padStart(2, '0')} ${monthNames[date.getMonth()]}`; }
+
+    function generateDays(offset) {
+      const res = []; const t = new Date(); t.setHours(0,0,0,0);
+      let c = new Date(t); c.setDate(t.getDate() + offset);
+      while(res.length < 4) { if(availabilityPattern[c.getDay()]) res.push(new Date(c)); c.setDate(c.getDate() + 1); }
+      return res;
+    }
+
+    function renderDates() {
+      state.days = generateDays(state.offset);
+      if(!state.selectedDate || !state.days.some(d => formatISO(d) === state.selectedDate)) { state.selectedDate = formatISO(state.days[0]); state.selectedHour = null; }
+      dateStrip.innerHTML = '';
+      state.days.forEach(date => {
+        const dISO = formatISO(date); const btn = document.createElement('div');
+        btn.className = `date-card ${dISO === state.selectedDate ? 'is-active' : ''}`;
+        btn.innerHTML = `<span>${weekdayNames[date.getDay()]}</span><strong>${String(date.getDate()).padStart(2,'0')}</strong><span>${monthNames[date.getMonth()]}</span>`;
+        btn.onclick = () => { state.selectedDate = dISO; state.selectedHour = null; renderDates(); };
+        dateStrip.appendChild(btn);
+      });
+      renderHours(); updateSummary();
+    }
+
+    function renderHours() {
+      const d = state.days.find(day => formatISO(day) === state.selectedDate);
+      const hours = availabilityPattern[d ? d.getDay() : 1] || [];
+      hoursGrid.innerHTML = '';
+      hours.forEach(hour => {
+        const btn = document.createElement('div');
+        btn.className = `hour-chip ${hour === state.selectedHour ? 'is-active' : ''}`;
+        btn.textContent = hour;
+        btn.onclick = () => { state.selectedHour = hour; renderHours(); updateSummary(); };
+        hoursGrid.appendChild(btn);
+      });
+    }
+
+    function updateSummary() {
+      const d = state.days.find(day => formatISO(day) === state.selectedDate);
+      const txt = d ? formatHuman(d) : '';
+      if(selectedDateInput) selectedDateInput.value = txt;
+      if(selectedHourInput) selectedHourInput.value = state.selectedHour || '';
+      selectedSummary.textContent = (txt && state.selectedHour) ? `${txt} às ${state.selectedHour}` : (txt ? `${txt} • escolha horário` : 'Selecione data e hora');
+    }
+
+    document.getElementById('nextDays').onclick = () => { state.offset += 4; renderDates(); };
+    renderDates();
+
+    // --- FORMULÁRIO DE AGENDAMENTO (Integração Real com Google Sheets) ---
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxVAS3rrnuPGdiyVTYol6za1H9cZjd134EFquV-DJTsqwxhVigfW2ZdaJ4ohLFoXU4/exec';
+    const form = document.getElementById('frontendBookingForm');
 
-    // Recuperar sessão ativa
-    if (localStorage.getItem('isLoggedIn') === 'true') { showDashboard(); }
-
-    // BLINDAGEM DE LOGIN: Permite tecla ENTER para conectar
-    document.getElementById('password').addEventListener('keypress', function(event) {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        handleLogin();
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      
+      if(!state.selectedDate || !state.selectedHour) { 
+        alert("Por favor, selecione um dia e horário na agenda primeiro."); 
+        return; 
       }
+
+      const submitButton = form.querySelector('button[type="submit"]');
+      const originalText = submitButton.innerText;
+      submitButton.innerText = 'Processando...';
+      submitButton.disabled = true;
+
+      const formData = new FormData(form);
+
+      fetch(scriptURL, { method: 'POST', body: formData })
+        .then(response => response.json())
+        .then(data => {
+          if(data.resultado === 'sucesso') {
+            alert(`✅ Agendamento solicitado com sucesso!\n\nStatus: ${data.status_gerado}\nNossa equipe foi notificada.`);
+            form.reset();
+            state.selectedDate = null;
+            state.selectedHour = null;
+            renderDates();
+            updateSummary();
+          } else {
+            throw new Error('Erro no servidor');
+          }
+        })
+        .catch(error => {
+          console.error('Erro!', error.message);
+          alert("❌ Ocorreu um erro ao enviar. Por favor, tente novamente ou use nosso WhatsApp.");
+        })
+        .finally(() => {
+          submitButton.innerText = originalText;
+          submitButton.disabled = false;
+        });
     });
 
-    function handleLogin() {
-      const user = document.getElementById('username').value.trim().toLowerCase();
-      const pass = document.getElementById('password').value.trim();
-
-      if (user === 'admin' && pass === 'senha123') {
-        document.getElementById('login-error').style.display = 'none'; 
-        localStorage.setItem('isLoggedIn', 'true'); 
-        showDashboard();
-      } else { 
-        document.getElementById('login-error').style.display = 'block'; 
-      }
-    }
-
-    function handleLogout() { 
-      localStorage.removeItem('isLoggedIn'); 
-      document.getElementById('dashboard-screen').classList.add('hidden'); 
-      document.getElementById('login-screen').style.display = 'flex'; 
-    }
-
-    function showDashboard() { 
-      document.getElementById('login-screen').style.display = 'none'; 
-      document.getElementById('dashboard-screen').classList.remove('hidden'); 
-      loadData(); 
-    }
-
-    function switchView(view) {
-      document.getElementById('nav-agenda').classList.remove('active');
-      document.getElementById('nav-crm').classList.remove('active');
-      document.getElementById(`nav-${view}`).classList.add('active');
-
-      if (view === 'agenda') {
-        document.getElementById('view-agenda').classList.remove('hidden');
-        document.getElementById('view-crm').classList.add('hidden');
-        document.getElementById('header-title').innerText = "Central de Agendamentos";
-      } else if (view === 'crm') {
-        document.getElementById('view-agenda').classList.add('hidden');
-        document.getElementById('view-crm').classList.remove('hidden');
-        document.getElementById('header-title').innerText = "Banco de Pacientes (CRM)";
-        renderCRM();
-      }
-    }
-
-    async function loadData() {
-      const tBody = document.getElementById('table-body');
-      tBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 32px; color: var(--text-muted);">Sincronizando... ⏳</td></tr>`;
-      
-      // BLOCO DE PROTEÇÃO: Evita que falha na internet desconecte o botão
-      try {
-        const response = await fetch(scriptURL);
-        const dataText = await response.text(); 
-        
-        try {
-          // Tenta ler o JSON que vem da planilha
-          mockData = JSON.parse(dataText);
-        } catch(parseError) {
-          console.error("Falha ao ler os dados do Google: ", dataText);
-          throw new Error("Formato de banco de dados inválido.");
-        }
-        
-        const total = mockData.length;
-        const novos = mockData.filter(d => d.status === 'Novo').length;
-        const autoAprovados = mockData.filter(d => d.status.includes('Confirmado')).length;
-
-        document.getElementById('stat-novos').innerText = novos;
-        document.getElementById('stat-aprovados').innerText = autoAprovados;
-        
-        document.getElementById('stat-auto').innerText = (autoAprovados * 10 / 60).toFixed(1);
-        
-        document.getElementById('count-todos').innerText = total;
-        document.getElementById('count-pendentes').innerText = novos;
-        document.getElementById('count-confirmados').innerText = autoAprovados;
-
-        const bell = document.getElementById('notification-badge');
-        const lbl = document.getElementById('badge-new-label');
-        if (novos > 0) { 
-          bell.innerText = novos; 
-          bell.classList.add('active'); 
-          lbl.classList.remove('hidden'); 
-        } else { 
-          bell.classList.remove('active'); 
-          lbl.classList.add('hidden'); 
-        }
-        
-        renderTable();
-        
-        if (!document.getElementById('view-crm').classList.contains('hidden')) {
-          renderCRM();
-        }
-      } catch (error) {
-        console.error("Erro na comunicação com a API:", error);
-        tBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 32px; color: var(--danger);">Falha de Conexão: A sua Planilha pode estar offline ou bloqueada (Verifique as permissões de Compartilhamento no Apps Script).</td></tr>`;
-      }
-    }
-
-    function setFilter(type) {
-      currentFilter = type;
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(`tab-${type}`).classList.add('active');
-      renderTable();
-    }
-
-    function renderCRM() {
-      const tbody = document.getElementById('crm-table-body');
-      tbody.innerHTML = '';
-      const search = document.getElementById('search-crm').value.toLowerCase();
-
-      const pacientesMap = {};
-      mockData.forEach(item => {
-        const num = item.telefone.replace(/\D/g, '');
-        if (!num) return; 
-
-        if (!pacientesMap[num]) {
-          pacientesMap[num] = { nome: item.nome, telefone: item.telefone, telefoneLimpo: num, consultas: 0, ultimoServico: item.servico };
-        }
-        pacientesMap[num].consultas += 1;
-        pacientesMap[num].ultimoServico = item.servico;
-      });
-
-      let pacientes = Object.values(pacientesMap);
-      if (search) { pacientes = pacientes.filter(p => p.nome.toLowerCase().includes(search) || p.telefone.includes(search)); }
-      pacientes.sort((a, b) => a.nome.localeCompare(b.nome));
-
-      if (pacientes.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: var(--text-muted); padding: 32px;">Nenhum paciente localizado.</td></tr>`;
-        return;
-      }
-
-      pacientes.forEach(p => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td data-label="Paciente" style="font-weight: 600;">${p.nome}</td>
-          <td data-label="Contato">${p.telefone}</td>
-          <td data-label="Consultas"><span class="status-badge" style="background:#F1F5F9; color:#334155; border: 1px solid #E2E8F0;">${p.consultas} visita(s)</span></td>
-          <td data-label="Último Serviço" style="color: var(--text-muted);">${p.ultimoServico}</td>
-          <td data-label="Ação" class="action-cell" style="text-align: right;">
-            <button class="btn btn-wa" style="width: auto; padding: 6px 12px; font-size: 0.75rem; border-radius: 6px; box-shadow: none;" onclick="window.open('https://wa.me/55${p.telefoneLimpo}?text=Olá ${p.nome}, tudo bem? Aqui é da Clínica.', '_blank')">
-              Falar no WhatsApp
-            </button>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function renderTable() {
-      const tbody = document.getElementById('table-body'); tbody.innerHTML = '';
-      let data = mockData;
-      if (currentFilter !== 'Todos') data = mockData.filter(i => currentFilter === 'Confirmado' ? i.status.includes('Confirmado') : i.status === currentFilter);
-      if (currentFilter === 'Todos') data.sort((a, b) => a.status === 'Novo' ? -1 : 1);
-      
-      if (data.length === 0) { tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: #64748B; padding: 32px;">Nenhum agendamento.</td></tr>`; return; }
-
-      data.forEach(item => {
-        const isNovo = item.status === 'Novo';
-        const isAuto = item.status === 'Confirmado Automático' || item.status === 'Confirmado';
-        
-        let statusClass = isNovo ? 'status-novo' : (isAuto ? 'status-auto' : 'status-confirmado');
-        let statusLabel = isNovo ? 'Requer Triagem' : (isAuto ? 'Auto-Confirmado ⚡' : 'Aprovado Manual');
-        
-        const rowClass = isNovo ? 'row-pending' : '';
-        const btnApprove = isNovo ? `<button class="btn-icon btn-approve" title="Aprovar Cliente" onclick="approveAppt(${item.id}, event)"><svg style="width:16px;height:16px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></button>` : '';
-
-        const tr = document.createElement('tr'); tr.className = rowClass; tr.onclick = () => openModal(item.id);
-        tr.innerHTML = `
-          <td data-label="Status"><span class="status-badge ${statusClass}">${statusLabel}</span></td>
-          <td data-label="Paciente" style="font-weight: 600;">${item.nome}</td>
-          <td data-label="Serviço" style="color: var(--text-muted);">${item.servico}</td>
-          <td data-label="Horário"><strong>${item.data}</strong> às ${item.hora}</td>
-          <td data-label="Ações" class="action-cell">${btnApprove}<button class="btn-icon" title="Ver Detalhes"><svg style="width:16px;height:16px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button></td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function showToast(title, message) {
-      const c = document.getElementById('toast-container');
-      const t = document.createElement('div'); t.className = 'toast';
-      t.innerHTML = `<svg class="toast-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><div class="toast-content"><h4>${title}</h4><p>${message}</p></div>`;
-      c.appendChild(t); setTimeout(() => t.classList.add('show'), 100); setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 4000);
-    }
-
-    function approveAppt(id, event) {
-      if(event) event.stopPropagation();
-      const i = mockData.findIndex(p => p.id === id);
-      if(i > -1) {
-        mockData[i].status = 'Confirmado Manualmente';
-        showToast("Triagem Concluída", `${mockData[i].nome} foi aprovado(a). Apenas visual, dados não alterados no Google Sheets nesta versão base.`);
-        renderTable();
-        // NOTA TÉCNICA: Num ambiente em produção real, faríamos um fetch(POST) 
-        // para o scriptURL aqui, enviando o ID para alterar o banco de dados oficial.
-      }
-    }
-
-    const modal = document.getElementById('patient-modal');
-    function openModal(id) {
-      const p = mockData.find(x => x.id === id); if(!p) return;
-      document.getElementById('m-nome').innerText = p.nome; document.getElementById('m-servico').innerText = p.servico;
-      document.getElementById('m-data').innerText = p.data; document.getElementById('m-hora').innerText = p.hora; document.getElementById('m-telefone').innerText = p.telefone;
-      
-      const isNovo = p.status === 'Novo';
-      const elStatus = document.getElementById('m-status');
-      elStatus.innerText = isNovo ? 'Requer Triagem' : p.status;
-      elStatus.className = `status-badge ${isNovo ? 'status-novo' : (p.status.includes('Confirmado') ? 'status-confirmado' : 'status-auto')}`;
-      
-      document.getElementById('m-btn-wa').onclick = () => window.open(`https://wa.me/55${p.telefone.replace(/\D/g,'')}?text=Olá ${p.nome}, referente ao seu agendamento de ${p.servico}...`, '_blank');
-      
-      const btnConfirmar = document.getElementById('m-btn-confirmar');
-      if (isNovo) { btnConfirmar.style.display = 'block'; btnConfirmar.onclick = () => { approveAppt(id); closeModal(); }; } 
-      else { btnConfirmar.style.display = 'none'; }
-      modal.classList.add('active');
-    }
+    // --- MODAL DO WHATSAPP ---
+    const waBtn = document.getElementById('waBtnTrigger');
+    const waModal = document.getElementById('waModal');
+    const waClose = document.getElementById('waModalClose');
     
-    function closeModal() { modal.classList.remove('active'); }
-    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    waBtn.onclick = () => waModal.classList.add('is-active');
+    waClose.onclick = () => waModal.classList.remove('is-active');
+    waModal.onclick = (e) => { if(e.target === waModal) waModal.classList.remove('is-active'); }
+
+    document.getElementById('waForm').onsubmit = (e) => {
+      e.preventDefault();
+      const nome = document.getElementById('waName').value;
+      const intent = document.getElementById('waIntent').value;
+      const text = encodeURIComponent(`Olá, me chamo ${nome}. Motivo do contato: ${intent}.`);
+      window.open(`https://wa.me/5500000000000?text=${text}`, '_blank');
+      waModal.classList.remove('is-active');
+    };
   </script>
 </body>
 </html>
