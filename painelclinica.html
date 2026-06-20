@@ -175,8 +175,8 @@
     <aside class="sidebar">
       <div class="brand">Clínica Admin</div>
       <nav class="nav-items">
-        <a class="nav-item active">Gestão de Agenda</a>
-        <a class="nav-item">Banco de Pacientes</a>
+        <a class="nav-item active" id="nav-agenda" onclick="switchView('agenda')">Gestão de Agenda</a>
+        <a class="nav-item" id="nav-crm" onclick="switchView('crm')">Banco de Pacientes</a>
       </nav>
       <div class="user-info">
         <div class="avatar">C</div>
@@ -190,21 +190,21 @@
     <main class="main-content">
       <header class="header">
         <div class="header-left">
-          <h1>Central de Agendamentos</h1>
+          <h1 id="header-title">Central de Agendamentos</h1>
           <div class="sync-status"><div class="dot"></div> Online</div>
         </div>
-        <div class="notifications" onclick="setFilter('Novo')">
+        <div class="notifications" onclick="setFilter('Novo'); switchView('agenda');">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
           <span class="badge" id="notification-badge">0</span>
         </div>
       </header>
 
       <div class="content-area">
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-title" style="color: var(--danger);">Triagem Pendente</div>
-            <div class="stat-value">
-              <span id="stat-novos">0</span>
+        <!-- VIEW 1: GESTÃO DE AGENDA -->
+        <div id="view-agenda">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-title" style="color: var(--danger);">Triagem Pendente</div>
               <span class="tab-badge danger hidden" id="badge-new-label" style="font-size:0.8rem; margin-left:8px;">Atenção</span>
             </div>
           </div>
@@ -241,11 +241,39 @@
                 <th>Serviço / Procedimento</th>
                 <th>Data & Hora</th>
                 <th style="text-align: right;">Ações</th>
-              </tr>
-            </thead>
-            <tbody id="table-body"></tbody>
-          </table>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
         </div>
+        </div> <!-- FIM VIEW AGENDA -->
+
+        <!-- VIEW 2: BANCO DE PACIENTES (CRM) -->
+        <div id="view-crm" class="hidden">
+          <div class="table-controls" style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <h2 style="font-size: 1.25rem; font-weight: 600; color: var(--text-main);">Ficha de Pacientes</h2>
+              <p style="font-size: 0.85rem; color: var(--text-muted);">Histórico e unificação de cadastros (CRM).</p>
+            </div>
+            <input type="text" id="search-crm" placeholder="Buscar por nome ou telefone..." onkeyup="renderCRM()" style="width: 100%; max-width: 320px; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border); font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none;">
+          </div>
+          
+          <div class="agenda-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Paciente</th>
+                  <th>Contato (WhatsApp)</th>
+                  <th>Total de Consultas</th>
+                  <th>Último Serviço</th>
+                  <th style="text-align: right;">Ação Rápida</th>
+                </tr>
+              </thead>
+              <tbody id="crm-table-body"></tbody>
+            </table>
+          </div>
+        </div> <!-- FIM VIEW CRM -->
+
       </div>
     </main>
   </div>
@@ -279,16 +307,8 @@
 
   <script>
     let currentFilter = 'Todos';
-    
-    // Dados Simulados. Note que o "Preenchimento Labial" entra como Confirmado Automaticamente.
-    // Enquanto "Avaliação Completa" entra como "Novo" (pendente de triagem).
-    let mockData = [
-      { id: 1, nome: "Ana Luiza Freitas", servico: "Avaliação Completa", data: "18/06/2026", hora: "14:30", telefone: "11999998888", status: "Novo" },
-      { id: 2, nome: "Carla Mendes", servico: "Preenchimento Labial", data: "18/06/2026", hora: "16:00", telefone: "11988887777", status: "Confirmado Automático" },
-      { id: 3, nome: "Juliana Silva", servico: "Primeira Avaliação", data: "19/06/2026", hora: "09:30", telefone: "11977776666", status: "Novo" },
-      { id: 4, nome: "Mariana Costa", servico: "Retorno", data: "20/06/2026", hora: "10:00", telefone: "11966665555", status: "Confirmado Automático" },
-      { id: 5, nome: "Roberto Almeida", servico: "Rinomodelação", data: "21/06/2026", hora: "11:00", telefone: "11955554444", status: "Confirmado Automático" }
-    ];
+    let mockData = []; // Agora começa vazio, pois virá da internet
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxVAS3rrnuPGdiyVTYol6za1H9cZjd134EFquV-DJTsqwxhVigfW2ZdaJ4ohLFoXU4/exec';
 
     if (localStorage.getItem('isLoggedIn') === 'true') { showDashboard(); }
 
@@ -300,6 +320,84 @@
 
     function handleLogout() { localStorage.removeItem('isLoggedIn'); document.getElementById('dashboard-screen').classList.add('hidden'); document.getElementById('login-screen').style.display = 'flex'; }
     function showDashboard() { document.getElementById('login-screen').style.display = 'none'; document.getElementById('dashboard-screen').classList.remove('hidden'); loadData(); }
+
+    // === NAVEGAÇÃO ENTRE ABAS (AGENDA / CRM) ===
+    function switchView(view) {
+      document.getElementById('nav-agenda').classList.remove('active');
+      document.getElementById('nav-crm').classList.remove('active');
+      document.getElementById(`nav-${view}`).classList.add('active');
+
+      if (view === 'agenda') {
+        document.getElementById('view-agenda').classList.remove('hidden');
+        document.getElementById('view-crm').classList.add('hidden');
+        document.getElementById('header-title').innerText = "Central de Agendamentos";
+      } else if (view === 'crm') {
+        document.getElementById('view-agenda').classList.add('hidden');
+        document.getElementById('view-crm').classList.remove('hidden');
+        document.getElementById('header-title').innerText = "Banco de Pacientes (CRM)";
+        renderCRM();
+      }
+    }
+
+    // === LÓGICA DO BANCO DE PACIENTES (CRM Inteligente) ===
+    function renderCRM() {
+      const tbody = document.getElementById('crm-table-body');
+      tbody.innerHTML = '';
+      
+      const search = document.getElementById('search-crm').value.toLowerCase();
+
+      // Agrupa os dados da planilha por telefone (identificador único do paciente)
+      const pacientesMap = {};
+      mockData.forEach(item => {
+        // Limpa o telefone para ser o identificador sem espaços
+        const num = item.telefone.replace(/\D/g, '');
+        if (!num) return; 
+
+        if (!pacientesMap[num]) {
+          pacientesMap[num] = {
+            nome: item.nome,
+            telefone: item.telefone,
+            telefoneLimpo: num,
+            consultas: 0,
+            ultimoServico: item.servico
+          };
+        }
+        pacientesMap[num].consultas += 1;
+        // Atualiza para o serviço da iteração atual (simplificação do último atendimento)
+        pacientesMap[num].ultimoServico = item.servico;
+      });
+
+      let pacientes = Object.values(pacientesMap);
+
+      // Filtro de busca na barra
+      if (search) {
+        pacientes = pacientes.filter(p => p.nome.toLowerCase().includes(search) || p.telefone.includes(search));
+      }
+
+      // Ordenar por ordem alfabética
+      pacientes.sort((a, b) => a.nome.localeCompare(b.nome));
+
+      if (pacientes.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color: var(--text-muted); padding: 32px;">Nenhum paciente localizado.</td></tr>`;
+        return;
+      }
+
+      pacientes.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td data-label="Paciente" style="font-weight: 600;">${p.nome}</td>
+          <td data-label="Contato">${p.telefone}</td>
+          <td data-label="Consultas"><span class="status-badge" style="background:#F1F5F9; color:#334155; border: 1px solid #E2E8F0;">${p.consultas} visita(s)</span></td>
+          <td data-label="Último Serviço" style="color: var(--text-muted);">${p.ultimoServico}</td>
+          <td data-label="Ação" class="action-cell" style="text-align: right;">
+            <button class="btn btn-wa" style="width: auto; padding: 6px 12px; font-size: 0.75rem; border-radius: 6px; box-shadow: none;" onclick="window.open('https://wa.me/55${p.telefoneLimpo}?text=Olá ${p.nome}, tudo bem? Aqui é da Clínica.', '_blank')">
+              Falar no WhatsApp
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
 
     function showToast(title, message) {
       const c = document.getElementById('toast-container'), t = document.createElement('div'); t.className = 'toast';
@@ -314,25 +412,38 @@
       renderTable();
     }
 
-    function loadData() {
-      const total = mockData.length;
-      const novos = mockData.filter(d => d.status === 'Novo').length;
-      const autoAprovados = mockData.filter(d => d.status.includes('Confirmado')).length;
-
-      document.getElementById('stat-novos').innerText = novos;
-      document.getElementById('stat-aprovados').innerText = autoAprovados;
+    async function loadData() {
+      // Indicador de carregamento
+      document.getElementById('table-body').innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 32px; color: var(--text-muted);">Sincronizando com o servidor... ⏳</td></tr>`;
       
-      // Simula métrica de "Tempo Salvo" pela automação (10 min por paciente aprovado automaticamente)
-      document.getElementById('stat-auto').innerText = (autoAprovados * 10 / 60).toFixed(1);
-      
-      document.getElementById('count-todos').innerText = total;
-      document.getElementById('count-pendentes').innerText = novos;
-      document.getElementById('count-confirmados').innerText = autoAprovados;
+      try {
+        const response = await fetch(scriptURL);
+        mockData = await response.json();
+        
+        const total = mockData.length;
+        const novos = mockData.filter(d => d.status === 'Novo').length;
+        const autoAprovados = mockData.filter(d => d.status.includes('Confirmado')).length;
 
-      const bell = document.getElementById('notification-badge'), lbl = document.getElementById('badge-new-label');
+        document.getElementById('stat-novos').innerText = novos;
+        document.getElementById('stat-aprovados').innerText = autoAprovados;
+        
+        // Simula métrica de "Tempo Salvo" pela automação (10 min por paciente aprovado)
+        document.getElementById('stat-auto').innerText = (autoAprovados * 10 / 60).toFixed(1);
+        
+        document.getElementById('count-todos').innerText = total;
+        document.getElementById('count-pendentes').innerText = novos;
+        document.getElementById('count-confirmados').innerText = autoAprovados;
+
+        const bell = document.getElementById('notification-badge'), lbl = document.getElementById('badge-new-label');
       if (novos > 0) { bell.innerText = novos; bell.classList.add('active'); lbl.classList.remove('hidden'); } 
       else { bell.classList.remove('active'); lbl.classList.add('hidden'); }
+      
       renderTable();
+      
+      // Atualiza o CRM se a aba estiver aberta
+      if (!document.getElementById('view-crm').classList.contains('hidden')) {
+        renderCRM();
+      }
     }
 
     function approveAppt(id, event) {
@@ -340,8 +451,9 @@
       const i = mockData.findIndex(p => p.id === id);
       if(i > -1) {
         mockData[i].status = 'Confirmado Manualmente';
-        showToast("Triagem Concluída", `${mockData[i].nome} foi aprovado(a).`);
-        loadData();
+        showToast("Triagem Concluída", `${mockData[i].nome} foi aprovado(a) localmente.`);
+        // Nota: Num sistema completo, você enviaria um "fetch" via POST para a planilha avisando que o status mudou.
+        renderTable(); // Apenas atualiza a tabela para refletir a mudança visual na tela
       }
     }
 
