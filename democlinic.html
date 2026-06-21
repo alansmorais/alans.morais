@@ -376,6 +376,7 @@
             <!-- Campos Ocultos preenchidos pelo JS -->
             <input type="hidden" name="data_agendamento" id="selectedDateInput">
             <input type="hidden" name="horario_agendamento" id="selectedHourInput">
+            <input type="hidden" name="data_iso" id="selectedDateIsoInput">
 
             <div class="selected-box">
               <span style="font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Horário Selecionado</span>
@@ -480,8 +481,14 @@
     const selectedSummary = document.getElementById('selectedSummary');
     const selectedDateInput = document.getElementById('selectedDateInput');
     const selectedHourInput = document.getElementById('selectedHourInput');
+    const selectedDateIsoInput = document.getElementById('selectedDateIsoInput');
 
-    function formatISO(date) { return date.toISOString().slice(0, 10); }
+    function formatISO(date) {
+      const ano = date.getFullYear();
+      const mes = String(date.getMonth() + 1).padStart(2, '0');
+      const dia = String(date.getDate()).padStart(2, '0');
+      return `${ano}-${mes}-${dia}`;
+    }
     function formatHuman(date) { return `${weekdayNames[date.getDay()]}, ${String(date.getDate()).padStart(2, '0')} ${monthNames[date.getMonth()]}`; }
 
     function generateDays(offset) {
@@ -532,12 +539,13 @@
       const txt = d ? formatHuman(d) : '';
       if(selectedDateInput) selectedDateInput.value = txt;
       if(selectedHourInput) selectedHourInput.value = state.selectedHour || '';
+      if(selectedDateIsoInput) selectedDateIsoInput.value = state.selectedDate || '';
       selectedSummary.textContent = (txt && state.selectedHour) ? `${txt} às ${state.selectedHour}` : (txt ? `${txt} • escolha horário` : 'Selecione data e hora');
     }
 
     const nextDaysBtn = document.getElementById('nextDays');
     if(nextDaysBtn) {
-      nextDaysBtn.onclick = () => { state.offset += 4; renderDates(); };
+      nextDaysBtn.onclick = () => { state.offset += 4; state.selectedDate = null; state.selectedHour = null; renderDates(); };
     }
     
     // ATIVA O CALENDÁRIO NA TELA
@@ -560,8 +568,10 @@
         btn.disabled = true;
 
         const formData = new FormData(form);
-        // Garante que o formato técnico vai para a Planilha para facilitar a integração do Calendário
-        formData.append('data_iso', state.selectedDate);
+        // Garante que o formato técnico e o texto visual vão corretos para a Planilha e para o Calendário
+        formData.set('data_iso', state.selectedDate);
+        formData.set('data_agendamento', selectedDateInput.value);
+        formData.set('horario_agendamento', selectedHourInput.value);
 
         try {
           const response = await fetch(scriptURL, { method: 'POST', body: formData });
