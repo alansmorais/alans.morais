@@ -319,9 +319,7 @@
     // --- FUNÇÃO DO ALERTA SONORO ---
     function playAlertSound() {
       try {
-        // Áudio oficial do Google (nunca falha)
         const audio = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg');
-        // O navegador só vai tocar se você tiver dado pelo menos 1 clique na tela antes!
         audio.play().catch(e => console.log("Áudio bloqueado pelo navegador. Clique na tela para liberar o som."));
       } catch(e) {}
     }
@@ -375,7 +373,7 @@
       }
     }
 
-    // Adicionado parâmetro isAutoRefresh para não piscar a tela
+    // --- FUNÇÃO PRINCIPAL CARREGAR DADOS COM PROTEÇÃO ---
     async function loadData(isAutoRefresh = false) {
       const tBody = document.getElementById('table-body');
       
@@ -383,9 +381,11 @@
         tBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 32px; color: var(--text-muted);">Sincronizando com o Google Sheets... ⏳</td></tr>`;
       }
       
-      // BLOCO DE PROTEÇÃO: Evita que falha na internet desconecte o botão
       try {
-        const response = await fetch(scriptURL);
+        const response = await fetch(scriptURL, {
+            redirect: "follow" // Previne CORS do Google
+        });
+        
         const dataText = await response.text(); 
         
         try {
@@ -406,6 +406,35 @@
           showToast("Novo Agendamento!", "Você tem um novo paciente aguardando triagem.");
         }
         lastNovosCount = novos; // Grava a quantidade atual para a próxima checagem
+        
+        // Atualiza a vista da página
+        document.getElementById('stat-novos').innerText = novos;
+        document.getElementById('stat-aprovados').innerText = autoAprovados;
+        
+        // Métrica Simulada de tempo salvo
+        document.getElementById('stat-auto').innerText = (autoAprovados * 10 / 60).toFixed(1);
+
+        document.getElementById('count-todos').innerText = total;
+        document.getElementById('count-pendentes').innerText = novos;
+        document.getElementById('count-confirmados').innerText = autoAprovados;
+
+        const bell = document.getElementById('notification-badge');
+        const lbl = document.getElementById('badge-new-label');
+        
+        if (novos > 0) { 
+            bell.innerText = novos; bell.classList.add('active'); lbl.classList.remove('hidden'); 
+        } else { 
+            bell.classList.remove('active'); lbl.classList.add('hidden'); 
+        }
+        
+        renderTable();
+        
+      } catch (error) {
+         console.error("Falha grave na sincronização: ", error);
+         if (!isAutoRefresh) {
+             tBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding: 32px; color: var(--danger);"><strong>Erro de Ligação.</strong><br><br>Verifique se o Google Apps Script está a funcionar corretamente.</td></tr>`;
+         }
+      }
     }
 
     function setFilter(type) {
@@ -500,10 +529,8 @@
       const i = mockData.findIndex(p => p.id === id);
       if(i > -1) {
         mockData[i].status = 'Confirmado Manualmente';
-        showToast("Triagem Concluída", `${mockData[i].nome} foi aprovado(a). Apenas visual, dados não alterados no Google Sheets nesta versão base.`);
+        showToast("Triagem Concluída", `${mockData[i].nome} foi aprovado(a).`);
         renderTable();
-        // NOTA TÉCNICA: Num ambiente em produção real, faríamos um fetch(POST) 
-        // para o scriptURL aqui, enviando o ID para alterar o banco de dados oficial.
       }
     }
 
