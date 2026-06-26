@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlanSM Contract Signature</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: Inter, Arial, sans-serif; background-color: #f8fafc; }
+    #signature-pad {
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      background-color: white;
+      cursor: crosshair;
+      touch-action: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen p-4 md:p-10 text-slate-800">
+  <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+    <div class="bg-slate-900 text-white p-6 md:p-8">
+      <div class="flex justify-between items-center gap-4 mb-2">
+        <h1 class="text-2xl font-bold">AlanSM Contract Signature</h1>
+        <span class="bg-blue-500/20 text-blue-300 text-xs font-bold px-3 py-1 rounded-full border border-blue-500/30">Pending</span>
+      </div>
+      <p class="text-slate-400 text-sm">Contract ID: <strong><?= contractId ?></strong></p>
+    </div>
+
+    <div class="p-6 md:p-8 border-b border-slate-100 bg-slate-50">
+      <h2 class="font-bold text-lg mb-4">Contract Summary</h2>
+      <div class="grid md:grid-cols-2 gap-4 text-sm">
+        <div><p class="text-slate-400 text-xs uppercase font-bold">Client</p><p><?= clientName ?></p></div>
+        <div><p class="text-slate-400 text-xs uppercase font-bold">Email</p><p><?= clientEmail ?></p></div>
+        <div><p class="text-slate-400 text-xs uppercase font-bold">Package</p><p><?= packageName ?></p></div>
+        <div><p class="text-slate-400 text-xs uppercase font-bold">Estimated Price</p><p><?= estimatedPrice ?></p></div>
+      </div>
+
+      <? if (contractDocUrl) { ?>
+        <a href="<?= contractDocUrl ?>" target="_blank" rel="noopener noreferrer" class="inline-flex mt-5 text-sm font-semibold text-blue-600 hover:underline">
+          Open contract document →
+        </a>
+      <? } ?>
+
+      <p class="text-xs text-slate-500 mt-5 leading-relaxed">
+        Please review the contract document before signing. By signing below, you confirm that you agree with the contract terms and authorize AlanSM Solutions to register this electronic signature.
+      </p>
+    </div>
+
+    <div class="p-6 md:p-8">
+      <h3 class="font-bold text-slate-800 mb-2">Electronic Signature</h3>
+      <p class="text-xs text-slate-500 mb-4">Draw your signature below.</p>
+
+      <form id="signature-form" onsubmit="submitSignature(event)">
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
+          <div>
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Full Name</label>
+            <input type="text" id="signer-name" required value="<?= clientName ?>" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Email</label>
+            <input type="email" id="signer-email" required value="<?= clientEmail ?>" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Signature</label>
+          <canvas id="signature-pad" class="w-full h-48"></canvas>
+          <div class="flex justify-end mt-2">
+            <button type="button" onclick="clearCanvas()" class="text-xs text-red-500 font-semibold hover:underline">Clear signature</button>
+          </div>
+        </div>
+
+        <label class="flex items-start gap-2 text-sm text-slate-600 mb-8 cursor-pointer">
+          <input type="checkbox" required class="mt-1 w-4 h-4 text-blue-600 rounded border-slate-300" />
+          <span>I confirm that this electronic signature represents my agreement to the contract terms.</span>
+        </label>
+
+        <button type="submit" id="submit-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+          <span>Sign Document</span>
+        </button>
+
+        <div id="status-message" class="text-center text-sm font-medium mt-4 hidden"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const SCRIPT_URL = <?!= JSON.stringify(webAppUrl) ?>;
+    const CONTRACT_ID = <?!= JSON.stringify(contractId) ?>;
+    const LEAD_ID = <?!= JSON.stringify(leadId) ?>;
+    const PACKAGE_NAME = <?!= JSON.stringify(packageName) ?>;
+    const ESTIMATED_PRICE = <?!= JSON.stringify(estimatedPrice) ?>;
+    const CONTRACT_DOC_URL = <?!= JSON.stringify(contractDocUrl) ?>;
+
+    const canvas = document.getElementById('signature-pad');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+
+    function resizeCanvas() {
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      canvas.width = canvas.offsetWidth * ratio;
+      canvas.height = canvas.offsetHeight * ratio;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = '#0f172a';
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function getPointerPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: clientX - rect.left, y: clientY - rect.top };
+    }
+
+    function startDrawing(e) {
+      isDrawing = true;
+      const pos = getPointerPos(e);
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+      e.preventDefault();
+    }
+
+    function draw(e) {
+      if (!isDrawing) return;
+      const pos = getPointerPos(e);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+      e.preventDefault();
+    }
+
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+    canvas.addEventListener('touchstart', startDrawing, { passive: false });
+    canvas.addEventListener('touchmove', draw, { passive: false });
+    canvas.addEventListener('touchend', stopDrawing);
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    function isCanvasBlank() {
+      const blank = document.createElement('canvas');
+      blank.width = canvas.width;
+      blank.height = canvas.height;
+      return canvas.toDataURL() === blank.toDataURL();
+    }
+
+    async function submitSignature(event) {
+      event.preventDefault();
+
+      if (isCanvasBlank()) {
+        alert('Please draw your signature before submitting.');
+        return;
+      }
+
+      const btn = document.getElementById('submit-btn');
+      const status = document.getElementById('status-message');
+
+      btn.disabled = true;
+      btn.innerHTML = 'Processing signature...';
+      status.classList.remove('hidden', 'text-green-600', 'text-red-600');
+      status.classList.add('text-slate-600');
+      status.innerHTML = 'Please wait...';
+
+      const payload = {
+        action: 'signContract',
+        contractId: CONTRACT_ID,
+        leadId: LEAD_ID,
+        clientName: document.getElementById('signer-name').value,
+        clientEmail: document.getElementById('signer-email').value,
+        packageName: PACKAGE_NAME,
+        estimatedPrice: ESTIMATED_PRICE,
+        contractDocUrl: CONTRACT_DOC_URL,
+        signatureData: canvas.toDataURL('image/png'),
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        source: window.location.href
+      };
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+
+        let result = {};
+        try { result = await response.json(); } catch (e) {}
+
+        if (result.status && result.status !== 'ok') {
+          throw new Error(result.message || 'Signature failed.');
+        }
+
+        status.classList.remove('text-slate-600', 'text-red-600');
+        status.classList.add('text-green-600');
+        status.innerHTML = '✅ Document signed successfully.';
+        btn.innerHTML = 'Document Signed';
+        document.getElementById('signature-form').reset();
+        clearCanvas();
+      } catch (error) {
+        status.classList.remove('text-slate-600', 'text-green-600');
+        status.classList.add('text-red-600');
+        status.innerHTML = '❌ Error: ' + error.message;
+        btn.disabled = false;
+        btn.innerHTML = 'Try Again';
+      }
+    }
+  </script>
+</body>
+</html>
