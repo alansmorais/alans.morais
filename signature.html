@@ -1,220 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AlanSM Contract Signature</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { font-family: Inter, Arial, sans-serif; background-color: #f8fafc; }
-    #signature-pad {
-      border: 2px dashed #cbd5e1;
-      border-radius: 12px;
-      background-color: white;
-      cursor: crosshair;
-      touch-action: none;
-    }
+    body{font-family:Inter,Arial,sans-serif;background:#f8fafc}#signature-pad{border:2px dashed #cbd5e1;border-radius:12px;background:white;cursor:crosshair;touch-action:none}.contract-scroll{max-height:560px;overflow-y:auto}@media print{.no-print{display:none!important}.contract-scroll{max-height:none;overflow:visible}body{background:white}}
   </style>
 </head>
 <body class="min-h-screen p-4 md:p-10 text-slate-800">
-  <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+  <div id="loadingBox" class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8"><h1 class="text-2xl font-bold text-slate-900 mb-2">Loading contract...</h1><p class="text-sm text-slate-500">Please wait while we prepare the secure signature page.</p></div>
+  <div id="errorBox" class="hidden max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 border border-red-100"><h1 class="text-2xl font-bold text-red-700 mb-2">Unable to load contract</h1><p id="errorText" class="text-sm text-slate-600"></p></div>
+  <div id="app" class="hidden max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
     <div class="bg-slate-900 text-white p-6 md:p-8">
-      <div class="flex justify-between items-center gap-4 mb-2">
-        <h1 class="text-2xl font-bold">AlanSM Contract Signature</h1>
-        <span class="bg-blue-500/20 text-blue-300 text-xs font-bold px-3 py-1 rounded-full border border-blue-500/30">Pending</span>
-      </div>
-      <p class="text-slate-400 text-sm">Contract ID: <strong><?= contractId ?></strong></p>
+      <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-2"><div><h1 class="text-2xl font-bold" data-i18n="pageTitle">AlanSM Contract Signature</h1><p class="text-slate-400 text-sm mt-1"><span data-i18n="contractIdLabel">Contract ID:</span> <strong id="contractIdDisplay"></strong></p></div><div class="flex flex-col items-start md:items-end gap-3 no-print"><span id="status-pill" class="bg-blue-500/20 text-blue-300 text-xs font-bold px-3 py-1 rounded-full border border-blue-500/30">Pending</span><div class="flex items-center gap-1 text-xs"><button type="button" onclick="setLang('en')" class="lang-btn px-2 py-1 rounded border border-slate-700 hover:bg-slate-800" data-lang-btn="en">EN</button><button type="button" onclick="setLang('pt')" class="lang-btn px-2 py-1 rounded border border-slate-700 hover:bg-slate-800" data-lang-btn="pt">PT-BR</button><button type="button" onclick="setLang('es')" class="lang-btn px-2 py-1 rounded border border-slate-700 hover:bg-slate-800" data-lang-btn="es">ES</button><button type="button" onclick="setLang('pl')" class="lang-btn px-2 py-1 rounded border border-slate-700 hover:bg-slate-800" data-lang-btn="pl">PL</button></div></div></div>
     </div>
-
     <div class="p-6 md:p-8 border-b border-slate-100 bg-slate-50">
-      <h2 class="font-bold text-lg mb-4">Contract Summary</h2>
-      <div class="grid md:grid-cols-2 gap-4 text-sm">
-        <div><p class="text-slate-400 text-xs uppercase font-bold">Client</p><p><?= clientName ?></p></div>
-        <div><p class="text-slate-400 text-xs uppercase font-bold">Email</p><p><?= clientEmail ?></p></div>
-        <div><p class="text-slate-400 text-xs uppercase font-bold">Package</p><p><?= packageName ?></p></div>
-        <div><p class="text-slate-400 text-xs uppercase font-bold">Estimated Price</p><p><?= estimatedPrice ?></p></div>
-      </div>
-
-      <? if (contractDocUrl) { ?>
-        <a href="<?= contractDocUrl ?>" target="_blank" rel="noopener noreferrer" class="inline-flex mt-5 text-sm font-semibold text-blue-600 hover:underline">
-          Open contract document →
-        </a>
-      <? } ?>
-
-      <p class="text-xs text-slate-500 mt-5 leading-relaxed">
-        Please review the contract document before signing. By signing below, you confirm that you agree with the contract terms and authorize AlanSM Solutions to register this electronic signature.
-      </p>
+      <h2 class="font-bold text-lg mb-4" data-i18n="agreementSummary">Agreement Summary</h2>
+      <div class="grid md:grid-cols-2 gap-4 text-sm mb-6"><div><p class="text-slate-400 text-xs uppercase font-bold" data-i18n="client">Client</p><p id="clientNameDisplay"></p></div><div><p class="text-slate-400 text-xs uppercase font-bold" data-i18n="email">Email</p><p id="clientEmailDisplay"></p></div><div><p class="text-slate-400 text-xs uppercase font-bold" data-i18n="package">Package</p><p id="packageDisplay"></p></div><div><p class="text-slate-400 text-xs uppercase font-bold" data-i18n="price">Estimated / Final Price</p><p id="priceDisplay"></p></div></div>
+      <div class="rounded-xl bg-blue-50 border border-blue-100 p-4 mb-5"><h3 class="font-bold text-slate-900 mb-2" data-i18n="docsCoveredTitle">Documents covered by this electronic signature</h3><p class="text-sm text-slate-700 leading-relaxed" data-i18n="docsCoveredText">By signing below, the Client confirms that they have read, understood, and accept both the Service Order / Order Form and the Master Service Agreement displayed on this page. This electronic signature represents the Client’s agreement to both documents.</p></div>
+      <section class="rounded-xl bg-white border border-slate-200 p-5 mb-5"><div class="flex items-center justify-between gap-4 mb-4"><h3 class="text-lg font-bold text-slate-900" data-i18n="doc1Title">Document 1 — Service Order / Order Form</h3><span class="text-[10px] uppercase font-bold tracking-wider bg-green-100 text-green-700 px-2 py-1 rounded" data-i18n="projectSpecific">Project Specific</span></div>
+        <div class="space-y-4 text-sm text-slate-700 leading-relaxed"><p><strong data-i18n="projectRef">Project Reference ID:</strong> <span id="leadIdDisplay"></span><br><strong data-i18n="contractIdLabel">Contract ID:</strong> <span id="contractIdDisplay2"></span><br><strong data-i18n="date">Date:</strong> <span id="dateDisplay"></span></p>
+        <div class="grid md:grid-cols-2 gap-4 bg-slate-50 border border-slate-200 rounded-lg p-4"><div><p class="text-xs uppercase font-bold text-slate-400" data-i18n="provider">Service Provider</p><p>Alan da Silva Morais / AlanSM Solutions<br>Email: kontakt@alansmsolutions.com<br><span data-i18n="providerLocation">Location: Kraków, Poland / Remote</span></p></div><div><p class="text-xs uppercase font-bold text-slate-400" data-i18n="client">Client</p><p><span data-i18n="clientLegalName">Client Legal Name:</span> <span id="legalNameDoc"></span><br><span data-i18n="businessName">Business Name:</span> <span id="businessNameDoc"></span><br><span data-i18n="clientEmail">Client Email:</span> <span id="emailDoc"></span><br><span data-i18n="taxId">Tax / ID:</span> <span id="taxDoc"></span></p></div></div>
+        <div class="grid md:grid-cols-2 gap-4 bg-slate-50 border border-slate-200 rounded-lg p-4"><div><p class="text-xs uppercase font-bold text-slate-400" data-i18n="selectedPackage">Selected Package</p><p id="packageDoc"></p></div><div><p class="text-xs uppercase font-bold text-slate-400" data-i18n="price">Price</p><p id="priceDoc"></p></div></div>
+        <div><h4 class="font-bold text-slate-900 mb-2" data-i18n="projectDescription">Project Description</h4><p data-i18n="projectDescriptionText">AlanSM Solutions will provide the project, services, deliverables, implementation work, support level, and technical scope previously discussed and confirmed between AlanSM Solutions and the Client.</p></div>
+        <div><h4 class="font-bold text-slate-900 mb-2" data-i18n="includedServices">Included Services</h4><ul class="list-disc pl-5 space-y-1"><li data-i18n="included1">Services and features agreed in the selected package and project communication.</li><li data-i18n="included2">Project setup, configuration, implementation, and testing within the agreed scope.</li><li data-i18n="included3">Basic launch or handover support unless agreed otherwise.</li><li data-i18n="included4">Reasonable communication and project coordination during implementation.</li></ul></div>
+        <div><h4 class="font-bold text-slate-900 mb-2" data-i18n="notIncluded">Not Included Unless Separately Agreed</h4><ul class="list-disc pl-5 space-y-1"><li data-i18n="notIncluded1">Paid third-party subscriptions, booking tools, domains, hosting, business email, payment processors, CRM licenses, or external software costs.</li><li data-i18n="notIncluded2">Advanced backend systems, custom databases, payment integration, complex automations, or major redesigns outside the agreed scope.</li><li data-i18n="notIncluded3">Additional languages, extra pages, large copywriting work, urgent delivery, or new features not listed in the agreed scope.</li></ul></div>
+        <div><h4 class="font-bold text-slate-900 mb-2" data-i18n="paymentDelivery">Payment and Delivery</h4><p data-i18n="paymentDeliveryText">Payment terms, delivery expectations, revisions, third-party costs, maintenance, and support are governed by the Master Service Agreement unless otherwise confirmed in writing.</p></div></div>
+      </section>
+      <section class="rounded-xl bg-white border border-slate-200 p-5 mb-5"><div class="flex items-center justify-between gap-4 mb-3"><h3 class="text-lg font-bold text-slate-900" data-i18n="doc2Title">Document 2 — Master Service Agreement</h3><span class="text-[10px] uppercase font-bold tracking-wider bg-slate-100 text-slate-500 px-2 py-1 rounded" data-i18n="generalTerms">General Terms</span></div>
+        <div class="contract-scroll border border-slate-200 rounded-lg bg-slate-50 p-4 text-xs text-slate-700 leading-relaxed space-y-4" id="msaBox"></div>
+      </section>
+      <p class="text-xs text-slate-500 mt-5 leading-relaxed" data-i18n="reviewBeforeSigning">Please review the Service Order / Order Form and the Master Service Agreement before signing. This electronic signature records the Client’s acceptance of both documents.</p>
     </div>
-
-    <div class="p-6 md:p-8">
-      <h3 class="font-bold text-slate-800 mb-2">Electronic Signature</h3>
-      <p class="text-xs text-slate-500 mb-4">Draw your signature below.</p>
-
-      <form id="signature-form" onsubmit="submitSignature(event)">
-        <div class="grid md:grid-cols-2 gap-4 mb-6">
-          <div>
-            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Full Name</label>
-            <input type="text" id="signer-name" required value="<?= clientName ?>" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Email</label>
-            <input type="email" id="signer-email" required value="<?= clientEmail ?>" class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" />
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Signature</label>
-          <canvas id="signature-pad" class="w-full h-48"></canvas>
-          <div class="flex justify-end mt-2">
-            <button type="button" onclick="clearCanvas()" class="text-xs text-red-500 font-semibold hover:underline">Clear signature</button>
-          </div>
-        </div>
-
-        <label class="flex items-start gap-2 text-sm text-slate-600 mb-8 cursor-pointer">
-          <input type="checkbox" required class="mt-1 w-4 h-4 text-blue-600 rounded border-slate-300" />
-          <span>I confirm that this electronic signature represents my agreement to the contract terms.</span>
-        </label>
-
-        <button type="submit" id="submit-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
-          <span>Sign Document</span>
-        </button>
-
-        <div id="status-message" class="text-center text-sm font-medium mt-4 hidden"></div>
-      </form>
+    <div class="p-6 md:p-8"><h3 class="font-bold text-slate-800 mb-2" data-i18n="identityTitle">Client Identity Confirmation</h3><p class="text-xs text-slate-500 mb-4" data-i18n="identityText">Please confirm the legal identity details used for this agreement.</p>
+      <div class="grid md:grid-cols-2 gap-4 mb-8"><div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="clientType">Client Type</label><select id="clientTypeInput" class="field w-full border border-slate-300 rounded-lg p-3 text-sm"><option value="" data-i18n="selectOption">Select...</option><option value="Business">Business</option><option value="Private Person">Private Person</option></select></div><div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="clientLegalName">Client Legal Name</label><input type="text" id="clientLegalNameInput" required class="field w-full border border-slate-300 rounded-lg p-3 text-sm"></div><div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="businessName">Business Name</label><input type="text" id="businessNameInput" class="field w-full border border-slate-300 rounded-lg p-3 text-sm"></div><div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="phone">Phone</label><input type="text" id="phoneInput" class="field w-full border border-slate-300 rounded-lg p-3 text-sm"></div><div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="taxIdType">Tax / ID Type</label><select id="taxIdTypeInput" class="field w-full border border-slate-300 rounded-lg p-3 text-sm"><option value="">Select...</option><option value="CNPJ">CNPJ — Brazil Business</option><option value="CPF">CPF — Brazil Private Person</option><option value="NIP">NIP — Poland Business</option><option value="PESEL">PESEL — Poland Private Person</option><option value="VAT ID">VAT ID</option><option value="Tax ID">Tax ID</option><option value="National ID">National ID</option><option value="Passport">Passport</option><option value="Other">Other</option></select></div><div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="taxIdNumber">Tax / ID Number</label><input type="text" id="taxIdNumberInput" class="field w-full border border-slate-300 rounded-lg p-3 text-sm"></div><div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="country">Country</label><input type="text" id="countryInput" class="field w-full border border-slate-300 rounded-lg p-3 text-sm"></div><div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="city">City</label><input type="text" id="cityInput" class="field w-full border border-slate-300 rounded-lg p-3 text-sm"></div><div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="address">Address</label><input type="text" id="addressInput" class="field w-full border border-slate-300 rounded-lg p-3 text-sm"></div><div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="postalCode">Postal Code</label><input type="text" id="postalCodeInput" class="field w-full border border-slate-300 rounded-lg p-3 text-sm"></div></div>
+      <h3 class="font-bold text-slate-800 mb-2" data-i18n="electronicSignature">Electronic Signature</h3><p class="text-xs text-slate-500 mb-4" data-i18n="drawSignature">Draw your signature below.</p><form id="signature-form" onsubmit="submitSignature(event)"><div class="grid md:grid-cols-2 gap-4 mb-6"><div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="fullName">Full Name</label><input type="text" id="signer-name" required class="w-full border border-slate-300 rounded-lg p-3 text-sm"></div><div><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1" data-i18n="email">Email</label><input type="email" id="signer-email" required class="w-full border border-slate-300 rounded-lg p-3 text-sm"></div></div><div class="mb-4"><label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2" data-i18n="signature">Signature</label><canvas id="signature-pad" class="w-full h-48"></canvas><div class="flex justify-end mt-2"><button type="button" onclick="clearCanvas()" class="text-xs text-red-500 font-semibold hover:underline" data-i18n="clearSignature">Clear signature</button></div></div><label class="flex items-start gap-2 text-sm text-slate-600 mb-8 cursor-pointer"><input type="checkbox" required class="mt-1 w-4 h-4 text-blue-600 rounded border-slate-300"><span data-i18n="checkboxText">I confirm that I have read and accept the Service Order / Order Form and the Master Service Agreement displayed on this page, and that this electronic signature represents my agreement to both documents.</span></label><button type="submit" id="submit-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2"><span data-i18n="signDocuments">Sign Documents</span></button><div id="status-message" class="text-center text-sm font-medium mt-4 hidden"></div></form>
     </div>
   </div>
-
-  <script>
-    const SCRIPT_URL = <?!= JSON.stringify(webAppUrl) ?>;
-    const CONTRACT_ID = <?!= JSON.stringify(contractId) ?>;
-    const LEAD_ID = <?!= JSON.stringify(leadId) ?>;
-    const PACKAGE_NAME = <?!= JSON.stringify(packageName) ?>;
-    const ESTIMATED_PRICE = <?!= JSON.stringify(estimatedPrice) ?>;
-    const CONTRACT_DOC_URL = <?!= JSON.stringify(contractDocUrl) ?>;
-
-    const canvas = document.getElementById('signature-pad');
-    const ctx = canvas.getContext('2d');
-    let isDrawing = false;
-
-    function resizeCanvas() {
-      const ratio = Math.max(window.devicePixelRatio || 1, 1);
-      canvas.width = canvas.offsetWidth * ratio;
-      canvas.height = canvas.offsetHeight * ratio;
-      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-      ctx.lineWidth = 2.5;
-      ctx.lineCap = 'round';
-      ctx.strokeStyle = '#0f172a';
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    function getPointerPos(e) {
-      const rect = canvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      return { x: clientX - rect.left, y: clientY - rect.top };
-    }
-
-    function startDrawing(e) {
-      isDrawing = true;
-      const pos = getPointerPos(e);
-      ctx.beginPath();
-      ctx.moveTo(pos.x, pos.y);
-      e.preventDefault();
-    }
-
-    function draw(e) {
-      if (!isDrawing) return;
-      const pos = getPointerPos(e);
-      ctx.lineTo(pos.x, pos.y);
-      ctx.stroke();
-      e.preventDefault();
-    }
-
-    function stopDrawing() {
-      isDrawing = false;
-    }
-
-    canvas.addEventListener('mousedown', startDrawing);
-    canvas.addEventListener('mousemove', draw);
-    canvas.addEventListener('mouseup', stopDrawing);
-    canvas.addEventListener('mouseout', stopDrawing);
-    canvas.addEventListener('touchstart', startDrawing, { passive: false });
-    canvas.addEventListener('touchmove', draw, { passive: false });
-    canvas.addEventListener('touchend', stopDrawing);
-
-    function clearCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    function isCanvasBlank() {
-      const blank = document.createElement('canvas');
-      blank.width = canvas.width;
-      blank.height = canvas.height;
-      return canvas.toDataURL() === blank.toDataURL();
-    }
-
-    async function submitSignature(event) {
-      event.preventDefault();
-
-      if (isCanvasBlank()) {
-        alert('Please draw your signature before submitting.');
-        return;
-      }
-
-      const btn = document.getElementById('submit-btn');
-      const status = document.getElementById('status-message');
-
-      btn.disabled = true;
-      btn.innerHTML = 'Processing signature...';
-      status.classList.remove('hidden', 'text-green-600', 'text-red-600');
-      status.classList.add('text-slate-600');
-      status.innerHTML = 'Please wait...';
-
-      const payload = {
-        action: 'signContract',
-        contractId: CONTRACT_ID,
-        leadId: LEAD_ID,
-        clientName: document.getElementById('signer-name').value,
-        clientEmail: document.getElementById('signer-email').value,
-        packageName: PACKAGE_NAME,
-        estimatedPrice: ESTIMATED_PRICE,
-        contractDocUrl: CONTRACT_DOC_URL,
-        signatureData: canvas.toDataURL('image/png'),
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent,
-        source: window.location.href
-      };
-
-      try {
-        const response = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
-        });
-
-        let result = {};
-        try { result = await response.json(); } catch (e) {}
-
-        if (result.status && result.status !== 'ok') {
-          throw new Error(result.message || 'Signature failed.');
-        }
-
-        status.classList.remove('text-slate-600', 'text-red-600');
-        status.classList.add('text-green-600');
-        status.innerHTML = '✅ Document signed successfully.';
-        btn.innerHTML = 'Document Signed';
-        document.getElementById('signature-form').reset();
-        clearCanvas();
-      } catch (error) {
-        status.classList.remove('text-slate-600', 'text-green-600');
-        status.classList.add('text-red-600');
-        status.innerHTML = '❌ Error: ' + error.message;
-        btn.disabled = false;
-        btn.innerHTML = 'Try Again';
-      }
-    }
-  </script>
+<script>
+const BACKEND_URL="https://script.google.com/macros/s/AKfycbzEHeYQm4gsQa1s_KhCEodbpXproeYESNoe8uhjJaKRQ0ab3-9drjx2yGpXrWZyfkTA/exec";
+const base={pageTitle:"AlanSM Contract Signature",contractIdLabel:"Contract ID:",agreementSummary:"Agreement Summary",client:"Client",email:"Email",package:"Package",price:"Estimated / Final Price",docsCoveredTitle:"Documents covered by this electronic signature",docsCoveredText:"By signing below, the Client confirms that they have read, understood, and accept both the Service Order / Order Form and the Master Service Agreement displayed on this page. This electronic signature represents the Client’s agreement to both documents.",doc1Title:"Document 1 — Service Order / Order Form",projectSpecific:"Project Specific",projectRef:"Project Reference ID:",date:"Date:",provider:"Service Provider:",providerLocation:"Location: Kraków, Poland / Remote",clientLegalName:"Client Legal Name:",businessName:"Business Name:",clientEmail:"Client Email:",taxId:"Tax / ID:",selectedPackage:"Selected Package:",projectDescription:"Project Description",projectDescriptionText:"AlanSM Solutions will provide the project, services, deliverables, implementation work, support level, and technical scope previously discussed and confirmed between AlanSM Solutions and the Client.",includedServices:"Included Services",included1:"Services and features agreed in the selected package and project communication.",included2:"Project setup, configuration, implementation, and testing within the agreed scope.",included3:"Basic launch or handover support unless agreed otherwise.",included4:"Reasonable communication and project coordination during implementation.",notIncluded:"Not Included Unless Separately Agreed",notIncluded1:"Paid third-party subscriptions, booking tools, domains, hosting, business email, payment processors, CRM licenses, or external software costs.",notIncluded2:"Advanced backend systems, custom databases, payment integration, complex automations, or major redesigns outside the agreed scope.",notIncluded3:"Additional languages, extra pages, large copywriting work, urgent delivery, or new features not listed in the agreed scope.",paymentDelivery:"Payment and Delivery",paymentDeliveryText:"Payment terms, delivery expectations, revisions, third-party costs, maintenance, and support are governed by the Master Service Agreement unless otherwise confirmed in writing.",doc2Title:"Document 2 — Master Service Agreement",generalTerms:"General Terms",msaTitle:"MASTER SERVICE AGREEMENT",msaIntro:"This Master Service Agreement (“Agreement”) is entered into between:",parties:"Together referred to as the “Parties”.",identityTitle:"Client Identity Confirmation",identityText:"Please confirm the legal identity details used for this agreement.",clientType:"Client Type",selectOption:"Select...",phone:"Phone",taxIdType:"Tax / ID Type",taxIdNumber:"Tax / ID Number",country:"Country",city:"City",address:"Address",postalCode:"Postal Code",electronicSignature:"Electronic Signature",drawSignature:"Draw your signature below.",fullName:"Full Name",signature:"Signature",clearSignature:"Clear signature",checkboxText:"I confirm that I have read and accept the Service Order / Order Form and the Master Service Agreement displayed on this page, and that this electronic signature represents my agreement to both documents.",signDocuments:"Sign Documents",processing:"Processing signature. Please do not close this page.",signedSuccess:"✅ Documents signed successfully.",alreadySigned:"This contract has already been signed.",signatureRequired:"Please draw your signature before submitting.",requiredFields:"Please complete your full name, email, and legal name before signing.",reviewBeforeSigning:"Please review the Service Order / Order Form and the Master Service Agreement before signing. This electronic signature records the Client’s acceptance of both documents."};
+const translations={en:base,pt:{...base,pageTitle:"Assinatura de Contrato AlanSM",agreementSummary:"Resumo do Acordo",client:"Cliente",email:"E-mail",package:"Pacote",price:"Preço estimado / final",docsCoveredTitle:"Documentos cobertos por esta assinatura eletrônica",doc1Title:"Documento 1 — Ordem de Serviço / Formulário de Pedido",doc2Title:"Documento 2 — Contrato Master de Prestação de Serviços",identityTitle:"Confirmação de Identidade do Cliente",signDocuments:"Assinar Documentos",signedSuccess:"✅ Documentos assinados com sucesso."},es:{...base,pageTitle:"Firma de Contrato AlanSM",agreementSummary:"Resumen del Acuerdo",client:"Cliente",email:"Correo electrónico",package:"Paquete",price:"Precio estimado / final",docsCoveredTitle:"Documentos cubiertos por esta firma electrónica",doc1Title:"Documento 1 — Orden de Servicio / Formulario de Pedido",doc2Title:"Documento 2 — Acuerdo Marco de Servicios",identityTitle:"Confirmación de Identidad del Cliente",signDocuments:"Firmar Documentos",signedSuccess:"✅ Documentos firmados correctamente."},pl:{...base,pageTitle:"Podpis umowy AlanSM",agreementSummary:"Podsumowanie umowy",client:"Klient",email:"E-mail",package:"Pakiet",price:"Cena szacunkowa / końcowa",docsCoveredTitle:"Dokumenty objęte tym podpisem elektronicznym",doc1Title:"Dokument 1 — Zamówienie / Formularz Zamówienia",doc2Title:"Dokument 2 — Ramowa Umowa Świadczenia Usług",identityTitle:"Potwierdzenie danych Klienta",signDocuments:"Podpisz dokumenty",signedSuccess:"✅ Dokumenty zostały podpisane."}};
+const msaSections=["1. Purpose","2. Services","3. Client Responsibilities","4. Fees and Payment","5. Discount Terms","6. Scope Changes","7. Revisions","8. Third-Party Tools and Subscriptions","9. Domain, Hosting, and Email","10. Delivery and Timelines","11. Client Approval and Launch","12. Post-Launch Support","13. Monthly Services","14. Intellectual Property","15. Portfolio Rights","16. Confidentiality","17. Data Protection","18. Login Credentials and Access","19. No Guarantee of Business Results","20. Limitation of Liability","21. Cancellation and Termination","22. Governing Law","23. Acceptance"];
+const msaText={"1. Purpose":"This Agreement sets out the general terms under which AlanSM Solutions provides website development, booking system integration, automation, CRM, data workflow, consulting, and related technical services to the Client. The specific project is described in the Service Order / Order Form above.","2. Services":"AlanSM Solutions may provide business website design and development, landing pages, booking system integration, contact forms, lead capture, SEO setup, hosting guidance, domain connection, workflow automation, CRM or Salesforce-related consulting, reporting, spreadsheet automation, technical operations support, monthly website or automation maintenance, and process improvement. The exact services are limited to the agreed package and project scope.","3. Client Responsibilities":"The Client agrees to provide accurate business information, logo, images, text, service descriptions, pricing, contact details, required account access, timely feedback and approvals, legal permission to use all supplied materials, and confirmation that shared data may be used for the project. Delays in providing required information may delay project delivery.","4. Fees and Payment":"Unless otherwise agreed in writing, setup or project fees may require a deposit before work begins, remaining balances are due before final launch or handover, monthly services are billed in advance, third-party costs are billed separately unless clearly included, and late payment may pause work, support, or delivery. AlanSM Solutions may withhold final files, deployment, or handover until outstanding invoices are paid.","5. Discount Terms":"Any launch discount, promotional discount, or limited-slot offer is valid only if expressly stated in this Agreement or related Order Form. Submitting a form does not reserve or guarantee a discount. A discount is only confirmed after scope review and signed acceptance while discount slots remain available.","6. Scope Changes":"Any work outside the agreed scope may require an additional quote. Scope changes may include extra pages, additional languages, custom copywriting, advanced design changes, payment integration, WhatsApp automation, CRM configuration, custom backend development, business email setup, complex forms or databases, and urgent delivery requests. AlanSM Solutions will inform the Client if a requested change affects price or timeline.","7. Revisions":"The number of included revisions will be stated in the project scope or Order Form. Unless otherwise stated, a revision means a reasonable adjustment to existing agreed work, not a full redesign, new concept, new feature, or major scope change. Additional revisions may be charged separately.","8. Third-Party Tools and Subscriptions":"The Client is responsible for third-party tools unless clearly stated otherwise. Third-party tools may include domain registration, paid booking systems, business email subscriptions, CRM platforms, Salesforce licenses, payment processors, form providers, analytics tools, hosting providers, automation platforms, stock images, fonts, or plugins. AlanSM Solutions is not responsible for outages, pricing changes, limitations, account suspensions, or failures caused by third-party services.","9. Domain, Hosting, and Email":"If GitHub Pages or similar static hosting is used, AlanSM Solutions may help configure deployment, HTTPS, and domain connection. The Client remains responsible for domain ownership, domain renewal, registrar access, email service subscriptions, and maintaining third-party accounts.","10. Delivery and Timelines":"Estimated delivery timelines depend on project scope, client responsiveness, availability of materials, third-party access, revision requests, and technical complexity. AlanSM Solutions will make reasonable efforts to meet agreed timelines, but timelines may change due to Client delay, third-party issues, technical limitations, or scope changes.","11. Client Approval and Launch":"Before launch or final delivery, the Client may be asked to review and approve the work. Once the Client approves launch or delivery, the project is considered delivered, except for any included post-launch support.","12. Post-Launch Support":"Any included post-launch support is limited to the agreed period. Post-launch support may include fixing issues caused by original implementation, minor text or link corrections, checking form or booking links, and basic deployment support. It does not include new features, redesigns, new pages, marketing campaigns, or third-party outages unless agreed separately.","13. Monthly Services":"Monthly support, care plans, or Tech Ops services may include small content updates, form monitoring, booking link checks, minor improvements, analytics review, automation maintenance, and technical troubleshooting. The exact monthly scope is defined separately.","14. Intellectual Property":"Unless otherwise agreed, AlanSM Solutions retains ownership of pre-existing tools, methods, frameworks, templates, snippets, know-how, and internal processes. The Client owns final custom content, text, and assets supplied by the Client. After full payment, the Client receives the right to use the final delivered website or project output for its business.","15. Portfolio Rights":"Unless the Client requests otherwise in writing, AlanSM Solutions may reference the completed project in its portfolio, website, proposals, or social media. This may include client business name, project description, screenshots, and general project outcomes. Confidential information will not be disclosed.","16. Confidentiality":"Each Party agrees to keep confidential information private and not disclose it to third parties except when necessary to perform the project, comply with law, or use approved service providers. Confidential information may include business processes, customer data, internal documents, pricing, credentials, technical architecture, CRM information, and automation workflows.","17. Data Protection":"Where personal data is processed, each Party agrees to comply with applicable data protection laws. If AlanSM Solutions processes personal data on behalf of the Client, a separate Data Processing Agreement or data-processing clause may be required. The Client is responsible for ensuring it has the legal right to provide personal data, customer records, CRM data, or business data to AlanSM Solutions.","18. Login Credentials and Access":"The Client should use secure methods to share account access. Where possible, the Client should provide temporary, limited, or role-based access rather than sharing personal passwords. AlanSM Solutions is not responsible for account security issues caused by weak passwords, shared credentials, missing two-factor authentication, or unauthorized access outside AlanSM Solutions’ control.","19. No Guarantee of Business Results":"AlanSM Solutions provides technical, design, consulting, and automation services. AlanSM Solutions does not guarantee specific revenue increases, search engine ranking, advertising results, booking volume, lead volume, sales outcomes, platform approval, or third-party performance.","20. Limitation of Liability":"To the maximum extent permitted by applicable law, AlanSM Solutions is not liable for indirect, incidental, special, consequential, or loss-of-profit damages. AlanSM Solutions’ total liability for a project is limited to the amount paid by the Client for that specific project during the three months before the claim, unless applicable law requires otherwise.","21. Cancellation and Termination":"Either Party may terminate a project if the other Party materially breaches this Agreement and does not correct the breach within a reasonable period after written notice. If the Client cancels after work has started, amounts paid may be non-refundable to the extent they cover work already performed, planning, reserved time, third-party costs, or delivered materials. AlanSM Solutions may suspend or terminate services for non-payment, abusive conduct, unlawful requests, or failure to provide required access or materials.","22. Governing Law":"This Agreement is governed by the laws of Poland, unless otherwise agreed in writing. The Parties will first attempt to resolve disputes through good-faith negotiation before pursuing formal legal remedies.","23. Acceptance":"This Agreement may be accepted by physical signature, electronic signature, email confirmation, payment of invoice, or other written approval. By signing below, the Client accepts this Master Service Agreement and the Service Order / Order Form displayed above."};
+const state={data:null,lang:'en'};function t(k){return(translations[state.lang]&&translations[state.lang][k])||translations.en[k]||k}function p(){return new URLSearchParams(location.search)}function showError(m){loadingBox.classList.add('hidden');app.classList.add('hidden');errorText.textContent=m;errorBox.classList.remove('hidden')}function jsonp(action,params){return new Promise((resolve,reject)=>{const cb='cb_'+Date.now()+'_'+Math.floor(Math.random()*1e5);const u=new URL(BACKEND_URL);u.searchParams.set('action',action);Object.keys(params||{}).forEach(k=>u.searchParams.set(k,params[k]||''));u.searchParams.set('callback',cb);const s=document.createElement('script');const to=setTimeout(()=>{clean();reject(new Error('Request timed out.'))},20000);function clean(){clearTimeout(to);delete window[cb];s.remove()}window[cb]=r=>{clean();resolve(r)};s.onerror=()=>{clean();reject(new Error('Network error.'))};s.src=u;document.body.appendChild(s)})}function setText(id,v){const e=document.getElementById(id);if(e)e.textContent=v||'—'}function setLang(l){state.lang=translations[l]?l:'en';const u=new URL(location.href);u.searchParams.set('lang',state.lang);history.replaceState({},'',u);applyTranslations();renderMsa()}function applyTranslations(){document.documentElement.lang=state.lang==='pt'?'pt-BR':state.lang;document.querySelectorAll('[data-i18n]').forEach(e=>{const k=e.getAttribute('data-i18n');if(t(k))e.textContent=t(k)});document.querySelectorAll('.lang-btn').forEach(b=>{const a=b.getAttribute('data-lang-btn')===state.lang;b.classList.toggle('bg-blue-600',a);b.classList.toggle('text-white',a);b.classList.toggle('border-blue-500',a)})}function today(){try{return new Date().toLocaleDateString(state.lang==='pt'?'pt-BR':state.lang)}catch(e){return new Date().toLocaleDateString()}}function field(id){return document.getElementById(id).value.trim()}function syncIdentity(){const legal=field('clientLegalNameInput')||state.data?.clientLegalName||state.data?.clientName||'';const biz=field('businessNameInput')||state.data?.businessName||'';const email=field('signer-email')||state.data?.clientEmail||'';const tax=[field('taxIdTypeInput')||state.data?.taxIdType||'',field('taxIdNumberInput')||state.data?.taxIdNumber||''].filter(Boolean).join(': ');['legalNameDoc','legalNameMsa'].forEach(id=>setText(id,legal));['businessNameDoc','businessNameMsa'].forEach(id=>setText(id,biz));['emailDoc','emailMsa'].forEach(id=>setText(id,email));['taxDoc','taxMsa'].forEach(id=>setText(id,tax))}function renderMsa(){if(!state.data)return;let intro=`<section><h4 class="font-bold text-slate-900 mb-1">${t('msaTitle')}</h4><p><strong>${t('projectRef')}</strong> ${state.data.leadId}<br><strong>${t('date')}</strong> ${today()}</p><p>${t('msaIntro')}</p><p><strong>${t('provider')}</strong><br>Alan da Silva Morais / AlanSM Solutions<br>Email: kontakt@alansmsolutions.com<br>${t('providerLocation')}</p><p><strong>${t('client')}</strong><br>${t('clientLegalName')} <span id="legalNameMsa"></span><br>${t('businessName')} <span id="businessNameMsa"></span><br>${t('clientEmail')} <span id="emailMsa"></span><br>${t('taxId')} <span id="taxMsa"></span></p><p>${t('parties')}</p></section>`;let sections=msaSections.map(s=>`<section><h4 class="font-bold text-slate-900 mb-1">${s}</h4><p>${msaText[s]}</p></section>`).join('');msaBox.innerHTML=intro+sections;syncIdentity()}function fill(d){state.data=d;['contractIdDisplay','contractIdDisplay2'].forEach(id=>setText(id,d.contractId));['leadIdDisplay','leadIdMsa'].forEach(id=>setText(id,d.leadId));setText('dateDisplay',today());setText('dateMsa',today());setText('clientNameDisplay',d.clientName);setText('clientEmailDisplay',d.clientEmail);setText('packageDisplay',d.packageName);setText('priceDisplay',d.estimatedPrice);setText('packageDoc',d.packageName);setText('priceDoc',d.estimatedPrice);document.getElementById('signer-name').value=d.clientName||'';document.getElementById('signer-email').value=d.clientEmail||'';clientTypeInput.value=d.clientType||'';clientLegalNameInput.value=d.clientLegalName||d.clientName||'';businessNameInput.value=d.businessName||'';taxIdTypeInput.value=d.taxIdType||'';taxIdNumberInput.value=d.taxIdNumber||'';countryInput.value=d.country||'';addressInput.value=d.address||'';cityInput.value=d.city||'';postalCodeInput.value=d.postalCode||'';phoneInput.value=d.phone||'';document.querySelectorAll('.field,#signer-email').forEach(e=>e.addEventListener('input',syncIdentity));renderMsa();if(d.alreadySigned){statusPillSigned();submitBtn.disabled=true;submitBtn.textContent=t('alreadySigned');setStatus(t('alreadySigned'),'success')}}function statusPillSigned(){status-pill.textContent='Signed'}
+function setStatus(m,type){const s=document.getElementById('status-message');s.classList.remove('hidden','text-red-600','text-green-600','text-slate-600');s.classList.add(type==='success'?'text-green-600':type==='error'?'text-red-600':'text-slate-600');s.textContent=m}async function load(){const q=p();state.lang=translations[q.get('lang')]?q.get('lang'):'en';applyTranslations();const leadId=q.get('leadId')||'',contractId=q.get('contractId')||'';if(!leadId||!contractId){showError('Missing leadId or contractId in the signature URL.');return}try{const r=await jsonp('getSignatureData',{leadId,contractId,lang:state.lang});if(!r||r.status!=='ok')throw new Error(r?.message||'Unable to load contract data.');loadingBox.classList.add('hidden');app.classList.remove('hidden');fill(r);resizeCanvas()}catch(e){showError(e.message)}}
+const canvas=document.getElementById('signature-pad'),ctx=canvas.getContext('2d');let isDrawing=false;function resizeCanvas(){const ratio=Math.max(devicePixelRatio||1,1),rect=canvas.getBoundingClientRect();canvas.width=rect.width*ratio;canvas.height=rect.height*ratio;ctx.setTransform(ratio,0,0,ratio,0,0);ctx.lineWidth=2.5;ctx.lineCap='round';ctx.strokeStyle='#0f172a'}addEventListener('resize',resizeCanvas);function pos(e){const r=canvas.getBoundingClientRect(),x=e.touches?e.touches[0].clientX:e.clientX,y=e.touches?e.touches[0].clientY:e.clientY;return{x:x-r.left,y:y-r.top}}function start(e){isDrawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);e.preventDefault()}function draw(e){if(!isDrawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();e.preventDefault()}function stop(){isDrawing=false}canvas.addEventListener('mousedown',start);canvas.addEventListener('mousemove',draw);canvas.addEventListener('mouseup',stop);canvas.addEventListener('mouseout',stop);canvas.addEventListener('touchstart',start,{passive:false});canvas.addEventListener('touchmove',draw,{passive:false});canvas.addEventListener('touchend',stop);function clearCanvas(){ctx.clearRect(0,0,canvas.width,canvas.height)}function isCanvasBlank(){const b=new Uint32Array(ctx.getImageData(0,0,canvas.width,canvas.height).data.buffer);return!b.some(c=>c!==0)}async function waitSigned(){for(let i=0;i<8;i++){await new Promise(r=>setTimeout(r,1500));try{const r=await jsonp('checkSignatureStatus',{leadId:state.data.leadId,contractId:state.data.contractId});if(r&&r.status==='ok'&&r.signed)return true}catch(e){}}return false}async function submitSignature(e){e.preventDefault();if(!state.data)return;const signerName=field('signer-name'),signerEmail=field('signer-email'),legal=field('clientLegalNameInput');if(!signerName||!signerEmail||!legal){alert(t('requiredFields'));return}if(isCanvasBlank()){alert(t('signatureRequired'));return}submitBtn.disabled=true;submitBtn.textContent=t('processing');setStatus(t('processing'),'info');const payload={action:'signContract',leadId:state.data.leadId,contractId:state.data.contractId,clientName:signerName,clientEmail:signerEmail,phone:field('phoneInput'),clientType:field('clientTypeInput'),clientLegalName:legal,businessName:field('businessNameInput'),taxIdType:field('taxIdTypeInput'),taxIdNumber:field('taxIdNumberInput'),country:field('countryInput'),address:field('addressInput'),city:field('cityInput'),postalCode:field('postalCodeInput'),packageName:state.data.packageName,estimatedPrice:state.data.estimatedPrice,signatureLanguage:state.lang,signatureData:canvas.toDataURL('image/png'),timestamp:new Date().toISOString(),userAgent:navigator.userAgent,source:location.href};try{await fetch(BACKEND_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});if(!await waitSigned())throw new Error('Signature was submitted, but confirmation could not be verified yet. Please refresh in a few seconds or contact AlanSM Solutions.');document.getElementById('status-pill').textContent='Signed';document.getElementById('status-pill').className='bg-green-500/20 text-green-300 text-xs font-bold px-3 py-1 rounded-full border border-green-500/30';submitBtn.textContent=t('signedSuccess');setStatus(t('signedSuccess'),'success');clearCanvas()}catch(err){setStatus('❌ '+err.message,'error');submitBtn.disabled=false;submitBtn.textContent=t('signDocuments')}}load();
+</script>
 </body>
 </html>
