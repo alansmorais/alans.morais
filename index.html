@@ -373,7 +373,7 @@
                         <p id="discountCounterText" class="text-xs text-slate-300">Checking availability...</p>
                     </div>
                     <p class="text-xs text-slate-400 mb-4">Optional care plan: <br><span data-price-display="199">199 PLN</span> / mo</p>
-                    <button type="button" onclick="openContactForm('light_booking', '1490')" class="w-full bg-green-600 hover:bg-green-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Estimate My Project</button>
+                    <button type="button" onclick="openContactForm('light_booking', '1490')" class="w-full bg-green-600 hover:bg-green-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Request Project Review</button>
                 </div>
             </div>
 
@@ -459,6 +459,41 @@
                     <button type="button" onclick="openContactForm('six_month', '1150')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Select Package</button>
                 </div>
             </div>
+
+            <div class="mt-10 bg-slate-900/70 border border-slate-800 rounded-xl p-6 md:p-8">
+                <div class="text-center mb-6">
+                    <p class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-2">Pricing Summary</p>
+                    <h3 class="text-xl md:text-2xl font-bold text-slate-100">Clear starting points before the final quote</h3>
+                    <p class="text-slate-400 text-sm mt-2 max-w-2xl mx-auto">Final pricing is confirmed after a short scope review, but these ranges help align expectations before we start.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-slate-950 border border-slate-800 rounded-lg p-5 text-center">
+                        <p class="text-xs uppercase tracking-wider text-green-500 font-bold mb-2">Light Booking Website</p>
+                        <p class="text-2xl font-bold text-slate-100" data-price-display="1490">1,490 PLN</p>
+                        <p class="text-xs text-slate-500 mt-1">pilot setup</p>
+                        <p class="text-xs text-slate-400 mt-3">Optional care plan: <span data-price-display="199">199 PLN</span> / mo</p>
+                    </div>
+
+                    <div class="bg-slate-950 border border-slate-800 rounded-lg p-5 text-center">
+                        <p class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-2">DeliveryHub Pilot</p>
+                        <p class="text-2xl font-bold text-slate-100" data-price-range="1500,2500">1,500–2,500 PLN</p>
+                        <p class="text-xs text-slate-500 mt-1">setup range</p>
+                        <p class="text-xs text-slate-400 mt-3">Monthly pilot: <span data-price-range="299,499">299–499 PLN</span> / mo</p>
+                    </div>
+
+                    <div class="bg-slate-950 border border-slate-800 rounded-lg p-5 text-center">
+                        <p class="text-xs uppercase tracking-wider text-slate-400 font-bold mb-2">Tech Ops Support</p>
+                        <p class="text-2xl font-bold text-slate-100"><span data-price-display="850">850 PLN</span>–<span data-price-display="1400">1,400 PLN</span></p>
+                        <p class="text-xs text-slate-500 mt-1">per month, depending on contract length</p>
+                        <p class="text-xs text-slate-400 mt-3">3, 6, or 12-month support options.</p>
+                    </div>
+                </div>
+
+                <p class="text-[11px] text-slate-500 leading-relaxed mt-5 text-center">
+                    Domains, paid booking tools, hosting, business email, payment processors, external subscriptions, and third-party platform costs are billed separately unless explicitly included in the written agreement.
+                </p>
+            </div>
         </div>
     </section>
 
@@ -529,6 +564,15 @@
             <form action="https://formsubmit.co/ajax/Contact@alansmsolutions.com" method="POST" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-3">
                 <input type="hidden" name="_subject" id="formSubject" />
                 <input type="hidden" name="_captcha" value="false" />
+                <input
+                    id="formWebsite"
+                    type="text"
+                    name="website"
+                    tabindex="-1"
+                    autocomplete="off"
+                    aria-hidden="true"
+                    style="position:absolute;left:-9999px;opacity:0;height:0;width:0;"
+                />
                 <div>
                     <label for="formName" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Name</label>
                     <input id="formName" type="text" name="name" autocomplete="name" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
@@ -614,6 +658,7 @@
     let currentCurrency = 'USD';
     let previouslyFocusedElement = null;
     let currentPackageInfo = { packageName: '', price: '' };
+    let contactFormStartedAt = Date.now();
 
     const exchangeRates = { PLN: 1, BRL: 1.38, EUR: 0.23, USD: 0.25 };
 
@@ -652,30 +697,7 @@
                 el.textContent = `${formatPrice(lowPln)}–${formatPrice(highPln)}`;
             }
         });
-
-        // Estimator options formatting
-        const optIds = ['estimateDomain', 'estimateBooking', 'estimateLanguages', 'estimateContent'];
-        optIds.forEach(id => {
-            const select = document.getElementById(id);
-            if (select) {
-                Array.from(select.options).forEach(opt => {
-                    const val = parseInt(opt.getAttribute('data-price') || opt.value, 10);
-                    // Reset to base text to prevent stacking (+ $100) (+ $100)
-                    if (!opt.hasAttribute('data-base-text')) {
-                        opt.setAttribute('data-base-text', opt.textContent.split(' (+')[0]);
-                    }
-                    let text = opt.getAttribute('data-base-text');
-                    
-                    if (val > 0) {
-                        text += ` (+ ${formatPrice(val)})`;
-                    }
-                    opt.textContent = text;
-                });
-            }
-        });
-
-        updateEstimate();
-        loadDiscountCounter();
+loadDiscountCounter();
     }
 
     function setCurrency(curr) {
@@ -685,36 +707,7 @@
         updateDynamicContent();
     }
 
-    function getEstimatorTotal() {
-        const ids = ['estimateDomain', 'estimateBooking', 'estimateLanguages', 'estimateContent'];
-        let total = 1490; // Pilot base setup
-        ids.forEach(id => { 
-            const el = document.getElementById(id); 
-            if (el) total += Number(el.options[el.selectedIndex].getAttribute('data-price') || el.value || 0); 
-        });
-        ['estimateExtraPage', 'estimateWhatsapp', 'estimatePayments'].forEach(id => { 
-            const el = document.getElementById(id); 
-            if (el && el.checked) total += Number(el.value || 0); 
-        });
-        return total;
-    }
-
-    function updateEstimate() {
-        const result = document.getElementById('estimateResult');
-        if (!result) return;
-        const totalPln = getEstimatorTotal();
-        const highPln = totalPln + 200;
-        
-        result.textContent = `${formatPrice(totalPln)}–${formatPrice(highPln)}`;
-
-        const care = document.getElementById('estimateCare');
-        const note = document.getElementById('estimateCareNote');
-        if (care && note) {
-            note.textContent = care.checked
-                ? `Final quote confirmed after a short project review. ${formatPrice(199)} / mo care plan selected.`
-                : "Final quote confirmed after a short project review.";
-        }
-    }
+    
 
     function packageDetails(packageKey, priceBaseKey) {
         const packages = {
@@ -748,22 +741,16 @@
         };
     }
 
-    function openEstimatedContactForm() {
-        updateEstimate();
-        const range = document.getElementById('estimateResult')?.textContent || '';
-        openContactForm();
-        currentPackageInfo = { packageName: "Project Estimate", price: range };
-        document.getElementById('formSubject').value = "Project Estimate";
-        document.getElementById('formMsg').value = `I am interested in the Project Estimate (${range}). My request is...`;
-    }
-
-    function openContactForm(packageKey = null, priceKey = null) {
+        function openContactForm(packageKey = null, priceKey = null) {
         const modal = document.getElementById('contactModal');
         const subject = document.getElementById('formSubject');
         const message = document.getElementById('formMsg');
         const status = document.getElementById('formStatus');
 
         previouslyFocusedElement = document.activeElement;
+        contactFormStartedAt = Date.now();
+        const honeypot = document.getElementById('formWebsite');
+        if (honeypot) honeypot.value = '';
         status.textContent = '';
         status.className = 'text-xs text-center min-h-[20px]';
 
@@ -845,48 +832,28 @@
     }
 
     function submitLeadViaJsonp(payload) {
-        return new Promise((resolve, reject) => {
-            const callbackName = 'alansmLeadCallback_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
-            const script = document.createElement('script');
-
-            const cleanup = () => {
-                try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
-                if (script && script.parentNode) script.parentNode.removeChild(script);
+        /*
+         * Secure POST submission to Apps Script.
+         * The backend blocks GET submissions and requires:
+         * - formToken
+         * - formStartedAt
+         * - empty honeypot field
+         *
+         * mode: 'no-cors' avoids browser CORS issues with Google Apps Script.
+         * Apps Script still receives the JSON body and writes the lead.
+         */
+        return fetch(ALANSM_BACKEND_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'text/plain;charset=utf-8'
+            },
+            body: JSON.stringify(payload)
+        }).then(() => {
+            return {
+                status: 'ok',
+                leadId: 'pending'
             };
-
-            const timeout = window.setTimeout(() => {
-                cleanup();
-                reject(new Error('Lead submission timed out.'));
-            }, 15000);
-
-            window[callbackName] = function(result) {
-                window.clearTimeout(timeout);
-                cleanup();
-
-                if (!result || result.status !== 'ok') {
-                    reject(new Error(result && result.message ? result.message : 'Lead submission failed.'));
-                    return;
-                }
-
-                resolve(result);
-            };
-
-            script.onerror = function() {
-                window.clearTimeout(timeout);
-                cleanup();
-                reject(new Error('Lead submission request failed.'));
-            };
-
-            const params = new URLSearchParams();
-            Object.keys(payload).forEach(key => {
-                params.append(key, payload[key] == null ? '' : String(payload[key]));
-            });
-            params.set('action', 'submitLead');
-            params.set('callback', callbackName);
-            params.set('_ts', Date.now());
-
-            script.src = ALANSM_BACKEND_URL + '?' + params.toString();
-            document.head.appendChild(script);
         });
     }
 
@@ -914,6 +881,9 @@
 
         const payload = {
             action: 'submitLead',
+            formToken: 'alansm_2026_secure_lead_form_v1',
+            formStartedAt: contactFormStartedAt,
+            website: document.getElementById('formWebsite')?.value || '',
             name: name,
             email: email,
             phone: phone,
@@ -931,7 +901,7 @@
         try {
             const result = await submitLeadViaJsonp(payload);
 
-            status.textContent = `Message sent successfully. Ref: ${result.leadId || '0000'}`;
+            status.textContent = 'Message sent successfully. I will reply as soon as possible.';
             status.className = 'text-xs text-center min-h-[20px] text-green-500 mt-2 font-medium';
             form.reset();
             loadDiscountCounter();
