@@ -325,7 +325,7 @@
                         <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Formulário de contato</li>
                         <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Integração com Google Maps</li>
                         <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Configuração básica de SEO</li>
-                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Configuração de hospedage</li>
+                        <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Configuração de hospedagem</li>
                         <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Conexão com domínio existente</li>
                         <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Suporte no lançamento</li>
                     </ul>
@@ -340,7 +340,7 @@
                         <p id="discountCounterText" class="text-xs text-slate-300">Verificando disponibilidade...</p>
                     </div>
                     <p class="text-xs text-slate-400 mb-4">Plano de cuidado opcional: <br><span data-price-display="70">R$ 97</span> / mês</p>
-                    <button type="button" onclick="openContactForm('light_booking', '430')" class="w-full bg-green-600 hover:bg-green-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Estimar Meu Projeto</button>
+                    <button type="button" onclick="openContactForm('light_booking', '430')" class="w-full bg-green-600 hover:bg-green-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Solicitar Site Leve</button>
                 </div>
             </div>
 
@@ -368,62 +368,6 @@
                     <p class="text-xs text-blue-400 font-medium mb-4">Mensalidade piloto: <br><span data-price-range="143,215" class="font-bold text-sm">R$ 197–297</span> / mês</p>
                     <p class="text-xs text-slate-400 mb-4">Criado para restaurantes que querem mais pedidos diretos e melhor controle operacional.</p>
                     <button type="button" onclick="openContactForm('deliveryhub', 'custom_quote')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir DeliveryHub</button>
-                </div>
-            </div>
-
-            <div id="quote-estimator" class="bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8 mb-12 max-w-4xl mx-auto shadow-lg">
-                <div class="grid lg:grid-cols-[1fr_0.8fr] gap-8 items-start">
-                    <div>
-                        <p class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-2">Assistente de Orçamento</p>
-                        <h3 class="text-xl md:text-2xl font-bold mb-3 text-slate-100">Estime a faixa do projeto</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-5">Responda algumas perguntas para entender a faixa provável antes de solicitar o orçamento final.</p>
-                        <div class="grid sm:grid-cols-2 gap-4">
-                            <label class="block">
-                                <span class="block text-xs font-semibold text-slate-400 mb-1">Status do domínio</span>
-                                <select id="estimateDomain" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
-                                    <option value="0" data-price="0">Domínio existente</option>
-                                    <option value="70" data-price="70">Configuração de novo domínio</option>
-                                </select>
-                            </label>
-                            <label class="block">
-                                <span class="block text-xs font-semibold text-slate-400 mb-1">Configuração de agendamento</span>
-                                <select id="estimateBooking" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
-                                    <option value="0" data-price="0">Apenas link de agendamento</option>
-                                    <option value="145" data-price="145">Widget incorporado</option>
-                                    <option value="360" data-price="360">Fluxo com múltiplos profissionais</option>
-                                </select>
-                            </label>
-                            <label class="block">
-                                <span class="block text-xs font-semibold text-slate-400 mb-1">Idiomas</span>
-                                <select id="estimateIdiomas" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
-                                    <option value="0" data-price="0">Um idioma</option>
-                                    <option value="180" data-price="180">Dois idiomas</option>
-                                    <option value="325" data-price="325">Três idiomas</option>
-                                </select>
-                            </label>
-                            <label class="block">
-                                <span class="block text-xs font-semibold text-slate-400 mb-1">Conteúdo</span>
-                                <select id="estimateConteúdo" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
-                                    <option value="0" data-price="0">Cliente fornece o conteúdo</option>
-                                    <option value="180" data-price="180">Ajuste de conteúdo</option>
-                                    <option value="360" data-price="360">Suporte de copywriting</option>
-                                </select>
-                            </label>
-                        </div>
-                        <div class="grid sm:grid-cols-2 gap-3 mt-5 text-sm text-slate-300">
-                            <label class="flex items-center gap-2"><input id="estimateExtraPage" type="checkbox" value="215" onchange="updateEstimate()" class="accent-blue-600" /><span>Página extra</span></label>
-                            <label class="flex items-center gap-2"><input id="estimateWhatsapp" type="checkbox" value="360" onchange="updateEstimate()" class="accent-blue-600" /><span>Automação de WhatsApp</span></label>
-                            <label class="flex items-center gap-2"><input id="estimatePayments" type="checkbox" value="430" onchange="updateEstimate()" class="accent-blue-600" /><span>Pagamentos online</span></label>
-                            <label class="flex items-center gap-2"><input id="estimateCare" type="checkbox" value="70" onchange="updateEstimate()" class="accent-blue-600" /><span>Plano mensal de cuidado</span></label>
-                        </div>
-                    </div>
-                    <div class="bg-slate-950 border border-slate-800 rounded-lg p-6 text-center sticky top-28">
-                        <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Faixa estimada</p>
-                        <div id="estimateResult" class="text-2xl font-bold text-blue-500 mb-3">R$ 600–R$ 900</div>
-                        <p id="estimateCareNote" class="text-[11px] text-slate-400 mb-4 leading-relaxed">Orçamento final confirmado após uma breve análise do projeto.</p>
-                        <p class="text-[10px] text-slate-500 leading-relaxed">A condição piloto se aplica à implantação base se houver vagas disponíveis.</p>
-                        <button type="button" onclick="openEstimatedContactForm()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition-colors mt-4 focus:outline-none">Solicitar Esta Estimativa</button>
-                    </div>
                 </div>
             </div>
 
@@ -482,6 +426,57 @@
                     <button type="button" onclick="openContactForm('six_month', '580')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Selecionar Pacote</button>
                 </div>
             </div>
+            <div class="mt-10 bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8">
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-100 mb-2">Resumo de Preços</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Pontos de partida claros para planejamento. O preço final é confirmado após uma breve análise do projeto e confirmação do escopo por escrito.</p>
+                    </div>
+                    <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Meu Projeto</button>
+                </div>
+
+                <div class="overflow-x-auto border border-slate-800 rounded-lg">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-950 text-slate-400 text-xs uppercase tracking-wider">
+                            <tr>
+                                <th class="px-4 py-3 font-bold">Serviço</th>
+                                <th class="px-4 py-3 font-bold">Implantação / Projeto</th>
+                                <th class="px-4 py-3 font-bold">Mensal</th>
+                                <th class="px-4 py-3 font-bold">Indicado para</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-slate-300">
+                            <tr>
+                                <td class="px-4 py-4 font-semibold text-slate-100">Site Leve com Agendamento</td>
+                                <td class="px-4 py-4"><span data-price-display="650">R$ 900</span><br><span class="text-green-400 text-xs">Piloto: <span data-price-display="430">R$ 600</span></span></td>
+                                <td class="px-4 py-4">Plano de cuidado opcional<br><span class="text-slate-100 font-semibold" data-price-display="70">R$ 97</span> / mês</td>
+                                <td class="px-4 py-4 text-slate-400">Pequenos negócios que precisam de site, agendamento e contato simples.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 font-semibold text-slate-100">DeliveryHub para Restaurantes</td>
+                                <td class="px-4 py-4"><span data-price-range="650,1080">R$ 900–R$ 1.500</span></td>
+                                <td class="px-4 py-4"><span data-price-range="143,215">R$ 197–R$ 297</span> / mês</td>
+                                <td class="px-4 py-4 text-slate-400">Restaurantes que querem pedidos diretos, painel e controle de entregas.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 font-semibold text-slate-100">Arquitetura & Implementação de Automação</td>
+                                <td class="px-4 py-4">A partir de <span data-price-display="1300">R$ 1.800</span></td>
+                                <td class="px-4 py-4">Contrato de suporte opcional</td>
+                                <td class="px-4 py-4 text-slate-400">Formulários avançados, suporte CRM/Salesforce/ERP e automação de fluxos.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 font-semibold text-slate-100">Suporte Mensal Tech Ops</td>
+                                <td class="px-4 py-4">Após o lançamento</td>
+                                <td class="px-4 py-4">3 meses: <span data-price-display="720">R$ 997</span> / mês<br>6 meses: <span data-price-display="580">R$ 797</span> / mês<br>12 meses: <span data-price-display="430">R$ 597</span> / mês</td>
+                                <td class="px-4 py-4 text-slate-400">Atualizações, monitoramento, relatórios e melhorias contínuas.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="text-xs text-slate-500 leading-relaxed mt-4">Domínios, hospedagem, e-mail profissional, ferramentas pagas de agendamento, provedores de pagamento, licenças de CRM, ferramentas pagas de mensagens e assinaturas de terceiros são cobrados separadamente, salvo se estiverem explicitamente incluídos na Ordem de Serviço assinada.</p>
+            </div>
+
         </div>
     </section>
 
@@ -549,12 +544,13 @@
             <button type="button" onclick="closeContactForm()" aria-label="Close contact form" class="text-slate-500 hover:text-white text-xl leading-none transition-colors focus:outline-none">&times;</button>
         </div>
         <div class="p-5">
-            <form action="https://formsubmit.co/ajax/Contact@alansmsolutions.com" method="POST" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-3">
+            <form action="#" method="POST" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-3">
                 <input type="hidden" name="_subject" id="formSubject" />
                 <input type="hidden" name="_captcha" value="false" />
+                <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
                 <div>
-                    <label for="formNome" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Nome</label>
-                    <input id="formNome" type="text" name="name" autocomplete="name" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
+                    <label for="formName" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Nome</label>
+                    <input id="formName" type="text" name="name" autocomplete="name" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
                 </div>
                 <div>
                     <label for="formEmail" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Email</label>
@@ -631,201 +627,169 @@
 
 <script>
     const ALANSM_BACKEND_URL = "https://script.google.com/macros/s/AKfycbzEHeYQm4gsQa1s_KhCEodbpXproeYESNoe8uhjJaKRQ0ab3-9drjx2yGpXrWZyfkTA/exec";
-    
-    // Explicitly set language for the root index file
-    const currentLang = 'pt';
-    let currentCurrency = 'BRL';
+    const ALANSM_FORM_TOKEN = "alansm_2026_secure_lead_form_v1";
+    window.ALanSMFormStartedAt = Date.now();
+
+    const currentLang = "pt";
+    let currentCurrency = "BRL";
     let previouslyFocusedElement = null;
-    let currentPackageInfo = { packageName: '', price: '' };
+    let currentPackageInfo = { packageName: "", price: "" };
 
     const exchangeRates = { PLN: 1, BRL: 1.38, EUR: 0.23, USD: 0.25 };
 
     function formatPrice(plnAmount) {
-        if (!plnAmount) return '';
-        let converted = plnAmount * exchangeRates[currentCurrency];
-        
-        if (currentCurrency !== 'PLN') {
+        if (!plnAmount) return "";
+        let converted = Number(plnAmount) * exchangeRates[currentCurrency];
+
+        if (currentCurrency !== "PLN") {
             converted = Math.ceil(converted / 10) * 10;
         }
 
-        const formatted = converted.toLocaleString('en-US');
+        const locale = currentCurrency === "BRL" ? "pt-BR" : currentCurrency === "PLN" ? "pl-PL" : "en-US";
+        const formatted = converted.toLocaleString(locale);
 
-        if (currentCurrency === 'BRL') return 'R$ ' + formatted;
-        if (currentCurrency === 'EUR') return '€' + formatted;
-        if (currentCurrency === 'USD') return '$' + formatted;
-        return formatted + ' PLN';
+        if (currentCurrency === "BRL") return "R$ " + formatted;
+        if (currentCurrency === "EUR") return "€" + formatted;
+        if (currentCurrency === "USD") return "$" + formatted;
+        return formatted + " PLN";
     }
 
     function updateDynamicContent() {
-        const currSelect = document.getElementById('currencySelect');
+        const currSelect = document.getElementById("currencySelect");
         if (currSelect) currSelect.value = currentCurrency;
 
-        document.querySelectorAll('[data-price-display]').forEach(el => {
-            const basePln = parseInt(el.getAttribute('data-price-display'), 10);
+        document.querySelectorAll("[data-price-display]").forEach(function(el) {
+            const basePln = parseInt(el.getAttribute("data-price-display"), 10);
             if (!isNaN(basePln)) {
                 el.textContent = formatPrice(basePln);
             }
         });
 
-        document.querySelectorAll('[data-price-range]').forEach(el => {
-            const values = String(el.getAttribute('data-price-range') || '').split(',');
+        document.querySelectorAll("[data-price-range]").forEach(function(el) {
+            const values = String(el.getAttribute("data-price-range") || "").split(",");
             const lowPln = parseInt(values[0], 10);
             const highPln = parseInt(values[1], 10);
+
             if (!isNaN(lowPln) && !isNaN(highPln)) {
-                el.textContent = `${formatPrice(lowPln)}–${formatPrice(highPln)}`;
+                el.textContent = formatPrice(lowPln) + "–" + formatPrice(highPln);
             }
         });
 
-        // Estimator options formatting
-        const optIds = ['estimateDomain', 'estimateBooking', 'estimateIdiomas', 'estimateConteúdo'];
-        optIds.forEach(id => {
-            const select = document.getElementById(id);
-            if (select) {
-                Array.from(select.options).forEach(opt => {
-                    const val = parseInt(opt.getAttribute('data-price') || opt.value, 10);
-                    // Reset to base text to prevent stacking (+ $100) (+ $100)
-                    if (!opt.hasAttribute('data-base-text')) {
-                        opt.setAttribute('data-base-text', opt.textContent.split(' (+')[0]);
-                    }
-                    let text = opt.getAttribute('data-base-text');
-                    
-                    if (val > 0) {
-                        text += ` (+ ${formatPrice(val)})`;
-                    }
-                    opt.textContent = text;
-                });
-            }
-        });
-
-        updateEstimate();
         loadDiscountCounter();
     }
 
     function setCurrency(curr) {
         if (!exchangeRates[curr]) return;
         currentCurrency = curr;
-        localStorage.setItem('preferredCurrency', curr);
+        localStorage.setItem("preferredCurrency", curr);
         updateDynamicContent();
-    }
-
-    function getEstimatorTotal() {
-        const ids = ['estimateDomain', 'estimateBooking', 'estimateIdiomas', 'estimateConteúdo'];
-        let total = 430; // Base setup
-        ids.forEach(id => { 
-            const el = document.getElementById(id); 
-            if (el) total += Number(el.options[el.selectedIndex].getAttribute('data-price') || el.value || 0); 
-        });
-        ['estimateExtraPage', 'estimateWhatsapp', 'estimatePayments'].forEach(id => { 
-            const el = document.getElementById(id); 
-            if (el && el.checked) total += Number(el.value || 0); 
-        });
-        return total;
-    }
-
-    function updateEstimate() {
-        const result = document.getElementById('estimateResult');
-        if (!result) return;
-        const totalPln = getEstimatorTotal();
-        const highPln = totalPln + 200;
-        
-        result.textContent = `${formatPrice(totalPln)}–${formatPrice(highPln)}`;
-
-        const care = document.getElementById('estimateCare');
-        const note = document.getElementById('estimateCareNote');
-        if (care && note) {
-            note.textContent = care.checked
-                ? `Orçamento final confirmado após uma breve análise do projeto. ${formatPrice(70)} / mês care plan selected.`
-                : "Orçamento final confirmado após uma breve análise do projeto.";
-        }
     }
 
     function packageDetails(packageKey, priceBaseKey) {
         const packages = {
             light_booking: "Site Leve com Agendamento",
             deliveryhub: "DeliveryHub para Restaurantes",
-            three_month: "3-Month Tech Ops",
-            six_month: "6-Month Tech Ops",
-            twelve_month: "12-Month Tech Ops",
-            enterprise_crm: "Enterprise CRM & Salesforce",
-            offer: "Oferta limitada"
+            three_month: "Tech Ops por 3 Meses",
+            six_month: "Tech Ops por 6 Meses",
+            twelve_month: "Tech Ops por 12 Meses",
+            enterprise_crm: "CRM Empresarial & Salesforce",
+            offer: "Oferta de lançamento"
         };
 
-        let priceStr = '';
-        if (priceBaseKey === 'custom_quote') {
-            priceStr = "Custom quote";
-        } else if (priceBaseKey === 'introductory_offer') {
-            priceStr = "Special rate";
+        let priceStr = "";
+
+        if (priceBaseKey === "custom_quote") {
+            priceStr = "Orçamento personalizado";
+        } else if (priceBaseKey === "introductory_offer") {
+            priceStr = "Condição especial";
         } else if (priceBaseKey) {
             const baseAmount = parseInt(priceBaseKey, 10);
+
             if (!isNaN(baseAmount)) {
                 priceStr = formatPrice(baseAmount);
-                if (['1400', '1150', '850', '199'].includes(priceBaseKey)) {
+
+                if (["1400", "1150", "850", "199"].includes(String(priceBaseKey))) {
                     priceStr += " / mês";
                 }
             }
         }
 
         return {
-            packageName: packages[packageKey] || '',
+            packageName: packages[packageKey] || "",
             price: priceStr
         };
     }
 
-    function openEstimatedContactForm() {
-        updateEstimate();
-        const range = document.getElementById('estimateResult')?.textContent || '';
-        openContactForm();
-        currentPackageInfo = { packageName: "Project Estimate", price: range };
-        document.getElementById('formSubject').value = "Project Estimate";
-        document.getElementById('formMsg').value = `I am interested in the Project Estimate (${range}). My request is...`;
-    }
-
     function openContactForm(packageKey = null, priceKey = null) {
-        const modal = document.getElementById('contactModal');
-        const subject = document.getElementById('formSubject');
-        const message = document.getElementById('formMsg');
-        const status = document.getElementById('formStatus');
+        const modal = document.getElementById("contactModal");
+        const subject = document.getElementById("formSubject");
+        const message = document.getElementById("formMsg");
+        const status = document.getElementById("formStatus");
+
+        if (!modal || !subject || !message || !status) return;
 
         previouslyFocusedElement = document.activeElement;
-        status.textContent = '';
-        status.className = 'text-xs text-center min-h-[20px]';
+        window.ALanSMFormStartedAt = Date.now();
+
+        status.textContent = "";
+        status.className = "text-xs text-center min-h-[20px]";
 
         if (packageKey) {
             const details = packageDetails(packageKey, priceKey);
             currentPackageInfo = details;
-            subject.value = packageKey === 'offer' ? "Inquiry: Introductory onboarding offer" : `Inquiry: ${details.packageName}`;
-            message.value = `I am interested in the ${details.packageName} option (${details.price}). My request is...`;
+            subject.value = packageKey === "offer" ? "Interesse: oferta de lançamento" : "Interesse: " + details.packageName;
+            message.value = "Tenho interesse na opção " + details.packageName + " (" + details.price + "). Minha solicitação é...";
         } else {
-            currentPackageInfo = { packageName: "General inquiry", price: '' };
-            subject.value = "General inquiry";
-            message.value = '';
+            currentPackageInfo = { packageName: "Contato geral", price: "" };
+            subject.value = "Contato geral";
+            message.value = "";
         }
 
-        modal.classList.remove('hidden');
-        document.body.classList.add('overflow-hidden');
-        window.setTimeout(() => document.getElementById('formNome').focus(), 0);
+        modal.classList.remove("hidden");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("overflow-hidden");
+
+        window.setTimeout(function() {
+            const nameInput = document.getElementById("formName");
+            if (nameInput) nameInput.focus();
+        }, 0);
     }
 
     function closeContactForm() {
-        document.getElementById('contactModal').classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-        if (previouslyFocusedElement) previouslyFocusedElement.focus();
+        const modal = document.getElementById("contactModal");
+        if (!modal) return;
+
+        modal.classList.add("hidden");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("overflow-hidden");
+
+        if (previouslyFocusedElement && typeof previouslyFocusedElement.focus === "function") {
+            previouslyFocusedElement.focus();
+        }
     }
 
     function loadDiscountCounter() {
-        const counterText = document.getElementById('discountCounterText');
+        const counterText = document.getElementById("discountCounterText");
         if (!counterText || !ALANSM_BACKEND_URL) return;
 
         counterText.textContent = "Verificando disponibilidade...";
 
-        const callbackName = 'alansmCounterCallback_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
-        const script = document.createElement('script');
-        const cleanup = () => {
-            try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
-            if (script && script.parentNode) script.parentNode.removeChild(script);
+        const callbackName = "alansmCounterCallback_" + Date.now() + "_" + Math.floor(Math.random() * 10000);
+        const script = document.createElement("script");
+
+        const cleanup = function() {
+            try {
+                delete window[callbackName];
+            } catch (e) {
+                window[callbackName] = undefined;
+            }
+
+            if (script && script.parentNode) {
+                script.parentNode.removeChild(script);
+            }
         };
 
-        const timeout = window.setTimeout(() => {
+        const timeout = window.setTimeout(function() {
             cleanup();
             counterText.textContent = "Contador indisponível. A disponibilidade final será confirmada após análise.";
         }, 10000);
@@ -834,191 +798,226 @@
             window.clearTimeout(timeout);
             cleanup();
 
-            const counter = data && (data.counter || data);
-            const remaining = Number(counter && counter.remaining);
-            const totalSlots = Number(counter && counter.totalSlots);
-
-            if (
-                !counter ||
-                counter.status !== 'ok' ||
-                !Number.isFinite(remaining) ||
-                !Number.isFinite(totalSlots)
-            ) {
+            if (!data || data.status !== "ok") {
                 counterText.textContent = "Contador indisponível. A disponibilidade final será confirmada após análise.";
                 return;
             }
 
-            if (counter.soldOut || remaining <= 0) {
-                counterText.textContent = "As vagas piloto estão completas. A condição padrão será aplicada.";
-            } else if (remaining === 1) {
-                counterText.textContent = "Última vaga piloto disponível.";
-            } else {
-                counterText.textContent = `${remaining} de ${totalSlots} vagas piloto disponíveis.`;
+            if (Number(data.remaining) <= 0) {
+                counterText.textContent = "As vagas promocionais estão temporariamente indisponíveis.";
+                return;
             }
+
+            counterText.textContent = data.remaining + " vagas promocionais restantes.";
         };
 
+        script.src = ALANSM_BACKEND_URL + "?action=counter&callback=" + encodeURIComponent(callbackName) + "&t=" + Date.now();
         script.onerror = function() {
             window.clearTimeout(timeout);
             cleanup();
             counterText.textContent = "Contador indisponível. A disponibilidade final será confirmada após análise.";
         };
 
-        script.src = ALANSM_BACKEND_URL + '?action=counter&callback=' + encodeURIComponent(callbackName) + '&_ts=' + Date.now();
-        document.head.appendChild(script);
-    }
-
-    function handleFormSubmit(event) {
-        event.preventDefault();
-
-        const form = event.target;
-        const button = form.querySelector('button[type="submit"]');
-        const status = document.getElementById('formStatus');
-        const originalText = button.textContent;
-
-        const name = document.getElementById('formNome')?.value || '';
-        const email = document.getElementById('formEmail')?.value || '';
-        const phone = document.getElementById('formPhone')?.value || '';
-        const message = document.getElementById('formMsg')?.value || '';
-        const consent = document.getElementById('formConsent')?.checked;
-
-        if (!consent) {
-            status.textContent = "Concordo que meus dados sejam usados para responder à solicitação e gerenciar a comunicação do projeto.";
-            status.className = 'text-xs text-center min-h-[20px] text-yellow-400 mt-2 font-medium';
-            return;
-        }
-
-        const packageInfo = currentPackageInfo || { packageName: "Consulta geral", price: '' };
-
-        const callbackName = 'alansmLeadCallback_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
-        const script = document.createElement('script');
-
-        const cleanup = () => {
-            try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
-            if (script && script.parentNode) script.parentNode.removeChild(script);
-        };
-
-        const timeout = window.setTimeout(() => {
-            cleanup();
-            button.disabled = false;
-            button.textContent = originalText;
-            status.textContent = "A mensagem não pôde ser enviada. Tente novamente ou entre em contato pelo LinkedIn.";
-            status.className = 'text-xs text-center min-h-[20px] text-red-500 mt-2 font-medium';
-        }, 15000);
-
-        window[callbackName] = function(result) {
-            window.clearTimeout(timeout);
-            cleanup();
-
-            button.disabled = false;
-            button.textContent = originalText;
-
-            if (!result || result.status !== 'ok') {
-                status.textContent = result && result.message ? result.message : "A mensagem não pôde ser enviada. Tente novamente ou entre em contato pelo LinkedIn.";
-                status.className = 'text-xs text-center min-h-[20px] text-red-500 mt-2 font-medium';
-                return;
-            }
-
-            status.textContent = `Mensagem enviada com sucesso. Ref: ${result.leadId || '0000'}`;
-            status.className = 'text-xs text-center min-h-[20px] text-green-500 mt-2 font-medium';
-            form.reset();
-            loadDiscountCounter();
-
-            window.setTimeout(closeContactForm, 3000);
-        };
-
-        script.onerror = function() {
-            window.clearTimeout(timeout);
-            cleanup();
-            button.disabled = false;
-            button.textContent = originalText;
-            status.textContent = "A mensagem não pôde ser enviada. Tente novamente ou entre em contato pelo LinkedIn.";
-            status.className = 'text-xs text-center min-h-[20px] text-red-500 mt-2 font-medium';
-        };
-
-        const params = new URLSearchParams();
-        params.set('action', 'submitLead');
-        params.set('callback', callbackName);
-        params.set('name', name);
-        params.set('email', email);
-        params.set('phone', phone);
-        params.set('packageName', packageInfo.packageName || "Consulta geral");
-        params.set('estimatedPrice', packageInfo.price || '');
-        params.set('discountRequested', String(packageInfo.packageName || '').toLowerCase().includes('light') ? 'YES' : 'NO');
-        params.set('message', message);
-        params.set('source', 'website');
-        params.set('_ts', String(Date.now()));
-
-        button.disabled = true;
-        button.textContent = "Enviando...";
-        status.textContent = '';
-
-        script.src = ALANSM_BACKEND_URL + '?' + params.toString();
-        document.head.appendChild(script);
-    }
-
-    function openLegalModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) { modal.classList.remove('hidden'); modal.classList.add('flex'); document.body.classList.add('overflow-hidden'); }
-    }
-
-    function closeLegalModal(modalId) {
-        const modal = document.getElementById(modalId);
-        if (modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); document.body.classList.remove('overflow-hidden'); }
-    }
-
-    function closeOfferBanner() {
-        const banner = document.getElementById('offerBanner');
-        banner.classList.add('opacity-0', 'translate-y-4');
-        sessionStorage.setItem('offerBannerDismissed', 'true');
-        window.setTimeout(() => banner.classList.add('hidden'), 300);
-    }
-
-    function showOfferBanner() {
-        if (sessionStorage.getItem('offerBannerDismissed') === 'true') return;
-        const banner = document.getElementById('offerBanner');
-        banner.classList.remove('hidden');
-        window.setTimeout(() => banner.classList.remove('opacity-0', 'translate-y-4'), 20);
+        document.body.appendChild(script);
     }
 
     function claimOffer() {
         closeOfferBanner();
-        window.setTimeout(() => openContactForm('offer', 'introductory_offer'), 320);
+        openContactForm("offer", "introductory_offer");
     }
 
-    // Modal trap focus and escape
-    document.addEventListener('keydown', event => {
-        const modal = document.getElementById('contactModal');
-        if (event.key === 'Escape') {
-            if(!modal.classList.contains('hidden')) closeContactForm();
-            closeLegalModal('termsModal');
-            closeLegalModal('privacyModal');
+    function closeOfferBanner() {
+        const banner = document.getElementById("offerBanner");
+        if (!banner) return;
+
+        banner.classList.add("opacity-0", "translate-y-4");
+        window.setTimeout(function() {
+            banner.classList.add("hidden");
+        }, 300);
+    }
+
+    function showOfferBanner() {
+        const banner = document.getElementById("offerBanner");
+        if (!banner) return;
+
+        window.setTimeout(function() {
+            banner.classList.remove("hidden");
+            window.setTimeout(function() {
+                banner.classList.remove("opacity-0", "translate-y-4");
+            }, 20);
+        }, 1200);
+    }
+
+    async function submitLeadViaPost(payload) {
+        await fetch(ALANSM_BACKEND_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        return {
+            status: "ok",
+            ok: true,
+            message: "Lead submitted."
+        };
+    }
+
+    async function handleFormSubmit(event) {
+        event.preventDefault();
+
+        const status = document.getElementById("formStatus");
+        const submitBtn = event.target.querySelector('button[type="submit"]');
+
+        const name = String(document.getElementById("formName")?.value || "").trim();
+        const email = String(document.getElementById("formEmail")?.value || "").trim();
+        const phone = String(document.getElementById("formPhone")?.value || "").trim();
+        const message = String(document.getElementById("formMsg")?.value || "").trim();
+        const consent = document.getElementById("formConsent")?.checked;
+        const website = String(document.getElementById("website")?.value || "").trim();
+
+        if (!status) return;
+
+        status.className = "text-[10px] text-center min-h-[16px] text-slate-400";
+        status.textContent = "";
+
+        const secondsOnForm = (Date.now() - Number(window.ALanSMFormStartedAt || 0)) / 1000;
+
+        if (website) {
+            status.className = "text-[10px] text-center min-h-[16px] text-red-400";
+            status.textContent = "Envio bloqueado.";
+            return;
+        }
+
+        if (secondsOnForm < 4) {
+            status.className = "text-[10px] text-center min-h-[16px] text-yellow-400";
+            status.textContent = "Aguarde alguns segundos antes de enviar. Isso ajuda a bloquear spam.";
+            return;
+        }
+
+        if (!name || name.length < 2) {
+            status.className = "text-[10px] text-center min-h-[16px] text-red-400";
+            status.textContent = "Por favor, informe um nome válido.";
+            return;
+        }
+
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            status.className = "text-[10px] text-center min-h-[16px] text-red-400";
+            status.textContent = "Por favor, informe um email válido.";
+            return;
+        }
+
+        if (!message || message.length < 15) {
+            status.className = "text-[10px] text-center min-h-[16px] text-red-400";
+            status.textContent = "Por favor, escreva uma mensagem com pelo menos 15 caracteres.";
+            return;
+        }
+
+        if (!consent) {
+            status.className = "text-[10px] text-center min-h-[16px] text-red-400";
+            status.textContent = "Por favor, aceite o uso dos seus dados para responder à solicitação.";
+            return;
+        }
+
+        const packageInfo = currentPackageInfo || { packageName: "Contato geral", price: "" };
+
+        const payload = {
+            action: "submitLead",
+            formToken: ALANSM_FORM_TOKEN,
+            formStartedAt: window.ALanSMFormStartedAt,
+            website: website,
+
+            name: name,
+            email: email,
+            phone: phone,
+
+            packageName: packageInfo.packageName || "Contato geral",
+            estimatedPrice: packageInfo.price || "",
+            discountRequested: String(packageInfo.packageName || "").toLowerCase().includes("light") ? "YES" : "NO",
+
+            message: message,
+            source: "website-" + currentLang,
+            lang: currentLang,
+            signatureLanguage: currentLang
+        };
+
+        try {
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Enviando...";
+            }
+
+            status.className = "text-[10px] text-center min-h-[16px] text-slate-400";
+            status.textContent = "Enviando sua mensagem...";
+
+            await submitLeadViaPost(payload);
+
+            status.className = "text-[10px] text-center min-h-[16px] text-green-400";
+            status.textContent = "Mensagem enviada com sucesso. Obrigado!";
+
+            event.target.reset();
+            currentPackageInfo = { packageName: "Contato geral", price: "" };
+            window.ALanSMFormStartedAt = Date.now();
+
+            window.setTimeout(function() {
+                closeContactForm();
+            }, 1500);
+
+        } catch (error) {
+            console.error(error);
+            status.className = "text-[10px] text-center min-h-[16px] text-red-400";
+            status.textContent = "Não foi possível enviar agora. Tente novamente em alguns instantes.";
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Enviar Mensagem";
+            }
+        }
+    }
+
+    function openLegalModal(id) {
+        const modal = document.getElementById(id);
+        if (!modal) return;
+
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        document.body.classList.add("overflow-hidden");
+    }
+
+    function closeLegalModal(id) {
+        const modal = document.getElementById(id);
+        if (!modal) return;
+
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+        document.body.classList.remove("overflow-hidden");
+    }
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            closeContactForm();
+            closeLegalModal("termsModal");
+            closeLegalModal("privacyModal");
         }
     });
 
-    document.addEventListener('click', event => {
-        if (event.target.id === 'contactModal') closeContactForm();
-        if (event.target.id === 'termsModal' || event.target.id === 'privacyModal') closeLegalModal(event.target.id);
-    });
+    document.addEventListener("DOMContentLoaded", function() {
+        const savedCurrency = localStorage.getItem("preferredCurrency");
+        if (savedCurrency && exchangeRates[savedCurrency]) {
+            currentCurrency = savedCurrency;
+        } else {
+            localStorage.setItem("preferredCurrency", currentCurrency);
+        }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        currentCurrency = 'BRL';
-        localStorage.setItem('preferredCurrency', 'BRL');
+        localStorage.setItem("preferredLanguage", currentLang);
 
         updateDynamicContent();
-
-        let bannerTriggered = false;
-        const triggerBanner = () => {
-            if (bannerTriggered) return;
-            bannerTriggered = true;
-            showOfferBanner();
-            window.removeEventListener('scroll', handleScroll);
-        };
-        const handleScroll = () => { if (window.scrollY > 500) triggerBanner(); };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        window.setTimeout(triggerBanner, 12000);
+        showOfferBanner();
     });
 </script>
+
 
 </body>
 </html>
