@@ -404,62 +404,6 @@
                 </div>
             </div>
 
-            <div id="quote-estimator" class="bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8 mb-12 max-w-4xl mx-auto shadow-lg">
-                <div class="grid lg:grid-cols-[1fr_0.8fr] gap-8 items-start">
-                    <div>
-                        <p class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-2">Project Quote Assistant</p>
-                        <h3 class="text-xl md:text-2xl font-bold mb-3 text-slate-100">Estimate your project range</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-5">Answer a few questions to understand the likely range before requesting a final quote.</p>
-                        <div class="grid sm:grid-cols-2 gap-4">
-                            <label class="block">
-                                <span class="block text-xs font-semibold text-slate-400 mb-1">Domain status</span>
-                                <select id="estimateDomain" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
-                                    <option value="0" data-price="0">Existing domain</option>
-                                    <option value="100" data-price="100">New domain setup</option>
-                                </select>
-                            </label>
-                            <label class="block">
-                                <span class="block text-xs font-semibold text-slate-400 mb-1">Booking setup</span>
-                                <select id="estimateBooking" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
-                                    <option value="0" data-price="0">Booking link only</option>
-                                    <option value="200" data-price="200">Embedded widget</option>
-                                    <option value="500" data-price="500">Multi-staff flow</option>
-                                </select>
-                            </label>
-                            <label class="block">
-                                <span class="block text-xs font-semibold text-slate-400 mb-1">Languages</span>
-                                <select id="estimateLanguages" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
-                                    <option value="0" data-price="0">One language</option>
-                                    <option value="250" data-price="250">Two languages</option>
-                                    <option value="450" data-price="450">Three languages</option>
-                                </select>
-                            </label>
-                            <label class="block">
-                                <span class="block text-xs font-semibold text-slate-400 mb-1">Content</span>
-                                <select id="estimateContent" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-blue-500" onchange="updateEstimate()">
-                                    <option value="0" data-price="0">Client provides content</option>
-                                    <option value="250" data-price="250">Content polish</option>
-                                    <option value="500" data-price="500">Copywriting support</option>
-                                </select>
-                            </label>
-                        </div>
-                        <div class="grid sm:grid-cols-2 gap-3 mt-5 text-sm text-slate-300">
-                            <label class="flex items-center gap-2"><input id="estimateExtraPage" type="checkbox" value="300" onchange="updateEstimate()" class="accent-blue-600" /><span>Extra page</span></label>
-                            <label class="flex items-center gap-2"><input id="estimateWhatsapp" type="checkbox" value="500" onchange="updateEstimate()" class="accent-blue-600" /><span>WhatsApp automation</span></label>
-                            <label class="flex items-center gap-2"><input id="estimatePayments" type="checkbox" value="600" onchange="updateEstimate()" class="accent-blue-600" /><span>Online payments</span></label>
-                            <label class="flex items-center gap-2"><input id="estimateCare" type="checkbox" value="199" onchange="updateEstimate()" class="accent-blue-600" /><span>Monthly care plan</span></label>
-                        </div>
-                    </div>
-                    <div class="bg-slate-950 border border-slate-800 rounded-lg p-6 text-center sticky top-28">
-                        <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Estimated range</p>
-                        <div id="estimateResult" class="text-2xl font-bold text-blue-500 mb-3">1,490–1,690 PLN</div>
-                        <p id="estimateCareNote" class="text-[11px] text-slate-400 mb-4 leading-relaxed">Final quote confirmed after a short project review.</p>
-                        <p class="text-[10px] text-slate-500 leading-relaxed">Discount applies to the base setup if slots are available.</p>
-                        <button type="button" onclick="openEstimatedContactForm()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition-colors mt-4 focus:outline-none">Request This Estimate</button>
-                    </div>
-                </div>
-            </div>
-
             <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
                 <div class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-br-lg z-10">Automation Setup</div>
                 <div class="pt-4 md:pt-0">
