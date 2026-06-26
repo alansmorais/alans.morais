@@ -373,7 +373,7 @@
                         <p id="discountCounterText" class="text-xs text-slate-300">Checking availability...</p>
                     </div>
                     <p class="text-xs text-slate-400 mb-4">Optional care plan: <br><span data-price-display="199">199 PLN</span> / mo</p>
-                    <button type="button" onclick="openContactForm('light_booking', '1490')" class="w-full bg-green-600 hover:bg-green-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Request Project Review</button>
+                    <button type="button" onclick="openContactForm('light_booking', '1490')" class="w-full bg-green-600 hover:bg-green-500 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Estimate My Project</button>
                 </div>
             </div>
 
@@ -460,39 +460,55 @@
                 </div>
             </div>
 
-            <div class="mt-10 bg-slate-900/70 border border-slate-800 rounded-xl p-6 md:p-8">
-                <div class="text-center mb-6">
-                    <p class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-2">Pricing Summary</p>
-                    <h3 class="text-xl md:text-2xl font-bold text-slate-100">Clear starting points before the final quote</h3>
-                    <p class="text-slate-400 text-sm mt-2 max-w-2xl mx-auto">Final pricing is confirmed after a short scope review, but these ranges help align expectations before we start.</p>
+            <div class="mt-10 bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8">
+                <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-100 mb-2">Pricing Summary</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">Clear starting points for planning. Final pricing is confirmed after a short project review and written scope confirmation.</p>
+                    </div>
+                    <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors focus:outline-none">Discuss My Project</button>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-4 text-sm">
-                    <div class="bg-slate-950 border border-slate-800 rounded-lg p-5 text-center">
-                        <p class="text-xs uppercase tracking-wider text-green-500 font-bold mb-2">Light Booking Website</p>
-                        <p class="text-2xl font-bold text-slate-100" data-price-display="1490">1,490 PLN</p>
-                        <p class="text-xs text-slate-500 mt-1">pilot setup</p>
-                        <p class="text-xs text-slate-400 mt-3">Optional care plan: <span data-price-display="199">199 PLN</span> / mo</p>
-                    </div>
-
-                    <div class="bg-slate-950 border border-slate-800 rounded-lg p-5 text-center">
-                        <p class="text-xs uppercase tracking-wider text-blue-500 font-bold mb-2">DeliveryHub Pilot</p>
-                        <p class="text-2xl font-bold text-slate-100" data-price-range="1500,2500">1,500–2,500 PLN</p>
-                        <p class="text-xs text-slate-500 mt-1">setup range</p>
-                        <p class="text-xs text-slate-400 mt-3">Monthly pilot: <span data-price-range="299,499">299–499 PLN</span> / mo</p>
-                    </div>
-
-                    <div class="bg-slate-950 border border-slate-800 rounded-lg p-5 text-center">
-                        <p class="text-xs uppercase tracking-wider text-slate-400 font-bold mb-2">Tech Ops Support</p>
-                        <p class="text-2xl font-bold text-slate-100"><span data-price-display="850">850 PLN</span>–<span data-price-display="1400">1,400 PLN</span></p>
-                        <p class="text-xs text-slate-500 mt-1">per month, depending on contract length</p>
-                        <p class="text-xs text-slate-400 mt-3">3, 6, or 12-month support options.</p>
-                    </div>
+                <div class="overflow-x-auto border border-slate-800 rounded-lg">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-950 text-slate-400 text-xs uppercase tracking-wider">
+                            <tr>
+                                <th class="px-4 py-3 font-bold">Service</th>
+                                <th class="px-4 py-3 font-bold">Setup / Project</th>
+                                <th class="px-4 py-3 font-bold">Monthly</th>
+                                <th class="px-4 py-3 font-bold">Best For</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-slate-300">
+                            <tr>
+                                <td class="px-4 py-4 font-semibold text-slate-100">Light Booking Website</td>
+                                <td class="px-4 py-4"><span data-price-display="1800">1,800 PLN</span><br><span class="text-green-400 text-xs">Pilot: <span data-price-display="1490">1,490 PLN</span></span></td>
+                                <td class="px-4 py-4">Optional care plan<br><span class="text-slate-100 font-semibold" data-price-display="199">199 PLN</span> / mo</td>
+                                <td class="px-4 py-4 text-slate-400">Small businesses needing website + booking + contact flow.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 font-semibold text-slate-100">DeliveryHub for Restaurants</td>
+                                <td class="px-4 py-4"><span data-price-range="1500,2500">1,500–2,500 PLN</span></td>
+                                <td class="px-4 py-4"><span data-price-range="299,499">299–499 PLN</span> / mo</td>
+                                <td class="px-4 py-4 text-slate-400">Restaurants wanting direct orders, dashboard and delivery control.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 font-semibold text-slate-100">Automation Architecture & Implementation</td>
+                                <td class="px-4 py-4">Starting at <span data-price-display="2900">2,900 PLN</span></td>
+                                <td class="px-4 py-4">Optional support contract</td>
+                                <td class="px-4 py-4 text-slate-400">Advanced forms, CRM/Salesforce/ERP support and workflow automation.</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-4 font-semibold text-slate-100">Tech Ops Monthly Support</td>
+                                <td class="px-4 py-4">After launch</td>
+                                <td class="px-4 py-4">3 mo: <span data-price-display="1400">1,400 PLN</span> / mo<br>6 mo: <span data-price-display="1150">1,150 PLN</span> / mo<br>12 mo: <span data-price-display="850">850 PLN</span> / mo</td>
+                                <td class="px-4 py-4 text-slate-400">Ongoing updates, monitoring, reports and improvements.</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
-                <p class="text-[11px] text-slate-500 leading-relaxed mt-5 text-center">
-                    Domains, paid booking tools, hosting, business email, payment processors, external subscriptions, and third-party platform costs are billed separately unless explicitly included in the written agreement.
-                </p>
+                <p class="text-xs text-slate-500 leading-relaxed mt-4">Domains, hosting, business email, paid booking tools, payment providers, CRM licenses, paid messaging tools and third-party subscriptions are billed separately unless explicitly included in the signed Order Form.</p>
             </div>
         </div>
     </section>
@@ -561,18 +577,10 @@
             <button type="button" onclick="closeContactForm()" aria-label="Close contact form" class="text-slate-500 hover:text-white text-xl leading-none transition-colors focus:outline-none">&times;</button>
         </div>
         <div class="p-5">
-            <form action="https://formsubmit.co/ajax/Contact@alansmsolutions.com" method="POST" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-3">
+            <form action="#" method="POST" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-3">
                 <input type="hidden" name="_subject" id="formSubject" />
                 <input type="hidden" name="_captcha" value="false" />
-                <input
-                    id="formWebsite"
-                    type="text"
-                    name="website"
-                    tabindex="-1"
-                    autocomplete="off"
-                    aria-hidden="true"
-                    style="position:absolute;left:-9999px;opacity:0;height:0;width:0;"
-                />
+                <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
                 <div>
                     <label for="formName" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Name</label>
                     <input id="formName" type="text" name="name" autocomplete="name" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
@@ -652,13 +660,14 @@
 
 <script>
     const ALANSM_BACKEND_URL = "https://script.google.com/macros/s/AKfycbzEHeYQm4gsQa1s_KhCEodbpXproeYESNoe8uhjJaKRQ0ab3-9drjx2yGpXrWZyfkTA/exec";
+    const ALANSM_FORM_TOKEN = "alansm_2026_secure_lead_form_v1";
+    window.ALanSMFormStartedAt = Date.now();
     
     // Explicitly set language for the root index file
     const currentLang = 'en';
     let currentCurrency = 'USD';
     let previouslyFocusedElement = null;
     let currentPackageInfo = { packageName: '', price: '' };
-    let contactFormStartedAt = Date.now();
 
     const exchangeRates = { PLN: 1, BRL: 1.38, EUR: 0.23, USD: 0.25 };
 
@@ -697,7 +706,8 @@
                 el.textContent = `${formatPrice(lowPln)}–${formatPrice(highPln)}`;
             }
         });
-loadDiscountCounter();
+
+        loadDiscountCounter();
     }
 
     function setCurrency(curr) {
@@ -707,7 +717,6 @@ loadDiscountCounter();
         updateDynamicContent();
     }
 
-    
 
     function packageDetails(packageKey, priceBaseKey) {
         const packages = {
@@ -741,16 +750,15 @@ loadDiscountCounter();
         };
     }
 
-        function openContactForm(packageKey = null, priceKey = null) {
+
+    function openContactForm(packageKey = null, priceKey = null) {
         const modal = document.getElementById('contactModal');
         const subject = document.getElementById('formSubject');
         const message = document.getElementById('formMsg');
         const status = document.getElementById('formStatus');
 
         previouslyFocusedElement = document.activeElement;
-        contactFormStartedAt = Date.now();
-        const honeypot = document.getElementById('formWebsite');
-        if (honeypot) honeypot.value = '';
+        window.ALanSMFormStartedAt = Date.now();
         status.textContent = '';
         status.className = 'text-xs text-center min-h-[20px]';
 
@@ -831,30 +839,21 @@ loadDiscountCounter();
         document.head.appendChild(script);
     }
 
-    function submitLeadViaJsonp(payload) {
-        /*
-         * Secure POST submission to Apps Script.
-         * The backend blocks GET submissions and requires:
-         * - formToken
-         * - formStartedAt
-         * - empty honeypot field
-         *
-         * mode: 'no-cors' avoids browser CORS issues with Google Apps Script.
-         * Apps Script still receives the JSON body and writes the lead.
-         */
-        return fetch(ALANSM_BACKEND_URL, {
+    async function submitLeadViaPost(payload) {
+        await fetch(ALANSM_BACKEND_URL, {
             method: 'POST',
             mode: 'no-cors',
             headers: {
                 'Content-Type': 'text/plain;charset=utf-8'
             },
             body: JSON.stringify(payload)
-        }).then(() => {
-            return {
-                status: 'ok',
-                leadId: 'pending'
-            };
         });
+
+        return {
+            status: 'ok',
+            ok: true,
+            message: 'Lead submitted.'
+        };
     }
 
     async function handleFormSubmit(event) {
@@ -877,13 +876,28 @@ loadDiscountCounter();
             return;
         }
 
+        if (String(message).trim().length < 15) {
+            status.textContent = "Please write a short message about your project before sending.";
+            status.className = 'text-xs text-center min-h-[20px] text-yellow-400 mt-2 font-medium';
+            return;
+        }
+
+        const secondsOnForm = (Date.now() - window.ALanSMFormStartedAt) / 1000;
+        if (secondsOnForm < 4) {
+            status.textContent = "Please wait a few seconds before sending. This helps block spam.";
+            status.className = 'text-xs text-center min-h-[20px] text-yellow-400 mt-2 font-medium';
+            return;
+        }
+
         const packageInfo = currentPackageInfo || { packageName: "General inquiry", price: '' };
 
         const payload = {
             action: 'submitLead',
-            formToken: 'alansm_2026_secure_lead_form_v1',
-            formStartedAt: contactFormStartedAt,
-            website: document.getElementById('formWebsite')?.value || '',
+
+            formToken: ALANSM_FORM_TOKEN,
+            formStartedAt: window.ALanSMFormStartedAt,
+            website: document.getElementById('website')?.value || '',
+
             name: name,
             email: email,
             phone: phone,
@@ -891,7 +905,9 @@ loadDiscountCounter();
             estimatedPrice: packageInfo.price || '',
             discountRequested: String(packageInfo.packageName || '').toLowerCase().includes('light') ? 'YES' : 'NO',
             message: message,
-            source: 'website'
+            source: 'website',
+            lang: currentLang || 'en',
+            signatureLanguage: currentLang || 'en'
         };
 
         button.disabled = true;
@@ -899,9 +915,9 @@ loadDiscountCounter();
         status.textContent = '';
 
         try {
-            const result = await submitLeadViaJsonp(payload);
+            const result = await submitLeadViaPost(payload);
 
-            status.textContent = 'Message sent successfully. I will reply as soon as possible.';
+            status.textContent = `Message sent successfully. Ref: ${result.leadId || '0000'}`;
             status.className = 'text-xs text-center min-h-[20px] text-green-500 mt-2 font-medium';
             form.reset();
             loadDiscountCounter();
