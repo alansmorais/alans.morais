@@ -27,58 +27,70 @@
 
   <script>
     (function() {
-      var savedLang = localStorage.getItem('preferredLanguage');
       var path = window.location.pathname;
+      if (!(path === '/' || path === '/index.html')) return;
 
-      // Execute redirect only if on the root path.
-      if (path === '/' || path === '/index.html') {
-        // Respect a manual language choice if the visitor already selected one.
-        if (savedLang === 'pt') {
-          localStorage.setItem('preferredCurrency', '');
-          window.location.replace('/br/');
-          return;
-        }
+      var params = new URLSearchParams(window.location.search || '');
+      var langParam = (params.get('lang') || '').toLowerCase();
 
-        if (savedLang === 'pl') {
-          localStorage.setItem('preferredCurrency', 'EUR');
-          window.location.replace('/pl/');
-          return;
-        }
-
-        if (savedLang === 'en') {
-          localStorage.setItem('preferredCurrency', 'EUR');
-          return;
-        }
-
-        var browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-        var timeZone = '';
-
-        try {
-          timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
-        } catch (error) {
-          timeZone = '';
-        }
-
-        var isBrazil = browserLang === 'pt-br' || timeZone === 'America/Sao_Paulo';
-        var isPoland = browserLang.startsWith('pl') || timeZone === 'Europe/Warsaw';
-
-        if (isBrazil) {
-          localStorage.setItem('preferredLanguage', 'pt');
-          localStorage.setItem('preferredCurrency', '');
-          window.location.replace('/br/');
-          return;
-        }
-
-        if (isPoland) {
-          localStorage.setItem('preferredLanguage', 'pl');
-          localStorage.setItem('preferredCurrency', 'EUR');
-          window.location.replace('/pl/');
-          return;
-        }
-
+      if (langParam === 'en') {
         localStorage.setItem('preferredLanguage', 'en');
-        localStorage.setItem('preferredCurrency', 'EUR');
+        localStorage.setItem('preferredCurrency', 'USD');
+        return;
       }
+
+      if (langParam === 'pl') {
+        localStorage.setItem('preferredLanguage', 'pl');
+        localStorage.setItem('preferredCurrency', 'PLN');
+        window.location.replace('/pl/');
+        return;
+      }
+
+      if (langParam === 'pt' || langParam === 'br' || langParam === 'pt-br') {
+        localStorage.setItem('preferredLanguage', 'pt');
+        localStorage.setItem('preferredCurrency', 'BRL');
+        window.location.replace('/br/');
+        return;
+      }
+
+      var browserLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      var languages = Array.prototype.slice.call(navigator.languages || []);
+      var timeZone = '';
+
+      try {
+        timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      } catch (error) {
+        timeZone = '';
+      }
+
+      var isBrazil = browserLang === 'pt-br' ||
+        languages.some(function(l) { return String(l).toLowerCase() === 'pt-br'; }) ||
+        timeZone === 'America/Sao_Paulo' ||
+        timeZone === 'America/Recife' ||
+        timeZone === 'America/Fortaleza' ||
+        timeZone === 'America/Manaus' ||
+        timeZone === 'America/Cuiaba';
+
+      var isPoland = browserLang.startsWith('pl') ||
+        languages.some(function(l) { return String(l).toLowerCase().startsWith('pl'); }) ||
+        timeZone === 'Europe/Warsaw';
+
+      if (isBrazil) {
+        localStorage.setItem('preferredLanguage', 'pt');
+        localStorage.setItem('preferredCurrency', 'BRL');
+        window.location.replace('/br/');
+        return;
+      }
+
+      if (isPoland) {
+        localStorage.setItem('preferredLanguage', 'pl');
+        localStorage.setItem('preferredCurrency', 'PLN');
+        window.location.replace('/pl/');
+        return;
+      }
+
+      localStorage.setItem('preferredLanguage', 'en');
+      localStorage.setItem('preferredCurrency', 'USD');
     })();
   </script>
 
@@ -289,9 +301,9 @@
 
       <div class="flex items-center justify-end gap-3">
         <div class="hidden md:flex items-center gap-3">
-          <a href="/br/" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">BR</a>
-          <a href="/pl/" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</a>
-          <a href="/" class="text-xs font-semibold text-blue-500">EN</a>
+          <a href="/br/" onclick="localStorage.setItem('preferredLanguage', 'pt'); localStorage.setItem('preferredCurrency', 'BRL');" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">BR</a>
+          <a href="/pl/" onclick="localStorage.setItem('preferredLanguage', 'pl'); localStorage.setItem('preferredCurrency', 'PLN');" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</a>
+          <a href="/?lang=en" onclick="localStorage.setItem('preferredLanguage', 'en'); localStorage.setItem('preferredCurrency', 'USD');" class="text-xs font-semibold text-blue-500">EN</a>
           <span id="currencyAutoLabel" class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">PLN auto</span>
         </div>
 
@@ -318,9 +330,9 @@
 
       <div class="pt-5 mt-5 border-t border-slate-800 flex items-center justify-between gap-3">
         <div class="flex items-center gap-3">
-          <a href="/br/" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">BR</a>
-          <a href="/pl/" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</a>
-          <a href="/" class="text-xs font-semibold text-blue-500">EN</a>
+          <a href="/br/" onclick="localStorage.setItem('preferredLanguage', 'pt'); localStorage.setItem('preferredCurrency', 'BRL');" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">BR</a>
+          <a href="/pl/" onclick="localStorage.setItem('preferredLanguage', 'pl'); localStorage.setItem('preferredCurrency', 'PLN');" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</a>
+          <a href="/?lang=en" onclick="localStorage.setItem('preferredLanguage', 'en'); localStorage.setItem('preferredCurrency', 'USD');" class="text-xs font-semibold text-blue-500">EN</a>
         </div>
         <span id="currencyAutoLabelMobile" class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">PLN auto</span>
       </div>
