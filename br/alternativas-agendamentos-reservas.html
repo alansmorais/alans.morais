@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alternativas para Agendamentos e Reservas Online | ASM Solutions</title>
+  <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg">
+  <meta name="description" content="Compare plataformas como Booksy, AppBarber e CashBarber com um sistema próprio de agendamento online para barbearias, salões, clínicas e negócios de serviços.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="author" content="ASM Solutions">
+  <link rel="canonical" href="https://www.alansmsolutions.com/br/alternativas-agendamentos-reservas/">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Alternativas para Agendamentos e Reservas Online | ASM Solutions">
+  <meta property="og:description" content="Sistema próprio de agendamento online com sua marca, seu fluxo de atendimento e integrações com WhatsApp, Instagram e Google Agenda.">
+  <meta property="og:url" content="https://www.alansmsolutions.com/br/alternativas-agendamentos-reservas/">
+  <meta property="og:site_name" content="ASM Solutions">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#020617">
+
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-soft: #0f172a;
+      --card: rgba(15, 23, 42, .92);
+      --card-strong: rgba(15, 23, 42, .98);
+      --line: #1e293b;
+      --line-soft: rgba(148, 163, 184, .18);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --muted-2: #94a3b8;
+      --brand: #2563eb;
+      --brand-2: #60a5fa;
+      --brand-3: #93c5fd;
+      --danger: #f87171;
+      --ok: #22c55e;
+      --shadow: 0 24px 70px rgba(0,0,0,.34);
+      --radius: 24px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% -10%, rgba(37,99,235,.22), transparent 34%),
+        radial-gradient(circle at 90% 2%, rgba(96,165,250,.14), transparent 30%),
+        linear-gradient(145deg, #020617 0%, #0f172a 52%, #020617 100%);
+      line-height: 1.65;
+    }
+
+    ::selection { background: #2563eb; color: #fff; }
+    :focus-visible { outline: 2px solid #60a5fa; outline-offset: 3px; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .skip-link { position: absolute; left: -999px; top: 12px; background: #fff; color: #111; padding: 10px 14px; border-radius: 10px; z-index: 100; }
+    .skip-link:focus { left: 12px; }
+
+    .notice {
+      border-bottom: 1px solid var(--line);
+      background: #020617;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .notice .wrap, .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .notice .wrap { padding-block: 9px; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(2,6,23,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+    .nav .wrap { padding-block: 15px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 900; letter-spacing: -.02em; }
+    .brand-logo { width: 46px; height: 46px; border-radius: 999px; border: 1px solid #334155; background: #020617; object-fit: cover; box-shadow: 0 14px 30px rgba(0,0,0,.24); }
+    .brand-name { display: flex; flex-direction: column; line-height: 1; }
+    .brand-title { color: #f8fafc; font-size: 18px; }
+    .brand-subtitle { color: var(--brand-2); font-size: 11px; text-transform: uppercase; letter-spacing: .18em; margin-top: 6px; font-weight: 800; }
+    .menu { display: flex; align-items: center; gap: 18px; color: var(--muted); font-size: 14px; }
+    .menu a:hover { color: #fff; }
+
+    .hero { padding: 80px 0 58px; }
+    .hero-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 38px; align-items: center; }
+    .eyebrow {
+      display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px;
+      width: fit-content; margin-bottom: 18px; padding: 8px 12px;
+      border-radius: 999px; border: 1px solid rgba(96,165,250,.42);
+      color: #dbeafe; background: rgba(37,99,235,.16); font-size: 13px; font-weight: 700;
+    }
+    h1, h2, h3 { letter-spacing: -.035em; line-height: 1.12; }
+    h1 { margin: 0 0 20px; font-size: clamp(38px, 6vw, 70px); line-height: 1.02; }
+    h2 { margin: 0 0 14px; font-size: clamp(28px, 3.3vw, 44px); }
+    h3 { margin: 0 0 9px; font-size: 21px; }
+    p { margin: 0 0 14px; }
+    .lead { max-width: 760px; color: #dbe5f4; font-size: clamp(18px, 2vw, 21px); }
+    .muted { color: var(--muted); }
+    .small { color: var(--muted-2); font-size: 14px; }
+
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 50px; padding: 14px 18px; border-radius: 14px;
+      border: 1px solid var(--line); font-weight: 850; transition: transform .15s ease, background .15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { border: 0; background: var(--brand); color: #fff; box-shadow: 0 16px 32px rgba(37,99,235,.24); }
+    .btn-secondary { background: rgba(15,23,42,.86); }
+
+    .panel {
+      border: 1px solid var(--line); background: linear-gradient(180deg, rgba(15,23,42,.98), rgba(15,23,42,.78));
+      border-radius: 30px; box-shadow: var(--shadow); padding: 24px;
+    }
+    .browser-dots { display: flex; gap: 8px; margin-bottom: 18px; }
+    .dot { width: 10px; height: 10px; border-radius: 99px; background: var(--brand-2); opacity: .85; }
+    .mock-title { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 16px; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: rgba(37,99,235,.16); border: 1px solid rgba(96,165,250,.42); color: #dbeafe; font-size: 12px; font-weight: 800; }
+    .mock-card { padding: 16px; border-radius: 18px; border: 1px solid var(--line); background: rgba(15,23,42,.90); margin: 12px 0; }
+    .mock-row { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 14px; }
+    .progress { height: 8px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.08); margin-top: 14px; }
+    .progress span { display: block; height: 100%; width: 76%; background: linear-gradient(90deg,var(--brand),var(--brand-2)); border-radius: inherit; }
+
+    .section { padding: 62px 0; }
+    .section.alt { border-block: 1px solid var(--line); background: rgba(255,255,255,.036); }
+    .section-title { max-width: 860px; margin-bottom: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+    .card {
+      border: 1px solid var(--line); background: var(--card); border-radius: var(--radius); padding: 22px;
+    }
+    .card strong, .card b { color: #fff; }
+    .icon { width: 38px; height: 38px; border-radius: 13px; display: grid; place-items: center; margin-bottom: 14px; background: rgba(37,99,235,.16); border: 1px solid rgba(96,165,250,.42); }
+
+    .search-intent { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+    .chip { border: 1px solid var(--line); background: rgba(15,23,42,.74); color: #dbe5f4; border-radius: 999px; padding: 8px 11px; font-size: 13px; }
+
+    .comparison { overflow: hidden; border-radius: var(--radius); border: 1px solid var(--line); margin-top: 22px; }
+    table { width: 100%; border-collapse: collapse; background: rgba(15,23,42,.82); }
+    th, td { padding: 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { background: rgba(2,6,23,.72); color: #f3f8ff; }
+    td:nth-child(2), th:nth-child(2), td:nth-child(3), th:nth-child(3) { text-align: center; }
+    tr:last-child td { border-bottom: 0; }
+    .ok { color: var(--ok); font-weight: 900; }
+    .neutral { color: var(--brand-3); font-weight: 900; }
+
+    .alternatives { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .alternative-card { display: grid; grid-template-columns: .36fr .64fr; gap: 18px; align-items: start; border: 1px solid var(--line); background: var(--card); border-radius: var(--radius); padding: 22px; }
+    .alternative-card .label { color: var(--brand-2); font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+
+    .steps { counter-reset: step; display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+    .step::before { counter-increment: step; content: counter(step); width: 36px; height: 36px; display: grid; place-items: center; margin-bottom: 14px; border-radius: 99px; background: var(--brand); color: #fff; box-shadow: 0 16px 32px rgba(37,99,235,.24); font-weight: 950; }
+
+    .callout { border: 1px solid rgba(255,209,102,.38); background: rgba(255,209,102,.09); color: #fff6dd; border-radius: var(--radius); padding: 20px; margin-top: 20px; }
+    .callout strong { color: #fff; }
+    .soft-callout { border: 1px solid rgba(96,165,250,.38); background: rgba(37,99,235,.10); border-radius: var(--radius); padding: 22px; }
+
+    .faq details { border: 1px solid var(--line); background: rgba(15,23,42,.84); border-radius: 18px; padding: 16px 18px; margin: 10px 0; }
+    .faq summary { cursor: pointer; font-weight: 850; color: #fff; }
+    .faq p { margin: 10px 0 0; color: #dbe5f4; }
+
+    .cta { text-align: center; border: 1px solid var(--line); background: linear-gradient(135deg, rgba(37,99,235,.22), rgba(96,165,250,.12)); border-radius: 32px; padding: 44px 26px; }
+    .cta p { max-width: 720px; margin-inline: auto; }
+    .footer { padding: 34px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    .footer-grid { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+    @media (max-width: 920px) {
+      .hero-grid, .grid-3, .grid-2, .steps, .alternative-card { grid-template-columns: 1fr; }
+      .menu { display: none; }
+      .hero { padding-top: 54px; }
+      .notice .wrap { flex-direction: column; align-items: flex-start; gap: 2px; }
+      th, td { padding: 12px 9px; font-size: 14px; }
+      .comparison { overflow-x: auto; }
+      table { min-width: 690px; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.alansmsolutions.com/#organization",
+        "name": "ASM Solutions",
+        "url": "https://www.alansmsolutions.com/",
+        "email": "contact@alansmsolutions.com",
+        "logo": "https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.alansmsolutions.com/#website",
+        "url": "https://www.alansmsolutions.com/",
+        "name": "ASM Solutions",
+        "publisher": { "@id": "https://www.alansmsolutions.com/#organization" },
+        "inLanguage": "pt-BR"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.alansmsolutions.com/br/alternativas-agendamentos-reservas/#webpage",
+        "url": "https://www.alansmsolutions.com/br/alternativas-agendamentos-reservas/",
+        "name": "Alternativas para Agendamentos e Reservas Online",
+        "description": "Compare plataformas como Booksy, AppBarber e CashBarber com um sistema próprio de agendamento online para barbearias, salões, clínicas e negócios de serviços.",
+        "isPartOf": { "@id": "https://www.alansmsolutions.com/#website" },
+        "about": { "@id": "https://www.alansmsolutions.com/br/alternativas-agendamentos-reservas/#service" },
+        "breadcrumb": { "@id": "https://www.alansmsolutions.com/br/alternativas-agendamentos-reservas/#breadcrumb" },
+        "inLanguage": "pt-BR"
+      },
+      {
+        "@type": "Service",
+        "@id": "https://www.alansmsolutions.com/br/alternativas-agendamentos-reservas/#service",
+        "name": "Sistema próprio de agendamento e reservas online",
+        "serviceType": "Sistema de agendamento online, reservas online e automação para negócios de serviços",
+        "provider": { "@id": "https://www.alansmsolutions.com/#organization" },
+        "areaServed": ["BR", "PL", "EU"],
+        "description": "Desenvolvimento de sistema web personalizado para receber agendamentos e reservas online com identidade visual da marca, painel administrativo, formulários e integrações com WhatsApp, Instagram, Google Agenda e Google Sheets."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.alansmsolutions.com/br/alternativas-agendamentos-reservas/#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://www.alansmsolutions.com/br/" },
+          { "@type": "ListItem", "position": 2, "name": "Alternativas para agendamentos e reservas", "item": "https://www.alansmsolutions.com/br/alternativas-agendamentos-reservas/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.alansmsolutions.com/br/alternativas-agendamentos-reservas/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Preciso abandonar Booksy, AppBarber, CashBarber ou outra plataforma?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Não. Muitos negócios podem usar um sistema próprio como canal complementar e migrar clientes aos poucos, se fizer sentido para a operação." }
+          },
+          {
+            "@type": "Question",
+            "name": "Um sistema próprio pode aparecer no Google?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Pode aparecer se a página for pública, rastreável, útil, bem estruturada e indexada pelo Google. Nenhum profissional sério deve prometer posição fixa nos resultados." }
+          },
+          {
+            "@type": "Question",
+            "name": "O sistema funciona com Instagram e WhatsApp?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Sim. O link de agendamento pode ser usado na bio do Instagram, em mensagens de WhatsApp, no Google Perfil da Empresa, em QR Code e em campanhas locais." }
+          },
+          {
+            "@type": "Question",
+            "name": "É um aplicativo pronto ou um sistema personalizado?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A proposta da ASM Solutions é criar uma solução web personalizada para o fluxo do negócio, com página de reservas, painel administrativo e automações conforme o escopo." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <div class="notice">
+    <div class="wrap">
+      <span>ASM Solutions • Sistemas digitais, automação e agendamento online</span>
+      <a href="mailto:contact@alansmsolutions.com">contact@alansmsolutions.com</a>
+    </div>
+  </div>
+
+  <header class="nav" aria-label="Cabeçalho">
+    <div class="wrap">
+      <a class="brand" href="https://www.alansmsolutions.com/br/" aria-label="Página inicial ASM Solutions">
+        <img class="brand-logo" src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="ASM Solutions logo">
+        <span class="brand-name">
+          <span class="brand-title">ASM Solutions</span>
+          <span class="brand-subtitle">Automação • Agendamentos</span>
+        </span>
+      </a>
+      <nav class="menu" aria-label="Navegação da página">
+        <a href="#comparativo">Comparativo</a>
+        <a href="#alternativas">Alternativas</a>
+        <a href="#para-quem">Para quem é</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://www.alansmsolutions.com/br/#contact">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Agendamentos online • Reservas • Sistema próprio</span>
+          <h1>Alternativas para Agendamentos e Reservas Online</h1>
+          <p class="lead">Está comparando Booksy, AppBarber, CashBarber, Fresha, Reservio, SimplyBook ou Calendly? Veja quando uma plataforma pronta faz sentido e quando um sistema próprio pode ser melhor para sua marca.</p>
+          <p class="muted">A ASM Solutions cria sistemas personalizados para negócios de serviços que precisam receber agendamentos pelo site, Instagram, WhatsApp ou Google Perfil da Empresa — com uma experiência mais direta e adaptada ao atendimento real.</p>
+          <div class="buttons">
+            <a class="btn btn-primary" href="https://www.alansmsolutions.com/br/#contact">Quero uma demo com minha marca</a>
+            <a class="btn btn-secondary" href="#comparativo">Ver comparação</a>
+          </div>
+          <div class="search-intent" aria-label="Principais buscas relacionadas">
+            <span class="chip">sistema de agendamento online</span>
+            <span class="chip">app para agendamento</span>
+            <span class="chip">agenda online para barbearia</span>
+            <span class="chip">sistema de reservas online</span>
+          </div>
+        </div>
+
+        <aside class="panel" aria-label="Exemplo visual de fluxo de agendamento online">
+          <div class="browser-dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="mock-title">
+            <strong>Fluxo de reserva personalizado</strong>
+            <span class="pill">Mobile-first</span>
+          </div>
+          <div class="mock-card">
+            <strong>1. Cliente escolhe o serviço</strong>
+            <div class="mock-row"><span>Corte, consulta, horário, orçamento ou reserva</span><span>online</span></div>
+          </div>
+          <div class="mock-card">
+            <strong>2. Responde perguntas importantes</strong>
+            <div class="mock-row"><span>Unidade, profissional, observações, fotos ou preferências</span><span>sob medida</span></div>
+          </div>
+          <div class="mock-card">
+            <strong>3. Você recebe tudo organizado</strong>
+            <div class="mock-row"><span>Painel, e-mail, Google Sheets ou Google Agenda</span><span>controle</span></div>
+          </div>
+          <div class="progress" aria-hidden="true"><span></span></div>
+          <p class="small" style="margin-top:12px">O cliente permanece dentro da sua experiência de marca, sem depender de um fluxo genérico.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section alt" id="para-quem">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Uma página para vários tipos de agendamento</h2>
+          <p class="muted">Em vez de criar páginas repetidas para cada concorrente, esta página concentra uma intenção de busca ampla: encontrar uma alternativa para organizar horários, reservas e solicitações online.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <div class="icon">💈</div>
+            <h3>Barbearias e salões</h3>
+            <p>Agenda online para cortes, barba, manicure, estética, profissionais, horários disponíveis e confirmação pelo canal mais usado pelo cliente.</p>
+          </article>
+          <article class="card">
+            <div class="icon">📅</div>
+            <h3>Clínicas e consultores</h3>
+            <p>Reservas para sessões, consultas, avaliações, triagem inicial, formulários antes do atendimento e organização das solicitações em painel.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🛠️</div>
+            <h3>Serviços locais</h3>
+            <p>Oficinas, estúdios, aulas, visitas técnicas, orçamentos e negócios que precisam receber pedidos ou reservas com menos mensagens perdidas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="comparativo">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Plataforma pronta ou sistema próprio?</h2>
+          <p class="muted">As duas opções podem ser válidas. A melhor escolha depende do momento do negócio, da necessidade de personalização e do quanto você quer controlar a experiência do cliente.</p>
+        </div>
+
+        <div class="comparison" role="region" aria-label="Tabela comparativa entre sistema próprio e plataforma pronta" tabindex="0">
+          <table>
+            <thead>
+              <tr>
+                <th>Critério</th>
+                <th>Sistema próprio ASM Solutions</th>
+                <th>Plataforma pronta</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Marca e identidade visual</td>
+                <td><span class="ok">✓</span> Layout adaptado à sua marca</td>
+                <td><span class="neutral">•</span> Geralmente segue o padrão da ferramenta</td>
+              </tr>
+              <tr>
+                <td>Fluxo de agendamento</td>
+                <td><span class="ok">✓</span> Criado para seu atendimento real</td>
+                <td><span class="neutral">•</span> Limitado ao fluxo disponível na plataforma</td>
+              </tr>
+              <tr>
+                <td>Campos personalizados</td>
+                <td><span class="ok">✓</span> Perguntas, fotos, serviços, filtros e observações</td>
+                <td><span class="neutral">•</span> Depende do plano e dos recursos da ferramenta</td>
+              </tr>
+              <tr>
+                <td>Link para Instagram, WhatsApp e Google</td>
+                <td><span class="ok">✓</span> Link próprio para bio, mensagens, QR Code e site</td>
+                <td><span class="neutral">•</span> Depende da estrutura da ferramenta</td>
+              </tr>
+              <tr>
+                <td>Painel administrativo</td>
+                <td><span class="ok">✓</span> Pode ser adaptado ao processo da equipe</td>
+                <td><span class="neutral">•</span> Recursos definidos pela plataforma</td>
+              </tr>
+              <tr>
+                <td>Integrações</td>
+                <td><span class="ok">✓</span> Google Agenda, Google Sheets, WhatsApp, e-mail e automações</td>
+                <td><span class="neutral">•</span> Depende do ecossistema e plano contratado</td>
+              </tr>
+              <tr>
+                <td>Evolução</td>
+                <td><span class="ok">✓</span> Pode crescer por etapas conforme a operação</td>
+                <td><span class="neutral">•</span> Depende do roadmap da empresa</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small" style="margin-top:12px">Observação: esta comparação é geral. Recursos, planos e condições de ferramentas terceiras podem mudar com o tempo e variar por país ou tipo de conta.</p>
+      </div>
+    </section>
+
+    <section class="section alt" id="alternativas">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Alternativas ao Booksy, AppBarber, CashBarber, Fresha, Reservio, SimplyBook e Calendly</h2>
+          <p class="muted">A ideia não é atacar concorrentes. A ideia é ajudar quem está pesquisando opções a entender a diferença entre contratar uma plataforma pronta e criar um sistema próprio.</p>
+        </div>
+
+        <div class="alternatives">
+          <article class="alternative-card">
+            <div>
+              <p class="label">Beleza e serviços</p>
+              <h3>Alternativa ao Booksy</h3>
+            </div>
+            <p>Para negócios que já recebem clientes pelo Instagram, WhatsApp ou Google, um sistema próprio pode servir como canal direto de reservas com sua marca, seu domínio e uma experiência menos genérica.</p>
+          </article>
+
+          <article class="alternative-card">
+            <div>
+              <p class="label">Barbearias</p>
+              <h3>Alternativa ao AppBarber</h3>
+            </div>
+            <p>Quem procura um app para barbearia geralmente precisa organizar barbeiros, serviços, horários e confirmações. A ASM Solutions pode criar uma página de reserva e painel ajustados ao fluxo real da barbearia.</p>
+          </article>
+
+          <article class="alternative-card">
+            <div>
+              <p class="label">Agenda e gestão</p>
+              <h3>Alternativa ao CashBarber</h3>
+            </div>
+            <p>Se o objetivo é ter uma agenda online com mais controle visual e operacional, um sistema próprio permite definir campos, etapas e formas de receber solicitações conforme a equipe trabalha.</p>
+          </article>
+
+          <article class="alternative-card">
+            <div>
+              <p class="label">Salões e estética</p>
+              <h3>Alternativa ao Fresha</h3>
+            </div>
+            <p>Uma solução própria pode ser usada como canal complementar quando o negócio quer fortalecer sua marca e direcionar clientes para um link de reserva feito especialmente para seus serviços.</p>
+          </article>
+
+          <article class="alternative-card">
+            <div>
+              <p class="label">Reservas gerais</p>
+              <h3>Alternativa ao Reservio, SimplyBook ou Calendly</h3>
+            </div>
+            <p>Ferramentas prontas podem funcionar bem para muitos casos. A diferença de um sistema personalizado é adaptar a jornada para serviços específicos, com campos, mensagens e automações próprias.</p>
+          </article>
+        </div>
+
+        <div class="callout">
+          <strong>Aviso de não afiliação:</strong> ASM Solutions não é afiliada, parceira, representante ou revendedora oficial de Booksy, AppBarber, CashBarber, Fresha, Reservio, SimplyBook ou Calendly. Os nomes são citados apenas para fins informativos e comparativos. As marcas pertencem aos seus respectivos proprietários.
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap grid-2">
+        <div>
+          <h2>Quando um sistema próprio faz mais sentido?</h2>
+          <p class="muted">Nem todo negócio precisa de uma solução personalizada logo no início. Mas ela pode ser interessante quando a empresa quer mais controle, diferenciação e um fluxo mais alinhado à operação.</p>
+        </div>
+        <div class="soft-callout">
+          <p><strong>Faz sentido quando você quer:</strong></p>
+          <p>• Usar sua marca e seu próprio link de reserva<br>• Evitar depender apenas de mensagens soltas no WhatsApp<br>• Coletar informações antes do atendimento<br>• Receber reservas em painel, e-mail, Google Sheets ou Google Agenda<br>• Testar um canal direto sem abandonar plataformas atuais</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>O que a primeira versão pode incluir</h2>
+          <p class="muted">A página pode começar simples para validar demanda e depois evoluir para funcionalidades mais completas.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Para o cliente</h3>
+            <p>Página de reserva mobile-first, serviços, horários, profissional, perguntas personalizadas, botão WhatsApp e confirmação clara.</p>
+          </article>
+          <article class="card">
+            <h3>Para a empresa</h3>
+            <p>Painel administrativo, lista de solicitações, filtros por status, notificações, exportação para planilha e organização dos contatos.</p>
+          </article>
+          <article class="card">
+            <h3>Para crescimento</h3>
+            <p>Integração com Google Agenda, Google Sheets, automações, páginas por serviço, SEO local e melhorias conforme os clientes usam.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="como-funciona">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Como construir sem complicar</h2>
+          <p class="muted">O objetivo é criar uma primeira versão funcional e clara, sem transformar o projeto em algo pesado antes de validar.</p>
+        </div>
+        <div class="steps">
+          <article class="card step">
+            <h3>Análise</h3>
+            <p>Revisão do site, Instagram, serviços, forma atual de atendimento e principais dores.</p>
+          </article>
+          <article class="card step">
+            <h3>Demo</h3>
+            <p>Criação de uma prévia com cores, textos, serviços e fluxo de reserva da marca.</p>
+          </article>
+          <article class="card step">
+            <h3>Painel</h3>
+            <p>Organização do recebimento das reservas, status, notificações e integrações necessárias.</p>
+          </article>
+          <article class="card step">
+            <h3>Publicação</h3>
+            <p>Publicação no domínio, subdomínio ou link de teste para começar a receber clientes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt faq" id="faq">
+      <div class="wrap">
+        <div class="section-title">
+          <h2>Perguntas frequentes</h2>
+          <p class="muted">Respostas diretas para quem está pesquisando um sistema de agendamento ou uma alternativa a plataformas prontas.</p>
+        </div>
+        <details open>
+          <summary>Preciso abandonar Booksy, AppBarber, CashBarber ou outra plataforma?</summary>
+          <p>Não. Você pode usar um sistema próprio como canal complementar. Muitos negócios começam colocando o link no Instagram, WhatsApp ou Google Perfil da Empresa e observam se os clientes usam.</p>
+        </details>
+        <details>
+          <summary>Isso pode aparecer no Google?</summary>
+          <p>Sim, desde que a página seja pública, rastreável, útil e indexada. A página também precisa responder a buscas reais, como “sistema de agendamento online”, “agenda online para barbearia” e “alternativa ao Booksy”. Nenhuma posição específica é garantida.</p>
+        </details>
+        <details>
+          <summary>É melhor uma página única ou várias páginas para cada concorrente?</summary>
+          <p>Para começar, uma página única forte é mais segura e evita conteúdo repetido. Depois, se houver tráfego para termos específicos como “alternativa ao AppBarber”, você pode transformar aquela seção em uma página própria.</p>
+        </details>
+        <details>
+          <summary>Funciona para Instagram e WhatsApp?</summary>
+          <p>Sim. O link pode ser usado na bio do Instagram, em mensagens de WhatsApp, no Google Perfil da Empresa, em QR Code, em anúncios e no site da empresa.</p>
+        </details>
+        <details>
+          <summary>É um app pronto?</summary>
+          <p>Não exatamente. É uma solução web personalizada. Ela pode funcionar no navegador do celular sem o cliente precisar instalar aplicativo.</p>
+        </details>
+        <details>
+          <summary>Quais negócios podem usar?</summary>
+          <p>Barbearias, salões, clínicas, consultores, oficinas, estúdios, professores, restaurantes com reservas, profissionais autônomos e outros negócios que trabalham com horários ou solicitações.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="cta">
+          <h2>Quer ver uma demo para o seu negócio?</h2>
+          <p>Envie o site, Instagram ou perfil do Google da empresa. A ASM Solutions pode preparar uma demonstração visual com sua marca, seus serviços e um fluxo inicial de agendamento.</p>
+          <div class="buttons" style="justify-content:center">
+            <a class="btn btn-primary" href="https://www.alansmsolutions.com/br/#contact">Solicitar demonstração</a>
+            <a class="btn btn-secondary" href="mailto:contact@alansmsolutions.com?subject=Demo%20de%20sistema%20de%20agendamento%20online">Enviar e-mail</a>
+          </div>
+          <p class="small" style="margin-top:12px">Sem afiliação com as plataformas citadas. Comparação feita apenas para ajudar o cliente a entender as opções.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <span>© 2026 ASM Solutions. Sistemas digitais, automação e reservas online.</span>
+      <span><a href="https://www.alansmsolutions.com/br/">Início</a> · <a href="https://www.alansmsolutions.com/br/#contact">Contato</a></span>
+    </div>
+  </footer>
+</body>
+</html>
