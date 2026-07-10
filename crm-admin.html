@@ -127,6 +127,10 @@
       }
     }
 
+    headers: {
+    "Content-Type": "text/plain;charset=utf-8"
+}
+
     function renderTable(leads) {
       const body = document.getElementById('leadsTableBody');
       if (leads.length === 0) {
