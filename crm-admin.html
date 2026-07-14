@@ -115,8 +115,7 @@
 
   <script>
     // =========================================================
-    // COLE SUA URL AQUI (Aquela que você pegou no Passo 2)
-    // NÃO COLOQUE A SENHA NESTE ARQUIVO!
+    // COLE SUA URL AQUI ABAIXO:
     // =========================================================
     const API_URL = "https://script.google.com/macros/s/AKfycbxRt9TiZmhjR17nhUZMQ6MlF-T4bKZY4lJbyghHnwVj0EO2rCu7Rld0BkROOCKr-idh/exec";
     
@@ -131,6 +130,22 @@
       loadLeads();
     }
 
+    // ==========================================
+    // FUNÇÃO MESTRA PARA VENCER O CORS
+    // ==========================================
+    async function fetchAPI(payload) {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload),
+        redirect: 'follow'
+      });
+      return await response.json();
+    }
+
+    // ==========================================
+    // LOGIN E CARREGAMENTO
+    // ==========================================
     async function handleLogin(e) {
       e.preventDefault();
       const inputVal = document.getElementById('passwordInput').value;
@@ -142,12 +157,10 @@
       err.classList.add('hidden');
       
       try {
-        const res = await fetch(`${API_URL}?action=getLeads&token=${encodeURIComponent(inputVal)}`);
-        const data = await res.json();
+        const data = await fetchAPI({ action: 'getLeads', token: inputVal });
         
         if(data.error) throw new Error(data.error);
         
-        // Sucesso: Salva a senha na sessão e mostra o painel
         userToken = inputVal;
         sessionStorage.setItem("crmToken", userToken);
         
@@ -175,16 +188,19 @@
       const body = document.getElementById('leadsTableBody');
       body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-slate-500 font-medium animate-pulse">Sincronizando Leads...</td></tr>';
       try {
-        const res = await fetch(`${API_URL}?action=getLeads&token=${encodeURIComponent(userToken)}`);
-        const data = await res.json();
+        const data = await fetchAPI({ action: 'getLeads', token: userToken });
         if(data.error) throw new Error(data.error);
+        
         allLeads = data.leads || [];
         renderTable(allLeads);
       } catch(e) {
-        body.innerHTML = `<tr><td colspan="5" class="text-center text-red-400 py-12">${e.message}</td></tr>`;
+        body.innerHTML = `<tr><td colspan="5" class="text-center text-red-400 py-12">Erro de conexão. Tente relogar.</td></tr>`;
       }
     }
 
+    // ==========================================
+    // INTERFACE E EDIÇÃO
+    // ==========================================
     function renderTable(leads) {
       const body = document.getElementById('leadsTableBody');
       if (leads.length === 0) {
@@ -276,12 +292,7 @@
       };
 
       try {
-        const res = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
-        });
-        const result = await res.json();
+        const result = await fetchAPI(payload);
         if (result.error) throw new Error(result.error);
         closeModal();
         loadLeads();
