@@ -20,7 +20,7 @@
       <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-sm text-white">AS</div>
       <div>
         <h1 class="text-base font-bold text-slate-100 leading-none">AlanSM Solutions</h1>
-        <span class="text-[10px] text-blue-500 font-semibold tracking-wider uppercase">CRM Offline / API Mode</span>
+        <span class="text-[10px] text-blue-500 font-semibold tracking-wider uppercase">Painel de Operações Seguro</span>
       </div>
     </div>
     <div class="flex items-center gap-4">
@@ -47,7 +47,7 @@
           </thead>
           <tbody id="leadsTableBody" class="divide-y divide-slate-800/60 text-slate-300">
             <tr>
-              <td colspan="6" class="px-6 py-12 text-center text-slate-500 font-medium">Iniciando API...</td>
+              <td colspan="6" class="px-6 py-12 text-center text-slate-500 font-medium">Sincronizando dados...</td>
             </tr>
           </tbody>
         </table>
@@ -58,7 +58,7 @@
   <div id="editModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm hidden z-50 items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-3xl shadow-2xl flex flex-col overflow-hidden max-h-[90vh]">
       <div class="flex justify-between items-center px-6 py-4 border-b border-slate-800 bg-slate-950">
-        <h2 class="text-sm font-bold text-slate-100 uppercase tracking-wider">Edição via API</h2>
+        <h2 class="text-sm font-bold text-slate-100 uppercase tracking-wider">Edição de Registro</h2>
         <button onclick="closeModal()" class="text-slate-500 hover:text-slate-100 text-2xl leading-none font-semibold">&times;</button>
       </div>
       <div class="p-6 overflow-y-auto custom-scrollbar">
@@ -93,7 +93,7 @@
           
           <div class="sm:col-span-2 border-t border-slate-800 pt-5 mt-2 flex justify-end gap-3">
             <button type="button" onclick="closeModal()" class="border border-slate-800 hover:bg-slate-800 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition-colors">Cancelar</button>
-            <button type="submit" id="saveButton" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-6 py-2 rounded-md transition-colors">Salvar no Google Sheets</button>
+            <button type="submit" id="saveButton" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-6 py-2 rounded-md transition-colors">Salvar Alterações</button>
           </div>
         </form>
       </div>
@@ -101,36 +101,28 @@
   </div>
 
   <script>
-    // ==========================================
-    // CREDENCIAIS (Corrigido para não duplicar parâmetros)
-    // ==========================================
-    const API_URL = "https://script.google.com/macros/s/AKfycbwhMd6dZCMUzfBKiRV0Y0epTzQmMKvI5Q4uwh738gwDWi9LfG_3p4hUi4TUB6Gr1YU/exec";
-    const API_TOKEN = "AlanSM2026";
-    // ==========================================
-
     let allLeads = [];
 
-    async function loadLeads() {
+    function loadLeads() {
       const body = document.getElementById('leadsTableBody');
-      body.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-slate-500 font-medium animate-pulse">Autenticando e conectando à API...</td></tr>';
+      body.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-slate-500 font-medium animate-pulse">Sincronizando com a Planilha de Forma Segura...</td></tr>';
       
-      try {
-        const response = await fetch(`${API_URL}?action=getLeads&token=${API_TOKEN}`);
-        const data = await response.json();
-        
-        if (data.error) throw new Error(data.error);
-        
-        allLeads = data.leads || [];
-        renderTable(allLeads);
-      } catch (error) {
-        body.innerHTML = `<tr><td colspan="6" class="px-6 py-12 text-center text-red-400 font-semibold bg-red-950/20 border border-red-900/50 rounded-lg">⚠️ Erro na API: ${error.message}</td></tr>`;
-      }
+      // Ponte nativa do Google que elimina erros de barreira CORS
+      google.script.run
+        .withSuccessHandler(function(leads) {
+          allLeads = leads;
+          renderTable(leads);
+        })
+        .withFailureHandler(function(error) {
+          body.innerHTML = `<tr><td colspan="6" class="px-6 py-12 text-center text-red-400 font-semibold bg-red-950/20 border border-red-900/50 rounded-lg">⚠️ Erro: ${error.message}</td></tr>`;
+        })
+        .getLeadsData();
     }
 
     function renderTable(leads) {
       const body = document.getElementById('leadsTableBody');
       if (leads.length === 0) {
-        body.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-slate-500 font-medium">Nenhum lead retornado pela API.</td></tr>';
+        body.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-slate-500 font-medium">A tabela está vazia.</td></tr>';
         return;
       }
       
@@ -193,12 +185,12 @@
       modal.classList.remove('flex');
     }
 
-    async function saveLeadChanges(event) {
+    function saveLeadChanges(event) {
       event.preventDefault();
       
       const btn = document.getElementById('saveButton');
       const originalText = btn.textContent;
-      btn.textContent = 'Aguarde, atualizando planilha...';
+      btn.textContent = 'Gravando alterações...';
       btn.disabled = true;
       
       const updatedLead = {
@@ -220,31 +212,19 @@
         estimatedprice: document.getElementById('modalEstimatedPrice').value
       };
 
-      const payload = {
-        action: 'updateLead',
-        token: API_TOKEN,
-        data: updatedLead
-      };
-
-      try {
-        // Envio limpo com text/plain para evitar bloqueios CORS ao salvar
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
-        });
-        
-        const result = await response.json();
-        if (result.error) throw new Error(result.error);
-        
-        closeModal();
-        loadLeads();
-      } catch (error) {
-        alert('Erro ao atualizar: ' + error.message);
-      } finally {
-        btn.textContent = originalText;
-        btn.disabled = false;
-      }
+      google.script.run
+        .withSuccessHandler(function(response) {
+          closeModal();
+          btn.textContent = originalText;
+          btn.disabled = false;
+          loadLeads();
+        })
+        .withFailureHandler(function(error) {
+          alert('Erro ao atualizar: ' + error.message);
+          btn.textContent = originalText;
+          btn.disabled = false;
+        })
+        .updateLeadRow(updatedLead);
     }
 
     document.addEventListener('DOMContentLoaded', loadLeads);
