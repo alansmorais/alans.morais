@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel Local | AlanSM Solutions</title>
+  <title>Painel CRM | AlanSM Solutions</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -102,9 +102,9 @@
 
   <script>
     // ==========================================
-    // COLOQUE SUAS CREDENCIAIS AQUI
+    // CREDENCIAIS (Corrigido para não duplicar parâmetros)
     // ==========================================
-    const API_URL = "https://script.google.com/macros/s/AKfycbwhMd6dZCMUzfBKiRV0Y0epTzQmMKvI5Q4uwh738gwDWi9LfG_3p4hUi4TUB6Gr1YU/exec?action=getLeads&token=AlanSM2026";
+    const API_URL = "https://script.google.com/macros/s/AKfycbwhMd6dZCMUzfBKiRV0Y0epTzQmMKvI5Q4uwh738gwDWi9LfG_3p4hUi4TUB6Gr1YU/exec";
     const API_TOKEN = "AlanSM2026";
     // ==========================================
 
@@ -126,10 +126,6 @@
         body.innerHTML = `<tr><td colspan="6" class="px-6 py-12 text-center text-red-400 font-semibold bg-red-950/20 border border-red-900/50 rounded-lg">⚠️ Erro na API: ${error.message}</td></tr>`;
       }
     }
-
-    headers: {
-    "Content-Type": "text/plain;charset=utf-8"
-}
 
     function renderTable(leads) {
       const body = document.getElementById('leadsTableBody');
@@ -231,6 +227,7 @@
       };
 
       try {
+        // Envio limpo com text/plain para evitar bloqueios CORS ao salvar
         const response = await fetch(API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -250,13 +247,7 @@
       }
     }
 
-    // Inicialização
-    if(API_URL.includes('COLE_AQUI')) {
-      alert("Por favor, edite o arquivo HTML e cole a sua API_URL na linha 199.");
-    } else {
-      document.addEventListener('DOMContentLoaded', loadLeads);
-    }
+    document.addEventListener('DOMContentLoaded', loadLeads);
   </script>
 </body>
 </html>
-                                                                                                                                                                                                                                                                                      
