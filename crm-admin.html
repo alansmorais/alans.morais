@@ -113,205 +113,403 @@
     </div>
   </div>
 
-  <script>
-    // =========================================================
-    // COLE SUA URL AQUI ABAIXO:
-    // =========================================================
-    const API_URL = "https://script.google.com/macros/s/AKfycbxRt9TiZmhjR17nhUZMQ6MlF-T4bKZY4lJbyghHnwVj0EO2rCu7Rld0BkROOCKr-idh/exec";
-    
-    let userToken = sessionStorage.getItem("crmToken") || "";
-    let allLeads = [];
+ <script>
 
-    // Checa se já está logado ao abrir
-    if(userToken) {
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('mainDashboard').classList.remove('hidden');
-      document.getElementById('mainDashboard').classList.add('flex');
-      loadLeads();
-    }
+const API_URL = "https://script.google.com/macros/s/AKfycbxRt9TiZmhjR17nhUZMQ6MlF-T4bKZY4lJbyghHnwVj0EO2rCu7Rld0BkROOCKr-idh/exec";
 
-    // ==========================================
-    // ==========================================
-    // FUNÇÃO MESTRA (Agora usa GET para furar o bloqueio)
-    // ==========================================
-    async function fetchAPI(payload) {
-      // Transforma as informações em parâmetros invisíveis de URL
-      const params = new URLSearchParams();
-      params.append('action', payload.action);
-      params.append('token', payload.token);
-      
-      // Se estiver salvando dados, envia junto
-      if (payload.data) {
-        params.append('data', JSON.stringify(payload.data));
-      }
-      
-      const response = await fetch(`${API_URL}?${params.toString()}`, {
-        method: 'GET',
-        mode: 'cors'
-      });
-      
-      return await response.json();
-    }
-    // ==========================================
-    // LOGIN E CARREGAMENTO
-    // ==========================================
-    async function handleLogin(e) {
-      e.preventDefault();
-      const inputVal = document.getElementById('passwordInput').value;
-      const btn = document.getElementById('loginBtn');
-      const err = document.getElementById('loginError');
-      
-      btn.textContent = "Verificando...";
-      btn.disabled = true;
-      err.classList.add('hidden');
-      
-      try {
-        const data = await fetchAPI({ action: 'getLeads', token: inputVal });
-        
-        if(data.error) throw new Error(data.error);
-        
-        userToken = inputVal;
-        sessionStorage.setItem("crmToken", userToken);
-        
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('mainDashboard').classList.remove('hidden');
-        document.getElementById('mainDashboard').classList.add('flex');
-        
-        allLeads = data.leads || [];
-        renderTable(allLeads);
-      } catch (error) {
-        err.textContent = error.message;
-        err.classList.remove('hidden');
-      } finally {
-        btn.textContent = "Entrar no Sistema";
-        btn.disabled = false;
-      }
-    }
 
-    function logout() {
-      sessionStorage.removeItem("crmToken");
-      location.reload();
-    }
+let sessionToken = sessionStorage.getItem("crmSession") || "";
+let allLeads = [];
 
-    async function loadLeads() {
-      const body = document.getElementById('leadsTableBody');
-      body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-slate-500 font-medium animate-pulse">Sincronizando Leads...</td></tr>';
-      try {
-        const data = await fetchAPI({ action: 'getLeads', token: userToken });
-        if(data.error) throw new Error(data.error);
-        
-        allLeads = data.leads || [];
-        renderTable(allLeads);
-      } catch(e) {
-        body.innerHTML = `<tr><td colspan="5" class="text-center text-red-400 py-12">Erro de conexão. Tente relogar.</td></tr>`;
-      }
-    }
 
-    // ==========================================
-    // INTERFACE E EDIÇÃO
-    // ==========================================
-    function renderTable(leads) {
-      const body = document.getElementById('leadsTableBody');
-      if (leads.length === 0) {
-        body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-slate-500">Nenhum lead encontrado.</td></tr>';
-        return;
-      }
-      body.innerHTML = leads.map((lead, idx) => {
-        const displayCompany = lead.businessname || lead.clientlegalname || lead.clienttype || '-';
-        return `
-        <tr class="hover:bg-slate-950/40 border-b border-slate-800/30">
-          <td class="px-6 py-4 font-semibold text-slate-100">${lead.name || '-'}</td>
-          <td class="px-6 py-4 text-slate-300">${displayCompany}</td>
-          <td class="px-6 py-4 text-slate-400">
-            <div>${lead.email || '-'}</div><div class="text-[11px] text-slate-500 mt-0.5">${lead.phone || '-'}</div>
-          </td>
-          <td class="px-6 py-4"><span class="bg-slate-800 border border-slate-700 text-blue-400 px-2 py-1 rounded text-[10px]">${lead.package || 'Geral'}</span></td>
-          <td class="px-6 py-4 text-right">
-            <button onclick="openEditModal(${idx})" class="border border-slate-700 hover:border-blue-500 hover:text-blue-400 text-slate-300 font-semibold px-3 py-1.5 rounded transition-all">Editar</button>
-          </td>
-        </tr>
-      `}).join('');
-    }
+// ===============================
+// AUTO LOGIN
+// ===============================
 
-    function filterLeads() {
-      const query = document.getElementById('tableSearch').value.toLowerCase();
-      const filtered = allLeads.filter(l => 
-        (l.name && l.name.toLowerCase().includes(query)) || 
-        (l.email && l.email.toLowerCase().includes(query)) ||
-        (l.businessname && l.businessname.toLowerCase().includes(query))
-      );
-      renderTable(filtered);
-    }
+if(sessionToken){
 
-    function openEditModal(index) {
-      const l = allLeads[index];
-      document.getElementById('modalRowIndex').value = l.rowIndex;
-      document.getElementById('modalName').value = l.name || '';
-      document.getElementById('modalEmail').value = l.email || '';
-      document.getElementById('modalPhone').value = l.phone || '';
-      document.getElementById('modalClientType').value = l.clienttype || '';
-      document.getElementById('modalClientLegalName').value = l.clientlegalname || '';
-      document.getElementById('modalSignatureLanguage').value = l.signaturelanguage || '';
-      document.getElementById('modalBusinessName').value = l.businessname || '';
-      document.getElementById('modalTaxIDType').value = l.taxidtype || '';
-      document.getElementById('modalTaxIDNumber').value = l.taxidnumber || '';
-      document.getElementById('modalCountry').value = l.country || '';
-      document.getElementById('modalAddress').value = l.address || '';
-      document.getElementById('modalCity').value = l.city || '';
-      document.getElementById('modalPostalCode').value = l.postalcode || '';
-      document.getElementById('modalPackage').value = l.package || '';
-      document.getElementById('modalEstimatedPrice').value = l.estimatedprice || '';
-      document.getElementById('editModal').classList.remove('hidden');
-      document.getElementById('editModal').classList.add('flex');
-    }
+    document.getElementById('loginScreen').style.display='none';
 
-    function closeModal() {
-      document.getElementById('editModal').classList.add('hidden');
-      document.getElementById('editModal').classList.remove('flex');
-    }
+    document.getElementById('mainDashboard')
+    .classList.remove('hidden');
 
-    async function saveLeadChanges(event) {
-      event.preventDefault();
-      const btn = document.getElementById('saveButton');
-      const oldText = btn.textContent;
-      btn.textContent = 'Salvando...';
-      btn.disabled = true;
-      
-      const payload = {
-        action: 'updateLead',
-        token: userToken,
-        data: {
-          rowIndex: parseInt(document.getElementById('modalRowIndex').value),
-          name: document.getElementById('modalName').value,
-          email: document.getElementById('modalEmail').value,
-          phone: document.getElementById('modalPhone').value,
-          clienttype: document.getElementById('modalClientType').value,
-          clientlegalname: document.getElementById('modalClientLegalName').value,
-          signaturelanguage: document.getElementById('modalSignatureLanguage').value,
-          businessname: document.getElementById('modalBusinessName').value,
-          taxidtype: document.getElementById('modalTaxIDType').value,
-          taxidnumber: document.getElementById('modalTaxIDNumber').value,
-          country: document.getElementById('modalCountry').value,
-          address: document.getElementById('modalAddress').value,
-          city: document.getElementById('modalCity').value,
-          postalcode: document.getElementById('modalPostalCode').value,
-          package: document.getElementById('modalPackage').value,
-          estimatedprice: document.getElementById('modalEstimatedPrice').value
+    document.getElementById('mainDashboard')
+    .classList.add('flex');
+
+    loadLeads();
+
+}
+
+
+// ===============================
+// LOGIN
+// ===============================
+
+async function handleLogin(e){
+
+    e.preventDefault();
+
+
+    const password =
+    document.getElementById('passwordInput').value;
+
+
+    const btn =
+    document.getElementById('loginBtn');
+
+
+    const err =
+    document.getElementById('loginError');
+
+
+    btn.textContent="Verificando...";
+    btn.disabled=true;
+
+    err.classList.add('hidden');
+
+
+
+    try{
+
+
+        const response =
+        await fetch(
+            `${API_URL}?action=login&password=${encodeURIComponent(password)}`
+        );
+
+
+        const data =
+        await response.json();
+
+
+
+        if(!data.success){
+
+            throw new Error(data.error);
+
         }
-      };
 
-      try {
-        const result = await fetchAPI(payload);
-        if (result.error) throw new Error(result.error);
-        closeModal();
+
+
+        sessionToken =
+        data.session;
+
+
+
+        sessionStorage.setItem(
+            "crmSession",
+            sessionToken
+        );
+
+
+
+        document.getElementById('loginScreen')
+        .style.display='none';
+
+
+        document.getElementById('mainDashboard')
+        .classList.remove('hidden');
+
+
+        document.getElementById('mainDashboard')
+        .classList.add('flex');
+
+
+
         loadLeads();
-      } catch (e) {
-        alert('Erro ao salvar: ' + e.message);
-      } finally {
-        btn.textContent = oldText;
-        btn.disabled = false;
-      }
+
+
+
     }
-  </script>
+    catch(error){
+
+        err.textContent =
+        error.message;
+
+        err.classList.remove('hidden');
+
+    }
+    finally{
+
+        btn.textContent="Entrar no Sistema";
+
+        btn.disabled=false;
+
+    }
+
+}
+
+
+
+// ===============================
+// API REQUEST
+// ===============================
+
+async function fetchAPI(payload){
+
+
+    const params =
+    new URLSearchParams();
+
+
+    params.append(
+        "action",
+        payload.action
+    );
+
+
+    params.append(
+        "session",
+        sessionToken
+    );
+
+
+
+    if(payload.data){
+
+        params.append(
+            "data",
+            JSON.stringify(payload.data)
+        );
+
+    }
+
+
+
+    const response =
+    await fetch(
+        `${API_URL}?${params.toString()}`
+    );
+
+
+
+    return await response.json();
+
+}
+
+
+
+// ===============================
+// LOAD LEADS
+// ===============================
+
+async function loadLeads(){
+
+
+    const body =
+    document.getElementById('leadsTableBody');
+
+
+    body.innerHTML=
+    `
+    <tr>
+    <td colspan="5"
+    class="px-6 py-12 text-center text-slate-500">
+    Sincronizando Leads...
+    </td>
+    </tr>
+    `;
+
+
+
+    try{
+
+
+        const data =
+        await fetchAPI({
+            action:"getLeads"
+        });
+
+
+
+        if(!data.success){
+
+            throw new Error(data.error);
+
+        }
+
+
+
+        allLeads =
+        data.leads || [];
+
+
+
+        renderTable(allLeads);
+
+
+
+    }
+    catch(error){
+
+
+        body.innerHTML=
+        `
+        <tr>
+        <td colspan="5"
+        class="text-center text-red-400 py-12">
+        Sessão expirada. Faça login novamente.
+        </td>
+        </tr>
+        `;
+
+
+        sessionStorage.removeItem("crmSession");
+
+
+    }
+
+
+}
+
+
+
+// ===============================
+// LOGOUT
+// ===============================
+
+function logout(){
+
+    sessionStorage.removeItem(
+        "crmSession"
+    );
+
+    location.reload();
+
+}
+
+
+
+// ===============================
+// TABLE
+// ===============================
+
+function renderTable(leads){
+
+
+const body =
+document.getElementById('leadsTableBody');
+
+
+
+if(leads.length===0){
+
+body.innerHTML=
+`
+<tr>
+<td colspan="5"
+class="px-6 py-12 text-center text-slate-500">
+Nenhum lead encontrado.
+</td>
+</tr>
+`;
+
+return;
+
+}
+
+
+
+body.innerHTML =
+leads.map((lead,idx)=>{
+
+
+const company =
+lead.businessname ||
+lead.clientlegalname ||
+"-";
+
+
+return `
+
+<tr class="hover:bg-slate-950/40 border-b border-slate-800/30">
+
+
+<td class="px-6 py-4 font-semibold text-slate-100">
+${lead.name || "-"}
+</td>
+
+
+<td class="px-6 py-4">
+${company}
+</td>
+
+
+<td class="px-6 py-4">
+${lead.email || "-"}
+<br>
+<span class="text-xs text-slate-500">
+${lead.phone || ""}
+</span>
+</td>
+
+
+<td class="px-6 py-4">
+
+<span class="bg-slate-800 text-blue-400 px-2 py-1 rounded text-xs">
+
+${lead.package || "-"}
+
+</span>
+
+</td>
+
+
+
+<td class="px-6 py-4 text-right">
+
+<button
+onclick="openEditModal(${idx})"
+class="border border-slate-700 px-3 py-1 rounded">
+
+Editar
+
+</button>
+
+</td>
+
+
+</tr>
+
+
+`;
+
+}).join("");
+
+}
+
+
+
+// ===============================
+// FILTER
+// ===============================
+
+function filterLeads(){
+
+const q =
+document.getElementById('tableSearch')
+.value
+.toLowerCase();
+
+
+renderTable(
+
+allLeads.filter(l=>
+
+(l.name||"").toLowerCase().includes(q) ||
+
+(l.email||"").toLowerCase().includes(q) ||
+
+(l.businessname||"").toLowerCase().includes(q)
+
+)
+
+);
+
+
+}
+
+
+</script>
 </body>
 </html>
