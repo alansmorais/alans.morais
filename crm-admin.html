@@ -131,6 +131,9 @@
             <div><label class="block text-[10px] text-slate-500 uppercase mb-1">NIF / CNPJ</label><input id="modalTaxIDNumber" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
           </div>
           <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Tipo de Cliente</label><input id="modalClientType" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+          
+          <!-- CORREÇÃO: Campo Idioma da Assinatura adicionado -->
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Idioma da Assinatura</label><input id="modalSignatureLanguage" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
 
           <div class="sm:col-span-2 border-t border-slate-800 pt-3 mt-1"><span class="text-[10px] font-bold text-blue-500 uppercase tracking-wider">Endereço & Venda</span></div>
           <div class="sm:col-span-2"><label class="block text-[10px] text-slate-500 uppercase mb-1">Endereço Completo</label><input id="modalAddress" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
@@ -160,52 +163,52 @@
     let sessionToken = sessionStorage.getItem("crmSession") || "";
     let allLeads = [];
 
-    if(sessionToken){
-      document.getElementById('loginScreen').style.display='none';
+    if (sessionToken) {
+      document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('mainDashboard').classList.remove('hidden');
       document.getElementById('mainDashboard').classList.add('flex');
       loadLeads();
     }
 
-    async function handleLogin(e){
+    async function handleLogin(e) {
       e.preventDefault();
       const password = document.getElementById('passwordInput').value;
       const btn = document.getElementById('loginBtn');
       const err = document.getElementById('loginError');
 
-      btn.textContent="Verificando...";
-      btn.disabled=true;
+      btn.textContent = "Verificando...";
+      btn.disabled = true;
       err.classList.add('hidden');
 
       try {
         const response = await fetch(`${API_URL}?action=login&password=${encodeURIComponent(password)}`);
         const data = await response.json();
 
-        if(!data.success) throw new Error(data.error);
+        if (!data.success) throw new Error(data.error);
 
         sessionToken = data.session;
         sessionStorage.setItem("crmSession", sessionToken);
 
-        document.getElementById('loginScreen').style.display='none';
+        document.getElementById('loginScreen').style.display = 'none';
         document.getElementById('mainDashboard').classList.remove('hidden');
         document.getElementById('mainDashboard').classList.add('flex');
 
         loadLeads();
-      } catch(error){
+      } catch (error) {
         err.textContent = error.message;
         err.classList.remove('hidden');
       } finally {
-        btn.textContent="Entrar no Sistema";
-        btn.disabled=false;
+        btn.textContent = "Entrar no Sistema";
+        btn.disabled = false;
       }
     }
 
-    async function fetchAPI(payload){
+    async function fetchAPI(payload) {
       const params = new URLSearchParams();
       params.append("action", payload.action);
       params.append("session", sessionToken);
 
-      if(payload.data){
+      if (payload.data) {
         params.append("data", JSON.stringify(payload.data));
       }
 
@@ -223,30 +226,28 @@
       document.getElementById('dashNovos').textContent = novos;
     }
 
-    async function loadLeads(){
+    async function loadLeads() {
       const body = document.getElementById('leadsTableBody');
       body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-slate-500">Sincronizando Leads...</td></tr>';
 
       try {
-        const data = await fetchAPI({ action:"getLeads" });
-        if(!data.success) throw new Error(data.error);
+        const data = await fetchAPI({ action: "getLeads" });
+        if (!data.success) throw new Error(data.error);
         
-        // Inverte o array para mostrar os mais novos (fundo da planilha) no topo
         allLeads = (data.leads || []).reverse(); 
         updateDashboard(allLeads);
         renderTable(allLeads);
-      } catch(error){
+      } catch (error) {
         body.innerHTML = '<tr><td colspan="5" class="text-center text-red-400 py-12">Sessão expirada. Faça login novamente.</td></tr>';
         sessionStorage.removeItem("crmSession");
       }
     }
 
-    function logout(){
+    function logout() {
       sessionStorage.removeItem("crmSession");
       location.reload();
     }
 
-    // NOVA FUNÇÃO: Disparar Email
     async function triggerInvoice(index, btnElement) {
       const lead = allLeads[index];
       if (!lead.email) {
@@ -265,10 +266,10 @@
           data: lead
         };
         const result = await fetchAPI(payload);
-        if (result.error) throw new Error(result.error);
+        if (!result.success) throw new Error(result.error);
         
         alert("E-mail enviado com sucesso!");
-        loadLeads(); // Recarrega para atualizar o status para "Proposta Enviada"
+        loadLeads();
       } catch (e) {
         alert("Erro ao enviar: " + e.message);
         btnElement.innerHTML = originalText;
@@ -276,9 +277,9 @@
       }
     }
 
-    function renderTable(leads){
+    function renderTable(leads) {
       const body = document.getElementById('leadsTableBody');
-      if(leads.length === 0){
+      if (leads.length === 0) {
         body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-slate-500">Nenhum lead encontrado.</td></tr>';
         return;
       }
@@ -330,12 +331,12 @@
       `}).join("");
     }
 
-    function filterLeads(){
+    function filterLeads() {
       const q = document.getElementById('tableSearch').value.toLowerCase();
       renderTable(allLeads.filter(l =>
-        (l.name||"").toLowerCase().includes(q) ||
-        (l.email||"").toLowerCase().includes(q) ||
-        (l.businessname||"").toLowerCase().includes(q)
+        (l.name || "").toLowerCase().includes(q) ||
+        (l.email || "").toLowerCase().includes(q) ||
+        (l.businessname || "").toLowerCase().includes(q)
       ));
     }
 
@@ -359,7 +360,6 @@
       document.getElementById('modalEstimatedPrice').value = l.estimatedprice || '';
       document.getElementById('modalStatus').value = l.status || 'Novo';
       
-      // Novos Campos
       document.getElementById('modalPromoter').value = l.promoter || '';
       document.getElementById('modalCommission').value = l.commission || '';
       document.getElementById('modalReferredBy').value = l.referredby || '';
@@ -368,12 +368,12 @@
       document.getElementById('editModal').classList.add('flex');
     }
 
-    function closeModal(){
+    function closeModal() {
       document.getElementById('editModal').classList.add('hidden');
       document.getElementById('editModal').classList.remove('flex');
     }
 
-    async function saveLeadChanges(event){
+    async function saveLeadChanges(event) {
       event.preventDefault();
       const btn = document.getElementById('saveButton');
       const oldText = btn.textContent;
@@ -382,7 +382,6 @@
       
       const payload = {
         action: 'updateLead',
-        token: sessionToken,
         data: {
           rowIndex: parseInt(document.getElementById('modalRowIndex').value),
           name: document.getElementById('modalName').value,
@@ -409,7 +408,7 @@
 
       try {
         const result = await fetchAPI(payload);
-        if (result.error) throw new Error(result.error);
+        if (!result.success) throw new Error(result.error);
         closeModal();
         loadLeads();
       } catch (e) {
