@@ -131,18 +131,27 @@
     }
 
     // ==========================================
-    // FUNÇÃO MESTRA PARA VENCER O CORS
+    // ==========================================
+    // FUNÇÃO MESTRA (Agora usa GET para furar o bloqueio)
     // ==========================================
     async function fetchAPI(payload) {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload),
-        redirect: 'follow'
+      // Transforma as informações em parâmetros invisíveis de URL
+      const params = new URLSearchParams();
+      params.append('action', payload.action);
+      params.append('token', payload.token);
+      
+      // Se estiver salvando dados, envia junto
+      if (payload.data) {
+        params.append('data', JSON.stringify(payload.data));
+      }
+      
+      const response = await fetch(`${API_URL}?${params.toString()}`, {
+        method: 'GET',
+        mode: 'cors'
       });
+      
       return await response.json();
     }
-
     // ==========================================
     // LOGIN E CARREGAMENTO
     // ==========================================
