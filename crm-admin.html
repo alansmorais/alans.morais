@@ -15,13 +15,12 @@
 </head>
 <body class="antialiased min-h-screen flex flex-col">
 
-  <!-- TELA DE LOGIN -->
+  <!-- LOGIN -->
   <div id="loginScreen" class="fixed inset-0 bg-slate-950 flex flex-col items-center justify-center z-50">
     <div class="bg-slate-900 border border-slate-800 p-8 rounded-xl shadow-2xl w-full max-w-sm text-center">
       <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center font-bold text-2xl text-white mx-auto mb-4">AS</div>
       <h2 class="text-lg font-bold text-slate-100">AlanSM Solutions</h2>
       <p class="text-xs text-slate-400 mb-6 uppercase tracking-wider">Acesso Restrito - CRM</p>
-      
       <form onsubmit="handleLogin(event)">
         <input type="password" id="passwordInput" placeholder="Senha de Acesso" class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-3 text-sm text-center text-slate-100 focus:outline-none focus:border-blue-500 mb-4" required />
         <button type="submit" id="loginBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition-colors text-sm">Entrar no Sistema</button>
@@ -30,14 +29,14 @@
     </div>
   </div>
 
-  <!-- PAINEL PRINCIPAL -->
+  <!-- DASHBOARD -->
   <div id="mainDashboard" class="hidden flex-col flex-1">
     <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur px-8 py-4 flex items-center justify-between sticky top-0 z-40">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-sm text-white">AS</div>
         <div>
           <h1 class="text-base font-bold text-slate-100 leading-none">AlanSM Solutions</h1>
-          <span class="text-[10px] text-blue-500 font-semibold tracking-wider uppercase">CRM Github / API Mode</span>
+          <span class="text-[10px] text-blue-500 font-semibold tracking-wider uppercase">CRM Mode</span>
         </div>
       </div>
       <div class="flex items-center gap-4">
@@ -48,8 +47,6 @@
     </header>
 
     <main class="flex-1 p-6 max-w-7xl w-full mx-auto flex flex-col gap-6">
-      
-      <!-- MINI DASHBOARD -->
       <div class="grid grid-cols-3 gap-4">
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col shadow-lg">
           <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Total de Leads</span>
@@ -65,7 +62,6 @@
         </div>
       </div>
 
-      <!-- TABELA DE LEADS -->
       <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
         <div class="overflow-x-auto custom-scrollbar">
           <table class="w-full text-left border-collapse text-xs">
@@ -78,31 +74,28 @@
                 <th class="px-6 py-4 text-right">Ações</th>
               </tr>
             </thead>
-            <tbody id="leadsTableBody" class="divide-y divide-slate-800/60 text-slate-300">
-              <tr><td colspan="5" class="px-6 py-12 text-center text-slate-500">Aguardando dados...</td></tr>
-            </tbody>
+            <tbody id="leadsTableBody" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
           </table>
         </div>
       </div>
     </main>
   </div>
 
-  <!-- MODAL DE EDIÇÃO -->
+  <!-- MODAL -->
   <div id="editModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm hidden z-50 items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-3xl shadow-2xl flex flex-col overflow-hidden max-h-[90vh]">
       <div class="flex justify-between items-center px-6 py-4 border-b border-slate-800 bg-slate-950">
         <h2 class="text-sm font-bold text-slate-100 uppercase tracking-wider">Ficha do Lead</h2>
-        <button onclick="closeModal()" class="text-slate-500 hover:text-slate-100 text-2xl leading-none font-semibold">&times;</button>
+        <button onclick="closeModal()" class="text-slate-500 hover:text-slate-100 text-2xl font-semibold">&times;</button>
       </div>
       <div class="p-6 overflow-y-auto custom-scrollbar">
         <form id="editForm" onsubmit="saveLeadChanges(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input type="hidden" id="modalRowIndex" />
           
           <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Nome</label><input id="modalName" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          
           <div>
-            <label class="block text-[10px] text-slate-500 uppercase mb-1">Status do Lead</label>
-            <select id="modalStatus" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500">
+            <label class="block text-[10px] text-slate-500 uppercase mb-1">Status</label>
+            <select id="modalStatus" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100">
               <option value="Novo">Novo</option>
               <option value="Em Contato">Em Contato</option>
               <option value="Proposta Enviada">Proposta Enviada</option>
@@ -111,43 +104,25 @@
               <option value="Perdido">Perdido</option>
             </select>
           </div>
-          
           <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Email</label><input id="modalEmail" type="email" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Telefone (WhatsApp)</label><input id="modalPhone" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Telefone</label><input id="modalPhone" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
           
-          <!-- NOVOS CAMPOS DE COMISSÃO E INDICAÇÃO -->
-          <div class="sm:col-span-2 border-t border-slate-800 pt-3 mt-1"><span class="text-[10px] font-bold text-purple-500 uppercase tracking-wider">Parcerias & Comissões</span></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Promotor (Promoter)</label><input id="modalPromoter" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+          <div class="sm:col-span-2 border-t border-slate-800 pt-3"><span class="text-[10px] font-bold text-purple-500 uppercase">Parcerias</span></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Promotor</label><input id="modalPromoter" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
           <div class="grid grid-cols-2 gap-2">
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Comissão (%)</label><input id="modalCommission" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" placeholder="Ex: 10%" /></div>
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Indicado Por</label><input id="modalReferredBy" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Comissão (%)</label><input id="modalCommission" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Indicado Por</label><input id="modalReferredBy" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
           </div>
 
-          <div class="sm:col-span-2 border-t border-slate-800 pt-3 mt-1"><span class="text-[10px] font-bold text-blue-500 uppercase tracking-wider">Dados Corporativos</span></div>
+          <div class="sm:col-span-2 border-t border-slate-800 pt-3"><span class="text-[10px] font-bold text-blue-500 uppercase">Dados Corporativos</span></div>
           <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Razão Social</label><input id="modalClientLegalName" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
           <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Nome Fantasia</label><input id="modalBusinessName" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          <div class="grid grid-cols-2 gap-2">
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Tipo de Documento</label><input id="modalTaxIDType" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">NIF / CNPJ</label><input id="modalTaxIDNumber" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          </div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Tipo de Cliente</label><input id="modalClientType" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          
-          <!-- CORREÇÃO: Campo Idioma da Assinatura adicionado -->
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Idioma da Assinatura</label><input id="modalSignatureLanguage" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Idioma Assinatura</label><input id="modalSignatureLanguage" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">NIF / CNPJ</label><input id="modalTaxIDNumber" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
 
-          <div class="sm:col-span-2 border-t border-slate-800 pt-3 mt-1"><span class="text-[10px] font-bold text-blue-500 uppercase tracking-wider">Endereço & Venda</span></div>
-          <div class="sm:col-span-2"><label class="block text-[10px] text-slate-500 uppercase mb-1">Endereço Completo</label><input id="modalAddress" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          <div class="grid grid-cols-3 gap-2 sm:col-span-2">
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Cidade</label><input id="modalCity" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">CEP / Postal</label><input id="modalPostalCode" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">País</label><input id="modalCountry" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          </div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Pacote Desejado</label><input id="modalPackage" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Valor Estimado</label><input id="modalEstimatedPrice" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          
-          <div class="sm:col-span-2 border-t border-slate-800 pt-5 mt-2 flex justify-end gap-3">
-            <button type="button" onclick="closeModal()" class="border border-slate-800 hover:bg-slate-800 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition-colors">Cancelar</button>
-            <button type="submit" id="saveButton" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-6 py-2 rounded-md transition-colors">Salvar Alterações</button>
+          <div class="sm:col-span-2 border-t border-slate-800 pt-5 flex justify-end gap-3">
+            <button type="button" onclick="closeModal()" class="border border-slate-800 px-4 py-2 rounded text-xs">Cancelar</button>
+            <button type="submit" id="saveButton" class="bg-blue-600 px-6 py-2 rounded text-xs font-bold text-white">Salvar Alterações</button>
           </div>
         </form>
       </div>
@@ -155,269 +130,126 @@
   </div>
 
   <script>
-    // =========================================================
-    // COLE SUA URL AQUI ABAIXO:
-    // =========================================================
-    const API_URL = "https://script.google.com/macros/s/AKfycbxRt9TiZmhjR17nhUZMQ6MlF-T4bKZY4lJbyghHnwVj0EO2rCu7Rld0BkROOCKr-idh/exec";
-    
+    const API_URL = "https://script.google.com/macros/s/AKfycbxRt9TiZmhjR17nhUZMQ6MlF-T4bKZY4lJbyghHnwVj0EO2rCu7Rld0BkROOCKr-idh/exec"; 
     let sessionToken = sessionStorage.getItem("crmSession") || "";
     let allLeads = [];
 
     if (sessionToken) {
-      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('loginScreen').style.display='none';
       document.getElementById('mainDashboard').classList.remove('hidden');
-      document.getElementById('mainDashboard').classList.add('flex');
       loadLeads();
     }
 
-    async function handleLogin(e) {
+    async function handleLogin(e){
       e.preventDefault();
       const password = document.getElementById('passwordInput').value;
-      const btn = document.getElementById('loginBtn');
-      const err = document.getElementById('loginError');
-
-      btn.textContent = "Verificando...";
-      btn.disabled = true;
-      err.classList.add('hidden');
-
       try {
         const response = await fetch(`${API_URL}?action=login&password=${encodeURIComponent(password)}`);
         const data = await response.json();
-
-        if (!data.success) throw new Error(data.error);
-
+        if(!data.success) throw new Error(data.error);
         sessionToken = data.session;
         sessionStorage.setItem("crmSession", sessionToken);
-
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('mainDashboard').classList.remove('hidden');
-        document.getElementById('mainDashboard').classList.add('flex');
-
-        loadLeads();
-      } catch (error) {
-        err.textContent = error.message;
-        err.classList.remove('hidden');
-      } finally {
-        btn.textContent = "Entrar no Sistema";
-        btn.disabled = false;
-      }
+        location.reload();
+      } catch(err) { alert(err.message); }
     }
 
-    async function fetchAPI(payload) {
-      const params = new URLSearchParams();
-      params.append("action", payload.action);
-      params.append("session", sessionToken);
-
-      if (payload.data) {
-        params.append("data", JSON.stringify(payload.data));
-      }
-
+    async function fetchAPI(payload){
+      const params = new URLSearchParams({ action: payload.action, session: sessionToken });
+      if(payload.data) params.append("data", JSON.stringify(payload.data));
       const response = await fetch(`${API_URL}?${params.toString()}`);
       return await response.json();
     }
 
-    function updateDashboard(leads) {
-      document.getElementById('dashTotal').textContent = leads.length;
-      
-      const fechados = leads.filter(l => (l.status || '').trim().toLowerCase() === 'fechado').length;
-      document.getElementById('dashFechados').textContent = fechados;
-
-      const novos = leads.filter(l => (l.status || '').trim().toLowerCase() === 'novo' || !(l.status)).length;
-      document.getElementById('dashNovos').textContent = novos;
-    }
-
-    async function loadLeads() {
-      const body = document.getElementById('leadsTableBody');
-      body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-slate-500">Sincronizando Leads...</td></tr>';
-
+    async function loadLeads(){
       try {
-        const data = await fetchAPI({ action: "getLeads" });
-        if (!data.success) throw new Error(data.error);
-        
-        allLeads = (data.leads || []).reverse(); 
+        const data = await fetchAPI({ action:"getLeads" });
+        if(!data.success) throw new Error(data.error);
+        allLeads = (data.leads || []).reverse();
         updateDashboard(allLeads);
         renderTable(allLeads);
-      } catch (error) {
-        body.innerHTML = '<tr><td colspan="5" class="text-center text-red-400 py-12">Sessão expirada. Faça login novamente.</td></tr>';
-        sessionStorage.removeItem("crmSession");
-      }
+      } catch(e) { console.error(e); }
     }
 
-    function logout() {
-      sessionStorage.removeItem("crmSession");
-      location.reload();
+    function updateDashboard(leads) {
+      document.getElementById('dashTotal').textContent = leads.length;
+      document.getElementById('dashFechados').textContent = leads.filter(l => (l.status||'').toLowerCase() === 'fechado').length;
+      document.getElementById('dashNovos').textContent = leads.filter(l => (l.status||'').toLowerCase() === 'novo' || !l.status).length;
     }
 
-    async function triggerInvoice(index, btnElement) {
-      const lead = allLeads[index];
-      if (!lead.email) {
-        alert("Este lead não possui um e-mail cadastrado.");
-        return;
-      }
-      if (!confirm(`Deseja enviar a proposta por e-mail para ${lead.email}?`)) return;
-
-      const originalText = btnElement.innerHTML;
-      btnElement.innerHTML = "⏳ Enviando...";
-      btnElement.disabled = true;
-
-      try {
-        const payload = {
-          action: 'sendInvoice',
-          data: lead
-        };
-        const result = await fetchAPI(payload);
-        if (!result.success) throw new Error(result.error);
-        
-        alert("E-mail enviado com sucesso!");
-        loadLeads();
-      } catch (e) {
-        alert("Erro ao enviar: " + e.message);
-        btnElement.innerHTML = originalText;
-        btnElement.disabled = false;
-      }
-    }
-
-    function renderTable(leads) {
+    function renderTable(leads){
       const body = document.getElementById('leadsTableBody');
-      if (leads.length === 0) {
-        body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-slate-500">Nenhum lead encontrado.</td></tr>';
-        return;
-      }
-
-      body.innerHTML = leads.map((lead, idx) => {
-        const company = lead.businessname || lead.clientlegalname || lead.name || "-";
-        
-        const status = (lead.status || 'Novo').trim();
-        let statusColor = "bg-slate-800 text-slate-300 border-slate-700";
-        if (status === 'Em Negociação' || status === 'Proposta Enviada' || status === 'Em Contato') {
-          statusColor = "bg-blue-950/50 text-blue-400 border-blue-900/50";
-        } else if (status === 'Fechado') {
-          statusColor = "bg-emerald-950/40 text-emerald-400 border-emerald-900/40";
-        } else if (status === 'Perdido') {
-          statusColor = "bg-red-950/40 text-red-400 border-red-900/40";
-        }
-
-        const cleanPhone = (lead.phone || '').replace(/\D/g, '');
-
-        return `
-        <tr class="hover:bg-slate-950/40 border-b border-slate-800/30">
-          <td class="px-6 py-4">
-            <div class="font-semibold text-slate-100">${lead.name || "-"}</div>
-            <div class="text-[10px] text-slate-500 mt-0.5 uppercase">${company}</div>
-          </td>
-          <td class="px-6 py-4 text-slate-400">
-            <div>${lead.email || "-"}</div>
-            <div class="flex items-center gap-2 mt-0.5">
-              <span class="text-[11px] text-slate-500">${lead.phone || ""}</span>
-              ${cleanPhone ? `
-                <a href="https://api.whatsapp.com/send?phone=${cleanPhone}&text=Olá%20${encodeURIComponent(lead.name || '')},%20tudo%20bem?" target="_blank" class="text-emerald-500 hover:text-emerald-400 flex items-center gap-0.5" title="WhatsApp">
-                  <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.963C16.528 2.01 14.069.99 11.512.99 6.076.99 1.652 5.361 1.648 10.79c-.001 1.732.455 3.42 1.32 4.927l-.993 3.629 3.722-.962c1.479.801 3.06 1.221 4.673 1.222z"/></svg>
-                </a>
-              ` : ''}
-            </div>
-          </td>
-          <td class="px-6 py-4">
-            <span class="border px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider ${statusColor}">${status}</span>
-          </td>
-          <td class="px-6 py-4">
-            <div class="text-xs text-blue-400 font-medium">${lead.package || "Geral"}</div>
-            <div class="text-[11px] text-emerald-500 font-bold mt-0.5">${lead.estimatedprice || "-"}</div>
-          </td>
-          <td class="px-6 py-4 text-right space-x-2">
-            <button onclick="triggerInvoice(${idx}, this)" class="bg-blue-600/20 text-blue-400 hover:bg-blue-600 hover:text-white border border-blue-900/50 font-semibold px-3 py-1.5 rounded transition-all" title="Enviar Proposta por Email">✉️ Enviar</button>
-            <button onclick="openEditModal(${idx})" class="border border-slate-700 hover:border-slate-500 hover:bg-slate-800 text-slate-300 font-semibold px-3 py-1.5 rounded transition-all">Editar</button>
+      body.innerHTML = leads.map((l, idx) => `
+        <tr class="border-b border-slate-800/30 hover:bg-slate-950/40">
+          <td class="px-6 py-4"><b>${l.name || '-'}</b><br><small class="text-slate-500">${l.businessname || '-'}</small></td>
+          <td class="px-6 py-4">${l.email || '-'}<br><small>${l.phone || '-'}</small></td>
+          <td class="px-6 py-4"><span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] uppercase font-bold">${l.status || 'Novo'}</span></td>
+          <td class="px-6 py-4 text-blue-400">${l.package || '-'}<br><b class="text-emerald-500">${l.estimatedprice || '-'}</b></td>
+          <td class="px-6 py-4 text-right">
+            <button onclick="triggerInvoice(${idx}, this)" class="bg-blue-600/20 text-blue-400 px-3 py-1 rounded">✉️ Enviar</button>
+            <button onclick="openEditModal(${idx})" class="border border-slate-700 px-3 py-1 rounded">Editar</button>
           </td>
         </tr>
-      `}).join("");
+      `).join("");
     }
 
-    function filterLeads() {
-      const q = document.getElementById('tableSearch').value.toLowerCase();
-      renderTable(allLeads.filter(l =>
-        (l.name || "").toLowerCase().includes(q) ||
-        (l.email || "").toLowerCase().includes(q) ||
-        (l.businessname || "").toLowerCase().includes(q)
-      ));
+    async function triggerInvoice(idx, btn){
+      const lead = allLeads[idx];
+      if(!lead.email) return alert("Lead sem email!");
+      if(!confirm("Enviar proposta?")) return;
+      btn.disabled = true; btn.innerText = "Enviando...";
+      try {
+        const res = await fetchAPI({ action: 'sendInvoice', data: lead });
+        if(!res.success) throw new Error(res.error);
+        alert("Enviado!"); loadLeads();
+      } catch(e) { alert(e.message); btn.disabled=false; btn.innerText="✉️ Enviar"; }
     }
 
-    function openEditModal(index) {
-      const l = allLeads[index];
+    function openEditModal(idx){
+      const l = allLeads[idx];
       document.getElementById('modalRowIndex').value = l.rowIndex;
       document.getElementById('modalName').value = l.name || '';
       document.getElementById('modalEmail').value = l.email || '';
-      document.getElementById('modalPhone').value = l.phone || '';
-      document.getElementById('modalClientType').value = l.clienttype || '';
-      document.getElementById('modalClientLegalName').value = l.clientlegalname || '';
-      document.getElementById('modalSignatureLanguage').value = l.signaturelanguage || '';
-      document.getElementById('modalBusinessName').value = l.businessname || '';
-      document.getElementById('modalTaxIDType').value = l.taxidtype || '';
-      document.getElementById('modalTaxIDNumber').value = l.taxidnumber || '';
-      document.getElementById('modalCountry').value = l.country || '';
-      document.getElementById('modalAddress').value = l.address || '';
-      document.getElementById('modalCity').value = l.city || '';
-      document.getElementById('modalPostalCode').value = l.postalcode || '';
-      document.getElementById('modalPackage').value = l.package || '';
-      document.getElementById('modalEstimatedPrice').value = l.estimatedprice || '';
       document.getElementById('modalStatus').value = l.status || 'Novo';
-      
+      document.getElementById('modalPhone').value = l.phone || '';
       document.getElementById('modalPromoter').value = l.promoter || '';
       document.getElementById('modalCommission').value = l.commission || '';
       document.getElementById('modalReferredBy').value = l.referredby || '';
-
+      document.getElementById('modalClientLegalName').value = l.clientlegalname || '';
+      document.getElementById('modalBusinessName').value = l.businessname || '';
+      document.getElementById('modalSignatureLanguage').value = l.signaturelanguage || '';
+      document.getElementById('modalTaxIDNumber').value = l.taxidnumber || '';
       document.getElementById('editModal').classList.remove('hidden');
       document.getElementById('editModal').classList.add('flex');
     }
 
-    function closeModal() {
-      document.getElementById('editModal').classList.add('hidden');
-      document.getElementById('editModal').classList.remove('flex');
-    }
-
-    async function saveLeadChanges(event) {
-      event.preventDefault();
+    async function saveLeadChanges(e){
+      e.preventDefault();
       const btn = document.getElementById('saveButton');
-      const oldText = btn.textContent;
-      btn.textContent = 'Salvando...';
-      btn.disabled = true;
-      
-      const payload = {
-        action: 'updateLead',
-        data: {
-          rowIndex: parseInt(document.getElementById('modalRowIndex').value),
-          name: document.getElementById('modalName').value,
-          email: document.getElementById('modalEmail').value,
-          phone: document.getElementById('modalPhone').value,
-          clienttype: document.getElementById('modalClientType').value,
-          clientlegalname: document.getElementById('modalClientLegalName').value,
-          signaturelanguage: document.getElementById('modalSignatureLanguage').value,
-          businessname: document.getElementById('modalBusinessName').value,
-          taxidtype: document.getElementById('modalTaxIDType').value,
-          taxidnumber: document.getElementById('modalTaxIDNumber').value,
-          country: document.getElementById('modalCountry').value,
-          address: document.getElementById('modalAddress').value,
-          city: document.getElementById('modalCity').value,
-          postalcode: document.getElementById('modalPostalCode').value,
-          package: document.getElementById('modalPackage').value,
-          estimatedprice: document.getElementById('modalEstimatedPrice').value,
-          status: document.getElementById('modalStatus').value,
-          promoter: document.getElementById('modalPromoter').value,
-          commission: document.getElementById('modalCommission').value,
-          referredby: document.getElementById('modalReferredBy').value
-        }
+      btn.innerText = "Salvando...";
+      const leadData = {
+        rowIndex: document.getElementById('modalRowIndex').value,
+        name: document.getElementById('modalName').value,
+        email: document.getElementById('modalEmail').value,
+        status: document.getElementById('modalStatus').value,
+        phone: document.getElementById('modalPhone').value,
+        promoter: document.getElementById('modalPromoter').value,
+        commission: document.getElementById('modalCommission').value,
+        referredby: document.getElementById('modalReferredBy').value,
+        clientlegalname: document.getElementById('modalClientLegalName').value,
+        businessname: document.getElementById('modalBusinessName').value,
+        signaturelanguage: document.getElementById('modalSignatureLanguage').value,
+        taxidnumber: document.getElementById('modalTaxIDNumber').value
       };
-
       try {
-        const result = await fetchAPI(payload);
-        if (!result.success) throw new Error(result.error);
-        closeModal();
-        loadLeads();
-      } catch (e) {
-        alert('Erro ao salvar: ' + e.message);
-      } finally {
-        btn.textContent = oldText;
-        btn.disabled = false;
-      }
+        const res = await fetchAPI({ action: 'updateLead', data: leadData });
+        if(!res.success) throw new Error(res.error);
+        closeModal(); loadLeads();
+      } catch(e) { alert(e.message); } finally { btn.innerText = "Salvar Alterações"; }
     }
+
+    function closeModal(){ document.getElementById('editModal').classList.add('hidden'); document.getElementById('editModal').classList.remove('flex'); }
+    function filterLeads(){ /* sua lógica de filtro aqui */ }
+    function logout(){ sessionStorage.clear(); location.reload(); }
   </script>
 </body>
 </html>
