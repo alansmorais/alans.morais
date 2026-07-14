@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel CRM | AlanSM Solutions</title>
+  <title>CRM Segurado | AlanSM Solutions</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -15,85 +15,98 @@
 </head>
 <body class="antialiased min-h-screen flex flex-col">
 
-  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur px-8 py-4 flex items-center justify-between sticky top-0 z-40">
-    <div class="flex items-center gap-3">
-      <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-sm text-white">AS</div>
-      <div>
-        <h1 class="text-base font-bold text-slate-100 leading-none">AlanSM Solutions</h1>
-        <span class="text-[10px] text-blue-500 font-semibold tracking-wider uppercase">Painel de Operações Seguro</span>
-      </div>
+  <!-- TELA DE LOGIN (Aparece primeiro) -->
+  <div id="loginScreen" class="fixed inset-0 bg-slate-950 flex flex-col items-center justify-center z-50">
+    <div class="bg-slate-900 border border-slate-800 p-8 rounded-xl shadow-2xl w-full max-w-sm text-center">
+      <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center font-bold text-2xl text-white mx-auto mb-4">AS</div>
+      <h2 class="text-lg font-bold text-slate-100">AlanSM Solutions</h2>
+      <p class="text-xs text-slate-400 mb-6 uppercase tracking-wider">Acesso Restrito - CRM</p>
+      
+      <form onsubmit="handleLogin(event)">
+        <input type="password" id="passwordInput" placeholder="Senha de Acesso" class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-3 text-sm text-center text-slate-100 focus:outline-none focus:border-blue-500 mb-4" required />
+        <button type="submit" id="loginBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition-colors text-sm">Entrar no Sistema</button>
+      </form>
+      <p id="loginError" class="text-red-400 text-xs mt-4 hidden font-medium"></p>
     </div>
-    <div class="flex items-center gap-4">
-      <input type="text" id="tableSearch" oninput="filterLeads()" placeholder="Filtrar..." class="bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors w-64" />
-      <button onclick="loadLeads()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-md transition-colors flex items-center gap-2">
-        <span>↻</span> Atualizar
-      </button>
-    </div>
-  </header>
+  </div>
 
-  <main class="flex-1 p-8 max-w-7xl w-full mx-auto">
-    <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
-      <div class="overflow-x-auto custom-scrollbar">
-        <table class="w-full text-left border-collapse text-xs">
-          <thead>
-            <tr class="bg-slate-950 border-b border-slate-800 text-slate-400 font-bold uppercase tracking-wider">
-              <th class="px-6 py-4">Nome do Lead</th>
-              <th class="px-6 py-4">Tipo / Empresa</th>
-              <th class="px-6 py-4">Contato</th>
-              <th class="px-6 py-4">Pacote</th>
-              <th class="px-6 py-4">Valor Estimado</th>
-              <th class="px-6 py-4 text-right">Ações</th>
-            </tr>
-          </thead>
-          <tbody id="leadsTableBody" class="divide-y divide-slate-800/60 text-slate-300">
-            <tr>
-              <td colspan="6" class="px-6 py-12 text-center text-slate-500 font-medium">Sincronizando dados...</td>
-            </tr>
-          </tbody>
-        </table>
+  <!-- PAINEL PRINCIPAL (Oculto até o login) -->
+  <div id="mainDashboard" class="hidden flex-col flex-1">
+    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur px-8 py-4 flex items-center justify-between sticky top-0 z-40">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-sm text-white">AS</div>
+        <div>
+          <h1 class="text-base font-bold text-slate-100 leading-none">AlanSM Solutions</h1>
+          <span class="text-[10px] text-blue-500 font-semibold tracking-wider uppercase">CRM Github / API Mode</span>
+        </div>
       </div>
-    </div>
-  </main>
+      <div class="flex items-center gap-4">
+        <input type="text" id="tableSearch" oninput="filterLeads()" placeholder="Filtrar..." class="bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors w-64" />
+        <button onclick="loadLeads()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-md transition-colors flex items-center gap-2">↻ Atualizar</button>
+        <button onclick="logout()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold px-4 py-2 rounded-md transition-colors border border-slate-700">Sair</button>
+      </div>
+    </header>
 
+    <main class="flex-1 p-8 max-w-7xl w-full mx-auto">
+      <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
+        <div class="overflow-x-auto custom-scrollbar">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="bg-slate-950 border-b border-slate-800 text-slate-400 font-bold uppercase tracking-wider">
+                <th class="px-6 py-4">Nome do Lead</th>
+                <th class="px-6 py-4">Empresa</th>
+                <th class="px-6 py-4">Contato</th>
+                <th class="px-6 py-4">Pacote</th>
+                <th class="px-6 py-4 text-right">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="leadsTableBody" class="divide-y divide-slate-800/60 text-slate-300">
+              <tr><td colspan="5" class="px-6 py-12 text-center text-slate-500">Aguardando dados...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL DE EDIÇÃO -->
   <div id="editModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm hidden z-50 items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-3xl shadow-2xl flex flex-col overflow-hidden max-h-[90vh]">
       <div class="flex justify-between items-center px-6 py-4 border-b border-slate-800 bg-slate-950">
-        <h2 class="text-sm font-bold text-slate-100 uppercase tracking-wider">Edição de Registro</h2>
+        <h2 class="text-sm font-bold text-slate-100 uppercase tracking-wider">Edição via API</h2>
         <button onclick="closeModal()" class="text-slate-500 hover:text-slate-100 text-2xl leading-none font-semibold">&times;</button>
       </div>
       <div class="p-6 overflow-y-auto custom-scrollbar">
         <form id="editForm" onsubmit="saveLeadChanges(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input type="hidden" id="modalRowIndex" />
           
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Name</label><input id="modalName" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Client Type</label><input id="modalClientType" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Email</label><input id="modalEmail" type="email" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Phone</label><input id="modalPhone" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Name</label><input id="modalName" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Client Type</label><input id="modalClientType" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Email</label><input id="modalEmail" type="email" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Phone</label><input id="modalPhone" type="text" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
           
           <div class="sm:col-span-2 border-t border-slate-800 pt-3 mt-1"><span class="text-[10px] font-bold text-blue-500 uppercase tracking-wider">Dados Corporativos</span></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Client Legal Name</label><input id="modalClientLegalName" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Business Name</label><input id="modalBusinessName" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Client Legal Name</label><input id="modalClientLegalName" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Business Name</label><input id="modalBusinessName" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
           <div class="grid grid-cols-2 gap-2">
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Tax ID Type</label><input id="modalTaxIDType" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Tax ID Number</label><input id="modalTaxIDNumber" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
+            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Tax ID Type</label><input id="modalTaxIDType" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Tax ID Number</label><input id="modalTaxIDNumber" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
           </div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Signature Language</label><input id="modalSignatureLanguage" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Signature Language</label><input id="modalSignatureLanguage" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
 
-          <div class="sm:col-span-2 border-t border-slate-800 pt-3 mt-1"><span class="text-[10px] font-bold text-blue-500 uppercase tracking-wider">Localização</span></div>
-          <div class="sm:col-span-2"><label class="block text-[10px] text-slate-500 uppercase mb-1">Address</label><input id="modalAddress" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
+          <div class="sm:col-span-2 border-t border-slate-800 pt-3 mt-1"><span class="text-[10px] font-bold text-blue-500 uppercase tracking-wider">Localização & Venda</span></div>
+          <div class="sm:col-span-2"><label class="block text-[10px] text-slate-500 uppercase mb-1">Address</label><input id="modalAddress" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
           <div class="grid grid-cols-3 gap-2 sm:col-span-2">
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">City</label><input id="modalCity" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Postal Code</label><input id="modalPostalCode" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Country</label><input id="modalCountry" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
+            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">City</label><input id="modalCity" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Postal Code</label><input id="modalPostalCode" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Country</label><input id="modalCountry" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
           </div>
-
-          <div class="sm:col-span-2 border-t border-slate-800 pt-3 mt-1"><span class="text-[10px] font-bold text-blue-500 uppercase tracking-wider">Produto / Orçamento</span></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Package</label><input id="modalPackage" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Estimated Price</label><input id="modalEstimatedPrice" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100 focus:border-blue-500 focus:outline-none" /></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Package</label><input id="modalPackage" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Estimated Price</label><input id="modalEstimatedPrice" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
           
           <div class="sm:col-span-2 border-t border-slate-800 pt-5 mt-2 flex justify-end gap-3">
             <button type="button" onclick="closeModal()" class="border border-slate-800 hover:bg-slate-800 text-slate-300 text-xs font-semibold px-4 py-2 rounded-md transition-colors">Cancelar</button>
-            <button type="submit" id="saveButton" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-6 py-2 rounded-md transition-colors">Salvar Alterações</button>
+            <button type="submit" id="saveButton" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-6 py-2 rounded-md transition-colors">Salvar no Google Sheets</button>
           </div>
         </form>
       </div>
@@ -101,45 +114,95 @@
   </div>
 
   <script>
+    // =========================================================
+    // COLE SUA URL AQUI (Aquela que você pegou no Passo 2)
+    // NÃO COLOQUE A SENHA NESTE ARQUIVO!
+    // =========================================================
+    const API_URL = "https://script.google.com/macros/s/AKfycbxRt9TiZmhjR17nhUZMQ6MlF-T4bKZY4lJbyghHnwVj0EO2rCu7Rld0BkROOCKr-idh/exec";
+    
+    let userToken = sessionStorage.getItem("crmToken") || "";
     let allLeads = [];
 
-    function loadLeads() {
-      const body = document.getElementById('leadsTableBody');
-      body.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-slate-500 font-medium animate-pulse">Sincronizando com a Planilha de Forma Segura...</td></tr>';
+    // Checa se já está logado ao abrir
+    if(userToken) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('mainDashboard').classList.remove('hidden');
+      document.getElementById('mainDashboard').classList.add('flex');
+      loadLeads();
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const inputVal = document.getElementById('passwordInput').value;
+      const btn = document.getElementById('loginBtn');
+      const err = document.getElementById('loginError');
       
-      // Ponte nativa do Google que elimina erros de barreira CORS
-      google.script.run
-        .withSuccessHandler(function(leads) {
-          allLeads = leads;
-          renderTable(leads);
-        })
-        .withFailureHandler(function(error) {
-          body.innerHTML = `<tr><td colspan="6" class="px-6 py-12 text-center text-red-400 font-semibold bg-red-950/20 border border-red-900/50 rounded-lg">⚠️ Erro: ${error.message}</td></tr>`;
-        })
-        .getLeadsData();
+      btn.textContent = "Verificando...";
+      btn.disabled = true;
+      err.classList.add('hidden');
+      
+      try {
+        const res = await fetch(`${API_URL}?action=getLeads&token=${encodeURIComponent(inputVal)}`);
+        const data = await res.json();
+        
+        if(data.error) throw new Error(data.error);
+        
+        // Sucesso: Salva a senha na sessão e mostra o painel
+        userToken = inputVal;
+        sessionStorage.setItem("crmToken", userToken);
+        
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('mainDashboard').classList.remove('hidden');
+        document.getElementById('mainDashboard').classList.add('flex');
+        
+        allLeads = data.leads || [];
+        renderTable(allLeads);
+      } catch (error) {
+        err.textContent = error.message;
+        err.classList.remove('hidden');
+      } finally {
+        btn.textContent = "Entrar no Sistema";
+        btn.disabled = false;
+      }
+    }
+
+    function logout() {
+      sessionStorage.removeItem("crmToken");
+      location.reload();
+    }
+
+    async function loadLeads() {
+      const body = document.getElementById('leadsTableBody');
+      body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-slate-500 font-medium animate-pulse">Sincronizando Leads...</td></tr>';
+      try {
+        const res = await fetch(`${API_URL}?action=getLeads&token=${encodeURIComponent(userToken)}`);
+        const data = await res.json();
+        if(data.error) throw new Error(data.error);
+        allLeads = data.leads || [];
+        renderTable(allLeads);
+      } catch(e) {
+        body.innerHTML = `<tr><td colspan="5" class="text-center text-red-400 py-12">${e.message}</td></tr>`;
+      }
     }
 
     function renderTable(leads) {
       const body = document.getElementById('leadsTableBody');
       if (leads.length === 0) {
-        body.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-slate-500 font-medium">A tabela está vazia.</td></tr>';
+        body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-slate-500">Nenhum lead encontrado.</td></tr>';
         return;
       }
-      
       body.innerHTML = leads.map((lead, idx) => {
         const displayCompany = lead.businessname || lead.clientlegalname || lead.clienttype || '-';
         return `
-        <tr class="hover:bg-slate-950/40 transition-colors border-b border-slate-800/30">
+        <tr class="hover:bg-slate-950/40 border-b border-slate-800/30">
           <td class="px-6 py-4 font-semibold text-slate-100">${lead.name || '-'}</td>
-          <td class="px-6 py-4 font-medium text-slate-300">${displayCompany}</td>
+          <td class="px-6 py-4 text-slate-300">${displayCompany}</td>
           <td class="px-6 py-4 text-slate-400">
-            <div>${lead.email || '-'}</div>
-            <div class="text-[11px] text-slate-500 mt-0.5">${lead.phone || '-'}</div>
+            <div>${lead.email || '-'}</div><div class="text-[11px] text-slate-500 mt-0.5">${lead.phone || '-'}</div>
           </td>
-          <td class="px-6 py-4"><span class="bg-slate-800 border border-slate-700 text-blue-400 font-medium px-2 py-1 rounded text-[10px]">${lead.package || 'Geral'}</span></td>
-          <td class="px-6 py-4 font-bold text-emerald-400">${lead.estimatedprice || '-'}</td>
+          <td class="px-6 py-4"><span class="bg-slate-800 border border-slate-700 text-blue-400 px-2 py-1 rounded text-[10px]">${lead.package || 'Geral'}</span></td>
           <td class="px-6 py-4 text-right">
-            <button onclick="openEditModal(${idx})" class="border border-slate-700 hover:border-blue-500 hover:bg-blue-600/10 text-slate-300 hover:text-blue-400 font-semibold px-4 py-1.5 rounded transition-all">Editar</button>
+            <button onclick="openEditModal(${idx})" class="border border-slate-700 hover:border-blue-500 hover:text-blue-400 text-slate-300 font-semibold px-3 py-1.5 rounded transition-all">Editar</button>
           </td>
         </tr>
       `}).join('');
@@ -156,78 +219,79 @@
     }
 
     function openEditModal(index) {
-      const lead = allLeads[index];
-      document.getElementById('modalRowIndex').value = lead.rowIndex;
-      document.getElementById('modalName').value = lead.name || '';
-      document.getElementById('modalEmail').value = lead.email || '';
-      document.getElementById('modalPhone').value = lead.phone || '';
-      document.getElementById('modalClientType').value = lead.clienttype || '';
-      document.getElementById('modalClientLegalName').value = lead.clientlegalname || '';
-      document.getElementById('modalSignatureLanguage').value = lead.signaturelanguage || '';
-      document.getElementById('modalBusinessName').value = lead.businessname || '';
-      document.getElementById('modalTaxIDType').value = lead.taxidtype || '';
-      document.getElementById('modalTaxIDNumber').value = lead.taxidnumber || '';
-      document.getElementById('modalCountry').value = lead.country || '';
-      document.getElementById('modalAddress').value = lead.address || '';
-      document.getElementById('modalCity').value = lead.city || '';
-      document.getElementById('modalPostalCode').value = lead.postalcode || '';
-      document.getElementById('modalPackage').value = lead.package || '';
-      document.getElementById('modalEstimatedPrice').value = lead.estimatedprice || '';
-      
-      const modal = document.getElementById('editModal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      const l = allLeads[index];
+      document.getElementById('modalRowIndex').value = l.rowIndex;
+      document.getElementById('modalName').value = l.name || '';
+      document.getElementById('modalEmail').value = l.email || '';
+      document.getElementById('modalPhone').value = l.phone || '';
+      document.getElementById('modalClientType').value = l.clienttype || '';
+      document.getElementById('modalClientLegalName').value = l.clientlegalname || '';
+      document.getElementById('modalSignatureLanguage').value = l.signaturelanguage || '';
+      document.getElementById('modalBusinessName').value = l.businessname || '';
+      document.getElementById('modalTaxIDType').value = l.taxidtype || '';
+      document.getElementById('modalTaxIDNumber').value = l.taxidnumber || '';
+      document.getElementById('modalCountry').value = l.country || '';
+      document.getElementById('modalAddress').value = l.address || '';
+      document.getElementById('modalCity').value = l.city || '';
+      document.getElementById('modalPostalCode').value = l.postalcode || '';
+      document.getElementById('modalPackage').value = l.package || '';
+      document.getElementById('modalEstimatedPrice').value = l.estimatedprice || '';
+      document.getElementById('editModal').classList.remove('hidden');
+      document.getElementById('editModal').classList.add('flex');
     }
 
     function closeModal() {
-      const modal = document.getElementById('editModal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
+      document.getElementById('editModal').classList.add('hidden');
+      document.getElementById('editModal').classList.remove('flex');
     }
 
-    function saveLeadChanges(event) {
+    async function saveLeadChanges(event) {
       event.preventDefault();
-      
       const btn = document.getElementById('saveButton');
-      const originalText = btn.textContent;
-      btn.textContent = 'Gravando alterações...';
+      const oldText = btn.textContent;
+      btn.textContent = 'Salvando...';
       btn.disabled = true;
       
-      const updatedLead = {
-        rowIndex: parseInt(document.getElementById('modalRowIndex').value),
-        name: document.getElementById('modalName').value,
-        email: document.getElementById('modalEmail').value,
-        phone: document.getElementById('modalPhone').value,
-        clienttype: document.getElementById('modalClientType').value,
-        clientlegalname: document.getElementById('modalClientLegalName').value,
-        signaturelanguage: document.getElementById('modalSignatureLanguage').value,
-        businessname: document.getElementById('modalBusinessName').value,
-        taxidtype: document.getElementById('modalTaxIDType').value,
-        taxidnumber: document.getElementById('modalTaxIDNumber').value,
-        country: document.getElementById('modalCountry').value,
-        address: document.getElementById('modalAddress').value,
-        city: document.getElementById('modalCity').value,
-        postalcode: document.getElementById('modalPostalCode').value,
-        package: document.getElementById('modalPackage').value,
-        estimatedprice: document.getElementById('modalEstimatedPrice').value
+      const payload = {
+        action: 'updateLead',
+        token: userToken,
+        data: {
+          rowIndex: parseInt(document.getElementById('modalRowIndex').value),
+          name: document.getElementById('modalName').value,
+          email: document.getElementById('modalEmail').value,
+          phone: document.getElementById('modalPhone').value,
+          clienttype: document.getElementById('modalClientType').value,
+          clientlegalname: document.getElementById('modalClientLegalName').value,
+          signaturelanguage: document.getElementById('modalSignatureLanguage').value,
+          businessname: document.getElementById('modalBusinessName').value,
+          taxidtype: document.getElementById('modalTaxIDType').value,
+          taxidnumber: document.getElementById('modalTaxIDNumber').value,
+          country: document.getElementById('modalCountry').value,
+          address: document.getElementById('modalAddress').value,
+          city: document.getElementById('modalCity').value,
+          postalcode: document.getElementById('modalPostalCode').value,
+          package: document.getElementById('modalPackage').value,
+          estimatedprice: document.getElementById('modalEstimatedPrice').value
+        }
       };
 
-      google.script.run
-        .withSuccessHandler(function(response) {
-          closeModal();
-          btn.textContent = originalText;
-          btn.disabled = false;
-          loadLeads();
-        })
-        .withFailureHandler(function(error) {
-          alert('Erro ao atualizar: ' + error.message);
-          btn.textContent = originalText;
-          btn.disabled = false;
-        })
-        .updateLeadRow(updatedLead);
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (result.error) throw new Error(result.error);
+        closeModal();
+        loadLeads();
+      } catch (e) {
+        alert('Erro ao salvar: ' + e.message);
+      } finally {
+        btn.textContent = oldText;
+        btn.disabled = false;
+      }
     }
-
-    document.addEventListener('DOMContentLoaded', loadLeads);
   </script>
 </body>
 </html>
