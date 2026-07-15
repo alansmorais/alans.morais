@@ -100,35 +100,37 @@
       btn.disabled = true;
       msg.classList.add('hidden');
 
-      // Coleta os dados para enviar à planilha
+      // Coleta os dados do formulário
       const payload = {
-        action: 'newPublicLead',
-        data: {
-          name: document.getElementById('clientName').value,
-          email: document.getElementById('clientEmail').value,
-          phone: document.getElementById('clientPhone').value,
-          clienttype: 'Business', // Fixo como B2B
-          clientlegalname: document.getElementById('clientLegalName').value,
-          taxidtype: 'NIP', // Fixo para a Polônia
-          taxidnumber: document.getElementById('taxIDNumber').value,
-          address: document.getElementById('address').value,
-          postalcode: document.getElementById('postalCode').value,
-          city: document.getElementById('city').value,
-          country: 'Poland',
-          status: 'Dados Preenchidos' // Status que vai aparecer no seu CRM
-        }
+        name: document.getElementById('clientName').value,
+        email: document.getElementById('clientEmail').value,
+        phone: document.getElementById('clientPhone').value,
+        clienttype: 'Business', // Fixo como B2B
+        clientlegalname: document.getElementById('clientLegalName').value,
+        taxidtype: 'NIP', // Fixo para a Polônia
+        taxidnumber: document.getElementById('taxIDNumber').value,
+        address: document.getElementById('address').value,
+        postalcode: document.getElementById('postalCode').value,
+        city: document.getElementById('city').value,
+        country: 'Poland',
+        status: 'Dados Preenchidos' // Status para destacar no CRM
       };
 
+      // Transforma os dados em URL (A Tática do GET para evitar bloqueio)
+      const params = new URLSearchParams();
+      params.append("action", "addLead");
+      params.append("token", API_TOKEN);
+      params.append("data", JSON.stringify(payload));
+
       try {
-        // Envia como POST da mesma forma que o seu CRM faz
-        const res = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify(payload)
+        const res = await fetch(`${API_URL}?${params.toString()}`, {
+          method: 'GET',
+          mode: 'cors'
         });
         
         const result = await res.json();
-        if (result.error) throw new Error(result.error);
+        
+        if (!result.success) throw new Error(result.error);
 
         // Sucesso
         document.getElementById('plForm').reset();
