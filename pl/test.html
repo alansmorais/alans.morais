@@ -944,7 +944,7 @@
 </div>
 
 <script>
-  const ALANSM_BACKEND_URL = "https://script.google.com/a/macros/google.com/s/AKfycbxkgBUTrzkE_6ttI6wtN8V8PcLMfX90_d_Q6Z8N8TjPFD_EF7ON-cQJxXWUr-U4I1AQ/exec";
+  const ALANSM_BACKEND_URL = "https://script.google.com/macros/s/AKfycbxkgBUTrzkE_6ttI6wtN8V8PcLMfX90_d_Q6Z8N8TjPFD_EF7ON-cQJxXWUr-U4I1AQ/exec";
   const ALANSM_FORM_TOKEN = "alansm_2026_secure_lead_form_v1";
   window.ALanSMFormStartedAt = Date.now();
 
@@ -1171,13 +1171,19 @@
     document.head.appendChild(script);
   }
 
-  async function submitLeadViaPost(payload) {
+async function submitLeadViaPost(payload) {
+    // Pack the payload into URLSearchParams (Standard Form Data)
+    const formData = new URLSearchParams();
+    for (const key in payload) {
+      formData.append(key, payload[key]);
+    }
+
     await fetch(ALANSM_BACKEND_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
+      body: formData // The browser automatically handles the 'application/x-www-form-urlencoded' headers natively
     });
+    
     return { status: 'ok', ok: true, message: 'Lead submitted.' };
   }
 
