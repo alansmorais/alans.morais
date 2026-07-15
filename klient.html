@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Setup | AlanSM Solutions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
+  </style>
+</head>
+<body class="antialiased min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-full max-w-xl bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden relative">
+    
+    <!-- Header -->
+    <div class="bg-slate-950/80 border-b border-slate-800 p-8 text-center">
+      <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center font-bold text-2xl text-white mx-auto mb-4 shadow-lg shadow-blue-500/20">AS</div>
+      <h1 class="text-xl font-bold text-slate-100">AlanSM Solutions</h1>
+      <p class="text-[10px] text-blue-500 font-semibold tracking-widest uppercase mt-2">Client Onboarding / Rejestracja Klienta</p>
+      <p class="text-xs text-slate-400 mt-4 leading-relaxed">
+        Proszę wypełnić poniższe dane w celu przygotowania umowy.<br>
+        <span class="italic text-slate-500">Please fill in the details below to generate your contract.</span>
+      </p>
+    </div>
+
+    <!-- Form -->
+    <form id="plForm" onsubmit="submitForm(event)" class="p-8 space-y-5">
+      
+      <!-- Seção 1: Contato -->
+      <div>
+        <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Imię i Nazwisko / Full Name *</label>
+        <input type="text" id="clientName" required class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">E-mail *</label>
+          <input type="email" id="clientEmail" required class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
+        </div>
+        <div>
+          <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Telefon / Phone</label>
+          <input type="text" id="clientPhone" class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
+        </div>
+      </div>
+
+      <div class="border-t border-slate-800/60 my-6"></div>
+
+      <!-- Seção 2: Empresa (B2B PL) -->
+      <div>
+        <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Pełna Nazwa Firmy / Company Legal Name *</label>
+        <input type="text" id="clientLegalName" required class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" placeholder="e.g., Kowalski Sp. z o.o." />
+      </div>
+
+      <div>
+        <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">NIP / Tax ID Number *</label>
+        <input type="text" id="taxIDNumber" required class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" placeholder="1234567890" />
+      </div>
+
+      <div class="border-t border-slate-800/60 my-6"></div>
+
+      <!-- Seção 3: Endereço -->
+      <div>
+        <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Ulica i numer / Street Address *</label>
+        <input type="text" id="address" required class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Kod pocztowy / Postal Code *</label>
+          <input type="text" id="postalCode" required class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" placeholder="00-000" />
+        </div>
+        <div>
+          <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Miasto / City *</label>
+          <input type="text" id="city" required class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
+        </div>
+      </div>
+
+      <!-- Botão Submeter -->
+      <div class="pt-6">
+        <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-3.5 rounded-md transition-all shadow-lg shadow-blue-600/30">
+          Wyślij / Submit Details
+        </button>
+        <p id="statusMsg" class="text-center text-xs font-semibold mt-4 hidden"></p>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // COLE SEU LINK DO GOOGLE AQUI
+    const API_URL = "COLE_AQUI_SEU_LINK_EXEC";
+
+    async function submitForm(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const msg = document.getElementById('statusMsg');
+      
+      btn.textContent = "Przetwarzanie / Processing...";
+      btn.disabled = true;
+      msg.classList.add('hidden');
+
+      // Coleta os dados para enviar à planilha
+      const payload = {
+        action: 'newPublicLead',
+        data: {
+          name: document.getElementById('clientName').value,
+          email: document.getElementById('clientEmail').value,
+          phone: document.getElementById('clientPhone').value,
+          clienttype: 'Business', // Fixo como B2B
+          clientlegalname: document.getElementById('clientLegalName').value,
+          taxidtype: 'NIP', // Fixo para a Polônia
+          taxidnumber: document.getElementById('taxIDNumber').value,
+          address: document.getElementById('address').value,
+          postalcode: document.getElementById('postalCode').value,
+          city: document.getElementById('city').value,
+          country: 'Poland',
+          status: 'Dados Preenchidos' // Status que vai aparecer no seu CRM
+        }
+      };
+
+      try {
+        // Envia como POST da mesma forma que o seu CRM faz
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        
+        const result = await res.json();
+        if (result.error) throw new Error(result.error);
+
+        // Sucesso
+        document.getElementById('plForm').reset();
+        msg.textContent = "Dziękujemy! Dane zostały wysłane. / Thank you! Details submitted.";
+        msg.className = "text-center text-xs font-semibold mt-4 text-emerald-400 block";
+      } catch (error) {
+        msg.textContent = "Błąd / Error. Proszę spróbować ponownie.";
+        msg.className = "text-center text-xs font-semibold mt-4 text-red-400 block";
+      } finally {
+        btn.textContent = "Wyślij / Submit Details";
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
