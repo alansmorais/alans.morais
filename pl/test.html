@@ -100,4 +100,453 @@
           <div class="text-3xl font-bold text-white mb-6">1,900 zł<span class="text-base font-normal text-slate-500">/projekt</span></div>
           <ul class="space-y-3 text-sm text-slate-400 mb-8">
             <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i>System rezerwacji</li>
-            <li c
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i>Podstawowy CRM</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i>1 język</li>
+          </ul>
+          <button class="w-full py-2.5 rounded-lg border border-slate-700 text-slate-300 group-hover:border-blue-500 group-hover:text-blue-400 transition-colors font-medium">Wybieram</button>
+        </div>
+
+        <!-- Pro -->
+        <div onclick="selectPackage('pro')" class="group relative p-6 rounded-2xl border-2 border-blue-500/30 bg-slate-900/80 shadow-2xl shadow-blue-900/10 cursor-pointer">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-blue-600 text-white text-xs font-bold">Polecany</div>
+          <div class="mb-4">
+            <h3 class="text-xl font-semibold text-white">Pro</h3>
+            <p class="text-slate-500 text-sm mt-1">Dla rozwijających się salonów</p>
+          </div>
+          <div class="text-3xl font-bold text-white mb-6">3,900 zł<span class="text-base font-normal text-slate-500">/projekt</span></div>
+          <ul class="space-y-3 text-sm text-slate-400 mb-8">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i>Multi-user + uprawnienia</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i>4 języki (PL/EN/PT/ES)</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i>SMS + Email automation</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i>Płatności online</li>
+          </ul>
+          <button class="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition-colors font-medium">Wybieram</button>
+        </div>
+
+        <!-- Enterprise -->
+        <div onclick="selectPackage('enterprise')" class="group relative p-6 rounded-2xl border border-slate-800 bg-slate-900 hover:border-blue-500/50 transition-all cursor-pointer">
+          <div class="mb-4">
+            <h3 class="text-xl font-semibold text-white">Enterprise</h3>
+            <p class="text-slate-500 text-sm mt-1">Sieci i multi-lokacje</p>
+          </div>
+          <div class="text-3xl font-bold text-white mb-6">Wycena<span class="text-base font-normal text-slate-500"> indywidualna</span></div>
+          <ul class="space-y-3 text-sm text-slate-400 mb-8">
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i>Wiele lokacji</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i>API + integracje</li>
+            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i>Dedykowany opiekun</li>
+          </ul>
+          <button class="w-full py-2.5 rounded-lg border border-slate-700 text-slate-300 group-hover:border-blue-500 group-hover:text-blue-400 transition-colors font-medium">Kontakt</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="portfolio" class="py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Wybrane realizacje</h2>
+        <p class="text-slate-400">Systemy, które codziennie obsługują klientów w Polsce, Brazylii i Europie.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="group relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <h4 class="text-white font-semibold">Beauty Clinic CRM</h4>
+            <p class="text-slate-400 text-sm">Rezerwacje + galeria before/after</p>
+          </div>
+        </div>
+        <div class="group relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <h4 class="text-white font-semibold">Barbershop Chain</h4>
+            <p class="text-slate-400 text-sm">Multi-lokacja, 3 miasta</p>
+          </div>
+        </div>
+        <div class="group relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-900 border border-slate-800">
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80"></div>
+          <div class="absolute bottom-0 left-0 p-6">
+            <h4 class="text-white font-semibold">Medical Spa</h4>
+            <p class="text-slate-400 text-sm">Karty zgody + SMS reminders</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" class="py-24 bg-slate-900/50 border-y border-slate-800/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Jak wygląda współpraca?</h2>
+      </div>
+      <div class="grid sm:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mx-auto mb-4 font-bold">1</div>
+          <h4 class="text-white font-semibold mb-2">Analiza</h4>
+          <p class="text-slate-400 text-sm">Rozmowa o procesach w Twoim salonie</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mx-auto mb-4 font-bold">2</div>
+          <h4 class="text-white font-semibold mb-2">Wdrożenie</h4>
+          <p class="text-slate-400 text-sm">Konfiguracja + import danych</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mx-auto mb-4 font-bold">3</div>
+          <h4 class="text-white font-semibold mb-2">Szkolenie</h4>
+          <p class="text-slate-400 text-sm">1h z zespołem online</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center mx-auto mb-4 font-bold">4</div>
+          <h4 class="text-white font-semibold mb-2">Wsparcie</h4>
+          <p class="text-slate-400 text-sm">Hosting + aktualizacje w cenie</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-24">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">Częste pytania</h2>
+      </div>
+      <div class="space-y-4" id="faqContainer">
+        <div class="border border-slate-800 rounded-xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left bg-slate-900 hover:bg-slate-850 transition-colors">
+            <span class="font-medium text-white">Czy płacę miesięczny abonament?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+          </button>
+          <div class="hidden px-5 pb-5 text-slate-400 text-sm bg-slate-900 border-t border-slate-800">
+            Nie. Model oparty jest na jednorazowej realizacji projektu + opcjonalnym abonamencie hostingowym (90 zł/mc). Nie pobieramy prowizji od rezerwacji.
+          </div>
+        </div>
+        <div class="border border-slate-800 rounded-xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left bg-slate-900 hover:bg-slate-850 transition-colors">
+            <span class="font-medium text-white">Czy mogę zmienić pakiet później?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+          </button>
+          <div class="hidden px-5 pb-5 text-slate-400 text-sm bg-slate-900 border-t border-slate-800">
+            Tak, systemy są modułowe. Dokładamy funkcjonalności w trakcie rozwoju bez konieczności wymiany całej platformy.
+          </div>
+        </div>
+        <div class="border border-slate-800 rounded-xl overflow-hidden">
+          <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left bg-slate-900 hover:bg-slate-850 transition-colors">
+            <span class="font-medium text-white">Jak szybko jest gotowy system?</span>
+            <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 transition-transform"></i>
+          </button>
+          <div class="hidden px-5 pb-5 text-slate-400 text-sm bg-slate-900 border-t border-slate-800">
+            Standardowe wdrożenie (pakiet Pro) trwa 7-14 dni roboczych od zatwierdzenia specyfikacji.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 py-12 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="text-slate-500 text-sm"> AlanSM Solutions. Wszelkie prawa zastrzeżone.</div>
+      <div class="flex gap-6 text-sm text-slate-400">
+        <a href="#" class="hover:text-white">Polityka prywatności</a>
+        <a href="#" class="hover:text-white">Regulamin</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="fixed inset-0 z-[60] hidden">
+    <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm" onclick="closeContact()"></div>
+    <div class="absolute inset-0 flex items-center justify-center p-4">
+      <div class="w-full max-w-md rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl relative overflow-hidden">
+        <button onclick="closeContact()" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        
+        <div class="p-8">
+          <h3 class="text-2xl font-bold text-white mb-2">Darmowa wycena</h3>
+          <p class="text-slate-400 text-sm mb-6">Wypełnij formularz — oddzwonimy tego samego dnia roboczego.</p>
+          
+          <form id="contactForm" onsubmit="handleFormSubmit(event)">
+            <!-- Honeypot -->
+            <div class="hidden">
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Imię i nazwisko</label>
+                <input type="text" name="name" required class="w-full px-3 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-blue-500 transition-colors" placeholder="Jan Kowalski">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Email</label>
+                <input type="email" name="email" required class="w-full px-3 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-blue-500 transition-colors" placeholder="jan@salon.pl">
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Telefon</label>
+                <input type="tel" name="phone" class="w-full px-3 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-blue-500 transition-colors" placeholder="+48 600 000 000">
+              </div>
+              
+              <!-- WhatsApp Consent -->
+              <label class="flex items-center gap-2 text-xs text-slate-400 mt-1 cursor-pointer">
+                <input class="accent-blue-600 w-4 h-4 rounded border-slate-700 bg-slate-950" id="whatsappConsent" name="whatsapp_consent" type="checkbox"/>
+                <span>Chcę otrzymać odpowiedź przez WhatsApp</span>
+              </label>
+
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Wybrany pakiet</label>
+                <select id="packageSelect" name="package" class="w-full px-3 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-blue-500 transition-colors">
+                  <option value="light">Light — 1,900 zł</option>
+                  <option value="pro" selected>Pro — 3,900 zł</option>
+                  <option value="enterprise">Enterprise — Wycena</option>
+                  <option value="general">Jeszcze nie wiem</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Wiadomość</label>
+                <textarea name="message" rows="3" required minlength="10" class="w-full px-3 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-blue-500 transition-colors" placeholder="Opisz swój biznes i potrzeby..."></textarea>
+              </div>
+            </div>
+
+            <label class="flex items-center gap-2 text-[10px] text-slate-500 mt-4">
+              <input class="accent-blue-600" name="consent" required type="checkbox"/>
+              <span>Wyrażam zgodę na przetwarzanie danych w celu przygotowania oferty.</span>
+            </label>
+
+            <button type="submit" id="submitBtn" class="w-full mt-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-colors flex items-center justify-center gap-2">
+              <span>Wyślij wiadomość</span>
+              <i data-lucide="send" class="w-4 h-4"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alert Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 z-[70] hidden transform transition-all duration-300 translate-y-2 opacity-0">
+    <div class="px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 shadow-2xl flex items-center gap-3">
+      <div id="toastIcon"></div>
+      <div>
+        <div id="toastTitle" class="text-sm font-semibold text-white"></div>
+        <div id="toastMessage" class="text-xs text-slate-400"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ============================================================
+    // CONFIGURATION
+    // ============================================================
+    const ALANSM_BACKEND_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL_HERE'; // 🔴 REPLACE WITH YOUR DEPLOYED URL
+    const ALANSM_FORM_TOKEN  = 'alansm_2026_secure_lead_form_v1';
+    let currentLang = 'pl';
+    let currentSelectedPackage = 'pro';
+
+    // ============================================================
+    // LANGUAGE
+    // ============================================================
+    function setLanguage(lang) {
+      currentLang = lang;
+      showToast('Język zmieniony', 'Aktywny język: ' + lang.toUpperCase(), 'info');
+      // In production, this would reload page or swap text content
+    }
+
+    // ============================================================
+    // MOBILE MENU
+    // ============================================================
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    // ============================================================
+    // CONTACT MODAL
+    // ============================================================
+    function openContact() {
+      document.getElementById('contactModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      window.ALanSMFormStartedAt = new Date().toISOString();
+    }
+    function closeContact() {
+      document.getElementById('contactModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // ============================================================
+    // PACKAGE SELECTION
+    // ============================================================
+    function selectPackage(pkg) {
+      currentSelectedPackage = pkg;
+      const select = document.getElementById('packageSelect');
+      if (select) select.value = pkg;
+      openContact();
+    }
+
+    const packageData = {
+      light:      { packageName: 'Light',      price: '1,900 zł' },
+      pro:        { packageName: 'Pro',        price: '3,900 zł' },
+      enterprise: { packageName: 'Enterprise', price: 'Wycena indywidualna' },
+      general:    { packageName: 'General',    price: '' }
+    };
+
+    // ============================================================
+    // FORM HANDLER
+    // ============================================================
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const btn = document.getElementById('submitBtn');
+      const originalBtnText = btn.innerHTML;
+
+      // Validation
+      const name = String(formData.get('name') || '').trim();
+      const email = String(formData.get('email') || '').trim();
+      const message = String(formData.get('message') || '').trim();
+      const honeypot = String(formData.get('website') || '').trim();
+
+      if (!name || !email || message.length < 10) {
+        showToast('Błąd', 'Uzupełnij wszystkie wymagane pola (min. 10 znaków wiadomości).', 'error');
+        return;
+      }
+      if (honeypot !== '') {
+        // Bot filtered silently
+        showToast('Wysłano', 'Dziękujemy za wiadomość!', 'success');
+        form.reset();
+        return;
+      }
+
+      // UI Loading
+      btn.disabled = true;
+      btn.innerHTML = '<span class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span> Wysyłanie...';
+
+      const packageInfo = packageData[formData.get('package')] || packageData['general'];
+
+      const payload = {
+        action: 'submitLead',
+        formToken: ALANSM_FORM_TOKEN,
+        formStartedAt: window.ALanSMFormStartedAt,
+        website: document.getElementById('website')?.value || '',
+
+        name: name,
+        email: email,
+        phone: String(formData.get('phone') || '').trim(),
+        packageName: packageInfo.packageName,
+        estimatedPrice: packageInfo.price,
+        discountRequested: String(packageInfo.packageName || '').toLowerCase().includes('light') ? 'YES' : 'NO',
+        message: message,
+        source: 'website',
+        lang: currentLang || 'pl',
+        signatureLanguage: currentLang || 'pl',
+
+        // ✅ NEW: WhatsApp consent
+        whatsapp_consent: document.getElementById('whatsappConsent')?.checked ? 'Yes' : 'No'
+      };
+
+      try {
+        const response = await fetch(ALANSM_BACKEND_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (result.ok || result.status === 'ok') {
+          showToast('Sukces!', 'Wiadomość wysłana. Skontaktujemy się z Tobą w ciągu 24h.', 'success');
+          form.reset();
+          setTimeout(closeContact, 2000);
+        } else {
+          showToast('Błąd serwera', result.message || 'Spróbuj ponownie później.', 'error');
+        }
+
+      } catch (err) {
+        console.error('Submit error:', err);
+        showToast('Błąd połączenia', 'Nie udało się połączyć z serwerem.', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalBtnText;
+      }
+    }
+
+    // ============================================================
+    // FAQ ACCORDION
+    // ============================================================
+    function toggleFaq(button) {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector('[data-lucide="chevron-down"]');
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.style.transform = 'rotate(180deg)';
+      } else {
+        content.classList.add('hidden');
+        icon.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    // ============================================================
+    // TOAST NOTIFICATIONS
+    // ============================================================
+    function showToast(title, message, type) {
+      const toast = document.getElementById('toast');
+      const toastTitle = document.getElementById('toastTitle');
+      const toastMessage = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastTitle.textContent = title;
+      toastMessage.textContent = message;
+
+      let iconHtml = '';
+      if (type === 'success') iconHtml = '<div class="w-8 h-8 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>';
+      else if (type === 'error') iconHtml = '<div class="w-8 h-8 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>';
+      else iconHtml = '<div class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></div>';
+
+      toastIcon.innerHTML = iconHtml;
+
+      toast.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('translate-y-2', 'opacity-0');
+        setTimeout(() => toast.classList.add('hidden'), 300);
+      }, 4000);
+    }
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Close mobile menu if open
+          document.getElementById('mobileMenu')?.classList.add('hidden');
+        });
+      });
+
+      // Intersection observer for fade-in animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-4');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('section').forEach(section => {
+        section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
+        observer.observe(section);
+      });
+    });
+  </script>
+</body>
+</html>
