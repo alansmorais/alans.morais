@@ -1245,8 +1245,8 @@
 
     try {
       const result = await submitLeadViaPost(payload);
-      status.textContent = `Wiadomość wysłana pomyślnie. Ref: ${result.leadId || '0000'}`;
-      status.className = 'text-xs text-center min-h-[20px] text-green-500 mt-2 font-medium';
+        status.textContent = 'Wiadomość została wysłana. Odpowiemy tak szybko, jak to możliwe.';
+        status.className = 'text-xs text-center min-h-[20px] text-green-500 mt-2 font-medium';
       form.reset();
       loadDiscountCounter();
       window.setTimeout(closeContactForm, 3000);
