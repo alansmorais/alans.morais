@@ -14,7 +14,6 @@
 
   <div class="w-full max-w-xl bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden relative">
     
-    <!-- Header -->
     <div class="bg-slate-950/80 border-b border-slate-800 p-8 text-center">
       <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center font-bold text-2xl text-white mx-auto mb-4 shadow-lg shadow-blue-500/20">AS</div>
       <h1 class="text-xl font-bold text-slate-100">AlanSM Solutions</h1>
@@ -25,10 +24,8 @@
       </p>
     </div>
 
-    <!-- Form -->
     <form id="plForm" onsubmit="submitForm(event)" class="p-8 space-y-5">
       
-      <!-- Seção 1: Contato -->
       <div>
         <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Imię i Nazwisko / Full Name *</label>
         <input type="text" id="clientName" required class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
@@ -47,7 +44,6 @@
 
       <div class="border-t border-slate-800/60 my-6"></div>
 
-      <!-- Seção 2: Empresa (B2B PL) -->
       <div>
         <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Pełna Nazwa Firmy / Company Legal Name *</label>
         <input type="text" id="clientLegalName" required class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" placeholder="np. Kowalski Sp. z o.o." />
@@ -60,7 +56,6 @@
 
       <div class="border-t border-slate-800/60 my-6"></div>
 
-      <!-- Seção 3: Endereço -->
       <div>
         <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Ulica i numer / Street Address *</label>
         <input type="text" id="address" required class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
@@ -77,7 +72,6 @@
         </div>
       </div>
 
-      <!-- Botão Submeter -->
       <div class="pt-6">
         <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-3.5 rounded-md transition-all shadow-lg shadow-blue-600/30">
           Wyślij / Submit Details
@@ -88,10 +82,22 @@
   </div>
 
   <script>
-    // Link do Google e Token mantidos exatamente como você configurou
+    // A URL DA SUA API (Substitua se necessário)
     const API_URL = "https://script.google.com/macros/s/AKfycbxg_NJOGp60jg7ffN--ELCIQ9DDBpddcV7RpfZwqMgAvROEev_sgD0QfjS6xRKQbGkp/exec";
-    const API_TOKEN = "AlanSM2026"; 
     
+    // O TRUQUE DO SEU SITE PRINCIPAL (POST CEGO)
+    async function submitBlindPost(payload) {
+      await fetch(API_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Ignora o bloqueio do Google
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(payload)
+      });
+      return { success: true };
+    }
+
     async function submitForm(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
@@ -101,42 +107,33 @@
       btn.disabled = true;
       msg.classList.add('hidden');
 
-      // Coleta os dados do formulário
+      // Coleta os dados do formulário e cria a ação 'newPublicLead' (que já colocamos no seu Code.gs)
       const payload = {
-        name: document.getElementById('clientName').value,
-        email: document.getElementById('clientEmail').value,
-        phone: document.getElementById('clientPhone').value,
-        clienttype: 'Business', 
-        clientlegalname: document.getElementById('clientLegalName').value,
-        taxidtype: 'NIP', 
-        taxidnumber: document.getElementById('taxIDNumber').value,
-        address: document.getElementById('address').value,
-        postalcode: document.getElementById('postalCode').value,
-        city: document.getElementById('city').value,
-        country: 'Poland',
-        status: 'Dados Preenchidos'
+        action: 'newPublicLead',
+        data: {
+          name: document.getElementById('clientName').value,
+          email: document.getElementById('clientEmail').value,
+          phone: document.getElementById('clientPhone').value,
+          clienttype: 'Business', 
+          clientlegalname: document.getElementById('clientLegalName').value,
+          taxidtype: 'NIP', 
+          taxidnumber: document.getElementById('taxIDNumber').value,
+          address: document.getElementById('address').value,
+          postalcode: document.getElementById('postalCode').value,
+          city: document.getElementById('city').value,
+          country: 'Poland',
+          status: 'Dados Preenchidos'
+        }
       };
 
-      const params = new URLSearchParams();
-      params.append("action", "addLead");
-      params.append("token", API_TOKEN);
-      params.append("data", JSON.stringify(payload));
-
       try {
-        // FIX: Removed { method: 'GET', mode: 'cors' } to allow Google's redirect
-        const res = await fetch(`${API_URL}?${params.toString()}`);
+        await submitBlindPost(payload);
         
-        const result = await res.json();
-        
-        if (!result.success) throw new Error(result.error);
-
-        // Sucesso
+        // Como o 'no-cors' não lê resposta, nós simplesmente assumimos o sucesso
         document.getElementById('plForm').reset();
         msg.textContent = "Dziękujemy! Dane zostały wysłane. / Thank you! Details submitted.";
         msg.className = "text-center text-xs font-semibold mt-4 text-emerald-400 block";
       } catch (error) {
-        // Added a console log so if it fails, you can press F12 and see exactly why
-        console.error("Fetch Error:", error); 
         msg.textContent = "Błąd / Error. Proszę spróbować ponownie.";
         msg.className = "text-center text-xs font-semibold mt-4 text-red-400 block";
       } finally {
