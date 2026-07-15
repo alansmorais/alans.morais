@@ -50,7 +50,7 @@
       <!-- Seção 2: Empresa (B2B PL) -->
       <div>
         <label class="block text-[10px] text-slate-400 uppercase font-semibold mb-1">Pełna Nazwa Firmy / Company Legal Name *</label>
-        <input type="text" id="clientLegalName" required class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" placeholder="e.g., Kowalski Sp. z o.o." />
+        <input type="text" id="clientLegalName" required class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-2.5 text-sm text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" placeholder="np. Kowalski Sp. z o.o." />
       </div>
 
       <div>
@@ -88,9 +88,9 @@
   </div>
 
   <script>
-    // COLE SEU LINK DO GOOGLE AQUI
+    // Link do Google e Token mantidos exatamente como você configurou
     const API_URL = "https://script.google.com/macros/s/AKfycbxg_NJOGp60jg7ffN--ELCIQ9DDBpddcV7RpfZwqMgAvROEev_sgD0QfjS6xRKQbGkp/exec";
-    const API_TOKEN = "AlanSM2026"; // Senha necessária para a API autorizar a inserção
+    const API_TOKEN = "AlanSM2026"; 
     
     async function submitForm(e) {
       e.preventDefault();
@@ -106,28 +106,25 @@
         name: document.getElementById('clientName').value,
         email: document.getElementById('clientEmail').value,
         phone: document.getElementById('clientPhone').value,
-        clienttype: 'Business', // Fixo como B2B
+        clienttype: 'Business', 
         clientlegalname: document.getElementById('clientLegalName').value,
-        taxidtype: 'NIP', // Fixo para a Polônia
+        taxidtype: 'NIP', 
         taxidnumber: document.getElementById('taxIDNumber').value,
         address: document.getElementById('address').value,
         postalcode: document.getElementById('postalCode').value,
         city: document.getElementById('city').value,
         country: 'Poland',
-        status: 'Dados Preenchidos' // Status para destacar no CRM
+        status: 'Dados Preenchidos'
       };
 
-      // Transforma os dados em URL (A Tática do GET para evitar bloqueio)
       const params = new URLSearchParams();
       params.append("action", "addLead");
       params.append("token", API_TOKEN);
       params.append("data", JSON.stringify(payload));
 
       try {
-        const res = await fetch(`${API_URL}?${params.toString()}`, {
-          method: 'GET',
-          mode: 'cors'
-        });
+        // FIX: Removed { method: 'GET', mode: 'cors' } to allow Google's redirect
+        const res = await fetch(`${API_URL}?${params.toString()}`);
         
         const result = await res.json();
         
@@ -138,6 +135,8 @@
         msg.textContent = "Dziękujemy! Dane zostały wysłane. / Thank you! Details submitted.";
         msg.className = "text-center text-xs font-semibold mt-4 text-emerald-400 block";
       } catch (error) {
+        // Added a console log so if it fails, you can press F12 and see exactly why
+        console.error("Fetch Error:", error); 
         msg.textContent = "Błąd / Error. Proszę spróbować ponownie.";
         msg.className = "text-center text-xs font-semibold mt-4 text-red-400 block";
       } finally {
