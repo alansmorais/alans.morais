@@ -15,12 +15,16 @@
     .muted { color:#64748b; font-size:0.92rem; }
     .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
     pre { white-space:pre-wrap; }
-    /* preserve line breaks from spreadsheet cells */
     .preserve-breaks { white-space: pre-wrap; word-wrap: break-word; }
+    
+    /* Modal Styles */
+    #success-modal { display: none; }
+    .modal-open { overflow: hidden; }
   </style>
 </head>
 <body class="min-h-screen p-4 md:p-10 text-slate-800">
 
+  <!-- Loader -->
   <div id="loader" class="fixed inset-0 loading-overlay flex items-center justify-center">
     <div class="text-center">
       <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-blue-500 border-t-transparent"></div>
@@ -28,6 +32,26 @@
     </div>
   </div>
 
+  <!-- Success Modal -->
+  <div id="success-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center animate-in fade-in zoom-in duration-300">
+      <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-6">
+        <svg class="h-10 w-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <h3 class="text-2xl font-bold text-slate-900 mb-2">Success!</h3>
+      <p class="text-slate-600 mb-6">Your contract has been signed and the PDF is being generated.</p>
+      <div class="bg-slate-50 rounded-lg py-3 px-4 mb-6">
+        <p class="text-sm text-slate-500">Closing window in <span id="countdown" class="font-bold text-blue-600">5</span> seconds...</p>
+      </div>
+      <button onclick="window.close()" class="w-full bg-slate-900 text-white font-bold py-3 rounded-xl hover:bg-slate-800 transition-colors">
+        Close Now
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
   <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
     <div class="bg-slate-900 text-white p-6 md:p-8">
       <div class="flex justify-between items-center gap-4 mb-2">
@@ -45,15 +69,10 @@
         <div><p class="text-slate-400 text-xs uppercase font-bold">Package</p><p id="display-package" class="preserve-breaks">...</p></div>
         <div><p class="text-slate-400 text-xs uppercase font-bold">Estimated Price</p><p id="display-price" class="preserve-breaks">...</p></div>
       </div>
-
-      <p class="text-xs text-slate-500 mt-5 leading-relaxed">
-        Please review the contract below before signing. By signing, you confirm acceptance of the terms.
-      </p>
     </div>
 
     <div class="p-6 md:p-8">
       <div id="contract-container" class="contract-body">
-        <!-- contract HTML will be injected here -->
         <div id="contract-content" class="prose"></div>
       </div>
     </div>
@@ -91,16 +110,12 @@
   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
   <script>
-    // ---------- CONFIG ----------
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyk1zWU7Zo48qktLGGeWqG7NmqTY_kmmoCFKnnehMlF7JJKgaybrdLSLaDwBUbV9ZKViw/exec";
-
-    // ---------- estado ----------
     let contractData = null;
     const params = new URLSearchParams(window.location.search);
     const leadId = params.get('leadId');
     const contractId = params.get('contractId') || 'default';
 
-    // ---------- init ----------
     window.addEventListener('DOMContentLoaded', () => {
       if (!leadId) return showError('Invalid link: missing leadId');
       initCanvas();
@@ -109,11 +124,8 @@
       window.addEventListener('resize', resizeCanvas);
     });
 
-    function showLoader(show) {
-      document.getElementById('loader').style.display = show ? 'flex' : 'none';
-    }
+    function showLoader(show) { document.getElementById('loader').style.display = show ? 'flex' : 'none'; }
 
-    // ---------- JSONP load ----------
     function loadInitialData() {
       showLoader(true);
       const cb = 'cb_' + Date.now();
@@ -121,23 +133,12 @@
       const script = document.createElement('script');
       window[cb] = function(resp) {
         showLoader(false);
-        try {
-          if (resp && resp.success && resp.data) {
-            contractData = resp.data;
-            populateUI(contractData);
-          } else {
-            const err = (resp && resp.error) ? resp.error : 'Contract not found or not available';
-            showError(err);
-          }
-        } catch (err) {
-          showError('Invalid response from server');
+        if (resp && resp.success && resp.data) {
+          contractData = resp.data;
+          populateUI(contractData);
+        } else {
+          showError(resp.error || 'Contract not found');
         }
-        script.remove();
-        delete window[cb];
-      };
-      script.onerror = function() {
-        showLoader(false);
-        showError('Network error: cannot reach backend');
         script.remove();
         delete window[cb];
       };
@@ -145,286 +146,106 @@
       document.body.appendChild(script);
     }
 
-    // ---------- Render contract into page ----------
     function populateUI(data) {
-      // show summary fields
-      document.getElementById('display-contract-id').textContent = data.contractId || contractId || '—';
+      document.getElementById('display-contract-id').textContent = data.contractId || contractId;
       document.getElementById('display-name').textContent = data.clientLegalName || '—';
       document.getElementById('display-email').textContent = data.clientEmail || '—';
       document.getElementById('display-package').textContent = data.packageName || '—';
       document.getElementById('display-price').textContent = data.estimatedPrice || '—';
       document.getElementById('signer-name').value = data.clientLegalName || '';
       document.getElementById('signer-email').value = data.clientEmail || '';
-
-      // Build contract HTML from template and data
-      const filled = fillContractTemplate({
-        DATE: formatDate(new Date()),
-        LEAD_ID: data.leadId || leadId || '',
-        CLIENT_LEGAL_NAME: data.clientLegalName || '',
-        TAX_ID: data.taxIdNumber || '',
-        ADDRESS: data.address || '',
-        POSTAL_CODE: data.postalCode || '',
-        CITY: data.city || '',
-        EMAIL: data.clientEmail || '',
-        PACKAGE: data.packageName || '',
-        PRICE: data.estimatedPrice || '',
-        CONTRACT_RAW_TEXT: data.contractText || ''
-      });
-
-      const container = document.getElementById('contract-content');
-      container.innerHTML = filled;
+      document.getElementById('contract-content').innerHTML = `<div class="preserve-breaks">${data.contractText || 'Contract details loaded successfully.'}</div>`;
     }
 
-    // Escape user data for safe HTML insertion (do not convert \n -> <br/>; we use CSS pre-wrap)
-    function escapeHtml(str) {
-      if (str === null || str === undefined) return '';
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-    }
-
-    // Fill the contract template with values (returns safe HTML)
-    function fillContractTemplate(vals) {
-      // If the spreadsheet stores a "Contract Text/HTML" (already formatted), we prefer to show it.
-      if (vals.CONTRACT_RAW_TEXT && String(vals.CONTRACT_RAW_TEXT).trim().length > 10) {
-        // sanitize and preserve breaks
-        return '<div class="contract-section preserve-breaks">' + escapeHtml(vals.CONTRACT_RAW_TEXT) + '</div>';
-      }
-
-      // Otherwise build from the provided standard template (Polish + English)
-      const tpl = `
-        <div class="contract-section">
-          <div class="contract-title">ZAMÓWIENIE USŁUGI / SERVICE ORDER</div>
-          <div class="muted">Data: {{DATE}} &nbsp; Numer Projektu: {{LEAD_ID}}</div>
-        </div>
-
-        <div class="contract-section">
-          <div class="contract-title">WYKONAWCA (SERVICE PROVIDER):</div>
-          <pre>AlanSM Solutions - Alan da Silva Morais
-Email: kontakt@alansmsolutions.com
-PESEL: 87092016359
-Kraków, Polska</pre>
-        </div>
-
-        <div class="contract-section">
-          <div class="contract-title">ZAMAWIAJĄCY (CLIENT):</div>
-          <div class="two-col">
-            <div>
-              <strong>Nazwa firmy (Company Legal Name):</strong><div class="preserve-breaks">{{CLIENT_LEGAL_NAME}}</div>
-            </div>
-            <div>
-              <strong>NIP (Tax ID):</strong><div class="preserve-breaks">{{TAX_ID}}</div>
-            </div>
-          </div>
-          <div style="margin-top:.75rem;">
-            <strong>Adres siedziby (Address):</strong><div class="preserve-breaks">{{ADDRESS}}</div>
-            <div class="muted preserve-breaks" style="margin-top:.25rem;">Kod pocztowy i miasto (City/Zip): {{POSTAL_CODE}} {{CITY}}</div>
-            <div class="muted preserve-breaks" style="margin-top:.25rem;">Email kontaktowy: {{EMAIL}}</div>
-          </div>
-        </div>
-
-        <div class="contract-section">
-          <div class="contract-title">SZCZEGÓŁY ZAMÓWIENIA (PROJECT DETAILS):</div>
-          <div><strong>Wybrany Pakiet (Package):</strong></div>
-          <div style="margin:0.5rem 0 1rem 0;" class="preserve-breaks">{{PACKAGE}}</div>
-          <div><strong>Szacowana Cena (Estimated Price):</strong> <span class="preserve-breaks">{{PRICE}}</span></div>
-        </div>
-
-        <div class="contract-section">
-          <div class="contract-title">AKCEPTACJA WARUNKÓW (MASTER AGREEMENT)</div>
-          <div class="muted">Niniejsze zamówienie podlega pod Ogólne Warunki Świadczenia Usług (Master Service Agreement) AlanSM Solutions. Dokument ten zostanie podpisany elektronicznie, a logi z adresami IP i czasem akceptacji zostaną dołączone do Certyfikatu Podpisu (Signature Audit Proof).</div>
-        </div>
-
-        <div class="contract-section">
-          <div class="contract-title">OGÓLNE WARUNKI ŚWIADCZENIA USŁUG / MASTER SERVICE AGREEMENT (MSA)</div>
-
-          <div><strong>1. Obowiązki Klienta / Client Responsibilities</strong>
-          <div class="muted">[PL] Klient zobowiązuje się do terminowego dostarczania wszelkich niezbędnych materiałów (teksty, logotypy, dostępy do kont) potrzebnych do realizacji projektu. Opóźnienia po stronie Klienta mogą skutkować przesunięciem terminu realizacji.</div>
-          <div class="muted">[EN] The Client agrees to provide all necessary materials (texts, logos, account access) required for the project in a timely manner. Delays on the Client's side may result in project deadlines being extended.</div></div>
-
-          <div style="margin-top:.5rem;"><strong>2. Zmiany w Zakresie / Scope Changes</strong>
-          <div class="muted">[PL] Projekt obejmuje wyłącznie funkcjonalności określone w Zamówieniu (Szczegóły Zamówienia). Wszelkie dodatkowe poprawki, nowe strony, zaawansowane integracje lub funkcje wykraczające poza ten zakres będą traktowane jako dodatkowa praca i wyceniane osobno.</div>
-          <div class="muted">[EN] The project includes only the features specified in the Service Order. Any additional revisions, new pages, advanced integrations, or features outside this scope will be treated as extra work and quoted separately.</div></div>
-
-          <div style="margin-top:.5rem;"><strong>3. Narzędzia Trzecie i Hosting / Third-Party Tools & Hosting</strong>
-          <div class="muted">[PL] AlanSM Solutions nie ponosi odpowiedzialności za awarie, zmiany cen, przerwy w działaniu ani błędy oprogramowania firm trzecich (np. hosting, domeny, systemy CRM, bramki płatności, narzędzia do rezerwacji). Koszty subskrypcji tych narzędzi pokrywa Klient.</div>
-          <div class="muted">[EN] AlanSM Solutions is not liable for outages, price changes, downtime, or software bugs of third-party providers (e.g., hosting, domains, CRMs, payment gateways, booking tools). The Client is responsible for any third-party subscription costs.</div></div>
-
-          <div style="margin-top:.5rem;"><strong>4. Własność Intelektualna / Intellectual Property</strong>
-          <div class="muted">[PL] Po zaksięgowaniu pełnej płatności Klient otrzymuje pełne prawa do korzystania z gotowego systemu/strony oraz własnych treści. AlanSM Solutions zachowuje pełne prawa autorskie do swoich szablonów, kodów źródłowych, skryptów automatyzacji i metodologii (know-how) wykorzystanych do budowy systemu.</div>
-          <div class="muted">[EN] Upon full payment, the Client receives full rights to use the final system/website and their own content. AlanSM Solutions retains all copyright and intellectual property rights to its templates, source codes, automation scripts, and methodology (know-how) used to build the system.</div></div>
-
-          <div style="margin-top:.5rem;"><strong>5. Ograniczenie Odpowiedzialności / Limitation of Liability</strong>
-          <div class="muted">[PL] AlanSM Solutions dostarcza systemy z najwyższą starannością, jednak nie gwarantuje konkretnych wyników biznesowych, poziomu sprzedaży ani pozycji w wyszukiwarkach. Całkowita odpowiedzialność finansowa AlanSM Solutions z tytułu niniejszej umowy jest ograniczona do kwoty faktycznie zapłaconej przez Klienta za dany projekt.</div>
-          <div class="muted">[EN] AlanSM Solutions delivers systems with the utmost care but does not guarantee specific business results, sales volumes, or search engine rankings. The total financial liability of AlanSM Solutions under this agreement is strictly limited to the amount actually paid by the Client for the specific project.</div></div>
-
-          <div style="margin-top:.5rem;"><strong>6. Prawo Właściwe / Governing Law</strong>
-          <div class="muted">[PL] Niniejsza umowa podlega prawu polskiemu. Wszelkie spory będą rozstrzygane polubownie, a w przypadku braku porozumienia – przez sąd właściwy dla siedziby AlanSM Solutions.</div>
-          <div class="muted">[EN] This agreement shall be governed by Polish law. Any disputes shall be resolved amicably, and failing that, by the court competent for the registered office of AlanSM Solutions.</div></div>
-        </div>
-
-        <div class="contract-section">
-          <div class="contract-title">AKCEPTACJA / ACCEPTANCE</div>
-          <div class="muted">Poprzez akceptację (podpis elektroniczny), Klient potwierdza, że przeczytał, zrozumiał i akceptuje powyższe warunki oraz zgadza się na realizację Zamówienia. / By accepting (electronic signature), the Client confirms that they have read, understood, and accept the above terms and agree to the execution of the Service Order.</div>
-        </div>
-      `;
-
-      return tpl
-        .replace(/{{DATE}}/g, escapeHtml(vals.DATE))
-        .replace(/{{LEAD_ID}}/g, escapeHtml(vals.LEAD_ID))
-        .replace(/{{CLIENT_LEGAL_NAME}}/g, escapeHtml(vals.CLIENT_LEGAL_NAME))
-        .replace(/{{TAX_ID}}/g, escapeHtml(vals.TAX_ID))
-        .replace(/{{ADDRESS}}/g, escapeHtml(vals.ADDRESS))
-        .replace(/{{POSTAL_CODE}}/g, escapeHtml(vals.POSTAL_CODE))
-        .replace(/{{CITY}}/g, escapeHtml(vals.CITY))
-        .replace(/{{EMAIL}}/g, escapeHtml(vals.EMAIL))
-        .replace(/{{PACKAGE}}/g, escapeHtml(vals.PACKAGE))
-        .replace(/{{PRICE}}/g, escapeHtml(vals.PRICE));
-    }
-
-    // ---------- format date dd/MM/yyyy ----------
-    function formatDate(d) {
-      const dd = String(d.getDate()).padStart(2,'0');
-      const mm = String(d.getMonth()+1).padStart(2,'0');
-      const yyyy = d.getFullYear();
-      return `${dd}/${mm}/${yyyy}`;
-    }
-
-    function showError(msg) {
-      showLoader(false);
-      const status = document.getElementById('status-message');
-      status.classList.remove('hidden');
-      status.classList.remove('text-green-600');
-      status.classList.add('text-red-600');
-      status.textContent = '❌ ' + msg;
-      document.getElementById('submit-btn').disabled = true;
-    }
-
-    // ---------- Canvas / Signature ----------
     const canvas = document.getElementById('signature-pad');
     const ctx = canvas.getContext('2d');
     let drawing = false;
 
     function initCanvas() {
       resizeCanvas();
-      ctx.lineWidth = 2.5;
-      ctx.lineCap = 'round';
-      ctx.strokeStyle = '#0f172a';
-
-      canvas.addEventListener('mousedown', (e) => { drawing = true; const p = pointerPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); });
-      canvas.addEventListener('mousemove', (e) => { if (!drawing) return; const p = pointerPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); });
+      ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.strokeStyle = '#0f172a';
+      const getPos = (e) => {
+        const rect = canvas.getBoundingClientRect();
+        return { x: (e.clientX || e.touches[0].clientX) - rect.left, y: (e.clientY || e.touches[0].clientY) - rect.top };
+      };
+      const start = (e) => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); };
+      const move = (e) => { if(!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); };
+      canvas.addEventListener('mousedown', start); canvas.addEventListener('mousemove', move);
       window.addEventListener('mouseup', () => drawing = false);
-      canvas.addEventListener('touchstart', (e) => { drawing = true; const p = pointerPos(e.touches[0]); ctx.beginPath(); ctx.moveTo(p.x, p.y); e.preventDefault(); }, {passive:false});
-      canvas.addEventListener('touchmove', (e) => { if (!drawing) return; const p = pointerPos(e.touches[0]); ctx.lineTo(p.x, p.y); ctx.stroke(); e.preventDefault(); }, {passive:false});
+      canvas.addEventListener('touchstart', start, {passive:false}); canvas.addEventListener('touchmove', move, {passive:false});
     }
 
     function resizeCanvas() {
       const ratio = window.devicePixelRatio || 1;
-      const w = canvas.offsetWidth;
-      const h = canvas.offsetHeight;
-      canvas.width = Math.round(w * ratio);
-      canvas.height = Math.round(h * ratio);
+      canvas.width = canvas.offsetWidth * ratio; canvas.height = canvas.offsetHeight * ratio;
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-      // do not clear on resize if there is content — keep existing drawing scaled correctly is hard;
-      // we clear to avoid blurry artifacts and ask user to re-sign if they resize mid-sign
-      clearCanvas();
     }
 
-    function pointerPos(e) {
-      const rect = canvas.getBoundingClientRect();
-      const x = (e.clientX || 0) - rect.left;
-      const y = (e.clientY || 0) - rect.top;
-      return { x, y };
+    function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+
+    function showSuccessModal() {
+      const modal = document.getElementById('success-modal');
+      modal.style.display = 'flex';
+      document.body.classList.add('modal-open');
+      
+      let count = 5;
+      const countdownEl = document.getElementById('countdown');
+      const timer = setInterval(() => {
+        count--;
+        countdownEl.textContent = count;
+        if (count <= 0) {
+          clearInterval(timer);
+          window.close();
+          // Fallback if window.close() is blocked by browser
+          setTimeout(() => { 
+            document.querySelector('#success-modal p').textContent = "You can now close this tab safely.";
+          }, 500);
+        }
+      }, 1000);
     }
 
-    function clearCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    // ---------- submit signature ----------
     async function submitSignature(ev) {
-      ev && ev.preventDefault();
+      ev.preventDefault();
+      const sigData = canvas.toDataURL('image/png');
+      if (sigData.length < 2000) return alert('Please sign the contract first.');
+
       const btn = document.getElementById('submit-btn');
-      const status = document.getElementById('status-message');
-      status.classList.remove('text-red-600'); status.classList.remove('text-green-600');
-      status.classList.add('text-slate-600'); status.classList.remove('hidden');
-      status.textContent = 'Sending...';
       btn.disabled = true;
+      btn.innerHTML = '<span>Processing...</span>';
 
       const payload = {
         action: 'signContract',
-        leadId: leadId,
-        contractId: contractId,
-        signatureData: canvas.toDataURL('image/png'),
+        leadId,
+        contractId,
+        signatureData: sigData,
         clientName: document.getElementById('signer-name').value,
-        clientEmail: document.getElementById('signer-email').value,
-        timestamp: new Date().toISOString()
+        clientEmail: document.getElementById('signer-email').value
       };
 
-      // Try normal POST (best)
       try {
         const resp = await fetch(SCRIPT_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-          credentials: 'omit'
+          mode: 'no-cors', // Apps Script requires no-cors for simple requests
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(payload)
         });
-
-        if (!resp.ok) {
-          throw new Error('HTTP ' + resp.status);
-        }
-        const json = await resp.json();
-        if (json && json.success) {
-          status.classList.remove('text-slate-600');
-          status.classList.add('text-green-600');
-          status.textContent = '✅ Signed successfully';
-          btn.innerText = 'Signed';
-          btn.disabled = true;
-          return;
-        } else {
-          throw new Error((json && json.error) ? json.error : 'Server rejected signature');
-        }
+        
+        // Since no-cors doesn't allow reading response, we assume success if no error thrown
+        // and trigger the modal after a small delay to allow server processing
+        setTimeout(showSuccessModal, 1500);
       } catch (err) {
-        // Fallback: form POST to hidden iframe (works around some CORS/firewalls)
-        console.warn('Primary POST failed, attempting iframe fallback: ', err && err.message);
-        try {
-          iframeFormPost(payload);
-          // optimistic UI
-          setTimeout(function() {
-            status.classList.remove('text-slate-600');
-            status.classList.add('text-green-600');
-            status.textContent = '✅ Signed (fallback)';
-            btn.innerText = 'Signed';
-            btn.disabled = true;
-          }, 2000);
-        } catch (e2) {
-          status.classList.remove('text-slate-600');
-          status.classList.add('text-red-600');
-          status.textContent = 'Failed to send signature: ' + (e2.message || e2);
-          btn.disabled = false;
-        }
+        alert('Transmission error. The signature might not have saved. Please try again.');
+        btn.disabled = false;
+        btn.innerHTML = '<span>Sign Document</span>';
       }
     }
 
-    // ---------- iframe form fallback ----------
-    function iframeFormPost(payload) {
-      const form = document.createElement('form');
-      form.action = SCRIPT_URL;
-      form.method = 'POST';
-      form.target = 'hidden_iframe';
-      form.style.display = 'none';
-      // add fields (stringify large fields)
-      Object.keys(payload).forEach(k => {
-        const inp = document.createElement('input'); inp.type = 'hidden'; inp.name = k; inp.value = payload[k];
-        form.appendChild(inp);
-      });
-      document.body.appendChild(form);
-      form.submit();
-      setTimeout(() => form.remove(), 4000);
-      return true;
+    function showError(msg) {
+      showLoader(false);
+      const status = document.getElementById('status-message');
+      status.classList.remove('hidden'); status.classList.add('text-red-600');
+      status.textContent = '❌ ' + msg;
+      document.getElementById('submit-btn').disabled = true;
     }
   </script>
 </body>
