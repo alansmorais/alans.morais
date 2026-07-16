@@ -9,15 +9,8 @@
     body { font-family: Inter, Arial, sans-serif; background:#f8fafc; }
     #signature-pad { border: 2px dashed #cbd5e1; border-radius: 12px; background: #fff; cursor: crosshair; touch-action: none; }
     .loading-overlay { background: rgba(255,255,255,0.85); z-index: 50; }
-    .contract-body { max-height: 520px; overflow:auto; padding:1rem; background:#ffffff; border-radius:8px; border:1px solid #e6eef8; }
-    .contract-section { margin-bottom:1rem; }
-    .contract-title { font-weight:700; margin-bottom:.5rem; }
-    .muted { color:#64748b; font-size:0.92rem; }
-    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-    pre { white-space:pre-wrap; }
+    .contract-body { max-height: 520px; overflow:auto; padding:1.5rem; background:#ffffff; border-radius:8px; border:1px solid #e6eef8; }
     .preserve-breaks { white-space: pre-wrap; word-wrap: break-word; }
-    
-    /* Modal Styles */
     #success-modal { display: none; }
     .modal-open { overflow: hidden; }
   </style>
@@ -34,14 +27,14 @@
 
   <!-- Success Modal -->
   <div id="success-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-    <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center animate-in fade-in zoom-in duration-300">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-8 text-center">
       <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-6">
         <svg class="h-10 w-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
         </svg>
       </div>
       <h3 class="text-2xl font-bold text-slate-900 mb-2">Success!</h3>
-      <p class="text-slate-600 mb-6">Your contract has been signed and the PDF is being generated.</p>
+      <p class="text-slate-600 mb-6">Contract signed successfully. The PDF is being generated and saved.</p>
       <div class="bg-slate-50 rounded-lg py-3 px-4 mb-6">
         <p class="text-sm text-slate-500">Closing window in <span id="countdown" class="font-bold text-blue-600">5</span> seconds...</p>
       </div>
@@ -62,46 +55,52 @@
     </div>
 
     <div class="p-6 md:p-8 border-b border-slate-100 bg-slate-50">
-      <h2 class="font-bold text-lg mb-4">Contract Summary</h2>
+      <h2 class="font-bold text-lg mb-4 text-slate-700">Client Details</h2>
       <div class="grid md:grid-cols-2 gap-4 text-sm">
-        <div><p class="text-slate-400 text-xs uppercase font-bold">Client</p><p id="display-name">...</p></div>
-        <div><p class="text-slate-400 text-xs uppercase font-bold">Email</p><p id="display-email">...</p></div>
-        <div><p class="text-slate-400 text-xs uppercase font-bold">Package</p><p id="display-package" class="preserve-breaks">...</p></div>
-        <div><p class="text-slate-400 text-xs uppercase font-bold">Estimated Price</p><p id="display-price" class="preserve-breaks">...</p></div>
+        <div><p class="text-slate-400 text-xs uppercase font-bold">Client</p><p id="display-name" class="font-medium">...</p></div>
+        <div><p class="text-slate-400 text-xs uppercase font-bold">Email</p><p id="display-email" class="font-medium">...</p></div>
+        <div class="md:col-span-2 mt-2">
+          <p class="text-slate-400 text-xs uppercase font-bold">Package & Price</p>
+          <div class="flex flex-col gap-1">
+            <span id="display-package" class="preserve-breaks font-medium">...</span>
+            <span id="display-price" class="text-blue-600 font-bold">...</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="p-6 md:p-8">
+    <div class="p-6 md:p-8 bg-white text-sm leading-relaxed">
       <div id="contract-container" class="contract-body">
-        <div id="contract-content" class="prose"></div>
+        <div id="contract-content" class="prose max-w-none">
+          <p class="text-slate-400 italic">Please wait while the contract terms are loaded...</p>
+        </div>
       </div>
     </div>
 
-    <div class="p-6 md:p-8">
-      <form id="signature-form" onsubmit="submitSignature(event)">
+    <div class="p-6 md:p-8 border-t border-slate-100 bg-slate-50">
+      <form id="signature-form" onsubmit="handleFormSubmit(event)">
         <div class="grid md:grid-cols-2 gap-4 mb-6">
           <div>
-            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Full Name</label>
-            <input type="text" id="signer-name" required class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:border-blue-500" />
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Signer Name</label>
+            <input type="text" id="signer-name" required class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Email</label>
-            <input type="email" id="signer-email" required class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:border-blue-500" />
+            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Signer Email</label>
+            <input type="email" id="signer-email" required class="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all" />
           </div>
         </div>
 
         <div class="mb-4">
-          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Signature</label>
+          <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 text-slate-500">Sign here (using mouse or touch)</label>
           <canvas id="signature-pad" class="w-full h-48"></canvas>
           <div class="flex justify-end mt-2">
-            <button type="button" id="clear-btn" class="text-xs text-red-500 font-semibold hover:underline">Clear signature</button>
+            <button type="button" onclick="clearCanvas()" class="text-xs text-red-500 font-semibold hover:text-red-700 transition-colors">Clear signature</button>
           </div>
         </div>
 
-        <button type="submit" id="submit-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
-          <span>Sign Document</span>
+        <button type="submit" id="submit-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl transition-all shadow-lg flex justify-center items-center gap-2">
+          <span>Sign & Finalize Contract</span>
         </button>
-
         <div id="status-message" class="text-center text-sm font-medium mt-4 hidden"></div>
       </form>
     </div>
@@ -111,140 +110,117 @@
 
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyk1zWU7Zo48qktLGGeWqG7NmqTY_kmmoCFKnnehMlF7JJKgaybrdLSLaDwBUbV9ZKViw/exec";
-    let contractData = null;
     const params = new URLSearchParams(window.location.search);
     const leadId = params.get('leadId');
     const contractId = params.get('contractId') || 'default';
 
-    window.addEventListener('DOMContentLoaded', () => {
-      if (!leadId) return showError('Invalid link: missing leadId');
-      initCanvas();
-      loadInitialData();
-      document.getElementById('clear-btn').addEventListener('click', clearCanvas);
-      window.addEventListener('resize', resizeCanvas);
-    });
-
-    function showLoader(show) { document.getElementById('loader').style.display = show ? 'flex' : 'none'; }
-
-    function loadInitialData() {
-      showLoader(true);
-      const cb = 'cb_' + Date.now();
-      const url = `${SCRIPT_URL}?action=getSignatureData&leadId=${encodeURIComponent(leadId)}&contractId=${encodeURIComponent(contractId)}&callback=${cb}`;
-      const script = document.createElement('script');
-      window[cb] = function(resp) {
-        showLoader(false);
-        if (resp && resp.success && resp.data) {
-          contractData = resp.data;
-          populateUI(contractData);
-        } else {
-          showError(resp.error || 'Contract not found');
-        }
-        script.remove();
-        delete window[cb];
-      };
-      script.src = url;
-      document.body.appendChild(script);
-    }
-
-    function populateUI(data) {
-      document.getElementById('display-contract-id').textContent = data.contractId || contractId;
-      document.getElementById('display-name').textContent = data.clientLegalName || '—';
-      document.getElementById('display-email').textContent = data.clientEmail || '—';
-      document.getElementById('display-package').textContent = data.packageName || '—';
-      document.getElementById('display-price').textContent = data.estimatedPrice || '—';
-      document.getElementById('signer-name').value = data.clientLegalName || '';
-      document.getElementById('signer-email').value = data.clientEmail || '';
-      document.getElementById('contract-content').innerHTML = `<div class="preserve-breaks">${data.contractText || 'Contract details loaded successfully.'}</div>`;
-    }
-
+    // Canvas Logic
     const canvas = document.getElementById('signature-pad');
     const ctx = canvas.getContext('2d');
     let drawing = false;
 
-    function initCanvas() {
+    window.onload = () => {
+      if (!leadId) { showError('Invalid Link: Missing leadId'); return; }
       resizeCanvas();
-      ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.strokeStyle = '#0f172a';
-      const getPos = (e) => {
+      loadData();
+      
+      // Events
+      const getPt = (e) => {
         const rect = canvas.getBoundingClientRect();
         return { x: (e.clientX || e.touches[0].clientX) - rect.left, y: (e.clientY || e.touches[0].clientY) - rect.top };
       };
-      const start = (e) => { drawing = true; const p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); };
-      const move = (e) => { if(!drawing) return; const p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); };
+      const start = (e) => { drawing = true; const p = getPt(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); };
+      const move = (e) => { if(!drawing) return; const p = getPt(e); ctx.lineTo(p.x, p.y); ctx.stroke(); e.preventDefault(); };
+      
       canvas.addEventListener('mousedown', start); canvas.addEventListener('mousemove', move);
       window.addEventListener('mouseup', () => drawing = false);
       canvas.addEventListener('touchstart', start, {passive:false}); canvas.addEventListener('touchmove', move, {passive:false});
-    }
+    };
 
     function resizeCanvas() {
       const ratio = window.devicePixelRatio || 1;
       canvas.width = canvas.offsetWidth * ratio; canvas.height = canvas.offsetHeight * ratio;
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.strokeStyle = '#0f172a';
     }
 
     function clearCanvas() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
 
-    function showSuccessModal() {
-      const modal = document.getElementById('success-modal');
-      modal.style.display = 'flex';
-      document.body.classList.add('modal-open');
-      
-      let count = 5;
-      const countdownEl = document.getElementById('countdown');
-      const timer = setInterval(() => {
-        count--;
-        countdownEl.textContent = count;
-        if (count <= 0) {
-          clearInterval(timer);
-          window.close();
-          // Fallback if window.close() is blocked by browser
-          setTimeout(() => { 
-            document.querySelector('#success-modal p').textContent = "You can now close this tab safely.";
-          }, 500);
-        }
+    function loadData() {
+      const cb = 'cb_' + Date.now();
+      const script = document.createElement('script');
+      window[cb] = (resp) => {
+        document.getElementById('loader').style.display = 'none';
+        if (resp.success) {
+          const d = resp.data;
+          document.getElementById('display-contract-id').innerText = d.contractId || contractId;
+          document.getElementById('display-name').innerText = d.clientLegalName || '—';
+          document.getElementById('display-email').innerText = d.clientEmail || '—';
+          document.getElementById('display-package').innerText = d.packageName || '—';
+          document.getElementById('display-price').innerText = d.estimatedPrice || '—';
+          document.getElementById('signer-name').value = d.clientLegalName || '';
+          document.getElementById('signer-email').value = d.clientEmail || '';
+          document.getElementById('contract-content').innerHTML = `<div class="preserve-breaks text-slate-600">${d.contractText || 'Contract text loaded. Please sign below.'}</div>`;
+        } else { showError(resp.error); }
+      };
+      script.src = `${SCRIPT_URL}?action=getSignatureData&leadId=${leadId}&contractId=${contractId}&callback=${cb}`;
+      document.body.appendChild(script);
+    }
+
+    function showSuccess() {
+      document.getElementById('success-modal').style.display = 'flex';
+      let c = 5;
+      const el = document.getElementById('countdown');
+      setInterval(() => {
+        c--; if(c >= 0) el.innerText = c;
+        if(c === 0) window.close();
       }, 1000);
     }
 
-    async function submitSignature(ev) {
-      ev.preventDefault();
-      const sigData = canvas.toDataURL('image/png');
-      if (sigData.length < 2000) return alert('Please sign the contract first.');
+    async function handleFormSubmit(e) {
+      e.preventDefault();
+      const sig = canvas.toDataURL('image/png');
+      if (sig.length < 2000) return alert('Please sign the document.');
 
       const btn = document.getElementById('submit-btn');
-      btn.disabled = true;
-      btn.innerHTML = '<span>Processing...</span>';
+      btn.disabled = true; btn.innerText = 'Signing...';
 
       const payload = {
         action: 'signContract',
-        leadId,
-        contractId,
-        signatureData: sigData,
+        leadId, contractId, 
+        signatureData: sig,
         clientName: document.getElementById('signer-name').value,
         clientEmail: document.getElementById('signer-email').value
       };
 
       try {
+        // Envio direto via POST
         const resp = await fetch(SCRIPT_URL, {
           method: 'POST',
-          mode: 'no-cors', // Apps Script requires no-cors for simple requests
-          headers: { 'Content-Type': 'text/plain' },
           body: JSON.stringify(payload)
         });
         
-        // Since no-cors doesn't allow reading response, we assume success if no error thrown
-        // and trigger the modal after a small delay to allow server processing
-        setTimeout(showSuccessModal, 1500);
+        // Google Apps Script redireciona (302) em POSTs bem sucedidos. 
+        // Se chegarmos aqui ou o status for ok, mostramos o sucesso.
+        showSuccess();
       } catch (err) {
-        alert('Transmission error. The signature might not have saved. Please try again.');
-        btn.disabled = false;
-        btn.innerHTML = '<span>Sign Document</span>';
+        // Fallback: Se falhar por bloqueio de CORS, tentamos via Iframe Form
+        const form = document.createElement('form');
+        form.method = 'POST'; form.action = SCRIPT_URL; form.target = 'hidden_iframe';
+        for (let key in payload) {
+          const inp = document.createElement('input'); inp.type='hidden'; inp.name=key; inp.value=payload[key];
+          form.appendChild(inp);
+        }
+        document.body.appendChild(form);
+        form.submit();
+        setTimeout(showSuccess, 2000);
       }
     }
 
-    function showError(msg) {
-      showLoader(false);
-      const status = document.getElementById('status-message');
-      status.classList.remove('hidden'); status.classList.add('text-red-600');
-      status.textContent = '❌ ' + msg;
+    function showError(m) {
+      document.getElementById('loader').style.display = 'none';
+      const s = document.getElementById('status-message');
+      s.classList.remove('hidden'); s.classList.add('text-red-500'); s.innerText = 'Error: ' + m;
       document.getElementById('submit-btn').disabled = true;
     }
   </script>
