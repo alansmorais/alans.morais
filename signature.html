@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -9,6 +9,12 @@
     body { font-family: Inter, Arial, sans-serif; background:#f8fafc; }
     #signature-pad { border: 2px dashed #cbd5e1; border-radius: 12px; background: #fff; cursor: crosshair; touch-action: none; }
     .loading-overlay { background: rgba(255,255,255,0.85); z-index: 50; }
+    .contract-body { max-height: 520px; overflow:auto; padding:1rem; background:#ffffff; border-radius:8px; border:1px solid #e6eef8; }
+    .contract-section { margin-bottom:1rem; }
+    .contract-title { font-weight:700; margin-bottom:.5rem; }
+    .muted { color:#64748b; font-size:0.92rem; }
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    pre { white-space:pre-wrap; }
   </style>
 </head>
 <body class="min-h-screen p-4 md:p-10 text-slate-800">
@@ -20,7 +26,7 @@
     </div>
   </div>
 
-  <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+  <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
     <div class="bg-slate-900 text-white p-6 md:p-8">
       <div class="flex justify-between items-center gap-4 mb-2">
         <h1 class="text-2xl font-bold">AlanSM Contract Signature</h1>
@@ -38,15 +44,16 @@
         <div><p class="text-slate-400 text-xs uppercase font-bold">Estimated Price</p><p id="display-price">...</p></div>
       </div>
 
-      <div id="contract-link-container" class="hidden">
-        <a id="contract-doc-url" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex mt-5 text-sm font-semibold text-blue-600 hover:underline">
-          Open contract document →
-        </a>
-      </div>
-
       <p class="text-xs text-slate-500 mt-5 leading-relaxed">
-        Please review the contract document before signing. By signing below, you confirm that you agree with the contract terms.
+        Please review the contract below before signing. By signing, you confirm acceptance of the terms.
       </p>
+    </div>
+
+    <div class="p-6 md:p-8">
+      <div id="contract-container" class="contract-body">
+        <!-- contract HTML will be injected here -->
+        <div id="contract-content" class="prose"></div>
+      </div>
     </div>
 
     <div class="p-6 md:p-8">
@@ -82,23 +89,10 @@
   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
   <script>
-    // ---------- CONFIG: substitua pela sua URL exec do Apps Script publicada ----------
+    // ---------- CONFIG ----------
+    // Substitua pelo Exec URL do seu deployment public-read do Apps Script
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyk1zWU7Zo48qktLGGeWqG7NmqTY_kmmoCFKnnehMlF7JJKgaybrdLSLaDwBUbV9ZKViw/exec";
 
-    async function submitBlindPost(payload) {
-    await fetch(SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors', // <-- This is the magic line
-    headers: {
-      'Content-Type': 'text/plain;charset=utf-8'
-    },
-    body: JSON.stringify(payload)
-  });
-  
-  // Because 'no-cors' prevents the browser from reading Google's actual response,
-  // we just manually return a success status assuming the data was sent.
-  return { success: true };
-}
     // ---------- estado ----------
     let contractData = null;
     const params = new URLSearchParams(window.location.search);
@@ -119,7 +113,7 @@
       document.getElementById('loader').style.display = show ? 'flex' : 'none';
     }
 
-    // ---------- load data via JSONP ----------
+    // ---------- JSONP load ----------
     function loadInitialData() {
       showLoader(true);
       const cb = 'cb_' + Date.now();
@@ -151,25 +145,161 @@
       document.body.appendChild(script);
     }
 
+    // ---------- Render contract into page ----------
     function populateUI(data) {
-      document.getElementById('display-contract-id').textContent = contractId || data.contractId || '—';
-      document.getElementById('display-name').textContent = data.clientName || '—';
+      // show summary fields
+      document.getElementById('display-contract-id').textContent = data.contractId || contractId || '—';
+      document.getElementById('display-name').textContent = data.clientLegalName || '—';
       document.getElementById('display-email').textContent = data.clientEmail || '—';
       document.getElementById('display-package').textContent = data.packageName || '—';
       document.getElementById('display-price').textContent = data.estimatedPrice || '—';
-      document.getElementById('signer-name').value = data.clientName || '';
+      document.getElementById('signer-name').value = data.clientLegalName || '';
       document.getElementById('signer-email').value = data.clientEmail || '';
 
-      if (data.contractDocUrl) {
-        document.getElementById('contract-link-container').classList.remove('hidden');
-        document.getElementById('contract-doc-url').href = data.contractDocUrl;
+      // Build contract HTML from template and data
+      const filled = fillContractTemplate({
+        DATE: formatDate(new Date()),
+        LEAD_ID: data.leadId || leadId || '',
+        CLIENT_LEGAL_NAME: data.clientLegalName || '',
+        TAX_ID: data.taxIdNumber || '',
+        ADDRESS: data.address || '',
+        POSTAL_CODE: data.postalCode || '',
+        CITY: data.city || '',
+        EMAIL: data.clientEmail || '',
+        PACKAGE: data.packageName || '',
+        PRICE: data.estimatedPrice || '',
+        CONTRACT_RAW_TEXT: data.contractText || ''
+      });
+
+      const container = document.getElementById('contract-content');
+      container.innerHTML = filled;
+    }
+
+    // Escape user data for safe HTML insertion
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;')
+        .replace(/\n/g, '<br/>');
+    }
+
+    // Fill the contract template with values (returns safe HTML)
+    function fillContractTemplate(vals) {
+      // If the spreadsheet stores a "Contract Text/HTML" (already formatted), we prefer to show it.
+      if (vals.CONTRACT_RAW_TEXT && String(vals.CONTRACT_RAW_TEXT).trim().length > 10) {
+        // small sanitation: assume trusted, but still wrap in container
+        return '<div class="contract-section">' + vals.CONTRACT_RAW_TEXT + '</div>';
       }
+
+      // Otherwise build from the provided standard template (Polish + English)
+      const tpl = `
+        <div class="contract-section">
+          <div class="contract-title">ZAMÓWIENIE USŁUGI / SERVICE ORDER</div>
+          <div class="muted">Data: {{DATE}} &nbsp; Numer Projektu: {{LEAD_ID}}</div>
+        </div>
+
+        <div class="contract-section">
+          <div class="contract-title">WYKONAWCA (SERVICE PROVIDER):</div>
+          <pre>AlanSM Solutions - Alan da Silva Morais
+Email: kontakt@alansmsolutions.com
+PESEL: 87092016359
+Kraków, Polska</pre>
+        </div>
+
+        <div class="contract-section">
+          <div class="contract-title">ZAMAWIAJĄCY (CLIENT):</div>
+          <div class="two-col">
+            <div>
+              <strong>Nazwa firmy (Company Legal Name):</strong><div>{{CLIENT_LEGAL_NAME}}</div>
+            </div>
+            <div>
+              <strong>NIP (Tax ID):</strong><div>{{TAX_ID}}</div>
+            </div>
+          </div>
+          <div style="margin-top:.75rem;">
+            <strong>Adres siedziby (Address):</strong><div>{{ADDRESS}}</div>
+            <div class="muted" style="margin-top:.25rem;">Kod pocztowy i miasto (City/Zip): {{POSTAL_CODE}} {{CITY}}</div>
+            <div class="muted" style="margin-top:.25rem;">Email kontaktowy: {{EMAIL}}</div>
+          </div>
+        </div>
+
+        <div class="contract-section">
+          <div class="contract-title">SZCZEGÓŁY ZAMÓWIENIA (PROJECT DETAILS):</div>
+          <div><strong>Wybrany Pakiet (Package):</strong></div>
+          <div style="margin:0.5rem 0 1rem 0;">{{PACKAGE}}</div>
+          <div><strong>Szacowana Cena (Estimated Price):</strong> {{PRICE}}</div>
+        </div>
+
+        <div class="contract-section">
+          <div class="contract-title">AKCEPTACJA WARUNKÓW (MASTER AGREEMENT)</div>
+          <div class="muted">Niniejsze zamówienie podlega pod Ogólne Warunki Świadczenia Usług (Master Service Agreement) AlanSM Solutions. Dokument ten zostanie podpisany elektronicznie, a logi z adresami IP i czasem akceptacji zostaną dołączone do Certyfikatu Podpisu (Signature Audit Proof).</div>
+        </div>
+
+        <div class="contract-section">
+          <div class="contract-title">OGÓLNE WARUNKI ŚWIADCZENIA USŁUG / MASTER SERVICE AGREEMENT (MSA)</div>
+
+          <div><strong>1. Obowiązki Klienta / Client Responsibilities</strong>
+          <div class="muted">[PL] Klient zobowiązuje się do terminowego dostarczania wszelkich niezbędnych materiałów (teksty, logotypy, dostępy do kont) potrzebnych do realizacji projektu. Opóźnienia po stronie Klienta mogą skutkować przesunięciem terminu realizacji.</div>
+          <div class="muted">[EN] The Client agrees to provide all necessary materials (texts, logos, account access) required for the project in a timely manner. Delays on the Client's side may result in project deadlines being extended.</div></div>
+
+          <div style="margin-top:.5rem;"><strong>2. Zmiany w Zakresie / Scope Changes</strong>
+          <div class="muted">[PL] Projekt obejmuje wyłącznie funkcjonalności określone w Zamówieniu (Szczegóły Zamówienia). Wszelkie dodatkowe poprawki, nowe strony, zaawansowane integracje lub funkcje wykraczające poza ten zakres będą traktowane jako dodatkowa praca i wyceniane osobno.</div>
+          <div class="muted">[EN] The project includes only the features specified in the Service Order. Any additional revisions, new pages, advanced integrations, or features outside this scope will be treated as extra work and quoted separately.</div></div>
+
+          <div style="margin-top:.5rem;"><strong>3. Narzędzia Trzecie i Hosting / Third-Party Tools & Hosting</strong>
+          <div class="muted">[PL] AlanSM Solutions nie ponosi odpowiedzialności za awarie, zmiany cen, przerwy w działaniu ani błędy oprogramowania firm trzecich (np. hosting, domeny, systemy CRM, bramki płatności, narzędzia do rezerwacji). Koszty subskrypcji tych narzędzi pokrywa Klient.</div>
+          <div class="muted">[EN] AlanSM Solutions is not liable for outages, price changes, downtime, or software bugs of third-party providers (e.g., hosting, domains, CRMs, payment gateways, booking tools). The Client is responsible for any third-party subscription costs.</div></div>
+
+          <div style="margin-top:.5rem;"><strong>4. Własność Intelektualna / Intellectual Property</strong>
+          <div class="muted">[PL] Po zaksięgowaniu pełnej płatności Klient otrzymuje pełne prawa do korzystania z gotowego systemu/strony oraz własnych treści. AlanSM Solutions zachowuje pełne prawa autorskie do swoich szablonów, kodów źródłowych, skryptów automatyzacji i metodologii (know-how) wykorzystanych do budowy systemu.</div>
+          <div class="muted">[EN] Upon full payment, the Client receives full rights to use the final system/website and their own content. AlanSM Solutions retains all copyright and intellectual property rights to its templates, source codes, automation scripts, and methodology (know-how) used to build the system.</div></div>
+
+          <div style="margin-top:.5rem;"><strong>5. Ograniczenie Odpowiedzialności / Limitation of Liability</strong>
+          <div class="muted">[PL] AlanSM Solutions dostarcza systemy z najwyższą starannością, jednak nie gwarantuje konkretnych wyników biznesowych, poziomu sprzedaży ani pozycji w wyszukiwarkach. Całkowita odpowiedzialność finansowa AlanSM Solutions z tytułu niniejszej umowy jest ograniczona do kwoty faktycznie zapłaconej przez Klienta za dany projekt.</div>
+          <div class="muted">[EN] AlanSM Solutions delivers systems with the utmost care but does not guarantee specific business results, sales volumes, or search engine rankings. The total financial liability of AlanSM Solutions under this agreement is strictly limited to the amount actually paid by the Client for the specific project.</div></div>
+
+          <div style="margin-top:.5rem;"><strong>6. Prawo Właściwe / Governing Law</strong>
+          <div class="muted">[PL] Niniejsza umowa podlega prawu polskiemu. Wszelkie spory będą rozstrzygane polubownie, a w przypadku braku porozumienia – przez sąd właściwy dla siedziby AlanSM Solutions.</div>
+          <div class="muted">[EN] This agreement shall be governed by Polish law. Any disputes shall be resolved amicably, and failing that, by the court competent for the registered office of AlanSM Solutions.</div></div>
+        </div>
+
+        <div class="contract-section">
+          <div class="contract-title">AKCEPTACJA / ACCEPTANCE</div>
+          <div class="muted">Poprzez akceptację (podpis elektroniczny), Klient potwierdza, że przeczytał, zrozumiał i akceptuje powyższe warunki oraz zgadza się na realizację Zamówienia. / By accepting (electronic signature), the Client confirms that they have read, understood, and accept the above terms and agree to the execution of the Service Order.</div>
+        </div>
+      `;
+
+      // perform replacements and escape inserted values
+      return tpl
+        .replace(/{{DATE}}/g, escapeHtml(vals.DATE))
+        .replace(/{{LEAD_ID}}/g, escapeHtml(vals.LEAD_ID))
+        .replace(/{{CLIENT_LEGAL_NAME}}/g, escapeHtml(vals.CLIENT_LEGAL_NAME))
+        .replace(/{{TAX_ID}}/g, escapeHtml(vals.TAX_ID))
+        .replace(/{{ADDRESS}}/g, escapeHtml(vals.ADDRESS))
+        .replace(/{{POSTAL_CODE}}/g, escapeHtml(vals.POSTAL_CODE))
+        .replace(/{{CITY}}/g, escapeHtml(vals.CITY))
+        .replace(/{{EMAIL}}/g, escapeHtml(vals.EMAIL))
+        .replace(/{{PACKAGE}}/g, escapeHtml(vals.PACKAGE))
+        .replace(/{{PRICE}}/g, escapeHtml(vals.PRICE));
+    }
+
+    // ---------- format date dd/MM/yyyy ----------
+    function formatDate(d) {
+      const dd = String(d.getDate()).padStart(2,'0');
+      const mm = String(d.getMonth()+1).padStart(2,'0');
+      const yyyy = d.getFullYear();
+      return `${dd}/${mm}/${yyyy}`;
     }
 
     function showError(msg) {
       showLoader(false);
       const status = document.getElementById('status-message');
       status.classList.remove('hidden');
+      status.classList.remove('text-green-600');
       status.classList.add('text-red-600');
       status.textContent = '❌ ' + msg;
       document.getElementById('submit-btn').disabled = true;
@@ -238,11 +368,10 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
-          credentials: 'omit' // no credentials; app must be published public
+          credentials: 'omit'
         });
 
         if (!resp.ok) {
-          // if 4xx/5xx -> try fallback
           throw new Error('HTTP ' + resp.status);
         }
         const json = await resp.json();
@@ -261,7 +390,7 @@
         console.warn('Primary POST failed, attempting iframe fallback: ', err && err.message);
         try {
           iframeFormPost(payload);
-          // optimistic UI - we'll still show success after a short delay
+          // optimistic UI
           setTimeout(function() {
             status.classList.remove('text-slate-600');
             status.classList.add('text-green-600');
@@ -285,14 +414,13 @@
       form.method = 'POST';
       form.target = 'hidden_iframe';
       form.style.display = 'none';
-      // add fields
+      // add fields (stringify large fields)
       Object.keys(payload).forEach(k => {
         const inp = document.createElement('input'); inp.type = 'hidden'; inp.name = k; inp.value = payload[k];
         form.appendChild(inp);
       });
       document.body.appendChild(form);
       form.submit();
-      // remove form after a moment
       setTimeout(() => form.remove(), 4000);
       return true;
     }
