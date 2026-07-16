@@ -17,6 +17,13 @@
     pre { white-space:pre-wrap; }
     /* preserve line breaks from spreadsheet cells */
     .preserve-breaks { white-space: pre-wrap; word-wrap: break-word; }
+
+    /* Modal de agradecimento */
+    .thank-modal-backdrop { position: fixed; inset: 0; background: rgba(2,6,23,0.6); display: none; align-items: center; justify-content: center; z-index: 60; }
+    .thank-modal { background: #fff; padding: 24px; border-radius: 12px; max-width: 520px; width: 92%; box-shadow: 0 10px 30px rgba(2,6,23,0.15); text-align: center; }
+    .thank-modal h3 { margin: 0 0 8px; font-size: 20px; color: #0b63d6; }
+    .thank-modal p { color: #334155; font-size: 14px; margin-bottom: 18px; }
+    .thank-modal .ok-btn { background:#0b63d6; color:white; padding:10px 18px; border-radius:8px; border:none; cursor:pointer; font-weight:600; }
   </style>
 </head>
 <body class="min-h-screen p-4 md:p-10 text-slate-800">
@@ -89,6 +96,15 @@
   </div>
 
   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+  <!-- Thank-you Modal -->
+  <div id="thankModal" class="thank-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="thankTitle">
+    <div class="thank-modal" role="document">
+      <h3 id="thankTitle">Obrigado — assinatura recebida!</h3>
+      <p id="thankMsg">Seu contrato foi assinado com sucesso. Em breve você receberá uma cópia por e-mail.</p>
+      <button id="thankOkBtn" class="ok-btn">OK</button>
+    </div>
+  </div>
 
   <script>
     // ---------- CONFIG ----------
@@ -344,13 +360,14 @@ Kraków, Polska</pre>
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    // ---------- submit signature ----------
+    // ---------- submit signature (updated with modal) ----------
     async function submitSignature(ev) {
       ev && ev.preventDefault();
       const btn = document.getElementById('submit-btn');
       const status = document.getElementById('status-message');
-      status.classList.remove('text-red-600'); status.classList.remove('text-green-600');
-      status.classList.add('text-slate-600'); status.classList.remove('hidden');
+      status.classList.remove('text-red-600','text-green-600');
+      status.classList.add('text-slate-600');
+      status.classList.remove('hidden');
       status.textContent = 'Sending...';
       btn.disabled = true;
 
@@ -364,7 +381,24 @@ Kraków, Polska</pre>
         timestamp: new Date().toISOString()
       };
 
-      // Try normal POST (best)
+      const showThankModal = (message) => {
+        const modal = document.getElementById('thankModal');
+        const p = document.getElementById('thankMsg');
+        p.textContent = message || 'Seu contrato foi assinado com sucesso. Em breve você receberá uma cópia por e-mail.';
+        modal.style.display = 'flex';
+        const ok = document.getElementById('thankOkBtn');
+        const onOk = () => {
+          ok.removeEventListener('click', onOk);
+          modal.style.display = 'none';
+          // try to close the window; if blocked, navigate to about:blank
+          try { window.close(); }
+          catch(e) {
+            try { window.location.href = 'about:blank'; } catch(_) { /* ignore */ }
+          }
+        };
+        ok.addEventListener('click', onOk);
+      };
+
       try {
         const resp = await fetch(SCRIPT_URL, {
           method: 'POST',
@@ -373,33 +407,33 @@ Kraków, Polska</pre>
           credentials: 'omit'
         });
 
-        if (!resp.ok) {
-          throw new Error('HTTP ' + resp.status);
-        }
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
         const json = await resp.json();
+
         if (json && json.success) {
           status.classList.remove('text-slate-600');
           status.classList.add('text-green-600');
           status.textContent = '✅ Signed successfully';
           btn.innerText = 'Signed';
           btn.disabled = true;
+          showThankModal('Obrigado! Seu contrato foi assinado com sucesso.');
           return;
         } else {
           throw new Error((json && json.error) ? json.error : 'Server rejected signature');
         }
       } catch (err) {
-        // Fallback: form POST to hidden iframe (works around some CORS/firewalls)
         console.warn('Primary POST failed, attempting iframe fallback: ', err && err.message);
         try {
           iframeFormPost(payload);
-          // optimistic UI
-          setTimeout(function() {
+          // optimistic UI and modal
+          setTimeout(() => {
             status.classList.remove('text-slate-600');
             status.classList.add('text-green-600');
             status.textContent = '✅ Signed (fallback)';
             btn.innerText = 'Signed';
             btn.disabled = true;
-          }, 2000);
+            showThankModal('Obrigado! Recebemos sua assinatura (modo fallback).');
+          }, 1500);
         } catch (e2) {
           status.classList.remove('text-slate-600');
           status.classList.add('text-red-600');
