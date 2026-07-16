@@ -15,6 +15,8 @@
     .muted { color:#64748b; font-size:0.92rem; }
     .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
     pre { white-space:pre-wrap; }
+    /* preserve line breaks from spreadsheet cells */
+    .preserve-breaks { white-space: pre-wrap; word-wrap: break-word; }
   </style>
 </head>
 <body class="min-h-screen p-4 md:p-10 text-slate-800">
@@ -40,8 +42,8 @@
       <div class="grid md:grid-cols-2 gap-4 text-sm">
         <div><p class="text-slate-400 text-xs uppercase font-bold">Client</p><p id="display-name">...</p></div>
         <div><p class="text-slate-400 text-xs uppercase font-bold">Email</p><p id="display-email">...</p></div>
-        <div><p class="text-slate-400 text-xs uppercase font-bold">Package</p><p id="display-package">...</p></div>
-        <div><p class="text-slate-400 text-xs uppercase font-bold">Estimated Price</p><p id="display-price">...</p></div>
+        <div><p class="text-slate-400 text-xs uppercase font-bold">Package</p><p id="display-package" class="preserve-breaks">...</p></div>
+        <div><p class="text-slate-400 text-xs uppercase font-bold">Estimated Price</p><p id="display-price" class="preserve-breaks">...</p></div>
       </div>
 
       <p class="text-xs text-slate-500 mt-5 leading-relaxed">
@@ -57,7 +59,7 @@
     </div>
 
     <div class="p-6 md:p-8">
-      <form id="signature-form">
+      <form id="signature-form" onsubmit="submitSignature(event)">
         <div class="grid md:grid-cols-2 gap-4 mb-6">
           <div>
             <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Full Name</label>
@@ -77,7 +79,7 @@
           </div>
         </div>
 
-        <button type="button" id="submit-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
+        <button type="submit" id="submit-btn" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-xl transition-colors shadow-lg flex justify-center items-center gap-2">
           <span>Sign Document</span>
         </button>
 
@@ -90,7 +92,6 @@
 
   <script>
     // ---------- CONFIG ----------
-    // Substitua pelo Exec URL do seu deployment public-read do Apps Script
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyk1zWU7Zo48qktLGGeWqG7NmqTY_kmmoCFKnnehMlF7JJKgaybrdLSLaDwBUbV9ZKViw/exec";
 
     // ---------- estado ----------
@@ -104,7 +105,6 @@
       if (!leadId) return showError('Invalid link: missing leadId');
       initCanvas();
       loadInitialData();
-      document.getElementById('submit-btn').addEventListener('click', submitSignature);
       document.getElementById('clear-btn').addEventListener('click', clearCanvas);
       window.addEventListener('resize', resizeCanvas);
     });
@@ -175,7 +175,7 @@
       container.innerHTML = filled;
     }
 
-    // Escape user data for safe HTML insertion
+    // Escape user data for safe HTML insertion (do not convert \n -> <br/>; we use CSS pre-wrap)
     function escapeHtml(str) {
       if (str === null || str === undefined) return '';
       return String(str)
@@ -183,16 +183,15 @@
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;')
-        .replace(/\n/g, '<br/>');
+        .replace(/'/g, '&#039;');
     }
 
     // Fill the contract template with values (returns safe HTML)
     function fillContractTemplate(vals) {
       // If the spreadsheet stores a "Contract Text/HTML" (already formatted), we prefer to show it.
       if (vals.CONTRACT_RAW_TEXT && String(vals.CONTRACT_RAW_TEXT).trim().length > 10) {
-        // small sanitation: assume trusted, but still wrap in container
-        return '<div class="contract-section">' + vals.CONTRACT_RAW_TEXT + '</div>';
+        // sanitize and preserve breaks
+        return '<div class="contract-section preserve-breaks">' + escapeHtml(vals.CONTRACT_RAW_TEXT) + '</div>';
       }
 
       // Otherwise build from the provided standard template (Polish + English)
@@ -214,24 +213,24 @@ Kraków, Polska</pre>
           <div class="contract-title">ZAMAWIAJĄCY (CLIENT):</div>
           <div class="two-col">
             <div>
-              <strong>Nazwa firmy (Company Legal Name):</strong><div>{{CLIENT_LEGAL_NAME}}</div>
+              <strong>Nazwa firmy (Company Legal Name):</strong><div class="preserve-breaks">{{CLIENT_LEGAL_NAME}}</div>
             </div>
             <div>
-              <strong>NIP (Tax ID):</strong><div>{{TAX_ID}}</div>
+              <strong>NIP (Tax ID):</strong><div class="preserve-breaks">{{TAX_ID}}</div>
             </div>
           </div>
           <div style="margin-top:.75rem;">
-            <strong>Adres siedziby (Address):</strong><div>{{ADDRESS}}</div>
-            <div class="muted" style="margin-top:.25rem;">Kod pocztowy i miasto (City/Zip): {{POSTAL_CODE}} {{CITY}}</div>
-            <div class="muted" style="margin-top:.25rem;">Email kontaktowy: {{EMAIL}}</div>
+            <strong>Adres siedziby (Address):</strong><div class="preserve-breaks">{{ADDRESS}}</div>
+            <div class="muted preserve-breaks" style="margin-top:.25rem;">Kod pocztowy i miasto (City/Zip): {{POSTAL_CODE}} {{CITY}}</div>
+            <div class="muted preserve-breaks" style="margin-top:.25rem;">Email kontaktowy: {{EMAIL}}</div>
           </div>
         </div>
 
         <div class="contract-section">
           <div class="contract-title">SZCZEGÓŁY ZAMÓWIENIA (PROJECT DETAILS):</div>
           <div><strong>Wybrany Pakiet (Package):</strong></div>
-          <div style="margin:0.5rem 0 1rem 0;">{{PACKAGE}}</div>
-          <div><strong>Szacowana Cena (Estimated Price):</strong> {{PRICE}}</div>
+          <div style="margin:0.5rem 0 1rem 0;" class="preserve-breaks">{{PACKAGE}}</div>
+          <div><strong>Szacowana Cena (Estimated Price):</strong> <span class="preserve-breaks">{{PRICE}}</span></div>
         </div>
 
         <div class="contract-section">
@@ -273,7 +272,6 @@ Kraków, Polska</pre>
         </div>
       `;
 
-      // perform replacements and escape inserted values
       return tpl
         .replace(/{{DATE}}/g, escapeHtml(vals.DATE))
         .replace(/{{LEAD_ID}}/g, escapeHtml(vals.LEAD_ID))
@@ -325,10 +323,14 @@ Kraków, Polska</pre>
 
     function resizeCanvas() {
       const ratio = window.devicePixelRatio || 1;
-      canvas.width = Math.round(canvas.offsetWidth * ratio);
-      canvas.height = Math.round(canvas.offsetHeight * ratio);
+      const w = canvas.offsetWidth;
+      const h = canvas.offsetHeight;
+      canvas.width = Math.round(w * ratio);
+      canvas.height = Math.round(h * ratio);
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-      clearCanvas(); // keep blank on resize
+      // do not clear on resize if there is content — keep existing drawing scaled correctly is hard;
+      // we clear to avoid blurry artifacts and ask user to re-sign if they resize mid-sign
+      clearCanvas();
     }
 
     function pointerPos(e) {
