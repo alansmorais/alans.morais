@@ -81,59 +81,77 @@
     </form>
   </div>
 
+  <!-- Hidden iframe for form POST fallback -->
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
   <script>
-    // A URL DA SUA API (Substitua se necessário)
+    // YOUR Apps Script web app URL (keep /exec)
     const API_URL = "https://script.google.com/macros/s/AKfycbyk1zWU7Zo48qktLGGeWqG7NmqTY_kmmoCFKnnehMlF7JJKgaybrdLSLaDwBUbV9ZKViw/exec";
-    
-    // O TRUQUE DO SEU SITE PRINCIPAL (POST CEGO)
-    async function submitBlindPost(payload) {
-      await fetch(API_URL, {
-        method: 'POST',
-        mode: 'no-cors', // Ignora o bloqueio do Google
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8'
-        },
-        body: JSON.stringify(payload)
+
+    // Build and submit a hidden form to the Apps Script endpoint (works cross-origin)
+    function iframeFormPost(payload) {
+      const form = document.createElement('form');
+      form.action = API_URL;
+      form.method = 'POST';
+      form.target = 'hidden_iframe';
+      form.style.display = 'none';
+
+      // Add each key as an input (Apps Script will receive them in e.parameter)
+      Object.keys(payload).forEach(key => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        // If the value is an object/array, stringify it
+        input.value = (typeof payload[key] === 'object') ? JSON.stringify(payload[key]) : payload[key];
+        form.appendChild(input);
       });
-      return { success: true };
+
+      document.body.appendChild(form);
+      form.submit();
+
+      // Clean up after a short delay
+      setTimeout(() => {
+        document.body.removeChild(form);
+      }, 3000);
     }
 
     async function submitForm(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
       const msg = document.getElementById('statusMsg');
-      
+
       btn.textContent = "Przetwarzanie / Processing...";
       btn.disabled = true;
       msg.classList.add('hidden');
 
-      // Coleta os dados do formulário e cria a ação 'newPublicLead' (que já colocamos no seu Code.gs)
+      // Prepare payload exactly as Apps Script expects:
+      // top-level action = 'newPublicLead' and other fields at top-level
       const payload = {
         action: 'newPublicLead',
-        data: {
-          name: document.getElementById('clientName').value,
-          email: document.getElementById('clientEmail').value,
-          phone: document.getElementById('clientPhone').value,
-          clienttype: 'Business', 
-          clientlegalname: document.getElementById('clientLegalName').value,
-          taxidtype: 'NIP', 
-          taxidnumber: document.getElementById('taxIDNumber').value,
-          address: document.getElementById('address').value,
-          postalcode: document.getElementById('postalCode').value,
-          city: document.getElementById('city').value,
-          country: 'Poland',
-          status: 'Dados Preenchidos'
-        }
+        // the backend's handleNewPublicLead_ can accept a flat payload
+        name: document.getElementById('clientName').value,
+        email: document.getElementById('clientEmail').value,
+        phone: document.getElementById('clientPhone').value,
+        clienttype: 'Business',
+        clientlegalname: document.getElementById('clientLegalName').value,
+        taxidtype: 'NIP',
+        taxidnumber: document.getElementById('taxIDNumber').value,
+        address: document.getElementById('address').value,
+        postalcode: document.getElementById('postalCode').value,
+        city: document.getElementById('city').value,
+        country: 'Poland',
+        status: 'Dados Preenchidos'
       };
 
       try {
-        await submitBlindPost(payload);
-        
-        // Como o 'no-cors' não lê resposta, nós simplesmente assumimos o sucesso
+        // Post via hidden iframe (no CORS issues) — Apps Script will receive e.parameter
+        iframeFormPost(payload);
+
+        // optimistic UI: we can't read the response with iframe fallback reliably, so assume success
         document.getElementById('plForm').reset();
         msg.textContent = "Dziękujemy! Dane zostały wysłane. / Thank you! Details submitted.";
         msg.className = "text-center text-xs font-semibold mt-4 text-emerald-400 block";
-      } catch (error) {
+      } catch (err) {
         msg.textContent = "Błąd / Error. Proszę spróbować ponownie.";
         msg.className = "text-center text-xs font-semibold mt-4 text-red-400 block";
       } finally {
