@@ -85,6 +85,20 @@
     // ---------- CONFIG: substitua pela sua URL exec do Apps Script publicada ----------
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyBxsQaj38jbD3aLLU6acP3AWE9fHJdHFt5M8E2UuAV39-p4MkjuLzY0v9AOIUhWb63/exec";
 
+    async function submitBlindPost(payload) {
+    await fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors', // <-- This is the magic line
+    headers: {
+      'Content-Type': 'text/plain;charset=utf-8'
+    },
+    body: JSON.stringify(payload)
+  });
+  
+  // Because 'no-cors' prevents the browser from reading Google's actual response,
+  // we just manually return a success status assuming the data was sent.
+  return { success: true };
+}
     // ---------- estado ----------
     let contractData = null;
     const params = new URLSearchParams(window.location.search);
