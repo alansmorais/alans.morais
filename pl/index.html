@@ -1151,60 +1151,62 @@
     if (previouslyFocusedElement) previouslyFocusedElement.focus();
   }
 
-  function loadDiscountCounter() {
-    const counterText = document.getElementById('discountCounterText');
-    if (!counterText || !ALANSM_BACKEND_URL) return;
+ function loadDiscountCounter() {
+  const counterText = document.getElementById('discountCounterText');
+  if (!counterText || !ALANSM_BACKEND_URL) return;
 
-    counterText.textContent = "Checking availability...";
+  counterText.textContent = "Checking availability...";
 
-    const callbackName = 'alansmCounterCallback_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
-    const script = document.createElement('script');
-    const cleanup = () => {
-      try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
-      if (script && script.parentNode) script.parentNode.removeChild(script);
-    };
+  const callbackName = 'alansmCounterCallback_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+  const script = document.createElement('script');
+  const cleanup = () => {
+    try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
+    if (script && script.parentNode) script.parentNode.removeChild(script);
+  };
 
-    const timeout = window.setTimeout(() => {
-      cleanup();
+  const timeout = window.setTimeout(() => {
+    cleanup();
+    counterText.textContent = "Live counter unavailable. Final availability confirmed after review.";
+  }, 10000);
+
+  // CORREÇÃO: verificar data.status (não counter.status)
+  window[callbackName] = function(data) {
+    window.clearTimeout(timeout);
+    cleanup();
+
+    const status = data && data.status;
+    const counter = data && (data.counter || data);
+    const remaining = Number(counter && counter.remaining);
+    const totalSlots = Number(counter && counter.totalSlots);
+
+    if (
+      !counter ||
+      status !== 'ok' ||
+      !Number.isFinite(remaining) ||
+      !Number.isFinite(totalSlots)
+    ) {
       counterText.textContent = "Live counter unavailable. Final availability confirmed after review.";
-    }, 10000);
+      return;
+    }
 
-    window[callbackName] = function(data) {
-      window.clearTimeout(timeout);
-      cleanup();
+    if (counter.soldOut || remaining <= 0) {
+      counterText.textContent = "Pilot onboarding spots are currently full. Standard setup applies.";
+    } else if (remaining === 1) {
+      counterText.textContent = "Last pilot onboarding spot available.";
+    } else {
+      counterText.textContent = `${remaining} of ${totalSlots} pilot onboarding spots remaining.`;
+    }
+  };
 
-      const counter = data && (data.counter || data);
-      const remaining = Number(counter && counter.remaining);
-      const totalSlots = Number(counter && counter.totalSlots);
+  script.onerror = function() {
+    window.clearTimeout(timeout);
+    cleanup();
+    counterText.textContent = "Live counter unavailable. Final availability confirmed after review.";
+  };
 
-      if (
-        !counter ||
-        counter.status !== 'ok' ||
-        !Number.isFinite(remaining) ||
-        !Number.isFinite(totalSlots)
-      ) {
-        counterText.textContent = "Live counter unavailable. Final availability confirmed after review.";
-        return;
-      }
-
-      if (counter.soldOut || remaining <= 0) {
-        counterText.textContent = "Pilot onboarding spots are currently full. Standard setup applies.";
-      } else if (remaining === 1) {
-        counterText.textContent = "Last pilot onboarding spot available.";
-      } else {
-        counterText.textContent = `${remaining} of ${totalSlots} pilot onboarding spots remaining.`;
-      }
-    };
-
-    script.onerror = function() {
-      window.clearTimeout(timeout);
-      cleanup();
-      counterText.textContent = "Live counter unavailable. Final availability confirmed after review.";
-    };
-
-    script.src = ALANSM_BACKEND_URL + '?action=counter&callback=' + encodeURIComponent(callbackName) + '&_ts=' + Date.now();
-    document.head.appendChild(script);
-  }
+  script.src = ALANSM_BACKEND_URL + '?action=counter&callback=' + encodeURIComponent(callbackName) + '&_ts=' + Date.now();
+  document.head.appendChild(script);
+}
 
   async function submitLeadViaPost(payload) {
     await fetch(ALANSM_BACKEND_URL, {
