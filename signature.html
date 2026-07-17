@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AlanSM - Sign Contract</title>
-  <link rel="icon" type="image/svg+xml" href="https://alansmsolutions.com/images/logo.svg" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: Inter, Arial, sans-serif; background:#f8fafc; }
@@ -18,13 +17,6 @@
     pre { white-space:pre-wrap; }
     /* preserve line breaks from spreadsheet cells */
     .preserve-breaks { white-space: pre-wrap; word-wrap: break-word; }
-
-    /* Modal de agradecimento */
-    .thank-modal-backdrop { position: fixed; inset: 0; background: rgba(2,6,23,0.6); display: none; align-items: center; justify-content: center; z-index: 60; }
-    .thank-modal { background: #fff; padding: 24px; border-radius: 12px; max-width: 520px; width: 92%; box-shadow: 0 10px 30px rgba(2,6,23,0.15); text-align: center; }
-    .thank-modal h3 { margin: 0 0 8px; font-size: 20px; color: #0b63d6; }
-    .thank-modal p { color: #334155; font-size: 14px; margin-bottom: 18px; }
-    .thank-modal .ok-btn { background:#0b63d6; color:white; padding:10px 18px; border-radius:8px; border:none; cursor:pointer; font-weight:600; }
   </style>
 </head>
 <body class="min-h-screen p-4 md:p-10 text-slate-800">
@@ -40,16 +32,7 @@
     <div class="bg-slate-900 text-white p-6 md:p-8">
       <div class="flex justify-between items-center gap-4 mb-2">
         <h1 class="text-2xl font-bold">AlanSM Contract Signature</h1>
-</a>
-<right>
-<img
-  src="/images/logo.svg"
-  alt="AlanSM Solutions logo"
-  width="96" height="96"
-  class="w-[96px] h-[96px] md:w-[112px] md:h-[112px] rounded-full border border-slate-700 bg-transparent object-contain mx-auto"
-/>
-</right>  
-
+        <span id="badge-status" class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">Pending</span>
       </div>
       <p class="text-slate-400 text-sm">Contract ID: <strong id="display-contract-id">...</strong></p>
     </div>
@@ -106,15 +89,6 @@
   </div>
 
   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-
-  <!-- Thank-you Modal -->
-  <div id="thankModal" class="thank-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="thankTitle">
-    <div class="thank-modal" role="document">
-      <h3 id="thankTitle">Obrigado — assinatura recebida!</h3>
-      <p id="thankMsg">Seu contrato foi assinado com sucesso. Em breve você receberá uma cópia por e-mail.</p>
-      <button id="thankOkBtn" class="ok-btn">OK</button>
-    </div>
-  </div>
 
   <script>
     // ---------- CONFIG ----------
@@ -370,14 +344,13 @@ Kraków, Polska</pre>
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    // ---------- submit signature (updated with modal) ----------
+    // ---------- submit signature ----------
     async function submitSignature(ev) {
       ev && ev.preventDefault();
       const btn = document.getElementById('submit-btn');
       const status = document.getElementById('status-message');
-      status.classList.remove('text-red-600','text-green-600');
-      status.classList.add('text-slate-600');
-      status.classList.remove('hidden');
+      status.classList.remove('text-red-600'); status.classList.remove('text-green-600');
+      status.classList.add('text-slate-600'); status.classList.remove('hidden');
       status.textContent = 'Sending...';
       btn.disabled = true;
 
@@ -391,24 +364,7 @@ Kraków, Polska</pre>
         timestamp: new Date().toISOString()
       };
 
-      const showThankModal = (message) => {
-        const modal = document.getElementById('thankModal');
-        const p = document.getElementById('thankMsg');
-        p.textContent = message || 'Seu contrato foi assinado com sucesso. Em breve você receberá uma cópia por e-mail.';
-        modal.style.display = 'flex';
-        const ok = document.getElementById('thankOkBtn');
-        const onOk = () => {
-          ok.removeEventListener('click', onOk);
-          modal.style.display = 'none';
-          // try to close the window; if blocked, navigate to about:blank
-          try { window.close(); }
-          catch(e) {
-            try { window.location.href = 'about:blank'; } catch(_) { /* ignore */ }
-          }
-        };
-        ok.addEventListener('click', onOk);
-      };
-
+      // Try normal POST (best)
       try {
         const resp = await fetch(SCRIPT_URL, {
           method: 'POST',
@@ -417,33 +373,33 @@ Kraków, Polska</pre>
           credentials: 'omit'
         });
 
-        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        if (!resp.ok) {
+          throw new Error('HTTP ' + resp.status);
+        }
         const json = await resp.json();
-
         if (json && json.success) {
           status.classList.remove('text-slate-600');
           status.classList.add('text-green-600');
           status.textContent = '✅ Signed successfully';
           btn.innerText = 'Signed';
           btn.disabled = true;
-          showThankModal('Obrigado! Seu contrato foi assinado com sucesso.');
           return;
         } else {
           throw new Error((json && json.error) ? json.error : 'Server rejected signature');
         }
       } catch (err) {
+        // Fallback: form POST to hidden iframe (works around some CORS/firewalls)
         console.warn('Primary POST failed, attempting iframe fallback: ', err && err.message);
         try {
           iframeFormPost(payload);
-          // optimistic UI and modal
-          setTimeout(() => {
+          // optimistic UI
+          setTimeout(function() {
             status.classList.remove('text-slate-600');
             status.classList.add('text-green-600');
             status.textContent = '✅ Signed (fallback)';
             btn.innerText = 'Signed';
             btn.disabled = true;
-            showThankModal('Obrigado! Recebemos sua assinatura (modo fallback).');
-          }, 1500);
+          }, 2000);
         } catch (e2) {
           status.classList.remove('text-slate-600');
           status.classList.add('text-red-600');
