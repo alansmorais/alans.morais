@@ -15,22 +15,8 @@
 </head>
 <body class="antialiased min-h-screen flex flex-col">
 
-  <!-- LOGIN -->
-  <div id="loginScreen" class="fixed inset-0 bg-slate-950 flex flex-col items-center justify-center z-50">
-    <div class="bg-slate-900 border border-slate-800 p-8 rounded-xl shadow-2xl w-full max-w-sm text-center">
-      <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center font-bold text-2xl text-white mx-auto mb-4">AS</div>
-      <h2 class="text-lg font-bold text-slate-100">AlanSM Solutions</h2>
-      <p class="text-xs text-slate-400 mb-6 uppercase tracking-wider">Acesso Restrito - CRM</p>
-      <form onsubmit="handleLogin(event)">
-        <input type="password" id="passwordInput" placeholder="Senha de Acesso" class="w-full bg-slate-950 border border-slate-800 rounded-md px-4 py-3 text-sm text-center text-slate-100 focus:outline-none focus:border-blue-500 mb-4" required />
-        <button type="submit" id="loginBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition-colors text-sm">Entrar no Sistema</button>
-      </form>
-      <p id="loginError" class="text-red-400 text-xs mt-4 hidden font-medium"></p>
-    </div>
-  </div>
-
-  <!-- DASHBOARD -->
-  <div id="mainDashboard" class="hidden flex-col flex-1">
+  <!-- DASHBOARD (Agora visível por padrão) -->
+  <div id="mainDashboard" class="flex flex-col flex-1">
     <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur px-8 py-4 flex items-center justify-between sticky top-0 z-40">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-sm text-white">AS</div>
@@ -42,7 +28,6 @@
       <div class="flex items-center gap-4">
         <input type="text" id="tableSearch" oninput="filterLeads()" placeholder="Buscar leads..." class="bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors w-64" />
         <button onclick="loadLeads()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-md transition-colors flex items-center gap-2">↻ Atualizar</button>
-        <button onclick="logout()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold px-4 py-2 rounded-md transition-colors border border-slate-700">Sair</button>
       </div>
     </header>
 
@@ -131,27 +116,15 @@
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbzX5IVQnHbT1dVi11rUYb1-Wqeyl8F-0F55Jepnd71KtH1PbphE-Ww9so0DjiHEnFE3/exec"; 
-    let sessionToken = sessionStorage.getItem("crmSession") || "";
+    
+    // A chave do seu admin está configurada diretamente aqui para passar pela proteção do backend
+    const sessionToken = "alan_admin_2026"; 
     let allLeads = [];
 
-    if (sessionToken) {
-      document.getElementById('loginScreen').style.display='none';
-      document.getElementById('mainDashboard').classList.remove('hidden');
+    // Inicia o carregamento dos leads assim que a página abre
+    document.addEventListener("DOMContentLoaded", () => {
       loadLeads();
-    }
-
-    async function handleLogin(e){
-      e.preventDefault();
-      const password = document.getElementById('passwordInput').value;
-      try {
-        const response = await fetch(`${API_URL}?action=login&password=${encodeURIComponent(password)}`);
-        const data = await response.json();
-        if(!data.success) throw new Error(data.error);
-        sessionToken = data.session;
-        sessionStorage.setItem("crmSession", sessionToken);
-        location.reload();
-      } catch(err) { alert(err.message); }
-    }
+    });
 
     async function fetchAPI(payload){
       const params = new URLSearchParams({ action: payload.action, session: sessionToken });
@@ -161,6 +134,8 @@
     }
 
     async function loadLeads(){
+      const body = document.getElementById('leadsTableBody');
+      body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-slate-500 font-medium animate-pulse">Sincronizando Leads...</td></tr>';
       try {
         const data = await fetchAPI({ action:"getLeads" });
         if(!data.success) throw new Error(data.error);
@@ -249,7 +224,6 @@
 
     function closeModal(){ document.getElementById('editModal').classList.add('hidden'); document.getElementById('editModal').classList.remove('flex'); }
     function filterLeads(){ /* sua lógica de filtro aqui */ }
-    function logout(){ sessionStorage.clear(); location.reload(); }
   </script>
 </body>
 </html>
