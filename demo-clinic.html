@@ -193,11 +193,21 @@
         <div id="subview-month" class="subview items-center justify-center bg-slate-50 text-slate-400 p-8">
           <i class="fa-solid fa-calendar-days text-5xl mb-4 text-slate-300"></i><h2 class="text-xl font-bold text-slate-700 mb-2">Month View</h2>
         </div>
+        
         <div id="subview-week" class="subview items-center justify-center bg-slate-50 text-slate-400 p-8">
           <i class="fa-solid fa-calendar-week text-5xl mb-4 text-slate-300"></i><h2 class="text-xl font-bold text-slate-700 mb-2">Week View</h2>
         </div>
-        <div id="subview-list" class="subview items-center justify-center bg-slate-50 text-slate-400 p-8">
-          <i class="fa-solid fa-list text-5xl mb-4 text-slate-300"></i><h2 class="text-xl font-bold text-slate-700 mb-2">Agenda List View</h2>
+        
+        <!-- NEW FUNCTIONAL LIST VIEW -->
+        <div id="subview-list" class="subview bg-slate-50 p-6 overflow-auto">
+          <div class="max-w-4xl mx-auto w-full bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-4 border-b border-slate-100 bg-slate-50 font-bold text-slate-700">
+              <i class="fa-solid fa-list mr-2"></i> Agenda / Lista Wizyt
+            </div>
+            <div id="agenda-list-container" class="divide-y divide-slate-100">
+              <!-- Live list items will appear here -->
+            </div>
+          </div>
         </div>
       </main>
     </div>
@@ -334,28 +344,24 @@
     function initApp() {
       document.getElementById('lang-select').value = currentLang;
       applyTranslations(currentLang);
-      renderMiniCalendar(); // Builds the dynamic mini calendar
+      renderMiniCalendar(); 
       populateResourceDropdown();
       renderHeaders();
       renderTimeColumn();
-      fetchEvents(); // Fetches live data from Google Sheets
+      fetchEvents(); 
     }
 
-    // --- NEW: DYNAMIC MINI CALENDAR & HEADER DATE ---
     function renderMiniCalendar() {
       const locales = { en: 'en-GB', br: 'pt-BR', pl: 'pl-PL', es: 'es-ES' };
       const locale = locales[currentLang] || 'pl-PL';
-      const date = new Date(); // Gets today's real date from your computer
+      const date = new Date(); 
       
-      // Update Top Global Toolbar Date
       const topDateFormatted = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
       document.getElementById('display-date').textContent = topDateFormatted;
       
-      // Update Sidebar Mini Calendar Month Header
       const monthFormatted = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(date);
       document.getElementById('mini-cal-month').textContent = monthFormatted.charAt(0).toUpperCase() + monthFormatted.slice(1);
 
-      // Translate Days of the Week row
       const dayHeaders = {
         pl: ['P','W','Ś','C','P','S','N'],
         en: ['M','T','W','T','F','S','S'],
@@ -366,7 +372,6 @@
       daysRow.innerHTML = '';
       dayHeaders[currentLang].forEach(d => { daysRow.innerHTML += `<div>${d}</div>`; });
 
-      // Generate the Number Grid dynamically
       const grid = document.getElementById('mini-cal-grid');
       grid.innerHTML = '';
       
@@ -376,27 +381,23 @@
       
       const firstDay = new Date(year, month, 1);
       let firstDayIndex = firstDay.getDay() - 1;
-      if (firstDayIndex === -1) firstDayIndex = 6; // Make Monday the first day
+      if (firstDayIndex === -1) firstDayIndex = 6; 
       
       const daysInMonth = new Date(year, month + 1, 0).getDate();
       const daysInPrevMonth = new Date(year, month, 0).getDate();
       
-      // Trailing days of previous month
       for (let i = firstDayIndex; i > 0; i--) {
         grid.innerHTML += `<div style="color: #cbd5e1; height: 24px; display: flex; align-items: center; justify-content: center;">${daysInPrevMonth - i + 1}</div>`;
       }
       
-      // Days of current month
       for (let i = 1; i <= daysInMonth; i++) {
         if (i === currentDay) {
-          // Highlight today's date
           grid.innerHTML += `<div style="background: var(--primary); color: white; border-radius: 50%; font-weight: bold; width: 24px; height: 24px; margin: auto; display: flex; align-items: center; justify-content: center;">${i}</div>`;
         } else {
           grid.innerHTML += `<div style="height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;" onmouseover="this.style.background='#f1f5f9'; this.style.borderRadius='50%';" onmouseout="this.style.background='transparent';">${i}</div>`;
         }
       }
       
-      // Leading days of next month
       const totalRendered = firstDayIndex + daysInMonth;
       const remainingSlots = (Math.ceil(totalRendered / 7) * 7) - totalRendered;
       for (let i = 1; i <= remainingSlots; i++) {
@@ -404,7 +405,6 @@
       }
     }
 
-    // --- FETCH LIVE EVENTS (READ FROM GOOGLE SHEETS) ---
     function fetchEvents() {
       fetch(WEB_APP_URL)
         .then(response => response.json())
@@ -436,7 +436,7 @@
           });
           
           document.getElementById('loading-overlay').style.display = 'none';
-          renderGridAndEvents();
+          renderCalendar();
         })
         .catch(err => {
           console.error("Error fetching data:", err);
@@ -476,7 +476,7 @@
     function changeLanguage(lang) {
       currentLang = lang;
       applyTranslations(lang);
-      renderMiniCalendar(); // Re-render to translate days/month
+      renderMiniCalendar(); 
       renderCalendar(); 
     }
 
@@ -484,6 +484,7 @@
       renderHeaders();
       renderTimeColumn();
       renderGridAndEvents();
+      renderListView(); // Renders the List view!
     }
 
     function renderHeaders() {
@@ -564,6 +565,47 @@
           colDiv.appendChild(evtDiv);
         });
         gridCols.appendChild(colDiv);
+      });
+    }
+
+    // --- NEW: LIST VIEW RENDERER ---
+    function renderListView() {
+      const container = document.getElementById('agenda-list-container');
+      if (!container) return;
+      container.innerHTML = '';
+      
+      if (events.length === 0) {
+        container.innerHTML = '<div class="p-8 text-center text-slate-400 font-medium">Brak wizyt. (No appointments)</div>';
+        return;
+      }
+      
+      // Sort events chronologically by start time
+      const sortedEvents = [...events].sort((a, b) => timeToMinutes(a.start) - timeToMinutes(b.start));
+      
+      sortedEvents.forEach(evt => {
+        // Find the matching professional for this event
+        const res = allResources.find(r => r.id === evt.resourceId);
+        const resName = res ? res.name : '';
+        const srvName = i18n[currentLang].services[evt.srvKey] || evt.srvKey;
+        
+        container.innerHTML += `
+          <div class="p-4 flex items-center justify-between hover:bg-slate-50 transition">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-12 rounded-lg ${evt.theme} flex flex-col items-center justify-center flex-shrink-0 border-l-4">
+                <span class="font-bold text-sm">${evt.start}</span>
+              </div>
+              <div>
+                <div class="font-bold text-slate-800 text-lg">${evt.client}</div>
+                <div class="text-sm font-semibold text-slate-500 mt-0.5">
+                  <i class="fa-solid fa-user-doctor mr-1"></i> ${resName} <span class="mx-2 text-slate-300">|</span> ${srvName}
+                </div>
+              </div>
+            </div>
+            <div class="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-500">
+              ${evt.start} - ${evt.end}
+            </div>
+          </div>
+        `;
       });
     }
 
