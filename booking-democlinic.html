@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Harmonia Mind | Centrum Wsparcia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f766e; /* Teal 700 - calming, clinical */
+      --primary-light: #f0fdfa; /* Teal 50 */
+      --dark: #0f172a;
+    }
+    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: var(--dark); margin: 0; }
+    
+    /* Calming gradients */
+    .hero-bg { background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); }
+    
+    /* Booking Modal Styles */
+    #booking-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 100; padding: 16px; }
+    #booking-modal.active { display: flex; }
+    .modal-inner { width: 100%; max-width: 500px; background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); max-height: 90vh; display: flex; flex-direction: column; }
+    .modal-body { overflow-y: auto; padding: 24px; }
+    
+    .select-card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.2s; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+    .select-card:hover { border-color: var(--primary); background: var(--primary-light); }
+    .select-card.selected { border-color: var(--primary); background: var(--primary-light); border-width: 2px; }
+    
+    .time-btn { padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0; background: white; cursor: pointer; transition: 0.2s; text-align: center; font-weight: 600; color: #334155; }
+    .time-btn:hover, .time-btn.selected { background: var(--primary-light); border-color: var(--primary); color: var(--primary); }
+    
+    .lang-selector { padding: 6px 12px; border-radius: 8px; border: 1px solid #e2e8f0; background: white; font-size: 14px; font-weight: 600; cursor: pointer; outline: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-teal-700 flex items-center justify-center shadow-md">
+          <i class="fa-solid fa-leaf text-white"></i>
+        </div>
+        <span class="text-xl font-bold text-slate-800 tracking-tight" data-i18n="brandName">Harmonia Mind</span>
+      </div>
+      
+      <div class="flex items-center gap-6">
+        <select id="lang-select" class="lang-selector" onchange="changeLanguage(this.value)">
+          <option value="pl">🇵🇱 PL</option>
+          <option value="en">🇬🇧 EN</option>
+          <option value="br">🇧🇷 BR</option>
+          <option value="es">🇪🇸 ES</option>
+        </select>
+        <button onclick="openBooking()" class="hidden md:block px-6 py-2.5 bg-teal-700 hover:bg-teal-800 text-white rounded-lg font-semibold transition shadow-sm" data-i18n="btnBookNav">Umów wizytę</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-bg py-20 lg:py-32">
+    <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-block px-4 py-1.5 rounded-full bg-teal-100 text-teal-800 text-xs font-bold uppercase tracking-wider mb-6" data-i18n="heroBadge">
+          Centrum Wsparcia
+        </div>
+        <h1 class="text-4xl lg:text-5xl font-bold leading-tight mb-6 text-slate-900" data-i18n="heroTitle">
+          Twoje zdrowie psychiczne jest najważniejsze.
+        </h1>
+        <p class="text-lg text-slate-600 mb-8 leading-relaxed max-w-lg" data-i18n="heroDesc">
+          Profesjonalna pomoc psychologiczna, psychoterapeutyczna i psychiatryczna w bezpiecznej, pełnej empatii przestrzeni. Konsultacje online i stacjonarnie.
+        </p>
+        <button onclick="openBooking()" class="px-8 py-4 bg-teal-700 hover:bg-teal-800 text-white rounded-xl font-bold shadow-lg shadow-teal-700/30 transition text-lg flex items-center gap-2">
+          <span data-i18n="btnBookHero">Umów pierwszą wizytę</span> <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+      
+      <div class="relative hidden lg:block rounded-2xl overflow-hidden shadow-2xl border border-white">
+        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Therapy session" class="w-full h-full object-cover">
+      </div>
+    </div>
+  </section>
+
+  <!-- Specialists Section -->
+  <section class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4" data-i18n="specTitle">Nasi Specjaliści</h2>
+        <p class="text-slate-500" data-i18n="specDesc">Wybierz odpowiedniego eksperta dla swoich potrzeb. Każdy z naszych specjalistów posiada certyfikowane kwalifikacje.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Psycholog -->
+        <div class="p-6 rounded-2xl border border-slate-200 hover:border-teal-500 hover:shadow-xl transition flex flex-col bg-slate-50">
+          <div class="w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-white shadow-sm">
+             <img src="https://i.pravatar.cc/150?img=47" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">Dr. Anna Kowalska</h3>
+          <p class="text-teal-700 font-semibold text-sm mb-4" data-i18n="rolePsychologist">Psycholog</p>
+          <p class="text-slate-500 text-sm mb-6 flex-1" data-i18n="descPsychologist">Diagnoza psychologiczna, wsparcie w kryzysie, radzenie sobie ze stresem i wypaleniem zawodowym.</p>
+          <button onclick="openBooking('r1')" class="w-full py-2.5 rounded-lg border border-teal-700 text-teal-700 font-bold hover:bg-teal-50 transition" data-i18n="btnSelect">Wybierz</button>
+        </div>
+
+        <!-- Psychoterapeuta -->
+        <div class="p-6 rounded-2xl border border-slate-200 hover:border-teal-500 hover:shadow-xl transition flex flex-col bg-slate-50">
+          <div class="w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-white shadow-sm">
+             <img src="https://i.pravatar.cc/150?img=12" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">Mgr Jan Nowak</h3>
+          <p class="text-teal-700 font-semibold text-sm mb-4" data-i18n="roleTherapist">Psychoterapeuta (CBT)</p>
+          <p class="text-slate-500 text-sm mb-6 flex-1" data-i18n="descTherapist">Długoterminowa praca nad zaburzeniami lękowymi, depresją oraz trudnościami w relacjach.</p>
+          <button onclick="openBooking('r2')" class="w-full py-2.5 rounded-lg border border-teal-700 text-teal-700 font-bold hover:bg-teal-50 transition" data-i18n="btnSelect">Wybierz</button>
+        </div>
+
+        <!-- Psychiatra -->
+        <div class="p-6 rounded-2xl border border-slate-200 hover:border-teal-500 hover:shadow-xl transition flex flex-col bg-slate-50">
+          <div class="w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-white shadow-sm">
+             <img src="https://i.pravatar.cc/150?img=32" class="w-full h-full object-cover">
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">Lek. Maria Wiśniewska</h3>
+          <p class="text-teal-700 font-semibold text-sm mb-4" data-i18n="rolePsychiatrist">Lekarz Psychiatra</p>
+          <p class="text-slate-500 text-sm mb-6 flex-1" data-i18n="descPsychiatrist">Konsultacje medyczne, diagnoza kliniczna, farmakoterapia oraz wystawianie zwolnień (L4).</p>
+          <button onclick="openBooking('r3')" class="w-full py-2.5 rounded-lg border border-teal-700 text-teal-700 font-bold hover:bg-teal-50 transition" data-i18n="btnSelect">Wybierz</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRONT END BOOKING WIDGET -->
+  <div id="booking-modal">
+    <div class="modal-inner">
+      <!-- Header -->
+      <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50 shrink-0">
+        <h3 class="font-bold text-slate-900 text-lg" id="modal-title" data-i18n="modalTitle1">Wybierz Specjalistę i Usługę</h3>
+        <button onclick="closeBooking()" class="text-slate-400 hover:text-slate-700 text-xl"><i class="fa-solid fa-times"></i></button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- STEP 1: Specialist & Service -->
+        <div id="step-1">
+          <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="lblSpec">Specjalista</label>
+          <select id="inp-resource" class="w-full p-3 rounded-lg border border-slate-200 mb-6 focus:ring-2 focus:ring-teal-600 outline-none font-medium">
+            <option value="r1">Dr. Anna Kowalska (Psycholog)</option>
+            <option value="r2">Mgr Jan Nowak (Psychoterapeuta)</option>
+            <option value="r3">Lek. Maria Wiśniewska (Psychiatra)</option>
+          </select>
+
+          <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="lblService">Rodzaj wizyty</label>
+          
+          <div class="select-card selected" onclick="selectService(this, 'ind')">
+            <input type="radio" name="service" value="ind" checked class="accent-teal-700 w-4 h-4 pointer-events-none">
+            <div>
+              <div class="font-bold text-slate-900" data-i18n="srvInd">Konsultacja Indywidualna</div>
+              <div class="text-xs text-slate-500 mt-1">50 min • 200 PLN</div>
+            </div>
+          </div>
+          
+          <div class="select-card" onclick="selectService(this, 'med')">
+            <input type="radio" name="service" value="med" class="accent-teal-700 w-4 h-4 pointer-events-none">
+            <div>
+              <div class="font-bold text-slate-900" data-i18n="srvMed">Konsultacja Psychiatryczna (Pierwsza)</div>
+              <div class="text-xs text-slate-500 mt-1">45 min • 300 PLN</div>
+            </div>
+          </div>
+
+          <button onclick="goToStep(2)" class="w-full mt-4 py-3.5 bg-teal-700 text-white rounded-xl font-bold hover:bg-teal-800 transition" data-i18n="btnNext">Dalej</button>
+        </div>
+
+        <!-- STEP 2: Date & Time -->
+        <div id="step-2" style="display:none;">
+          <div class="flex items-center gap-2 mb-4">
+            <button onclick="goToStep(1)" class="text-slate-400 hover:text-slate-700 text-sm font-semibold"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="btnBack">Wróć</span></button>
+          </div>
+          
+          <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="lblDate">Wybierz Datę</label>
+          <input type="date" id="inp-date" class="w-full p-3 rounded-lg border border-slate-200 mb-6 focus:ring-2 focus:ring-teal-600 outline-none font-medium" onchange="generateTimes()">
+
+          <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="lblTime">Wybierz Godzinę</label>
+          <div class="grid grid-cols-3 gap-2 mb-6" id="time-slots">
+            <!-- Populated by JS -->
+          </div>
+          <input type="hidden" id="inp-time">
+
+          <button id="btn-to-step3" onclick="goToStep(3)" class="w-full mt-2 py-3.5 bg-teal-700 text-white rounded-xl font-bold hover:bg-teal-800 transition disabled:opacity-50" disabled data-i18n="btnNext">Dalej</button>
+        </div>
+
+        <!-- STEP 3: Client Details -->
+        <div id="step-3" style="display:none;">
+          <div class="flex items-center gap-2 mb-4">
+            <button onclick="goToStep(2)" class="text-slate-400 hover:text-slate-700 text-sm font-semibold"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="btnBack">Wróć</span></button>
+          </div>
+
+          <div class="bg-teal-50 p-4 rounded-xl border border-teal-100 mb-6">
+            <div class="font-bold text-slate-900" id="sum-service">Konsultacja</div>
+            <div class="text-sm text-slate-600 font-medium" id="sum-datetime">--</div>
+          </div>
+
+          <form id="booking-form" onsubmit="submitToBackend(event)">
+            <div class="mb-4">
+              <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="lblName">Imię i Nazwisko</label>
+              <input type="text" id="client-name" required class="w-full p-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-teal-600 outline-none" placeholder="np. Jan Kowalski">
+            </div>
+            
+            <div class="mb-6">
+              <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="lblPhone">Telefon (WhatsApp)</label>
+              <input type="tel" id="client-phone" required class="w-full p-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-teal-600 outline-none" placeholder="+48 000 000 000">
+            </div>
+
+            <button type="submit" id="btn-submit" class="w-full py-3.5 bg-teal-700 text-white rounded-xl font-bold hover:bg-teal-800 transition shadow-lg shadow-teal-700/20 flex justify-center items-center gap-2">
+              <span data-i18n="btnConfirm">Potwierdź i Wyślij</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- SUCCESS STEP -->
+        <div id="step-success" style="display:none;" class="text-center py-6">
+          <div class="w-20 h-20 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center text-4xl mx-auto mb-4">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-2" data-i18n="successTitle">Rezerwacja Potwierdzona</h3>
+          <p class="text-slate-500 mb-8" data-i18n="successDesc">Twoja wizyta została zapisana w naszym systemie. Otrzymasz powiadomienie SMS.</p>
+          <button onclick="closeBooking()" class="px-8 py-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-xl transition" data-i18n="btnDone">Gotowe</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- 1. TRANSLATION DICTIONARY (POLISH DEFAULT) ---
+    const i18n = {
+      pl: {
+        brandName: "Harmonia Mind", btnBookNav: "Umów wizytę", heroBadge: "Centrum Wsparcia",
+        heroTitle: "Twoje zdrowie psychiczne jest najważniejsze.",
+        heroDesc: "Profesjonalna pomoc psychologiczna, psychoterapeutyczna i psychiatryczna w bezpiecznej, pełnej empatii przestrzeni.",
+        btnBookHero: "Umów pierwszą wizytę",
+        specTitle: "Nasi Specjaliści", specDesc: "Wybierz odpowiedniego eksperta. Każdy posiada certyfikowane kwalifikacje.",
+        rolePsychologist: "Psycholog", descPsychologist: "Diagnoza psychologiczna, wsparcie w kryzysie, radzenie sobie ze stresem.",
+        roleTherapist: "Psychoterapeuta (CBT)", descTherapist: "Długoterminowa praca nad zaburzeniami lękowymi, depresją i relacjami.",
+        rolePsychiatrist: "Lekarz Psychiatra", descPsychiatrist: "Konsultacje medyczne, diagnoza kliniczna, farmakoterapia i L4.",
+        btnSelect: "Wybierz",
+        modalTitle1: "Wybierz Usługę", modalTitle2: "Wybierz Termin", modalTitle3: "Twoje Dane",
+        lblSpec: "Specjalista", lblService: "Rodzaj wizyty",
+        srvInd: "Konsultacja Indywidualna", srvMed: "Konsultacja Psychiatryczna (Pierwsza)",
+        btnNext: "Dalej", btnBack: "Wróć",
+        lblDate: "Wybierz Datę", lblTime: "Wybierz Godzinę",
+        lblName: "Imię i Nazwisko", lblPhone: "Telefon (WhatsApp)",
+        btnConfirm: "Potwierdź Rezerwację", successTitle: "Wizyta Potwierdzona",
+        successDesc: "Twoja wizyta została zapisana. Otrzymasz powiadomienie SMS.", btnDone: "Gotowe"
+      },
+      en: {
+        brandName: "Harmonia Mind", btnBookNav: "Book Session", heroBadge: "Support Center",
+        heroTitle: "Your mental health is a priority.",
+        heroDesc: "Professional psychological, psychotherapeutic, and psychiatric help in a safe, empathetic space.",
+        btnBookHero: "Book first session",
+        specTitle: "Our Specialists", specDesc: "Choose the right expert. Everyone holds certified qualifications.",
+        rolePsychologist: "Psychologist", descPsychologist: "Psychological diagnosis, crisis support, stress management.",
+        roleTherapist: "Psychotherapist (CBT)", descTherapist: "Long-term work on anxiety disorders, depression, and relationships.",
+        rolePsychiatrist: "Psychiatrist", descPsychiatrist: "Medical consultations, clinical diagnosis, pharmacotherapy.",
+        btnSelect: "Select",
+        modalTitle1: "Select Service", modalTitle2: "Select Date & Time", modalTitle3: "Your Details",
+        lblSpec: "Specialist", lblService: "Service Type",
+        srvInd: "Individual Consultation", srvMed: "Psychiatric Consultation (First)",
+        btnNext: "Next", btnBack: "Back",
+        lblDate: "Select Date", lblTime: "Select Time",
+        lblName: "Full Name", lblPhone: "Phone (WhatsApp)",
+        btnConfirm: "Confirm Booking", successTitle: "Booking Confirmed",
+        successDesc: "Your appointment has been saved. You will receive an SMS notification.", btnDone: "Done"
+      },
+      br: {
+        brandName: "Harmonia Mind", btnBookNav: "Agendar", heroBadge: "Centro de Apoio",
+        heroTitle: "Sua saúde mental é a prioridade.",
+        heroDesc: "Ajuda psicológica, psicoterapêutica e psiquiátrica profissional em um espaço seguro e empático.",
+        btnBookHero: "Agendar 1ª sessão",
+        specTitle: "Nossos Especialistas", specDesc: "Escolha o especialista certo. Todos possuem qualificações certificadas.",
+        rolePsychologist: "Psicóloga", descPsychologist: "Diagnóstico psicológico, apoio em crises, gestão de estresse.",
+        roleTherapist: "Psicoterapeuta (TCC)", descTherapist: "Trabalho a longo prazo em distúrbios de ansiedade e depressão.",
+        rolePsychiatrist: "Psiquiatra", descPsychiatrist: "Consultas médicas, diagnóstico clínico, farmacoterapia.",
+        btnSelect: "Selecionar",
+        modalTitle1: "Selecionar Serviço", modalTitle2: "Data e Hora", modalTitle3: "Seus Dados",
+        lblSpec: "Especialista", lblService: "Tipo de Serviço",
+        srvInd: "Consulta Individual", srvMed: "Consulta Psiquiátrica (Primeira)",
+        btnNext: "Próximo", btnBack: "Voltar",
+        lblDate: "Escolha a Data", lblTime: "Escolha a Hora",
+        lblName: "Nome Completo", lblPhone: "Telefone (WhatsApp)",
+        btnConfirm: "Confirmar", successTitle: "Reserva Confirmada",
+        successDesc: "Sua consulta foi salva. Você receberá um SMS de aviso.", btnDone: "Concluído"
+      }
+    };
+
+    // SET DEFAULT LANGUAGE TO POLISH
+    let currentLang = 'pl';
+
+    function initApp() {
+      // Set today's date as min for date picker
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('inp-date').min = today;
+      document.getElementById('inp-date').value = today;
+      
+      document.getElementById('lang-select').value = currentLang;
+      applyTranslations(currentLang);
+      generateTimes(); // Generate initial time slots
+    }
+
+    function applyTranslations(lang) {
+      if(!i18n[lang]) return;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang][key]) {
+          if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
+            // Keep placeholders intact but we could translate them if needed
+          } else {
+            el.textContent = i18n[lang][key];
+          }
+        }
+      });
+    }
+
+    function changeLanguage(lang) {
+      currentLang = lang;
+      applyTranslations(lang);
+    }
+
+    // --- 2. MODAL & BOOKING LOGIC ---
+
+    function openBooking(specialistId = null) {
+      if(specialistId) {
+        document.getElementById('inp-resource').value = specialistId;
+      }
+      document.getElementById('booking-modal').classList.add('active');
+      goToStep(1);
+    }
+
+    function closeBooking() {
+      document.getElementById('booking-modal').classList.remove('active');
+    }
+
+    function selectService(el, serviceVal) {
+      // Handle custom radio card UI
+      document.querySelectorAll('.select-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+      el.querySelector('input').checked = true;
+    }
+
+    function goToStep(stepNum) {
+      document.getElementById('step-1').style.display = 'none';
+      document.getElementById('step-2').style.display = 'none';
+      document.getElementById('step-3').style.display = 'none';
+      document.getElementById('step-success').style.display = 'none';
+
+      document.getElementById(`step-${stepNum}`).style.display = 'block';
+
+      // Update Modal Title based on Step
+      const titleEl = document.getElementById('modal-title');
+      if(stepNum === 1) titleEl.textContent = i18n[currentLang].modalTitle1;
+      if(stepNum === 2) titleEl.textContent = i18n[currentLang].modalTitle2;
+      if(stepNum === 3) {
+        titleEl.textContent = i18n[currentLang].modalTitle3;
+        // Summarize data for Step 3
+        const selectedSrv = document.querySelector('input[name="service"]:checked').value;
+        document.getElementById('sum-service').textContent = selectedSrv === 'ind' ? i18n[currentLang].srvInd : i18n[currentLang].srvMed;
+        const date = document.getElementById('inp-date').value;
+        const time = document.getElementById('inp-time').value;
+        document.getElementById('sum-datetime').textContent = `${date} • ${time}`;
+      }
+    }
+
+    function generateTimes() {
+      // Mock generating time slots based on the date picked
+      const container = document.getElementById('time-slots');
+      container.innerHTML = '';
+      document.getElementById('inp-time').value = ''; // reset
+      document.getElementById('btn-to-step3').disabled = true;
+
+      const times = ['09:00', '10:00', '11:30', '13:00', '14:30', '16:00', '17:30'];
+      
+      times.forEach(t => {
+        const btn = document.createElement('div');
+        btn.className = 'time-btn';
+        btn.textContent = t;
+        btn.onclick = () => {
+          document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          document.getElementById('inp-time').value = t;
+          document.getElementById('btn-to-step3').disabled = false;
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    // --- 3. BACKEND CONNECTION LOGIC ---
+    
+    // REPLACE THIS with your actual Google Apps Script Web App URL
+    const WEB_APP_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; 
+
+    function submitToBackend(e) {
+      e.preventDefault();
+      
+      const btn = document.getElementById('btn-submit');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading...';
+      btn.disabled = true;
+
+      // Construct Payload to match Dashboard expectations
+      const payload = {
+        type: 'booking',
+        client: document.getElementById('client-name').value,
+        phone: document.getElementById('client-phone').value,
+        resourceId: document.getElementById('inp-resource').value,
+        serviceKey: document.querySelector('input[name="service"]:checked').value,
+        date: document.getElementById('inp-date').value,
+        time: document.getElementById('inp-time').value,
+        status: 'confirmed'
+      };
+
+      /* 
+       * REAL FETCH CONNECTION: 
+       * Uncomment the block below to actually send data to your Google Apps Script backend.
+       * We use mode: 'no-cors' so the browser doesn't block the request to Google's servers.
+       */
+      
+      /*
+      fetch(WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        mode: 'no-cors',
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        // Hide Step 3, Show Success Step
+        document.getElementById('step-3').style.display = 'none';
+        document.getElementById('step-success').style.display = 'block';
+        document.getElementById('modal-title').textContent = i18n[currentLang].successTitle;
+      })
+      .catch(err => {
+        console.error('Error submitting booking:', err);
+        alert('Wystąpił błąd. Spróbuj ponownie.');
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      });
+      */
+
+      // MOCK SUCCESS (For Demo purposes)
+      setTimeout(() => {
+        document.getElementById('step-3').style.display = 'none';
+        document.getElementById('step-success').style.display = 'block';
+        document.getElementById('modal-title').textContent = i18n[currentLang].successTitle;
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+      }, 1000);
+    }
+
+    // Run on load
+    initApp();
+  </script>
+</body>
+</html>
