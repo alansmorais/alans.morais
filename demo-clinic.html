@@ -33,24 +33,27 @@
 
     /* Top Navigation */
     .topbar { background-color: var(--topbar-bg); color: #cbd5e1; height: 56px; display: flex; align-items: center; padding: 0 16px; font-size: 13px; flex-shrink: 0; }
+    .topbar-brand { font-weight: 700; font-size: 16px; color: white; display: flex; align-items: center; gap: 8px; }
     .topbar-menu { display: flex; gap: 4px; height: 100%; align-items: center; margin-left: 24px; flex: 1; }
     .topbar-item { padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 8px; }
     .topbar-item:hover, .topbar-item.active { background-color: rgba(255,255,255,0.1); color: white; font-weight: 600; }
     
     .lang-selector { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white; padding: 4px 8px; border-radius: 6px; font-size: 12px; cursor: pointer; outline: none; }
     .lang-selector option { color: #000; }
+    .mobile-menu-btn { display: none; color: white; font-size: 20px; cursor: pointer; padding: 4px 8px; margin-right: 8px; }
 
     /* Sub Toolbar */
     .toolbar { height: 64px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; background: white; flex-shrink: 0; }
+    .toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 16px; }
     .view-tabs { display: flex; background: #f1f5f9; border-radius: 8px; padding: 4px; }
     .view-tab { padding: 6px 16px; font-size: 13px; font-weight: 600; color: #64748b; border-radius: 6px; cursor: pointer; }
     .view-tab.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 
     /* Main Layout */
-    .main-wrapper { display: flex; flex: 1; overflow: hidden; }
+    .main-wrapper { display: flex; flex: 1; overflow: hidden; position: relative; }
     
     /* Sidebar */
-    .sidebar { width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; flex-shrink: 0; overflow-y: auto; }
+    .sidebar { width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; flex-shrink: 0; overflow-y: auto; transition: transform 0.3s ease; }
     
     /* Calendar Area */
     .calendar-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: white; }
@@ -105,21 +108,66 @@
     .filter-item input { accent-color: var(--primary); width: 14px; height: 14px; cursor: pointer; }
 
     /* Modal Styles */
-    #appt-modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.5); display: none; align-items: center; justify-content: center; z-index: 50; }
+    #appt-modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.5); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
     #appt-modal.active { display: flex; }
     .modal-box { background: white; width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); padding: 24px; }
     .form-group { margin-bottom: 16px; }
     .form-group label { display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 6px; }
     .form-group input, .form-group select { width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit; font-size: 14px; }
+
+    /* ========================================= */
+    /* MOBILE RESPONSIVE FIXES                   */
+    /* ========================================= */
+    @media (max-width: 768px) {
+      .mobile-menu-btn { display: block; }
+      
+      /* Collapse topbar to icons */
+      .topbar { padding: 0 8px; }
+      .topbar-brand span { display: none; }
+      .topbar-menu { margin-left: 8px; justify-content: flex-end; }
+      .topbar-menu span { display: none; }
+      .topbar-item { padding: 8px; }
+
+      /* Stack Toolbar items */
+      .toolbar { height: auto; flex-direction: column; padding: 12px; gap: 12px; align-items: stretch; }
+      .toolbar-left, .toolbar-right { width: 100%; justify-content: space-between; }
+      .view-tabs { display: none; } /* Hide view tabs on mobile to save space */
+      
+      /* Make sidebar a slide-out drawer */
+      .sidebar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 40;
+        transform: translateX(-100%);
+        box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+      }
+      .sidebar.active { transform: translateX(0); }
+      
+      /* Sidebar overlay background */
+      .sidebar-overlay {
+        display: none;
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.3);
+        z-index: 39;
+      }
+      .sidebar-overlay.active { display: block; }
+
+      /* Ensure headers allow horizontal swiping */
+      .cal-headers { overflow-x: hidden; } /* JS keeps this synced with body scroll */
+    }
   </style>
 </head>
 <body>
 
   <!-- Top Navigation (Dark) -->
   <header class="topbar">
-    <div style="font-weight: 700; font-size: 16px; color: white; display: flex; align-items: center; gap: 8px;">
+    <div class="mobile-menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></div>
+    <div class="topbar-brand">
       <div style="width:24px;height:24px;background:var(--primary);border-radius:6px;display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-plus text-white text-xs"></i></div>
-      System
+      <span>System</span>
     </div>
     <nav class="topbar-menu">
       <div class="topbar-item active"><i class="fa-solid fa-calendar-days"></i> <span data-i18n="navCalendar">Calendar</span></div>
@@ -127,7 +175,7 @@
       <div class="topbar-item"><i class="fa-solid fa-list-check"></i> <span data-i18n="navServices">Services</span></div>
       <div class="topbar-item"><i class="fa-solid fa-chart-line"></i> <span data-i18n="navReports">Reports</span></div>
     </nav>
-    <div style="display: flex; gap: 16px; align-items: center;">
+    <div style="display: flex; gap: 12px; align-items: center; margin-left: 12px;">
       <select id="lang-select" class="lang-selector" onchange="changeLanguage(this.value)">
         <option value="en">🇬🇧 EN</option>
         <option value="br">🇧🇷 BR</option>
@@ -140,14 +188,14 @@
 
   <!-- Sub Toolbar (White) -->
   <div class="toolbar">
-    <div style="display: flex; align-items: center; gap: 16px;">
+    <div class="toolbar-left">
       <div style="display: flex; gap: 8px;">
         <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border-color); background: white; color: #64748b;"><i class="fa-solid fa-chevron-left"></i></button>
         <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border-color); background: white; color: #64748b;"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
       <div style="font-weight: 700; font-size: 18px; color: #0f172a;" id="display-date">13 June 2026</div>
     </div>
-    <div style="display: flex; gap: 16px; align-items: center;">
+    <div class="toolbar-right">
       <div class="view-tabs">
         <div class="view-tab" data-i18n="viewMonth">Month</div>
         <div class="view-tab" data-i18n="viewWeek">Week</div>
@@ -155,14 +203,17 @@
         <div class="view-tab" data-i18n="viewList">List</div>
       </div>
       <button onclick="openModal()" style="background: var(--primary); color: white; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 8px; cursor: pointer; border: none;">
-        <i class="fa-solid fa-plus"></i> <span data-i18n="btnNewAppt">New Appointment</span>
+        <i class="fa-solid fa-plus"></i> <span data-i18n="btnNewAppt">New Appt</span>
       </button>
     </div>
   </div>
 
   <div class="main-wrapper">
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <!-- Mini Calendar Fake Visual -->
       <div style="padding: 20px; border-bottom: 1px solid var(--border-color);">
         <div style="font-weight: 700; font-size: 14px; margin-bottom: 12px; display: flex; justify-content: space-between;">
@@ -179,7 +230,7 @@
         </div>
       </div>
 
-      <!-- Filters (Wired up to JavaScript now) -->
+      <!-- Filters -->
       <div style="padding: 16px 0;">
         <div style="padding: 0 20px; font-weight: 700; font-size: 11px; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px;" data-i18n="filterStaff">Professionals</div>
         <label class="filter-item"><input type="checkbox" value="r1" checked onchange="toggleResource(this)"> Dr. Anna</label>
@@ -194,6 +245,7 @@
 
     <!-- Calendar Area -->
     <main class="calendar-area">
+      <!-- Syncs horizontal scrolling with the body below -->
       <div class="cal-headers" id="cal-headers"></div>
       
       <div class="cal-body-scroll" id="cal-scroll-area">
@@ -229,7 +281,7 @@
         </div>
 
         <div class="form-group">
-          <label data-i18n="modalResource">Resource (Professional / Room)</label>
+          <label data-i18n="modalResource">Resource</label>
           <select id="inp-resource" required></select>
         </div>
         
@@ -258,29 +310,29 @@
       en: {
         navCalendar: "Calendar", navClients: "Clients", navServices: "Services", navReports: "Reports",
         viewMonth: "Month", viewWeek: "Week", viewDay: "Day", viewList: "List",
-        btnNewAppt: "New Appointment", filterStaff: "Professionals", filterRooms: "Rooms",
+        btnNewAppt: "New Appt", filterStaff: "Professionals", filterRooms: "Rooms",
         roles: { psych: "Psychologist", ther: "Therapist", sex: "Sexologist", room: "Room" },
         services: { ind: "Individual Session", coup: "Couples Therapy", cons: "Consultation" },
         modalTitle: "New Appointment", modalClient: "Client Name", modalService: "Service", modalResource: "Resource", modalStart: "Start Time", modalEnd: "End Time", btnCancel: "Cancel", btnSave: "Save",
-        srvInd: "Individual Session", srvCoup: "Couples Therapy", srvCons: "Consultation", msgDelete: "Are you sure you want to delete this appointment?"
+        srvInd: "Individual Session", srvCoup: "Couples Therapy", srvCons: "Consultation", msgDelete: "Delete this appointment?"
       },
       br: {
         navCalendar: "Calendário", navClients: "Clientes", navServices: "Serviços", navReports: "Relatórios",
         viewMonth: "Mês", viewWeek: "Semana", viewDay: "Dia", viewList: "Lista",
-        btnNewAppt: "Novo Agendamento", filterStaff: "Profissionais", filterRooms: "Salas",
+        btnNewAppt: "Novo", filterStaff: "Profissionais", filterRooms: "Salas",
         roles: { psych: "Psicóloga", ther: "Terapeuta", sex: "Sexóloga", room: "Sala" },
         services: { ind: "Sessão Individual", coup: "Terapia de Casal", cons: "Consulta" },
-        modalTitle: "Novo Agendamento", modalClient: "Nome do Cliente", modalService: "Serviço", modalResource: "Recurso", modalStart: "Hora de Início", modalEnd: "Hora de Término", btnCancel: "Cancelar", btnSave: "Salvar",
-        srvInd: "Sessão Individual", srvCoup: "Terapia de Casal", srvCons: "Consulta", msgDelete: "Tem certeza que deseja excluir este agendamento?"
+        modalTitle: "Novo Agendamento", modalClient: "Nome do Cliente", modalService: "Serviço", modalResource: "Recurso", modalStart: "Início", modalEnd: "Término", btnCancel: "Cancelar", btnSave: "Salvar",
+        srvInd: "Sessão Individual", srvCoup: "Terapia de Casal", srvCons: "Consulta", msgDelete: "Excluir este agendamento?"
       },
       pl: {
         navCalendar: "Kalendarz", navClients: "Klienci", navServices: "Usługi", navReports: "Raporty",
         viewMonth: "Miesiąc", viewWeek: "Tydzień", viewDay: "Dzień", viewList: "Lista",
-        btnNewAppt: "Nowa wizyta", filterStaff: "Specjaliści", filterRooms: "Gabinety",
+        btnNewAppt: "Nowa Wizyta", filterStaff: "Specjaliści", filterRooms: "Gabinety",
         roles: { psych: "Psycholog", ther: "Terapeuta", sex: "Seksuolog", room: "Gabinet" },
         services: { ind: "Sesja Indywidualna", coup: "Terapia Par", cons: "Konsultacja" },
-        modalTitle: "Nowa Wizyta", modalClient: "Imię i Nazwisko", modalService: "Usługa", modalResource: "Zasób", modalStart: "Godzina Rozpoczęcia", modalEnd: "Godzina Zakończenia", btnCancel: "Anuluj", btnSave: "Zapisz",
-        srvInd: "Sesja Indywidualna", srvCoup: "Terapia Par", srvCons: "Konsultacja", msgDelete: "Czy na pewno chcesz usunąć tę wizytę?"
+        modalTitle: "Nowa Wizyta", modalClient: "Imię i Nazwisko", modalService: "Usługa", modalResource: "Zasób", modalStart: "Start", modalEnd: "Koniec", btnCancel: "Anuluj", btnSave: "Zapisz",
+        srvInd: "Sesja Indywidualna", srvCoup: "Terapia Par", srvCons: "Konsultacja", msgDelete: "Usunąć wizytę?"
       },
       es: {
         navCalendar: "Calendario", navClients: "Clientes", navServices: "Servicios", navReports: "Informes",
@@ -288,8 +340,8 @@
         btnNewAppt: "Nueva Cita", filterStaff: "Profesionales", filterRooms: "Salas",
         roles: { psych: "Psicóloga", ther: "Terapeuta", sex: "Sexóloga", room: "Sala" },
         services: { ind: "Sesión Individual", coup: "Terapia de Parejas", cons: "Consulta" },
-        modalTitle: "Nueva Cita", modalClient: "Nombre del Cliente", modalService: "Servicio", modalResource: "Recurso", modalStart: "Hora de Inicio", modalEnd: "Hora de Fin", btnCancel: "Cancelar", btnSave: "Guardar",
-        srvInd: "Sesión Individual", srvCoup: "Terapia de Parejas", srvCons: "Consulta", msgDelete: "¿Estás seguro de que deseas eliminar esta cita?"
+        modalTitle: "Nueva Cita", modalClient: "Nombre", modalService: "Servicio", modalResource: "Recurso", modalStart: "Inicio", modalEnd: "Fin", btnCancel: "Cancelar", btnSave: "Guardar",
+        srvInd: "Sesión Individual", srvCoup: "Terapia de Parejas", srvCons: "Consulta", msgDelete: "¿Eliminar esta cita?"
       }
     };
 
@@ -300,7 +352,6 @@
     const END_HOUR = 20;  
     const PIXELS_PER_MIN = 1; 
 
-    // All available resources
     const allResources = [
       { id: 'r1', name: 'Dr. Anna', roleKey: 'psych', avatar: 'A', imgColor: '#fbcfe8', textColor: '#be185d' },
       { id: 'r2', name: 'Dr. Monika', roleKey: 'ther', avatar: 'M', imgColor: '#bbf7d0', textColor: '#166534' },
@@ -309,10 +360,8 @@
       { id: 'r5', name: 'Gabinet 2', roleKey: 'room', avatar: 'G2', imgColor: '#e2e8f0', textColor: '#475569' }
     ];
 
-    // State for currently visible resources (filtered via checkboxes)
     let visibleResources = [...allResources];
 
-    // Mutable Events array for demo interactivity
     let events = [
       { id: 1, resourceId: 'r1', start: '08:30', end: '09:20', srvKey: 'ind', client: 'Agata Kowal', theme: 'theme-pink' },
       { id: 2, resourceId: 'r1', start: '10:00', end: '11:00', srvKey: 'coup', client: 'Jan & Anna Nowak', theme: 'theme-pink' },
@@ -320,6 +369,17 @@
       { id: 7, resourceId: 'r3', start: '09:00', end: '10:30', srvKey: 'coup', client: 'Ewa & Adam Lis', theme: 'theme-blue' },
       { id: 9, resourceId: 'r4', start: '08:00', end: '09:00', srvKey: 'ind', client: 'Rezerwacja - Dr. Anna', theme: 'theme-green' }
     ];
+
+    // Mobile Sidebar Toggle
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('active');
+      document.querySelector('.sidebar-overlay').classList.toggle('active');
+    }
+
+    // Sync Horizontal Scroll between headers and body
+    document.getElementById('cal-scroll-area').addEventListener('scroll', function(e) {
+      document.getElementById('cal-headers').scrollLeft = e.target.scrollLeft;
+    });
 
     function initApp() {
       updateDateHeader();
@@ -333,7 +393,6 @@
       document.getElementById('lang-select').value = currentLang;
     }
 
-    // Handle Checkbox Toggles
     function toggleResource(checkbox) {
       const resId = checkbox.value;
       if (checkbox.checked) {
@@ -342,7 +401,6 @@
       } else {
         visibleResources = visibleResources.filter(r => r.id !== resId);
       }
-      // Re-sort visible resources to maintain original order
       visibleResources.sort((a, b) => allResources.indexOf(a) - allResources.indexOf(b));
       renderCalendar();
     }
@@ -351,19 +409,17 @@
       const select = document.getElementById('inp-resource');
       select.innerHTML = '';
       allResources.forEach(res => {
-        select.innerHTML += `<option value="${res.id}">${res.name} (${i18n[currentLang].roles[res.roleKey]})</option>`;
+        select.innerHTML += `<option value="${res.id}">${res.name}</option>`;
       });
     }
 
     function applyTranslations(lang) {
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (i18n[lang] && i18n[lang][key]) {
-          el.textContent = i18n[lang][key];
-        }
+        if (i18n[lang] && i18n[lang][key]) { el.textContent = i18n[lang][key]; }
       });
       updateDateHeader();
-      populateResourceDropdown(); // Update dropdown roles translation
+      populateResourceDropdown();
     }
 
     function changeLanguage(lang) {
@@ -378,7 +434,6 @@
       const locales = { en: 'en-GB', br: 'pt-BR', pl: 'pl-PL', es: 'es-ES' };
       const formatted = new Intl.DateTimeFormat(locales[currentLang], { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
       document.getElementById('display-date').textContent = formatted;
-      
       const monthFormatted = new Intl.DateTimeFormat(locales[currentLang], { month: 'long', year: 'numeric' }).format(date);
       document.getElementById('mini-cal-month').textContent = monthFormatted.charAt(0).toUpperCase() + monthFormatted.slice(1);
     }
@@ -445,18 +500,13 @@
         const colDiv = document.createElement('div');
         colDiv.className = 'res-col';
         
-        // Handle clicking empty space to add event
         colDiv.onclick = (e) => {
-          if(e.target !== colDiv) return; // Prevent triggering if clicking an actual event
-          
+          if(e.target !== colDiv) return;
           const clickY = e.offsetY;
           const minsClicked = Math.floor(clickY / PIXELS_PER_MIN);
           const totalMins = (START_HOUR * 60) + minsClicked;
-          
-          // Round down to nearest 30 mins
           const roundedStartMins = Math.floor(totalMins / 30) * 30;
-          const roundedEndMins = roundedStartMins + 60; // Default 1 hour duration
-          
+          const roundedEndMins = roundedStartMins + 60;
           openModal(res.id, minutesToTime(roundedStartMins), minutesToTime(roundedEndMins));
         };
         
@@ -482,7 +532,6 @@
             <div style="opacity: 0.85;">${srvName}</div>
           `;
           
-          // Delete prompt on click
           evtDiv.onclick = (e) => {
             e.stopPropagation();
             if(confirm(i18n[currentLang].msgDelete)) {
@@ -498,23 +547,18 @@
       });
     }
 
-    // Modal Logic
     function openModal(resourceId = 'r1', start = '09:00', end = '10:00') {
       document.getElementById('inp-resource').value = resourceId;
       document.getElementById('inp-start').value = start;
       document.getElementById('inp-end').value = end;
       document.getElementById('inp-client').value = '';
-      
       document.getElementById('appt-modal').classList.add('active');
     }
 
-    function closeModal() {
-      document.getElementById('appt-modal').classList.remove('active');
-    }
+    function closeModal() { document.getElementById('appt-modal').classList.remove('active'); }
 
     function saveAppointment(e) {
       e.preventDefault();
-      
       const themes = ['theme-pink', 'theme-green', 'theme-blue', 'theme-yellow'];
       const randomTheme = themes[Math.floor(Math.random() * themes.length)];
 
