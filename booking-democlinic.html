@@ -395,15 +395,16 @@
     // REPLACE THIS with your actual Google Apps Script Web App URL
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxZnhH6Byb_cg_bwPAtT9zua02OaWKLB-77xjZPRR81iwEjXm9PiK-rxr1fG6Vqpu_Qiw/exec'; 
 
+    // 2. ACTIVE BACKEND CONNECTION
     function submitToBackend(e) {
       e.preventDefault();
       
       const btn = document.getElementById('btn-submit');
       const originalText = btn.innerHTML;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading...';
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Wysłanie...';
       btn.disabled = true;
 
-      // Construct Payload to match Dashboard expectations
+      // Construct Payload to match your Google Sheet headers
       const payload = {
         type: 'booking',
         client: document.getElementById('client-name').value,
@@ -415,13 +416,7 @@
         status: 'confirmed'
       };
 
-      /* 
-       * REAL FETCH CONNECTION: 
-       * Uncomment the block below to actually send data to your Google Apps Script backend.
-       * We use mode: 'no-cors' so the browser doesn't block the request to Google's servers.
-       */
-      
-      /*
+      // Send the data securely to Google Apps Script
       fetch(WEB_APP_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -429,7 +424,7 @@
         body: JSON.stringify(payload)
       })
       .then(() => {
-        // Hide Step 3, Show Success Step
+        // Hide Step 3, Show Success Step instantly
         document.getElementById('step-3').style.display = 'none';
         document.getElementById('step-success').style.display = 'block';
         document.getElementById('modal-title').textContent = i18n[currentLang].successTitle;
@@ -440,20 +435,7 @@
         btn.innerHTML = originalText;
         btn.disabled = false;
       });
-      */
-
-      // MOCK SUCCESS (For Demo purposes)
-      setTimeout(() => {
-        document.getElementById('step-3').style.display = 'none';
-        document.getElementById('step-success').style.display = 'block';
-        document.getElementById('modal-title').textContent = i18n[currentLang].successTitle;
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-      }, 1000);
     }
-
-    // Run on load
-    initApp();
   </script>
 </body>
 </html>
