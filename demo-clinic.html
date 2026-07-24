@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Resource Calendar Dashboard - Interactive Demo</title>
+  <title>Resource Calendar Dashboard - Interactive Tabs</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -36,22 +35,24 @@
     .topbar { background-color: var(--topbar-bg); color: #cbd5e1; height: 56px; display: flex; align-items: center; padding: 0 16px; font-size: 13px; flex-shrink: 0; }
     .topbar-brand { font-weight: 700; font-size: 16px; color: white; display: flex; align-items: center; gap: 8px; }
     .topbar-menu { display: flex; gap: 4px; height: 100%; align-items: center; margin-left: 24px; flex: 1; }
-    .topbar-item { padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 8px; }
-    .topbar-item:hover, .topbar-item.active { background-color: rgba(255,255,255,0.1); color: white; font-weight: 600; }
+    .topbar-item { padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: background-color 0.2s, color 0.2s; display: flex; align-items: center; gap: 8px; }
+    .topbar-item:hover { background-color: rgba(255,255,255,0.05); }
+    .topbar-item.active { background-color: rgba(255,255,255,0.15); color: white; font-weight: 600; }
     
     .lang-selector { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white; padding: 4px 8px; border-radius: 6px; font-size: 12px; cursor: pointer; outline: none; }
     .lang-selector option { color: #000; }
     .mobile-menu-btn { display: none; color: white; font-size: 20px; cursor: pointer; padding: 4px 8px; margin-right: 8px; }
 
     /* Sub Toolbar */
-    .toolbar { height: 64px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; background: white; flex-shrink: 0; }
+    .toolbar { height: 64px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; background: white; flex-shrink: 0; transition: opacity 0.3s; }
     .toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 16px; }
     .view-tabs { display: flex; background: #f1f5f9; border-radius: 8px; padding: 4px; }
-    .view-tab { padding: 6px 16px; font-size: 13px; font-weight: 600; color: #64748b; border-radius: 6px; cursor: pointer; }
+    .view-tab { padding: 6px 16px; font-size: 13px; font-weight: 600; color: #64748b; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+    .view-tab:hover { color: #0f172a; }
     .view-tab.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 
     /* Main Layout */
-    .main-wrapper { display: flex; flex: 1; overflow: hidden; position: relative; }
+    .main-wrapper { display: flex; flex: 1; overflow: hidden; position: relative; transition: opacity 0.3s; }
     
     /* Sidebar */
     .sidebar { width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; flex-shrink: 0; overflow-y: auto; transition: transform 0.3s ease; }
@@ -116,48 +117,25 @@
     .form-group label { display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 6px; }
     .form-group input, .form-group select { width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit; font-size: 14px; }
 
-    /* ========================================= */
-    /* MOBILE RESPONSIVE FIXES                   */
-    /* ========================================= */
+    /* Mobile Responsive Fixes */
     @media (max-width: 768px) {
       .mobile-menu-btn { display: block; }
-      
-      /* Collapse topbar to icons */
       .topbar { padding: 0 8px; }
       .topbar-brand span { display: none; }
       .topbar-menu { margin-left: 8px; justify-content: flex-end; }
       .topbar-menu span { display: none; }
       .topbar-item { padding: 8px; }
-
-      /* Stack Toolbar items */
       .toolbar { height: auto; flex-direction: column; padding: 12px; gap: 12px; align-items: stretch; }
       .toolbar-left, .toolbar-right { width: 100%; justify-content: space-between; }
-      .view-tabs { display: none; } /* Hide view tabs on mobile to save space */
-      
-      /* Make sidebar a slide-out drawer */
+      .view-tabs { display: none; } 
       .sidebar {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        z-index: 40;
-        transform: translateX(-100%);
-        box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+        position: absolute; left: 0; top: 0; bottom: 0; z-index: 40;
+        transform: translateX(-100%); box-shadow: 4px 0 15px rgba(0,0,0,0.1);
       }
       .sidebar.active { transform: translateX(0); }
-      
-      /* Sidebar overlay background */
-      .sidebar-overlay {
-        display: none;
-        position: absolute;
-        inset: 0;
-        background: rgba(0,0,0,0.3);
-        z-index: 39;
-      }
+      .sidebar-overlay { display: none; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 39; }
       .sidebar-overlay.active { display: block; }
-
-      /* Ensure headers allow horizontal swiping */
-      .cal-headers { overflow-x: hidden; } /* JS keeps this synced with body scroll */
+      .cal-headers { overflow-x: hidden; } 
     }
   </style>
 </head>
@@ -170,12 +148,23 @@
       <div style="width:24px;height:24px;background:var(--primary);border-radius:6px;display:flex;align-items:center;justify-content:center"><i class="fa-solid fa-plus text-white text-xs"></i></div>
       <span>System</span>
     </div>
+    
+    <!-- MAIN NAVIGATION TABS -->
     <nav class="topbar-menu">
-      <div class="topbar-item active"><i class="fa-solid fa-calendar-days"></i> <span data-i18n="navCalendar">Calendar</span></div>
-      <div class="topbar-item"><i class="fa-solid fa-users"></i> <span data-i18n="navClients">Clients</span></div>
-      <div class="topbar-item"><i class="fa-solid fa-list-check"></i> <span data-i18n="navServices">Services</span></div>
-      <div class="topbar-item"><i class="fa-solid fa-chart-line"></i> <span data-i18n="navReports">Reports</span></div>
+      <div class="topbar-item active" onclick="switchMainTab(this, 'calendar')">
+        <i class="fa-solid fa-calendar-days"></i> <span data-i18n="navCalendar">Calendar</span>
+      </div>
+      <div class="topbar-item" onclick="switchMainTab(this, 'clients')">
+        <i class="fa-solid fa-users"></i> <span data-i18n="navClients">Clients</span>
+      </div>
+      <div class="topbar-item" onclick="switchMainTab(this, 'services')">
+        <i class="fa-solid fa-list-check"></i> <span data-i18n="navServices">Services</span>
+      </div>
+      <div class="topbar-item" onclick="switchMainTab(this, 'reports')">
+        <i class="fa-solid fa-chart-line"></i> <span data-i18n="navReports">Reports</span>
+      </div>
     </nav>
+
     <div style="display: flex; gap: 12px; align-items: center; margin-left: 12px;">
       <select id="lang-select" class="lang-selector" onchange="changeLanguage(this.value)">
         <option value="en">🇬🇧 EN</option>
@@ -188,7 +177,7 @@
   </header>
 
   <!-- Sub Toolbar (White) -->
-  <div class="toolbar">
+  <div class="toolbar" id="main-toolbar">
     <div class="toolbar-left">
       <div style="display: flex; gap: 8px;">
         <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border-color); background: white; color: #64748b;"><i class="fa-solid fa-chevron-left"></i></button>
@@ -197,25 +186,27 @@
       <div style="font-weight: 700; font-size: 18px; color: #0f172a;" id="display-date">13 June 2026</div>
     </div>
     <div class="toolbar-right">
+      
+      <!-- CALENDAR VIEW TABS -->
       <div class="view-tabs">
-        <div class="view-tab" data-i18n="viewMonth">Month</div>
-        <div class="view-tab" data-i18n="viewWeek">Week</div>
-        <div class="view-tab active" data-i18n="viewDay">Day</div>
-        <div class="view-tab" data-i18n="viewList">List</div>
+        <div class="view-tab" onclick="switchViewTab(this)" data-i18n="viewMonth">Month</div>
+        <div class="view-tab" onclick="switchViewTab(this)" data-i18n="viewWeek">Week</div>
+        <div class="view-tab active" onclick="switchViewTab(this)" data-i18n="viewDay">Day</div>
+        <div class="view-tab" onclick="switchViewTab(this)" data-i18n="viewList">List</div>
       </div>
+
       <button onclick="openModal()" style="background: var(--primary); color: white; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 8px; cursor: pointer; border: none;">
         <i class="fa-solid fa-plus"></i> <span data-i18n="btnNewAppt">New Appt</span>
       </button>
     </div>
   </div>
 
-  <div class="main-wrapper">
+  <div class="main-wrapper" id="main-content-wrapper">
     <!-- Sidebar Overlay for Mobile -->
     <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
-      <!-- Mini Calendar Fake Visual -->
       <div style="padding: 20px; border-bottom: 1px solid var(--border-color);">
         <div style="font-weight: 700; font-size: 14px; margin-bottom: 12px; display: flex; justify-content: space-between;">
           <span id="mini-cal-month">June 2026</span>
@@ -370,6 +361,38 @@
       { id: 7, resourceId: 'r3', start: '09:00', end: '10:30', srvKey: 'coup', client: 'Ewa & Adam Lis', theme: 'theme-blue' },
       { id: 9, resourceId: 'r4', start: '08:00', end: '09:00', srvKey: 'ind', client: 'Rezerwacja - Dr. Anna', theme: 'theme-green' }
     ];
+
+    /* =======================================
+       TAB INTERACTIVITY LOGIC 
+       ======================================= */
+    
+    // Switch Main Top Navigation Tabs
+    function switchMainTab(clickedEl, viewName) {
+      // 1. Remove active class from all tabs
+      document.querySelectorAll('.topbar-item').forEach(el => el.classList.remove('active'));
+      
+      // 2. Add active class to clicked tab
+      clickedEl.classList.add('active');
+
+      // 3. Visual simulation for the demo: dim the calendar if we aren't on the calendar tab
+      const isCalendar = (viewName === 'calendar');
+      document.getElementById('main-toolbar').style.opacity = isCalendar ? '1' : '0.2';
+      document.getElementById('main-content-wrapper').style.opacity = isCalendar ? '1' : '0.2';
+      
+      // In a real app, you would swap out the entire #main-content-wrapper HTML here
+    }
+
+    // Switch Calendar View Tabs (Month, Week, Day, List)
+    function switchViewTab(clickedEl) {
+      // 1. Remove active class from all view tabs
+      document.querySelectorAll('.view-tab').forEach(el => el.classList.remove('active'));
+      
+      // 2. Add active class to clicked tab
+      clickedEl.classList.add('active');
+      
+      // In a real app, you would trigger the re-rendering of the grid (e.g., from Day view to Week view)
+    }
+
 
     // Mobile Sidebar Toggle
     function toggleSidebar() {
