@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -107,9 +107,9 @@
 
     <div style="display: flex; gap: 12px; align-items: center; margin-left: 12px;">
       <select id="lang-select" class="lang-selector" onchange="changeLanguage(this.value)">
+        <option value="pl">🇵🇱 PL</option>
         <option value="en">🇬🇧 EN</option>
         <option value="br">🇧🇷 BR</option>
-        <option value="pl">🇵🇱 PL</option>
         <option value="es">🇪🇸 ES</option>
       </select>
       <div style="width: 28px; height: 28px; border-radius: 50%; background: #334155; display: flex; align-items: center; justify-content: center; font-weight: 600;">A</div>
@@ -122,7 +122,7 @@
         <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border-color); background: white; color: #64748b;"><i class="fa-solid fa-chevron-left"></i></button>
         <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border-color); background: white; color: #64748b;"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
-      <div style="font-weight: 700; font-size: 18px; color: #0f172a;" id="display-date">13 June 2026</div>
+      <div style="font-weight: 700; font-size: 18px; color: #0f172a;" id="display-date">Loading...</div>
     </div>
     
     <div class="toolbar-left" id="toolbar-global-title" style="display:none; font-weight: 700; font-size: 18px; color: #0f172a;">Clients</div>
@@ -145,19 +145,16 @@
       <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
       <aside class="sidebar" id="sidebar">
+        <!-- DYNAMIC MINI CALENDAR INJECTED HERE -->
         <div style="padding: 20px; border-bottom: 1px solid var(--border-color);">
           <div style="font-weight: 700; font-size: 14px; margin-bottom: 12px; display: flex; justify-content: space-between;">
-            <span id="mini-cal-month">June 2026</span>
+            <span id="mini-cal-month"></span>
             <div style="color: #94a3b8; font-size: 10px; display: flex; gap: 4px;"><i class="fa-solid fa-chevron-left"></i> <i class="fa-solid fa-chevron-right"></i></div>
           </div>
-          <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 11px; color: #64748b; font-weight: 600; margin-bottom: 8px;">
-            <div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div><div>S</div>
-          </div>
-          <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 12px; color: #334155;">
-            <div style="color: #cbd5e1;">28</div><div style="color: #cbd5e1;">29</div><div style="color: #cbd5e1;">30</div><div style="color: #cbd5e1;">31</div><div>1</div><div>2</div><div>3</div>
-            <div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div>
-            <div>11</div><div>12</div><div style="background: var(--primary); color: white; border-radius: 50%; font-weight: bold; width: 20px; height: 20px; margin: auto; display: flex; align-items: center; justify-content: center;">13</div><div>14</div><div>15</div><div>16</div><div>17</div>
-          </div>
+          <!-- Days Header (M, T, W...) -->
+          <div id="mini-cal-days-header" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 11px; color: #64748b; font-weight: 600; margin-bottom: 8px;"></div>
+          <!-- Calendar Numbers Grid -->
+          <div id="mini-cal-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 12px; color: #334155;"></div>
         </div>
 
         <div style="padding: 16px 0;">
@@ -171,7 +168,6 @@
           <label class="filter-item"><input type="checkbox" value="r5" checked onchange="toggleResource(this)"> <div style="width:8px;height:8px;border-radius:50%;background:#ec4899"></div> Gabinet 2</label>
         </div>
 
-        <!-- Sidebar Footer added here -->
         <div style="margin-top: auto; padding: 16px 20px; border-top: 1px solid var(--border-color); font-size: 11px; color: #94a3b8; text-align: center; background: var(--sidebar-bg);">
           &copy; 2026 Clinic Dashboard<br>
           Designed by <span style="color: var(--primary); font-weight: 600;">Alan SM Solutions</span>
@@ -263,7 +259,7 @@
   </div>
 
   <script>
-    // --- CORRECTED WEB APP URL (With missing quote fixed!) ---
+    // --- CORRECTED WEB APP URL ---
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxZnhH6Byb_cg_bwPAtT9zua02OaWKLB-77xjZPRR81iwEjXm9PiK-rxr1fG6Vqpu_Qiw/exec';
 
     const i18n = {
@@ -287,7 +283,7 @@
       }
     };
 
-    let currentLang = 'pl';
+    let currentLang = 'pl'; // Sets PL as default on load
     const START_HOUR = 8; 
     const END_HOUR = 20;  
     const PIXELS_PER_MIN = 1; 
@@ -301,7 +297,7 @@
     ];
 
     let visibleResources = [...allResources];
-    let events = []; // <--- THIS IS NOW EMPTY, WAITING FOR LIVE DATA!
+    let events = []; // EMPTY ARRAY - Waiting for Live Data
 
     function switchMainTab(clickedEl, viewName) {
       document.querySelectorAll('.topbar-item').forEach(el => el.classList.remove('active'));
@@ -336,14 +332,76 @@
     });
 
     function initApp() {
-      updateDateHeader();
+      document.getElementById('lang-select').value = currentLang;
       applyTranslations(currentLang);
+      renderMiniCalendar(); // Builds the dynamic mini calendar
       populateResourceDropdown();
       renderHeaders();
       renderTimeColumn();
+      fetchEvents(); // Fetches live data from Google Sheets
+    }
+
+    // --- NEW: DYNAMIC MINI CALENDAR & HEADER DATE ---
+    function renderMiniCalendar() {
+      const locales = { en: 'en-GB', br: 'pt-BR', pl: 'pl-PL', es: 'es-ES' };
+      const locale = locales[currentLang] || 'pl-PL';
+      const date = new Date(); // Gets today's real date from your computer
       
-      // Load live data from Google Sheets immediately
-      fetchEvents();
+      // Update Top Global Toolbar Date
+      const topDateFormatted = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+      document.getElementById('display-date').textContent = topDateFormatted;
+      
+      // Update Sidebar Mini Calendar Month Header
+      const monthFormatted = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(date);
+      document.getElementById('mini-cal-month').textContent = monthFormatted.charAt(0).toUpperCase() + monthFormatted.slice(1);
+
+      // Translate Days of the Week row
+      const dayHeaders = {
+        pl: ['P','W','Ś','C','P','S','N'],
+        en: ['M','T','W','T','F','S','S'],
+        br: ['S','T','Q','Q','S','S','D'],
+        es: ['L','M','X','J','V','S','D']
+      };
+      const daysRow = document.getElementById('mini-cal-days-header');
+      daysRow.innerHTML = '';
+      dayHeaders[currentLang].forEach(d => { daysRow.innerHTML += `<div>${d}</div>`; });
+
+      // Generate the Number Grid dynamically
+      const grid = document.getElementById('mini-cal-grid');
+      grid.innerHTML = '';
+      
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const currentDay = date.getDate();
+      
+      const firstDay = new Date(year, month, 1);
+      let firstDayIndex = firstDay.getDay() - 1;
+      if (firstDayIndex === -1) firstDayIndex = 6; // Make Monday the first day
+      
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const daysInPrevMonth = new Date(year, month, 0).getDate();
+      
+      // Trailing days of previous month
+      for (let i = firstDayIndex; i > 0; i--) {
+        grid.innerHTML += `<div style="color: #cbd5e1; height: 24px; display: flex; align-items: center; justify-content: center;">${daysInPrevMonth - i + 1}</div>`;
+      }
+      
+      // Days of current month
+      for (let i = 1; i <= daysInMonth; i++) {
+        if (i === currentDay) {
+          // Highlight today's date
+          grid.innerHTML += `<div style="background: var(--primary); color: white; border-radius: 50%; font-weight: bold; width: 24px; height: 24px; margin: auto; display: flex; align-items: center; justify-content: center;">${i}</div>`;
+        } else {
+          grid.innerHTML += `<div style="height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;" onmouseover="this.style.background='#f1f5f9'; this.style.borderRadius='50%';" onmouseout="this.style.background='transparent';">${i}</div>`;
+        }
+      }
+      
+      // Leading days of next month
+      const totalRendered = firstDayIndex + daysInMonth;
+      const remainingSlots = (Math.ceil(totalRendered / 7) * 7) - totalRendered;
+      for (let i = 1; i <= remainingSlots; i++) {
+        grid.innerHTML += `<div style="color: #cbd5e1; height: 24px; display: flex; align-items: center; justify-content: center;">${i}</div>`;
+      }
     }
 
     // --- FETCH LIVE EVENTS (READ FROM GOOGLE SHEETS) ---
@@ -359,9 +417,8 @@
           
           events = [];
           data.forEach(item => {
-            if (!item.time) return; // Skip empty rows
+            if (!item.time) return; 
             
-            // Calculate a 1 hour end time dynamically based on the start time (if missing)
             let startH = parseInt(item.time.split(':')[0]);
             let startM = item.time.split(':')[1] || '00';
             let endH = startH + 1;
@@ -413,20 +470,14 @@
         const key = el.getAttribute('data-i18n');
         if (i18n[lang][key]) { el.textContent = i18n[lang][key]; }
       });
-      updateDateHeader();
       populateResourceDropdown();
     }
 
     function changeLanguage(lang) {
       currentLang = lang;
       applyTranslations(lang);
+      renderMiniCalendar(); // Re-render to translate days/month
       renderCalendar(); 
-    }
-
-    function updateDateHeader() {
-      const date = new Date(); // Use today's live date
-      const formatted = new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
-      document.getElementById('display-date').textContent = formatted;
     }
 
     function renderCalendar() {
