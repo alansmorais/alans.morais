@@ -698,27 +698,71 @@
 
     function closeModal() { document.getElementById('appt-modal').classList.remove('active'); }
 
+// PASTE YOUR GENERATED WEB APP URL HERE
+    const WEB_APP_URL = https://script.google.com/macros/s/AKfycbxZnhH6Byb_cg_bwPAtT9zua02OaWKLB-77xjZPRR81iwEjXm9PiK-rxr1fG6Vqpu_Qiw/exec';
+
     function saveAppointment(e) {
       e.preventDefault();
-      const themes = ['theme-pink', 'theme-green', 'theme-blue', 'theme-yellow'];
-      const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+      
+      const btnSubmit = e.target.querySelector('button[type="submit"]');
+      const originalText = btnSubmit.innerHTML;
+      btnSubmit.innerHTML = 'Saving...';
+      btnSubmit.disabled = true;
 
-      const newEvt = {
-        id: Date.now(),
-        resourceId: document.getElementById('inp-resource').value,
-        start: document.getElementById('inp-start').value,
-        end: document.getElementById('inp-end').value,
-        srvKey: document.getElementById('inp-service').value,
-        client: document.getElementById('inp-client').value,
-        theme: randomTheme
+      const resourceId = document.getElementById('inp-resource').value;
+      const start = document.getElementById('inp-start').value;
+      const end = document.getElementById('inp-end').value;
+      const srvKey = document.getElementById('inp-service').value;
+      const client = document.getElementById('inp-client').value;
+
+      // 1. Prepare data for Google Sheets
+      const payload = {
+        type: 'booking',
+        client: client,
+        phone: 'N/A', // The dashboard modal doesn't ask for a phone number yet
+        resourceId: resourceId,
+        serviceKey: srvKey,
+        date: '2026-06-13', // Using the hardcoded demo date
+        time: start,
+        status: 'confirmed'
       };
 
-      events.push(newEvt);
-      renderCalendar();
-      closeModal();
-    }
+      // 2. Send the data to your Google Apps Script
+      fetch(WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        mode: 'no-cors',
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        // 3. Update the visual calendar on success
+        const themes = ['theme-pink', 'theme-green', 'theme-blue', 'theme-yellow'];
+        const randomTheme = themes[Math.floor(Math.random() * themes.length)];
 
-    initApp();
+        const newEvt = {
+          id: Date.now(),
+          resourceId: resourceId,
+          start: start,
+          end: end,
+          srvKey: srvKey,
+          client: client,
+          theme: randomTheme
+        };
+
+        events.push(newEvt);
+        renderCalendar();
+        closeModal();
+        
+        btnSubmit.innerHTML = originalText;
+        btnSubmit.disabled = false;
+      })
+      .catch(err => {
+        console.error('Error saving to backend:', err);
+        alert('Failed to save to database.');
+        btnSubmit.innerHTML = originalText;
+        btnSubmit.disabled = false;
+      });
+    }
   </script>
 </body>
 </html>
