@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Resource Calendar Dashboard - Interactive Tabs</title>
+  <title>Resource Calendar Dashboard - Fully Interactive Demo</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,16 +20,7 @@
       --res-col-min-width: 240px;
     }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #ffffff;
-      color: #334155;
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
+    body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; color: #334155; margin: 0; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
     /* Top Navigation */
     .topbar { background-color: var(--topbar-bg); color: #cbd5e1; height: 56px; display: flex; align-items: center; padding: 0 16px; font-size: 13px; flex-shrink: 0; }
@@ -44,7 +35,7 @@
     .mobile-menu-btn { display: none; color: white; font-size: 20px; cursor: pointer; padding: 4px 8px; margin-right: 8px; }
 
     /* Sub Toolbar */
-    .toolbar { height: 64px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; background: white; flex-shrink: 0; transition: opacity 0.3s; }
+    .toolbar { height: 64px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; background: white; flex-shrink: 0; transition: 0.3s; }
     .toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 16px; }
     .view-tabs { display: flex; background: #f1f5f9; border-radius: 8px; padding: 4px; }
     .view-tab { padding: 6px 16px; font-size: 13px; font-weight: 600; color: #64748b; border-radius: 6px; cursor: pointer; transition: 0.2s; }
@@ -52,52 +43,40 @@
     .view-tab.active { background: white; color: #0f172a; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 
     /* Main Layout */
-    .main-wrapper { display: flex; flex: 1; overflow: hidden; position: relative; transition: opacity 0.3s; }
+    .main-wrapper { display: flex; flex: 1; overflow: hidden; position: relative; background: white; }
+    .page-view { display: none; width: 100%; height: 100%; overflow: auto; background: #f8fafc; padding: 24px; }
+    .page-view.active { display: block; }
     
-    /* Sidebar */
+    /* Calendar Layout */
+    #view-calendar.active { display: flex; padding: 0; background: white; }
     .sidebar { width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; flex-shrink: 0; overflow-y: auto; transition: transform 0.3s ease; }
-    
-    /* Calendar Area */
     .calendar-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: white; }
+    .cal-view-container { display: none; flex: 1; flex-direction: column; overflow: hidden; }
+    .cal-view-container.active { display: flex; }
     
-    /* Sticky Column Headers */
-    .cal-headers { display: flex; padding-left: var(--time-col-width); border-bottom: 1px solid var(--border-color); background: white; z-index: 10; }
-    .res-header { flex: 1; min-width: var(--res-col-min-width); padding: 12px; border-right: 1px solid var(--border-color); display: flex; align-items: center; gap: 10px; transition: 0.3s ease; }
-    
-    /* Calendar Grid Scrollable Area */
+    /* Day/Week Grid Styles */
+    .cal-headers { display: flex; padding-left: var(--time-col-width); border-bottom: 1px solid var(--border-color); background: white; z-index: 10; overflow: hidden; }
+    .res-header { flex: 1; min-width: var(--res-col-min-width); padding: 12px; border-right: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s ease; text-align: center; }
     .cal-body-scroll { flex: 1; overflow: auto; display: flex; position: relative; }
-    
-    /* Time Label Column */
     .time-col { width: var(--time-col-width); flex-shrink: 0; border-right: 1px solid var(--border-color); position: sticky; left: 0; background: white; z-index: 5; }
-    .time-slot { height: var(--hour-height); position: relative; }
+    .time-slot { height: var(--hour-height); position: relative; border-bottom: 1px solid transparent; }
     .time-label { position: absolute; top: 0; right: 8px; transform: translateY(-50%); font-size: 11px; color: #94a3b8; font-weight: 500; }
-    
-    /* Resource Columns */
     .grid-cols { display: flex; flex: 1; position: relative; }
     .res-col { flex: 1; min-width: var(--res-col-min-width); border-right: 1px solid var(--border-color); position: relative; cursor: crosshair; }
     .res-col:hover { background-color: rgba(248, 250, 252, 0.5); }
-    .grid-lines-layer { position: absolute; inset: 0; pointer-events: none; }
-    .grid-line { height: var(--hour-height); border-bottom: 1px solid #f1f5f9; box-sizing: border-box; }
+    .grid-lines-layer { position: absolute; inset: 0; pointer-events: none; width: 100%; }
+    .grid-line { height: var(--hour-height); border-bottom: 1px solid #f1f5f9; box-sizing: border-box; width: 100%; }
 
     /* Appointment Blocks */
-    .event-block {
-      position: absolute;
-      left: 4px;
-      right: 4px;
-      border-radius: 6px;
-      padding: 6px 8px;
-      font-size: 11px;
-      line-height: 1.4;
-      overflow: hidden;
-      border-left-width: 4px;
-      border-left-style: solid;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-      cursor: pointer;
-      transition: transform 0.1s;
-    }
+    .event-block { position: absolute; left: 4px; right: 4px; border-radius: 6px; padding: 6px 8px; font-size: 11px; line-height: 1.4; overflow: hidden; border-left-width: 4px; border-left-style: solid; box-shadow: 0 1px 2px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.1s; }
     .event-block:hover { transform: scale(1.02); z-index: 10; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-    .evt-time { font-weight: 700; margin-bottom: 2px; opacity: 0.8; }
-    .evt-title { font-weight: 600; font-size: 12px; margin-bottom: 2px; }
+    
+    /* Month View Styles */
+    .month-grid { display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: minmax(100px, auto); gap: 1px; background: #e2e8f0; border: 1px solid #e2e8f0; }
+    .month-cell { background: white; padding: 8px; min-height: 120px; transition: 0.2s; cursor: pointer; }
+    .month-cell:hover { background: #f8fafc; }
+    .month-header-cell { background: white; padding: 12px; text-align: center; font-weight: 600; font-size: 12px; color: #64748b; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; }
+    .month-event { font-size: 10px; padding: 4px 6px; border-radius: 4px; margin-bottom: 4px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-left: 3px solid; }
     
     /* Color Themes */
     .theme-pink { background-color: #fce7f3; border-left-color: #ec4899; color: #831843; }
@@ -117,7 +96,12 @@
     .form-group label { display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 6px; }
     .form-group input, .form-group select { width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit; font-size: 14px; }
 
-    /* Mobile Responsive Fixes */
+    /* Mock Tables */
+    .mock-card { background: white; border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); padding: 24px; margin-bottom: 24px; }
+    .mock-table { width: 100%; text-align: left; border-collapse: collapse; }
+    .mock-table th { padding: 12px 16px; font-size: 12px; font-weight: 600; color: #64748b; border-bottom: 2px solid #e2e8f0; }
+    .mock-table td { padding: 16px; font-size: 14px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+
     @media (max-width: 768px) {
       .mobile-menu-btn { display: block; }
       .topbar { padding: 0 8px; }
@@ -128,10 +112,7 @@
       .toolbar { height: auto; flex-direction: column; padding: 12px; gap: 12px; align-items: stretch; }
       .toolbar-left, .toolbar-right { width: 100%; justify-content: space-between; }
       .view-tabs { display: none; } 
-      .sidebar {
-        position: absolute; left: 0; top: 0; bottom: 0; z-index: 40;
-        transform: translateX(-100%); box-shadow: 4px 0 15px rgba(0,0,0,0.1);
-      }
+      .sidebar { position: absolute; left: 0; top: 0; bottom: 0; z-index: 40; transform: translateX(-100%); box-shadow: 4px 0 15px rgba(0,0,0,0.1); }
       .sidebar.active { transform: translateX(0); }
       .sidebar-overlay { display: none; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 39; }
       .sidebar-overlay.active { display: block; }
@@ -188,11 +169,11 @@
     <div class="toolbar-right">
       
       <!-- CALENDAR VIEW TABS -->
-      <div class="view-tabs">
-        <div class="view-tab" onclick="switchViewTab(this)" data-i18n="viewMonth">Month</div>
-        <div class="view-tab" onclick="switchViewTab(this)" data-i18n="viewWeek">Week</div>
-        <div class="view-tab active" onclick="switchViewTab(this)" data-i18n="viewDay">Day</div>
-        <div class="view-tab" onclick="switchViewTab(this)" data-i18n="viewList">List</div>
+      <div class="view-tabs" id="calendar-view-tabs">
+        <div class="view-tab" onclick="switchViewTab(this, 'month')" data-i18n="viewMonth">Month</div>
+        <div class="view-tab" onclick="switchViewTab(this, 'week')" data-i18n="viewWeek">Week</div>
+        <div class="view-tab active" onclick="switchViewTab(this, 'day')" data-i18n="viewDay">Day</div>
+        <div class="view-tab" onclick="switchViewTab(this, 'list')" data-i18n="viewList">List</div>
       </div>
 
       <button onclick="openModal()" style="background: var(--primary); color: white; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 8px; cursor: pointer; border: none;">
@@ -202,51 +183,167 @@
   </div>
 
   <div class="main-wrapper" id="main-content-wrapper">
-    <!-- Sidebar Overlay for Mobile -->
-    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    
+    <!-- ============================================== -->
+    <!-- 1. CALENDAR VIEW (Default)                     -->
+    <!-- ============================================== -->
+    <div id="view-calendar" class="page-view active">
+      <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+      <aside class="sidebar" id="sidebar">
+        <!-- Mini Calendar Fake Visual -->
+        <div style="padding: 20px; border-bottom: 1px solid var(--border-color);">
+          <div style="font-weight: 700; font-size: 14px; margin-bottom: 12px; display: flex; justify-content: space-between;">
+            <span id="mini-cal-month">June 2026</span>
+            <div style="color: #94a3b8; font-size: 10px; display: flex; gap: 4px;"><i class="fa-solid fa-chevron-left"></i> <i class="fa-solid fa-chevron-right"></i></div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 11px; color: #64748b; font-weight: 600; margin-bottom: 8px;">
+            <div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div><div>S</div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 12px; color: #334155;">
+            <div style="color: #cbd5e1;">28</div><div style="color: #cbd5e1;">29</div><div style="color: #cbd5e1;">30</div><div style="color: #cbd5e1;">31</div><div>1</div><div>2</div><div>3</div>
+            <div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div>
+            <div>11</div><div>12</div><div style="background: var(--primary); color: white; border-radius: 50%; font-weight: bold; width: 20px; height: 20px; margin: auto; display: flex; align-items: center; justify-content: center;">13</div><div>14</div><div>15</div><div>16</div><div>17</div>
+          </div>
+        </div>
+        <!-- Filters -->
+        <div style="padding: 16px 0;" id="sidebar-filters">
+          <!-- Populated by JS -->
+        </div>
+      </aside>
 
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
-      <div style="padding: 20px; border-bottom: 1px solid var(--border-color);">
-        <div style="font-weight: 700; font-size: 14px; margin-bottom: 12px; display: flex; justify-content: space-between;">
-          <span id="mini-cal-month">June 2026</span>
-          <div style="color: #94a3b8; font-size: 10px; display: flex; gap: 4px;"><i class="fa-solid fa-chevron-left"></i> <i class="fa-solid fa-chevron-right"></i></div>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 11px; color: #64748b; font-weight: 600; margin-bottom: 8px;">
-          <div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div><div>S</div>
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 12px; color: #334155;">
-          <div style="color: #cbd5e1;">28</div><div style="color: #cbd5e1;">29</div><div style="color: #cbd5e1;">30</div><div style="color: #cbd5e1;">31</div><div>1</div><div>2</div><div>3</div>
-          <div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div>
-          <div>11</div><div>12</div><div style="background: var(--primary); color: white; border-radius: 50%; font-weight: bold; width: 20px; height: 20px; margin: auto; display: flex; align-items: center; justify-content: center;">13</div><div>14</div><div>15</div><div>16</div><div>17</div>
-        </div>
-      </div>
-
-      <!-- Filters -->
-      <div style="padding: 16px 0;">
-        <div style="padding: 0 20px; font-weight: 700; font-size: 11px; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px;" data-i18n="filterStaff">Professionals</div>
-        <label class="filter-item"><input type="checkbox" value="r1" checked onchange="toggleResource(this)"> Dr. Anna</label>
-        <label class="filter-item"><input type="checkbox" value="r2" checked onchange="toggleResource(this)"> Dr. Monika</label>
-        <label class="filter-item"><input type="checkbox" value="r3" checked onchange="toggleResource(this)"> Dr. Ewelina</label>
+      <main class="calendar-area">
         
-        <div style="padding: 0 20px; font-weight: 700; font-size: 11px; color: #94a3b8; text-transform: uppercase; margin: 16px 0 8px 0;" data-i18n="filterRooms">Rooms</div>
-        <label class="filter-item"><input type="checkbox" value="r4" checked onchange="toggleResource(this)"> <div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div> Gabinet 1</label>
-        <label class="filter-item"><input type="checkbox" value="r5" checked onchange="toggleResource(this)"> <div style="width:8px;height:8px;border-radius:50%;background:#ec4899"></div> Gabinet 2</label>
-      </div>
-    </aside>
+        <!-- A. DAY VIEW (Default Active) -->
+        <div id="cal-day" class="cal-view-container active">
+          <div class="cal-headers" id="day-headers"></div>
+          <div class="cal-body-scroll" id="day-scroll-area">
+            <div class="time-col" id="day-time-col"></div>
+            <div class="grid-cols" id="day-grid-cols">
+              <div class="grid-lines-layer" id="day-grid-lines"></div>
+            </div>
+          </div>
+        </div>
 
-    <!-- Calendar Area -->
-    <main class="calendar-area">
-      <!-- Syncs horizontal scrolling with the body below -->
-      <div class="cal-headers" id="cal-headers"></div>
-      
-      <div class="cal-body-scroll" id="cal-scroll-area">
-        <div class="time-col" id="time-col"></div>
-        <div class="grid-cols" id="grid-cols">
-          <div class="grid-lines-layer" id="grid-lines"></div>
+        <!-- B. WEEK VIEW (Mock) -->
+        <div id="cal-week" class="cal-view-container">
+          <div class="cal-headers" style="padding-left: 60px;">
+            <!-- Simple Mock Week Headers -->
+            <div class="res-header" style="flex-direction: column; gap:2px;"><div style="font-size:11px;color:#64748b">MON</div><div style="font-weight:700;font-size:16px;">08</div></div>
+            <div class="res-header" style="flex-direction: column; gap:2px;"><div style="font-size:11px;color:#64748b">TUE</div><div style="font-weight:700;font-size:16px;">09</div></div>
+            <div class="res-header" style="flex-direction: column; gap:2px;"><div style="font-size:11px;color:#64748b">WED</div><div style="font-weight:700;font-size:16px;">10</div></div>
+            <div class="res-header" style="flex-direction: column; gap:2px;"><div style="font-size:11px;color:#64748b">THU</div><div style="font-weight:700;font-size:16px;">11</div></div>
+            <div class="res-header" style="flex-direction: column; gap:2px;"><div style="font-size:11px;color:#64748b">FRI</div><div style="font-weight:700;font-size:16px;">12</div></div>
+            <div class="res-header" style="flex-direction: column; gap:2px; background:#f8fafc;"><div style="font-size:11px;color:#64748b">SAT</div><div style="font-weight:700;font-size:16px;">13</div></div>
+            <div class="res-header" style="flex-direction: column; gap:2px; background:#f8fafc;"><div style="font-size:11px;color:#64748b">SUN</div><div style="font-weight:700;font-size:16px;">14</div></div>
+          </div>
+          <div class="cal-body-scroll flex" style="background:#f8fafc; align-items:center; justify-content:center;">
+             <div class="text-slate-400 font-semibold"><i class="fa-solid fa-wrench"></i> Week view rendering logic goes here...</div>
+          </div>
+        </div>
+
+        <!-- C. MONTH VIEW (Mock) -->
+        <div id="cal-month" class="cal-view-container overflow-auto p-4" style="background: white;">
+          <div class="month-grid" id="month-grid-container">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- D. LIST VIEW (Mock) -->
+        <div id="cal-list" class="cal-view-container overflow-auto p-6" style="background: white;">
+          <div class="mock-card">
+            <h3 class="font-bold text-lg mb-4" data-i18n="upcomingAppts">Upcoming Appointments</h3>
+            <table class="mock-table" id="list-view-table">
+              <!-- Populated by JS -->
+            </table>
+          </div>
+        </div>
+
+      </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- 2. CLIENTS VIEW                                -->
+    <!-- ============================================== -->
+    <div id="view-clients" class="page-view">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-slate-800" data-i18n="navClients">Clients</h2>
+          <div class="relative">
+            <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400"></i>
+            <input type="text" placeholder="Search clients..." class="pl-10 pr-4 py-2 rounded-lg border border-slate-200 w-64 text-sm">
+          </div>
+        </div>
+        <div class="mock-card p-0 overflow-hidden">
+          <table class="mock-table">
+            <thead class="bg-slate-50">
+              <tr>
+                <th>NAME</th>
+                <th>PHONE</th>
+                <th>LAST VISIT</th>
+                <th>TOTAL VISITS</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="font-semibold">Agata Kowal</td><td>+48 500 111 222</td><td>13 Jun 2026</td><td>4</td><td><button class="text-primary font-semibold text-sm">View Profile</button></td></tr>
+              <tr><td class="font-semibold">Jan Nowak</td><td>+48 600 333 444</td><td>10 Jun 2026</td><td>12</td><td><button class="text-primary font-semibold text-sm">View Profile</button></td></tr>
+              <tr><td class="font-semibold">Beata Kozioł</td><td>+48 700 555 666</td><td>01 Jun 2026</td><td>1</td><td><button class="text-primary font-semibold text-sm">View Profile</button></td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </main>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- 3. SERVICES VIEW                               -->
+    <!-- ============================================== -->
+    <div id="view-services" class="page-view">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-slate-800" data-i18n="navServices">Services</h2>
+          <button class="px-4 py-2 bg-slate-800 text-white rounded-lg text-sm font-semibold"><i class="fa-solid fa-plus mr-2"></i> Add Service</button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="services-list-cards">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- 4. REPORTS VIEW                                -->
+    <!-- ============================================== -->
+    <div id="view-reports" class="page-view">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="text-2xl font-bold text-slate-800 mb-6" data-i18n="navReports">Reports Dashboard</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div class="mock-card !mb-0 border-t-4 border-t-blue-500">
+            <div class="text-slate-500 text-sm font-semibold mb-2">Total Bookings (June)</div>
+            <div class="text-3xl font-bold text-slate-800">142</div>
+            <div class="text-green-500 text-sm mt-2"><i class="fa-solid fa-arrow-trend-up"></i> +12% from last month</div>
+          </div>
+          <div class="mock-card !mb-0 border-t-4 border-t-green-500">
+            <div class="text-slate-500 text-sm font-semibold mb-2">Est. Revenue (PLN)</div>
+            <div class="text-3xl font-bold text-slate-800">28,400</div>
+            <div class="text-green-500 text-sm mt-2"><i class="fa-solid fa-arrow-trend-up"></i> +8% from last month</div>
+          </div>
+          <div class="mock-card !mb-0 border-t-4 border-t-purple-500">
+            <div class="text-slate-500 text-sm font-semibold mb-2">New Clients</div>
+            <div class="text-3xl font-bold text-slate-800">24</div>
+            <div class="text-slate-400 text-sm mt-2">Steady growth</div>
+          </div>
+        </div>
+
+        <div class="mock-card">
+          <h3 class="font-bold text-lg mb-4">Resource Utilization</h3>
+          <div class="h-64 bg-slate-50 rounded-lg border border-slate-200 flex items-center justify-center text-slate-400">
+            <i class="fa-solid fa-chart-column text-4xl mb-2"></i>
+            <span class="block w-full text-center">Chart rendering area</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- Add Appointment Modal -->
@@ -301,7 +398,7 @@
     const i18n = {
       en: {
         navCalendar: "Calendar", navClients: "Clients", navServices: "Services", navReports: "Reports",
-        viewMonth: "Month", viewWeek: "Week", viewDay: "Day", viewList: "List",
+        viewMonth: "Month", viewWeek: "Week", viewDay: "Day", viewList: "List", upcomingAppts: "Upcoming Appointments",
         btnNewAppt: "New Appt", filterStaff: "Professionals", filterRooms: "Rooms",
         roles: { psych: "Psychologist", ther: "Therapist", sex: "Sexologist", room: "Room" },
         services: { ind: "Individual Session", coup: "Couples Therapy", cons: "Consultation" },
@@ -310,7 +407,7 @@
       },
       br: {
         navCalendar: "Calendário", navClients: "Clientes", navServices: "Serviços", navReports: "Relatórios",
-        viewMonth: "Mês", viewWeek: "Semana", viewDay: "Dia", viewList: "Lista",
+        viewMonth: "Mês", viewWeek: "Semana", viewDay: "Dia", viewList: "Lista", upcomingAppts: "Próximos Agendamentos",
         btnNewAppt: "Novo", filterStaff: "Profissionais", filterRooms: "Salas",
         roles: { psych: "Psicóloga", ther: "Terapeuta", sex: "Sexóloga", room: "Sala" },
         services: { ind: "Sessão Individual", coup: "Terapia de Casal", cons: "Consulta" },
@@ -319,7 +416,7 @@
       },
       pl: {
         navCalendar: "Kalendarz", navClients: "Klienci", navServices: "Usługi", navReports: "Raporty",
-        viewMonth: "Miesiąc", viewWeek: "Tydzień", viewDay: "Dzień", viewList: "Lista",
+        viewMonth: "Miesiąc", viewWeek: "Tydzień", viewDay: "Dzień", viewList: "Lista", upcomingAppts: "Nadchodzące Wizyty",
         btnNewAppt: "Nowa Wizyta", filterStaff: "Specjaliści", filterRooms: "Gabinety",
         roles: { psych: "Psycholog", ther: "Terapeuta", sex: "Seksuolog", room: "Gabinet" },
         services: { ind: "Sesja Indywidualna", coup: "Terapia Par", cons: "Konsultacja" },
@@ -328,7 +425,7 @@
       },
       es: {
         navCalendar: "Calendario", navClients: "Clientes", navServices: "Servicios", navReports: "Informes",
-        viewMonth: "Mes", viewWeek: "Semana", viewDay: "Día", viewList: "Lista",
+        viewMonth: "Mes", viewWeek: "Semana", viewDay: "Día", viewList: "Lista", upcomingAppts: "Próximas Citas",
         btnNewAppt: "Nueva Cita", filterStaff: "Profesionales", filterRooms: "Salas",
         roles: { psych: "Psicóloga", ther: "Terapeuta", sex: "Sexóloga", room: "Sala" },
         services: { ind: "Sesión Individual", coup: "Terapia de Parejas", cons: "Consulta" },
@@ -339,102 +436,88 @@
 
     let currentLang = 'en';
 
-    // Settings
-    const START_HOUR = 8; 
-    const END_HOUR = 20;  
-    const PIXELS_PER_MIN = 1; 
+    // Data Models
+    const START_HOUR = 8; const END_HOUR = 20; const PIXELS_PER_MIN = 1; 
 
     const allResources = [
-      { id: 'r1', name: 'Dr. Anna', roleKey: 'psych', avatar: 'A', imgColor: '#fbcfe8', textColor: '#be185d' },
-      { id: 'r2', name: 'Dr. Monika', roleKey: 'ther', avatar: 'M', imgColor: '#bbf7d0', textColor: '#166534' },
-      { id: 'r3', name: 'Dr. Ewelina', roleKey: 'sex', avatar: 'E', imgColor: '#bae6fd', textColor: '#0369a1' },
-      { id: 'r4', name: 'Gabinet 1', roleKey: 'room', avatar: 'G1', imgColor: '#e2e8f0', textColor: '#475569' },
-      { id: 'r5', name: 'Gabinet 2', roleKey: 'room', avatar: 'G2', imgColor: '#e2e8f0', textColor: '#475569' }
+      { id: 'r1', name: 'Dr. Anna', roleKey: 'psych', avatar: 'A', imgColor: '#fbcfe8', textColor: '#be185d', type: 'staff' },
+      { id: 'r2', name: 'Dr. Monika', roleKey: 'ther', avatar: 'M', imgColor: '#bbf7d0', textColor: '#166534', type: 'staff' },
+      { id: 'r3', name: 'Dr. Ewelina', roleKey: 'sex', avatar: 'E', imgColor: '#bae6fd', textColor: '#0369a1', type: 'staff' },
+      { id: 'r4', name: 'Gabinet 1', roleKey: 'room', avatar: 'G1', imgColor: '#e2e8f0', textColor: '#475569', type: 'room' },
+      { id: 'r5', name: 'Gabinet 2', roleKey: 'room', avatar: 'G2', imgColor: '#e2e8f0', textColor: '#475569', type: 'room' }
     ];
 
     let visibleResources = [...allResources];
 
     let events = [
-      { id: 1, resourceId: 'r1', start: '08:30', end: '09:20', srvKey: 'ind', client: 'Agata Kowal', theme: 'theme-pink' },
-      { id: 2, resourceId: 'r1', start: '10:00', end: '11:00', srvKey: 'coup', client: 'Jan & Anna Nowak', theme: 'theme-pink' },
-      { id: 4, resourceId: 'r2', start: '09:00', end: '10:00', srvKey: 'cons', client: 'Beata Kozioł', theme: 'theme-green' },
-      { id: 7, resourceId: 'r3', start: '09:00', end: '10:30', srvKey: 'coup', client: 'Ewa & Adam Lis', theme: 'theme-blue' },
-      { id: 9, resourceId: 'r4', start: '08:00', end: '09:00', srvKey: 'ind', client: 'Rezerwacja - Dr. Anna', theme: 'theme-green' }
+      { id: 1, resourceId: 'r1', start: '08:30', end: '09:20', srvKey: 'ind', client: 'Agata Kowal', theme: 'theme-pink', date: '2026-06-13' },
+      { id: 2, resourceId: 'r1', start: '10:00', end: '11:00', srvKey: 'coup', client: 'Jan Nowak', theme: 'theme-pink', date: '2026-06-13' },
+      { id: 4, resourceId: 'r2', start: '09:00', end: '10:00', srvKey: 'cons', client: 'Beata Kozioł', theme: 'theme-green', date: '2026-06-13' },
+      { id: 7, resourceId: 'r3', start: '09:00', end: '10:30', srvKey: 'coup', client: 'Adam Lis', theme: 'theme-blue', date: '2026-06-13' },
+      { id: 9, resourceId: 'r4', start: '08:00', end: '09:00', srvKey: 'ind', client: 'Rezerwacja - Dr. Anna', theme: 'theme-yellow', date: '2026-06-13' }
     ];
 
     /* =======================================
-       TAB INTERACTIVITY LOGIC 
+       TAB NAVIGATION LOGIC
        ======================================= */
     
     // Switch Main Top Navigation Tabs
     function switchMainTab(clickedEl, viewName) {
-      // 1. Remove active class from all tabs
       document.querySelectorAll('.topbar-item').forEach(el => el.classList.remove('active'));
-      
-      // 2. Add active class to clicked tab
       clickedEl.classList.add('active');
 
-      // 3. Visual simulation for the demo: dim the calendar if we aren't on the calendar tab
+      // Hide all page views, show targeted one
+      document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+      document.getElementById('view-' + viewName).classList.add('active');
+
+      // Hide toolbar view tabs and date if not on calendar
       const isCalendar = (viewName === 'calendar');
-      document.getElementById('main-toolbar').style.opacity = isCalendar ? '1' : '0.2';
-      document.getElementById('main-content-wrapper').style.opacity = isCalendar ? '1' : '0.2';
-      
-      // In a real app, you would swap out the entire #main-content-wrapper HTML here
+      document.getElementById('calendar-view-tabs').style.display = isCalendar ? 'flex' : 'none';
+      document.getElementById('display-date').style.display = isCalendar ? 'block' : 'none';
     }
 
     // Switch Calendar View Tabs (Month, Week, Day, List)
-    function switchViewTab(clickedEl) {
-      // 1. Remove active class from all view tabs
+    function switchViewTab(clickedEl, viewType) {
       document.querySelectorAll('.view-tab').forEach(el => el.classList.remove('active'));
-      
-      // 2. Add active class to clicked tab
       clickedEl.classList.add('active');
       
-      // In a real app, you would trigger the re-rendering of the grid (e.g., from Day view to Week view)
+      document.querySelectorAll('.cal-view-container').forEach(el => el.classList.remove('active'));
+      document.getElementById('cal-' + viewType).classList.add('active');
+      
+      if(viewType === 'month') renderMonthView();
+      if(viewType === 'list') renderListView();
     }
 
 
-    // Mobile Sidebar Toggle
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('active');
-      document.querySelector('.sidebar-overlay').classList.toggle('active');
-    }
-
-    // Sync Horizontal Scroll between headers and body
-    document.getElementById('cal-scroll-area').addEventListener('scroll', function(e) {
-      document.getElementById('cal-headers').scrollLeft = e.target.scrollLeft;
-    });
-
+    /* =======================================
+       INITIALIZATION & RENDERING
+       ======================================= */
+    
     function initApp() {
       updateDateHeader();
+      renderSidebarFilters();
       applyTranslations(currentLang);
       populateResourceDropdown();
-      renderCalendar();
       
-      setTimeout(() => {
-        document.getElementById('cal-scroll-area').scrollTop = 30;
-      }, 100);
+      renderDayView();
+      renderMockServicesPage(); // Pre-render the services tab content
+      
+      // Sync horizontal scroll for Day View
+      document.getElementById('day-scroll-area').addEventListener('scroll', function(e) {
+        document.getElementById('day-headers').scrollLeft = e.target.scrollLeft;
+      });
+
+      setTimeout(() => { document.getElementById('day-scroll-area').scrollTop = 30; }, 100);
       document.getElementById('lang-select').value = currentLang;
     }
 
-    function toggleResource(checkbox) {
-      const resId = checkbox.value;
-      if (checkbox.checked) {
-        const res = allResources.find(r => r.id === resId);
-        if (!visibleResources.includes(res)) visibleResources.push(res);
-      } else {
-        visibleResources = visibleResources.filter(r => r.id !== resId);
-      }
-      visibleResources.sort((a, b) => allResources.indexOf(a) - allResources.indexOf(b));
-      renderCalendar();
-    }
-
-    function populateResourceDropdown() {
-      const select = document.getElementById('inp-resource');
-      select.innerHTML = '';
-      allResources.forEach(res => {
-        select.innerHTML += `<option value="${res.id}">${res.name}</option>`;
-      });
+    function changeLanguage(lang) {
+      if (!i18n[lang]) return;
+      currentLang = lang;
+      applyTranslations(lang);
+      renderDayView(); 
+      renderListView();
+      renderMockServicesPage();
     }
 
     function applyTranslations(lang) {
@@ -443,161 +526,186 @@
         if (i18n[lang] && i18n[lang][key]) { el.textContent = i18n[lang][key]; }
       });
       updateDateHeader();
+      renderSidebarFilters();
       populateResourceDropdown();
-    }
-
-    function changeLanguage(lang) {
-      if (!i18n[lang]) return;
-      currentLang = lang;
-      applyTranslations(lang);
-      renderCalendar(); 
     }
 
     function updateDateHeader() {
       const date = new Date(2026, 5, 13);
       const locales = { en: 'en-GB', br: 'pt-BR', pl: 'pl-PL', es: 'es-ES' };
-      const formatted = new Intl.DateTimeFormat(locales[currentLang], { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
-      document.getElementById('display-date').textContent = formatted;
-      const monthFormatted = new Intl.DateTimeFormat(locales[currentLang], { month: 'long', year: 'numeric' }).format(date);
-      document.getElementById('mini-cal-month').textContent = monthFormatted.charAt(0).toUpperCase() + monthFormatted.slice(1);
+      document.getElementById('display-date').textContent = new Intl.DateTimeFormat(locales[currentLang], { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+      const mFormat = new Intl.DateTimeFormat(locales[currentLang], { month: 'long', year: 'numeric' }).format(date);
+      document.getElementById('mini-cal-month').textContent = mFormat.charAt(0).toUpperCase() + mFormat.slice(1);
     }
 
-    function renderCalendar() {
-      renderHeaders();
-      renderTimeColumn();
-      renderGridAndEvents();
-    }
-
-    function renderHeaders() {
-      const headerContainer = document.getElementById('cal-headers');
-      headerContainer.innerHTML = '';
-      
+    // -- Day View Rendering --
+    function renderDayView() {
+      // Headers
+      const hc = document.getElementById('day-headers'); hc.innerHTML = '';
       visibleResources.forEach(res => {
-        const roleName = i18n[currentLang].roles[res.roleKey] || res.roleKey;
-        headerContainer.innerHTML += `
-          <div class="res-header">
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: ${res.imgColor}; color: ${res.textColor}; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0;">
-              ${res.avatar}
+        const role = i18n[currentLang].roles[res.roleKey] || res.roleKey;
+        hc.innerHTML += `<div class="res-header"><div style="width: 32px; height: 32px; border-radius: 50%; background: ${res.imgColor}; color: ${res.textColor}; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0;">${res.avatar}</div><div style="line-height: 1.2; text-align:left;"><div style="font-weight: 700; font-size: 13px; color: #0f172a;">${res.name}</div><div style="font-size: 11px; color: #64748b;">${role}</div></div></div>`;
+      });
+
+      // Time Column
+      const tc = document.getElementById('day-time-col'); tc.innerHTML = '';
+      for (let h = START_HOUR; h <= END_HOUR; h++) tc.innerHTML += `<div class="time-slot"><span class="time-label">${h.toString().padStart(2, '0')}:00</span></div>`;
+
+      // Grid & Events
+      const gc = document.getElementById('day-grid-cols');
+      const ll = document.getElementById('day-grid-lines');
+      gc.innerHTML = ''; gc.appendChild(ll); ll.innerHTML = '';
+
+      const th = END_HOUR - START_HOUR + 1;
+      for (let i = 0; i < th; i++) ll.innerHTML += `<div class="grid-line"></div>`;
+
+      visibleResources.forEach(res => {
+        const colDiv = document.createElement('div'); colDiv.className = 'res-col';
+        colDiv.onclick = (e) => {
+          if(e.target !== colDiv) return;
+          const mins = Math.floor(e.offsetY / PIXELS_PER_MIN) + (START_HOUR * 60);
+          const sMins = Math.floor(mins / 30) * 30;
+          openModal(res.id, minutesToTime(sMins), minutesToTime(sMins + 60));
+        };
+        
+        events.filter(e => e.resourceId === res.id).forEach(evt => {
+          const s = timeToMinutes(evt.start); const eM = timeToMinutes(evt.end);
+          const evtDiv = document.createElement('div');
+          evtDiv.className = `event-block ${evt.theme}`;
+          evtDiv.style.top = `${(s - (START_HOUR * 60)) * PIXELS_PER_MIN}px`;
+          evtDiv.style.height = `${(eM - s) * PIXELS_PER_MIN}px`;
+          evtDiv.innerHTML = `<div class="evt-time">${evt.start} - ${evt.end}</div><div class="evt-title">${evt.client}</div><div style="opacity: 0.85;">${i18n[currentLang].services[evt.srvKey]}</div>`;
+          evtDiv.onclick = (e) => { e.stopPropagation(); if(confirm(i18n[currentLang].msgDelete)) { events = events.filter(x => x.id !== evt.id); renderAllViews(); } };
+          colDiv.appendChild(evtDiv);
+        });
+        gc.appendChild(colDiv);
+      });
+    }
+
+    // -- List View Rendering --
+    function renderListView() {
+      const tbody = document.getElementById('list-view-table');
+      tbody.innerHTML = `<thead class="bg-slate-50"><tr><th>TIME</th><th>CLIENT</th><th>SERVICE</th><th>RESOURCE</th></tr></thead><tbody></tbody>`;
+      const t = tbody.querySelector('tbody');
+      
+      const sortedEvents = [...events].sort((a,b) => timeToMinutes(a.start) - timeToMinutes(b.start));
+      
+      if(sortedEvents.length === 0) {
+          t.innerHTML = `<tr><td colspan="4" class="text-center text-slate-400 py-8">No appointments found.</td></tr>`;
+          return;
+      }
+
+      sortedEvents.forEach(evt => {
+        const res = allResources.find(r => r.id === evt.resourceId);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="font-bold">${evt.start} - ${evt.end}</td>
+          <td class="font-semibold text-slate-800">${evt.client}</td>
+          <td>${i18n[currentLang].services[evt.srvKey]}</td>
+          <td><span class="px-2 py-1 rounded bg-slate-100 text-xs font-semibold text-slate-600">${res ? res.name : ''}</span></td>
+        `;
+        t.appendChild(tr);
+      });
+    }
+
+    // -- Month View Rendering (Mock Grid) --
+    function renderMonthView() {
+      const grid = document.getElementById('month-grid-container');
+      grid.innerHTML = '';
+      const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      days.forEach(d => grid.innerHTML += `<div class="month-header-cell">${d}</div>`);
+      
+      // Render 35 squares
+      for(let i=1; i<=35; i++) {
+        let dateNum = i - 4; // Shift to start month correctly for visual
+        let isCurrentMonth = dateNum > 0 && dateNum <= 30;
+        let content = '';
+        
+        if (isCurrentMonth) {
+            content += `<div class="font-semibold mb-2 ${dateNum === 13 ? 'w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center' : 'text-slate-700'}">${dateNum}</div>`;
+            // Add fake events to the 13th
+            if (dateNum === 13) {
+               events.forEach(e => {
+                  content += `<div class="month-event ${e.theme}">${e.start} ${e.client}</div>`;
+               });
+            } else if (dateNum === 4 || dateNum === 18) {
+               content += `<div class="month-event theme-blue">09:00 Blocked</div>`;
+            }
+        }
+        
+        grid.innerHTML += `<div class="month-cell ${!isCurrentMonth ? 'bg-slate-50 opacity-50' : ''}">${content}</div>`;
+      }
+    }
+
+    // -- Services Page Mock Rendering --
+    function renderMockServicesPage() {
+      const container = document.getElementById('services-list-cards');
+      container.innerHTML = '';
+      const svcs = [
+        { k: 'ind', duration: '50 min', price: '200 PLN' },
+        { k: 'coup', duration: '60 min', price: '300 PLN' },
+        { k: 'cons', duration: '30 min', price: '150 PLN' }
+      ];
+      svcs.forEach(s => {
+        container.innerHTML += `
+          <div class="mock-card !mb-0 flex justify-between items-center hover:shadow-md transition">
+            <div>
+              <div class="font-bold text-lg text-slate-800">${i18n[currentLang].services[s.k]}</div>
+              <div class="text-sm text-slate-500 mt-1"><i class="fa-regular fa-clock"></i> ${s.duration} &nbsp;|&nbsp; ${s.price}</div>
             </div>
-            <div style="line-height: 1.2;">
-              <div style="font-weight: 700; font-size: 13px; color: #0f172a;">${res.name}</div>
-              <div style="font-size: 11px; color: #64748b;">${roleName}</div>
-            </div>
+            <button class="text-slate-400 hover:text-primary"><i class="fa-solid fa-ellipsis-vertical text-xl"></i></button>
           </div>
         `;
       });
     }
 
-    function renderTimeColumn() {
-      const timeCol = document.getElementById('time-col');
-      timeCol.innerHTML = '';
-      for (let h = START_HOUR; h <= END_HOUR; h++) {
-        timeCol.innerHTML += `<div class="time-slot"><span class="time-label">${h.toString().padStart(2, '0')}:00</span></div>`;
-      }
+    // -- Utility functions --
+    function renderAllViews() {
+      renderDayView();
+      renderListView();
+      renderMonthView();
     }
 
-    function timeToMinutes(timeStr) {
-      const [hours, minutes] = timeStr.split(':').map(Number);
-      return (hours * 60) + minutes;
-    }
-    
-    function minutesToTime(mins) {
-      const h = Math.floor(mins / 60);
-      const m = mins % 60;
-      return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
-    }
+    function timeToMinutes(t) { const [h, m] = t.split(':').map(Number); return (h * 60) + m; }
+    function minutesToTime(m) { return `${Math.floor(m / 60).toString().padStart(2, '0')}:${(m % 60).toString().padStart(2, '0')}`; }
 
-    function renderGridAndEvents() {
-      const gridCols = document.getElementById('grid-cols');
-      const linesLayer = document.getElementById('grid-lines');
-      
-      gridCols.innerHTML = '';
-      gridCols.appendChild(linesLayer);
-      linesLayer.innerHTML = '';
-
-      const totalHours = END_HOUR - START_HOUR + 1;
-      for (let i = 0; i < totalHours; i++) {
-        linesLayer.innerHTML += `<div class="grid-line"></div>`;
-      }
-
-      visibleResources.forEach(res => {
-        const colDiv = document.createElement('div');
-        colDiv.className = 'res-col';
-        
-        colDiv.onclick = (e) => {
-          if(e.target !== colDiv) return;
-          const clickY = e.offsetY;
-          const minsClicked = Math.floor(clickY / PIXELS_PER_MIN);
-          const totalMins = (START_HOUR * 60) + minsClicked;
-          const roundedStartMins = Math.floor(totalMins / 30) * 30;
-          const roundedEndMins = roundedStartMins + 60;
-          openModal(res.id, minutesToTime(roundedStartMins), minutesToTime(roundedEndMins));
-        };
-        
-        const resEvents = events.filter(e => e.resourceId === res.id);
-        
-        resEvents.forEach(evt => {
-          const startMins = timeToMinutes(evt.start);
-          const endMins = timeToMinutes(evt.end);
-          const dayStartMins = START_HOUR * 60;
-          
-          const topOffset = (startMins - dayStartMins) * PIXELS_PER_MIN;
-          const height = (endMins - startMins) * PIXELS_PER_MIN;
-          const srvName = i18n[currentLang].services[evt.srvKey] || evt.srvKey;
-
-          const evtDiv = document.createElement('div');
-          evtDiv.className = `event-block ${evt.theme}`;
-          evtDiv.style.top = `${topOffset}px`;
-          evtDiv.style.height = `${height}px`;
-          
-          evtDiv.innerHTML = `
-            <div class="evt-time">${evt.start} - ${evt.end}</div>
-            <div class="evt-title">${evt.client}</div>
-            <div style="opacity: 0.85;">${srvName}</div>
-          `;
-          
-          evtDiv.onclick = (e) => {
-            e.stopPropagation();
-            if(confirm(i18n[currentLang].msgDelete)) {
-              events = events.filter(x => x.id !== evt.id);
-              renderCalendar();
-            }
-          };
-          
-          colDiv.appendChild(evtDiv);
-        });
-
-        gridCols.appendChild(colDiv);
+    // Sidebar Filters
+    function renderSidebarFilters() {
+      const sf = document.getElementById('sidebar-filters');
+      let html = `<div style="padding: 0 20px; font-weight: 700; font-size: 11px; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px;">${i18n[currentLang].filterStaff}</div>`;
+      allResources.filter(r => r.type === 'staff').forEach(r => {
+        html += `<label class="filter-item"><input type="checkbox" value="${r.id}" ${visibleResources.some(v=>v.id===r.id)?'checked':''} onchange="toggleResource(this)"> ${r.name}</label>`;
       });
+      html += `<div style="padding: 0 20px; font-weight: 700; font-size: 11px; color: #94a3b8; text-transform: uppercase; margin: 16px 0 8px 0;">${i18n[currentLang].filterRooms}</div>`;
+      allResources.filter(r => r.type === 'room').forEach(r => {
+        html += `<label class="filter-item"><input type="checkbox" value="${r.id}" ${visibleResources.some(v=>v.id===r.id)?'checked':''} onchange="toggleResource(this)"> <div style="width:8px;height:8px;border-radius:50%;background:${r.id==='r4'?'#22c55e':'#ec4899'}"></div> ${r.name}</label>`;
+      });
+      sf.innerHTML = html;
     }
 
-    function openModal(resourceId = 'r1', start = '09:00', end = '10:00') {
-      document.getElementById('inp-resource').value = resourceId;
-      document.getElementById('inp-start').value = start;
-      document.getElementById('inp-end').value = end;
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('active');
+      document.querySelector('.sidebar-overlay').classList.toggle('active');
+    }
+
+    // Modal
+    function openModal(rId = 'r1', s = '09:00', e = '10:00') {
+      document.getElementById('inp-resource').value = rId;
+      document.getElementById('inp-start').value = s;
+      document.getElementById('inp-end').value = e;
       document.getElementById('inp-client').value = '';
       document.getElementById('appt-modal').classList.add('active');
     }
-
     function closeModal() { document.getElementById('appt-modal').classList.remove('active'); }
-
     function saveAppointment(e) {
       e.preventDefault();
-      const themes = ['theme-pink', 'theme-green', 'theme-blue', 'theme-yellow'];
-      const randomTheme = themes[Math.floor(Math.random() * themes.length)];
-
-      const newEvt = {
-        id: Date.now(),
-        resourceId: document.getElementById('inp-resource').value,
-        start: document.getElementById('inp-start').value,
-        end: document.getElementById('inp-end').value,
-        srvKey: document.getElementById('inp-service').value,
-        client: document.getElementById('inp-client').value,
-        theme: randomTheme
-      };
-
-      events.push(newEvt);
-      renderCalendar();
+      events.push({
+        id: Date.now(), resourceId: document.getElementById('inp-resource').value,
+        start: document.getElementById('inp-start').value, end: document.getElementById('inp-end').value,
+        srvKey: document.getElementById('inp-service').value, client: document.getElementById('inp-client').value,
+        theme: ['theme-pink', 'theme-green', 'theme-blue', 'theme-yellow'][Math.floor(Math.random()*4)]
+      });
+      renderAllViews();
       closeModal();
     }
 
