@@ -13,8 +13,6 @@
       --sidebar-bg: #f8fafc;
       --border-color: #e2e8f0;
       --primary: #0ea5e9; 
-      
-      /* Grid Settings */
       --hour-height: 60px; 
       --time-col-width: 60px;
       --res-col-min-width: 240px;
@@ -46,7 +44,7 @@
     .main-wrapper { display: flex; flex: 1; overflow: hidden; position: relative; }
     .mainview { display: none; flex: 1; width: 100%; height: 100%; }
     .mainview.active { display: flex; }
-    .subview { display: none; flex-direction: column; width: 100%; height: 100%; }
+    .subview { display: none; flex-direction: column; width: 100%; height: 100%; overflow: hidden; }
     .subview.active { display: flex; }
 
     /* Sidebar */
@@ -84,9 +82,16 @@
     .form-group { margin-bottom: 16px; }
     .form-group label { display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 6px; }
     .form-group input, .form-group select { width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit; font-size: 14px; }
-
-    /* Loading Overlay */
     #loading-overlay { position: absolute; inset: 0; background: rgba(255,255,255,0.8); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--primary); font-weight: bold; }
+
+    /* Custom styles for Month View */
+    .month-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); grid-auto-rows: minmax(100px, 1fr); gap: 1px; background-color: var(--border-color); flex: 1; border-top: 1px solid var(--border-color); }
+    .month-cell { background-color: white; padding: 8px; display: flex; flex-direction: column; overflow: hidden; cursor: pointer; transition: background-color 0.2s;}
+    .month-cell:hover { background-color: #f8fafc; }
+    .month-cell.out-of-month { background-color: #f1f5f9; color: #94a3b8; }
+    .month-date-num { font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 4px; text-align: right; }
+    .month-date-num.today { background-color: var(--primary); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; float: right;}
+    .month-evt-pill { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-left: 3px solid transparent;}
   </style>
 </head>
 <body>
@@ -119,8 +124,8 @@
   <div class="toolbar" id="main-toolbar">
     <div class="toolbar-left" id="toolbar-left-cal">
       <div style="display: flex; gap: 8px;">
-        <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border-color); background: white; color: #64748b;"><i class="fa-solid fa-chevron-left"></i></button>
-        <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border-color); background: white; color: #64748b;"><i class="fa-solid fa-chevron-right"></i></button>
+        <button onclick="changeDate(-1)" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border-color); background: white; color: #64748b; cursor: pointer; hover:bg-slate-50;"><i class="fa-solid fa-chevron-left"></i></button>
+        <button onclick="changeDate(1)" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border-color); background: white; color: #64748b; cursor: pointer; hover:bg-slate-50;"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
       <div style="font-weight: 700; font-size: 18px; color: #0f172a;" id="display-date">Loading...</div>
     </div>
@@ -145,15 +150,16 @@
       <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
       <aside class="sidebar" id="sidebar">
-        <!-- DYNAMIC MINI CALENDAR INJECTED HERE -->
+        <!-- DYNAMIC MINI CALENDAR -->
         <div style="padding: 20px; border-bottom: 1px solid var(--border-color);">
           <div style="font-weight: 700; font-size: 14px; margin-bottom: 12px; display: flex; justify-content: space-between;">
             <span id="mini-cal-month"></span>
-            <div style="color: #94a3b8; font-size: 10px; display: flex; gap: 4px;"><i class="fa-solid fa-chevron-left"></i> <i class="fa-solid fa-chevron-right"></i></div>
+            <div style="color: #94a3b8; font-size: 10px; display: flex; gap: 8px;">
+              <i class="fa-solid fa-chevron-left" style="cursor:pointer;" onclick="changeMiniMonth(-1)"></i> 
+              <i class="fa-solid fa-chevron-right" style="cursor:pointer;" onclick="changeMiniMonth(1)"></i>
+            </div>
           </div>
-          <!-- Days Header (M, T, W...) -->
           <div id="mini-cal-days-header" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 11px; color: #64748b; font-weight: 600; margin-bottom: 8px;"></div>
-          <!-- Calendar Numbers Grid -->
           <div id="mini-cal-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: 12px; color: #334155;"></div>
         </div>
 
@@ -174,35 +180,47 @@
         </div>
       </aside>
 
-      <main class="calendar-area relative">
+      <main class="calendar-area relative flex flex-col">
         <div id="loading-overlay">
           <i class="fa-solid fa-circle-notch fa-spin text-4xl mb-2"></i>
           <span>Loading Live Data...</span>
         </div>
         
+        <!-- SUBVIEW: DAY -->
         <div id="subview-day" class="subview active">
-          <div class="cal-headers" id="cal-headers"></div>
-          <div class="cal-body-scroll" id="cal-scroll-area">
-            <div class="time-col" id="time-col"></div>
-            <div class="grid-cols" id="grid-cols">
-              <div class="grid-lines-layer" id="grid-lines"></div>
+          <div class="cal-headers" id="day-headers"></div>
+          <div class="cal-body-scroll" id="day-scroll-area">
+            <div class="time-col" id="day-time-col"></div>
+            <div class="grid-cols" id="day-grid-cols">
+              <div class="grid-lines-layer" id="day-grid-lines"></div>
             </div>
           </div>
         </div>
 
-        <div id="subview-month" class="subview items-center justify-center bg-slate-50 text-slate-400 p-8">
-          <i class="fa-solid fa-calendar-days text-5xl mb-4 text-slate-300"></i><h2 class="text-xl font-bold text-slate-700 mb-2">Month View</h2>
+        <!-- SUBVIEW: WEEK -->
+        <div id="subview-week" class="subview">
+          <div class="cal-headers" id="week-headers"></div>
+          <div class="cal-body-scroll" id="week-scroll-area">
+            <div class="time-col" id="week-time-col"></div>
+            <div class="grid-cols" id="week-grid-cols">
+              <div class="grid-lines-layer" id="week-grid-lines"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUBVIEW: MONTH -->
+        <div id="subview-month" class="subview bg-slate-50">
+          <!-- Month Header row (Mon, Tue, Wed...) -->
+          <div id="month-days-header" style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 13px; color: #64748b; font-weight: 700; padding: 12px 0; background: white; border-bottom: 1px solid var(--border-color);"></div>
+          <!-- Month Grid -->
+          <div id="month-grid" class="month-grid"></div>
         </div>
         
-        <div id="subview-week" class="subview items-center justify-center bg-slate-50 text-slate-400 p-8">
-          <i class="fa-solid fa-calendar-week text-5xl mb-4 text-slate-300"></i><h2 class="text-xl font-bold text-slate-700 mb-2">Week View</h2>
-        </div>
-        
-        <!-- NEW FUNCTIONAL LIST VIEW -->
+        <!-- SUBVIEW: LIST -->
         <div id="subview-list" class="subview bg-slate-50 p-6 overflow-auto">
           <div class="max-w-4xl mx-auto w-full bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
             <div class="p-4 border-b border-slate-100 bg-slate-50 font-bold text-slate-700">
-              <i class="fa-solid fa-list mr-2"></i> Agenda / Lista Wizyt
+              <i class="fa-solid fa-list mr-2"></i> Agenda
             </div>
             <div id="agenda-list-container" class="divide-y divide-slate-100">
               <!-- Live list items will appear here -->
@@ -249,6 +267,9 @@
           <label data-i18n="modalResource">Resource</label>
           <select id="inp-resource" required></select>
         </div>
+        
+        <input type="hidden" id="inp-target-date">
+        
         <div style="display: flex; gap: 12px;">
           <div class="form-group" style="flex: 1;">
             <label data-i18n="modalStart">Start Time</label>
@@ -269,7 +290,6 @@
   </div>
 
   <script>
-    // --- CORRECTED WEB APP URL ---
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxZnhH6Byb_cg_bwPAtT9zua02OaWKLB-77xjZPRR81iwEjXm9PiK-rxr1fG6Vqpu_Qiw/exec';
 
     const i18n = {
@@ -280,7 +300,7 @@
         roles: { psych: "Psycholog", ther: "Terapeuta", sex: "Seksuolog", room: "Gabinet" },
         services: { ind: "Sesja Indywidualna", coup: "Terapia Par", cons: "Konsultacja" },
         modalTitle: "Nowa Wizyta", modalClient: "Imię i Nazwisko", modalService: "Usługa", modalResource: "Zasób", modalStart: "Start", modalEnd: "Koniec", btnCancel: "Anuluj", btnSave: "Zapisz",
-        srvInd: "Sesja Indywidualna", srvCoup: "Terapia Par", srvCons: "Konsultacja", msgDelete: "Usunąć wizytę?"
+        dayHeaders: ['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Ndz']
       },
       en: {
         navCalendar: "Calendar", navClients: "Clients", navServices: "Services", navReports: "Reports",
@@ -289,14 +309,19 @@
         roles: { psych: "Psychologist", ther: "Therapist", sex: "Sexologist", room: "Room" },
         services: { ind: "Individual Session", coup: "Couples Therapy", cons: "Consultation" },
         modalTitle: "New Appointment", modalClient: "Client Name", modalService: "Service", modalResource: "Resource", modalStart: "Start Time", modalEnd: "End Time", btnCancel: "Cancel", btnSave: "Save",
-        srvInd: "Individual Session", srvCoup: "Couples Therapy", srvCons: "Consultation", msgDelete: "Delete this appointment?"
+        dayHeaders: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
       }
     };
 
-    let currentLang = 'pl'; // Sets PL as default on load
+    let currentLang = 'pl'; 
     const START_HOUR = 8; 
     const END_HOUR = 20;  
     const PIXELS_PER_MIN = 1; 
+
+    // State Configuration
+    let displayedDate = new Date(); 
+    let miniCalDate = new Date();   
+    let currentActiveView = 'day';
 
     const allResources = [
       { id: 'r1', name: 'Dr. Anna', roleKey: 'psych', avatar: 'A', imgColor: '#fbcfe8', textColor: '#be185d' },
@@ -307,7 +332,46 @@
     ];
 
     let visibleResources = [...allResources];
-    let events = []; // EMPTY ARRAY - Waiting for Live Data
+    let allEvents = []; 
+
+    function isSameDay(d1, dateStringFromSheet) {
+       if(!dateStringFromSheet) return false;
+       const d2 = new Date(dateStringFromSheet);
+       return d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate();
+    }
+    
+    function toLocalISOString(date) {
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    }
+
+    // Changing Dates (Arrows in Top Toolbar)
+    function changeDate(offset) {
+      if (currentActiveView === 'day' || currentActiveView === 'list') {
+        displayedDate.setDate(displayedDate.getDate() + offset);
+      } else if (currentActiveView === 'week') {
+        displayedDate.setDate(displayedDate.getDate() + (offset * 7));
+      } else if (currentActiveView === 'month') {
+        displayedDate.setMonth(displayedDate.getMonth() + offset);
+      }
+      miniCalDate = new Date(displayedDate);
+      updateDateHeader();
+      renderMiniCalendar();
+      renderCalendar();
+    }
+
+    // Changing Mini Calendar Months
+    function changeMiniMonth(offset) {
+      miniCalDate.setMonth(miniCalDate.getMonth() + offset);
+      renderMiniCalendar();
+    }
+
+    function selectDate(year, month, day) {
+      displayedDate = new Date(year, month, day);
+      miniCalDate = new Date(year, month, day);
+      updateDateHeader();
+      renderMiniCalendar();
+      renderCalendar();
+    }
 
     function switchMainTab(clickedEl, viewName) {
       document.querySelectorAll('.topbar-item').forEach(el => el.classList.remove('active'));
@@ -317,12 +381,6 @@
       const isCalendar = (viewName === 'calendar');
       document.getElementById('toolbar-left-cal').style.display = isCalendar ? 'flex' : 'none';
       document.getElementById('toolbar-right-cal').style.display = isCalendar ? 'flex' : 'none';
-      const tbTitle = document.getElementById('toolbar-global-title');
-      if (isCalendar) { tbTitle.style.display = 'none'; } else {
-          tbTitle.style.display = 'block';
-          const langKey = clickedEl.querySelector('span').getAttribute('data-i18n');
-          tbTitle.textContent = (i18n[currentLang] && i18n[currentLang][langKey]) ? i18n[currentLang][langKey] : clickedEl.innerText.trim();
-      }
     }
 
     function switchViewTab(clickedEl, subViewName) {
@@ -330,6 +388,9 @@
       clickedEl.classList.add('active');
       document.querySelectorAll('.subview').forEach(el => el.classList.remove('active'));
       document.getElementById('subview-' + subViewName).classList.add('active');
+      currentActiveView = subViewName;
+      updateDateHeader(); // Update header logic based on view
+      renderCalendar();
     }
 
     function toggleSidebar() {
@@ -337,48 +398,55 @@
       document.querySelector('.sidebar-overlay').classList.toggle('active');
     }
 
-    document.getElementById('cal-scroll-area').addEventListener('scroll', function(e) {
-      document.getElementById('cal-headers').scrollLeft = e.target.scrollLeft;
-    });
+    // Sync Horizontal Scrolling for Day and Week Views
+    document.getElementById('day-scroll-area').addEventListener('scroll', e => document.getElementById('day-headers').scrollLeft = e.target.scrollLeft);
+    document.getElementById('week-scroll-area').addEventListener('scroll', e => document.getElementById('week-headers').scrollLeft = e.target.scrollLeft);
 
     function initApp() {
       document.getElementById('lang-select').value = currentLang;
       applyTranslations(currentLang);
+      updateDateHeader();
       renderMiniCalendar(); 
       populateResourceDropdown();
-      renderHeaders();
-      renderTimeColumn();
       fetchEvents(); 
     }
 
+    function updateDateHeader() {
+      const locale = (currentLang === 'en') ? 'en-GB' : 'pl-PL';
+      let title = "";
+      
+      if (currentActiveView === 'day' || currentActiveView === 'list') {
+        title = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', year: 'numeric' }).format(displayedDate);
+      } else if (currentActiveView === 'week') {
+        const curr = new Date(displayedDate);
+        const first = curr.getDate() - curr.getDay() + (curr.getDay() === 0 ? -6 : 1);
+        const monday = new Date(curr.setDate(first));
+        const sunday = new Date(curr.setDate(first + 6));
+        const mStr = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short' }).format(monday);
+        const sStr = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'short', year: 'numeric' }).format(sunday);
+        title = `${mStr} - ${sStr}`;
+      } else if (currentActiveView === 'month') {
+        title = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(displayedDate);
+        title = title.charAt(0).toUpperCase() + title.slice(1);
+      }
+      
+      document.getElementById('display-date').textContent = title;
+    }
+
     function renderMiniCalendar() {
-      const locales = { en: 'en-GB', br: 'pt-BR', pl: 'pl-PL', es: 'es-ES' };
-      const locale = locales[currentLang] || 'pl-PL';
-      const date = new Date(); 
-      
-      const topDateFormatted = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
-      document.getElementById('display-date').textContent = topDateFormatted;
-      
-      const monthFormatted = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(date);
+      const locale = (currentLang === 'en') ? 'en-GB' : 'pl-PL';
+      const monthFormatted = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(miniCalDate);
       document.getElementById('mini-cal-month').textContent = monthFormatted.charAt(0).toUpperCase() + monthFormatted.slice(1);
 
-      const dayHeaders = {
-        pl: ['P','W','Ś','C','P','S','N'],
-        en: ['M','T','W','T','F','S','S'],
-        br: ['S','T','Q','Q','S','S','D'],
-        es: ['L','M','X','J','V','S','D']
-      };
       const daysRow = document.getElementById('mini-cal-days-header');
       daysRow.innerHTML = '';
-      dayHeaders[currentLang].forEach(d => { daysRow.innerHTML += `<div>${d}</div>`; });
+      i18n[currentLang].dayHeaders.forEach(d => { daysRow.innerHTML += `<div>${d.charAt(0)}</div>`; });
 
       const grid = document.getElementById('mini-cal-grid');
       grid.innerHTML = '';
       
-      const year = date.getFullYear();
-      const month = date.getMonth();
-      const currentDay = date.getDate();
-      
+      const year = miniCalDate.getFullYear();
+      const month = miniCalDate.getMonth();
       const firstDay = new Date(year, month, 1);
       let firstDayIndex = firstDay.getDay() - 1;
       if (firstDayIndex === -1) firstDayIndex = 6; 
@@ -391,10 +459,11 @@
       }
       
       for (let i = 1; i <= daysInMonth; i++) {
-        if (i === currentDay) {
-          grid.innerHTML += `<div style="background: var(--primary); color: white; border-radius: 50%; font-weight: bold; width: 24px; height: 24px; margin: auto; display: flex; align-items: center; justify-content: center;">${i}</div>`;
+        const isSelected = (i === displayedDate.getDate() && month === displayedDate.getMonth() && year === displayedDate.getFullYear());
+        if (isSelected) {
+          grid.innerHTML += `<div onclick="selectDate(${year}, ${month}, ${i})" style="cursor: pointer; background: var(--primary); color: white; border-radius: 50%; font-weight: bold; width: 24px; height: 24px; margin: auto; display: flex; align-items: center; justify-content: center;">${i}</div>`;
         } else {
-          grid.innerHTML += `<div style="height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;" onmouseover="this.style.background='#f1f5f9'; this.style.borderRadius='50%';" onmouseout="this.style.background='transparent';">${i}</div>`;
+          grid.innerHTML += `<div onclick="selectDate(${year}, ${month}, ${i})" style="height: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s;" onmouseover="this.style.background='#f1f5f9'; this.style.borderRadius='50%';" onmouseout="this.style.background='transparent';">${i}</div>`;
         }
       }
       
@@ -410,38 +479,25 @@
         .then(response => response.json())
         .then(data => {
           if(data.error) {
-            console.error("Backend Error:", data.error);
             document.getElementById('loading-overlay').innerHTML = "Error loading data.";
             return;
           }
-          
-          events = [];
+          allEvents = [];
           data.forEach(item => {
-            if (!item.time) return; 
-            
+            if (!item.time || !item.date) return; 
             let startH = parseInt(item.time.split(':')[0]);
             let startM = item.time.split(':')[1] || '00';
             let endH = startH + 1;
-            let calcEnd = `${endH.toString().padStart(2, '0')}:${startM}`;
-            
-            events.push({
-              id: item.id,
-              resourceId: item.resourceId,
-              start: item.time,
-              end: calcEnd,
-              srvKey: item.serviceKey,
-              client: item.client,
-              theme: item.theme
+            allEvents.push({
+              id: item.id, resourceId: item.resourceId, date: item.date,
+              start: item.time, end: `${endH.toString().padStart(2, '0')}:${startM}`,
+              srvKey: item.serviceKey, client: item.client, theme: item.theme
             });
           });
-          
           document.getElementById('loading-overlay').style.display = 'none';
           renderCalendar();
         })
-        .catch(err => {
-          console.error("Error fetching data:", err);
-          document.getElementById('loading-overlay').innerHTML = "Connection failed.";
-        });
+        .catch(err => { document.getElementById('loading-overlay').innerHTML = "Connection failed."; });
     }
 
     function toggleResource(checkbox) {
@@ -459,9 +515,7 @@
     function populateResourceDropdown() {
       const select = document.getElementById('inp-resource');
       select.innerHTML = '';
-      allResources.forEach(res => {
-        select.innerHTML += `<option value="${res.id}">${res.name}</option>`;
-      });
+      allResources.forEach(res => { select.innerHTML += `<option value="${res.id}">${res.name}</option>`; });
     }
 
     function applyTranslations(lang) {
@@ -476,40 +530,17 @@
     function changeLanguage(lang) {
       currentLang = lang;
       applyTranslations(lang);
+      updateDateHeader();
       renderMiniCalendar(); 
       renderCalendar(); 
     }
 
+    // MAIN ROUTER FOR RENDER
     function renderCalendar() {
-      renderHeaders();
-      renderTimeColumn();
-      renderGridAndEvents();
-      renderListView(); // Renders the List view!
-    }
-
-    function renderHeaders() {
-      const headerContainer = document.getElementById('cal-headers');
-      headerContainer.innerHTML = '';
-      visibleResources.forEach(res => {
-        const roleName = i18n[currentLang].roles[res.roleKey] || res.roleKey;
-        headerContainer.innerHTML += `
-          <div class="res-header">
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: ${res.imgColor}; color: ${res.textColor}; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0;">${res.avatar}</div>
-            <div style="line-height: 1.2;">
-              <div style="font-weight: 700; font-size: 13px; color: #0f172a;">${res.name}</div>
-              <div style="font-size: 11px; color: #64748b;">${roleName}</div>
-            </div>
-          </div>
-        `;
-      });
-    }
-
-    function renderTimeColumn() {
-      const timeCol = document.getElementById('time-col');
-      timeCol.innerHTML = '';
-      for (let h = START_HOUR; h <= END_HOUR; h++) {
-        timeCol.innerHTML += `<div class="time-slot"><span class="time-label">${h.toString().padStart(2, '0')}:00</span></div>`;
-      }
+      if (currentActiveView === 'day') renderDayView();
+      if (currentActiveView === 'week') renderWeekView();
+      if (currentActiveView === 'month') renderMonthView();
+      if (currentActiveView === 'list') renderListView();
     }
 
     function timeToMinutes(timeStr) {
@@ -523,15 +554,35 @@
       return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
     }
 
-    function renderGridAndEvents() {
-      const gridCols = document.getElementById('grid-cols');
-      const linesLayer = document.getElementById('grid-lines');
-      if(!linesLayer) return;
-      
-      gridCols.innerHTML = '';
-      gridCols.appendChild(linesLayer);
-      linesLayer.innerHTML = '';
+    // --- DAY VIEW RENDERING ---
+    function renderDayView() {
+      const headerContainer = document.getElementById('day-headers');
+      headerContainer.innerHTML = '';
+      visibleResources.forEach(res => {
+        const roleName = i18n[currentLang].roles[res.roleKey] || res.roleKey;
+        headerContainer.innerHTML += `
+          <div class="res-header">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: ${res.imgColor}; color: ${res.textColor}; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0;">${res.avatar}</div>
+            <div style="line-height: 1.2;">
+              <div style="font-weight: 700; font-size: 13px; color: #0f172a;">${res.name}</div>
+              <div style="font-size: 11px; color: #64748b;">${roleName}</div>
+            </div>
+          </div>
+        `;
+      });
+
+      const timeCol = document.getElementById('day-time-col');
+      timeCol.innerHTML = '';
+      for (let h = START_HOUR; h <= END_HOUR; h++) {
+        timeCol.innerHTML += `<div class="time-slot"><span class="time-label">${h.toString().padStart(2, '0')}:00</span></div>`;
+      }
+
+      const gridCols = document.getElementById('day-grid-cols');
+      gridCols.innerHTML = `<div class="grid-lines-layer" id="day-grid-lines"></div>`;
+      const linesLayer = document.getElementById('day-grid-lines');
       for (let i = 0; i < (END_HOUR - START_HOUR + 1); i++) { linesLayer.innerHTML += `<div class="grid-line"></div>`; }
+
+      const todaysEvents = allEvents.filter(e => isSameDay(displayedDate, e.date));
 
       visibleResources.forEach(res => {
         const colDiv = document.createElement('div');
@@ -541,49 +592,162 @@
           if(e.target !== colDiv) return;
           const minsClicked = Math.floor(e.offsetY / PIXELS_PER_MIN);
           const totalMins = (START_HOUR * 60) + minsClicked;
-          const roundedStartMins = Math.floor(totalMins / 30) * 30;
-          openModal(res.id, minutesToTime(roundedStartMins));
+          openModal(res.id, minutesToTime(Math.floor(totalMins / 30) * 30), toLocalISOString(displayedDate));
         };
         
-        const resEvents = events.filter(e => e.resourceId === res.id);
+        const resEvents = todaysEvents.filter(e => e.resourceId === res.id);
         resEvents.forEach(evt => {
           const startMins = timeToMinutes(evt.start);
-          const endMins = timeToMinutes(evt.end);
-          const topOffset = (startMins - (START_HOUR * 60)) * PIXELS_PER_MIN;
-          const height = (endMins - startMins) * PIXELS_PER_MIN;
-
+          const height = (timeToMinutes(evt.end) - startMins) * PIXELS_PER_MIN;
           const evtDiv = document.createElement('div');
           evtDiv.className = `event-block ${evt.theme}`;
-          evtDiv.style.top = `${topOffset}px`;
+          evtDiv.style.top = `${(startMins - (START_HOUR * 60)) * PIXELS_PER_MIN}px`;
           evtDiv.style.height = `${height}px`;
-          
-          evtDiv.innerHTML = `
-            <div class="evt-time">${evt.start} - ${evt.end}</div>
-            <div class="evt-title">${evt.client}</div>
-            <div style="opacity: 0.85;">${evt.srvKey}</div>
-          `;
+          evtDiv.innerHTML = `<div class="evt-time">${evt.start} - ${evt.end}</div><div class="evt-title">${evt.client}</div><div style="opacity: 0.85;">${i18n[currentLang].services[evt.srvKey] || evt.srvKey}</div>`;
           colDiv.appendChild(evtDiv);
         });
         gridCols.appendChild(colDiv);
       });
     }
 
-    // --- NEW: LIST VIEW RENDERER ---
+    // --- NEW: WEEK VIEW RENDERING ---
+    function renderWeekView() {
+      const headerContainer = document.getElementById('week-headers');
+      headerContainer.innerHTML = '';
+      
+      const curr = new Date(displayedDate);
+      const first = curr.getDate() - curr.getDay() + (curr.getDay() === 0 ? -6 : 1);
+      const monday = new Date(curr.setDate(first));
+
+      // Generate 7 days columns
+      for (let i = 0; i < 7; i++) {
+        let colDate = new Date(monday);
+        colDate.setDate(monday.getDate() + i);
+        const dayName = i18n[currentLang].dayHeaders[i];
+        
+        headerContainer.innerHTML += `
+          <div class="res-header justify-center flex-col gap-1" style="cursor:pointer;" onclick="selectDate(${colDate.getFullYear()}, ${colDate.getMonth()}, ${colDate.getDate()})">
+            <div style="font-size: 12px; color: #64748b; font-weight: 600;">${dayName}</div>
+            <div style="font-weight: 700; font-size: 16px; color: #0f172a;">${colDate.getDate()}</div>
+          </div>
+        `;
+      }
+
+      const timeCol = document.getElementById('week-time-col');
+      timeCol.innerHTML = '';
+      for (let h = START_HOUR; h <= END_HOUR; h++) {
+        timeCol.innerHTML += `<div class="time-slot"><span class="time-label">${h.toString().padStart(2, '0')}:00</span></div>`;
+      }
+
+      const gridCols = document.getElementById('week-grid-cols');
+      gridCols.innerHTML = `<div class="grid-lines-layer" id="week-grid-lines"></div>`;
+      const linesLayer = document.getElementById('week-grid-lines');
+      for (let i = 0; i < (END_HOUR - START_HOUR + 1); i++) { linesLayer.innerHTML += `<div class="grid-line"></div>`; }
+
+      // Map columns by Day of the Week instead of Resource
+      for (let i = 0; i < 7; i++) {
+        let colDate = new Date(monday);
+        colDate.setDate(monday.getDate() + i);
+        const localDateStr = toLocalISOString(colDate);
+
+        const colDiv = document.createElement('div');
+        colDiv.className = 'res-col';
+        colDiv.onclick = (e) => {
+          if(e.target !== colDiv) return;
+          const minsClicked = Math.floor(e.offsetY / PIXELS_PER_MIN);
+          const totalMins = (START_HOUR * 60) + minsClicked;
+          openModal('r1', minutesToTime(Math.floor(totalMins / 30) * 30), localDateStr);
+        };
+        
+        // Filter events for this specific day, and only for checked visible resources
+        const visibleResIds = visibleResources.map(r => r.id);
+        const dayEvents = allEvents.filter(e => isSameDay(colDate, e.date) && visibleResIds.includes(e.resourceId));
+        
+        dayEvents.forEach(evt => {
+          const startMins = timeToMinutes(evt.start);
+          const height = (timeToMinutes(evt.end) - startMins) * PIXELS_PER_MIN;
+          const evtDiv = document.createElement('div');
+          evtDiv.className = `event-block ${evt.theme}`;
+          evtDiv.style.top = `${(startMins - (START_HOUR * 60)) * PIXELS_PER_MIN}px`;
+          evtDiv.style.height = `${height}px`;
+          
+          const res = allResources.find(r => r.id === evt.resourceId);
+          evtDiv.innerHTML = `<div class="evt-time">${evt.start} (${res.avatar})</div><div class="evt-title">${evt.client}</div>`;
+          colDiv.appendChild(evtDiv);
+        });
+        gridCols.appendChild(colDiv);
+      }
+    }
+
+    // --- NEW: MONTH VIEW RENDERING ---
+    function renderMonthView() {
+      const daysHeader = document.getElementById('month-days-header');
+      daysHeader.innerHTML = '';
+      i18n[currentLang].dayHeaders.forEach(d => { daysHeader.innerHTML += `<div>${d}</div>`; });
+
+      const grid = document.getElementById('month-grid');
+      grid.innerHTML = '';
+      
+      const year = displayedDate.getFullYear();
+      const month = displayedDate.getMonth();
+      const today = new Date();
+      
+      const firstDay = new Date(year, month, 1);
+      let firstDayIndex = firstDay.getDay() - 1;
+      if (firstDayIndex === -1) firstDayIndex = 6; 
+      
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const daysInPrevMonth = new Date(year, month, 0).getDate();
+      
+      // Draw Previous Month Trailing Days
+      for (let i = firstDayIndex; i > 0; i--) {
+        grid.innerHTML += `<div class="month-cell out-of-month"><div class="month-date-num">${daysInPrevMonth - i + 1}</div></div>`;
+      }
+      
+      // Draw Current Month Days
+      for (let i = 1; i <= daysInMonth; i++) {
+        let cellDate = new Date(year, month, i);
+        let isToday = (i === today.getDate() && month === today.getMonth() && year === today.getFullYear());
+        
+        let cellContent = `<div class="month-cell" onclick="selectDate(${year}, ${month}, ${i}); switchViewTab(document.querySelectorAll('.view-tab')[2], 'day')">`;
+        cellContent += `<div class="month-date-num ${isToday ? 'today' : ''}">${i}</div>`;
+        
+        // Find events for this day
+        const visibleResIds = visibleResources.map(r => r.id);
+        const dayEvents = allEvents.filter(e => isSameDay(cellDate, e.date) && visibleResIds.includes(e.resourceId));
+        
+        // Sort chronologically and display as tiny pills
+        dayEvents.sort((a,b) => timeToMinutes(a.start) - timeToMinutes(b.start)).slice(0,4).forEach(evt => {
+          cellContent += `<div class="month-evt-pill ${evt.theme}" style="background-color: transparent; border-left-color: inherit; color: inherit;">${evt.start} ${evt.client}</div>`;
+        });
+        if(dayEvents.length > 4) cellContent += `<div class="text-[10px] text-slate-400 font-bold ml-1">+${dayEvents.length - 4} more</div>`;
+        
+        cellContent += `</div>`;
+        grid.innerHTML += cellContent;
+      }
+      
+      // Draw Next Month Leading Days
+      const totalRendered = firstDayIndex + daysInMonth;
+      const remainingSlots = (Math.ceil(totalRendered / 7) * 7) - totalRendered;
+      for (let i = 1; i <= remainingSlots; i++) {
+        grid.innerHTML += `<div class="month-cell out-of-month"><div class="month-date-num">${i}</div></div>`;
+      }
+    }
+
+    // --- LIST VIEW RENDERING ---
     function renderListView() {
       const container = document.getElementById('agenda-list-container');
       if (!container) return;
       container.innerHTML = '';
       
-      if (events.length === 0) {
-        container.innerHTML = '<div class="p-8 text-center text-slate-400 font-medium">Brak wizyt. (No appointments)</div>';
+      const todaysEvents = allEvents.filter(e => isSameDay(displayedDate, e.date));
+      if (todaysEvents.length === 0) {
+        container.innerHTML = '<div class="p-8 text-center text-slate-400 font-medium">Brak wizyt na ten dzień. (No appointments today)</div>';
         return;
       }
       
-      // Sort events chronologically by start time
-      const sortedEvents = [...events].sort((a, b) => timeToMinutes(a.start) - timeToMinutes(b.start));
-      
+      const sortedEvents = [...todaysEvents].sort((a, b) => timeToMinutes(a.start) - timeToMinutes(b.start));
       sortedEvents.forEach(evt => {
-        // Find the matching professional for this event
         const res = allResources.find(r => r.id === evt.resourceId);
         const resName = res ? res.name : '';
         const srvName = i18n[currentLang].services[evt.srvKey] || evt.srvKey;
@@ -591,34 +755,31 @@
         container.innerHTML += `
           <div class="p-4 flex items-center justify-between hover:bg-slate-50 transition">
             <div class="flex items-center gap-4">
-              <div class="w-16 h-12 rounded-lg ${evt.theme} flex flex-col items-center justify-center flex-shrink-0 border-l-4">
-                <span class="font-bold text-sm">${evt.start}</span>
-              </div>
+              <div class="w-16 h-12 rounded-lg ${evt.theme} flex flex-col items-center justify-center flex-shrink-0 border-l-4"><span class="font-bold text-sm">${evt.start}</span></div>
               <div>
                 <div class="font-bold text-slate-800 text-lg">${evt.client}</div>
-                <div class="text-sm font-semibold text-slate-500 mt-0.5">
-                  <i class="fa-solid fa-user-doctor mr-1"></i> ${resName} <span class="mx-2 text-slate-300">|</span> ${srvName}
-                </div>
+                <div class="text-sm font-semibold text-slate-500 mt-0.5"><i class="fa-solid fa-user-doctor mr-1"></i> ${resName} <span class="mx-2 text-slate-300">|</span> ${srvName}</div>
               </div>
             </div>
-            <div class="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-500">
-              ${evt.start} - ${evt.end}
-            </div>
+            <div class="text-xs font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-500">${evt.start} - ${evt.end}</div>
           </div>
         `;
       });
     }
 
-    function openModal(resourceId = 'r1', start = '09:00') {
+    // Modal Operations
+    function openModal(resourceId = 'r1', start = '09:00', targetDateStr = null) {
       document.getElementById('inp-resource').value = resourceId;
       document.getElementById('inp-start').value = start;
       document.getElementById('inp-client').value = '';
+      // If clicked on week view, it passes the date. Otherwise use displayedDate.
+      document.getElementById('inp-target-date').value = targetDateStr || toLocalISOString(displayedDate);
       document.getElementById('appt-modal').classList.add('active');
     }
 
     function closeModal() { document.getElementById('appt-modal').classList.remove('active'); }
 
-    // --- SAVE NEW EVENT TO BACKEND ---
+    // --- SAVE NEW EVENT ---
     function saveAppointment(e) {
       e.preventDefault();
       
@@ -633,7 +794,7 @@
         phone: '-',
         resourceId: document.getElementById('inp-resource').value,
         serviceKey: document.getElementById('inp-service').value,
-        date: new Date().toISOString().split('T')[0], // Use today's date
+        date: document.getElementById('inp-target-date').value, 
         time: document.getElementById('inp-start').value,
         status: 'Confirmed'
       };
@@ -648,8 +809,6 @@
         closeModal();
         btnSubmit.innerHTML = originalText;
         btnSubmit.disabled = false;
-        
-        // Re-fetch the live data to show the new appointment on the grid!
         document.getElementById('loading-overlay').style.display = 'flex';
         fetchEvents();
       })
