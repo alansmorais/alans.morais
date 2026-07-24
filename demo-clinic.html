@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Resource Calendar Dashboard - Interactive Tabs</title>
+  <title>Resource Calendar Dashboard - Live Sync</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,16 +20,7 @@
       --res-col-min-width: 240px;
     }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #ffffff;
-      color: #334155;
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
+    body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #334155; margin: 0; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
     /* Top Navigation */
     .topbar { background-color: var(--topbar-bg); color: #cbd5e1; height: 56px; display: flex; align-items: center; padding: 0 16px; font-size: 13px; flex-shrink: 0; }
@@ -53,70 +44,40 @@
 
     /* Main Layout */
     .main-wrapper { display: flex; flex: 1; overflow: hidden; position: relative; }
-    
-    /* View Switchers */
     .mainview { display: none; flex: 1; width: 100%; height: 100%; }
     .mainview.active { display: flex; }
-    
     .subview { display: none; flex-direction: column; width: 100%; height: 100%; }
     .subview.active { display: flex; }
 
     /* Sidebar */
     .sidebar { width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; flex-shrink: 0; overflow-y: auto; transition: transform 0.3s ease; }
-    
-    /* Calendar Area */
     .calendar-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: white; }
-    
-    /* Sticky Column Headers */
     .cal-headers { display: flex; padding-left: var(--time-col-width); border-bottom: 1px solid var(--border-color); background: white; z-index: 10; }
     .res-header { flex: 1; min-width: var(--res-col-min-width); padding: 12px; border-right: 1px solid var(--border-color); display: flex; align-items: center; gap: 10px; transition: 0.3s ease; }
-    
-    /* Calendar Grid Scrollable Area */
     .cal-body-scroll { flex: 1; overflow: auto; display: flex; position: relative; }
-    
-    /* Time Label Column */
     .time-col { width: var(--time-col-width); flex-shrink: 0; border-right: 1px solid var(--border-color); position: sticky; left: 0; background: white; z-index: 5; }
     .time-slot { height: var(--hour-height); position: relative; }
     .time-label { position: absolute; top: 0; right: 8px; transform: translateY(-50%); font-size: 11px; color: #94a3b8; font-weight: 500; }
     
-    /* Resource Columns */
     .grid-cols { display: flex; flex: 1; position: relative; }
     .res-col { flex: 1; min-width: var(--res-col-min-width); border-right: 1px solid var(--border-color); position: relative; cursor: crosshair; }
     .res-col:hover { background-color: rgba(248, 250, 252, 0.5); }
     .grid-lines-layer { position: absolute; inset: 0; pointer-events: none; }
     .grid-line { height: var(--hour-height); border-bottom: 1px solid #f1f5f9; box-sizing: border-box; }
 
-    /* Appointment Blocks */
-    .event-block {
-      position: absolute;
-      left: 4px;
-      right: 4px;
-      border-radius: 6px;
-      padding: 6px 8px;
-      font-size: 11px;
-      line-height: 1.4;
-      overflow: hidden;
-      border-left-width: 4px;
-      border-left-style: solid;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-      cursor: pointer;
-      transition: transform 0.1s;
-    }
+    .event-block { position: absolute; left: 4px; right: 4px; border-radius: 6px; padding: 6px 8px; font-size: 11px; line-height: 1.4; overflow: hidden; border-left-width: 4px; border-left-style: solid; box-shadow: 0 1px 2px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.1s; }
     .event-block:hover { transform: scale(1.02); z-index: 10; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
     .evt-time { font-weight: 700; margin-bottom: 2px; opacity: 0.8; }
     .evt-title { font-weight: 600; font-size: 12px; margin-bottom: 2px; }
     
-    /* Color Themes */
     .theme-pink { background-color: #fce7f3; border-left-color: #ec4899; color: #831843; }
     .theme-green { background-color: #dcfce7; border-left-color: #22c55e; color: #14532d; }
     .theme-blue { background-color: #e0f2fe; border-left-color: #0ea5e9; color: #0c4a6e; }
     .theme-yellow { background-color: #fef3c7; border-left-color: #f59e0b; color: #78350f; }
 
-    /* Sidebar filters */
     .filter-item { display: flex; align-items: center; gap: 8px; padding: 6px 20px; font-size: 13px; color: #475569; cursor: pointer; }
     .filter-item input { accent-color: var(--primary); width: 14px; height: 14px; cursor: pointer; }
 
-    /* Modal Styles */
     #appt-modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.5); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
     #appt-modal.active { display: flex; }
     .modal-box { background: white; width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); padding: 24px; }
@@ -124,31 +85,12 @@
     .form-group label { display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 6px; }
     .form-group input, .form-group select { width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit; font-size: 14px; }
 
-    /* Mobile Responsive Fixes */
-    @media (max-width: 768px) {
-      .mobile-menu-btn { display: block; }
-      .topbar { padding: 0 8px; }
-      .topbar-brand span { display: none; }
-      .topbar-menu { margin-left: 8px; justify-content: flex-end; }
-      .topbar-menu span { display: none; }
-      .topbar-item { padding: 8px; }
-      .toolbar { height: auto; flex-direction: column; padding: 12px; gap: 12px; align-items: stretch; }
-      .toolbar-left, .toolbar-right { width: 100%; justify-content: space-between; }
-      .view-tabs { display: none; } 
-      .sidebar {
-        position: absolute; left: 0; top: 0; bottom: 0; z-index: 40;
-        transform: translateX(-100%); box-shadow: 4px 0 15px rgba(0,0,0,0.1);
-      }
-      .sidebar.active { transform: translateX(0); }
-      .sidebar-overlay { display: none; position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 39; }
-      .sidebar-overlay.active { display: block; }
-      .cal-headers { overflow-x: hidden; } 
-    }
+    /* Loading Overlay */
+    #loading-overlay { position: absolute; inset: 0; background: rgba(255,255,255,0.8); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--primary); font-weight: bold; }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation (Dark) -->
   <header class="topbar">
     <div class="mobile-menu-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></div>
     <div class="topbar-brand">
@@ -156,20 +98,11 @@
       <span>System</span>
     </div>
     
-    <!-- MAIN NAVIGATION TABS -->
     <nav class="topbar-menu">
-      <div class="topbar-item active" onclick="switchMainTab(this, 'calendar')">
-        <i class="fa-solid fa-calendar-days"></i> <span data-i18n="navCalendar">Calendar</span>
-      </div>
-      <div class="topbar-item" onclick="switchMainTab(this, 'clients')">
-        <i class="fa-solid fa-users"></i> <span data-i18n="navClients">Clients</span>
-      </div>
-      <div class="topbar-item" onclick="switchMainTab(this, 'services')">
-        <i class="fa-solid fa-list-check"></i> <span data-i18n="navServices">Services</span>
-      </div>
-      <div class="topbar-item" onclick="switchMainTab(this, 'reports')">
-        <i class="fa-solid fa-chart-line"></i> <span data-i18n="navReports">Reports</span>
-      </div>
+      <div class="topbar-item active" onclick="switchMainTab(this, 'calendar')"><i class="fa-solid fa-calendar-days"></i> <span data-i18n="navCalendar">Calendar</span></div>
+      <div class="topbar-item" onclick="switchMainTab(this, 'clients')"><i class="fa-solid fa-users"></i> <span data-i18n="navClients">Clients</span></div>
+      <div class="topbar-item" onclick="switchMainTab(this, 'services')"><i class="fa-solid fa-list-check"></i> <span data-i18n="navServices">Services</span></div>
+      <div class="topbar-item" onclick="switchMainTab(this, 'reports')"><i class="fa-solid fa-chart-line"></i> <span data-i18n="navReports">Reports</span></div>
     </nav>
 
     <div style="display: flex; gap: 12px; align-items: center; margin-left: 12px;">
@@ -183,10 +116,7 @@
     </div>
   </header>
 
-  <!-- Sub Toolbar (White) -->
   <div class="toolbar" id="main-toolbar">
-    
-    <!-- Dynamic Left Toolbar -->
     <div class="toolbar-left" id="toolbar-left-cal">
       <div style="display: flex; gap: 8px;">
         <button style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border-color); background: white; color: #64748b;"><i class="fa-solid fa-chevron-left"></i></button>
@@ -195,20 +125,15 @@
       <div style="font-weight: 700; font-size: 18px; color: #0f172a;" id="display-date">13 June 2026</div>
     </div>
     
-    <!-- Displayed only when NOT on calendar -->
-    <div class="toolbar-left" id="toolbar-global-title" style="display:none; font-weight: 700; font-size: 18px; color: #0f172a;">
-      Clients
-    </div>
+    <div class="toolbar-left" id="toolbar-global-title" style="display:none; font-weight: 700; font-size: 18px; color: #0f172a;">Clients</div>
 
     <div class="toolbar-right">
-      <!-- CALENDAR VIEW TABS -->
       <div class="view-tabs" id="toolbar-right-cal">
         <div class="view-tab" onclick="switchViewTab(this, 'month')" data-i18n="viewMonth">Month</div>
         <div class="view-tab" onclick="switchViewTab(this, 'week')" data-i18n="viewWeek">Week</div>
         <div class="view-tab active" onclick="switchViewTab(this, 'day')" data-i18n="viewDay">Day</div>
         <div class="view-tab" onclick="switchViewTab(this, 'list')" data-i18n="viewList">List</div>
       </div>
-
       <button onclick="openModal()" style="background: var(--primary); color: white; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 8px; cursor: pointer; border: none;">
         <i class="fa-solid fa-plus"></i> <span data-i18n="btnNewAppt">New Appt</span>
       </button>
@@ -216,15 +141,9 @@
   </div>
 
   <div class="main-wrapper" id="main-content-wrapper">
-    
-    <!-- =======================================
-         1. MAIN VIEW: CALENDAR (Default)
-         ======================================= -->
     <div id="mainview-calendar" class="mainview active flex-row">
-      <!-- Sidebar Overlay for Mobile -->
       <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 
-      <!-- Sidebar -->
       <aside class="sidebar" id="sidebar">
         <div style="padding: 20px; border-bottom: 1px solid var(--border-color);">
           <div style="font-weight: 700; font-size: 14px; margin-bottom: 12px; display: flex; justify-content: space-between;">
@@ -241,7 +160,6 @@
           </div>
         </div>
 
-        <!-- Filters -->
         <div style="padding: 16px 0;">
           <div style="padding: 0 20px; font-weight: 700; font-size: 11px; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px;" data-i18n="filterStaff">Professionals</div>
           <label class="filter-item"><input type="checkbox" value="r1" checked onchange="toggleResource(this)"> Dr. Anna</label>
@@ -252,14 +170,21 @@
           <label class="filter-item"><input type="checkbox" value="r4" checked onchange="toggleResource(this)"> <div style="width:8px;height:8px;border-radius:50%;background:#22c55e"></div> Gabinet 1</label>
           <label class="filter-item"><input type="checkbox" value="r5" checked onchange="toggleResource(this)"> <div style="width:8px;height:8px;border-radius:50%;background:#ec4899"></div> Gabinet 2</label>
         </div>
+
+        <!-- Sidebar Footer added here -->
+        <div style="margin-top: auto; padding: 16px 20px; border-top: 1px solid var(--border-color); font-size: 11px; color: #94a3b8; text-align: center; background: var(--sidebar-bg);">
+          &copy; 2026 Clinic Dashboard<br>
+          Designed by <span style="color: var(--primary); font-weight: 600;">Alan SM Solutions</span>
+        </div>
       </aside>
 
-      <!-- Calendar Area -->
       <main class="calendar-area relative">
+        <div id="loading-overlay">
+          <i class="fa-solid fa-circle-notch fa-spin text-4xl mb-2"></i>
+          <span>Loading Live Data...</span>
+        </div>
         
-        <!-- SUBVIEW: DAY (Original Grid) -->
         <div id="subview-day" class="subview active">
-          <!-- Syncs horizontal scrolling with the body below -->
           <div class="cal-headers" id="cal-headers"></div>
           <div class="cal-body-scroll" id="cal-scroll-area">
             <div class="time-col" id="time-col"></div>
@@ -269,84 +194,28 @@
           </div>
         </div>
 
-        <!-- SUBVIEW: MONTH (Placeholder) -->
         <div id="subview-month" class="subview items-center justify-center bg-slate-50 text-slate-400 p-8">
-          <i class="fa-solid fa-calendar-days text-5xl mb-4 text-slate-300"></i>
-          <h2 class="text-xl font-bold text-slate-700 mb-2">Month View</h2>
-          <p class="max-w-sm text-center">Interactive monthly grid goes here, showing an overview of appointments for all selected resources.</p>
+          <i class="fa-solid fa-calendar-days text-5xl mb-4 text-slate-300"></i><h2 class="text-xl font-bold text-slate-700 mb-2">Month View</h2>
         </div>
-
-        <!-- SUBVIEW: WEEK (Placeholder) -->
         <div id="subview-week" class="subview items-center justify-center bg-slate-50 text-slate-400 p-8">
-          <i class="fa-solid fa-calendar-week text-5xl mb-4 text-slate-300"></i>
-          <h2 class="text-xl font-bold text-slate-700 mb-2">Week View</h2>
-          <p class="max-w-sm text-center">Interactive 7-day layout goes here, displaying weekly schedules grouped by professional or room.</p>
+          <i class="fa-solid fa-calendar-week text-5xl mb-4 text-slate-300"></i><h2 class="text-xl font-bold text-slate-700 mb-2">Week View</h2>
         </div>
-
-        <!-- SUBVIEW: LIST (Placeholder) -->
         <div id="subview-list" class="subview items-center justify-center bg-slate-50 text-slate-400 p-8">
-          <i class="fa-solid fa-list text-5xl mb-4 text-slate-300"></i>
-          <h2 class="text-xl font-bold text-slate-700 mb-2">Agenda List View</h2>
-          <p class="max-w-sm text-center">Chronological list of all upcoming appointments and tasks goes here.</p>
+          <i class="fa-solid fa-list text-5xl mb-4 text-slate-300"></i><h2 class="text-xl font-bold text-slate-700 mb-2">Agenda List View</h2>
         </div>
-
       </main>
     </div>
 
-    <!-- =======================================
-         2. MAIN VIEW: CLIENTS
-         ======================================= -->
+    <!-- Other Main Views -->
     <div id="mainview-clients" class="mainview bg-slate-50 overflow-auto p-6 md:p-12">
-      <div class="max-w-6xl mx-auto w-full">
-        <div class="flex justify-between items-center mb-8">
-          <h2 class="text-2xl font-bold text-slate-800" data-i18n="navClients">Clients</h2>
-          <button class="px-4 py-2 bg-white border border-slate-200 rounded-lg shadow-sm text-sm font-semibold text-slate-600 hover:bg-slate-50 transition"><i class="fa-solid fa-download mr-2"></i>Export</button>
-        </div>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-12 text-center">
-          <div class="w-16 h-16 bg-slate-50 text-slate-300 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-users"></i></div>
-          <h3 class="text-lg font-bold text-slate-700 mb-2">Client Database</h3>
-          <p class="text-slate-500 max-w-md mx-auto">This is where your client list, medical history, contact details, and past appointments will appear.</p>
-        </div>
-      </div>
+      <div class="max-w-6xl mx-auto w-full"><div class="flex justify-between items-center mb-8"><h2 class="text-2xl font-bold text-slate-800" data-i18n="navClients">Clients</h2></div></div>
     </div>
-
-    <!-- =======================================
-         3. MAIN VIEW: SERVICES
-         ======================================= -->
     <div id="mainview-services" class="mainview bg-slate-50 overflow-auto p-6 md:p-12">
-      <div class="max-w-6xl mx-auto w-full">
-        <div class="flex justify-between items-center mb-8">
-          <h2 class="text-2xl font-bold text-slate-800" data-i18n="navServices">Services</h2>
-          <button class="px-4 py-2 bg-[var(--primary)] text-white rounded-lg shadow-sm text-sm font-semibold hover:opacity-90 transition"><i class="fa-solid fa-plus mr-2"></i>Add Service</button>
-        </div>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-12 text-center">
-          <div class="w-16 h-16 bg-slate-50 text-slate-300 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-list-check"></i></div>
-          <h3 class="text-lg font-bold text-slate-700 mb-2">Service & Pricing Settings</h3>
-          <p class="text-slate-500 max-w-md mx-auto">Configure the duration, pricing, and assigned professionals for all treatments and services.</p>
-        </div>
-      </div>
+      <div class="max-w-6xl mx-auto w-full"><div class="flex justify-between items-center mb-8"><h2 class="text-2xl font-bold text-slate-800" data-i18n="navServices">Services</h2></div></div>
     </div>
-
-    <!-- =======================================
-         4. MAIN VIEW: REPORTS
-         ======================================= -->
     <div id="mainview-reports" class="mainview bg-slate-50 overflow-auto p-6 md:p-12">
-      <div class="max-w-6xl mx-auto w-full">
-        <div class="flex justify-between items-center mb-8">
-          <h2 class="text-2xl font-bold text-slate-800" data-i18n="navReports">Reports</h2>
-          <select class="px-4 py-2 bg-white border border-slate-200 rounded-lg shadow-sm text-sm font-semibold text-slate-600 outline-none cursor-pointer">
-            <option>Last 30 Days</option>
-            <option>This Year</option>
-          </select>
-        </div>
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-12 text-center">
-          <div class="w-16 h-16 bg-slate-50 text-slate-300 rounded-full flex items-center justify-center text-2xl mx-auto mb-4"><i class="fa-solid fa-chart-line"></i></div>
-          <h3 class="text-lg font-bold text-slate-700 mb-2">Analytics Dashboard</h3>
-          <p class="text-slate-500 max-w-md mx-auto">Visual charts for revenue, attendance rates, no-shows, and clinic performance will be displayed here.</p>
-        </div>
-      </div>
+      <div class="max-w-6xl mx-auto w-full"><div class="flex justify-between items-center mb-8"><h2 class="text-2xl font-bold text-slate-800" data-i18n="navReports">Reports</h2></div></div>
     </div>
-
   </div>
 
   <!-- Add Appointment Modal -->
@@ -362,7 +231,6 @@
           <label data-i18n="modalClient">Client Name</label>
           <input type="text" id="inp-client" required placeholder="e.g. Jan Kowalski" autocomplete="off">
         </div>
-        
         <div class="form-group">
           <label data-i18n="modalService">Service</label>
           <select id="inp-service" required>
@@ -371,52 +239,34 @@
             <option value="cons" data-i18n="srvCons">Consultation</option>
           </select>
         </div>
-
         <div class="form-group">
           <label data-i18n="modalResource">Resource</label>
           <select id="inp-resource" required></select>
         </div>
-        
         <div style="display: flex; gap: 12px;">
           <div class="form-group" style="flex: 1;">
             <label data-i18n="modalStart">Start Time</label>
             <input type="time" id="inp-start" required min="08:00" max="19:30" step="1800">
           </div>
           <div class="form-group" style="flex: 1;">
-            <label data-i18n="modalEnd">End Time</label>
-            <input type="time" id="inp-end" required min="08:30" max="20:00" step="1800">
+            <label data-i18n="modalEnd">End Time (Optional)</label>
+            <input type="time" id="inp-end" min="08:30" max="20:00" step="1800">
           </div>
         </div>
 
         <div style="margin-top: 24px; display: flex; gap: 12px;">
           <button type="button" onclick="closeModal()" style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: white; font-weight: 600;" data-i18n="btnCancel">Cancel</button>
-          <button type="submit" style="flex: 1; padding: 10px; border-radius: 8px; border: none; background: var(--primary); color: white; font-weight: 600;" data-i18n="btnSave">Save</button>
+          <button type="submit" id="btn-submit" style="flex: 1; padding: 10px; border-radius: 8px; border: none; background: var(--primary); color: white; font-weight: 600;" data-i18n="btnSave">Save</button>
         </div>
       </form>
     </div>
   </div>
 
   <script>
-    // --- TRANSLATIONS ---
+    // --- CORRECTED WEB APP URL (With missing quote fixed!) ---
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxZnhH6Byb_cg_bwPAtT9zua02OaWKLB-77xjZPRR81iwEjXm9PiK-rxr1fG6Vqpu_Qiw/exec';
+
     const i18n = {
-      en: {
-        navCalendar: "Calendar", navClients: "Clients", navServices: "Services", navReports: "Reports",
-        viewMonth: "Month", viewWeek: "Week", viewDay: "Day", viewList: "List",
-        btnNewAppt: "New Appt", filterStaff: "Professionals", filterRooms: "Rooms",
-        roles: { psych: "Psychologist", ther: "Therapist", sex: "Sexologist", room: "Room" },
-        services: { ind: "Individual Session", coup: "Couples Therapy", cons: "Consultation" },
-        modalTitle: "New Appointment", modalClient: "Client Name", modalService: "Service", modalResource: "Resource", modalStart: "Start Time", modalEnd: "End Time", btnCancel: "Cancel", btnSave: "Save",
-        srvInd: "Individual Session", srvCoup: "Couples Therapy", srvCons: "Consultation", msgDelete: "Delete this appointment?"
-      },
-      br: {
-        navCalendar: "Calendário", navClients: "Clientes", navServices: "Serviços", navReports: "Relatórios",
-        viewMonth: "Mês", viewWeek: "Semana", viewDay: "Dia", viewList: "Lista",
-        btnNewAppt: "Novo", filterStaff: "Profissionais", filterRooms: "Salas",
-        roles: { psych: "Psicóloga", ther: "Terapeuta", sex: "Sexóloga", room: "Sala" },
-        services: { ind: "Sessão Individual", coup: "Terapia de Casal", cons: "Consulta" },
-        modalTitle: "Novo Agendamento", modalClient: "Nome do Cliente", modalService: "Serviço", modalResource: "Recurso", modalStart: "Início", modalEnd: "Término", btnCancel: "Cancelar", btnSave: "Salvar",
-        srvInd: "Sessão Individual", srvCoup: "Terapia de Casal", srvCons: "Consulta", msgDelete: "Excluir este agendamento?"
-      },
       pl: {
         navCalendar: "Kalendarz", navClients: "Klienci", navServices: "Usługi", navReports: "Raporty",
         viewMonth: "Miesiąc", viewWeek: "Tydzień", viewDay: "Dzień", viewList: "Lista",
@@ -426,20 +276,18 @@
         modalTitle: "Nowa Wizyta", modalClient: "Imię i Nazwisko", modalService: "Usługa", modalResource: "Zasób", modalStart: "Start", modalEnd: "Koniec", btnCancel: "Anuluj", btnSave: "Zapisz",
         srvInd: "Sesja Indywidualna", srvCoup: "Terapia Par", srvCons: "Konsultacja", msgDelete: "Usunąć wizytę?"
       },
-      es: {
-        navCalendar: "Calendario", navClients: "Clientes", navServices: "Servicios", navReports: "Informes",
-        viewMonth: "Mes", viewWeek: "Semana", viewDay: "Día", viewList: "Lista",
-        btnNewAppt: "Nueva Cita", filterStaff: "Profesionales", filterRooms: "Salas",
-        roles: { psych: "Psicóloga", ther: "Terapeuta", sex: "Sexóloga", room: "Sala" },
-        services: { ind: "Sesión Individual", coup: "Terapia de Parejas", cons: "Consulta" },
-        modalTitle: "Nueva Cita", modalClient: "Nombre", modalService: "Servicio", modalResource: "Recurso", modalStart: "Inicio", modalEnd: "Fin", btnCancel: "Cancelar", btnSave: "Guardar",
-        srvInd: "Sesión Individual", srvCoup: "Terapia de Parejas", srvCons: "Consulta", msgDelete: "¿Eliminar esta cita?"
+      en: {
+        navCalendar: "Calendar", navClients: "Clients", navServices: "Services", navReports: "Reports",
+        viewMonth: "Month", viewWeek: "Week", viewDay: "Day", viewList: "List",
+        btnNewAppt: "New Appt", filterStaff: "Professionals", filterRooms: "Rooms",
+        roles: { psych: "Psychologist", ther: "Therapist", sex: "Sexologist", room: "Room" },
+        services: { ind: "Individual Session", coup: "Couples Therapy", cons: "Consultation" },
+        modalTitle: "New Appointment", modalClient: "Client Name", modalService: "Service", modalResource: "Resource", modalStart: "Start Time", modalEnd: "End Time", btnCancel: "Cancel", btnSave: "Save",
+        srvInd: "Individual Session", srvCoup: "Couples Therapy", srvCons: "Consultation", msgDelete: "Delete this appointment?"
       }
     };
 
     let currentLang = 'pl';
-
-    // Settings
     const START_HOUR = 8; 
     const END_HOUR = 20;  
     const PIXELS_PER_MIN = 1; 
@@ -453,64 +301,36 @@
     ];
 
     let visibleResources = [...allResources];
+    let events = []; // <--- THIS IS NOW EMPTY, WAITING FOR LIVE DATA!
 
-    let events = [
-      { id: 1, resourceId: 'r1', start: '08:30', end: '09:20', srvKey: 'ind', client: 'Agata Kowal', theme: 'theme-pink' },
-      { id: 2, resourceId: 'r1', start: '10:00', end: '11:00', srvKey: 'coup', client: 'Jan & Anna Nowak', theme: 'theme-pink' },
-      { id: 4, resourceId: 'r2', start: '09:00', end: '10:00', srvKey: 'cons', client: 'Beata Kozioł', theme: 'theme-green' },
-      { id: 7, resourceId: 'r3', start: '09:00', end: '10:30', srvKey: 'coup', client: 'Ewa & Adam Lis', theme: 'theme-blue' },
-      { id: 9, resourceId: 'r4', start: '08:00', end: '09:00', srvKey: 'ind', client: 'Rezerwacja - Dr. Anna', theme: 'theme-green' }
-    ];
-
-    /* =======================================
-       TAB INTERACTIVITY LOGIC 
-       ======================================= */
-    
-    // 1. Switch Main Top Navigation Tabs (Calendar, Clients, Services, Reports)
     function switchMainTab(clickedEl, viewName) {
-      // Manage active classes on the top navigation
       document.querySelectorAll('.topbar-item').forEach(el => el.classList.remove('active'));
       clickedEl.classList.add('active');
-
-      // Hide all main views, show target view
       document.querySelectorAll('.mainview').forEach(el => el.classList.remove('active'));
       document.getElementById('mainview-' + viewName).classList.add('active');
-
-      // Toggle toolbar items (Only show date selector & view tabs if we are on 'calendar')
       const isCalendar = (viewName === 'calendar');
       document.getElementById('toolbar-left-cal').style.display = isCalendar ? 'flex' : 'none';
       document.getElementById('toolbar-right-cal').style.display = isCalendar ? 'flex' : 'none';
-      
-      // Toggle global text title for non-calendar tabs
       const tbTitle = document.getElementById('toolbar-global-title');
-      if (isCalendar) {
-          tbTitle.style.display = 'none';
-      } else {
+      if (isCalendar) { tbTitle.style.display = 'none'; } else {
           tbTitle.style.display = 'block';
-          // Use translation if available, fallback to clicked element text
           const langKey = clickedEl.querySelector('span').getAttribute('data-i18n');
           tbTitle.textContent = (i18n[currentLang] && i18n[currentLang][langKey]) ? i18n[currentLang][langKey] : clickedEl.innerText.trim();
       }
     }
 
-    // 2. Switch Calendar Sub-Views (Month, Week, Day, List)
     function switchViewTab(clickedEl, subViewName) {
-      // Manage active classes on view tabs
       document.querySelectorAll('.view-tab').forEach(el => el.classList.remove('active'));
       clickedEl.classList.add('active');
-      
-      // Hide all subviews inside the calendar area, show target view
       document.querySelectorAll('.subview').forEach(el => el.classList.remove('active'));
       document.getElementById('subview-' + subViewName).classList.add('active');
     }
 
-    // Mobile Sidebar Toggle
     function toggleSidebar() {
       document.getElementById('sidebar').classList.toggle('active');
       document.querySelector('.sidebar-overlay').classList.toggle('active');
     }
 
-    // Sync Horizontal Scroll between headers and body
     document.getElementById('cal-scroll-area').addEventListener('scroll', function(e) {
       document.getElementById('cal-headers').scrollLeft = e.target.scrollLeft;
     });
@@ -519,12 +339,52 @@
       updateDateHeader();
       applyTranslations(currentLang);
       populateResourceDropdown();
-      renderCalendar();
+      renderHeaders();
+      renderTimeColumn();
       
-      setTimeout(() => {
-        document.getElementById('cal-scroll-area').scrollTop = 30;
-      }, 100);
-      document.getElementById('lang-select').value = currentLang;
+      // Load live data from Google Sheets immediately
+      fetchEvents();
+    }
+
+    // --- FETCH LIVE EVENTS (READ FROM GOOGLE SHEETS) ---
+    function fetchEvents() {
+      fetch(WEB_APP_URL)
+        .then(response => response.json())
+        .then(data => {
+          if(data.error) {
+            console.error("Backend Error:", data.error);
+            document.getElementById('loading-overlay').innerHTML = "Error loading data.";
+            return;
+          }
+          
+          events = [];
+          data.forEach(item => {
+            if (!item.time) return; // Skip empty rows
+            
+            // Calculate a 1 hour end time dynamically based on the start time (if missing)
+            let startH = parseInt(item.time.split(':')[0]);
+            let startM = item.time.split(':')[1] || '00';
+            let endH = startH + 1;
+            let calcEnd = `${endH.toString().padStart(2, '0')}:${startM}`;
+            
+            events.push({
+              id: item.id,
+              resourceId: item.resourceId,
+              start: item.time,
+              end: calcEnd,
+              srvKey: item.serviceKey,
+              client: item.client,
+              theme: item.theme
+            });
+          });
+          
+          document.getElementById('loading-overlay').style.display = 'none';
+          renderGridAndEvents();
+        })
+        .catch(err => {
+          console.error("Error fetching data:", err);
+          document.getElementById('loading-overlay').innerHTML = "Connection failed.";
+        });
     }
 
     function toggleResource(checkbox) {
@@ -548,35 +408,25 @@
     }
 
     function applyTranslations(lang) {
+      if (!i18n[lang]) return;
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (i18n[lang] && i18n[lang][key]) { el.textContent = i18n[lang][key]; }
+        if (i18n[lang][key]) { el.textContent = i18n[lang][key]; }
       });
       updateDateHeader();
       populateResourceDropdown();
-      
-      // Update global title if we aren't on the calendar page
-      const activeNavTab = document.querySelector('.topbar-item.active span');
-      if (activeNavTab && document.getElementById('toolbar-global-title').style.display === 'block') {
-         const langKey = activeNavTab.getAttribute('data-i18n');
-         document.getElementById('toolbar-global-title').textContent = (i18n[lang] && i18n[lang][langKey]) ? i18n[lang][langKey] : activeNavTab.innerText.trim();
-      }
     }
 
     function changeLanguage(lang) {
-      if (!i18n[lang]) return;
       currentLang = lang;
       applyTranslations(lang);
       renderCalendar(); 
     }
 
     function updateDateHeader() {
-      const date = new Date(2026, 5, 13);
-      const locales = { en: 'en-GB', br: 'pt-BR', pl: 'pl-PL', es: 'es-ES' };
-      const formatted = new Intl.DateTimeFormat(locales[currentLang], { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+      const date = new Date(); // Use today's live date
+      const formatted = new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
       document.getElementById('display-date').textContent = formatted;
-      const monthFormatted = new Intl.DateTimeFormat(locales[currentLang], { month: 'long', year: 'numeric' }).format(date);
-      document.getElementById('mini-cal-month').textContent = monthFormatted.charAt(0).toUpperCase() + monthFormatted.slice(1);
     }
 
     function renderCalendar() {
@@ -588,14 +438,11 @@
     function renderHeaders() {
       const headerContainer = document.getElementById('cal-headers');
       headerContainer.innerHTML = '';
-      
       visibleResources.forEach(res => {
         const roleName = i18n[currentLang].roles[res.roleKey] || res.roleKey;
         headerContainer.innerHTML += `
           <div class="res-header">
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: ${res.imgColor}; color: ${res.textColor}; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0;">
-              ${res.avatar}
-            </div>
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: ${res.imgColor}; color: ${res.textColor}; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; flex-shrink: 0;">${res.avatar}</div>
             <div style="line-height: 1.2;">
               <div style="font-weight: 700; font-size: 13px; color: #0f172a;">${res.name}</div>
               <div style="font-size: 11px; color: #64748b;">${roleName}</div>
@@ -615,7 +462,7 @@
 
     function timeToMinutes(timeStr) {
       const [hours, minutes] = timeStr.split(':').map(Number);
-      return (hours * 60) + minutes;
+      return (hours * 60) + (minutes || 0);
     }
     
     function minutesToTime(mins) {
@@ -627,15 +474,12 @@
     function renderGridAndEvents() {
       const gridCols = document.getElementById('grid-cols');
       const linesLayer = document.getElementById('grid-lines');
+      if(!linesLayer) return;
       
       gridCols.innerHTML = '';
       gridCols.appendChild(linesLayer);
       linesLayer.innerHTML = '';
-
-      const totalHours = END_HOUR - START_HOUR + 1;
-      for (let i = 0; i < totalHours; i++) {
-        linesLayer.innerHTML += `<div class="grid-line"></div>`;
-      }
+      for (let i = 0; i < (END_HOUR - START_HOUR + 1); i++) { linesLayer.innerHTML += `<div class="grid-line"></div>`; }
 
       visibleResources.forEach(res => {
         const colDiv = document.createElement('div');
@@ -643,24 +487,18 @@
         
         colDiv.onclick = (e) => {
           if(e.target !== colDiv) return;
-          const clickY = e.offsetY;
-          const minsClicked = Math.floor(clickY / PIXELS_PER_MIN);
+          const minsClicked = Math.floor(e.offsetY / PIXELS_PER_MIN);
           const totalMins = (START_HOUR * 60) + minsClicked;
           const roundedStartMins = Math.floor(totalMins / 30) * 30;
-          const roundedEndMins = roundedStartMins + 60;
-          openModal(res.id, minutesToTime(roundedStartMins), minutesToTime(roundedEndMins));
+          openModal(res.id, minutesToTime(roundedStartMins));
         };
         
         const resEvents = events.filter(e => e.resourceId === res.id);
-        
         resEvents.forEach(evt => {
           const startMins = timeToMinutes(evt.start);
           const endMins = timeToMinutes(evt.end);
-          const dayStartMins = START_HOUR * 60;
-          
-          const topOffset = (startMins - dayStartMins) * PIXELS_PER_MIN;
+          const topOffset = (startMins - (START_HOUR * 60)) * PIXELS_PER_MIN;
           const height = (endMins - startMins) * PIXELS_PER_MIN;
-          const srvName = i18n[currentLang].services[evt.srvKey] || evt.srvKey;
 
           const evtDiv = document.createElement('div');
           evtDiv.className = `event-block ${evt.theme}`;
@@ -670,64 +508,43 @@
           evtDiv.innerHTML = `
             <div class="evt-time">${evt.start} - ${evt.end}</div>
             <div class="evt-title">${evt.client}</div>
-            <div style="opacity: 0.85;">${srvName}</div>
+            <div style="opacity: 0.85;">${evt.srvKey}</div>
           `;
-          
-          evtDiv.onclick = (e) => {
-            e.stopPropagation();
-            if(confirm(i18n[currentLang].msgDelete)) {
-              events = events.filter(x => x.id !== evt.id);
-              renderCalendar();
-            }
-          };
-          
           colDiv.appendChild(evtDiv);
         });
-
         gridCols.appendChild(colDiv);
       });
     }
 
-    function openModal(resourceId = 'r1', start = '09:00', end = '10:00') {
+    function openModal(resourceId = 'r1', start = '09:00') {
       document.getElementById('inp-resource').value = resourceId;
       document.getElementById('inp-start').value = start;
-      document.getElementById('inp-end').value = end;
       document.getElementById('inp-client').value = '';
       document.getElementById('appt-modal').classList.add('active');
     }
 
     function closeModal() { document.getElementById('appt-modal').classList.remove('active'); }
 
-// PASTE YOUR GENERATED WEB APP URL HERE
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxZnhH6Byb_cg_bwPAtT9zua02OaWKLB-77xjZPRR81iwEjXm9PiK-rxr1fG6Vqpu_Qiw/exec';
-
+    // --- SAVE NEW EVENT TO BACKEND ---
     function saveAppointment(e) {
       e.preventDefault();
       
-      const btnSubmit = e.target.querySelector('button[type="submit"]');
+      const btnSubmit = document.getElementById('btn-submit');
       const originalText = btnSubmit.innerHTML;
-      btnSubmit.innerHTML = 'Saving...';
+      btnSubmit.innerHTML = 'Zapisywanie...';
       btnSubmit.disabled = true;
 
-      const resourceId = document.getElementById('inp-resource').value;
-      const start = document.getElementById('inp-start').value;
-      const end = document.getElementById('inp-end').value;
-      const srvKey = document.getElementById('inp-service').value;
-      const client = document.getElementById('inp-client').value;
-
-      // 1. Prepare data for Google Sheets
       const payload = {
         type: 'booking',
-        client: client,
-        phone: 'N/A', // The dashboard modal doesn't ask for a phone number yet
-        resourceId: resourceId,
-        serviceKey: srvKey,
-        date: '2026-06-13', // Using the hardcoded demo date
-        time: start,
-        status: 'confirmed'
+        client: document.getElementById('inp-client').value,
+        phone: '-',
+        resourceId: document.getElementById('inp-resource').value,
+        serviceKey: document.getElementById('inp-service').value,
+        date: new Date().toISOString().split('T')[0], // Use today's date
+        time: document.getElementById('inp-start').value,
+        status: 'Confirmed'
       };
 
-      // 2. Send the data to your Google Apps Script
       fetch(WEB_APP_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -735,34 +552,23 @@
         body: JSON.stringify(payload)
       })
       .then(() => {
-        // 3. Update the visual calendar on success
-        const themes = ['theme-pink', 'theme-green', 'theme-blue', 'theme-yellow'];
-        const randomTheme = themes[Math.floor(Math.random() * themes.length)];
-
-        const newEvt = {
-          id: Date.now(),
-          resourceId: resourceId,
-          start: start,
-          end: end,
-          srvKey: srvKey,
-          client: client,
-          theme: randomTheme
-        };
-
-        events.push(newEvt);
-        renderCalendar();
         closeModal();
-        
         btnSubmit.innerHTML = originalText;
         btnSubmit.disabled = false;
+        
+        // Re-fetch the live data to show the new appointment on the grid!
+        document.getElementById('loading-overlay').style.display = 'flex';
+        fetchEvents();
       })
       .catch(err => {
-        console.error('Error saving to backend:', err);
+        console.error('Error:', err);
         alert('Failed to save to database.');
         btnSubmit.innerHTML = originalText;
         btnSubmit.disabled = false;
       });
     }
+
+    initApp();
   </script>
 </body>
 </html>
