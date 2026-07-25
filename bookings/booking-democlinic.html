@@ -9,14 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #0f766e; /* Teal 700 - calming, clinical */
-      --primary-light: #f0fdfa; /* Teal 50 */
-      --dark: #0f172a;
+      --primary: #2563eb; /* AlanSM Blue 600 - Trust, Calm, Professional */
+      --primary-light: #eff6ff; /* Blue 50 */
+      --dark: #0f172a; /* Slate 900 */
     }
     body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: var(--dark); margin: 0; }
     
-    /* Calming gradients */
-    .hero-bg { background: linear-gradient(135deg, #f0fdfa 0%, #e0f2fe 100%); }
+    /* Calming AlanSM Blue gradients */
+    .hero-bg { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
     
     /* Booking Modal Styles */
     #booking-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 100; padding: 16px; }
@@ -40,29 +40,29 @@
   <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-teal-700 flex items-center justify-center shadow-md">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center shadow-md shadow-blue-600/20">
           <i class="fa-solid fa-leaf text-white"></i>
         </div>
         <span class="text-xl font-bold text-slate-800 tracking-tight" data-i18n="brandName">Harmonia Mind</span>
       </div>
       
       <div class="flex items-center gap-6">
-        <select id="lang-select" class="lang-selector" onchange="changeLanguage(this.value)">
+        <select id="lang-select" class="lang-selector focus:border-blue-500 focus:ring-1 focus:ring-blue-500" onchange="changeLanguage(this.value)">
           <option value="pl">🇵🇱 PL</option>
           <option value="en">🇬🇧 EN</option>
           <option value="br">🇧🇷 BR</option>
           <option value="es">🇪🇸 ES</option>
         </select>
-        <button onclick="openBooking()" class="hidden md:block px-6 py-2.5 bg-teal-700 hover:bg-teal-800 text-white rounded-lg font-semibold transition shadow-sm" data-i18n="btnBookNav">Umów wizytę</button>
+        <button onclick="openBooking()" class="hidden md:block px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition shadow-sm" data-i18n="btnBookNav">Umów wizytę</button>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero-bg py-20 lg:py-32">
+  <section class="hero-bg pt-10 pb-20 lg:pt-16 lg:pb-32">
     <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
       <div>
-        <div class="inline-block px-4 py-1.5 rounded-full bg-teal-100 text-teal-800 text-xs font-bold uppercase tracking-wider mb-6" data-i18n="heroBadge">
+        <div class="inline-block px-4 py-1.5 rounded-full bg-blue-100 text-blue-800 text-xs font-bold uppercase tracking-wider mb-6" data-i18n="heroBadge">
           Centrum Wsparcia
         </div>
         <h1 class="text-4xl lg:text-5xl font-bold leading-tight mb-6 text-slate-900" data-i18n="heroTitle">
@@ -71,7 +71,7 @@
         <p class="text-lg text-slate-600 mb-8 leading-relaxed max-w-lg" data-i18n="heroDesc">
           Profesjonalna pomoc psychologiczna, psychoterapeutyczna i psychiatryczna w bezpiecznej, pełnej empatii przestrzeni. Konsultacje online i stacjonarnie.
         </p>
-        <button onclick="openBooking()" class="px-8 py-4 bg-teal-700 hover:bg-teal-800 text-white rounded-xl font-bold shadow-lg shadow-teal-700/30 transition text-lg flex items-center gap-2">
+        <button onclick="openBooking()" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-lg shadow-blue-600/30 transition text-lg flex items-center gap-2">
           <span data-i18n="btnBookHero">Umów pierwszą wizytę</span> <i class="fa-solid fa-arrow-right"></i>
         </button>
       </div>
@@ -92,40 +92,48 @@
 
       <div class="grid md:grid-cols-3 gap-8">
         <!-- Psycholog -->
-        <div class="p-6 rounded-2xl border border-slate-200 hover:border-teal-500 hover:shadow-xl transition flex flex-col bg-slate-50">
+        <div class="p-6 rounded-2xl border border-slate-200 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition flex flex-col bg-slate-50">
           <div class="w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-white shadow-sm">
              <img src="https://i.pravatar.cc/150?img=47" class="w-full h-full object-cover">
           </div>
           <h3 class="text-xl font-bold text-slate-900">Dr. Anna Kowalska</h3>
-          <p class="text-teal-700 font-semibold text-sm mb-4" data-i18n="rolePsychologist">Psycholog</p>
+          <p class="text-blue-600 font-semibold text-sm mb-4" data-i18n="rolePsychologist">Psycholog</p>
           <p class="text-slate-500 text-sm mb-6 flex-1" data-i18n="descPsychologist">Diagnoza psychologiczna, wsparcie w kryzysie, radzenie sobie ze stresem i wypaleniem zawodowym.</p>
-          <button onclick="openBooking('r1')" class="w-full py-2.5 rounded-lg border border-teal-700 text-teal-700 font-bold hover:bg-teal-50 transition" data-i18n="btnSelect">Wybierz</button>
+          <button onclick="openBooking('r1')" class="w-full py-2.5 rounded-lg border border-blue-600 text-blue-600 font-bold hover:bg-blue-50 transition" data-i18n="btnSelect">Wybierz</button>
         </div>
 
         <!-- Psychoterapeuta -->
-        <div class="p-6 rounded-2xl border border-slate-200 hover:border-teal-500 hover:shadow-xl transition flex flex-col bg-slate-50">
+        <div class="p-6 rounded-2xl border border-slate-200 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition flex flex-col bg-slate-50">
           <div class="w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-white shadow-sm">
              <img src="https://i.pravatar.cc/150?img=12" class="w-full h-full object-cover">
           </div>
           <h3 class="text-xl font-bold text-slate-900">Mgr Jan Nowak</h3>
-          <p class="text-teal-700 font-semibold text-sm mb-4" data-i18n="roleTherapist">Psychoterapeuta (CBT)</p>
+          <p class="text-blue-600 font-semibold text-sm mb-4" data-i18n="roleTherapist">Psychoterapeuta (CBT)</p>
           <p class="text-slate-500 text-sm mb-6 flex-1" data-i18n="descTherapist">Długoterminowa praca nad zaburzeniami lękowymi, depresją oraz trudnościami w relacjach.</p>
-          <button onclick="openBooking('r2')" class="w-full py-2.5 rounded-lg border border-teal-700 text-teal-700 font-bold hover:bg-teal-50 transition" data-i18n="btnSelect">Wybierz</button>
+          <button onclick="openBooking('r2')" class="w-full py-2.5 rounded-lg border border-blue-600 text-blue-600 font-bold hover:bg-blue-50 transition" data-i18n="btnSelect">Wybierz</button>
         </div>
 
         <!-- Psychiatra -->
-        <div class="p-6 rounded-2xl border border-slate-200 hover:border-teal-500 hover:shadow-xl transition flex flex-col bg-slate-50">
+        <div class="p-6 rounded-2xl border border-slate-200 hover:border-blue-500 hover:shadow-xl hover:shadow-blue-500/10 transition flex flex-col bg-slate-50">
           <div class="w-16 h-16 rounded-full overflow-hidden mb-4 border-2 border-white shadow-sm">
              <img src="https://i.pravatar.cc/150?img=32" class="w-full h-full object-cover">
           </div>
           <h3 class="text-xl font-bold text-slate-900">Lek. Maria Wiśniewska</h3>
-          <p class="text-teal-700 font-semibold text-sm mb-4" data-i18n="rolePsychiatrist">Lekarz Psychiatra</p>
+          <p class="text-blue-600 font-semibold text-sm mb-4" data-i18n="rolePsychiatrist">Lekarz Psychiatra</p>
           <p class="text-slate-500 text-sm mb-6 flex-1" data-i18n="descPsychiatrist">Konsultacje medyczne, diagnoza kliniczna, farmakoterapia oraz wystawianie zwolnień (L4).</p>
-          <button onclick="openBooking('r3')" class="w-full py-2.5 rounded-lg border border-teal-700 text-teal-700 font-bold hover:bg-teal-50 transition" data-i18n="btnSelect">Wybierz</button>
+          <button onclick="openBooking('r3')" class="w-full py-2.5 rounded-lg border border-blue-600 text-blue-600 font-bold hover:bg-blue-50 transition" data-i18n="btnSelect">Wybierz</button>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-50 py-8 border-t border-slate-200 text-center mt-auto">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="text-slate-500 text-sm mb-2">&copy; 2026 Harmonia Mind. <span data-i18n="rights">Wszelkie prawa zastrzeżone.</span></p>
+      <p class="text-slate-400 text-xs"><span data-i18n="designedBy">Zaprojektowane przez</span> <a href="https://alansmsolutions.com" target="_blank" rel="noopener noreferrer" class="font-semibold text-blue-600 hover:underline">AlanSM Solutions</a></p>
+    </div>
+  </footer>
 
   <!-- FRONT END BOOKING WIDGET -->
   <div id="booking-modal">
@@ -141,7 +149,7 @@
         <!-- STEP 1: Specialist & Service -->
         <div id="step-1">
           <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="lblSpec">Specjalista</label>
-          <select id="inp-resource" class="w-full p-3 rounded-lg border border-slate-200 mb-6 focus:ring-2 focus:ring-teal-600 outline-none font-medium">
+          <select id="inp-resource" class="w-full p-3 rounded-lg border border-slate-200 mb-6 focus:ring-2 focus:ring-blue-600 outline-none font-medium">
             <option value="r1">Dr. Anna Kowalska (Psycholog)</option>
             <option value="r2">Mgr Jan Nowak (Psychoterapeuta)</option>
             <option value="r3">Lek. Maria Wiśniewska (Psychiatra)</option>
@@ -150,7 +158,7 @@
           <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="lblService">Rodzaj wizyty</label>
           
           <div class="select-card selected" onclick="selectService(this, 'ind')">
-            <input type="radio" name="service" value="ind" checked class="accent-teal-700 w-4 h-4 pointer-events-none">
+            <input type="radio" name="service" value="ind" checked class="accent-blue-600 w-4 h-4 pointer-events-none">
             <div>
               <div class="font-bold text-slate-900" data-i18n="srvInd">Konsultacja Indywidualna</div>
               <div class="text-xs text-slate-500 mt-1">50 min • 200 PLN</div>
@@ -158,14 +166,14 @@
           </div>
           
           <div class="select-card" onclick="selectService(this, 'med')">
-            <input type="radio" name="service" value="med" class="accent-teal-700 w-4 h-4 pointer-events-none">
+            <input type="radio" name="service" value="med" class="accent-blue-600 w-4 h-4 pointer-events-none">
             <div>
               <div class="font-bold text-slate-900" data-i18n="srvMed">Konsultacja Psychiatryczna (Pierwsza)</div>
               <div class="text-xs text-slate-500 mt-1">45 min • 300 PLN</div>
             </div>
           </div>
 
-          <button onclick="goToStep(2)" class="w-full mt-4 py-3.5 bg-teal-700 text-white rounded-xl font-bold hover:bg-teal-800 transition" data-i18n="btnNext">Dalej</button>
+          <button onclick="goToStep(2)" class="w-full mt-4 py-3.5 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-600/20" data-i18n="btnNext">Dalej</button>
         </div>
 
         <!-- STEP 2: Date & Time -->
@@ -175,7 +183,7 @@
           </div>
           
           <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="lblDate">Wybierz Datę</label>
-          <input type="date" id="inp-date" class="w-full p-3 rounded-lg border border-slate-200 mb-6 focus:ring-2 focus:ring-teal-600 outline-none font-medium" onchange="generateTimes()">
+          <input type="date" id="inp-date" class="w-full p-3 rounded-lg border border-slate-200 mb-6 focus:ring-2 focus:ring-blue-600 outline-none font-medium text-slate-700" onchange="generateTimes()">
 
           <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="lblTime">Wybierz Godzinę</label>
           <div class="grid grid-cols-3 gap-2 mb-6" id="time-slots">
@@ -183,7 +191,7 @@
           </div>
           <input type="hidden" id="inp-time">
 
-          <button id="btn-to-step3" onclick="goToStep(3)" class="w-full mt-2 py-3.5 bg-teal-700 text-white rounded-xl font-bold hover:bg-teal-800 transition disabled:opacity-50" disabled data-i18n="btnNext">Dalej</button>
+          <button id="btn-to-step3" onclick="goToStep(3)" class="w-full mt-2 py-3.5 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-600/20 disabled:opacity-50 disabled:shadow-none" disabled data-i18n="btnNext">Dalej</button>
         </div>
 
         <!-- STEP 3: Client Details -->
@@ -192,7 +200,7 @@
             <button onclick="goToStep(2)" class="text-slate-400 hover:text-slate-700 text-sm font-semibold"><i class="fa-solid fa-arrow-left"></i> <span data-i18n="btnBack">Wróć</span></button>
           </div>
 
-          <div class="bg-teal-50 p-4 rounded-xl border border-teal-100 mb-6">
+          <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 mb-6">
             <div class="font-bold text-slate-900" id="sum-service">Konsultacja</div>
             <div class="text-sm text-slate-600 font-medium" id="sum-datetime">--</div>
           </div>
@@ -200,15 +208,15 @@
           <form id="booking-form" onsubmit="submitToBackend(event)">
             <div class="mb-4">
               <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="lblName">Imię i Nazwisko</label>
-              <input type="text" id="client-name" required class="w-full p-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-teal-600 outline-none" placeholder="np. Jan Kowalski">
+              <input type="text" id="client-name" required class="w-full p-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none text-slate-700" placeholder="np. Jan Kowalski">
             </div>
             
             <div class="mb-6">
               <label class="block text-sm font-bold text-slate-700 mb-2" data-i18n="lblPhone">Telefon (WhatsApp)</label>
-              <input type="tel" id="client-phone" required class="w-full p-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-teal-600 outline-none" placeholder="+48 000 000 000">
+              <input type="tel" id="client-phone" required class="w-full p-3 rounded-lg border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none text-slate-700" placeholder="+48 000 000 000">
             </div>
 
-            <button type="submit" id="btn-submit" class="w-full py-3.5 bg-teal-700 text-white rounded-xl font-bold hover:bg-teal-800 transition shadow-lg shadow-teal-700/20 flex justify-center items-center gap-2">
+            <button type="submit" id="btn-submit" class="w-full py-3.5 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-600/20 flex justify-center items-center gap-2">
               <span data-i18n="btnConfirm">Potwierdź i Wyślij</span>
             </button>
           </form>
@@ -216,7 +224,7 @@
 
         <!-- SUCCESS STEP -->
         <div id="step-success" style="display:none;" class="text-center py-6">
-          <div class="w-20 h-20 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center text-4xl mx-auto mb-4">
+          <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-4xl mx-auto mb-4">
             <i class="fa-solid fa-check"></i>
           </div>
           <h3 class="text-2xl font-bold text-slate-900 mb-2" data-i18n="successTitle">Rezerwacja Potwierdzona</h3>
@@ -248,7 +256,8 @@
         lblDate: "Wybierz Datę", lblTime: "Wybierz Godzinę",
         lblName: "Imię i Nazwisko", lblPhone: "Telefon (WhatsApp)",
         btnConfirm: "Potwierdź Rezerwację", successTitle: "Wizyta Potwierdzona",
-        successDesc: "Twoja wizyta została zapisana. Otrzymasz powiadomienie SMS.", btnDone: "Gotowe"
+        successDesc: "Twoja wizyta została zapisana. Otrzymasz powiadomienie SMS.", btnDone: "Gotowe",
+        rights: "Wszelkie prawa zastrzeżone.", designedBy: "Zaprojektowane przez"
       },
       en: {
         brandName: "Harmonia Mind", btnBookNav: "Book Session", heroBadge: "Support Center",
@@ -267,7 +276,8 @@
         lblDate: "Select Date", lblTime: "Select Time",
         lblName: "Full Name", lblPhone: "Phone (WhatsApp)",
         btnConfirm: "Confirm Booking", successTitle: "Booking Confirmed",
-        successDesc: "Your appointment has been saved. You will receive an SMS notification.", btnDone: "Done"
+        successDesc: "Your appointment has been saved. You will receive an SMS notification.", btnDone: "Done",
+        rights: "All rights reserved.", designedBy: "Designed by"
       },
       br: {
         brandName: "Harmonia Mind", btnBookNav: "Agendar", heroBadge: "Centro de Apoio",
@@ -286,7 +296,28 @@
         lblDate: "Escolha a Data", lblTime: "Escolha a Hora",
         lblName: "Nome Completo", lblPhone: "Telefone (WhatsApp)",
         btnConfirm: "Confirmar", successTitle: "Reserva Confirmada",
-        successDesc: "Sua consulta foi salva. Você receberá um SMS de aviso.", btnDone: "Concluído"
+        successDesc: "Sua consulta foi salva. Você receberá um SMS de aviso.", btnDone: "Concluído",
+        rights: "Todos os direitos reservados.", designedBy: "Desenvolvido por"
+      },
+      es: {
+        brandName: "Harmonia Mind", btnBookNav: "Reservar", heroBadge: "Centro de Apoyo",
+        heroTitle: "Tu salud mental es la prioridad.",
+        heroDesc: "Ayuda psicológica, psicoterapéutica y psiquiátrica profesional en un espacio seguro y empático.",
+        btnBookHero: "Reservar 1ª sesión",
+        specTitle: "Nuestros Especialistas", specDesc: "Elige al experto adecuado. Todos cuentan con calificaciones certificadas.",
+        rolePsychologist: "Psicóloga", descPsychologist: "Diagnóstico psicológico, apoyo en crisis, manejo del estrés.",
+        roleTherapist: "Psicoterapeuta (TCC)", descTherapist: "Trabajo a largo plazo en trastornos de ansiedad y depresión.",
+        rolePsychiatrist: "Psiquiatra", descPsychiatrist: "Consultas médicas, diagnóstico clínico, farmacoterapia.",
+        btnSelect: "Seleccionar",
+        modalTitle1: "Seleccionar Servicio", modalTitle2: "Fecha y Hora", modalTitle3: "Tus Datos",
+        lblSpec: "Especialista", lblService: "Tipo de Servicio",
+        srvInd: "Consulta Individual", srvMed: "Consulta Psiquiátrica (Primera)",
+        btnNext: "Siguiente", btnBack: "Volver",
+        lblDate: "Seleccionar Fecha", lblTime: "Seleccionar Hora",
+        lblName: "Nombre Completo", lblPhone: "Teléfono (WhatsApp)",
+        btnConfirm: "Confirmar Reserva", successTitle: "Reserva Confirmada",
+        successDesc: "Tu cita ha sido guardada. Recibirás una notificación por SMS.", btnDone: "Hecho",
+        rights: "Todos los derechos reservados.", designedBy: "Diseñado por"
       }
     };
 
@@ -436,6 +467,8 @@
         btn.disabled = false;
       });
     }
+    
+    window.onload = initApp;
   </script>
 </body>
 </html>
