@@ -92,6 +92,34 @@
     .month-date-num { font-size: 12px; font-weight: 600; color: #475569; margin-bottom: 4px; text-align: right; }
     .month-date-num.today { background-color: var(--primary); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; float: right;}
     .month-evt-pill { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-left: 3px solid transparent;}
+
+    /* Mobile Responsive Fixes (RESTORED) */
+    @media (max-width: 768px) {
+      .mobile-menu-btn { display: block; }
+      .topbar { padding: 0 8px; justify-content: space-between; }
+      .topbar-brand span { display: none; }
+      .topbar-menu { margin-left: auto; justify-content: flex-end; }
+      .topbar-menu span { display: none; }
+      .topbar-item { padding: 8px; }
+      
+      .toolbar { height: auto; flex-direction: column; padding: 12px; gap: 12px; align-items: stretch; }
+      .toolbar-left, .toolbar-right { width: 100%; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+      #display-date { font-size: 16px !important; text-align: center; }
+      
+      .view-tabs { display: flex; width: 100%; justify-content: space-between; overflow-x: auto; }
+      .view-tab { padding: 6px 12px; font-size: 12px; }
+      
+      .sidebar {
+        position: absolute; left: 0; top: 0; bottom: 0; z-index: 50;
+        transform: translateX(-100%); box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+      }
+      .sidebar.active { transform: translateX(0); }
+      .sidebar-overlay { display: none; position: absolute; inset: 0; background: rgba(15, 23, 42, 0.5); z-index: 49; }
+      .sidebar-overlay.active { display: block; }
+      
+      .res-col { min-width: 160px; }
+      #appt-modal .modal-box { padding: 20px; max-height: 90vh; overflow-y: auto; }
+    }
   </style>
 </head>
 <body>
