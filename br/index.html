@@ -53,7 +53,6 @@
       // if they haven't explicitly set something else.
       if (!localStorage.getItem('preferredLanguage')) {
         localStorage.setItem('preferredLanguage', 'pt');
-        localStorage.setItem('preferredCurrency', 'BRL');
       }
     })();
   </script>
@@ -400,7 +399,6 @@
   </div>
 </div>
 
-
 <main id="top" class="pt-24">
   
 <header class="border-b border-slate-800 bg-slate-950">
@@ -526,9 +524,6 @@
   </div>
 </section>
 
-
-
-    
 <section class="py-16 bg-slate-950 border-b border-slate-800">
   <div class="max-w-7xl mx-auto px-6">
     <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
@@ -1169,6 +1164,17 @@
   let previouslyFocusedElement = null;
   let currentPackageInfo = { packageName: '', price: '' };
 
+  const euroRegions = new Set([
+    'AT','BE','HR','CY','EE','FI','FR','DE','GR','IE','IT','LV','LT','LU','MT','NL','PT','SK','SI','ES'
+  ]);
+
+  const euroTimeZones = new Set([
+    'Europe/Vienna','Europe/Brussels','Europe/Zagreb','Asia/Nicosia','Europe/Tallinn','Europe/Helsinki',
+    'Europe/Paris','Europe/Berlin','Europe/Athens','Europe/Dublin','Europe/Rome','Europe/Riga',
+    'Europe/Vilnius','Europe/Luxembourg','Europe/Malta','Europe/Amsterdam','Europe/Lisbon',
+    'Europe/Bratislava','Europe/Ljubljana','Europe/Madrid'
+  ]);
+
   const priceMap = {
     15: { EUR: '€15', PLN: '60 PLN', BRL: 'R$ 95', USD: '$16' },
     16: { EUR: '€16', PLN: '69 PLN', BRL: 'R$ 100', USD: '$17' },
@@ -1189,6 +1195,56 @@
     115: { EUR: '€115', PLN: '500 PLN', BRL: 'R$ 725', USD: '$125' },
     390: { EUR: '€390', PLN: '1.690 PLN', BRL: 'R$ 2.450', USD: '$420' }
   };
+
+  function getRegionFromLocale() {
+    const candidates = [navigator.language].concat(navigator.languages || []);
+    for (const lang of candidates) {
+      if (!lang) continue;
+      const parts = String(lang).split('-');
+      if (parts.length >= 2) return parts[parts.length - 1].toUpperCase();
+    }
+    return '';
+  }
+
+  function detectVisitorCurrencyFromBrowser() {
+    let timeZone = '';
+    try {
+      timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+    } catch (error) {
+      timeZone = '';
+    }
+
+    const language = (navigator.language || '').toLowerCase();
+    const region = getRegionFromLocale();
+
+    if (region === 'PL' || language.startsWith('pl') || timeZone === 'Europe/Warsaw') return 'PLN';
+    if (region === 'BR' || language === 'pt-br' || timeZone === 'America/Sao_Paulo') return 'BRL';
+    if (euroRegions.has(region) || euroTimeZones.has(timeZone)) return 'EUR';
+    return 'USD';
+  }
+
+  async function detectVisitorCurrency() {
+    const browserCurrency = detectVisitorCurrencyFromBrowser();
+
+    try {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 1200);
+      const response = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+      window.clearTimeout(timeout);
+
+      if (response.ok) {
+        const data = await response.json();
+        const country = String(data.country_code || '').toUpperCase();
+
+        if (country === 'PL') return 'PLN';
+        if (country === 'BR') return 'BRL';
+        if (euroRegions.has(country)) return 'EUR';
+      }
+    } catch (error) {
+    }
+
+    return browserCurrency;
+  }
 
   function formatPrice(baseEur) {
     const key = Number(baseEur);
@@ -1549,12 +1605,29 @@
     savingsEl.textContent = selectedPlan.text;
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', async () => {
     // Check local storage. Since it's the BR page, BRL is our fallback priority instead of Polish PLN.
     currentCurrency = localStorage.getItem('preferredCurrency') || 'BRL';
     
     updateDynamicContent();
     updateBookingPilotPrice();
+
+    // Only run auto-detection if the user hasn't explicitly set a preference
+    if (!localStorage.getItem('preferredCurrency')) {
+      const browserCurrency = detectVisitorCurrencyFromBrowser();
+      if (browserCurrency !== currentCurrency) {
+        currentCurrency = browserCurrency;
+        updateDynamicContent();
+        updateBookingPilotPrice();
+      }
+
+      const detectedCurrency = await detectVisitorCurrency();
+      if (detectedCurrency !== currentCurrency) {
+        currentCurrency = detectedCurrency;
+        updateDynamicContent();
+        updateBookingPilotPrice();
+      }
+    }
 
     let bannerTriggered = false;
     const triggerBanner = () => {
