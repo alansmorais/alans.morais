@@ -1,0 +1,2303 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlanSM Solutions | Business Automation & Digital Systems</title>
+
+  <link rel="icon" type="image/svg+xml" href="https://alansmsolutions.com/images/logo.svg" />
+
+  <meta name="description" content="AlanSM Solutions builds business automation, private booking systems, DeliveryHub ordering platforms, CRM workflows and digital systems for small businesses in Poland and remote clients." />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="alternate" hreflang="en" href="https://alansmsolutions.com/" />
+  <link rel="alternate" hreflang="pt-br" href="https://alansmsolutions.com/br/" />
+  <link rel="alternate" hreflang="pl" href="https://alansmsolutions.com/pl/" />
+  <link rel="alternate" hreflang="x-default" href="https://alansmsolutions.com/" />
+  <link rel="canonical" href="https://alansmsolutions.com/"/>
+
+  <meta property="og:title" content="AlanSM Solutions | Business Automation & Digital Systems" />
+  <meta property="og:description" content="AlanSM Solutions builds business automation, private booking systems, DeliveryHub ordering platforms, CRM workflows and digital systems for small businesses in Poland and remote clients." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://alansmsolutions.com/" />
+  <meta property="og:image" content="https://alansmsolutions.com/images/logo.svg" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="AlanSM Solutions | Business Automation & Digital Systems" />
+  <meta name="twitter:description" content="AlanSM Solutions builds business automation, private booking systems, DeliveryHub ordering platforms, CRM workflows and digital systems for small businesses in Poland and remote clients." />
+  <meta name="twitter:image" content="https://alansmsolutions.com/images/logo.svg" />
+
+  <!-- LCP Optimization: Preload the hero background image -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background-color: #020617; 
+      color: #f8fafc; 
+    }
+    :focus-visible { outline: 2px solid #60a5fa; outline-offset: 3px; }
+    .modal-backdrop { background: rgba(15, 23, 42, 0.35); backdrop-filter: blur(4px); }
+    .fade-up { animation: fadeUp 0.6s ease-out both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  
+    .price-panel { background: #f1f5f9; border: 1px solid #cbd5e1; box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08); }
+    .price-value { color: #0f172a !important; font-weight: 800; letter-spacing: -0.04em; }
+    .soft-section { background: #f8fafc; border-color: #cbd5e1; }
+    .soft-card { background: #ffffff; border-color: #dbe3ee; }
+    .pilot-highlight { background: #ecfdf5; border-color: #bbf7d0; }
+
+    .section-shell { max-width: 80rem; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .panel-muted { background: #f4f7fb; border: 1px solid #cbd5e1; }
+    .panel-white { background: #ffffff; border: 1px solid #dbe3ee; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06); }
+    .price-panel { background: #eaf1f8; border: 1px solid #b8c6d8; box-shadow: 0 18px 40px rgba(15, 23, 42, 0.10); }
+    .price-value { color: #0f172a !important; font-weight: 850; letter-spacing: -0.04em; }
+    .pilot-highlight { background: #e8f8ef; border: 1px solid #a7e7bd; }
+    .balanced-card { height: 100%; display: flex; flex-direction: column; }
+    .balanced-card p:last-child { margin-bottom: 0; }
+
+    .ib-section { background: #f3f7fb; }
+    .ib-card { background: #ffffff; border: 1px solid #d7e0ea; box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06); }
+    .ib-card:hover { border-color: #93c5fd; transform: translateY(-2px); }
+    .ib-card { transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+    .solution-icon { width: 3rem; height: 3rem; display: flex; align-items: center; justify-content: center; border-radius: .9rem; background: #eff6ff; font-size: 1.5rem; }
+    .product-card-grid { align-items: stretch; }
+    .product-copy, .product-price { height: 100%; }
+    .product-price { display: flex; flex-direction: column; justify-content: space-between; }
+    .cta-panel { display: flex; align-items: stretch; }
+    @media (max-width: 1023px) {
+      .product-copy, .product-price { height: auto; }
+      .cta-panel { display: block; }
+    }
+
+    .top-info-bar { background: #1d4ed8; color: #eff6ff; }
+    .main-nav-shell { background: rgba(255,255,255,0.97); backdrop-filter: blur(8px); }
+    .mobile-drawer-link { display:block; padding: 0.95rem 0; font-size: 1.25rem; line-height: 1.6rem; font-weight: 600; color:#334155; border-bottom:1px solid #e2e8f0; }
+    .mobile-drawer-link:last-child { border-bottom: none; }
+    .nav-icon-btn { width: 3rem; height: 3rem; border: 1px solid #dbe3ee; border-radius: 0.75rem; display:flex; align-items:center; justify-content:center; background:#fff; }
+    .menu-line { width: 1.35rem; height: 2px; background:#64748b; border-radius: 999px; display:block; }
+    .menu-line + .menu-line { margin-top: 0.28rem; }
+
+    .hero-banner {
+      background:
+        linear-gradient(rgba(15,23,42,.55), rgba(15,23,42,.60)),
+        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      min-height: 440px;
+    }
+    .section-title-ib {
+      font-size: .8rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: #2563eb;
+      font-weight: 800;
+    }
+    .solution-box {
+      background: #fff;
+      border: 1px solid #dbe3ee;
+      border-radius: 1rem;
+      box-shadow: 0 12px 28px rgba(15,23,42,.05);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .solution-box:hover {
+      transform: translateY(-3px);
+      border-color: #93c5fd;
+      box-shadow: 0 18px 32px rgba(15,23,42,.08);
+    }
+    .solution-icon-lg {
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1rem;
+    }
+    .about-panel {
+      background:#ffffff;
+      border:1px solid #dbe3ee;
+      border-radius:1rem;
+      box-shadow:0 10px 28px rgba(15,23,42,.05);
+    }
+
+/* AlanSM dark final override */
+
+    .top-info-bar { background: #020617; color: #cbd5e1; border-bottom: 1px solid #1e293b; }
+    .main-nav-shell { background: rgba(2, 6, 23, 0.96); backdrop-filter: blur(8px); border-color: #1e293b; }
+    .hero-banner {
+      background:
+        linear-gradient(rgba(2,6,23,.70), rgba(2,6,23,.78)),
+        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      min-height: 550px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-banner .max-w-7xl {
+      position: relative;
+      z-index: 10;
+    }
+    .section-title-ib {
+      font-size: .8rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: #3b82f6;
+      font-weight: 800;
+    }
+    .solution-box {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 1.25rem;
+      box-shadow: 0 18px 40px rgba(0,0,0,.20);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .solution-box:hover {
+      transform: translateY(-8px);
+      border-color: #3b82f6;
+      box-shadow: 0 25px 50px -12px rgba(37,99,235,0.25);
+    }
+    .solution-icon-lg {
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 999px;
+      background: #020617;
+      color: #60a5fa;
+      border: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1rem;
+    }
+    .about-panel {
+      background:#0f172a;
+      border:1px solid #1e293b;
+      border-radius:1rem;
+      box-shadow:0 18px 40px rgba(0,0,0,.20);
+    }
+    .price-panel {
+      background: #0f172a;
+      border: 1px solid #3b82f6;
+      box-shadow: 0 20px 50px rgba(37,99,235,0.15);
+      position: relative;
+    }
+    .price-panel::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #3b82f6;
+      color: white;
+      padding: 4px 16px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .price-value { color: #60a5fa !important; font-weight: 850; letter-spacing: -0.04em; }
+    .pilot-highlight { background: #0f172a; border: 1px solid #1e293b; }
+    .mobile-drawer-link { display:block; padding: 0.95rem 0; font-size: 1.15rem; line-height: 1.6rem; font-weight: 600; color:#cbd5e1; border-bottom:1px solid #1e293b; }
+    .mobile-drawer-link:last-child { border-bottom: none; }
+    .nav-icon-btn { width: 3rem; height: 3rem; border: 1px solid #334155; border-radius: 0.75rem; display:flex; align-items:center; justify-content:center; background:#0f172a; }
+    .menu-line { width: 1.35rem; height: 2px; background:#cbd5e1; border-radius: 999px; display:block; }
+    .menu-line + .menu-line { margin-top: 0.28rem; }
+
+    .hero-consultation-btn {
+      background: rgba(15, 23, 42, 0.92) !important;
+      color: #ffffff !important;
+      border: 1px solid #3b82f6 !important;
+    }
+    .hero-consultation-btn:hover {
+      background: #2563eb !important;
+    }
+
+    /* Accessibility Enhancements */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: #3b82f6;
+      color: white;
+      padding: 8px;
+      z-index: 1000;
+      border-radius: 4px;
+    }
+    .skip-link:focus {
+      top: 6px;
+    }
+
+    /* Testimonial Carousel */
+    .testimonial-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    .testimonial-item {
+      scroll-snap-align: start;
+      flex: 0 0 100%;
+    }
+    .testimonial-indicators {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .testimonial-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #4b5563;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+    .testimonial-indicator.active {
+      background: #3b82f6;
+    }
+
+    /* Scroll Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: #3b82f6;
+      width: 0%;
+      z-index: 1000;
+    }
+
+    /* Copy Button */
+    .copy-btn {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.75rem;
+    }
+    .copy-btn:hover {
+      background: #2563eb;
+    }
+
+    /* Pricing Highlight */
+    .pricing-highlight {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #3b82f6;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 99;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Dark Mode Toggle */
+    .dark-mode-toggle {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      z-index: 98;
+    }
+
+    /* Exit Intent Popup */
+    .exit-intent-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 400px;
+      width: 90%;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    .exit-intent-popup.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .exit-intent-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+    }
+    .exit-intent-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Case Study Section */
+    .case-study-card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .case-study-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25);
+    }
+    .case-study-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Team Member Card */
+    .team-member {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    .team-member:hover {
+      transform: translateY(-5px);
+    }
+    .team-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top;
+      border: 3px solid #3b82f6;
+      margin: 24px auto 15px;
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AlanSM Solutions",
+    "url": "https://alansmsolutions.com/",
+    "logo": "https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg",
+    "email": "kontakt@alansmsolutions.com",
+    "areaServed": ["Poland", "Brazil", "European Union", "Remote"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Kraków",
+      "addressCountry": "PL"
+    },
+    "description": "Business automation, private booking systems, DeliveryHub ordering systems, CRM workflows and digital systems for small businesses.",
+    "priceRange": "$$",
+    "image": "https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg",
+    "sameAs": [
+      "https://www.linkedin.com/in/alandasm",
+      "https://github.com/alansmorais"
+    ]
+  }
+  </script>
+
+  <!-- FAQ Schema for Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [{
+      "@type": "Question",
+      "name": "What does an automation consultant do?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "I identify repetitive or disconnected processes, map the required information flow, and build practical systems that reduce manual work and improve consistency."
+      }
+    },{
+      "@type": "Question",
+      "name": "Do you build websites with integrated forms and booking flows?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. I build professional client-facing platforms with lead capture, contact forms, workflow automation, and booking integrations when they fit the business process."
+      }
+    },{
+      "@type": "Question",
+      "name": "Do you provide services in Kraków or worldwide?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Both. I am based in Kraków and work remotely with clients in Poland and internationally in English, Portuguese, and Polish."
+      }
+    }]
+  }
+  </script>
+</head>
+
+<body class="antialiased selection:bg-blue-100 selection:text-blue-900" style="padding-top: 132px;">
+  <!-- Skip to content link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <!-- Scroll progress bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd" />
+    </svg>
+  </div>
+
+  <!-- Dark Mode Toggle -->
+  <div class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+      <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+    </svg>
+  </div>
+
+  <!-- Exit Intent Popup -->
+  <div class="exit-intent-overlay" id="exitIntentOverlay"></div>
+  <div class="exit-intent-popup" id="exitIntentPopup">
+    <div class="flex justify-between items-start mb-4">
+      <h3 class="text-lg font-bold text-slate-100">Don't Miss Out!</h3>
+      <button id="closeExitPopup" class="text-slate-500 hover:text-slate-300">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </button>
+    </div>
+    <p class="text-slate-300 mb-4">Limited spots available for pilot projects. Get a special consultation rate!</p>
+    <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium">
+      Claim Special Rate
+    </button>
+  </div>
+
+  <div class="fixed top-0 inset-x-0 z-50">
+    <div class="top-info-bar">
+      <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] md:text-[13px] text-center">
+        <div class="flex items-center justify-center gap-2 sm:gap-5 mx-auto sm:mx-0">
+          <span class="font-medium">📧 kontakt@alansmsolutions.com</span>
+          <span class="hidden sm:inline text-blue-200">|</span>
+          <span class="font-medium">📍 Kraków, Poland • Remote</span>
+        </div>
+        <div class="flex items-center justify-center gap-4 text-blue-200/80">
+          <a href="https://www.instagram.com/alansmsolutions/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="AlanSM Solutions Instagram">
+            <svg fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path></svg>
+          </a>
+          <a href="https://www.instagram.com/alanmoraissss/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Alan Personal Instagram">
+            <svg fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path></svg>
+          </a>
+          <a href="https://www.facebook.com/alankmorais" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Alan Facebook">
+            <svg fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="main-nav-shell border-b border-slate-800 shadow-sm sticky top-0">
+      <div class="max-w-7xl mx-auto px-6 h-[88px] grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4">
+        <a href="#top" class="flex items-center gap-3 md:gap-4 min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded" aria-label="AlanSM Solutions home">
+          <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="AlanSM Solutions logo" width="56" height="56" fetchpriority="high" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-700 bg-slate-950 object-cover" loading="lazy" />
+          <div class="flex flex-col justify-center min-w-0">
+            <span class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-100 leading-none truncate">AlanSM Solutions</span>
+            <span class="text-[11px] md:text-[12px] text-blue-500 font-semibold tracking-[0.18em] uppercase mt-1">Portfolio • Automation • Digital Systems</span>
+          </div>
+        </a>
+
+        <div class="hidden lg:flex items-center justify-center gap-8">
+          <a href="#top" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Home</a>
+          <a href="#solutions" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Solutions</a>
+          <a href="#services-pricing" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Products</a>
+          <a href="/portfolio.html" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">CV / Portfolio</a>
+          <a href="#faq" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">FAQ</a>
+          <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contact</button>
+        </div>
+
+        <div class="flex items-center justify-end gap-3">
+          <div class="hidden md:flex items-center gap-3">
+            <a href="/br/" onclick="localStorage.setItem('preferredLanguage', 'pt'); localStorage.setItem('preferredCurrency', 'BRL');" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">BR</a>
+            <a href="/pl/" onclick="localStorage.setItem('preferredLanguage', 'pl'); localStorage.setItem('preferredCurrency', 'PLN');" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</a>
+            <a href="/?lang=en" onclick="localStorage.setItem('preferredLanguage', 'en'); localStorage.setItem('preferredCurrency', 'USD');" class="text-xs font-semibold text-blue-500">EN</a>
+            <span id="currencyAutoLabel" class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">PLN auto</span>
+          </div>
+
+          <button id="mobileMenuButton" type="button" class="lg:hidden nav-icon-btn" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMobileMenu()">
+            <span class="sr-only">Toggle menu</span>
+            <div>
+              <span class="menu-line"></span>
+              <span class="menu-line"></span>
+              <span class="menu-line"></span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mobileMenu" class="hidden lg:hidden bg-slate-950 border-b border-slate-800 shadow-sm">
+      <div class="px-6 py-5">
+        <a href="#top" class="mobile-drawer-link" onclick="closeMobileMenu()">Home</a>
+        <a href="#solutions" class="mobile-drawer-link" onclick="closeMobileMenu()">Solutions</a>
+        <a href="#services-pricing" class="mobile-drawer-link" onclick="closeMobileMenu()">Products</a>
+        <a href="/portfolio.html" class="mobile-drawer-link" onclick="closeMobileMenu()">CV / Portfolio</a>
+        <a href="#faq" class="mobile-drawer-link" onclick="closeMobileMenu()">FAQ</a>
+        <button type="button" class="mobile-drawer-link text-left w-full" onclick="closeMobileMenu(); openContactForm('offer', 'introductory_offer');">Contact</button>
+
+        <div class="pt-5 mt-5 border-t border-slate-800 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <a href="/br/" onclick="localStorage.setItem('preferredLanguage', 'pt'); localStorage.setItem('preferredCurrency', 'BRL');" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">BR</a>
+            <a href="/pl/" onclick="localStorage.setItem('preferredLanguage', 'pl'); localStorage.setItem('preferredCurrency', 'PLN');" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</a>
+            <a href="/?lang=en" onclick="localStorage.setItem('preferredLanguage', 'en'); localStorage.setItem('preferredCurrency', 'USD');" class="text-xs font-semibold text-blue-500">EN</a>
+          </div>
+          <span id="currencyAutoLabelMobile" class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">PLN auto</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content" class="pt-24">
+    <header class="border-b border-slate-800 bg-slate-950">
+      <div class="hero-banner flex items-center">
+        <div class="max-w-7xl mx-auto px-6 py-16 md:py-20 w-full text-center">
+          <p class="section-title-ib mb-4 text-blue-200">AlanSM Solutions</p>
+          <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
+            Automation & web platforms <br/><span class="text-blue-300">for service businesses</span>
+          </h1>
+          <p class="max-w-3xl mx-auto text-sm md:text-lg text-slate-100 leading-relaxed mb-8">
+            Practical digital solutions for service businesses, restaurants and internal operations — from websites and client flows to ordering systems, ERP-oriented workflows and custom automation.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#solutions" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold transition-all transform hover:scale-105 shadow-xl shadow-blue-600/20">Explore Solutions</a>
+            <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="hero-consultation-btn bg-slate-900/90 border border-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg transform hover:-translate-y-1">Request Consultation</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Trust Indicators -->
+    <section class="py-8 bg-slate-900 border-b border-slate-800">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+          <div class="flex items-center gap-2 text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-sm">20+ Projects Delivered</span>
+          </div>
+          <div class="flex items-center gap-2 text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-sm">98% Client Satisfaction</span>
+          </div>
+          <div class="flex items-center gap-2 text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-sm">5 Years Experience</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-slate-900 border-b border-slate-800">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <p class="section-title-ib mb-3">Testimonials</p>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-100 mb-4">What Our Clients Say</h2>
+        </div>
+        
+        <div class="testimonial-container">
+          <div class="testimonial-item">
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8">
+              <div class="flex items-center mb-4">
+                <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-4">JD</div>
+                <div>
+                  <h3 class="font-bold text-slate-100">John Doe</h3>
+                  <p class="text-sm text-slate-400">CEO, Tech Innovations</p>
+                </div>
+              </div>
+              <p class="text-slate-300 italic">"Alan transformed our booking process completely. Our efficiency increased by 200% and client satisfaction has never been higher!"</p>
+              <div class="mt-4 flex items-center">
+                <div class="flex text-yellow-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                </div>
+                <span class="ml-2 text-sm text-slate-400">5/5</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="testimonial-item">
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8">
+              <div class="flex items-center mb-4">
+                <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white font-bold mr-4">AS</div>
+                <div>
+                  <h3 class="font-bold text-slate-100">Anna Smith</h3>
+                  <p class="text-sm text-slate-400">Owner, Beauty Salon</p>
+                </div>
+              </div>
+              <p class="text-slate-300 italic">"The private booking system Alan created for us eliminated marketplace commissions and gave us full control over our client experience."</p>
+              <div class="mt-4 flex items-center">
+                <div class="flex text-yellow-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                </div>
+                <span class="ml-2 text-sm text-slate-400">5/5</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="testimonial-item">
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 md:p-8">
+              <div class="flex items-center mb-4">
+                <div class="w-12 h-12 rounded-full bg-purple-500 flex items-center justify-center text-white font-bold mr-4">MR</div>
+                <div>
+                  <h3 class="font-bold text-slate-100">Maria Rodriguez</h3>
+                  <p class="text-sm text-slate-400">Restaurant Owner</p>
+                </div>
+              </div>
+              <p class="text-slate-300 italic">"With DeliveryHub, we've streamlined our entire ordering and delivery process. Revenue increased by 35% in the first quarter!"</p>
+              <div class="mt-4 flex items-center">
+                <div class="flex text-yellow-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                </div>
+                <span class="ml-2 text-sm text-slate-400">5/5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="testimonial-indicators">
+          <div class="testimonial-indicator active"></div>
+          <div class="testimonial-indicator"></div>
+          <div class="testimonial-indicator"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section class="py-16 bg-slate-950 border-b border-slate-800">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <p class="section-title-ib mb-3">Case Studies</p>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-100 mb-4">Proven Results</h2>
+          <p class="text-slate-400 max-w-3xl mx-auto">Real-world examples of how our solutions have transformed businesses</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="case-study-card">
+            <div class="case-study-image bg-gray-800" style="background-image: url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1470&q=80');"></div>
+            <div class="p-6">
+              <span class="inline-block px-3 py-1 text-xs font-semibold text-blue-400 bg-blue-900/30 rounded-full mb-3">Clinic, Barber & Beauty</span>
+              <h3 class="text-xl font-bold text-slate-100 mb-2">Private Booking System for Salon</h3>
+              <p class="text-slate-400 mb-4">Implemented a custom booking system that reduced no-shows by 40% and increased appointment efficiency.</p>
+              <div class="flex justify-between items-center">
+                <div>
+                  <p class="text-sm font-semibold text-green-400">+200% Efficiency</p>
+                  <p class="text-xs text-slate-500">Within 3 months</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="case-study-card">
+            <div class="case-study-image bg-gray-800" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');"></div>
+            <div class="p-6">
+              <span class="inline-block px-3 py-1 text-xs font-semibold text-purple-400 bg-purple-900/30 rounded-full mb-3">Restaurant</span>
+              <h3 class="text-xl font-bold text-slate-100 mb-2">DeliveryHub for Local Eatery</h3>
+              <p class="text-slate-400 mb-4">Custom ordering platform that cut delivery costs by 30% and increased order volume by 35%.</p>
+              <div class="flex justify-between items-center">
+                <div>
+                  <p class="text-sm font-semibold text-green-400">+35% Revenue Growth</p>
+                  <p class="text-xs text-slate-500">First quarter</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-slate-955 border-b border-slate-800">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 items-start">
+          <div>
+            <p class="section-title-ib mb-3">About</p>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-100 mb-4">AlanSM Solutions</h2>
+            <p class="text-slate-400 text-base leading-relaxed mb-4">
+              AlanSM Solutions is a portfolio of practical digital services and productized systems designed to help businesses improve operations, present their brand better, and reduce repetitive manual work.
+            </p>
+            <p class="text-slate-400 text-base leading-relaxed mb-6">
+              I work with business websites, automation solutions, client-facing systems, operational flows and custom digital tools. Some solutions are delivered as custom services, while others are structured as reusable AlanSM products.
+            </p>
+            <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg font-semibold transition-colors">Talk About Your Project</button>
+          </div>
+          <div class="about-panel p-6 md:p-8">
+            <h3 class="text-xl font-bold text-slate-100 mb-5">What I can support</h3>
+            <div class="grid sm:grid-cols-2 gap-4 text-sm text-slate-300">
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                <p class="font-semibold text-slate-100 mb-1">Business websites</p>
+                <p>Professional websites, landing pages and client journeys.</p>
+              </div>
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                <p class="font-semibold text-slate-100 mb-1">Automation solutions</p>
+                <p>Lead handling, follow-up flows, forms, notifications and reports.</p>
+              </div>
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                <p class="font-semibold text-slate-100 mb-1">Ordering & booking systems</p>
+                <p>Client-facing systems for appointments, orders and intake flows.</p>
+              </div>
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                <p class="font-semibold text-slate-100 mb-1">Operational consulting</p>
+                <p>Scope review, system planning, implementation direction and support.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-16 bg-slate-900 border-b border-slate-800">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+          <p class="section-title-ib mb-3">The Team</p>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-100 mb-4">Meet Our Experts</h2>
+          <p class="text-slate-400 max-w-3xl mx-auto">Dedicated professionals committed to your business success</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="team-member text-center">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt="Alan da Silva Morais" class="team-photo" loading="lazy" />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-slate-100 mb-1">Alan da Silva Morais</h3>
+              <p class="text-blue-400 mb-3">Founder & Automation Specialist</p>
+              <p class="text-slate-400 text-sm">10+ years in digital transformation and business automation. Former SAP consultant with expertise in operational workflows.</p>
+            </div>
+          </div>
+          
+          <div class="team-member text-center">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1376&q=80" alt="Marketing Specialist" class="team-photo" loading="lazy" />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-slate-100 mb-1">Joanna Filek</h3>
+              <p class="text-blue-400 mb-3">Marketing & UX Director</p>
+              <p class="text-slate-400 text-sm">Digital marketing expert with focus on user experience design. Specializes in conversion optimization and brand strategy.</p>
+            </div>
+          </div>
+          
+          <div class="team-member text-center">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80" alt="Technical Lead" class="team-photo" loading="lazy" />
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-slate-100 mb-1">Technical Partner</h3>
+              <p class="text-blue-400 mb-3">Development Lead</p>
+              <p class="text-slate-400 text-sm">Full-stack developer with expertise in scalable systems. Handles complex integrations and technical architecture.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="solutions" class="py-16 bg-slate-900 border-b border-slate-800 scroll-mt-28">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <p class="section-title-ib mb-3">Our solutions</p>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-100 mb-4">Business systems & digital services</h2>
+          <p class="text-slate-400 text-base leading-relaxed">
+            A broader portfolio of automation, ERP-oriented workflows, CRM/Salesforce add-ons, and digital business systems — organized under AlanSM Solutions as a clear business-solutions portfolio. ERP-style workflows can be delivered as operational system projects, while CRM/Salesforce add-ons may be supported through SOUBLOX when they fit the project scope.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <article class="solution-box p-6 text-center">
+            <!-- Replaced emoji with SVG icon -->
+            <div class="solution-icon-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-100 mb-2">Business Websites</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Professional websites, landing pages and client-facing pages for local businesses and service providers.</p>
+          </article>
+
+          <article class="solution-box p-6 text-center">
+            <!-- Replaced emoji with SVG icon -->
+            <div class="solution-icon-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-100 mb-2">Private Booking System</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">A private booking system for salons, clinics, beauty professionals, therapists, consultants and local service businesses.</p>
+          </article>
+
+          <article class="solution-box p-6 text-center">
+            <!-- Replaced emoji with SVG icon -->
+            <div class="solution-icon-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-100 mb-2">DeliveryHub</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">A direct ordering and delivery coordination system for restaurants and delivery-focused businesses.</p>
+          </article>
+
+          <article class="solution-box p-6 text-center">
+            <!-- Replaced emoji with SVG icon -->
+            <div class="solution-icon-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-100 mb-2">Restaurant Systems</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Online ordering flows, menus, order status, driver assignment and customer control for food businesses.</p>
+          </article>
+
+          <article class="solution-box p-6 text-center">
+            <!-- Replaced emoji with SVG icon -->
+            <div class="solution-icon-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-100 mb-2">Service Order System</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Order and service tracking for tech shops, workshops, repair services and operational follow-up.</p>
+          </article>
+
+          <article class="solution-box p-6 text-center">
+            <!-- Replaced emoji with SVG icon -->
+            <div class="solution-icon-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-100 mb-2">NF-e / Document Flow</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Support for invoice-related flows, document organization, client records and business process control.</p>
+          </article>
+
+          <article class="solution-box p-6 text-center">
+            <!-- Replaced emoji with SVG icon -->
+            <div class="solution-icon-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-100 mb-2">ERP-Oriented Workflows</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Retail, stock, reporting and business workflow support for companies that need stronger operational structure.</p>
+          </article>
+
+          <article class="solution-box p-6 text-center">
+            <!-- Replaced emoji with SVG icon -->
+            <div class="solution-icon-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-100 mb-2">Automation Solutions</h3>
+            <p class="text-sm text-slate-400 leading-relaxed">Repetitive task reduction, lead handling, reports, reminders, follow-ups and internal process improvement.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 bg-slate-955 border-b border-slate-800">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
+          <div>
+            <p class="section-title-ib mb-3">Capabilities</p>
+            <h2 class="text-3xl font-bold text-slate-100 mb-4">Examples of what can be included</h2>
+            <p class="text-slate-400 leading-relaxed mb-5">
+              Depending on the project, AlanSM Solutions can support systems that involve operational records, stock visibility, service orders, client communication, lead capture, dashboards and reporting logic.
+            </p>
+            <ul class="space-y-3 text-slate-300 text-base">
+              <li>✅ Financial and operational records</li>
+              <li>✅ Client intake and follow-up</li>
+              <li>✅ Booking or order request flows</li>
+              <li>✅ Reporting and visibility dashboards</li>
+              <li>✅ Inventory / service control logic</li>
+              <li>✅ Lead forms, contact flows and notifications</li>
+            </ul>
+          </div>
+          <div class="about-panel p-6 md:p-8">
+            <h3 class="text-xl font-bold text-slate-100 mb-4">Productized directions</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                <p class="font-semibold text-slate-100 mb-1">For service businesses</p>
+                <p class="text-sm text-slate-400">Booking flows, service pages, intake, contact forms and offer presentation.</p>
+              </div>
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                <p class="font-semibold text-slate-100 mb-1">For restaurants</p>
+                <p class="text-sm text-slate-400">Direct ordering, DeliveryHub, restaurant operations and local delivery coordination.</p>
+              </div>
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                <p class="font-semibold text-slate-100 mb-1">For internal operations</p>
+                <p class="text-sm text-slate-400">Reports, forms, records, process organization and automation opportunities.</p>
+              </div>
+              <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+                <p class="font-semibold text-slate-100 mb-1">For new ideas</p>
+                <p class="text-sm text-slate-400">Lean prototypes and small business systems before scaling into larger solutions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services-pricing" class="py-16 bg-slate-950 border-t border-slate-800 scroll-mt-28">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-12 text-center max-w-3xl mx-auto">
+          <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-3">Productized Solutions</h2>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-100">Product Options & Business Packages</h2>
+          <p class="text-slate-400 text-sm md:text-base leading-relaxed">These productized options sit inside the broader AlanSM portfolio. Custom automation, consulting and website projects are scoped separately after a short review.</p>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-8 shadow-sm mb-12 grid lg:grid-cols-[1fr_20rem] gap-8 product-card-grid relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-green-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-bl-lg z-10">Small Business Pilot • limited onboarding projects</div>
+          <div class="product-copy">
+            <h3 class="text-xl md:text-2xl font-bold mb-3 text-slate-100">Private Booking System</h3>
+            <p class="text-slate-400 mb-5 text-sm md:text-base leading-relaxed">A private booking system for service businesses that want direct reservations, client control and a branded booking experience without sending customers to public marketplaces.</p>
+            <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 mb-6">
+              <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>One-page responsive website</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Booking system integration</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Contact form</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Google Maps integration</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Basic SEO setup</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Existing domain connection</li>
+              <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Launch support</li>
+            </ul>
+            <p class="text-xs text-slate-500 leading-relaxed">Pilot onboarding pricing is available for selected first projects. Setup is discussed after scope review, while monthly care follows the Polish ranges below. Domain renewal, paid booking tools, business email and third-party subscriptions are billed separately.</p>
+
+            <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 mt-5 shadow-sm">
+              <p class="text-xs uppercase tracking-[0.2em] text-green-500 font-bold mb-2">Why private booking?</p>
+              <ul class="text-xs text-slate-400 space-y-2">
+                <li>• No commission per booking</li>
+                <li>• Clients stay inside your brand experience</li>
+                <li>• No competitor suggestions during booking</li>
+                <li>• Predictable monthly care from <span data-eur-price="15">60 PLN</span> / mo</li>
+              </ul>
+            </div>
+          </div>
+          <div class="product-price price-panel rounded-lg p-6 text-left">
+            <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Monthly care from</p>
+            <!-- Pricing Highlight -->
+            <div class="mb-1 text-3xl price-value pricing-highlight" id="dynamicPriceDisplay"><span data-eur-price="15">60 PLN</span> / mo</div>
+            <p class="text-xs text-green-400 font-semibold mb-4">Setup discussed after scope review</p>
+
+            <div class="pilot-highlight border rounded-lg p-3 mb-4">
+              <p class="text-[10px] uppercase tracking-wider text-green-400 font-bold mb-1">Pilot availability</p>
+              <p id="discountCounterText" class="text-xs text-slate-300">Checking availability...</p>
+            </div>
+
+            <div class="space-y-3 mb-4">
+              <label class="block">
+                <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Business category</span>
+                <select id="bookingCategorySelect" onchange="updateBookingPilotPrice()" class="w-full bg-slate-950 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-blue-600">
+                  <option value="solo">Solo / Micro Business</option>
+                  <option value="small">Small Team, 2–10 employees</option>
+                  <option value="medium">Medium Salon / Multi-service team</option>
+                </select>
+              </label>
+
+              <label class="block">
+                <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Care plan</span>
+                <select id="bookingPlanSelect" onchange="updateBookingPilotPrice()" class="w-full bg-slate-950 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-blue-600">
+                  <option value="3">3 months</option>
+                  <option value="6">6 months</option>
+                  <option value="12">12 months — savings</option>
+                  <option value="24" selected>24 months — best saving</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 mb-4">
+              <p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Estimated monthly care</p>
+              <div id="bookingMonthlyPrice" class="text-2xl price-value"><span data-eur-price="15">60 PLN</span> / mo</div>
+              <p id="bookingSavingsText" class="text-xs text-slate-400 mt-1">Starting monthly care for solo/micro businesses</p>
+            </div>
+
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Monthly care starts from <strong class="text-slate-100" data-eur-price="15">60 PLN</strong> for solo/micro businesses. Pilot setup is discussed after scope review.
+            </p>
+
+            <button type="button" onclick="openContactForm('light_booking', 'custom_quote')" class="w-full bg-slate-800 border border-blue-700 hover:bg-blue-700 text-slate-100 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Request Consultation</button>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-sm md:p-8 mb-12 shadow-sm">
+          <div class="text-center max-w-3xl mx-auto mb-8">
+            <p class="text-xs uppercase tracking-[0.2em] text-green-500 font-bold mb-3">Core local features included</p>
+            <h3 class="text-2xl md:text-3xl font-bold text-slate-100 mb-3">A Private Alternative to Marketplace Booking</h3>
+            <p class="text-slate-400 text-sm md:text-base leading-relaxed">
+              A clear, solution-focused booking model for small businesses that want their own booking experience, predictable costs and more control over the client journey.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-5">
+            <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
+              <div class="text-2xl mb-3" aria-hidden="true">💳</div>
+              <h4 class="text-base font-bold text-slate-100 mb-2">No Booking Commissions</h4>
+              <p class="text-sm text-slate-400 leading-relaxed">You pay a predictable setup or monthly care fee, regardless of how many appointments your clients book through your own website.</p>
+            </article>
+
+            <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
+              <div class="text-2xl mb-3" aria-hidden="true">🤝</div>
+              <h4 class="text-base font-bold text-slate-100 mb-2">Your Clients Stay Yours</h4>
+              <p class="text-sm text-slate-400 leading-relaxed">Clients are not shown competing businesses during the booking journey. The experience stays focused on your brand, services and availability.</p>
+            </article>
+
+            <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
+              <div class="text-2xl mb-3" aria-hidden="true">📲</div>
+              <h4 class="text-base font-bold text-slate-100 mb-2">Direct Booking Flow</h4>
+              <p class="text-sm text-slate-400 leading-relaxed">Clients can book from your website, Instagram link, Google profile or direct message flow without being pushed into a public marketplace.</p>
+            </article>
+
+            <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
+              <div class="text-2xl mb-3" aria-hidden="true">🌍</div>
+              <h4 class="text-base font-bold text-slate-100 mb-2">Local Payment Ready</h4>
+              <p class="text-sm text-slate-400 leading-relaxed">When needed, the system can be prepared for regional European payment providers or external payment links, depending on project scope.</p>
+            </article>
+
+            <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
+              <div class="text-2xl mb-3" aria-hidden="true">📉</div>
+              <h4 class="text-base font-bold text-slate-100 mb-2">Predictable Long-Term Cost</h4>
+              <p class="text-sm text-slate-400 leading-relaxed">For many small businesses, private booking with monthly care can be easier to plan than recurring platform fees that grow with team size.</p>
+            </article>
+
+            <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
+              <div class="text-2xl mb-3" aria-hidden="true">🧾</div>
+              <h4 class="text-base font-bold text-slate-100 mb-2">Invoices Available</h4>
+              <p class="text-sm text-slate-400 leading-relaxed">Invoices can be issued according to the agreed project scope, billing model and applicable tax setup.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-sm md:p-8 mb-12 shadow-sm">
+          <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
+            <div>
+              <p class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-3">Structural cost optimization</p>
+              <h3 class="text-2xl md:text-3xl font-bold text-slate-100 mb-3">Lower Monthly Cost Without Losing the Private System</h3>
+              <p class="text-slate-400 text-sm leading-relaxed mb-5">
+                For selected pilot clients, longer commitments can reduce the average monthly cost through bonus months or lower care-plan pricing, while keeping the booking experience private and brand-focused.
+              </p>
+
+              <div class="space-y-4">
+                <div class="border border-slate-800 rounded-lg p-4 bg-slate-900">
+                  <h4 class="font-bold text-slate-100 text-sm mb-1">Long-Term Subscriptions</h4>
+                  <p class="text-xs text-slate-400 leading-relaxed">A 12-month care option can reduce the average monthly cost through a lower monthly rate or bonus month structure. A 24-month option can reduce it further for businesses that want predictable long-term technical care. Exact savings are confirmed in the signed order form.</p>
+                </div>
+                <div class="border border-slate-800 rounded-lg p-4 bg-slate-900">
+                  <h4 class="font-bold text-slate-100 text-sm mb-1">Tax Status</h4>
+                  <p class="text-xs text-slate-400 leading-relaxed">Invoices are issued according to the agreed project scope, billing model and applicable tax setup. Tax details are confirmed before signing the order form.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+              <h4 class="text-lg font-bold text-slate-100 mb-2">Estimated Monthly Care for Poland / Europe</h4>
+              <p class="text-xs text-slate-500 leading-relaxed mb-4">Indicative monthly ranges for pilot clients. Final pricing depends on scope, number of locations, number of employees, integrations and support level.</p>
+
+              <div class="overflow-hidden border border-slate-800 rounded-lg">
+                <table class="w-full text-left text-sm">
+                  <thead class="bg-slate-950 text-slate-500 text-xs uppercase tracking-wider">
+                    <tr>
+                      <th class="px-4 py-3 font-bold">Business Type</th>
+                      <th class="px-4 py-3 font-bold">Estimated Monthly Range</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-800 text-slate-300 bg-slate-950">
+                    <tr>
+                      <td class="px-4 py-4 font-semibold text-slate-100">Solo operators / micro businesses</td>
+                      <td class="px-4 py-4"><span data-eur-range="15,20">60–80 PLN</span> / month</td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-4 font-semibold text-slate-100">Small teams, 2–10 employees</td>
+                      <td class="px-4 py-4"><span data-eur-range="30,35">120–150 PLN</span> / month</td>
+                    </tr>
+                    <tr>
+                      <td class="px-4 py-4 font-semibold text-slate-100">Medium salons / multi-service teams</td>
+                      <td class="px-4 py-4">170–260 PLN / month</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <button type="button" onclick="openContactForm('light_booking', 'custom_quote')" class="mt-5 w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors focus:outline-none">Request Consultation</button>
+            </div>
+          </div>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-8 shadow-sm mb-12 grid lg:grid-cols-[1fr_20rem] gap-8 product-card-grid relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-bl-lg z-10">Operational Platform • Restaurant & Delivery</div>
+          <div class="product-copy">
+            <h3 class="text-xl md:text-2xl font-bold mb-3 text-slate-100">DeliveryHub for Restaurants</h3>
+            <p class="text-slate-400 mb-5 text-sm md:text-base leading-relaxed">A lightweight operational platform for restaurants that need direct online orders, kitchen status control, and local delivery driver coordination without marketplace commission dependency.</p>
+            <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 mb-6">
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Personalized ordering page</li>
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Digital menu and cart</li>
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Restaurant order dashboard</li>
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Delivery driver dashboard</li>
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Order and delivery status flow</li>
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Regional driver assignment</li>
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Records and reports</li>
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Pilot onboarding support</li>
+            </ul>
+            <p class="text-xs text-slate-500 leading-relaxed">Third-party payment tools, paid messaging services, custom domains and external delivery costs are billed separately.</p>
+          </div>
+          <div class="lg:w-72 bg-slate-950 border border-slate-800 rounded-lg p-6 text-center shrink-0">
+            <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Pilot setup</p>
+            <div class="mb-2 text-2xl font-bold text-blue-500">To be discussed</div>
+            <p class="text-xs text-blue-500 font-medium mb-4">Monthly pilot: <br><span data-eur-range="70,115" class="font-bold text-sm">300–500 PLN</span> / mo</p>
+            <p class="text-xs text-slate-400 mb-4">Built for restaurants that want more direct orders and better operational control.</p>
+            <button type="button" onclick="openContactForm('deliveryhub', 'custom_quote')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Request DeliveryHub Demo</button>
+          </div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm md:p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+          <div class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-br-lg z-10">Automation Setup</div>
+          <div class="pt-4 md:pt-0">
+            <h3 class="text-xl font-bold mb-2 text-slate-100">Phase 1: Automation Architecture & Implementation</h3>
+            <p class="text-slate-400 text-sm max-w-xl">Multi-page web structure, advanced forms, lead capture, CRM/Salesforce/ERP implementation support, integration planning, and workflow testing. For full ERP projects, implementation can be delivered together with specialized ERP partners.</p>
+          </div>
+          <div class="text-left md:text-right shrink-0">
+            <p class="text-xs uppercase text-slate-500 font-bold mb-1">Starting at</p>
+            <div data-price-display="390" class="text-2xl font-bold text-blue-500">1,690 PLN</div>
+          </div>
+        </div>
+
+        <h3 class="text-xl font-bold mb-6 text-center text-slate-100">Phase 2: Automation Tech Ops & Monthly Support</h3>
+        <div class="grid lg:grid-cols-3 gap-6 items-stretch">
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm flex flex-col hover:border-slate-700 transition-colors">
+            <h3 class="text-lg font-bold mb-1 text-slate-200">3-Month Care</h3>
+            <p class="text-slate-400 text-xs mb-6 h-8">Short-term support to stabilize pages, forms, automations, and integrations after launch.</p>
+            <div class="mb-6 pb-6 border-b border-slate-800">
+              <span class="text-2xl font-bold text-slate-100">Custom quote</span>
+              <p class="text-xs text-slate-500 mt-1">Confirmed after scope review</p>
+            </div>
+            <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
+              <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Website / platform publishing support</li>
+              <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Small content and page updates</li>
+              <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Form and automation maintenance</li>
+              <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Integration checks</li>
+            </ul>
+            <button type="button" onclick="openContactForm('three_month', 'custom_quote')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discuss Scope</button>
+          </div>
+          <div class="bg-slate-950 border-2 border-blue-600 rounded-xl p-6 shadow-sm flex flex-col relative order-first lg:order-none">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded">Recommended</div>
+            <h3 class="text-lg font-bold mb-1 text-slate-200 mt-2">12-Month Care</h3>
+            <p class="text-slate-400 text-xs mb-6 h-8">Long-term support for ongoing workflow improvements, reporting, and integration maintenance.</p>
+            <div class="mb-6 pb-6 border-b border-slate-800">
+              <span class="text-2xl font-bold text-slate-100">Custom quote</span>
+              <p class="text-xs text-slate-500 mt-1">Best for stable monthly support</p>
+            </div>
+            <ul class="text-slate-300 space-y-3 mb-8 flex-grow text-sm">
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Website / platform publishing support</li>
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Monthly content and page updates</li>
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Form and automation maintenance</li>
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Integration monitoring</li>
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Basic analytics and reports</li>
+              <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Workflow improvement planning</li>
+            </ul>
+            <button type="button" onclick="openContactForm('twelve_month', 'custom_quote')" class="w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discuss Monthly Care</button>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm flex flex-col hover:border-slate-700 transition-colors">
+            <h3 class="text-lg font-bold mb-1 text-slate-200">6-Month Care</h3>
+            <p class="text-slate-400 text-xs mb-6 h-8">A balanced period for optimization, monitoring, and gradual automation improvements.</p>
+            <div class="mb-6 pb-6 border-b border-slate-800">
+              <span class="text-2xl font-bold text-slate-100">Custom quote</span>
+              <p class="text-xs text-slate-500 mt-1">Confirmed after scope review</p>
+            </div>
+            <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
+              <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Website / platform publishing support</li>
+              <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Monthly content and page updates</li>
+              <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Form and automation maintenance</li>
+              <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Integration checks</li>
+              <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Basic analytics and reports</li>
+            </ul>
+            <button type="button" onclick="openContactForm('six_month', 'custom_quote')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discuss Scope</button>
+          </div>
+        </div>
+
+        <div class="mt-10 bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm md:p-8">
+          <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+            <div>
+              <h3 class="text-xl font-bold text-slate-100 mb-2">Pricing Summary</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">Clear starting points for planning. Final pricing is confirmed after a short project review and written scope confirmation.</p>
+            </div>
+            <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors focus:outline-none">Discuss My Project</button>
+          </div>
+
+          <div class="overflow-x-auto border border-slate-800 rounded-lg">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-slate-950 text-slate-400 text-xs uppercase tracking-wider">
+                <tr>
+                  <th class="px-4 py-3 font-bold">Service</th>
+                  <th class="px-4 py-3 font-bold">Setup / Project</th>
+                  <th class="px-4 py-3 font-bold">Monthly</th>
+                  <th class="px-4 py-3 font-bold">Best For</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800 text-slate-300">
+                <tr>
+                  <td class="px-4 py-4 font-semibold text-slate-100">Private Booking System</td>
+                  <td class="px-4 py-4">Setup<br><span class="text-green-400 font-semibold">To be discussed</span></td>
+                  <td class="px-4 py-4">
+                    Monthly care from<br>
+                    <span class="text-slate-100 font-semibold" data-eur-price="15">60 PLN</span> / mo<br>
+                    <span class="text-xs text-slate-500">
+                      Solo: <span data-eur-range="15,20">60–80 PLN</span> •
+                      Small team: <span data-eur-range="28,35">120–150 PLN</span> •
+                      Medium: <span data-eur-range="40,60">170–260 PLN</span>
+                    </span>
+                  </td>
+                  <td class="px-4 py-4 text-slate-400">Small businesses needing direct bookings, client forms and a branded private reservation flow.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-4 font-semibold text-slate-100">DeliveryHub for Restaurants</td>
+                  <td class="px-4 py-4">To be discussed</td>
+                  <td class="px-4 py-4">From <span data-eur-price="70">300 PLN</span> / mo</td>
+                  <td class="px-4 py-4 text-slate-400">Restaurants wanting direct orders, table reservations, dashboard and delivery control.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-4 font-semibold text-slate-100">Automation Architecture & Implementation</td>
+                  <td class="px-4 py-4">Starting at <span data-price-display="390">1,690 PLN</span></td>
+                  <td class="px-4 py-4">Optional support contract</td>
+                  <td class="px-4 py-4 text-slate-400">Advanced forms, CRM/Salesforce/ERP support and workflow automation.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-4 font-semibold text-slate-100">Tech Ops Monthly Support</td>
+                  <td class="px-4 py-4">After launch</td>
+                  <td class="px-4 py-4">Custom monthly care<br><span class="text-xs text-slate-500">Confirmed after scope review</span></td>
+                  <td class="px-4 py-4 text-slate-400">Monthly updates, monitoring, small improvements and technical care.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="text-xs text-slate-500 leading-relaxed mt-4">Domains, hosting, business email, paid booking tools, payment providers, CRM licenses, paid messaging tools and third-party subscriptions are billed separately unless explicitly included in the signed Order Form.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-14 bg-slate-950 border-b border-slate-800">
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div>
+          <h2 class="text-3xl font-bold mb-8 text-slate-100">How I Work</h2>
+          <div class="space-y-4">
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
+              <h3 class="font-semibold text-lg mb-1 text-blue-500">Private by Design</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">The solution is designed around your actual business process, not around unnecessary tools or generic templates.</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
+              <h3 class="font-semibold text-lg mb-1 text-blue-500">Simple for Clients</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">The client journey is kept simple: understand the offer, take action, submit a request, book, order or contact you.</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
+              <h3 class="font-semibold text-lg mb-1 text-blue-500">Supported After Launch</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">After launch, the system can continue evolving through monthly care, improvements and practical operational support.</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2 class="text-3xl font-bold mb-8 text-slate-100">Built with Operational Experience</h2>
+          <div class="space-y-6 border-l-2 border-slate-800 pl-6 ml-2">
+            <div class="relative">
+              <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
+              <h3 class="text-lg font-semibold text-slate-200">Client flow + business logic</h3>
+              <p class="text-slate-400 text-sm font-medium mt-0.5">Pages, forms, booking flows, dashboards and follow-up processes designed around how the business actually works.</p>
+            </div>
+            <div class="relative">
+              <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
+              <h3 class="text-lg font-semibold text-slate-200">Automation background</h3>
+              <p class="text-slate-400 text-sm font-medium mt-0.5">Forms, reports, client follow-up, automation planning and operational workflows.</p>
+            </div>
+            <div class="relative">
+              <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
+              <h3 class="text-lg font-semibold text-slate-200">Enterprise credibility</h3>
+              <p class="text-slate-400 text-sm font-medium mt-0.5">Experience with global operational environments, SAP, Salesforce, data quality and customer support processes.</p>
+            </div>
+            <div class="relative">
+              <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
+              <h3 class="text-lg font-semibold text-slate-200">Local + remote delivery</h3>
+              <p class="text-slate-400 text-sm font-medium mt-0.5">Based in Kraków and available for clients in Poland and internationally.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-14 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-blue-600/5 blur-[100px] rounded-full pointer-events-none"></div>
+      <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+        <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-6">My Approach</h2>
+        <div class="mb-6 text-slate-400" aria-hidden="true"><svg class="w-10 h-10 mx-auto" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg></div>
+        <blockquote class="text-xl md:text-2xl text-slate-200 font-medium leading-relaxed mb-6">"I put myself in the position of someone discovering a business for the first time: what attracts attention, builds trust, feels clear, and makes the experience easier?"</blockquote>
+        <p class="text-base text-slate-400 max-w-3xl mx-auto leading-relaxed">I look at both user experience and the larger operational picture, focusing on improvements that strengthen customer relationships and support sustainable growth.</p>
+      </div>
+    </section>
+
+    <section class="py-12 border-b border-slate-800 bg-slate-950">
+      <div class="max-w-7xl mx-auto px-6 text-center">
+        <h2 class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-8">Official Technology Partners</h2>
+        <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+          <div class="opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6syXayD8owdcx7OzrKSuL1pP6O5mcWI6-5XToySshE-Ud4QKq3FMnVBvu&s=10" alt="Soublox Partner" width="160" height="50" loading="lazy" class="h-8 md:h-10 object-contain" /></div>
+          <div class="opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300"><img src="https://alansmsolutions.com/images/ibcomplogo.enc" alt="IBComp Partner" width="160" height="50" loading="lazy" class="h-8 md:h-10 object-contain" /></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-14 bg-slate-950 border-b border-slate-800">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row gap-8 bg-slate-900 border border-slate-800 rounded-xl p-8 shadow-sm items-center">
+          <div class="w-1 h-full bg-blue-600 hidden md:block rounded"></div>
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-3">
+              <span class="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-2 rounded">Enterprise Add-on</span>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-bold mb-2 text-slate-100">Salesforce & CRM Automation</h2>
+            <p class="text-slate-400 text-sm md:text-base leading-relaxed mb-4 max-w-2xl">Advanced data architecture, native Salesforce automation, document generation, and intelligent WhatsApp integration for complex operations.</p>
+            <div class="flex items-center gap-2 mt-4 text-slate-300">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              <span class="text-sm font-semibold">Custom Quote Based on Operational Scope</span>
+            </div>
+          </div>
+          <div class="w-full md:w-auto mt-4 md:mt-0 shrink-0">
+            <button type="button" onclick="openContactForm('enterprise_crm', 'custom_quote')" class="w-full bg-slate-800 hover:bg-slate-200 text-white border border-slate-700 font-medium py-3 px-6 rounded-lg transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400">Discuss Architecture</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    
+
+    <section id="faq" class="py-16 bg-slate-900 border-b border-slate-800">
+      <div class="max-w-3xl mx-auto px-6">
+        <div class="mb-10 text-center"><h2 class="text-2xl font-bold mb-2 text-slate-100">Frequently Asked Questions</h2><p class="text-slate-400 text-sm">Common questions about web platforms, automation, and operational consulting.</p></div>
+        <div class="space-y-3">
+          <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">What does an automation consultant do?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">I identify repetitive or disconnected processes, map the required information flow, and build practical systems that reduce manual work and improve consistency.</div></details>
+          <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">Do you build websites with integrated forms and booking flows?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Yes. I build professional client-facing platforms with lead capture, contact forms, workflow automation, and booking integrations when they fit the business process.</div></details>
+          <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">Do you provide services in Kraków or worldwide?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Both. I am based in Kraków and work remotely with clients in Poland and internationally in English, Portuguese, and Polish.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-12 bg-slate-950 border-b border-slate-800">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="max-w-3xl">
+          <h2 class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-4">Featured Partner Project</h2>
+          <div class="flex items-center gap-4 mb-4">
+            <img src="https://joannafilek.com/images/logo.png" class="w-10 h-10 object-contain grayscale opacity-80" alt="Joanna Filek logo" loading="lazy" />
+            <h2 class="text-xl font-bold text-slate-200">Joanna Filek</h2>
+          </div>
+          <p class="text-slate-400 text-xs leading-relaxed mb-4">A collaborative web-development and UX project designed to elevate professional brand presence and streamline client interaction.</p>
+          <a href="https://joannafilek.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-blue-500 hover:text-blue-400 transition-colors">Visit Project →</a>
+        </div>
+      </div>
+    </section>
+
+    
+<section class="py-16 bg-slate-900 border-b border-slate-800">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="bg-blue-600 rounded-2xl p-8 md:p-10 text-center text-white shadow-sm">
+      <p class="section-title-ib !text-blue-100 mb-3">Contact</p>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Request a consultation</h2>
+      <p class="max-w-3xl mx-auto text-blue-50 leading-relaxed mb-8">
+        If your business needs a better website, booking flow, ordering system, service system or practical automation, let's review the idea together and define the best direction.
+      </p>
+      <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="bg-slate-950 text-blue-400 hover:bg-slate-800 px-6 py-3 rounded-lg font-semibold transition-colors">
+        Send a Message
+      </button>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <footer class="py-8 bg-slate-950 border-t border-slate-800 text-center text-xs">
+    <div class="flex justify-center items-center gap-5 mb-4 text-slate-400">
+      <a href="https://www.instagram.com/alansmsolutions/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors" aria-label="AlanSM Solutions Instagram">
+        <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path></svg>
+      </a>
+      <a href="https://www.instagram.com/alanmoraissss/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Alan Personal Instagram">
+        <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path></svg>
+      </a>
+      <a href="https://www.facebook.com/alankmorais" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Alan Facebook">
+        <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path></svg>
+      </a>
+      <!-- GitHub Icon -->
+      <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors" aria-label="GitHub Profile">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <!-- LinkedIn Icon -->
+      <a href="https://www.linkedin.com/in/alandasm/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors" aria-label="LinkedIn Profile">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+        </svg>
+      </a>
+    </div>
+    <p class="text-slate-500">© 2026 AlanSM Solutions. All rights reserved. • Portfolio, Automation & Digital Business Systems</p>
+    <div class="mt-3 flex flex-wrap justify-center gap-3 text-[10px]">
+      <button type="button" onclick="openLegalModal('termsModal')" class="text-slate-400 hover:text-blue-400 transition-colors">Terms of Service</button>
+      <span class="text-slate-200">|</span>
+      <button type="button" onclick="openLegalModal('privacyModal')" class="text-slate-400 hover:text-blue-400 transition-colors">Privacy Notice</button>
+    </div>
+  </footer>
+
+  <div id="offerBanner" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-sm z-[55] hidden opacity-0 translate-y-4 transition-all duration-300 bg-slate-900 border border-slate-700 rounded-xl p-5 shadow-xl" role="region" aria-label="Limited onboarding offer">
+    <div class="flex items-start gap-3">
+      <div class="flex-1">
+        <p class="text-xs font-bold uppercase tracking-wider text-blue-500">Limited offer</p>
+        <p class="text-xs text-slate-300 mt-2 leading-relaxed">Reduced setup pricing is available for selected new consulting projects.</p>
+        <button type="button" onclick="claimOffer()" class="mt-3 bg-slate-800 hover:bg-slate-200 border border-slate-700 text-white text-[10px] font-semibold px-4 py-2 rounded transition-colors w-full focus:outline-none">Discuss Your Project</button>
+      </div>
+      <button type="button" onclick="closeOfferBanner()" aria-label="Close offer banner" class="text-slate-500 hover:text-slate-100 text-lg leading-none focus:outline-none p-1">&times;</button>
+    </div>
+  </div>
+
+  <div id="contactModal" class="fixed inset-0 modal-backdrop hidden z-[70] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" aria-hidden="true">
+    <div class="bg-slate-950 border border-slate-800 rounded-xl w-full max-w-md shadow-2xl flex flex-col overflow-hidden" role="document">
+      <div class="flex justify-between items-center px-5 py-3 border-b border-slate-800 bg-slate-900">
+        <h2 id="contactModalTitle" class="text-sm font-bold text-slate-100">Send a Message</h2>
+        <button type="button" onclick="closeContactForm()" aria-label="Close contact form" class="text-slate-500 hover:text-slate-100 text-xl leading-none transition-colors focus:outline-none">&times;</button>
+      </div>
+      <div class="p-5">
+        <form action="#" method="POST" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-3">
+          <input type="hidden" name="_subject" id="formSubject" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
+          <!-- UTM Parameters -->
+          <input type="hidden" name="utm_source" id="utmSource" />
+          <input type="hidden" name="utm_medium" id="utmMedium" />
+          <input type="hidden" name="utm_campaign" id="utmCampaign" />
+          <input type="hidden" name="utm_term" id="utmTerm" />
+          <input type="hidden" name="utm_content" id="utmContent" />
+          
+          <div>
+            <label for="formName" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Name</label>
+            <input id="formName" type="text" name="name" autocomplete="name" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
+          </div>
+          <div>
+            <label for="formEmail" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Email</label>
+            <input id="formEmail" type="email" name="email" autocomplete="email" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
+          </div>
+          <div>
+            <label for="formPhone" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Phone / WhatsApp</label>
+            <input id="formPhone" type="text" name="phone" autocomplete="tel" class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
+          </div>
+          <div>
+            <label for="formMsg" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Message Details</label>
+            <textarea id="formMsg" name="message" rows="3" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors resize-none"></textarea>
+          </div>
+          <label class="flex items-start gap-2 text-[10px] text-slate-500 mt-1">
+            <input id="formConsent" type="checkbox" name="consent" required class="mt-0.5 accent-blue-600" />
+            <span>I agree that my details may be used to respond to my inquiry and manage project communication.</span>
+          </label>
+          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-medium py-2 rounded-md transition-colors mt-2 text-xs focus:outline-none">Send Message</button>
+          <p class="text-[9px] text-slate-400 text-center mt-1">Your details will only be used to respond to your inquiry.</p>
+          <p id="formStatus" class="text-[10px] text-center min-h-[16px]"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="termsModal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm px-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+      <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 flex items-start justify-between gap-4">
+        <div>
+          <h2 class="text-lg font-bold text-slate-100">Terms of Service</h2>
+          <p class="text-[10px] text-slate-500 mt-0.5">Last updated: June 2026</p>
+        </div>
+        <button type="button" onclick="closeLegalModal('termsModal')" class="text-slate-500 hover:text-slate-100 text-xl leading-none" aria-label="Close">&times;</button>
+      </div>
+      <div class="p-5 space-y-4 text-xs text-slate-400 leading-relaxed">
+        <p>These terms explain how AlanSM Solutions provides website, booking, automation, CRM and business systems services.</p>
+        <section><h3 class="font-bold text-slate-200 mb-1">1. Services</h3><p>Services may include website design, booking flows, CRM setup, workflow automation, consulting, training, integrations and related support. The exact scope is confirmed in the Order Form or written project agreement.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">2. Quotes, prices and discounts</h3><p>Prices shown on the website are starting prices or package prices unless stated otherwise. Final pricing depends on the reviewed scope. Launch discounts are only confirmed after scope review and signed agreement, while discount slots remain available.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">3. Client responsibilities</h3><p>The client is responsible for providing accurate information, text, images, account access, brand assets, approvals and timely feedback needed to complete the project.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">4. Payments</h3><p>Payment terms are confirmed in the Order Form. Work may pause if required payments, information or approvals are delayed.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">5. Third-party tools</h3><p>Projects may use third-party platforms such as hosting providers, booking tools, Google services, CRM systems, email tools or automation platforms. The client is responsible for third-party subscriptions, accounts and platform rules unless agreed otherwise.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">6. Revisions and scope changes</h3><p>Reasonable revisions are included only within the agreed scope. Extra features, additional pages, new integrations or major changes may require a separate quote.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">7. No guarantee of business results</h3><p>AlanSM Solutions aims to deliver professional systems and practical improvements, but does not guarantee sales, leads, search rankings, revenue or specific business outcomes.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">8. Limitation of liability</h3><p>To the maximum extent permitted by law, AlanSM Solutions is not responsible for indirect losses, lost profits, platform outages, third-party failures or issues caused by incorrect client information or access changes.</p></section>
+        <p>Questions about these terms can be sent to kontakt@alansmsolutions.com.</p>
+        <p class="text-[10px] text-slate-400 border-t border-slate-800 pt-3">These terms are provided for transparency and may be updated from time to time.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="privacyModal" class="fixed inset-0 z-[70] hidden items-center justify-center bg-slate-950/80 backdrop-blur-sm px-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+      <div class="sticky top-0 bg-slate-900 border-b border-slate-800 p-4 flex items-start justify-between gap-4">
+        <div>
+          <h2 class="text-lg font-bold text-slate-100">Privacy Notice</h2>
+          <p class="text-[10px] text-slate-500 mt-0.5">Last updated: June 2026</p>
+        </div>
+        <button type="button" onclick="closeLegalModal('privacyModal')" class="text-slate-500 hover:text-slate-100 text-xl leading-none" aria-label="Close">&times;</button>
+      </div>
+      <div class="p-5 space-y-4 text-xs text-slate-400 leading-relaxed">
+        <p>This notice explains how AlanSM Solutions collects and uses information submitted through this website and project communication.</p>
+        <section><h3 class="font-bold text-slate-200 mb-1">1. Who collects the data</h3><p>The data controller is AlanSM Solutions / Alan da Silva Morais. Contact: kontakt@alansmsolutions.com.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">2. Data collected</h3><p>The website form may collect your name, email, phone number, business name, business type, selected service, project message and related communication details.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">3. Why the data is used</h3><p>Your data is used to respond to your inquiry, prepare a quote, manage project communication, create project documents, provide services and maintain business records.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">4. Storage and tools</h3><p>Information may be stored in secure project records, Google Drive, Gmail and related business tools used to manage inquiries, contracts and project communication.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">5. Sharing</h3><p>Your information is not sold. It may be shared only when needed to provide the service, comply with legal obligations or use trusted service providers.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">6. Retention</h3><p>Inquiry and project records are kept only as long as needed for business, legal, tax, security and client-support purposes.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">7. Your rights</h3><p>You may request access, correction or deletion of your personal data, subject to legal and business record requirements.</p></section>
+        <section><h3 class="font-bold text-slate-200 mb-1">8. Contact</h3><p>For privacy questions or data requests, contact kontakt@alansmsolutions.com.</p></section>
+        <p class="text-[10px] text-slate-400 border-t border-slate-800 pt-3">These terms are provided for transparency and may be updated from time to time.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ALANSM_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwxzYWgEdGsUqjokKIMroI1xmZYE1LQcj4sd8EIoODbDWA5MIxa0xEb85JTuvAQnVMtXA/exec";
+    const ALANSM_FORM_TOKEN = "alan_admin_2026";
+    window.ALanSMFormStartedAt = Date.now();
+
+    const currentLang = 'en';
+    let currentCurrency = 'PLN';
+    let previouslyFocusedElement = null;
+    let currentPackageInfo = { packageName: '', price: '' };
+
+    const euroRegions = new Set([
+      'AT','BE','HR','CY','EE','FI','FR','DE','GR','IE','IT','LV','LT','LU','MT','NL','PT','SK','SI','ES'
+    ]);
+
+    const euroTimeZones = new Set([
+      'Europe/Vienna','Europe/Brussels','Europe/Zagreb','Asia/Nicosia','Europe/Tallinn','Europe/Helsinki',
+      'Europe/Paris','Europe/Berlin','Europe/Athens','Europe/Dublin','Europe/Rome','Europe/Riga',
+      'Europe/Vilnius','Europe/Luxembourg','Europe/Malta','Europe/Amsterdam','Europe/Lisbon',
+      'Europe/Bratislava','Europe/Ljubljana','Europe/Madrid'
+    ]);
+
+    const priceMap = {
+      15: { EUR: '€15', PLN: '60 PLN', BRL: 'R$ 95', USD: '$16' },
+      16: { EUR: '€16', PLN: '69 PLN', BRL: 'R$ 100', USD: '$17' },
+      18: { EUR: '€18', PLN: '75 PLN', BRL: 'R$ 115', USD: '$20' },
+      20: { EUR: '€20', PLN: '80 PLN', BRL: 'R$ 125', USD: '$22' },
+
+      28: { EUR: '€28', PLN: '120 PLN', BRL: 'R$ 175', USD: '$30' },
+      30: { EUR: '€30', PLN: '129 PLN', BRL: 'R$ 190', USD: '$32' },
+      33: { EUR: '€33', PLN: '139 PLN', BRL: 'R$ 210', USD: '$36' },
+      35: { EUR: '€35', PLN: '150 PLN', BRL: 'R$ 220', USD: '$38' },
+
+      40: { EUR: '€40', PLN: '170 PLN', BRL: 'R$ 250', USD: '$43' },
+      45: { EUR: '€45', PLN: '199 PLN', BRL: 'R$ 285', USD: '$49' },
+      52: { EUR: '€52', PLN: '229 PLN', BRL: 'R$ 330', USD: '$56' },
+      60: { EUR: '€60', PLN: '260 PLN', BRL: 'R$ 380', USD: '$65' },
+
+      70: { EUR: '€70', PLN: '300 PLN', BRL: 'R$ 440', USD: '$75' },
+      115: { EUR: '€115', PLN: '500 PLN', BRL: 'R$ 725', USD: '$125' },
+      390: { EUR: '€390', PLN: '1,690 PLN', BRL: 'R$ 2,450', USD: '$420' }
+    };
+
+    function getRegionFromLocale() {
+      const candidates = [navigator.language].concat(navigator.languages || []);
+      for (const lang of candidates) {
+        if (!lang) continue;
+        const parts = String(lang).split('-');
+        if (parts.length >= 2) return parts[parts.length - 1].toUpperCase();
+      }
+      return '';
+    }
+
+    function detectVisitorCurrencyFromBrowser() {
+      let timeZone = '';
+      try {
+        timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+      } catch (error) {
+        timeZone = '';
+      }
+
+      const language = (navigator.language || '').toLowerCase();
+      const region = getRegionFromLocale();
+
+      if (region === 'PL' || language.startsWith('pl') || timeZone === 'Europe/Warsaw') return 'PLN';
+      if (region === 'BR' || language === 'pt-br' || timeZone === 'America/Sao_Paulo') return 'BRL';
+      if (euroRegions.has(region) || euroTimeZones.has(timeZone)) return 'EUR';
+      return 'USD';
+    }
+
+    async function detectVisitorCurrency() {
+      const browserCurrency = detectVisitorCurrencyFromBrowser();
+
+      try {
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 1200);
+        const response = await fetch('https://ipapi.co/json/', { signal: controller.signal });
+        window.clearTimeout(timeout);
+
+        if (response.ok) {
+          const data = await response.json();
+          const country = String(data.country_code || '').toUpperCase();
+
+          if (country === 'PL') return 'PLN';
+          if (country === 'BR') return 'BRL';
+          if (euroRegions.has(country)) return 'EUR';
+        }
+      } catch (error) {
+      }
+
+      return browserCurrency;
+    }
+
+    function formatPrice(baseEur) {
+      const key = Number(baseEur);
+      if (priceMap[key] && priceMap[key][currentCurrency]) return priceMap[key][currentCurrency];
+
+      const fallbackRates = { EUR: 1, PLN: 4.3, BRL: 6.3, USD: 1.08 };
+      const converted = Math.round(key * (fallbackRates[currentCurrency] || fallbackRates.USD));
+      if (currentCurrency === 'PLN') return converted.toLocaleString('en-US') + ' PLN';
+      if (currentCurrency === 'BRL') return 'R$ ' + converted.toLocaleString('en-US');
+      if (currentCurrency === 'EUR') return '€' + converted.toLocaleString('en-US');
+      return '$' + converted.toLocaleString('en-US');
+    }
+
+    function updateAutoCurrencyLabels() {
+      const label = document.getElementById('currencyAutoLabel');
+      const labelMobile = document.getElementById('currencyAutoLabelMobile');
+      const text = currentCurrency + ' auto';
+      if (label) label.textContent = text;
+      if (labelMobile) labelMobile.textContent = text;
+    }
+
+    function updateDynamicContent() {
+      updateAutoCurrencyLabels();
+
+      document.querySelectorAll('[data-price-display], [data-eur-price]').forEach(el => {
+        const value = parseFloat(el.getAttribute('data-price-display') || el.getAttribute('data-eur-price'));
+        if (!isNaN(value)) el.textContent = formatPrice(value);
+      });
+
+      document.querySelectorAll('[data-price-range], [data-eur-range]').forEach(el => {
+        const raw = String(el.getAttribute('data-price-range') || el.getAttribute('data-eur-range') || '');
+        const values = raw.split(',');
+        const low = parseFloat(values[0]);
+        const high = parseFloat(values[1]);
+        if (!isNaN(low) && !isNaN(high)) {
+          el.textContent = `${formatPrice(low)}–${formatPrice(high)}`;
+        }
+      });
+
+      loadDiscountCounter();
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const button = document.getElementById('mobileMenuButton');
+      if (!menu || !button) return;
+      const isHidden = menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      button.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    }
+
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const button = document.getElementById('mobileMenuButton');
+      if (!menu || !button) return;
+      menu.classList.add('hidden');
+      button.setAttribute('aria-expanded', 'false');
+    }
+
+    function setCurrency(curr) {
+      if (!['PLN','BRL','EUR','USD'].includes(curr)) return;
+      currentCurrency = curr;
+      updateDynamicContent();
+      updateBookingPilotPrice();
+    }
+
+    function packageDetails(packageKey, priceBaseKey) {
+      const packages = {
+        light_booking: "Private Booking System",
+        deliveryhub: "DeliveryHub for Restaurants",
+        three_month: "3-Month Tech Ops",
+        six_month: "6-Month Tech Ops",
+        twelve_month: "12-Month Tech Ops",
+        enterprise_crm: "Enterprise CRM & Salesforce",
+        offer: "Limited offer",
+        case_study: "Case Study Inquiry"
+      };
+
+      let priceStr = '';
+      if (priceBaseKey === 'custom_quote') {
+        priceStr = "To be discussed";
+      } else if (priceBaseKey === 'introductory_offer') {
+        priceStr = "Special rate";
+      } else if (priceBaseKey) {
+        const baseAmount = parseFloat(priceBaseKey);
+        if (!isNaN(baseAmount)) priceStr = formatPrice(baseAmount);
+      }
+
+      return {
+        packageName: packages[packageKey] || '',
+        price: priceStr
+      };
+    }
+
+    function openContactForm(packageKey = null, priceKey = null) {
+      const modal = document.getElementById('contactModal');
+      const subject = document.getElementById('formSubject');
+      const message = document.getElementById('formMsg');
+      const status = document.getElementById('formStatus');
+
+      // Capture UTM parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      document.getElementById('utmSource').value = urlParams.get('utm_source') || '';
+      document.getElementById('utmMedium').value = urlParams.get('utm_medium') || '';
+      document.getElementById('utmCampaign').value = urlParams.get('utm_campaign') || '';
+      document.getElementById('utmTerm').value = urlParams.get('utm_term') || '';
+      document.getElementById('utmContent').value = urlParams.get('utm_content') || '';
+
+      previouslyFocusedElement = document.activeElement;
+      window.ALanSMFormStartedAt = Date.now();
+      status.textContent = '';
+      status.className = 'text-xs text-center min-h-[20px]';
+
+      if (packageKey) {
+        const details = packageDetails(packageKey, priceKey);
+        currentPackageInfo = details;
+        subject.value = packageKey === 'offer' ? "Inquiry: Introductory onboarding offer" : 
+                       packageKey === 'case_study' ? `Inquiry: ${details.packageName}` :
+                       `Inquiry: ${details.packageName}`;
+        message.value = packageKey === 'case_study' ? 
+                        `I'm interested in learning more about the ${details.packageName}. Could you share more details?` :
+                        `I am interested in the ${details.packageName} option (${details.price}). My request is...`;
+      } else {
+        currentPackageInfo = { packageName: "General inquiry", price: '' };
+        subject.value = "General inquiry";
+        message.value = '';
+      }
+
+      modal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+      window.setTimeout(() => document.getElementById('formName').focus(), 0);
+      
+      // Push to dataLayer
+      if (typeof dataLayer !== 'undefined') {
+        dataLayer.push({
+          'event': 'contact_form_open',
+          'package': packageKey || 'general'
+        });
+      }
+    }
+
+    function closeContactForm() {
+      document.getElementById('contactModal').classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+      if (previouslyFocusedElement) previouslyFocusedElement.focus();
+    }
+
+    function loadDiscountCounter() {
+      const counterText = document.getElementById('discountCounterText');
+      if (!counterText || !ALANSM_BACKEND_URL) return;
+
+      counterText.textContent = "Checking availability...";
+
+      const callbackName = 'alansmCounterCallback_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+      const script = document.createElement('script');
+      const cleanup = () => {
+        try { delete window[callbackName]; } catch (e) { window[callbackName] = undefined; }
+        if (script && script.parentNode) script.parentNode.removeChild(script);
+      };
+
+      const timeout = window.setTimeout(() => {
+        cleanup();
+        counterText.textContent = "Live counter unavailable. Final availability confirmed after review.";
+      }, 10000);
+
+      window[callbackName] = function(data) {
+        window.clearTimeout(timeout);
+        cleanup();
+
+        const status = data && data.status;
+        const counter = data && (data.counter || data);
+        const remaining = Number(counter && counter.remaining);
+        const totalSlots = Number(counter && counter.totalSlots);
+
+        if (
+          !counter ||
+          status !== 'ok' ||
+          !Number.isFinite(remaining) ||
+          !Number.isFinite(totalSlots)
+        ) {
+          counterText.textContent = "Live counter unavailable. Final availability confirmed after review.";
+          return;
+        }
+
+        if (counter.soldOut || remaining <= 0) {
+          counterText.textContent = "Pilot onboarding spots are currently full. Standard setup applies.";
+        } else if (remaining === 1) {
+          counterText.textContent = "Last pilot onboarding spot available.";
+        } else {
+          counterText.textContent = `${remaining} of ${totalSlots} pilot onboarding spots remaining.`;
+        }
+      };
+
+      script.onerror = function() {
+        window.clearTimeout(timeout);
+        cleanup();
+        counterText.textContent = "Live counter unavailable. Final availability confirmed after review.";
+      };
+
+      script.src = ALANSM_BACKEND_URL + '?action=counter&callback=' + encodeURIComponent(callbackName) + '&_ts=' + Date.now();
+      document.head.appendChild(script);
+    }
+
+    async function submitLeadViaPost(payload) {
+      await fetch(ALANSM_BACKEND_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      return {
+        status: 'ok',
+        ok: true,
+        message: 'Lead submitted.'
+      };
+    }
+
+    async function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const button = form.querySelector('button[type="submit"]');
+      const status = document.getElementById('formStatus');
+      const originalText = button.textContent;
+
+      const name = document.getElementById('formName')?.value || '';
+      const email = document.getElementById('formEmail')?.value || '';
+      const phone = document.getElementById('formPhone')?.value || '';
+      const message = document.getElementById('formMsg')?.value || '';
+      const consent = document.getElementById('formConsent')?.checked;
+
+      if (!consent) {
+        status.textContent = "I agree that my details may be used to respond to my inquiry and manage project communication.";
+        status.className = 'text-xs text-center min-h-[20px] text-yellow-400 mt-2 font-medium';
+        return;
+      }
+
+      if (String(message).trim().length < 15) {
+        status.textContent = "Please write a short message about your project before sending.";
+        status.className = 'text-xs text-center min-h-[20px] text-yellow-400 mt-2 font-medium';
+        return;
+      }
+
+      const secondsOnForm = (Date.now() - window.ALanSMFormStartedAt) / 1000;
+      if (secondsOnForm < 4) {
+        status.textContent = "Please wait a few seconds before sending. This helps block spam.";
+        status.className = 'text-xs text-center min-h-[20px] text-yellow-400 mt-2 font-medium';
+        return;
+      }
+
+      const packageInfo = currentPackageInfo || { packageName: "General inquiry", price: '' };
+
+      // UPDATED PAYLOAD: added "token" correctly mapped
+      const payload = {
+        action: 'submitLead',
+        token: ALANSM_FORM_TOKEN, // Added explicitly for backend validation
+        formToken: ALANSM_FORM_TOKEN, // Kept as backup
+        formStartedAt: window.ALanSMFormStartedAt,
+        website: document.getElementById('website')?.value || '',
+        name: name,
+        email: email,
+        phone: phone,
+        packageName: packageInfo.packageName || "General inquiry",
+        estimatedPrice: packageInfo.price || '',
+        discountRequested: String(packageInfo.packageName || '').toLowerCase().includes('light') ? 'YES' : 'NO',
+        message: message,
+        source: 'website',
+        lang: currentLang || 'en',
+        signatureLanguage: currentLang || 'en',
+        utm_source: document.getElementById('utmSource')?.value || '',
+        utm_medium: document.getElementById('utmMedium')?.value || '',
+        utm_campaign: document.getElementById('utmCampaign')?.value || '',
+        utm_term: document.getElementById('utmTerm')?.value || '',
+        utm_content: document.getElementById('utmContent')?.value || ''
+      };
+
+      button.disabled = true;
+      button.textContent = "Sending...";
+      status.textContent = '';
+
+      try {
+        const result = await submitLeadViaPost(payload);
+
+        status.textContent = `Message sent successfully. I will get back to you shortly.`;
+        status.className = 'text-xs text-center min-h-[20px] text-green-500 mt-2 font-medium';
+        form.reset();
+        loadDiscountCounter();
+
+        window.setTimeout(closeContactForm, 3000);
+        
+        // Push to dataLayer
+        if (typeof dataLayer !== 'undefined') {
+          dataLayer.push({
+            'event': 'contact_form_submit',
+            'package': packageInfo.packageName || 'general'
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        status.textContent = "The message could not be sent. Please try again or contact me through LinkedIn.";
+        status.className = 'text-xs text-center min-h-[20px] text-red-500 mt-2 font-medium';
+      } finally {
+        button.disabled = false;
+        button.textContent = originalText;
+      }
+    }
+
+    function openLegalModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) { modal.classList.remove('hidden'); modal.classList.add('flex'); document.body.classList.add('overflow-hidden'); }
+    }
+
+    function closeLegalModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); document.body.classList.remove('overflow-hidden'); }
+    }
+
+    function closeOfferBanner() {
+      const banner = document.getElementById('offerBanner');
+      banner.classList.add('opacity-0', 'translate-y-4');
+      sessionStorage.setItem('offerBannerDismissed', 'true');
+      window.setTimeout(() => banner.classList.add('hidden'), 300);
+    }
+
+    function showOfferBanner() {
+      if (sessionStorage.getItem('offerBannerDismissed') === 'true') return;
+      const banner = document.getElementById('offerBanner');
+      banner.classList.remove('hidden');
+      window.setTimeout(() => banner.classList.remove('opacity-0', 'translate-y-4'), 20);
+    }
+
+    function claimOffer() {
+      closeOfferBanner();
+      window.setTimeout(() => openContactForm('offer', 'introductory_offer'), 320);
+    }
+
+    // Modal trap focus and escape
+    document.addEventListener('keydown', event => {
+      const modal = document.getElementById('contactModal');
+      if (event.key === 'Escape') {
+        if(!modal.classList.contains('hidden')) closeContactForm();
+        closeLegalModal('termsModal');
+        closeLegalModal('privacyModal');
+      }
+    });
+
+    document.addEventListener('click', event => {
+      if (event.target.id === 'contactModal') closeContactForm();
+      if (event.target.id === 'termsModal' || event.target.id === 'privacyModal') closeLegalModal(event.target.id);
+      if (event.target.id === 'exitIntentOverlay') closeExitIntentPopup();
+      if (event.target.id === 'closeExitPopup') closeExitIntentPopup();
+    });
+
+    function updateBookingPilotPrice() {
+      const categorySelect = document.getElementById("bookingCategorySelect");
+      const planSelect = document.getElementById("bookingPlanSelect");
+      const priceEl = document.getElementById("bookingMonthlyPrice");
+      const savingsEl = document.getElementById("bookingSavingsText");
+
+      if (!categorySelect || !planSelect || !priceEl || !savingsEl) return;
+
+      const pricing = {
+        solo: {
+          plans: {
+            "3": { price: 20, text: "Pilot monthly range: " + formatPrice(15) + "–" + formatPrice(20) + " / month" },
+            "6": { price: 18, text: "Lower monthly rate for 6-month commitment." },
+            "12": { price: 16, text: "Savings plan: lower average monthly cost for 12 months." },
+            "24": { price: 15, text: "Best saving: lowest monthly care rate for 24 months." }
+          }
+        },
+        small: {
+          plans: {
+            "3": { price: 35, text: "Pilot monthly range: " + formatPrice(30) + "–" + formatPrice(35) + " / month" },
+            "6": { price: 33, text: "Lower monthly rate for 6-month commitment." },
+            "12": { price: 30, text: "Savings plan for stable monthly care." },
+            "24": { price: 28, text: "Best saving for long-term technical care." }
+          }
+        },
+        medium: {
+          plans: {
+            "3": { price: 60, text: "Pilot monthly range: " + formatPrice(40) + "–" + formatPrice(60) + " / month" },
+            "6": { price: 52, text: "Lower monthly rate for 6-month commitment." },
+            "12": { price: 45, text: "Savings plan for larger teams." },
+            "24": { price: 40, text: "Best saving for multi-service teams." }
+          }
+        }
+      };
+
+      const selectedCategory = pricing[categorySelect.value] || pricing.solo;
+      const selectedPlan = selectedCategory.plans[planSelect.value] || selectedCategory.plans["24"];
+
+      priceEl.textContent = formatPrice(selectedPlan.price) + " / mo";
+      savingsEl.textContent = selectedPlan.text;
+    }
+
+    // Initialize testimonial carousel
+    function initTestimonialCarousel() {
+      const container = document.querySelector('.testimonial-container');
+      const indicators = document.querySelectorAll('.testimonial-indicator');
+      let currentIndex = 0;
+
+      function showSlide(index) {
+        container.scrollTo({
+          left: index * container.offsetWidth,
+          behavior: 'smooth'
+        });
+        
+        indicators.forEach((indicator, i) => {
+          indicator.classList.toggle('active', i === index);
+        });
+        
+        currentIndex = index;
+      }
+
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => showSlide(index));
+      });
+
+      // Auto-advance every 5 seconds
+      setInterval(() => {
+        const nextIndex = (currentIndex + 1) % indicators.length;
+        showSlide(nextIndex);
+      }, 5000);
+    }
+
+    // Scroll progress bar
+    function initProgressBar() {
+      const progressBar = document.getElementById('progressBar');
+      
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        progressBar.style.width = scrollPercent + '%';
+      });
+    }
+
+    // Copy button functionality
+    function initCopyButtons() {
+      document.querySelectorAll('[data-copy]').forEach(button => {
+        button.addEventListener('click', () => {
+          const textToCopy = button.getAttribute('data-copy');
+          navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+              const originalText = button.textContent;
+              button.textContent = 'Copied!';
+              setTimeout(() => {
+                button.textContent = originalText;
+              }, 2000);
+            })
+            .catch(err => {
+              console.error('Failed to copy: ', err);
+            });
+        });
+      });
+    }
+
+    // Back to top button
+    function initBackToTop() {
+      const backToTopButton = document.getElementById('backToTop');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      });
+      
+      backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    // Exit intent popup
+    function initExitIntent() {
+      let hasShownPopup = sessionStorage.getItem('exitIntentShown');
+      
+      if (!hasShownPopup) {
+        document.addEventListener('mouseleave', function(e) {
+          if (e.clientY < 0 && !hasShownPopup) {
+            showExitIntentPopup();
+            hasShownPopup = true;
+            sessionStorage.setItem('exitIntentShown', 'true');
+          }
+        });
+      }
+    }
+
+    function showExitIntentPopup() {
+      document.getElementById('exitIntentPopup').classList.add('active');
+      document.getElementById('exitIntentOverlay').classList.add('active');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeExitIntentPopup() {
+      document.getElementById('exitIntentPopup').classList.remove('active');
+      document.getElementById('exitIntentOverlay').classList.remove('active');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    // Dark mode toggle
+    function initDarkModeToggle() {
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      
+      darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        // Save preference to localStorage
+        if (document.body.classList.contains('dark')) {
+          localStorage.setItem('theme', 'dark');
+        } else {
+          localStorage.setItem('theme', 'light');
+        }
+      });
+      
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      currentCurrency = 'PLN';
+      updateDynamicContent();
+      updateBookingPilotPrice();
+      initTestimonialCarousel();
+      initProgressBar();
+      initCopyButtons();
+      initBackToTop();
+      initExitIntent();
+      initDarkModeToggle();
+
+      const browserCurrency = detectVisitorCurrencyFromBrowser();
+      if (browserCurrency !== currentCurrency) {
+        currentCurrency = browserCurrency;
+        updateDynamicContent();
+        updateBookingPilotPrice();
+      }
+
+      const detectedCurrency = await detectVisitorCurrency();
+      if (detectedCurrency !== currentCurrency) {
+        currentCurrency = detectedCurrency;
+        updateDynamicContent();
+        updateBookingPilotPrice();
+      }
+
+      let bannerTriggered = false;
+      const triggerBanner = () => {
+        if (bannerTriggered) return;
+        bannerTriggered = true;
+        showOfferBanner();
+        window.removeEventListener('scroll', handleScroll);
+      };
+      const handleScroll = () => { if (window.scrollY > 500) triggerBanner(); };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      window.setTimeout(triggerBanner, 12000);
+    });
+  </script>
+</body>
+</html>
