@@ -200,7 +200,25 @@
       background:
         linear-gradient(rgba(2,6,23,.70), rgba(2,6,23,.78)),
         url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-      min-height: 440px;
+      min-height: 550px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-banner .max-w-7xl {
+      position: relative;
+      z-index: 10;
     }
     .section-title-ib {
       font-size: .8rem;
@@ -212,14 +230,14 @@
     .solution-box {
       background: #0f172a;
       border: 1px solid #1e293b;
-      border-radius: 1rem;
+      border-radius: 1.25rem;
       box-shadow: 0 18px 40px rgba(0,0,0,.20);
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .solution-box:hover {
-      transform: translateY(-3px);
-      border-color: #2563eb;
-      box-shadow: 0 22px 50px rgba(37,99,235,.12);
+      transform: translateY(-8px);
+      border-color: #3b82f6;
+      box-shadow: 0 25px 50px -12px rgba(37,99,235,0.25);
     }
     .solution-icon-lg {
       width: 4.5rem;
@@ -241,9 +259,25 @@
       box-shadow:0 18px 40px rgba(0,0,0,.20);
     }
     .price-panel {
-      background: #020617;
-      border: 1px solid #1e293b;
-      box-shadow: 0 18px 40px rgba(0,0,0,.20);
+      background: #0f172a;
+      border: 1px solid #3b82f6;
+      box-shadow: 0 20px 50px rgba(37,99,235,0.15);
+      position: relative;
+    }
+    .price-panel::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #3b82f6;
+      color: white;
+      padding: 4px 16px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
     .price-value { color: #60a5fa !important; font-weight: 850; letter-spacing: -0.04em; }
     .pilot-highlight { background: #0f172a; border: 1px solid #1e293b; }
@@ -419,8 +453,8 @@
         Practical digital solutions for service businesses, restaurants and internal operations — from websites and client flows to ordering systems, ERP-oriented workflows and custom automation.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#solutions" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">Explore Solutions</a>
-        <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="hero-consultation-btn bg-slate-900/90 border border-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-sm">Request Consultation</button>
+        <a href="#solutions" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold transition-all transform hover:scale-105 shadow-xl shadow-blue-600/20">Explore Solutions</a>
+        <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="hero-consultation-btn bg-slate-900/90 border border-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg transform hover:-translate-y-1">Request Consultation</button>
       </div>
     </div>
   </div>
