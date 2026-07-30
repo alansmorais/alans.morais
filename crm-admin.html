@@ -3,227 +3,689 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRM Segurado | AlanSM Solutions</title>
+  <title>ERP | AlanSM Solutions</title>
+  
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
   <style>
-    body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
-    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
-    .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+    body { font-family: 'Inter', sans-serif; background-color: #020617; color: #cbd5e1; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .nav-active { background: #1e293b; color: #60a5fa; border-left: 3px solid #3b82f6; }
+    .nav-btn { transition: all 0.2s ease; cursor: pointer; }
+    .nav-btn:hover { background: #1e293b; color: #f1f5f9; }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .msg-animate { animation: fadeIn 0.3s ease-out forwards; }
   </style>
 </head>
-<body class="antialiased min-h-screen flex flex-col">
+<body class="flex h-screen overflow-hidden relative">
 
-  <!-- DASHBOARD (Agora visível por padrão) -->
-  <div id="mainDashboard" class="flex flex-col flex-1">
-    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur px-8 py-4 flex items-center justify-between sticky top-0 z-40">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-sm text-white">AS</div>
-        <div>
-          <h1 class="text-base font-bold text-slate-100 leading-none">AlanSM Solutions</h1>
-          <span class="text-[10px] text-blue-500 font-semibold tracking-wider uppercase">CRM Mode</span>
-        </div>
-      </div>
-      <div class="flex items-center gap-4">
-        <input type="text" id="tableSearch" oninput="filterLeads()" placeholder="Buscar leads..." class="bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors w-64" />
-        <button onclick="loadLeads()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-md transition-colors flex items-center gap-2">↻ Atualizar</button>
+  <div id="toastContainer" class="fixed top-6 right-6 z-[100] flex flex-col gap-2"></div>
+
+  <aside class="w-20 bg-slate-950 border-r border-slate-800 flex flex-col items-center py-8 shrink-0 z-20">
+    <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white mb-10 shadow-lg shadow-blue-600/20">AS</div>
+    <nav class="flex flex-col gap-6 w-full px-2">
+      <button onclick="switchTab('tab-crm')" title="Clientes (CRM)" class="flex justify-center p-3 rounded-xl text-blue-500 bg-slate-900/50 nav-btn nav-active" id="nav-crm">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+      </button>
+      <button onclick="switchTab('tab-financeiro')" title="Financeiro" class="flex justify-center p-3 rounded-xl text-slate-500 nav-btn" id="nav-financeiro">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      </button>
+      <button onclick="switchTab('tab-comissoes')" title="Comissões" class="flex justify-center p-3 rounded-xl text-slate-500 nav-btn" id="nav-comissoes">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+      </button>
+      <button onclick="switchTab('tab-chat')" title="Suporte (Live Chat)" class="relative flex justify-center p-3 rounded-xl text-slate-500 nav-btn" id="nav-chat">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+        <span id="chatBadge" class="hidden absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-slate-950"></span>
+      </button>
+    </nav>
+  </aside>
+
+  <main class="flex-1 flex flex-col h-screen overflow-hidden bg-[#020617]">
+    <header class="h-20 flex items-center justify-between px-10 shrink-0 border-b border-slate-800">
+      <h2 id="pageTitle" class="text-xl font-medium text-white">Gestão de Clientes</h2>
+      <div class="flex items-center gap-6">
+        <div class="hidden sm:flex text-[10px] text-emerald-500 font-bold uppercase tracking-widest"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse mr-2"></span> Auto-Sync (60s)</div>
+        <input type="text" id="tableSearch" oninput="filterData()" placeholder="Buscar..." class="bg-slate-900 border border-slate-800 rounded-lg px-4 py-2 text-xs text-slate-100 w-48 focus:outline-none focus:border-blue-500" />
+        <button onclick="loadData(true)" class="text-xs text-slate-400 hover:text-white transition-colors">Sincronizar</button>
       </div>
     </header>
 
-    <main class="flex-1 p-6 max-w-7xl w-full mx-auto flex flex-col gap-6">
-      <div class="grid grid-cols-3 gap-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col shadow-lg">
-          <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Total de Leads</span>
-          <span id="dashTotal" class="text-2xl font-bold text-slate-100 mt-1">0</span>
+    <div class="flex-1 overflow-y-auto p-10 custom-scrollbar relative">
+      
+      <div id="tab-crm" class="tab-content active space-y-8">
+        <div class="flex gap-6">
+          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 flex-1"><p class="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Registros</p><p id="dashTotal" class="text-3xl font-light text-white">0</p></div>
+          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 flex-1"><p class="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Assinados</p><p id="dashAssinados" class="text-3xl font-light text-white">0</p></div>
         </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col shadow-lg">
-          <span class="text-xs text-emerald-500/70 uppercase tracking-wider font-semibold">Vendas Fechadas</span>
-          <span id="dashFechados" class="text-2xl font-bold text-emerald-400 mt-1">0</span>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col shadow-lg">
-          <span class="text-xs text-blue-500/70 uppercase tracking-wider font-semibold">Leads Novos</span>
-          <span id="dashNovos" class="text-2xl font-bold text-blue-400 mt-1">0</span>
-        </div>
-      </div>
-
-      <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
-        <div class="overflow-x-auto custom-scrollbar">
-          <table class="w-full text-left border-collapse text-xs">
-            <thead>
-              <tr class="bg-slate-950 border-b border-slate-800 text-slate-400 font-bold uppercase tracking-wider">
-                <th class="px-6 py-4">Nome do Lead</th>
-                <th class="px-6 py-4">Contato</th>
-                <th class="px-6 py-4">Status</th>
-                <th class="px-6 py-4">Pacote / Valor</th>
-                <th class="px-6 py-4 text-right">Ações</th>
-              </tr>
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6">
+          <table class="w-full text-sm">
+            <thead class="text-slate-500 uppercase text-[10px] tracking-widest border-b border-slate-800">
+              <tr><th class="pb-4 text-left font-medium">Cliente</th><th class="pb-4 text-left font-medium">Contato</th><th class="pb-4 text-left font-medium">Status</th><th class="pb-4 text-left font-medium">Preço / Moeda</th><th class="pb-4 text-right font-medium">Ações</th></tr>
             </thead>
-            <tbody id="leadsTableBody" class="divide-y divide-slate-800/60 text-slate-300"></tbody>
+            <tbody id="leadsTableBody" class="text-slate-300"></tbody>
           </table>
         </div>
       </div>
-    </main>
+
+      <div id="tab-financeiro" class="tab-content space-y-8">
+        <div class="grid grid-cols-3 gap-6">
+          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 flex-1"><p class="text-[10px] text-emerald-500 uppercase tracking-widest mb-1">Recebido</p><div id="finRecebido" class="flex flex-col gap-1 text-3xl font-light text-white">0</div></div>
+          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 flex-1"><p class="text-[10px] text-yellow-500 uppercase tracking-widest mb-1">A Receber</p><div id="finPendente" class="flex flex-col gap-1 text-3xl font-light text-white">0</div></div>
+          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 flex-1"><p class="text-[10px] text-red-500 uppercase tracking-widest mb-1">Atrasado</p><div id="finAtrasado" class="flex flex-col gap-1 text-3xl font-light text-white">0</div></div>
+        </div>
+        <div class="flex justify-end gap-3">
+          <button onclick="exportFinReport()" class="bg-slate-900 border border-slate-700 hover:bg-slate-800 text-white text-xs font-bold px-6 py-3 rounded-xl transition-colors flex items-center gap-2">📥 Gerar Relatório (CSV)</button>
+          <button onclick="openFinModal()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-6 py-3 rounded-xl transition-colors shadow-lg shadow-blue-600/20">+ Nova Cobrança</button>
+        </div>
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6">
+          <table class="w-full text-sm">
+            <thead class="text-slate-500 uppercase text-[10px] tracking-widest border-b border-slate-800">
+              <tr><th class="pb-4 text-left font-medium">Cliente</th><th class="pb-4 text-left font-medium">Descrição</th><th class="pb-4 text-left font-medium">Vencimento</th><th class="pb-4 text-left font-medium">Valor</th><th class="pb-4 text-left font-medium">Status</th><th class="pb-4 text-right font-medium">Ações</th></tr>
+            </thead>
+            <tbody id="financeiroTableBody" class="text-slate-300"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="tab-comissoes" class="tab-content space-y-8">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-10 flex flex-col items-center justify-center h-64 border-dashed shadow-inner">
+          <div class="w-16 h-16 rounded-full bg-blue-900/30 flex items-center justify-center mb-4 text-blue-500">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          </div>
+          <h3 class="text-slate-200 font-medium text-lg mb-1">Módulo de Comissões</h3>
+          <p class="text-slate-500 text-xs">Em breve. Gerencie parceiros, promotores e split de pagamentos aqui.</p>
+        </div>
+      </div>
+
+      <div id="tab-chat" class="tab-content space-y-8 h-full pb-20">
+        <div class="bg-slate-950 border border-slate-800 rounded-2xl flex flex-col h-[calc(100vh-200px)]">
+          <div class="p-4 border-b border-slate-800 bg-slate-900/50 rounded-t-2xl flex items-center gap-3">
+            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white"><span class="material-symbols-outlined">support_agent</span></div>
+            <div>
+              <h3 class="text-white font-medium">Central de Suporte ao Vivo</h3>
+              <p class="text-[10px] text-emerald-500">Conectado com a Clínica</p>
+            </div>
+          </div>
+          
+          <div id="chatHistory" class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+            <div class="text-center text-slate-500 text-xs mt-10">Carregando mensagens...</div>
+          </div>
+
+          <div class="p-4 border-t border-slate-800 bg-slate-900/50 rounded-b-2xl">
+            <form onsubmit="sendAdminMessage(event)" class="flex gap-3">
+              <input type="text" id="adminChatInput" autocomplete="off" placeholder="Digite sua resposta..." class="flex-1 bg-slate-950 border border-slate-700 text-slate-100 rounded-xl px-4 py-3 focus:border-blue-500 focus:outline-none text-sm transition-colors" required>
+              <button type="submit" id="btnAdminSend" class="bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl px-6 transition-colors shadow-lg shadow-blue-600/20 disabled:opacity-50">Enviar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="editModal" class="fixed inset-0 bg-slate-950/80 hidden z-50 items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl">
+      <div class="flex justify-between items-center mb-6"><h2 class="text-sm font-bold uppercase tracking-widest text-slate-100">Ficha do Cliente</h2><button onclick="closeModal('editModal')" class="text-slate-500 hover:text-white">&times;</button></div>
+      <form onsubmit="saveLead(event)" class="space-y-4">
+        <input type="hidden" id="modalLeadId">
+        <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Nome / Empresa</label><input type="text" id="modalName" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"></div>
+        <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Email</label><input type="email" id="modalEmail" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"></div>
+        <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Telefone / WhatsApp</label><input type="text" id="modalPhone" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"></div>
+        <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Status</label><select id="modalStatus" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"><option>New</option><option>Em Negociação</option><option>Contrato Assinado</option></select></div>
+        <div class="grid grid-cols-2 gap-4">
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Preço</label><input type="text" id="modalPrice" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Moeda</label><select id="modalCurrency" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"><option value="PLN">PLN</option><option value="EUR">EUR</option><option value="USD">USD</option><option value="BRL">BRL</option></select></div>
+        </div>
+        <div class="flex justify-end gap-3 mt-6 pt-6 border-t border-slate-800">
+          <button type="button" onclick="closeModal('editModal')" class="text-xs text-slate-400">Cancelar</button>
+          <button type="submit" id="saveLeadBtn" class="bg-blue-600 px-6 py-2 rounded-lg text-xs font-bold text-white">Salvar</button>
+        </div>
+      </form>
+    </div>
   </div>
 
-  <!-- MODAL -->
-  <div id="editModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm hidden z-50 items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-xl w-full max-w-3xl shadow-2xl flex flex-col overflow-hidden max-h-[90vh]">
-      <div class="flex justify-between items-center px-6 py-4 border-b border-slate-800 bg-slate-950">
-        <h2 class="text-sm font-bold text-slate-100 uppercase tracking-wider">Ficha do Lead</h2>
-        <button onclick="closeModal()" class="text-slate-500 hover:text-slate-100 text-2xl font-semibold">&times;</button>
-      </div>
-      <div class="p-6 overflow-y-auto custom-scrollbar">
-        <form id="editForm" onsubmit="saveLeadChanges(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <input type="hidden" id="modalRowIndex" />
-          
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Nome</label><input id="modalName" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          <div>
-            <label class="block text-[10px] text-slate-500 uppercase mb-1">Status</label>
-            <select id="modalStatus" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100">
-              <option value="Novo">Novo</option>
-              <option value="Em Contato">Em Contato</option>
-              <option value="Proposta Enviada">Proposta Enviada</option>
-              <option value="Em Negociação">Em Negociação</option>
-              <option value="Fechado">Fechado</option>
-              <option value="Perdido">Perdido</option>
-            </select>
+  <div id="finModal" class="fixed inset-0 bg-slate-950/80 hidden z-50 items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg p-6 shadow-2xl">
+      <div class="flex justify-between items-center mb-6"><h2 class="text-sm font-bold uppercase tracking-widest text-slate-100">Cobrança</h2><button onclick="closeModal('finModal')" class="text-slate-500 hover:text-white">&times;</button></div>
+      <form onsubmit="saveFin(event)" class="space-y-4">
+        <input type="hidden" id="finId">
+        <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Cliente (Lead)</label><select id="finLeadId" onchange="updateFinName()" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"></select><input type="hidden" id="finClienteNome"></div>
+        <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Descrição do Serviço</label><input type="text" id="finDesc" required placeholder="Ex: Setup do Site, Mensalidade..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"></div>
+        <div class="grid grid-cols-2 gap-4">
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Valor</label><input type="number" step="0.01" id="finValor" required placeholder="0.00" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Moeda</label><select id="finMoeda" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"><option value="PLN">PLN</option><option value="EUR">EUR</option><option value="USD">USD</option><option value="BRL">BRL</option></select></div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Vencimento</label><input type="date" id="finVencimento" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"></div>
+          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Status</label><select id="finStatus" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-xs text-white"><option value="Pendente">Pendente</option><option value="Pago">Pago</option><option value="Cancelado">Cancelado</option></select></div>
+        </div>
+        <div class="flex justify-between items-center mt-6 pt-6 border-t border-slate-800">
+          <button type="button" id="btnDeleteFin" onclick="deleteFin()" class="text-red-500 text-xs font-semibold hidden hover:underline">🗑️ Excluir</button>
+          <div class="flex gap-3 ml-auto">
+            <button type="button" onclick="closeModal('finModal')" class="text-xs text-slate-400">Cancelar</button>
+            <button type="submit" id="saveFinBtn" class="bg-blue-600 px-6 py-2 rounded-lg text-xs font-bold text-white">Salvar</button>
           </div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Email</label><input id="modalEmail" type="email" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Telefone</label><input id="modalPhone" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          
-          <div class="sm:col-span-2 border-t border-slate-800 pt-3"><span class="text-[10px] font-bold text-purple-500 uppercase">Parcerias</span></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Promotor</label><input id="modalPromoter" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          <div class="grid grid-cols-2 gap-2">
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Comissão (%)</label><input id="modalCommission" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-            <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Indicado Por</label><input id="modalReferredBy" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          </div>
-
-          <div class="sm:col-span-2 border-t border-slate-800 pt-3"><span class="text-[10px] font-bold text-blue-500 uppercase">Dados Corporativos</span></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Razão Social</label><input id="modalClientLegalName" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Nome Fantasia</label><input id="modalBusinessName" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">Idioma Assinatura</label><input id="modalSignatureLanguage" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-          <div><label class="block text-[10px] text-slate-500 uppercase mb-1">NIF / CNPJ</label><input id="modalTaxIDNumber" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-100" /></div>
-
-          <div class="sm:col-span-2 border-t border-slate-800 pt-5 flex justify-end gap-3">
-            <button type="button" onclick="closeModal()" class="border border-slate-800 px-4 py-2 rounded text-xs">Cancelar</button>
-            <button type="submit" id="saveButton" class="bg-blue-600 px-6 py-2 rounded text-xs font-bold text-white">Salvar Alterações</button>
-          </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbzX5IVQnHbT1dVi11rUYb1-Wqeyl8F-0F55Jepnd71KtH1PbphE-Ww9so0DjiHEnFE3/exec"; 
+    // --- URLs DAS APIS ---
+    const API_URL = "https://script.google.com/macros/s/AKfycbwxzYWgEdGsUqjokKIMroI1xmZYE1LQcj4sd8EIoODbDWA5MIxa0xEb85JTuvAQnVMtXA/exec";
+    const SESSION_TOKEN = "alan_admin_2026";
+    const CHAT_API_URL = "https://script.google.com/macros/s/AKfycbxfp-xTLvDdRzFRqLNLbYBR-teiYZIQUHP5mb8Wu4UyGOsHqV7K4cyKcZGRHELpbHD9/exec"; 
     
-    // A chave do seu admin está configurada diretamente aqui para passar pela proteção do backend
-    const sessionToken = "alan_admin_2026"; 
-    let allLeads = [];
+    let allLeads = [], allFin = [];
+    let currentTab = 'tab-crm';
+    let chatInterval = null;
+    let lastChatCount = -1; // Inicia com -1 para calibrar no carregamento
 
-    // Inicia o carregamento dos leads assim que a página abre
-    document.addEventListener("DOMContentLoaded", () => {
-      loadLeads();
+    // Áudio de Notificação (Servidor confiável do Google)
+    const notifSound = new Audio('https://actions.google.com/sounds/v1/alarms/beep_short.ogg');
+
+    // Desbloqueia a política de áudio do navegador no primeiro clique na tela
+    document.body.addEventListener('click', () => {
+      notifSound.load();
+    }, { once: true });
+
+    document.addEventListener("DOMContentLoaded", () => { 
+      loadData(true); 
+      setInterval(() => loadData(false), 60000); 
+      
+      initChatCount();
+      setInterval(checkChatNotifications, 5000);
     });
 
-    async function fetchAPI(payload){
-      const params = new URLSearchParams({ action: payload.action, session: sessionToken });
-      if(payload.data) params.append("data", JSON.stringify(payload.data));
-      const response = await fetch(`${API_URL}?${params.toString()}`);
-      return await response.json();
+    // Função que cria as Notificações Deslizantes (Toast)
+    function showToast(title, msg) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      
+      // Classes do Tailwind para criar a caixinha elegante e animada
+      toast.className = 'bg-blue-600 border border-blue-500 text-white px-5 py-3 rounded-xl shadow-2xl flex flex-col transform transition-all duration-300 translate-x-full opacity-0 z-[100] min-w-[250px]';
+      toast.innerHTML = `<span class="font-bold text-sm tracking-wide">${title}</span><span class="text-xs text-blue-100 mt-1">${msg}</span>`;
+      
+      container.appendChild(toast);
+      
+      // Animação de entrada
+      setTimeout(() => { toast.classList.remove('translate-x-full', 'opacity-0'); }, 10);
+      
+      // Espera 2.5 segundos e anima a saída, removendo o elemento depois
+      setTimeout(() => { 
+          toast.classList.add('translate-x-full', 'opacity-0'); 
+          setTimeout(() => toast.remove(), 300);
+      }, 2500); 
     }
 
-    async function loadLeads(){
-      const body = document.getElementById('leadsTableBody');
-      body.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-slate-500 font-medium animate-pulse">Sincronizando Leads...</td></tr>';
+    // Inicializa a contagem do chat invisivelmente
+    async function initChatCount() {
+      if (!CHAT_API_URL || CHAT_API_URL === "https://script.google.com/macros/s/AKfycbw6BVbXTwae2v5MrFvuImyOgPs3BwUJ8EcvTXjexV7vsZir0OCQXXV6Duys5xJI6YM/exec") return;
       try {
-        const data = await fetchAPI({ action:"getLeads" });
-        if(!data.success) throw new Error(data.error);
+        const response = await fetch(`${CHAT_API_URL}?action=getChat`);
+        const messages = await response.json();
+        if (Array.isArray(messages)) lastChatCount = messages.length;
+      } catch(e) { console.log("Erro no init do chat"); }
+    }
+
+    function switchTab(tabId) {
+      currentTab = tabId;
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('nav-active', 'bg-slate-900/50', 'text-blue-500'));
+      const activeBtn = document.getElementById(tabId.replace('tab-', 'nav-'));
+      if(activeBtn) activeBtn.classList.add('nav-active', 'bg-slate-900/50', 'text-blue-500');
+      
+      const titles = { 'tab-crm': 'Gestão de Clientes', 'tab-financeiro': 'Gestão Financeira', 'tab-comissoes': 'Acerto de Comissões', 'tab-chat': 'Suporte Live Chat' };
+      document.getElementById('pageTitle').textContent = titles[tabId] || 'Gestão';
+      document.getElementById('tableSearch').value = '';
+      
+      if(tabId === 'tab-chat') {
+        const badge = document.getElementById('chatBadge');
+        badge.classList.add('hidden'); 
+        badge.classList.remove('block', 'animate-bounce');
+        document.getElementById('nav-chat').classList.remove('text-rose-500');
+
+        loadChat();
+        if(!chatInterval) chatInterval = setInterval(loadChat, 5000);
+      } else {
+        if(chatInterval) { clearInterval(chatInterval); chatInterval = null; }
+        filterData();
+      }
+    }
+
+    // --- ESPIÃO DE NOTIFICAÇÕES (Chat) ---
+    async function checkChatNotifications() {
+      if (!CHAT_API_URL || CHAT_API_URL === "https://script.google.com/macros/s/AKfycbw6BVbXTwae2v5MrFvuImyOgPs3BwUJ8EcvTXjexV7vsZir0OCQXXV6Duys5xJI6YM/exec") return;
+      
+      try {
+        const response = await fetch(`${CHAT_API_URL}?action=getChat`);
+        const messages = await response.json();
+        
+        if (Array.isArray(messages)) {
+          if (lastChatCount === -1) { lastChatCount = messages.length; return; }
+          
+          if (messages.length > lastChatCount) {
+            const lastMsg = messages[messages.length - 1];
+            
+            // Só avisa se a mensagem não foi enviada pelo Admin
+            if (lastMsg.Remetente !== 'Admin') {
+              
+              if (currentTab !== 'tab-chat') {
+                const badge = document.getElementById('chatBadge');
+                const navBtn = document.getElementById('nav-chat');
+                
+                badge.classList.remove('hidden');
+                badge.classList.add('block', 'animate-bounce');
+                navBtn.classList.add('text-rose-500');
+                
+                // Dispara Som e Notificação Toast
+                notifSound.play().catch(e => console.log("Áudio pendente de interação do usuário."));
+                showToast("Nova Mensagem no Chat", `De: ${lastMsg.Remetente || 'Cliente'}`);
+                
+              } else {
+                // Se já estiver com a aba de chat aberta, apenas recarrega a conversa
+                loadChat();
+              }
+            }
+            lastChatCount = messages.length;
+          }
+        }
+      } catch(e) { console.log("Erro na verificação de notificação"); }
+    }
+
+    // ==========================================
+    // CRM & FINANCEIRO (Lógica Principal)
+    // ==========================================
+    async function loadData(showLoader) {
+      if(showLoader && document.getElementById('leadsTableBody')) {
+        document.getElementById('leadsTableBody').innerHTML = '<tr><td colspan="5" class="py-10 text-center text-slate-500 text-xs animate-pulse">Sincronizando banco de dados...</td></tr>';
+      }
+      try {
+        const response = await fetch(`${API_URL}?action=admin_dashboard&token=${SESSION_TOKEN}`);
+        const data = await response.json();
         allLeads = (data.leads || []).reverse();
-        updateDashboard(allLeads);
-        renderTable(allLeads);
+        allFin = (data.financeiro || []).reverse();
+        
+        document.getElementById('dashTotal').textContent = allLeads.length;
+        document.getElementById('dashAssinados').textContent = allLeads.filter(l => l['Status'] === 'Contrato Assinado').length;
+        
+        filterData();
+        updateFinDashboard();
       } catch(e) { console.error(e); }
     }
 
-    function updateDashboard(leads) {
-      document.getElementById('dashTotal').textContent = leads.length;
-      document.getElementById('dashFechados').textContent = leads.filter(l => (l.status||'').toLowerCase() === 'fechado').length;
-      document.getElementById('dashNovos').textContent = leads.filter(l => (l.status||'').toLowerCase() === 'novo' || !l.status).length;
+    function filterData() {
+      const q = document.getElementById('tableSearch').value.toLowerCase();
+      if(currentTab === 'tab-crm') {
+        renderCRMTable(allLeads.filter(l => (l['Client Legal Name'] || l['Name'] || '').toLowerCase().includes(q)));
+      } else if (currentTab === 'tab-financeiro') {
+        renderFinTable(allFin.filter(f => (f['Cliente'] || f['Descricao'] || '').toLowerCase().includes(q)));
+      }
     }
 
-    function renderTable(leads){
-      const body = document.getElementById('leadsTableBody');
-      body.innerHTML = leads.map((l, idx) => `
-        <tr class="border-b border-slate-800/30 hover:bg-slate-950/40">
-          <td class="px-6 py-4"><b>${l.name || '-'}</b><br><small class="text-slate-500">${l.businessname || '-'}</small></td>
-          <td class="px-6 py-4">${l.email || '-'}<br><small>${l.phone || '-'}</small></td>
-          <td class="px-6 py-4"><span class="px-2 py-0.5 rounded bg-slate-800 text-[10px] uppercase font-bold">${l.status || 'Novo'}</span></td>
-          <td class="px-6 py-4 text-blue-400">${l.package || '-'}<br><b class="text-emerald-500">${l.estimatedprice || '-'}</b></td>
-          <td class="px-6 py-4 text-right">
-            <button onclick="triggerInvoice(${idx}, this)" class="bg-blue-600/20 text-blue-400 px-3 py-1 rounded">✉️ Enviar</button>
-            <button onclick="openEditModal(${idx})" class="border border-slate-700 px-3 py-1 rounded">Editar</button>
-          </td>
-        </tr>
-      `).join("");
+    function renderCRMTable(leads) {
+      const tbody = document.getElementById('leadsTableBody');
+      if(leads.length === 0) { tbody.innerHTML = '<tr><td colspan="5" class="py-8 text-center text-slate-500 text-xs">Nenhum cliente.</td></tr>'; return; }
+      
+      tbody.innerHTML = leads.map(l => {
+        const hasPdf = l['Contract_PDF'] && l['Contract_PDF'].includes('http');
+        const phoneStr = (l['Phone'] || '').replace(/\D/g, '');
+        
+        let statusClass = "text-slate-400";
+        if(l['Status'] === 'Contrato Assinado') statusClass = "text-emerald-400";
+        
+        let actions = `<button onclick="gerarAssinatura('${l['Lead ID']}', this)" title="Gerar Contrato" class="text-slate-400 hover:text-blue-400 transition-colors mx-1">📄</button>`;
+        if (hasPdf) {
+          actions += `<a href="${l['Contract_PDF']}" target="_blank" title="Abrir PDF" class="text-slate-400 hover:text-emerald-400 transition-colors mx-1">🔗</a>`;
+          if (phoneStr) {
+            const waLink = `https://wa.me/${phoneStr}?text=${encodeURIComponent("Olá " + (l['Name']||'') + ", segue o link do seu contrato: " + l['Contract_PDF'])}`;
+            actions += `<a href="${waLink}" target="_blank" title="Enviar no WhatsApp" class="text-slate-400 hover:text-green-500 transition-colors mx-1">💬</a>`;
+          }
+        }
+        actions += `<button onclick="openEditModal('${l['Lead ID']}')" title="Editar Cliente" class="text-slate-400 hover:text-yellow-400 transition-colors mx-1">✏️</button>`;
+        actions += `<button onclick="deleteLead('${l['Lead ID']}')" title="Excluir" class="text-slate-400 hover:text-red-500 transition-colors mx-1">🗑️</button>`;
+
+        return `
+        <tr class="border-b border-slate-800/50 hover:bg-slate-900/30 transition-colors">
+          <td class="py-4 font-bold text-slate-200">${l['Client Legal Name'] || l['Name'] || '-'}</td>
+          <td class="py-4 text-xs text-slate-400">${l['Email'] || '-'}<br>${l['Phone'] || ''}</td>
+          <td class="py-4 text-[10px] font-bold uppercase tracking-wider ${statusClass}">${l['Status'] || 'New'}</td>
+          <td class="py-4 text-xs text-blue-400 font-medium">${l['Estimated Price'] || l['Price'] || '-'} ${l['Currency'] || ''}</td>
+          <td class="py-4 text-right text-base">${actions}</td>
+        </tr>`;
+      }).join('');
     }
 
-    async function triggerInvoice(idx, btn){
-      const lead = allLeads[idx];
-      if(!lead.email) return alert("Lead sem email!");
-      if(!confirm("Enviar proposta?")) return;
-      btn.disabled = true; btn.innerText = "Enviando...";
+    async function gerarAssinatura(leadId, btn) {
+      if(!confirm("Gerar link de assinatura e enviar e-mail para o cliente?")) return;
+      btn.innerText = "⏳";
       try {
-        const res = await fetchAPI({ action: 'sendInvoice', data: lead });
-        if(!res.success) throw new Error(res.error);
-        alert("Enviado!"); loadLeads();
-      } catch(e) { alert(e.message); btn.disabled=false; btn.innerText="✉️ Enviar"; }
+        const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'generateSignature', token: SESSION_TOKEN, leadId: leadId }) });
+        const result = await res.json();
+        if (result.status === 'ok') { alert("Contrato gerado e enviado!"); loadData(true); } else { throw new Error(result.message); }
+      } catch (err) { alert(err.message); btn.innerText = "📄"; }
     }
 
-    function openEditModal(idx){
-      const l = allLeads[idx];
-      document.getElementById('modalRowIndex').value = l.rowIndex;
-      document.getElementById('modalName').value = l.name || '';
-      document.getElementById('modalEmail').value = l.email || '';
-      document.getElementById('modalStatus').value = l.status || 'Novo';
-      document.getElementById('modalPhone').value = l.phone || '';
-      document.getElementById('modalPromoter').value = l.promoter || '';
-      document.getElementById('modalCommission').value = l.commission || '';
-      document.getElementById('modalReferredBy').value = l.referredby || '';
-      document.getElementById('modalClientLegalName').value = l.clientlegalname || '';
-      document.getElementById('modalBusinessName').value = l.businessname || '';
-      document.getElementById('modalSignatureLanguage').value = l.signaturelanguage || '';
-      document.getElementById('modalTaxIDNumber').value = l.taxidnumber || '';
+    function openEditModal(leadId) {
+      const l = allLeads.find(x => x['Lead ID'] === leadId);
+      if(!l) return;
+      document.getElementById('modalLeadId').value = leadId;
+      document.getElementById('modalName').value = l['Client Legal Name'] || l['Name'] || '';
+      document.getElementById('modalEmail').value = l['Email'] || '';
+      document.getElementById('modalPhone').value = l['Phone'] || '';
+      document.getElementById('modalStatus').value = l['Status'] || 'New';
+      document.getElementById('modalPrice').value = l['Estimated Price'] || l['Price'] || '';
+      document.getElementById('modalCurrency').value = l['Currency'] || 'PLN';
       document.getElementById('editModal').classList.remove('hidden');
       document.getElementById('editModal').classList.add('flex');
     }
 
-    async function saveLeadChanges(e){
+    async function saveLead(e) {
       e.preventDefault();
-      const btn = document.getElementById('saveButton');
-      btn.innerText = "Salvando...";
-      const leadData = {
-        rowIndex: document.getElementById('modalRowIndex').value,
-        name: document.getElementById('modalName').value,
-        email: document.getElementById('modalEmail').value,
-        status: document.getElementById('modalStatus').value,
-        phone: document.getElementById('modalPhone').value,
-        promoter: document.getElementById('modalPromoter').value,
-        commission: document.getElementById('modalCommission').value,
-        referredby: document.getElementById('modalReferredBy').value,
-        clientlegalname: document.getElementById('modalClientLegalName').value,
-        businessname: document.getElementById('modalBusinessName').value,
-        signaturelanguage: document.getElementById('modalSignatureLanguage').value,
-        taxidnumber: document.getElementById('modalTaxIDNumber').value
+      const btn = document.getElementById('saveLeadBtn'); btn.innerText = "⏳"; btn.disabled = true;
+      const updates = {
+        'Client Legal Name': document.getElementById('modalName').value,
+        'Email': document.getElementById('modalEmail').value,
+        'Phone': document.getElementById('modalPhone').value,
+        'Status': document.getElementById('modalStatus').value,
+        'Estimated Price': document.getElementById('modalPrice').value,
+        'Currency': document.getElementById('modalCurrency').value
       };
       try {
-        const res = await fetchAPI({ action: 'updateLead', data: leadData });
-        if(!res.success) throw new Error(res.error);
-        closeModal(); loadLeads();
-      } catch(e) { alert(e.message); } finally { btn.innerText = "Salvar Alterações"; }
+        await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'updateLead', token: SESSION_TOKEN, leadId: document.getElementById('modalLeadId').value, updates: updates }) });
+        closeModal('editModal'); loadData(true);
+      } catch(err) { alert(err.message); } finally { btn.innerText = "Salvar"; btn.disabled = false; }
     }
 
-    function closeModal(){ document.getElementById('editModal').classList.add('hidden'); document.getElementById('editModal').classList.remove('flex'); }
-    function filterLeads(){ /* sua lógica de filtro aqui */ }
+    async function deleteLead(leadId) {
+      if(!confirm("Tem certeza que deseja excluir este cliente do CRM?")) return;
+      try {
+        await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'deleteLead', token: SESSION_TOKEN, leadId: leadId }) });
+        loadData(true);
+      } catch(err) { alert(err.message); }
+    }
+
+    function parseDateObj(dateStr) {
+      if(!dateStr) return null;
+      let s = String(dateStr);
+      if(s.includes('T')) return new Date(s);
+      return new Date(s);
+    }
+
+    function updateFinDashboard() {
+      let recebido = {}, pendente = {}, atrasado = {};
+      const today = new Date(); today.setHours(0,0,0,0);
+
+      allFin.forEach(f => {
+        const val = parseFloat(f['Valor']) || 0;
+        const status = f['Status'];
+        const vencimento = parseDateObj(f['Vencimento']);
+        const moeda = f['Moeda'] || 'PLN';
+
+        if(status === 'Pago') { recebido[moeda] = (recebido[moeda] || 0) + val; } 
+        else if (status === 'Pendente') {
+          if (vencimento && vencimento < today) { atrasado[moeda] = (atrasado[moeda] || 0) + val; } 
+          else { pendente[moeda] = (pendente[moeda] || 0) + val; }
+        }
+      });
+
+      const formatMoedas = (obj) => {
+        const keys = Object.keys(obj).filter(k => obj[k] > 0);
+        if(keys.length === 0) return '<span class="text-3xl font-light text-slate-600">0</span>';
+        return keys.map(k => `<span class="text-2xl font-light text-white">${obj[k].toFixed(2)} <span class="text-[10px] text-slate-500 font-normal uppercase">${k}</span></span>`).join('');
+      };
+
+      document.getElementById('finRecebido').innerHTML = formatMoedas(recebido);
+      document.getElementById('finPendente').innerHTML = formatMoedas(pendente);
+      document.getElementById('finAtrasado').innerHTML = formatMoedas(atrasado);
+    }
+
+    function renderFinTable(finList) {
+      const tbody = document.getElementById('financeiroTableBody');
+      if(finList.length === 0) { tbody.innerHTML = '<tr><td colspan="6" class="py-8 text-center text-slate-500 text-xs">Nenhuma cobrança registrada.</td></tr>'; return; }
+      
+      const today = new Date(); today.setHours(0,0,0,0);
+
+      tbody.innerHTML = finList.map(f => {
+        let vDate = parseDateObj(f['Vencimento']);
+        let vDateStr = vDate ? vDate.toLocaleDateString('pt-BR') : '-';
+        
+        let sColor = "text-slate-400", bgStatus = "bg-slate-800", statText = f['Status'];
+        if(f['Status'] === 'Pago') { sColor = "text-emerald-400"; bgStatus = "bg-emerald-900/20 border-emerald-800/50"; }
+        else if(f['Status'] === 'Pendente') {
+           if(vDate && vDate < today) { sColor = "text-red-400"; bgStatus = "bg-red-900/20 border-red-800/50"; statText = "Atrasado"; }
+           else { sColor = "text-yellow-400"; bgStatus = "bg-yellow-900/20 border-yellow-800/50"; }
+        }
+
+        let acts = '';
+        if(f['Status'] !== 'Pago') { acts += `<button onclick="markFinPaid('${f['Invoice_ID']}')" title="Marcar Pago" class="text-slate-400 hover:text-emerald-400 transition-colors mx-1">💰</button>`; }
+        acts += `<button onclick="sendFinEmail('${f['Invoice_ID']}')" title="Enviar E-mail" class="text-slate-400 hover:text-blue-400 transition-colors mx-1">✉️</button>`;
+        acts += `<button onclick="openFinModal('${f['Invoice_ID']}')" title="Editar" class="text-slate-400 hover:text-yellow-400 transition-colors mx-1">✏️</button>`;
+
+        return `
+        <tr class="border-b border-slate-800/50 hover:bg-slate-900/30 transition-colors">
+          <td class="py-4 font-bold text-slate-200">${f['Cliente'] || '-'}</td>
+          <td class="py-4 text-xs text-slate-400">${f['Descricao'] || '-'}</td>
+          <td class="py-4 text-xs text-slate-400">${vDateStr}</td>
+          <td class="py-4 text-xs font-bold text-slate-200">${f['Valor'] || '0'} <span class="text-[10px] text-slate-500 font-normal">${f['Moeda']||''}</span></td>
+          <td class="py-4"><span class="px-2 py-1 rounded text-[9px] uppercase font-bold border ${bgStatus} ${sColor}">${statText}</span></td>
+          <td class="py-4 text-right text-base">${acts}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    function openFinModal(finId = null) {
+      const select = document.getElementById('finLeadId');
+      select.innerHTML = '<option value="">Selecione um cliente...</option>' + allLeads.map(l => `<option value="${l['Lead ID']}">${l['Client Legal Name'] || l['Name']}</option>`).join('');
+      
+      if(finId) {
+        const f = allFin.find(x => x['Invoice_ID'] === finId);
+        document.getElementById('finId').value = finId;
+        document.getElementById('finLeadId').value = f['Lead_ID'] || '';
+        document.getElementById('finClienteNome').value = f['Cliente'] || '';
+        document.getElementById('finDesc').value = f['Descricao'] || '';
+        document.getElementById('finValor').value = f['Valor'] || '';
+        document.getElementById('finMoeda').value = f['Moeda'] || 'PLN';
+        let vDate = f['Vencimento']; if(vDate && vDate.includes('T')) vDate = vDate.split('T')[0];
+        document.getElementById('finVencimento').value = vDate || '';
+        document.getElementById('finStatus').value = f['Status'] || 'Pendente';
+        document.getElementById('btnDeleteFin').classList.remove('hidden');
+      } else {
+        document.getElementById('finId').value = '';
+        document.getElementById('finDesc').value = '';
+        document.getElementById('finValor').value = '';
+        document.getElementById('finVencimento').value = '';
+        document.getElementById('finStatus').value = 'Pendente';
+        document.getElementById('btnDeleteFin').classList.add('hidden');
+      }
+      document.getElementById('finModal').classList.remove('hidden'); document.getElementById('finModal').classList.add('flex');
+    }
+
+    function updateFinName() {
+      const select = document.getElementById('finLeadId');
+      document.getElementById('finClienteNome').value = select.options[select.selectedIndex].text;
+    }
+
+    async function saveFin(e) {
+      e.preventDefault();
+      const btn = document.getElementById('saveFinBtn'); btn.innerText = "⏳"; btn.disabled = true;
+      const finId = document.getElementById('finId').value;
+      const payload = {
+        action: finId ? 'updateFin' : 'addFin', token: SESSION_TOKEN, finId: finId,
+        data: {
+          'Lead_ID': document.getElementById('finLeadId').value, 'Cliente': document.getElementById('finClienteNome').value,
+          'Descricao': document.getElementById('finDesc').value, 'Valor': document.getElementById('finValor').value,
+          'Moeda': document.getElementById('finMoeda').value, 'Vencimento': document.getElementById('finVencimento').value, 'Status': document.getElementById('finStatus').value
+        }
+      };
+      try {
+        await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) });
+        closeModal('finModal'); loadData(true);
+      } catch(err) { alert(err.message); } finally { btn.innerText = "Salvar"; btn.disabled = false; }
+    }
+
+    async function markFinPaid(finId) {
+      try { await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'updateFin', token: SESSION_TOKEN, finId: finId, data: { 'Status': 'Pago' } }) }); loadData(true); } catch(e) { alert(e.message); }
+    }
+
+    async function deleteFin() {
+      if(!confirm("Excluir esta cobrança permanentemente?")) return;
+      try { await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'deleteFin', token: SESSION_TOKEN, finId: document.getElementById('finId').value }) }); closeModal('finModal'); loadData(true); } catch(e) { alert(e.message); }
+    }
+
+    async function sendFinEmail(finId) {
+      if(!confirm("Enviar e-mail de cobrança para o cliente?")) return;
+      try {
+        const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'sendFinEmail', token: SESSION_TOKEN, finId: finId }) });
+        const data = await res.json();
+        if(data.status==='ok') alert("E-mail enviado!"); else alert(data.message);
+      } catch(e) { alert(e.message); }
+    }
+
+    function exportFinReport() {
+      if (!allFin || allFin.length === 0) { alert("Não há dados financeiros."); return; }
+      let csvContent = "data:text/csv;charset=utf-8,ID,Cliente,Descricao,Vencimento,Valor,Moeda,Status\n";
+      allFin.forEach(f => {
+        let vDateStr = parseDateObj(f['Vencimento']) ? parseDateObj(f['Vencimento']).toLocaleDateString('pt-BR') : '-';
+        let row = [ f['Invoice_ID']||'', f['Cliente']?'"'+f['Cliente']+'"':'', f['Descricao']?'"'+f['Descricao']+'"':'', vDateStr, f['Valor']||0, f['Moeda']||'', f['Status']||'' ];
+        csvContent += row.join(",") + "\n";
+      });
+      const link = document.createElement("a"); link.setAttribute("href", encodeURI(csvContent));
+      link.setAttribute("download", `Relatorio_Financeiro_${new Date().toISOString().split('T')[0]}.csv`);
+      document.body.appendChild(link); link.click(); document.body.removeChild(link);
+    }
+
+    // ==========================================
+    // LÓGICA DO LIVE CHAT NO CRM
+    // ==========================================
+    async function loadChat() {
+      const history = document.getElementById('chatHistory');
+      try {
+        const response = await fetch(`${CHAT_API_URL}?action=getChat`);
+        const messages = await response.json();
+        
+        history.innerHTML = '';
+        if(!messages || messages.length === 0 || messages.status === 'error') {
+          history.innerHTML = '<div class="text-center text-slate-500 text-xs mt-10">Nenhuma mensagem no suporte ainda.</div>';
+          return;
+        }
+
+        // Toca som se estiver na aba e chegar mensagem nova (Admin não apita)
+        if(messages.length > lastChatCount && lastChatCount > 0) {
+          const lastMsg = messages[messages.length - 1];
+          if(lastMsg.Remetente !== 'Admin') {
+            notifSound.play().catch(e => console.log("Áudio bloqueado pelo navegador"));
+          }
+        }
+        lastChatCount = messages.length;
+
+        messages.forEach(msg => {
+          const isAdmin = msg.Remetente === 'Admin';
+          if (isAdmin) {
+            history.innerHTML += `
+              <div class="flex gap-2 justify-end msg-animate">
+                <div class="bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none shadow-sm text-sm">
+                  ${msg.Mensagem}
+                </div>
+              </div>`;
+          } else {
+            history.innerHTML += `
+              <div class="flex gap-2 msg-animate">
+                <div class="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex-shrink-0 flex items-center justify-center text-slate-300 text-xs font-bold"><span class="material-symbols-outlined text-[16px]">person</span></div>
+                <div>
+                  <div class="text-[9px] text-slate-500 mb-1 ml-1">${msg.Remetente} <span class="text-slate-700 ml-1">Sessão: ${msg.Sessao}</span></div>
+                  <div class="bg-slate-800 text-slate-200 p-3 rounded-2xl rounded-tl-none border border-slate-700 shadow-sm text-sm">
+                    ${msg.Mensagem}
+                  </div>
+                </div>
+              </div>`;
+          }
+        });
+        history.scrollTop = history.scrollHeight;
+      } catch(e) {
+        history.innerHTML = '<div class="text-center text-red-500 text-xs mt-10">Erro ao carregar o chat. Verifique a CHAT_API_URL.</div>';
+      }
+    }
+
+    async function sendAdminMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('adminChatInput');
+      const btn = document.getElementById('btnAdminSend');
+      const text = input.value.trim();
+      if(!text) return;
+
+      input.disabled = true; btn.disabled = true;
+      const history = document.getElementById('chatHistory');
+      history.innerHTML += `
+        <div class="flex gap-2 justify-end opacity-50" id="tempAdminMsg">
+          <div class="bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none shadow-sm text-sm">${text}</div>
+        </div>`;
+      history.scrollTop = history.scrollHeight;
+      input.value = '';
+
+      try {
+        await fetch(CHAT_API_URL, {
+          method: 'POST',
+          body: JSON.stringify({ action: 'sendChat', sender: 'Admin', session: 'Geral', message: text })
+        });
+        await loadChat(); 
+      } catch(error) {
+        const temp = document.getElementById('tempAdminMsg');
+        if(temp) temp.innerHTML = '<div class="text-red-500 text-[10px]">Erro de conexão.</div>';
+      } finally {
+        input.disabled = false; btn.disabled = false; input.focus();
+      }
+    }
+
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); document.getElementById(id).classList.remove('flex'); }
   </script>
+
+<!-- TELA DE LOGIN (LOGIN OVERLAY) -->
+<div id="loginOverlay" class="fixed inset-0 z-[100] bg-slate-950 flex items-center justify-center p-4">
+  <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl w-full max-w-sm text-center shadow-2xl">
+    <div class="w-16 h-16 rounded-full bg-blue-600/20 flex items-center justify-center text-blue-500 mx-auto mb-6 text-2xl">🔒</div>
+    <h2 class="text-white font-bold mb-6">Acesso ao ERP</h2>
+    <input type="password" id="loginPass" placeholder="Digite a senha..." class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-white mb-4 focus:border-blue-500 outline-none">
+    <button onclick="checkAuth()" id="loginBtn" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-lg transition-colors">Entrar</button>
+    <p id="loginError" class="text-red-500 text-xs mt-4 font-bold hidden"></p>
+  </div>
+</div>
+
+<script>
+  // Adicione esta função ao seu script
+  async function checkAuth() {
+    const pass = document.getElementById('loginPass').value;
+    const btn = document.getElementById('loginBtn');
+    const err = document.getElementById('loginError');
+    
+    btn.disabled = true; btn.innerText = "Verificando...";
+    
+    try {
+      const res = await fetch(`${API_URL}?action=login&password=${pass}`);
+      const data = await res.json();
+      if(data.status === 'success') {
+        document.getElementById('loginOverlay').classList.add('hidden');
+        localStorage.setItem('erp_auth', 'true'); // Lembra que você já logou
+      } else {
+        err.textContent = "Senha incorreta!";
+        err.classList.remove('hidden');
+        btn.disabled = false; btn.innerText = "Entrar";
+      }
+    } catch(e) { err.textContent = "Erro de conexão"; err.classList.remove('hidden'); btn.disabled = false; btn.innerText = "Entrar"; }
+  }
+
+  // Verifica se já estava logado antes de mostrar o login
+  if(localStorage.getItem('erp_auth') === 'true') {
+    document.getElementById('loginOverlay').classList.add('hidden');
+  }
+</script>
+
 </body>
 </html>
