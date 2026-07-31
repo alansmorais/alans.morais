@@ -338,6 +338,24 @@
         services: { ind: "Individual Session", coup: "Couples Therapy", cons: "Consultation" },
         modalTitle: "New Appointment", modalClient: "Client Name", modalService: "Service", modalResource: "Resource", modalStart: "Start Time", modalEnd: "End Time", btnCancel: "Cancel", btnSave: "Save",
         dayHeaders: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      br: {
+        navCalendar: "Calendário", navClients: "Clientes", navServices: "Serviços", navReports: "Relatórios",
+        viewMonth: "Mês", viewWeek: "Semana", viewDay: "Dia", viewList: "Lista",
+        btnNewAppt: "Novo Agendamento", filterStaff: "Profissionais", filterRooms: "Salas",
+        roles: { psych: "Psicólogo", ther: "Terapeuta", sex: "Sexólogo", room: "Sala" },
+        services: { ind: "Sessão Individual", coup: "Terapia de Casal", cons: "Consulta" },
+        modalTitle: "Novo Agendamento", modalClient: "Nome do Cliente", modalService: "Serviço", modalResource: "Recurso", modalStart: "Início", modalEnd: "Fim", btnCancel: "Cancelar", btnSave: "Salvar",
+        dayHeaders: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom']
+      },
+      es: {
+        navCalendar: "Calendario", navClients: "Clientes", navServices: "Servicios", navReports: "Reportes",
+        viewMonth: "Mes", viewWeek: "Semana", viewDay: "Día", viewList: "Lista",
+        btnNewAppt: "Nueva Cita", filterStaff: "Profesionales", filterRooms: "Salas",
+        roles: { psych: "Psicólogo", ther: "Terapeuta", sex: "Sexólogo", room: "Sala" },
+        services: { ind: "Sesión Individual", coup: "Terapia de Pareja", cons: "Consulta" },
+        modalTitle: "Nueva Cita", modalClient: "Nombre del Cliente", modalService: "Servicio", modalResource: "Recurso", modalStart: "Inicio", modalEnd: "Fin", btnCancel: "Cancelar", btnSave: "Guardar",
+        dayHeaders: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom']
       }
     };
 
@@ -417,7 +435,7 @@
       document.querySelectorAll('.subview').forEach(el => el.classList.remove('active'));
       document.getElementById('subview-' + subViewName).classList.add('active');
       currentActiveView = subViewName;
-      updateDateHeader(); // Update header logic based on view
+      updateDateHeader(); 
       renderCalendar();
     }
 
@@ -431,7 +449,36 @@
     document.getElementById('week-scroll-area').addEventListener('scroll', e => document.getElementById('week-headers').scrollLeft = e.target.scrollLeft);
 
     function initApp() {
-      document.getElementById('lang-select').value = currentLang;
+      // IP Geolocation for Auto-Language
+      fetch('https://get.geojs.io/v1/ip/country.json')
+        .then(response => response.json())
+        .then(data => {
+          const country = data.country;
+          if (country === 'BR') {
+            currentLang = 'br';
+          } else if (country === 'PL') {
+            currentLang = 'pl';
+          } else if (['ES', 'MX', 'AR', 'CO', 'CL', 'PE', 'VE', 'EC', 'GT', 'CU', 'BO', 'DO', 'HN', 'PY', 'SV', 'NI', 'CR', 'PA', 'UY', 'GQ'].includes(country)) {
+            currentLang = 'es';
+          } else {
+            currentLang = 'en'; 
+          }
+          document.getElementById('lang-select').value = currentLang;
+          applyTranslations(currentLang);
+          updateDateHeader();
+          renderMiniCalendar();
+          renderCalendar();
+        })
+        .catch(err => {
+          console.error('Geolocation failed. Defaulting to EN.', err);
+          currentLang = 'en';
+          document.getElementById('lang-select').value = 'en';
+          applyTranslations('en');
+          updateDateHeader();
+          renderMiniCalendar();
+          renderCalendar();
+        });
+
       applyTranslations(currentLang);
       updateDateHeader();
       renderMiniCalendar(); 
@@ -440,7 +487,7 @@
     }
 
     function updateDateHeader() {
-      const locale = (currentLang === 'en') ? 'en-GB' : 'pl-PL';
+      const locale = (currentLang === 'en') ? 'en-GB' : (currentLang === 'pl' ? 'pl-PL' : (currentLang === 'br' ? 'pt-BR' : 'es-ES'));
       let title = "";
       
       if (currentActiveView === 'day' || currentActiveView === 'list') {
@@ -462,7 +509,7 @@
     }
 
     function renderMiniCalendar() {
-      const locale = (currentLang === 'en') ? 'en-GB' : 'pl-PL';
+      const locale = (currentLang === 'en') ? 'en-GB' : (currentLang === 'pl' ? 'pl-PL' : (currentLang === 'br' ? 'pt-BR' : 'es-ES'));
       const monthFormatted = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(miniCalDate);
       document.getElementById('mini-cal-month').textContent = monthFormatted.charAt(0).toUpperCase() + monthFormatted.slice(1);
 
@@ -638,7 +685,7 @@
       });
     }
 
-    // --- NEW: WEEK VIEW RENDERING ---
+    // --- WEEK VIEW RENDERING ---
     function renderWeekView() {
       const headerContainer = document.getElementById('week-headers');
       headerContainer.innerHTML = '';
@@ -647,7 +694,6 @@
       const first = curr.getDate() - curr.getDay() + (curr.getDay() === 0 ? -6 : 1);
       const monday = new Date(curr.setDate(first));
 
-      // Generate 7 days columns
       for (let i = 0; i < 7; i++) {
         let colDate = new Date(monday);
         colDate.setDate(monday.getDate() + i);
@@ -672,7 +718,6 @@
       const linesLayer = document.getElementById('week-grid-lines');
       for (let i = 0; i < (END_HOUR - START_HOUR + 1); i++) { linesLayer.innerHTML += `<div class="grid-line"></div>`; }
 
-      // Map columns by Day of the Week instead of Resource
       for (let i = 0; i < 7; i++) {
         let colDate = new Date(monday);
         colDate.setDate(monday.getDate() + i);
@@ -687,7 +732,6 @@
           openModal('r1', minutesToTime(Math.floor(totalMins / 30) * 30), localDateStr);
         };
         
-        // Filter events for this specific day, and only for checked visible resources
         const visibleResIds = visibleResources.map(r => r.id);
         const dayEvents = allEvents.filter(e => isSameDay(colDate, e.date) && visibleResIds.includes(e.resourceId));
         
@@ -707,7 +751,7 @@
       }
     }
 
-    // --- NEW: MONTH VIEW RENDERING ---
+    // --- MONTH VIEW RENDERING ---
     function renderMonthView() {
       const daysHeader = document.getElementById('month-days-header');
       daysHeader.innerHTML = '';
@@ -727,12 +771,10 @@
       const daysInMonth = new Date(year, month + 1, 0).getDate();
       const daysInPrevMonth = new Date(year, month, 0).getDate();
       
-      // Draw Previous Month Trailing Days
       for (let i = firstDayIndex; i > 0; i--) {
         grid.innerHTML += `<div class="month-cell out-of-month"><div class="month-date-num">${daysInPrevMonth - i + 1}</div></div>`;
       }
       
-      // Draw Current Month Days
       for (let i = 1; i <= daysInMonth; i++) {
         let cellDate = new Date(year, month, i);
         let isToday = (i === today.getDate() && month === today.getMonth() && year === today.getFullYear());
@@ -740,11 +782,9 @@
         let cellContent = `<div class="month-cell" onclick="selectDate(${year}, ${month}, ${i}); switchViewTab(document.querySelectorAll('.view-tab')[2], 'day')">`;
         cellContent += `<div class="month-date-num ${isToday ? 'today' : ''}">${i}</div>`;
         
-        // Find events for this day
         const visibleResIds = visibleResources.map(r => r.id);
         const dayEvents = allEvents.filter(e => isSameDay(cellDate, e.date) && visibleResIds.includes(e.resourceId));
         
-        // Sort chronologically and display as tiny pills
         dayEvents.sort((a,b) => timeToMinutes(a.start) - timeToMinutes(b.start)).slice(0,4).forEach(evt => {
           cellContent += `<div class="month-evt-pill ${evt.theme}" style="background-color: transparent; border-left-color: inherit; color: inherit;">${evt.start} ${evt.client}</div>`;
         });
@@ -754,7 +794,6 @@
         grid.innerHTML += cellContent;
       }
       
-      // Draw Next Month Leading Days
       const totalRendered = firstDayIndex + daysInMonth;
       const remainingSlots = (Math.ceil(totalRendered / 7) * 7) - totalRendered;
       for (let i = 1; i <= remainingSlots; i++) {
@@ -770,7 +809,7 @@
       
       const todaysEvents = allEvents.filter(e => isSameDay(displayedDate, e.date));
       if (todaysEvents.length === 0) {
-        container.innerHTML = '<div class="p-8 text-center text-slate-400 font-medium">Brak wizyt na ten dzień. (No appointments today)</div>';
+        container.innerHTML = '<div class="p-8 text-center text-slate-400 font-medium">Brak wizyt na ten dzień. / No appointments today.</div>';
         return;
       }
       
@@ -800,7 +839,6 @@
       document.getElementById('inp-resource').value = resourceId;
       document.getElementById('inp-start').value = start;
       document.getElementById('inp-client').value = '';
-      // If clicked on week view, it passes the date. Otherwise use displayedDate.
       document.getElementById('inp-target-date').value = targetDateStr || toLocalISOString(displayedDate);
       document.getElementById('appt-modal').classList.add('active');
     }
