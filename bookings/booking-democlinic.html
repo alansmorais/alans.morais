@@ -237,7 +237,7 @@
   </div>
 
   <script>
-    // --- 1. TRANSLATION DICTIONARY (POLISH DEFAULT) ---
+    // --- 1. TRANSLATION DICTIONARY ---
     const i18n = {
       pl: {
         brandName: "Harmonia Mind", btnBookNav: "Umów wizytę", heroBadge: "Centrum Wsparcia",
@@ -321,18 +321,40 @@
       }
     };
 
-    // SET DEFAULT LANGUAGE TO POLISH
-    let currentLang = 'pl';
+    let currentLang = 'en'; // Global fallback
 
     function initApp() {
       // Set today's date as min for date picker
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('inp-date').min = today;
       document.getElementById('inp-date').value = today;
-      
-      document.getElementById('lang-select').value = currentLang;
-      applyTranslations(currentLang);
-      generateTimes(); // Generate initial time slots
+      generateTimes();
+
+      // Detect IP and set language automatically
+      fetch('https://get.geojs.io/v1/ip/country.json')
+        .then(response => response.json())
+        .then(data => {
+          const country = data.country;
+          
+          // Map country codes to your languages
+          if (country === 'BR') {
+            currentLang = 'br';
+          } else if (country === 'PL') {
+            currentLang = 'pl';
+          } else if (['ES', 'MX', 'AR', 'CO', 'CL', 'PE', 'VE', 'EC', 'GT', 'CU', 'BO', 'DO', 'HN', 'PY', 'SV', 'NI', 'CR', 'PA', 'UY', 'GQ'].includes(country)) {
+            currentLang = 'es';
+          } else {
+            currentLang = 'en'; // Rest of the world
+          }
+
+          document.getElementById('lang-select').value = currentLang;
+          applyTranslations(currentLang);
+        })
+        .catch(err => {
+          console.error('Geolocation failed. Defaulting to English.', err);
+          document.getElementById('lang-select').value = 'en';
+          applyTranslations('en');
+        });
     }
 
     function applyTranslations(lang) {
@@ -340,9 +362,7 @@
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (i18n[lang][key]) {
-          if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
-            // Keep placeholders intact but we could translate them if needed
-          } else {
+          if (el.tagName !== 'INPUT') {
             el.textContent = i18n[lang][key];
           }
         }
@@ -355,7 +375,6 @@
     }
 
     // --- 2. MODAL & BOOKING LOGIC ---
-
     function openBooking(specialistId = null) {
       if(specialistId) {
         document.getElementById('inp-resource').value = specialistId;
@@ -369,7 +388,6 @@
     }
 
     function selectService(el, serviceVal) {
-      // Handle custom radio card UI
       document.querySelectorAll('.select-card').forEach(c => c.classList.remove('selected'));
       el.classList.add('selected');
       el.querySelector('input').checked = true;
@@ -383,13 +401,11 @@
 
       document.getElementById(`step-${stepNum}`).style.display = 'block';
 
-      // Update Modal Title based on Step
       const titleEl = document.getElementById('modal-title');
       if(stepNum === 1) titleEl.textContent = i18n[currentLang].modalTitle1;
       if(stepNum === 2) titleEl.textContent = i18n[currentLang].modalTitle2;
       if(stepNum === 3) {
         titleEl.textContent = i18n[currentLang].modalTitle3;
-        // Summarize data for Step 3
         const selectedSrv = document.querySelector('input[name="service"]:checked').value;
         document.getElementById('sum-service').textContent = selectedSrv === 'ind' ? i18n[currentLang].srvInd : i18n[currentLang].srvMed;
         const date = document.getElementById('inp-date').value;
@@ -399,10 +415,9 @@
     }
 
     function generateTimes() {
-      // Mock generating time slots based on the date picked
       const container = document.getElementById('time-slots');
       container.innerHTML = '';
-      document.getElementById('inp-time').value = ''; // reset
+      document.getElementById('inp-time').value = '';
       document.getElementById('btn-to-step3').disabled = true;
 
       const times = ['09:00', '10:00', '11:30', '13:00', '14:30', '16:00', '17:30'];
@@ -422,11 +437,8 @@
     }
 
     // --- 3. BACKEND CONNECTION LOGIC ---
-    
-    // REPLACE THIS with your actual Google Apps Script Web App URL
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxZnhH6Byb_cg_bwPAtT9zua02OaWKLB-77xjZPRR81iwEjXm9PiK-rxr1fG6Vqpu_Qiw/exec'; 
 
-    // 2. ACTIVE BACKEND CONNECTION
     function submitToBackend(e) {
       e.preventDefault();
       
@@ -435,7 +447,6 @@
       btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Wysłanie...';
       btn.disabled = true;
 
-      // Construct Payload to match your Google Sheet headers
       const payload = {
         type: 'booking',
         client: document.getElementById('client-name').value,
@@ -447,7 +458,6 @@
         status: 'confirmed'
       };
 
-      // Send the data securely to Google Apps Script
       fetch(WEB_APP_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -455,7 +465,6 @@
         body: JSON.stringify(payload)
       })
       .then(() => {
-        // Hide Step 3, Show Success Step instantly
         document.getElementById('step-3').style.display = 'none';
         document.getElementById('step-success').style.display = 'block';
         document.getElementById('modal-title').textContent = i18n[currentLang].successTitle;
