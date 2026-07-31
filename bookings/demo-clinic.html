@@ -8,6 +8,8 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
     :root {
       --topbar-bg: #1e293b; 
       --sidebar-bg: #f8fafc;
@@ -50,20 +52,28 @@
     /* Sidebar */
     .sidebar { width: 260px; background: var(--sidebar-bg); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; flex-shrink: 0; overflow-y: auto; transition: transform 0.3s ease; }
     .calendar-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: white; }
-    .cal-headers { display: flex; padding-left: var(--time-col-width); border-bottom: 1px solid var(--border-color); background: white; z-index: 10; }
+    
+    /* FIX: New Unified Scrolling Layout */
+    .cal-wrapper { flex: 1; overflow: auto; display: flex; flex-direction: column; position: relative; background: white; }
+    .cal-inner { min-width: 100%; display: flex; flex-direction: column; flex: 1; }
+    
+    .cal-headers-row { display: flex; position: sticky; top: 0; z-index: 20; background: white; border-bottom: 1px solid var(--border-color); }
+    .time-col-corner { width: var(--time-col-width); flex-shrink: 0; position: sticky; left: 0; z-index: 21; background: white; border-right: 1px solid var(--border-color); }
+    .header-cols { display: flex; flex: 1; }
     .res-header { flex: 1; min-width: var(--res-col-min-width); padding: 12px; border-right: 1px solid var(--border-color); display: flex; align-items: center; gap: 10px; transition: 0.3s ease; }
-    .cal-body-scroll { flex: 1; overflow: auto; display: flex; position: relative; }
-    .time-col { width: var(--time-col-width); flex-shrink: 0; border-right: 1px solid var(--border-color); position: sticky; left: 0; background: white; z-index: 5; }
+
+    .cal-body-row { display: flex; flex: 1; position: relative; }
+    .time-col { width: var(--time-col-width); flex-shrink: 0; border-right: 1px solid var(--border-color); position: sticky; left: 0; background: white; z-index: 10; }
     .time-slot { height: var(--hour-height); position: relative; }
     .time-label { position: absolute; top: 0; right: 8px; transform: translateY(-50%); font-size: 11px; color: #94a3b8; font-weight: 500; }
     
     .grid-cols { display: flex; flex: 1; position: relative; }
     .res-col { flex: 1; min-width: var(--res-col-min-width); border-right: 1px solid var(--border-color); position: relative; cursor: crosshair; }
     .res-col:hover { background-color: rgba(248, 250, 252, 0.5); }
-    .grid-lines-layer { position: absolute; inset: 0; pointer-events: none; }
+    .grid-lines-layer { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
     .grid-line { height: var(--hour-height); border-bottom: 1px solid #f1f5f9; box-sizing: border-box; }
 
-    .event-block { position: absolute; left: 4px; right: 4px; border-radius: 6px; padding: 6px 8px; font-size: 11px; line-height: 1.4; overflow: hidden; border-left-width: 4px; border-left-style: solid; box-shadow: 0 1px 2px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.1s; }
+    .event-block { position: absolute; left: 4px; right: 4px; border-radius: 6px; padding: 6px 8px; font-size: 11px; line-height: 1.4; overflow: hidden; border-left-width: 4px; border-left-style: solid; box-shadow: 0 1px 2px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.1s; z-index: 2; }
     .event-block:hover { transform: scale(1.02); z-index: 10; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
     .evt-time { font-weight: 700; margin-bottom: 2px; opacity: 0.8; }
     .evt-title { font-weight: 600; font-size: 12px; margin-bottom: 2px; }
@@ -93,7 +103,7 @@
     .month-date-num.today { background-color: var(--primary); color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; float: right;}
     .month-evt-pill { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-left: 3px solid transparent;}
 
-    /* Mobile Responsive Fixes (RESTORED) */
+    /* Mobile Responsive Fixes */
     @media (max-width: 768px) {
       .mobile-menu-btn { display: block; }
       .topbar { padding: 0 8px; justify-content: space-between; }
@@ -216,31 +226,43 @@
         
         <!-- SUBVIEW: DAY -->
         <div id="subview-day" class="subview active">
-          <div class="cal-headers" id="day-headers"></div>
-          <div class="cal-body-scroll" id="day-scroll-area">
-            <div class="time-col" id="day-time-col"></div>
-            <div class="grid-cols" id="day-grid-cols">
-              <div class="grid-lines-layer" id="day-grid-lines"></div>
+          <div class="cal-wrapper">
+            <div class="cal-inner">
+              <div class="cal-headers-row">
+                <div class="time-col-corner"></div>
+                <div class="header-cols" id="day-headers"></div>
+              </div>
+              <div class="cal-body-row">
+                <div class="time-col" id="day-time-col"></div>
+                <div class="grid-cols" id="day-grid-cols">
+                  <div class="grid-lines-layer" id="day-grid-lines"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- SUBVIEW: WEEK -->
         <div id="subview-week" class="subview">
-          <div class="cal-headers" id="week-headers"></div>
-          <div class="cal-body-scroll" id="week-scroll-area">
-            <div class="time-col" id="week-time-col"></div>
-            <div class="grid-cols" id="week-grid-cols">
-              <div class="grid-lines-layer" id="week-grid-lines"></div>
+          <div class="cal-wrapper">
+            <div class="cal-inner">
+              <div class="cal-headers-row">
+                <div class="time-col-corner"></div>
+                <div class="header-cols" id="week-headers"></div>
+              </div>
+              <div class="cal-body-row">
+                <div class="time-col" id="week-time-col"></div>
+                <div class="grid-cols" id="week-grid-cols">
+                  <div class="grid-lines-layer" id="week-grid-lines"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- SUBVIEW: MONTH -->
         <div id="subview-month" class="subview bg-slate-50">
-          <!-- Month Header row (Mon, Tue, Wed...) -->
           <div id="month-days-header" style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 13px; color: #64748b; font-weight: 700; padding: 12px 0; background: white; border-bottom: 1px solid var(--border-color);"></div>
-          <!-- Month Grid -->
           <div id="month-grid" class="month-grid"></div>
         </div>
         
@@ -443,10 +465,6 @@
       document.getElementById('sidebar').classList.toggle('active');
       document.querySelector('.sidebar-overlay').classList.toggle('active');
     }
-
-    // Sync Horizontal Scrolling for Day and Week Views
-    document.getElementById('day-scroll-area').addEventListener('scroll', e => document.getElementById('day-headers').scrollLeft = e.target.scrollLeft);
-    document.getElementById('week-scroll-area').addEventListener('scroll', e => document.getElementById('week-headers').scrollLeft = e.target.scrollLeft);
 
     function initApp() {
       // IP Geolocation for Auto-Language
