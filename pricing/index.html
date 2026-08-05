@@ -27,11 +27,11 @@
         const esCountries = ['ES','MX','AR','CO','CL','PE','VE','EC','GT','CU','BO','DO','HN','PY','SV','NI','CR','PA','PR','UY','GQ'];
         
         let targetUrl = '/pricing/'; 
-        if (country === 'BR' || country === 'PT') targetUrl = '/pt/pricing/';
+        if (country === 'BR' || country === 'PT') targetUrl = '/br/pricing/';
         else if (country === 'PL') targetUrl = '/pl/pricing/';
         else if (esCountries.includes(country)) targetUrl = '/es/pricing/';
 
-        if (targetUrl === '/pt/pricing/' && !currentPath.includes('/pt/')) window.location.replace(targetUrl);
+        if (targetUrl === '/br/pricing/' && !currentPath.includes('/br/')) window.location.replace(targetUrl);
         else if (targetUrl === '/pl/pricing/' && !currentPath.includes('/pl/')) window.location.replace(targetUrl);
         else if (targetUrl === '/es/pricing/' && !currentPath.includes('/es/')) window.location.replace(targetUrl);
       } catch(e) {}
@@ -99,7 +99,7 @@
 
         <div class="flex items-center justify-end gap-3">
           <div class="hidden md:flex items-center gap-2">
-            <button onclick="switchLang('pt', 'BRL', '/pt/pricing/')" class="text-xs font-semibold text-slate-400 hover:text-blue-400 cursor-pointer">PT</button>
+            <button onclick="switchLang('pt', 'BRL', '/br/pricing/')" class="text-xs font-semibold text-slate-400 hover:text-blue-400 cursor-pointer">BR</button>
             <button onclick="switchLang('pl', 'PLN', '/pl/pricing/')" class="text-xs font-semibold text-slate-400 hover:text-blue-400 cursor-pointer">PL</button>
             <button onclick="switchLang('es', 'EUR', '/es/pricing/')" class="text-xs font-semibold text-slate-400 hover:text-blue-400 cursor-pointer">ES</button>
             <button onclick="switchLang('en', 'EUR', '/pricing/')" class="text-xs font-bold text-blue-500 cursor-pointer">EN</button>
