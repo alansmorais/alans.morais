@@ -5,21 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AlanSM Solutions | Automação de Negócios e Sistemas Digitais</title>
 
-  <link rel="icon" type="image/svg+xml" href="https://alansmsolutions.com/images/logo.svg" />
+  <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" />
 
   <meta name="description" content="AlanSM Solutions cria automação de negócios, sistemas de agendamento privado, plataformas de pedidos DeliveryHub, fluxos de CRM e sistemas digitais para pequenas empresas e clientes remotos." />
   <meta name="robots" content="index, follow" />
 
   <link rel="alternate" hreflang="en" href="https://alansmsolutions.com/" />
-  <link rel="alternate" hreflang="pt-br" href="https://alansmsolutions.com/br/" />
+  <link rel="alternate" hreflang="pt-br" href="https://alansmsolutions.com/pt/" />
   <link rel="alternate" hreflang="pl" href="https://alansmsolutions.com/pl/" />
+  <link rel="alternate" hreflang="es" href="https://alansmsolutions.com/es/" />
   <link rel="alternate" hreflang="x-default" href="https://alansmsolutions.com/" />
-  <link rel="canonical" href="https://alansmsolutions.com/br/"/>
+  <link rel="canonical" href="https://alansmsolutions.com/pt/"/>
 
   <meta property="og:title" content="AlanSM Solutions | Automação de Negócios e Sistemas Digitais" />
   <meta property="og:description" content="AlanSM Solutions cria automação de negócios, sistemas de agendamento privado, plataformas de pedidos DeliveryHub, fluxos de CRM e sistemas digitais para pequenas empresas e clientes remotos." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://alansmsolutions.com/br/" />
+  <meta property="og:url" content="https://alansmsolutions.com/pt/" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="AlanSM Solutions | Automação de Negócios e Sistemas Digitais" />
@@ -30,7 +31,7 @@
 
   <script>
     (function() {
-      // Redirection logic simplified for the /br/ path.
+      // Redirection logic simplified for the /pt/ path.
       // If a user explicitly clicks a language toggle, we redirect them.
       var params = new URLSearchParams(window.location.search || '');
       var langParam = (params.get('lang') || '').toLowerCase();
@@ -48,239 +49,78 @@
         window.location.replace('/pl/');
         return;
       }
+
+      if (langParam === 'es') {
+        localStorage.setItem('preferredLanguage', 'es');
+        localStorage.setItem('preferredCurrency', 'EUR');
+        window.location.replace('/es/');
+        return;
+      }
       
-      // Since we are already on the BR page, set the defaults to PT/BRL
+      // Since we are already on the PT page, set the defaults to PT/BRL
       // if they haven't explicitly set something else.
       if (!localStorage.getItem('preferredLanguage')) {
         localStorage.setItem('preferredLanguage', 'pt');
+        localStorage.setItem('preferredCurrency', 'BRL');
       }
     })();
+
+    function switchLang(lang, currency, url) {
+      localStorage.setItem('user_lang', lang);
+      localStorage.setItem('preferredLanguage', lang);
+      if(currency) localStorage.setItem('preferredCurrency', currency);
+      window.location.href = url;
+    }
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background-color: #020617; 
-      color: #f8fafc; 
-    }
+    body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
     :focus-visible { outline: 2px solid #60a5fa; outline-offset: 3px; }
     .modal-backdrop { background: rgba(15, 23, 42, 0.35); backdrop-filter: blur(4px); }
     .fade-up { animation: fadeUp 0.6s ease-out both; }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   
-    .price-panel { background: #f1f5f9; border: 1px solid #cbd5e1; box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08); }
-    .price-value { color: #0f172a !important; font-weight: 800; letter-spacing: -0.04em; }
-    .soft-section { background: #f8fafc; border-color: #cbd5e1; }
-    .soft-card { background: #ffffff; border-color: #dbe3ee; }
-    .pilot-highlight { background: #ecfdf5; border-color: #bbf7d0; }
-
     .section-shell { max-width: 80rem; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; }
-    .panel-muted { background: #f4f7fb; border: 1px solid #cbd5e1; }
-    .panel-white { background: #ffffff; border: 1px solid #dbe3ee; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06); }
-    .price-panel { background: #eaf1f8; border: 1px solid #b8c6d8; box-shadow: 0 18px 40px rgba(15, 23, 42, 0.10); }
-    .price-value { color: #0f172a !important; font-weight: 850; letter-spacing: -0.04em; }
-    .pilot-highlight { background: #e8f8ef; border: 1px solid #a7e7bd; }
-    .balanced-card { height: 100%; display: flex; flex-direction: column; }
-    .balanced-card p:last-child { margin-bottom: 0; }
-
-    .ib-section { background: #f3f7fb; }
-    .ib-card { background: #ffffff; border: 1px solid #d7e0ea; box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06); }
-    .ib-card:hover { border-color: #93c5fd; transform: translateY(-2px); }
-    .ib-card { transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
-    .solution-icon { width: 3rem; height: 3rem; display: flex; align-items: center; justify-content: center; border-radius: .9rem; background: #eff6ff; font-size: 1.5rem; }
-    .product-card-grid { align-items: stretch; }
-    .product-copy, .product-price { height: 100%; }
-    .product-price { display: flex; flex-direction: column; justify-content: space-between; }
-    .cta-panel { display: flex; align-items: stretch; }
-    @media (max-width: 1023px) {
-      .product-copy, .product-price { height: auto; }
-      .cta-panel { display: block; }
-    }
-
-    .top-info-bar { background: #1d4ed8; color: #eff6ff; }
-    .main-nav-shell { background: rgba(255,255,255,0.97); backdrop-filter: blur(8px); }
-    .mobile-drawer-link { display:block; padding: 0.95rem 0; font-size: 1.25rem; line-height: 1.6rem; font-weight: 600; color:#334155; border-bottom:1px solid #e2e8f0; }
-    .mobile-drawer-link:last-child { border-bottom: none; }
-    .nav-icon-btn { width: 3rem; height: 3rem; border: 1px solid #dbe3ee; border-radius: 0.75rem; display:flex; align-items:center; justify-content:center; background:#fff; }
-    .menu-line { width: 1.35rem; height: 2px; background:#64748b; border-radius: 999px; display:block; }
-    .menu-line + .menu-line { margin-top: 0.28rem; }
-
-    .hero-banner {
-      background:
-        linear-gradient(rgba(15,23,42,.55), rgba(15,23,42,.60)),
-        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-      min-height: 440px;
-    }
-    .section-title-ib {
-      font-size: .8rem;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: #2563eb;
-      font-weight: 800;
-    }
-    .solution-box {
-      background: #fff;
-      border: 1px solid #dbe3ee;
-      border-radius: 1rem;
-      box-shadow: 0 12px 28px rgba(15,23,42,.05);
-      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-    }
-    .solution-box:hover {
-      transform: translateY(-3px);
-      border-color: #93c5fd;
-      box-shadow: 0 18px 32px rgba(15,23,42,.08);
-    }
-    .solution-icon-lg {
-      width: 4.5rem;
-      height: 4.5rem;
-      border-radius: 999px;
-      background: #eff6ff;
-      color: #1d4ed8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin: 0 auto 1rem;
-    }
-    .about-panel {
-      background:#ffffff;
-      border:1px solid #dbe3ee;
-      border-radius:1rem;
-      box-shadow:0 10px 28px rgba(15,23,42,.05);
-    }
-
-/* AlanSM dark final override */
-
-    .top-info-bar { background: #020617; color: #cbd5e1; border-bottom: 1px solid #1e293b; }
-    .main-nav-shell { background: rgba(2, 6, 23, 0.96); backdrop-filter: blur(8px); border-color: #1e293b; }
-    .hero-banner {
-      background:
-        linear-gradient(rgba(2,6,23,.70), rgba(2,6,23,.78)),
-        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-      min-height: 550px;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-banner::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-banner .max-w-7xl {
-      position: relative;
-      z-index: 10;
-    }
-    .section-title-ib {
-      font-size: .8rem;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      color: #3b82f6;
-      font-weight: 800;
-    }
-    .solution-box {
-      background: #0f172a;
-      border: 1px solid #1e293b;
-      border-radius: 1.25rem;
-      box-shadow: 0 18px 40px rgba(0,0,0,.20);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .solution-box:hover {
-      transform: translateY(-8px);
-      border-color: #3b82f6;
-      box-shadow: 0 25px 50px -12px rgba(37,99,235,0.25);
-    }
-    .solution-icon-lg {
-      width: 4.5rem;
-      height: 4.5rem;
-      border-radius: 999px;
-      background: #020617;
-      color: #60a5fa;
-      border: 1px solid #1e293b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin: 0 auto 1rem;
-    }
-    .about-panel {
-      background:#0f172a;
-      border:1px solid #1e293b;
-      border-radius:1rem;
-      box-shadow:0 18px 40px rgba(0,0,0,.20);
-    }
-    .price-panel {
-      background: #0f172a;
-      border: 1px solid #3b82f6;
-      box-shadow: 0 20px 50px rgba(37,99,235,0.15);
-      position: relative;
-    }
+    .price-panel { background: #0f172a; border: 1px solid #3b82f6; box-shadow: 0 20px 50px rgba(37,99,235,0.15); position: relative; }
     .price-panel::before {
-      content: 'Mais Popular';
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #3b82f6;
-      color: white;
-      padding: 4px 16px;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      content: 'Mais Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: #3b82f6; color: white; padding: 4px 16px; border-radius: 999px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
     }
     .price-value { color: #60a5fa !important; font-weight: 850; letter-spacing: -0.04em; }
     .pilot-highlight { background: #0f172a; border: 1px solid #1e293b; }
+    .product-card-grid { align-items: stretch; }
+    .product-copy, .product-price { height: 100%; }
+    .product-price { display: flex; flex-direction: column; justify-content: space-between; }
+    @media (max-width: 1023px) { .product-copy, .product-price { height: auto; } }
+
+    .top-info-bar { background: #020617; color: #cbd5e1; border-bottom: 1px solid #1e293b; }
+    .main-nav-shell { background: rgba(2, 6, 23, 0.96); backdrop-filter: blur(8px); border-color: #1e293b; }
     .mobile-drawer-link { display:block; padding: 0.95rem 0; font-size: 1.15rem; line-height: 1.6rem; font-weight: 600; color:#cbd5e1; border-bottom:1px solid #1e293b; }
     .mobile-drawer-link:last-child { border-bottom: none; }
     .nav-icon-btn { width: 3rem; height: 3rem; border: 1px solid #334155; border-radius: 0.75rem; display:flex; align-items:center; justify-content:center; background:#0f172a; }
     .menu-line { width: 1.35rem; height: 2px; background:#cbd5e1; border-radius: 999px; display:block; }
     .menu-line + .menu-line { margin-top: 0.28rem; }
 
-    .hero-consultation-btn {
-      background: rgba(15, 23, 42, 0.92) !important;
-      color: #ffffff !important;
-      border: 1px solid #3b82f6 !important;
+    .hero-banner {
+      background: linear-gradient(rgba(2,6,23,.70), rgba(2,6,23,.78)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      min-height: 550px; display: flex; align-items: center; position: relative; overflow: hidden;
     }
-    .hero-consultation-btn:hover {
-      background: #2563eb !important;
+    .hero-banner::after {
+      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%); pointer-events: none;
     }
-
+    .hero-banner .max-w-7xl { position: relative; z-index: 10; }
+    .section-title-ib { font-size: .8rem; letter-spacing: .22em; text-transform: uppercase; color: #3b82f6; font-weight: 800; }
+    
+    .solution-box { background: #0f172a; border: 1px solid #1e293b; border-radius: 1.25rem; box-shadow: 0 18px 40px rgba(0,0,0,.20); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .solution-box:hover { transform: translateY(-8px); border-color: #3b82f6; box-shadow: 0 25px 50px -12px rgba(37,99,235,0.25); }
+    .solution-icon-lg { width: 4.5rem; height: 4.5rem; border-radius: 999px; background: #020617; color: #60a5fa; border: 1px solid #1e293b; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1rem; }
+    .about-panel { background:#0f172a; border:1px solid #1e293b; border-radius:1rem; box-shadow:0 18px 40px rgba(0,0,0,.20); }
+    .hero-consultation-btn { background: rgba(15, 23, 42, 0.92) !important; color: #ffffff !important; border: 1px solid #3b82f6 !important; }
+    .hero-consultation-btn:hover { background: #2563eb !important; }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "AlanSM Solutions",
-    "url": "https://alansmsolutions.com/br/",
-    "logo": "https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg",
-    "email": "kontakt@alansmsolutions.com",
-    "areaServed": ["Poland", "Brazil", "European Union", "Remote"],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Kraków",
-      "addressCountry": "PL"
-    },
-    "description": "Automação de negócios, sistemas de agendamento privado, sistemas de pedidos DeliveryHub, fluxos de CRM e sistemas digitais para pequenas empresas.",
-    "priceRange": "$$",
-    "image": "https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg",
-    "sameAs": [
-      "https://www.linkedin.com/in/alandasm",
-      "https://github.com/alansmorais"
-    ]
-  }
-  </script>
 
   <!-- FAQ Schema for Rich Snippets -->
   <script type="application/ld+json">
@@ -316,7 +156,6 @@
 
 <body class="antialiased selection:bg-blue-100 selection:text-blue-900" style="padding-top: 132px;">
 
-
 <div class="fixed top-0 inset-x-0 z-50">
   <div class="top-info-bar">
     <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] md:text-[13px] text-center">
@@ -329,9 +168,6 @@
         <a href="https://www.instagram.com/alansmsolutions/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="AlanSM Solutions Instagram">
           <svg fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path></svg>
         </a>
-        <a href="https://www.instagram.com/alanmoraissss/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Alan Personal Instagram">
-          <svg fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path></svg>
-        </a>
         <a href="https://www.facebook.com/alankmorais" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Alan Facebook">
           <svg fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path></svg>
         </a>
@@ -341,7 +177,7 @@
 
   <nav class="main-nav-shell border-b border-slate-800 shadow-sm">
     <div class="max-w-7xl mx-auto px-6 h-[88px] grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4">
-      <a href="#top" class="flex items-center gap-3 md:gap-4 min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded" aria-label="AlanSM Solutions home">
+      <a href="/pt/" class="flex items-center gap-3 md:gap-4 min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded" aria-label="AlanSM Solutions home">
         <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="AlanSM Solutions logo" width="56" height="56" fetchpriority="high" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-700 bg-slate-950 object-cover" />
         <div class="flex flex-col justify-center min-w-0">
           <span class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-100 leading-none truncate">AlanSM Solutions</span>
@@ -350,19 +186,20 @@
       </a>
 
       <div class="hidden lg:flex items-center justify-center gap-8">
-        <a href="#top" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Início</a>
-        <a href="#solutions" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Soluções</a>
-        <a href="#services-pricing" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Produtos</a>
-        <a href="/portfolio.html" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">CV / Portfólio</a>
-        <a href="#faq" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">FAQ</a>
+        <a href="/pt/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Início</a>
+        <a href="/products/booking-system/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Soluções</a>
+        <a href="/pricing/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Preços</a>
+        <a href="/portfolio/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">CV / Portfólio</a>
+        <a href="/resources/faq/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">FAQ</a>
         <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contato</button>
       </div>
 
       <div class="flex items-center justify-end gap-3">
         <div class="hidden md:flex items-center gap-3">
-          <a href="/?lang=en" onclick="localStorage.setItem('preferredLanguage', 'en'); localStorage.setItem('preferredCurrency', 'USD');" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">EN</a>
-          <a href="/pl/" onclick="localStorage.setItem('preferredLanguage', 'pl'); localStorage.setItem('preferredCurrency', 'PLN');" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</a>
-          <a href="#top" class="text-xs font-semibold text-blue-500">BR</a>
+          <button onclick="switchLang('pt', 'BRL', '/pt/')" class="text-xs font-semibold text-blue-500">BR</button>
+          <button onclick="switchLang('pl', 'PLN', '/pl/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</button>
+          <button onclick="switchLang('es', 'EUR', '/es/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">ES</button>
+          <button onclick="switchLang('en', 'USD', '/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">EN</button>
           <span id="currencyAutoLabel" class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">BRL auto</span>
         </div>
 
@@ -380,18 +217,19 @@
 
   <div id="mobileMenu" class="hidden lg:hidden bg-slate-950 border-b border-slate-800 shadow-sm">
     <div class="px-6 py-5">
-      <a href="#top" class="mobile-drawer-link" onclick="closeMobileMenu()">Início</a>
-      <a href="#solutions" class="mobile-drawer-link" onclick="closeMobileMenu()">Soluções</a>
-      <a href="#services-pricing" class="mobile-drawer-link" onclick="closeMobileMenu()">Produtos</a>
-      <a href="/portfolio.html" class="mobile-drawer-link" onclick="closeMobileMenu()">CV / Portfólio</a>
-      <a href="#faq" class="mobile-drawer-link" onclick="closeMobileMenu()">FAQ</a>
+      <a href="/pt/" class="mobile-drawer-link" onclick="closeMobileMenu()">Início</a>
+      <a href="/products/booking-system/" class="mobile-drawer-link" onclick="closeMobileMenu()">Soluções</a>
+      <a href="/pricing/" class="mobile-drawer-link" onclick="closeMobileMenu()">Preços</a>
+      <a href="/portfolio/" class="mobile-drawer-link" onclick="closeMobileMenu()">CV / Portfólio</a>
+      <a href="/resources/faq/" class="mobile-drawer-link" onclick="closeMobileMenu()">FAQ</a>
       <button type="button" class="mobile-drawer-link text-left w-full" onclick="closeMobileMenu(); openContactForm('offer', 'introductory_offer');">Contato</button>
 
       <div class="pt-5 mt-5 border-t border-slate-800 flex items-center justify-between gap-3">
         <div class="flex items-center gap-3">
-          <a href="/?lang=en" onclick="localStorage.setItem('preferredLanguage', 'en'); localStorage.setItem('preferredCurrency', 'USD');" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">EN</a>
-          <a href="/pl/" onclick="localStorage.setItem('preferredLanguage', 'pl'); localStorage.setItem('preferredCurrency', 'PLN');" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</a>
-          <a href="#top" class="text-xs font-semibold text-blue-500">BR</a>
+          <button onclick="switchLang('pt', 'BRL', '/pt/')" class="text-xs font-semibold text-blue-500">BR</button>
+          <button onclick="switchLang('pl', 'PLN', '/pl/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</button>
+          <button onclick="switchLang('es', 'EUR', '/es/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">ES</button>
+          <button onclick="switchLang('en', 'USD', '/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">EN</button>
         </div>
         <span id="currencyAutoLabelMobile" class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">BRL auto</span>
       </div>
@@ -419,8 +257,6 @@
   </div>
 </header>
 
-
-  
 <section class="py-16 bg-slate-950 border-b border-slate-800">
   <div class="max-w-7xl mx-auto px-6">
     <div class="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 items-start">
@@ -460,8 +296,6 @@
   </div>
 </section>
 
-
-  
 <section id="solutions" class="py-16 bg-slate-900 border-b border-slate-800 scroll-mt-28">
   <div class="max-w-7xl mx-auto px-6">
     <div class="text-center max-w-3xl mx-auto mb-12">
@@ -567,455 +401,453 @@
   </div>
 </section>
 
+<section id="pricing" class="py-16 bg-slate-950 border-t border-slate-800 scroll-mt-28">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-12 text-center max-w-3xl mx-auto">
+      <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-3">Soluções Produtizadas</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-100">Opções de Produtos e Pacotes de Negócios</h2>
+      <p class="text-slate-400 text-sm md:text-base leading-relaxed">Estas opções produtizadas estão dentro do portfólio mais amplo da AlanSM. Projetos customizados de automação, consultoria e sites são orçados separadamente após uma breve análise.</p>
+    </div>
 
-  <section id="services-pricing" class="py-16 bg-slate-950 border-t border-slate-800 scroll-mt-28">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="mb-12 text-center max-w-3xl mx-auto">
-        <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-3">Soluções Produtizadas</h2>
-        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-slate-100">Opções de Produtos e Pacotes de Negócios</h2>
-        <p class="text-slate-400 text-sm md:text-base leading-relaxed">Estas opções produtizadas estão dentro do portfólio mais amplo da AlanSM. Projetos customizados de automação, consultoria e sites são orçados separadamente após uma breve análise.</p>
+    <div class="bg-slate-900 border border-slate-800 rounded-xl p-8 shadow-sm mb-12 grid lg:grid-cols-[1fr_20rem] gap-8 product-card-grid relative overflow-hidden">
+      <div class="absolute top-0 right-0 bg-green-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-bl-lg z-10">Piloto para Pequenas Empresas • vagas limitadas</div>
+      <div class="product-copy">
+        <h3 class="text-xl md:text-2xl font-bold mb-3 text-slate-100">Sistema de Agendamento Privado</h3>
+        <p class="text-slate-400 mb-5 text-sm md:text-base leading-relaxed">Um sistema de agendamento privado para empresas de serviços que desejam reservas diretas, controle de clientes e uma experiência de agendamento com a própria marca sem enviar os clientes para marketplaces públicos.</p>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 mb-6">
+          <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Site responsivo de página única</li>
+          <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Integração do sistema de agendamento</li>
+          <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Formulário de contato</li>
+          <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Integração com Google Maps</li>
+          <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Configuração básica de SEO</li>
+          <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Conexão com domínio existente</li>
+          <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Suporte no lançamento</li>
+        </ul>
+        <p class="text-xs text-slate-500 leading-relaxed">Preço de integração do piloto está disponível para os primeiros projetos selecionados. A configuração é discutida após a análise do escopo. Renovação de domínio, ferramentas de agendamento pagas, e-mail corporativo e assinaturas de terceiros são cobrados separadamente.</p>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 mt-5 shadow-sm">
+          <p class="text-xs uppercase tracking-[0.2em] text-green-500 font-bold mb-2">Por que agendamento privado?</p>
+          <ul class="text-xs text-slate-400 space-y-2">
+            <li>• Sem comissão por agendamento</li>
+            <li>• Os clientes permanecem na experiência da sua marca</li>
+            <li>• Sem sugestões de concorrentes durante a reserva</li>
+            <li>• Manutenção mensal previsível a partir de <span data-eur-price="15">60 PLN</span> / mês</li>
+          </ul>
+        </div>
+      </div>
+      <div class="product-price price-panel rounded-lg p-6 text-left">
+        <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Mensalidade a partir de</p>
+        <div class="mb-1 text-3xl price-value"><span data-eur-price="15">60 PLN</span> / mo</div>
+        <p class="text-xs text-green-400 font-semibold mb-4">Configuração discutida após análise</p>
+
+        <div class="pilot-highlight border rounded-lg p-3 mb-4">
+          <p class="text-[10px] uppercase tracking-wider text-green-400 font-bold mb-1">Disponibilidade do piloto</p>
+          <p id="discountCounterText" class="text-xs text-slate-300">Verificando disponibilidade...</p>
+        </div>
+
+        <div class="space-y-3 mb-4">
+          <label class="block">
+            <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Categoria da empresa</span>
+            <select id="bookingCategorySelect" onchange="updateBookingPilotPrice()" class="w-full bg-slate-950 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-blue-600">
+              <option value="solo">Solo / Microempresa</option>
+              <option value="small">Pequena Equipe, 2–10 funcionários</option>
+              <option value="medium">Salão Médio / Equipe Multisserviços</option>
+            </select>
+          </label>
+
+          <label class="block">
+            <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Plano de manutenção</span>
+            <select id="bookingPlanSelect" onchange="updateBookingPilotPrice()" class="w-full bg-slate-950 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-blue-600">
+              <option value="3">3 meses</option>
+              <option value="6">6 meses</option>
+              <option value="12">12 meses — economia</option>
+              <option value="24" selected>24 meses — maior economia</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 mb-4">
+          <p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Mensalidade estimada</p>
+          <div id="bookingMonthlyPrice" class="text-2xl price-value"><span data-eur-price="15">60 PLN</span> / mo</div>
+          <p id="bookingSavingsText" class="text-xs text-slate-400 mt-1">Mensalidade inicial para solo/microempresas</p>
+        </div>
+
+        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+          A manutenção mensal começa em <strong class="text-slate-100" data-eur-price="15">60 PLN</strong> para solo/microempresas. A configuração do piloto é discutida após a revisão do escopo.
+        </p>
+
+        <button type="button" onclick="openContactForm('light_booking', 'custom_quote')" class="w-full bg-slate-800 border border-blue-700 hover:bg-blue-700 text-slate-100 font-medium py-2.5 rounded-lg transition-colors focus:outline-none mt-auto">Solicitar Consultoria</button>
+      </div>
+    </div>
+
+    <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-sm md:p-8 mb-12 shadow-sm">
+      <div class="text-center max-w-3xl mx-auto mb-8">
+        <p class="text-xs uppercase tracking-[0.2em] text-green-500 font-bold mb-3">Recursos locais essenciais inclusos</p>
+        <h3 class="text-2xl md:text-3xl font-bold text-slate-100 mb-3">Uma Alternativa Privada aos Marketplaces de Agendamento</h3>
+        <p class="text-slate-400 text-sm md:text-base leading-relaxed">
+          Um modelo de agendamento focado em soluções para pequenas empresas que desejam sua própria experiência de reservas, custos previsíveis e mais controle sobre a jornada do cliente.
+        </p>
       </div>
 
-      <div class="bg-slate-900 border border-slate-800 rounded-xl p-8 shadow-sm mb-12 grid lg:grid-cols-[1fr_20rem] gap-8 product-card-grid relative overflow-hidden">
-        <div class="absolute top-0 right-0 bg-green-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-bl-lg z-10">Piloto para Pequenas Empresas • vagas limitadas</div>
-        <div class="product-copy">
-          <h3 class="text-xl md:text-2xl font-bold mb-3 text-slate-100">Sistema de Agendamento Privado</h3>
-          <p class="text-slate-400 mb-5 text-sm md:text-base leading-relaxed">Um sistema de agendamento privado para empresas de serviços que desejam reservas diretas, controle de clientes e uma experiência de agendamento com a própria marca sem enviar os clientes para marketplaces públicos.</p>
-          <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 mb-6">
-            <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Site responsivo de página única</li>
-            <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Integração do sistema de agendamento</li>
-            <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Formulário de contato</li>
-            <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Integração com Google Maps</li>
-            <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Configuração básica de SEO</li>
-            <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Conexão com domínio existente</li>
-            <li class="flex items-start"><span class="text-green-500 mr-2 font-bold">•</span>Suporte no lançamento</li>
-          </ul>
-          <p class="text-xs text-slate-500 leading-relaxed">Preço de integração do piloto está disponível para os primeiros projetos selecionados. A configuração é discutida após a análise do escopo. Renovação de domínio, ferramentas de agendamento pagas, e-mail corporativo e assinaturas de terceiros são cobrados separadamente.</p>
+      <div class="grid md:grid-cols-3 gap-5">
+        <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
+          <div class="text-2xl mb-3" aria-hidden="true">💳</div>
+          <h4 class="text-base font-bold text-slate-100 mb-2">Sem Comissões por Agendamento</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Você paga uma taxa previsível de configuração ou manutenção mensal, independentemente de quantos horários seus clientes reservem pelo seu próprio site.</p>
+        </article>
 
-          <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 mt-5 shadow-sm">
-            <p class="text-xs uppercase tracking-[0.2em] text-green-500 font-bold mb-2">Por que agendamento privado?</p>
-            <ul class="text-xs text-slate-400 space-y-2">
-              <li>• Sem comissão por agendamento</li>
-              <li>• Os clientes permanecem na experiência da sua marca</li>
-              <li>• Sem sugestões de concorrentes durante a reserva</li>
-              <li>• Manutenção mensal previsível a partir de <span data-eur-price="15">60 PLN</span> / mês</li>
-            </ul>
-          </div>
-        </div>
-        <div class="product-price price-panel rounded-lg p-6 text-left">
-          <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Mensalidade a partir de</p>
-          <div class="mb-1 text-3xl price-value"><span data-eur-price="15">60 PLN</span> / mo</div>
-          <p class="text-xs text-green-400 font-semibold mb-4">Configuração discutida após análise</p>
+        <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
+          <div class="text-2xl mb-3" aria-hidden="true">🤝</div>
+          <h4 class="text-base font-bold text-slate-100 mb-2">Seus Clientes Permanecem Seus</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Os clientes não veem empresas concorrentes durante a jornada de reserva. A experiência permanece focada na sua marca, serviços e disponibilidade.</p>
+        </article>
 
-          <div class="pilot-highlight border rounded-lg p-3 mb-4">
-            <p class="text-[10px] uppercase tracking-wider text-green-400 font-bold mb-1">Disponibilidade do piloto</p>
-            <p id="discountCounterText" class="text-xs text-slate-300">Verificando disponibilidade...</p>
-          </div>
+        <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
+          <div class="text-2xl mb-3" aria-hidden="true">📲</div>
+          <h4 class="text-base font-bold text-slate-100 mb-2">Fluxo de Reserva Direto</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Os clientes podem agendar através do seu site, link do Instagram, perfil do Google ou fluxo de mensagem direta sem serem direcionados para um marketplace público.</p>
+        </article>
 
-          <div class="space-y-3 mb-4">
-            <label class="block">
-              <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Categoria da empresa</span>
-              <select id="bookingCategorySelect" onchange="updateBookingPilotPrice()" class="w-full bg-slate-950 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-blue-600">
-                <option value="solo">Solo / Microempresa</option>
-                <option value="small">Pequena Equipe, 2–10 funcionários</option>
-                <option value="medium">Salão Médio / Equipe Multisserviços</option>
-              </select>
-            </label>
+        <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
+          <div class="text-2xl mb-3" aria-hidden="true">🌍</div>
+          <h4 class="text-base font-bold text-slate-100 mb-2">Pronto para Pagamentos Locais</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Quando necessário, o sistema pode ser preparado para provedores de pagamento regionais (Europa/Brasil) ou links de pagamento externos, dependendo do escopo do projeto.</p>
+        </article>
 
-            <label class="block">
-              <span class="block text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Plano de manutenção</span>
-              <select id="bookingPlanSelect" onchange="updateBookingPilotPrice()" class="w-full bg-slate-950 border border-slate-700 text-slate-100 text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-blue-600">
-                <option value="3">3 meses</option>
-                <option value="6">6 meses</option>
-                <option value="12">12 meses — economia</option>
-                <option value="24" selected>24 meses — maior economia</option>
-              </select>
-            </label>
-          </div>
+        <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
+          <div class="text-2xl mb-3" aria-hidden="true">📉</div>
+          <h4 class="text-base font-bold text-slate-100 mb-2">Custo Previsível a Longo Prazo</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Para muitas pequenas empresas, um agendamento privado com manutenção mensal pode ser mais fácil de planejar do que taxas recorrentes de plataforma que crescem com o tamanho da equipe.</p>
+        </article>
 
-          <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 mb-4">
-            <p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Mensalidade estimada</p>
-            <div id="bookingMonthlyPrice" class="text-2xl price-value"><span data-eur-price="15">60 PLN</span> / mo</div>
-            <p id="bookingSavingsText" class="text-xs text-slate-400 mt-1">Mensalidade inicial para solo/microempresas</p>
-          </div>
+        <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
+          <div class="text-2xl mb-3" aria-hidden="true">🧾</div>
+          <h4 class="text-base font-bold text-slate-100 mb-2">Emissão de Notas Fiscais</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">As notas fiscais (invoices / NF) podem ser emitidas de acordo com o escopo do projeto acordado, modelo de cobrança e configuração fiscal aplicável.</p>
+        </article>
+      </div>
+    </div>
 
-          <p class="text-xs text-slate-400 leading-relaxed mb-4">
-            A manutenção mensal começa em <strong class="text-slate-100" data-eur-price="15">60 PLN</strong> para solo/microempresas. A configuração do piloto é discutida após a revisão do escopo.
+    <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-sm md:p-8 mb-12 shadow-sm">
+      <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
+        <div>
+          <p class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-3">Otimização Estrutural de Custos</p>
+          <h3 class="text-2xl md:text-3xl font-bold text-slate-100 mb-3">Menor Custo Mensal Sem Perder o Sistema Privado</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-5">
+            Para clientes piloto selecionados, compromissos mais longos podem reduzir o custo médio mensal através de meses bônus ou preços reduzidos nos planos de manutenção, mantendo a experiência de reserva privada e focada na marca.
           </p>
 
-          <button type="button" onclick="openContactForm('light_booking', 'custom_quote')" class="w-full bg-slate-800 border border-blue-700 hover:bg-blue-700 text-slate-100 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Solicitar Consultoria</button>
-        </div>
-      </div>
-
-
-      <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-sm md:p-8 mb-12 shadow-sm">
-        <div class="text-center max-w-3xl mx-auto mb-8">
-          <p class="text-xs uppercase tracking-[0.2em] text-green-500 font-bold mb-3">Recursos locais essenciais inclusos</p>
-          <h3 class="text-2xl md:text-3xl font-bold text-slate-100 mb-3">Uma Alternativa Privada aos Marketplaces de Agendamento</h3>
-          <p class="text-slate-400 text-sm md:text-base leading-relaxed">
-            Um modelo de agendamento focado em soluções para pequenas empresas que desejam sua própria experiência de reservas, custos previsíveis e mais controle sobre a jornada do cliente.
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-5">
-          <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
-            <div class="text-2xl mb-3" aria-hidden="true">💳</div>
-            <h4 class="text-base font-bold text-slate-100 mb-2">Sem Comissões por Agendamento</h4>
-            <p class="text-sm text-slate-400 leading-relaxed">Você paga uma taxa previsível de configuração ou manutenção mensal, independentemente de quantos horários seus clientes reservem pelo seu próprio site.</p>
-          </article>
-
-          <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
-            <div class="text-2xl mb-3" aria-hidden="true">🤝</div>
-            <h4 class="text-base font-bold text-slate-100 mb-2">Seus Clientes Permanecem Seus</h4>
-            <p class="text-sm text-slate-400 leading-relaxed">Os clientes não veem empresas concorrentes durante a jornada de reserva. A experiência permanece focada na sua marca, serviços e disponibilidade.</p>
-          </article>
-
-          <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
-            <div class="text-2xl mb-3" aria-hidden="true">📲</div>
-            <h4 class="text-base font-bold text-slate-100 mb-2">Fluxo de Reserva Direto</h4>
-            <p class="text-sm text-slate-400 leading-relaxed">Os clientes podem agendar através do seu site, link do Instagram, perfil do Google ou fluxo de mensagem direta sem serem direcionados para um marketplace público.</p>
-          </article>
-
-          <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
-            <div class="text-2xl mb-3" aria-hidden="true">🌍</div>
-            <h4 class="text-base font-bold text-slate-100 mb-2">Pronto para Pagamentos Locais</h4>
-            <p class="text-sm text-slate-400 leading-relaxed">Quando necessário, o sistema pode ser preparado para provedores de pagamento regionais (Europa/Brasil) ou links de pagamento externos, dependendo do escopo do projeto.</p>
-          </article>
-
-          <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
-            <div class="text-2xl mb-3" aria-hidden="true">📉</div>
-            <h4 class="text-base font-bold text-slate-100 mb-2">Custo Previsível a Longo Prazo</h4>
-            <p class="text-sm text-slate-400 leading-relaxed">Para muitas pequenas empresas, um agendamento privado com manutenção mensal pode ser mais fácil de planejar do que taxas recorrentes de plataforma que crescem com o tamanho da equipe.</p>
-          </article>
-
-          <article class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-green-700 transition-colors shadow-sm">
-            <div class="text-2xl mb-3" aria-hidden="true">🧾</div>
-            <h4 class="text-base font-bold text-slate-100 mb-2">Emissão de Notas Fiscais</h4>
-            <p class="text-sm text-slate-400 leading-relaxed">As notas fiscais (invoices / NF) podem ser emitidas de acordo com o escopo do projeto acordado, modelo de cobrança e configuração fiscal aplicável.</p>
-          </article>
-        </div>
-      </div>
-
-      <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 shadow-sm md:p-8 mb-12 shadow-sm">
-        <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
-          <div>
-            <p class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-3">Otimização Estrutural de Custos</p>
-            <h3 class="text-2xl md:text-3xl font-bold text-slate-100 mb-3">Menor Custo Mensal Sem Perder o Sistema Privado</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-5">
-              Para clientes piloto selecionados, compromissos mais longos podem reduzir o custo médio mensal através de meses bônus ou preços reduzidos nos planos de manutenção, mantendo a experiência de reserva privada e focada na marca.
-            </p>
-
-            <div class="space-y-4">
-              <div class="border border-slate-800 rounded-lg p-4 bg-slate-900">
-                <h4 class="font-bold text-slate-100 text-sm mb-1">Assinaturas de Longo Prazo</h4>
-                <p class="text-xs text-slate-400 leading-relaxed">Uma opção de 12 meses pode reduzir o custo médio mensal por meio de uma taxa menor ou de uma estrutura de meses de bônus. Uma opção de 24 meses pode reduzir ainda mais para empresas que desejam suporte técnico previsível de longo prazo. A economia exata é confirmada no contrato final.</p>
-              </div>
-              <div class="border border-slate-800 rounded-lg p-4 bg-slate-900">
-                <h4 class="font-bold text-slate-100 text-sm mb-1">Status Fiscal</h4>
-                <p class="text-xs text-slate-400 leading-relaxed">As faturas são emitidas de acordo com o escopo do projeto acordado, modelo de faturamento e configuração de impostos aplicável. Os detalhes fiscais são confirmados antes da assinatura do contrato.</p>
-              </div>
+          <div class="space-y-4">
+            <div class="border border-slate-800 rounded-lg p-4 bg-slate-900">
+              <h4 class="font-bold text-slate-100 text-sm mb-1">Assinaturas de Longo Prazo</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">Uma opção de 12 meses pode reduzir o custo médio mensal por meio de uma taxa menor ou de uma estrutura de meses de bônus. Uma opção de 24 meses pode reduzir ainda mais para empresas que desejam suporte técnico previsível de longo prazo. A economia exata é confirmada no contrato final.</p>
+            </div>
+            <div class="border border-slate-800 rounded-lg p-4 bg-slate-900">
+              <h4 class="font-bold text-slate-100 text-sm mb-1">Status Fiscal</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">As faturas são emitidas de acordo com o escopo do projeto acordado, modelo de faturamento e configuração de impostos aplicável. Os detalhes fiscais são confirmados antes da assinatura do contrato.</p>
             </div>
           </div>
-
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
-            <h4 class="text-lg font-bold text-slate-100 mb-2">Mensalidade Estimada (Valores de Referência)</h4>
-            <p class="text-xs text-slate-500 leading-relaxed mb-4">Faixas mensais indicativas para clientes piloto. O preço final depende do escopo, número de locais, número de funcionários, integrações e nível de suporte.</p>
-
-            <div class="overflow-hidden border border-slate-800 rounded-lg">
-              <table class="w-full text-left text-sm">
-                <thead class="bg-slate-950 text-slate-500 text-xs uppercase tracking-wider">
-                  <tr>
-                    <th class="px-4 py-3 font-bold">Tipo de Empresa</th>
-                    <th class="px-4 py-3 font-bold">Faixa Mensal Estimada</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-800 text-slate-300 bg-slate-950">
-                  <tr>
-                    <td class="px-4 py-4 font-semibold text-slate-100">Operadores solo / microempresas</td>
-                    <td class="px-4 py-4"><span data-eur-range="15,20">60–80 PLN</span> / mês</td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-4 font-semibold text-slate-100">Pequenas equipes, 2–10 func.</td>
-                    <td class="px-4 py-4"><span data-eur-range="30,35">120–150 PLN</span> / mês</td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-4 font-semibold text-slate-100">Salões médios / equipes multisserviços</td>
-                    <td class="px-4 py-4">A combinar / sob consulta</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <button type="button" onclick="openContactForm('light_booking', 'custom_quote')" class="mt-5 w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors focus:outline-none">Solicitar Consultoria</button>
-          </div>
-        </div>
-      </div>
-      <div class="bg-slate-900 border border-slate-800 rounded-xl p-8 shadow-sm mb-12 grid lg:grid-cols-[1fr_20rem] gap-8 product-card-grid relative overflow-hidden">
-        <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-bl-lg z-10">Plataforma Operacional • Restaurante & Delivery</div>
-        <div class="product-copy">
-          <h3 class="text-xl md:text-2xl font-bold mb-3 text-slate-100">DeliveryHub para Restaurantes</h3>
-          <p class="text-slate-400 mb-5 text-sm md:text-base leading-relaxed">Uma plataforma operacional leve para restaurantes que precisam de pedidos online diretos, controle de status da cozinha e coordenação de entregadores locais sem dependência de comissões de marketplaces.</p>
-          <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 mb-6">
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Página de pedidos personalizada</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Cardápio e carrinho digitais</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Painel de pedidos do restaurante</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Painel do entregador (motoboy)</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Fluxo de status do pedido e entrega</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Designação regional de entregadores</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Registros e relatórios</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Suporte de integração do piloto</li>
-          </ul>
-          <p class="text-xs text-slate-500 leading-relaxed">Ferramentas de pagamento de terceiros, serviços de mensagens pagos, domínios personalizados e custos de entrega externos são cobrados separadamente.</p>
-        </div>
-        <div class="lg:w-72 bg-slate-950 border border-slate-800 rounded-lg p-6 text-center shrink-0">
-          <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Configuração inicial</p>
-          <div class="mb-2 text-2xl font-bold text-blue-500">A combinar</div>
-          <p class="text-xs text-blue-500 font-medium mb-4">Piloto mensal: <br><span data-eur-range="70,115" class="font-bold text-sm">300–500 PLN</span> / mês</p>
-          <p class="text-xs text-slate-400 mb-4">Construído para restaurantes que desejam mais pedidos diretos e melhor controle operacional.</p>
-          <button type="button" onclick="openContactForm('deliveryhub', 'custom_quote')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Solicitar Demonstração do DeliveryHub</button>
-        </div>
-      </div>
-
-      <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm md:p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
-        <div class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-br-lg z-10">Configuração de Automação</div>
-        <div class="pt-4 md:pt-0">
-          <h3 class="text-xl font-bold mb-2 text-slate-100">Fase 1: Arquitetura e Implementação de Automação</h3>
-          <p class="text-slate-400 text-sm max-w-xl">Estrutura web multipáginas, formulários avançados, captura de leads, suporte de implementação de CRM/Salesforce/ERP, planejamento de integrações e testes de fluxo. Para projetos ERP completos, a implementação pode ser entregue em conjunto com parceiros ERP especializados.</p>
-        </div>
-        <div class="text-left md:text-right shrink-0">
-          <p class="text-xs uppercase text-slate-500 font-bold mb-1">A partir de</p>
-          <div data-price-display="390" class="text-2xl font-bold text-blue-500">1.690 PLN</div>
-        </div>
-      </div>
-
-      <h3 class="text-xl font-bold mb-6 text-center text-slate-100">Fase 2: Suporte Mensal e Operações Técnicas (Tech Ops)</h3>
-      <div class="grid lg:grid-cols-3 gap-6 items-stretch">
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm flex flex-col hover:border-slate-700 transition-colors">
-          <h3 class="text-lg font-bold mb-1 text-slate-200">Plano 3 Meses</h3>
-          <p class="text-slate-400 text-xs mb-6 h-8">Suporte de curto prazo para estabilizar páginas, formulários, automações e integrações após o lançamento.</p>
-          <div class="mb-6 pb-6 border-b border-slate-800">
-            <span class="text-2xl font-bold text-slate-100">Orçamento personalizado</span>
-            <p class="text-xs text-slate-500 mt-1">Confirmado após análise de escopo</p>
-          </div>
-          <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
-            <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Suporte de publicação do site/plataforma</li>
-            <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Pequenas atualizações de conteúdo e páginas</li>
-            <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Manutenção de formulários e automações</li>
-            <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Verificação de integrações</li>
-          </ul>
-          <button type="button" onclick="openContactForm('three_month', 'custom_quote')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Escopo</button>
-        </div>
-        <div class="bg-slate-950 border-2 border-blue-600 rounded-xl p-6 shadow-sm flex flex-col relative order-first lg:order-none">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded">Recomendado</div>
-          <h3 class="text-lg font-bold mb-1 text-slate-200 mt-2">Plano 12 Meses</h3>
-          <p class="text-slate-400 text-xs mb-6 h-8">Suporte de longo prazo para melhorias contínuas do fluxo de trabalho, relatórios e manutenção de integração.</p>
-          <div class="mb-6 pb-6 border-b border-slate-800">
-            <span class="text-2xl font-bold text-slate-100">Orçamento personalizado</span>
-            <p class="text-xs text-slate-500 mt-1">Ideal para suporte mensal estável</p>
-          </div>
-          <ul class="text-slate-300 space-y-3 mb-8 flex-grow text-sm">
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Suporte de publicação do site/plataforma</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Atualizações mensais de conteúdo</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Manutenção de formulários e automações</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Monitoramento de integrações</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Análise básica e relatórios</li>
-            <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Planejamento de melhorias de fluxo</li>
-          </ul>
-          <button type="button" onclick="openContactForm('twelve_month', 'custom_quote')" class="w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Manutenção Mensal</button>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm flex flex-col hover:border-slate-700 transition-colors">
-          <h3 class="text-lg font-bold mb-1 text-slate-200">Plano 6 Meses</h3>
-          <p class="text-slate-400 text-xs mb-6 h-8">Um período equilibrado para otimização, monitoramento e melhorias graduais na automação.</p>
-          <div class="mb-6 pb-6 border-b border-slate-800">
-            <span class="text-2xl font-bold text-slate-100">Orçamento personalizado</span>
-            <p class="text-xs text-slate-500 mt-1">Confirmado após análise de escopo</p>
-          </div>
-          <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
-            <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Suporte de publicação do site/plataforma</li>
-            <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Atualizações mensais de conteúdo</li>
-            <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Manutenção de formulários e automações</li>
-            <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Verificação de integrações</li>
-            <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Análise básica e relatórios</li>
-          </ul>
-          <button type="button" onclick="openContactForm('six_month', 'custom_quote')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Escopo</button>
-        </div>
-      </div>
-
-      <div class="mt-10 bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm md:p-8">
-        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
-          <div>
-            <h3 class="text-xl font-bold text-slate-100 mb-2">Resumo de Preços</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">Pontos de partida claros para planejamento. O preço final é confirmado após uma breve revisão do projeto e confirmação do escopo por escrito.</p>
-          </div>
-          <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Meu Projeto</button>
         </div>
 
-        <div class="overflow-x-auto border border-slate-800 rounded-lg">
-          <table class="w-full text-left text-sm">
-            <thead class="bg-slate-950 text-slate-400 text-xs uppercase tracking-wider">
-              <tr>
-                <th class="px-4 py-3 font-bold">Serviço</th>
-                <th class="px-4 py-3 font-bold">Configuração / Projeto</th>
-                <th class="px-4 py-3 font-bold">Mensalidade</th>
-                <th class="px-4 py-3 font-bold">Ideal Para</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-800 text-slate-300">
-              <tr>
-                <td class="px-4 py-4 font-semibold text-slate-100">Sistema de Agendamento Privado</td>
-                <td class="px-4 py-4">Configuração<br><span class="text-green-400 font-semibold">A combinar</span></td>
-                <td class="px-4 py-4">
-                  A partir de<br>
-                  <span class="text-slate-100 font-semibold" data-eur-price="15">60 PLN</span> / mês<br>
-                  <span class="text-xs text-slate-500">
-                    Solo: <span data-eur-range="15,20">60–80 PLN</span> •
-                    Peq. equipe: <span data-eur-range="28,35">120–150 PLN</span>
-                  </span>
-                </td>
-                <td class="px-4 py-4 text-slate-400">Pequenas empresas que precisam de agendamento direto, formulários e fluxo de reserva com marca própria.</td>
-              </tr>
-              <tr>
-                <td class="px-4 py-4 font-semibold text-slate-100">DeliveryHub para Restaurantes</td>
-                <td class="px-4 py-4">A combinar</td>
-                <td class="px-4 py-4">A partir de <span data-eur-price="70">300 PLN</span> / mês</td>
-                <td class="px-4 py-4 text-slate-400">Restaurantes que desejam pedidos diretos, painel de controle e coordenação de entregas.</td>
-              </tr>
-              <tr>
-                <td class="px-4 py-4 font-semibold text-slate-100">Arquitetura e Impl. de Automação</td>
-                <td class="px-4 py-4">A partir de <span data-price-display="390">1.690 PLN</span></td>
-                <td class="px-4 py-4">Contrato de suporte opcional</td>
-                <td class="px-4 py-4 text-slate-400">Formulários avançados, suporte CRM/Salesforce/ERP e automação de fluxo de trabalho.</td>
-              </tr>
-              <tr>
-                <td class="px-4 py-4 font-semibold text-slate-100">Tech Ops (Suporte Mensal)</td>
-                <td class="px-4 py-4">Após o lançamento</td>
-                <td class="px-4 py-4">Plano personalizado<br><span class="text-xs text-slate-500">Confirmado após análise</span></td>
-                <td class="px-4 py-4 text-slate-400">Atualizações mensais, monitoramento, pequenas melhorias e cuidados técnicos.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+          <h4 class="text-lg font-bold text-slate-100 mb-2">Mensalidade Estimada (Valores de Referência)</h4>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4">Faixas mensais indicativas para clientes piloto. O preço final depende do escopo, número de locais, número de funcionários, integrações e nível de suporte.</p>
 
-        <p class="text-xs text-slate-500 leading-relaxed mt-4">Domínios, hospedagem, e-mail comercial, ferramentas de agendamento pagas, provedores de pagamento, licenças de CRM, ferramentas de mensagens pagas e assinaturas de terceiros são faturadas separadamente, a menos que explicitamente incluídas no Pedido assinado.</p>
-      </div>
-    </div>
-  </section>
+          <div class="overflow-hidden border border-slate-800 rounded-lg">
+            <table class="w-full text-left text-sm">
+              <thead class="bg-slate-950 text-slate-500 text-xs uppercase tracking-wider">
+                <tr>
+                  <th class="px-4 py-3 font-bold">Tipo de Empresa</th>
+                  <th class="px-4 py-3 font-bold">Faixa Mensal Estimada</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800 text-slate-300 bg-slate-950">
+                <tr>
+                  <td class="px-4 py-4 font-semibold text-slate-100">Operadores solo / microempresas</td>
+                  <td class="px-4 py-4"><span data-eur-range="15,20">60–80 PLN</span> / mês</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-4 font-semibold text-slate-100">Pequenas equipes, 2–10 func.</td>
+                  <td class="px-4 py-4"><span data-eur-range="30,35">120–150 PLN</span> / mês</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-4 font-semibold text-slate-100">Salões médios / equipes multisserviços</td>
+                  <td class="px-4 py-4">A combinar / sob consulta</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-  <section class="py-14 bg-slate-950 border-b border-slate-800">
-    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-      <div>
-        <h2 class="text-3xl font-bold mb-8 text-slate-100">Como Eu Trabalho</h2>
-        <div class="space-y-4">
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
-            <h3 class="font-semibold text-lg mb-1 text-blue-500">Privado por Design</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">A solução é desenhada em torno do seu processo real de negócios, e não em torno de ferramentas desnecessárias ou modelos genéricos.</p>
-          </div>
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
-            <h3 class="font-semibold text-lg mb-1 text-blue-500">Simples para os Clientes</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">A jornada do cliente é mantida simples: entender a oferta, agir, enviar uma solicitação, agendar, fazer um pedido ou entrar em contato com você.</p>
-          </div>
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
-            <h3 class="font-semibold text-lg mb-1 text-blue-500">Suporte Pós-Lançamento</h3>
-            <p class="text-slate-400 text-sm leading-relaxed">Após o lançamento, o sistema pode continuar evoluindo através de suporte mensal, melhorias e assistência operacional prática.</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <h2 class="text-3xl font-bold mb-8 text-slate-100">Construído com Experiência Operacional</h2>
-        <div class="space-y-6 border-l-2 border-slate-800 pl-6 ml-2">
-          <div class="relative">
-            <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
-            <h3 class="text-lg font-semibold text-slate-200">Fluxo do cliente + lógica de negócios</h3>
-            <p class="text-slate-400 text-sm font-medium mt-0.5">Páginas, formulários, fluxos de reserva, painéis e processos de acompanhamento criados em torno de como a empresa realmente funciona.</p>
-          </div>
-          <div class="relative">
-            <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
-            <h3 class="text-lg font-semibold text-slate-200">Histórico de automação</h3>
-            <p class="text-slate-400 text-sm font-medium mt-0.5">Formulários, relatórios, acompanhamento de clientes, planejamento de automação e fluxos de trabalho operacionais.</p>
-          </div>
-          <div class="relative">
-            <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
-            <h3 class="text-lg font-semibold text-slate-200">Credibilidade Enterprise</h3>
-            <p class="text-slate-400 text-sm font-medium mt-0.5">Experiência com ambientes operacionais globais, SAP, Salesforce, qualidade de dados e processos de suporte ao cliente.</p>
-          </div>
-          <div class="relative">
-            <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
-            <h3 class="text-lg font-semibold text-slate-200">Entrega Local e Remota</h3>
-            <p class="text-slate-400 text-sm font-medium mt-0.5">Com sede em Cracóvia, Polônia, e disponível para clientes localmente e internacionalmente (incluindo Brasil).</p>
-          </div>
+          <button type="button" onclick="openContactForm('light_booking', 'custom_quote')" class="mt-5 w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors focus:outline-none">Solicitar Consultoria</button>
         </div>
       </div>
     </div>
-  </section>
-
-  <section class="py-14 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-blue-600/5 blur-[100px] rounded-full pointer-events-none"></div>
-    <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
-      <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-6">Minha Abordagem</h2>
-      <div class="mb-6 text-slate-400" aria-hidden="true"><svg class="w-10 h-10 mx-auto" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg></div>
-      <blockquote class="text-xl md:text-2xl text-slate-200 font-medium leading-relaxed mb-6">"Coloco-me na posição de alguém que descobre um negócio pela primeira vez: o que chama a atenção, constrói confiança, parece claro e facilita a experiência?"</blockquote>
-      <p class="text-base text-slate-400 max-w-3xl mx-auto leading-relaxed">Olho tanto para a experiência do usuário quanto para o panorama operacional mais amplo, focando em melhorias que fortalecem o relacionamento com os clientes e apoiam o crescimento sustentável.</p>
-    </div>
-  </section>
-
-  <section class="py-12 border-b border-slate-800 bg-slate-950">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-8">Parceiros Tecnológicos Oficiais</h2>
-      <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20">
-        <div class="opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6syXayD8owdcx7OzrKSuL1pP6O5mcWI6-5XToySshE-Ud4QKq3FMnVBvu&s=10" alt="Soublox Partner" width="160" height="50" loading="lazy" class="h-8 md:h-10 object-contain" /></div>
-        <div class="opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300"><img src="https://alansmsolutions.com/images/ibcomplogo.enc" alt="IBComp Partner" width="160" height="50" loading="lazy" class="h-8 md:h-10 object-contain" /></div>
+    <div class="bg-slate-900 border border-slate-800 rounded-xl p-8 shadow-sm mb-12 grid lg:grid-cols-[1fr_20rem] gap-8 product-card-grid relative overflow-hidden">
+      <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-bl-lg z-10">Plataforma Operacional • Restaurante & Delivery</div>
+      <div class="product-copy">
+        <h3 class="text-xl md:text-2xl font-bold mb-3 text-slate-100">DeliveryHub para Restaurantes</h3>
+        <p class="text-slate-400 mb-5 text-sm md:text-base leading-relaxed">Uma plataforma operacional leve para restaurantes que precisam de pedidos online diretos, controle de status da cozinha e coordenação de entregadores locais sem dependência de comissões de marketplaces.</p>
+        <ul class="grid sm:grid-cols-2 gap-3 text-sm text-slate-300 mb-6">
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Página de pedidos personalizada</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Cardápio e carrinho digitais</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Painel de pedidos do restaurante</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Painel do entregador (motoboy)</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Fluxo de status do pedido e entrega</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Designação regional de entregadores</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Registros e relatórios</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Suporte de integração do piloto</li>
+        </ul>
+        <p class="text-xs text-slate-500 leading-relaxed">Ferramentas de pagamento de terceiros, serviços de mensagens pagos, domínios personalizados e custos de entrega externos são cobrados separadamente.</p>
+      </div>
+      <div class="lg:w-72 bg-slate-950 border border-slate-800 rounded-lg p-6 text-center shrink-0">
+        <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Configuração inicial</p>
+        <div class="mb-2 text-2xl font-bold text-blue-500">A combinar</div>
+        <p class="text-xs text-blue-500 font-medium mb-4">Piloto mensal: <br><span data-eur-range="70,115" class="font-bold text-sm">300–500 PLN</span> / mês</p>
+        <p class="text-xs text-slate-400 mb-4">Construído para restaurantes que desejam mais pedidos diretos e melhor controle operacional.</p>
+        <button type="button" onclick="openContactForm('deliveryhub', 'custom_quote')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Solicitar Demonstração do DeliveryHub</button>
       </div>
     </div>
-  </section>
 
-  <section class="py-14 bg-slate-950 border-b border-slate-800">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="flex flex-col md:flex-row gap-8 bg-slate-900 border border-slate-800 rounded-xl p-8 shadow-sm items-center">
-        <div class="w-1 h-full bg-blue-600 hidden md:block rounded"></div>
-        <div class="flex-1">
-          <div class="flex flex-wrap items-center gap-2 mb-3">
-            <span class="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-2 rounded">Complemento Enterprise</span>
-          </div>
-          <h2 class="text-2xl md:text-3xl font-bold mb-2 text-slate-100">Automação Salesforce e CRM</h2>
-          <p class="text-slate-400 text-sm md:text-base leading-relaxed mb-4 max-w-2xl">Arquitetura avançada de dados, automação nativa do Salesforce, geração de documentos e integração inteligente com o WhatsApp para operações complexas.</p>
-          <div class="flex items-center gap-2 mt-4 text-slate-300">
-            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-            <span class="text-sm font-semibold">Orçamento Personalizado com Base no Escopo</span>
-          </div>
+    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm md:p-8 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+      <div class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded-br-lg z-10">Configuração de Automação</div>
+      <div class="pt-4 md:pt-0">
+        <h3 class="text-xl font-bold mb-2 text-slate-100">Fase 1: Arquitetura e Implementação de Automação</h3>
+        <p class="text-slate-400 text-sm max-w-xl">Estrutura web multipáginas, formulários avançados, captura de leads, suporte de implementação de CRM/Salesforce/ERP, planejamento de integrações e testes de fluxo. Para projetos ERP completos, a implementação pode ser entregue em conjunto com parceiros ERP especializados.</p>
+      </div>
+      <div class="text-left md:text-right shrink-0">
+        <p class="text-xs uppercase text-slate-500 font-bold mb-1">A partir de</p>
+        <div data-price-display="390" class="text-2xl font-bold text-blue-500">1.690 PLN</div>
+      </div>
+    </div>
+
+    <h3 class="text-xl font-bold mb-6 text-center text-slate-100">Fase 2: Suporte Mensal e Operações Técnicas (Tech Ops)</h3>
+    <div class="grid lg:grid-cols-3 gap-6 items-stretch">
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm flex flex-col hover:border-slate-700 transition-colors">
+        <h3 class="text-lg font-bold mb-1 text-slate-200">Plano 3 Meses</h3>
+        <p class="text-slate-400 text-xs mb-6 h-8">Suporte de curto prazo para estabilizar páginas, formulários, automações e integrações após o lançamento.</p>
+        <div class="mb-6 pb-6 border-b border-slate-800">
+          <span class="text-2xl font-bold text-slate-100">Orçamento personalizado</span>
+          <p class="text-xs text-slate-500 mt-1">Confirmado após análise de escopo</p>
         </div>
-        <div class="w-full md:w-auto mt-4 md:mt-0 shrink-0">
-          <button type="button" onclick="openContactForm('enterprise_crm', 'custom_quote')" class="w-full bg-slate-800 hover:bg-slate-200 text-white border border-slate-700 font-medium py-3 px-6 rounded-lg transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400">Discutir Arquitetura</button>
+        <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
+          <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Suporte de publicação do site/plataforma</li>
+          <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Pequenas atualizações de conteúdo e páginas</li>
+          <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Manutenção de formulários e automações</li>
+          <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Verificação de integrações</li>
+        </ul>
+        <button type="button" onclick="openContactForm('three_month', 'custom_quote')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Escopo</button>
+      </div>
+      <div class="bg-slate-950 border-2 border-blue-600 rounded-xl p-6 shadow-sm flex flex-col relative order-first lg:order-none">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded">Recomendado</div>
+        <h3 class="text-lg font-bold mb-1 text-slate-200 mt-2">Plano 12 Meses</h3>
+        <p class="text-slate-400 text-xs mb-6 h-8">Suporte de longo prazo para melhorias contínuas do fluxo de trabalho, relatórios e manutenção de integração.</p>
+        <div class="mb-6 pb-6 border-b border-slate-800">
+          <span class="text-2xl font-bold text-slate-100">Orçamento personalizado</span>
+          <p class="text-xs text-slate-500 mt-1">Ideal para suporte mensal estável</p>
+        </div>
+        <ul class="text-slate-300 space-y-3 mb-8 flex-grow text-sm">
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Suporte de publicação do site/plataforma</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Atualizações mensais de conteúdo</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Manutenção de formulários e automações</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Monitoramento de integrações</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Análise básica e relatórios</li>
+          <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Planejamento de melhorias de fluxo</li>
+        </ul>
+        <button type="button" onclick="openContactForm('twelve_month', 'custom_quote')" class="w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Manutenção Mensal</button>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm flex flex-col hover:border-slate-700 transition-colors">
+        <h3 class="text-lg font-bold mb-1 text-slate-200">Plano 6 Meses</h3>
+        <p class="text-slate-400 text-xs mb-6 h-8">Um período equilibrado para otimização, monitoramento e melhorias graduais na automação.</p>
+        <div class="mb-6 pb-6 border-b border-slate-800">
+          <span class="text-2xl font-bold text-slate-100">Orçamento personalizado</span>
+          <p class="text-xs text-slate-500 mt-1">Confirmado após análise de escopo</p>
+        </div>
+        <ul class="text-slate-400 space-y-3 mb-8 flex-grow text-sm">
+          <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Suporte de publicação do site/plataforma</li>
+          <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Atualizações mensais de conteúdo</li>
+          <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Manutenção de formulários e automações</li>
+          <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Verificação de integrações</li>
+          <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Análise básica e relatórios</li>
+        </ul>
+        <button type="button" onclick="openContactForm('six_month', 'custom_quote')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Escopo</button>
+      </div>
+    </div>
+
+    <div class="mt-10 bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm md:p-8">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+        <div>
+          <h3 class="text-xl font-bold text-slate-100 mb-2">Resumo de Preços</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Pontos de partida claros para planejamento. O preço final é confirmado após uma breve revisão do projeto e confirmação do escopo por escrito.</p>
+        </div>
+        <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Meu Projeto</button>
+      </div>
+
+      <div class="overflow-x-auto border border-slate-800 rounded-lg">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-slate-950 text-slate-400 text-xs uppercase tracking-wider">
+            <tr>
+              <th class="px-4 py-3 font-bold">Serviço</th>
+              <th class="px-4 py-3 font-bold">Configuração / Projeto</th>
+              <th class="px-4 py-3 font-bold">Mensalidade</th>
+              <th class="px-4 py-3 font-bold">Ideal Para</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800 text-slate-300">
+            <tr>
+              <td class="px-4 py-4 font-semibold text-slate-100">Sistema de Agendamento Privado</td>
+              <td class="px-4 py-4">Configuração<br><span class="text-green-400 font-semibold">A combinar</span></td>
+              <td class="px-4 py-4">
+                A partir de<br>
+                <span class="text-slate-100 font-semibold" data-eur-price="15">60 PLN</span> / mês<br>
+                <span class="text-xs text-slate-500">
+                  Solo: <span data-eur-range="15,20">60–80 PLN</span> •
+                  Peq. equipe: <span data-eur-range="28,35">120–150 PLN</span>
+                </span>
+              </td>
+              <td class="px-4 py-4 text-slate-400">Pequenas empresas que precisam de agendamento direto, formulários e fluxo de reserva com marca própria.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-4 font-semibold text-slate-100">DeliveryHub para Restaurantes</td>
+              <td class="px-4 py-4">A combinar</td>
+              <td class="px-4 py-4">A partir de <span data-eur-price="70">300 PLN</span> / mês</td>
+              <td class="px-4 py-4 text-slate-400">Restaurantes que desejam pedidos diretos, painel de controle e coordenação de entregas.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-4 font-semibold text-slate-100">Arquitetura e Impl. de Automação</td>
+              <td class="px-4 py-4">A partir de <span data-price-display="390">1.690 PLN</span></td>
+              <td class="px-4 py-4">Contrato de suporte opcional</td>
+              <td class="px-4 py-4 text-slate-400">Formulários avançados, suporte CRM/Salesforce/ERP e automação de fluxo de trabalho.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-4 font-semibold text-slate-100">Tech Ops (Suporte Mensal)</td>
+              <td class="px-4 py-4">Após o lançamento</td>
+              <td class="px-4 py-4">Plano personalizado<br><span class="text-xs text-slate-500">Confirmado após análise</span></td>
+              <td class="px-4 py-4 text-slate-400">Atualizações mensais, monitoramento, pequenas melhorias e cuidados técnicos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-xs text-slate-500 leading-relaxed mt-4">Domínios, hospedagem, e-mail comercial, ferramentas de agendamento pagas, provedores de pagamento, licenças de CRM, ferramentas de mensagens pagas e assinaturas de terceiros são faturadas separadamente, a menos que explicitamente incluídas no Pedido assinado.</p>
+    </div>
+  </div>
+</section>
+
+<section class="py-14 bg-slate-950 border-b border-slate-800">
+  <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+    <div>
+      <h2 class="text-3xl font-bold mb-8 text-slate-100">Como Eu Trabalho</h2>
+      <div class="space-y-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
+          <h3 class="font-semibold text-lg mb-1 text-blue-500">Privado por Design</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">A solução é desenhada em torno do seu processo real de negócios, e não em torno de ferramentas desnecessárias ou modelos genéricos.</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
+          <h3 class="font-semibold text-lg mb-1 text-blue-500">Simples para os Clientes</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">A jornada do cliente é mantida simples: entender a oferta, agir, enviar uma solicitação, agendar, fazer um pedido ou entrar em contato com você.</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
+          <h3 class="font-semibold text-lg mb-1 text-blue-500">Suporte Pós-Lançamento</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Após o lançamento, o sistema pode continuar evoluindo através de suporte mensal, melhorias e assistência operacional prática.</p>
         </div>
       </div>
     </div>
-  </section>
+    <div>
+      <h2 class="text-3xl font-bold mb-8 text-slate-100">Construído com Experiência Operacional</h2>
+      <div class="space-y-6 border-l-2 border-slate-800 pl-6 ml-2">
+        <div class="relative">
+          <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
+          <h3 class="text-lg font-semibold text-slate-200">Fluxo do cliente + lógica de negócios</h3>
+          <p class="text-slate-400 text-sm font-medium mt-0.5">Páginas, formulários, fluxos de reserva, painéis e processos de acompanhamento criados em torno de como a empresa realmente funciona.</p>
+        </div>
+        <div class="relative">
+          <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
+          <h3 class="text-lg font-semibold text-slate-200">Histórico de automação</h3>
+          <p class="text-slate-400 text-sm font-medium mt-0.5">Formulários, relatórios, acompanhamento de clientes, planejamento de automação e fluxos de trabalho operacionais.</p>
+        </div>
+        <div class="relative">
+          <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
+          <h3 class="text-lg font-semibold text-slate-200">Credibilidade Enterprise</h3>
+          <p class="text-slate-400 text-sm font-medium mt-0.5">Experiência com ambientes operacionais globais, SAP, Salesforce, qualidade de dados e processos de suporte ao cliente.</p>
+        </div>
+        <div class="relative">
+          <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
+          <h3 class="text-lg font-semibold text-slate-200">Entrega Local e Remota</h3>
+          <p class="text-slate-400 text-sm font-medium mt-0.5">Com sede em Cracóvia, Polônia, e disponível para clientes localmente e internacionalmente (incluindo Brasil).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-14 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-blue-600/5 blur-[100px] rounded-full pointer-events-none"></div>
+  <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+    <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-6">Minha Abordagem</h2>
+    <div class="mb-6 text-slate-400" aria-hidden="true"><svg class="w-10 h-10 mx-auto" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg></div>
+    <blockquote class="text-xl md:text-2xl text-slate-200 font-medium leading-relaxed mb-6">"Coloco-me na posição de alguém que descobre um negócio pela primeira vez: o que chama a atenção, constrói confiança, parece claro e facilita a experiência?"</blockquote>
+    <p class="text-base text-slate-400 max-w-3xl mx-auto leading-relaxed">Olho tanto para a experiência do usuário quanto para o panorama operacional mais amplo, focando em melhorias que fortalecem o relacionamento com os clientes e apoiam o crescimento sustentável.</p>
+  </div>
+</section>
+
+<section class="py-12 border-b border-slate-800 bg-slate-950">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-8">Parceiros Tecnológicos Oficiais</h2>
+    <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+      <div class="opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6syXayD8owdcx7OzrKSuL1pP6O5mcWI6-5XToySshE-Ud4QKq3FMnVBvu&s=10" alt="Soublox Partner" width="160" height="50" loading="lazy" class="h-8 md:h-10 object-contain" /></div>
+      <div class="opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all duration-300"><img src="https://alansmsolutions.com/images/ibcomplogo.enc" alt="IBComp Partner" width="160" height="50" loading="lazy" class="h-8 md:h-10 object-contain" /></div>
+    </div>
+  </div>
+</section>
+
+<section class="py-14 bg-slate-950 border-b border-slate-800">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row gap-8 bg-slate-900 border border-slate-800 rounded-xl p-8 shadow-sm items-center">
+      <div class="w-1 h-full bg-blue-600 hidden md:block rounded"></div>
+      <div class="flex-1">
+        <div class="flex flex-wrap items-center gap-2 mb-3">
+          <span class="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-2 rounded">Complemento Enterprise</span>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-bold mb-2 text-slate-100">Automação Salesforce e CRM</h2>
+        <p class="text-slate-400 text-sm md:text-base leading-relaxed mb-4 max-w-2xl">Arquitetura avançada de dados, automação nativa do Salesforce, geração de documentos e integração inteligente com o WhatsApp para operações complexas (entregues em parceria com a SOUBLOX em projetos relevantes).</p>
+        <div class="flex items-center gap-2 mt-4 text-slate-300">
+          <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span class="text-sm font-semibold">Orçamento Personalizado com Base no Escopo</span>
+        </div>
+      </div>
+      <div class="w-full md:w-auto mt-4 md:mt-0 shrink-0">
+        <button type="button" onclick="openContactForm('enterprise_crm', 'custom_quote')" class="w-full bg-slate-800 hover:bg-slate-200 text-white border border-slate-700 font-medium py-3 px-6 rounded-lg transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400">Discutir Arquitetura</button>
+      </div>
+    </div>
+  </div>
+</section>
 
   
 
-  <section id="faq" class="py-16 bg-slate-900 border-b border-slate-800">
-    <div class="max-w-3xl mx-auto px-6">
-      <div class="mb-10 text-center"><h2 class="text-2xl font-bold mb-2 text-slate-100">Perguntas Frequentes</h2><p class="text-slate-400 text-sm">Dúvidas comuns sobre plataformas web, automação e consultoria operacional.</p></div>
-      <div class="space-y-3">
-        <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">O que faz um consultor de automação?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Identifico processos repetitivos ou desconectados, mapeio o fluxo de informações necessário e construo sistemas práticos que reduzem o trabalho manual e melhoram a consistência.</div></details>
-        <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">Você cria sites com formulários integrados e fluxos de agendamento?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Sim. Construo plataformas profissionais voltadas para o cliente com captura de leads, formulários de contato, automação de fluxo de trabalho e integrações de agendamento quando se adequam ao processo de negócios.</div></details>
-        <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">Você presta serviços em Cracóvia ou no mundo todo?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Ambos. Estou baseado em Cracóvia (Polônia) e trabalho remotamente com clientes na Europa, Brasil e internacionalmente, nos idiomas Inglês, Português e Polonês.</div></details>
-      </div>
+<section id="faq" class="py-16 bg-slate-900 border-b border-slate-800">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="mb-10 text-center"><h2 class="text-2xl font-bold mb-2 text-slate-100">Perguntas Frequentes</h2><p class="text-slate-400 text-sm">Dúvidas comuns sobre plataformas web, automação e consultoria operacional.</p></div>
+    <div class="space-y-3">
+      <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">O que faz um consultor de automação?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Identifico processos repetitivos ou desconectados, mapeio o fluxo de informações necessário e construo sistemas práticos que reduzem o trabalho manual e melhoram a consistência.</div></details>
+      <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">Você cria sites com formulários integrados e fluxos de agendamento?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Sim. Construo plataformas profissionais voltadas para o cliente com captura de leads, formulários de contato, automação de fluxo de trabalho e integrações de agendamento quando se adequam ao processo de negócios.</div></details>
+      <details class="group border border-slate-800 bg-slate-950 rounded-lg [&_summary::-webkit-details-marker]:hidden"><summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none"><h3 class="font-medium text-sm">Você presta serviços em Cracóvia ou no mundo todo?</h3><span class="relative size-4 shrink-0 text-slate-500" aria-hidden="true"><svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg><svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg></span></summary><div class="px-5 pb-5 text-slate-400 text-xs leading-relaxed border-t border-slate-800 pt-3 mt-1">Ambos. Estou baseado em Cracóvia (Polônia) e trabalho remotamente com clientes na Europa, Brasil e internacionalmente, nos idiomas Inglês, Português e Polonês.</div></details>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="py-12 bg-slate-950 border-b border-slate-800">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="max-w-3xl">
-        <h2 class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-4">Projeto Parceiro em Destaque</h2>
-        <div class="flex items-center gap-4 mb-4">
-          <img src="https://joannafilek.com/images/logo.png" class="w-10 h-10 object-contain grayscale opacity-80" alt="Joanna Filek logo" loading="lazy" />
-          <h2 class="text-xl font-bold text-slate-200">Joanna Filek</h2>
-        </div>
-        <p class="text-slate-400 text-xs leading-relaxed mb-4">Um projeto colaborativo de desenvolvimento web e UX desenhado para elevar a presença da marca profissional e otimizar a interação com o cliente.</p>
-        <a href="https://joannafilek.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-blue-500 hover:text-blue-400 transition-colors">Visitar Projeto →</a>
+<section class="py-12 bg-slate-950 border-b border-slate-800">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-3xl">
+      <h2 class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-4">Projeto Parceiro em Destaque</h2>
+      <div class="flex items-center gap-4 mb-4">
+        <img src="https://joannafilek.com/images/logo.png" class="w-10 h-10 object-contain grayscale opacity-80" alt="Joanna Filek logo" loading="lazy" />
+        <h2 class="text-xl font-bold text-slate-200">Joanna Filek</h2>
       </div>
+      <p class="text-slate-400 text-xs leading-relaxed mb-4">Um projeto colaborativo de desenvolvimento web e UX desenhado para elevar a presença da marca profissional e otimizar a interação com o cliente.</p>
+      <a href="https://joannafilek.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-blue-500 hover:text-blue-400 transition-colors">Visitar Projeto →</a>
     </div>
-  </section>
+  </div>
+</section>
 
   
 <section class="py-16 bg-slate-900 border-b border-slate-800">
@@ -1040,10 +872,10 @@
     <a href="https://www.instagram.com/alansmsolutions/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors" aria-label="AlanSM Solutions Instagram">
       <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path></svg>
     </a>
-    <a href="https://www.instagram.com/alanmoraissss/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors" aria-label="Alan Personal Instagram">
+    <a href="https://www.instagram.com/alanmoraissss/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Alan Personal Instagram">
       <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path></svg>
     </a>
-    <a href="https://www.facebook.com/alankmorais" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors" aria-label="Alan Facebook">
+    <a href="https://www.facebook.com/alankmorais" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Alan Facebook">
       <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path></svg>
     </a>
   </div>
@@ -1078,7 +910,7 @@
         <input type="hidden" name="_captcha" value="false" />
         <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
         <div>
-          <label for="formName" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Nome</label>
+          <label for="formName" class="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Nome Completo</label>
           <input id="formName" type="text" name="name" autocomplete="name" required class="w-full bg-slate-900 border border-slate-800 rounded-md px-3 py-1.5 text-xs text-slate-100 focus:outline-none focus:border-blue-500 transition-colors" />
         </div>
         <div>
