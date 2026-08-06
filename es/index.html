@@ -11,7 +11,7 @@
   <meta name="robots" content="index, follow" />
 
   <link rel="alternate" hreflang="en" href="https://alansmsolutions.com/" />
-  <link rel="alternate" hreflang="br" href="https://alansmsolutions.com/br/" />
+  <link rel="alternate" hreflang="pt" href="https://alansmsolutions.com/pt/" />
   <link rel="alternate" hreflang="pl" href="https://alansmsolutions.com/pl/" />
   <link rel="alternate" hreflang="es" href="https://alansmsolutions.com/es/" />
   <link rel="alternate" hreflang="x-default" href="https://alansmsolutions.com/" />
@@ -31,8 +31,14 @@
 
   <script>
     (function() {
-      // Redirection logic simplified for the /es/ path.
-      // If a user explicitly clicks a language toggle, we redirect them.
+      // FIX: Prevent auto-redirect on local computers (file:///) and preview environments
+      if (window.location.protocol === 'file:' || 
+          window.location.hostname === 'localhost' || 
+          window.location.hostname === '127.0.0.1' ||
+          (window.location.hostname && !window.location.hostname.includes('alansmsolutions.com'))) {
+          return;
+      }
+
       var params = new URLSearchParams(window.location.search || '');
       var langParam = (params.get('lang') || '').toLowerCase();
 
@@ -57,13 +63,35 @@
         return;
       }
       
-      // Since we are already on the ES page, set the defaults to ES/EUR
-      // if they haven't explicitly set something else.
       if (!localStorage.getItem('preferredLanguage')) {
         localStorage.setItem('preferredLanguage', 'es');
         localStorage.setItem('preferredCurrency', 'EUR');
       }
     })();
+
+    function switchLang(lang, currency, url) {
+      localStorage.setItem('user_lang', lang);
+      localStorage.setItem('preferredLanguage', lang);
+      if(currency) localStorage.setItem('preferredCurrency', currency);
+      
+      // FIX: If running locally on C: drive, convert absolute paths to relative local files
+      if (window.location.protocol === 'file:') {
+        if (url === '/') {
+          window.location.href = '../index.html'; // Go up to root for English
+        } else {
+          // Converts "/pl/" to "../pl/index.html"
+          window.location.href = '..' + url + 'index.html';
+        }
+        return;
+      }
+
+      // FIX: Append index.html for the preview environment
+      if (window.location.hostname && !window.location.hostname.includes('alansmsolutions.com') && url.endsWith('/')) {
+        url += 'index.html';
+      }
+      
+      window.location.href = url;
+    }
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -180,21 +208,24 @@
 
       <div class="hidden lg:flex items-center justify-center gap-8">
         <a href="/es/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Inicio</a>
-        <a href="/products/booking-system/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Soluciones</a>
-        <a href="/pricing/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Precios</a>
-        <a href="/portfolio/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Portafolio</a>
-        <a href="/resources/faq/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">FAQ</a>
-        <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contacto</button>
+        <a href="/es/features/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Características</a>
+        <a href="/es/pricing/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Precios</a>
+        <a href="/es/industries/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Industrias</a>
+        <a href="/es/resources/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Recursos</a>
+        <a href="/es/portfolio/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Portafolio</a>
+        <a href="/es/contact/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contacto</a>
       </div>
 
       <div class="flex items-center justify-end gap-3">
         <div class="hidden md:flex items-center gap-3">
-          <button onclick="switchLang('es', 'EUR', '/es/')" class="text-xs font-semibold text-blue-500">ES</button>
-          <button onclick="switchLang('pt', 'BRL', '/br/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">BR</button>
-          <button onclick="switchLang('pl', 'PLN', '/pl/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</button>
-          <button onclick="switchLang('en', 'USD', '/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">EN</button>
+          <a href="/pt/" onclick="switchLang('pt', 'BRL', '/pt/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PT</a>
+          <a href="/pl/" onclick="switchLang('pl', 'PLN', '/pl/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</a>
+          <a href="/es/" onclick="switchLang('es', 'EUR', '/es/')" class="text-xs font-semibold text-blue-500">ES</a>
+          <a href="/" onclick="switchLang('en', 'USD', '/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">EN</a>
           <span id="currencyAutoLabel" class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">EUR auto</span>
         </div>
+
+        <a href="/es/free-trial/" class="hidden md:inline-flex items-center bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm font-bold px-4 py-2.5 rounded-lg shadow-md shadow-blue-500/20 transition-all">Prueba Gratis</a>
 
         <button id="mobileMenuButton" type="button" class="lg:hidden nav-icon-btn" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMobileMenu()">
           <span class="sr-only">Abrir menú</span>
@@ -211,18 +242,20 @@
   <div id="mobileMenu" class="hidden lg:hidden bg-slate-950 border-b border-slate-800 shadow-sm">
     <div class="px-6 py-5">
       <a href="/es/" class="mobile-drawer-link" onclick="closeMobileMenu()">Inicio</a>
-      <a href="/products/booking-system/" class="mobile-drawer-link" onclick="closeMobileMenu()">Soluciones</a>
-      <a href="/pricing/" class="mobile-drawer-link" onclick="closeMobileMenu()">Precios</a>
-      <a href="/portfolio/" class="mobile-drawer-link" onclick="closeMobileMenu()">Portafolio</a>
-      <a href="/resources/faq/" class="mobile-drawer-link" onclick="closeMobileMenu()">FAQ</a>
-      <button type="button" class="mobile-drawer-link text-left w-full" onclick="closeMobileMenu(); openContactForm('offer', 'introductory_offer');">Contacto</button>
+      <a href="/es/features/" class="mobile-drawer-link" onclick="closeMobileMenu()">Características</a>
+      <a href="/es/pricing/" class="mobile-drawer-link" onclick="closeMobileMenu()">Precios</a>
+      <a href="/es/industries/" class="mobile-drawer-link" onclick="closeMobileMenu()">Industrias</a>
+      <a href="/es/resources/" class="mobile-drawer-link" onclick="closeMobileMenu()">Recursos</a>
+      <a href="/es/portfolio/" class="mobile-drawer-link" onclick="closeMobileMenu()">Portafolio</a>
+      <a href="/es/contact/" class="mobile-drawer-link" onclick="closeMobileMenu()">Contacto</a>
+      <a href="/es/free-trial/" class="mobile-drawer-link text-blue-400" onclick="closeMobileMenu()">Prueba Gratis</a>
 
       <div class="pt-5 mt-5 border-t border-slate-800 flex items-center justify-between gap-3">
         <div class="flex items-center gap-3">
-          <button onclick="switchLang('es', 'EUR', '/es/')" class="text-xs font-semibold text-blue-500">ES</button>
-          <button onclick="switchLang('pt', 'BRL', '/br/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PT</button>
-          <button onclick="switchLang('pl', 'PLN', '/pl/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</button>
-          <button onclick="switchLang('en', 'USD', '/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">EN</button>
+          <a href="/pt/" onclick="switchLang('pt', 'BRL', '/pt/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PT</a>
+          <a href="/pl/" onclick="switchLang('pl', 'PLN', '/pl/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</a>
+          <a href="/es/" onclick="switchLang('es', 'EUR', '/es/')" class="text-xs font-semibold text-blue-500">ES</a>
+          <a href="/" onclick="switchLang('en', 'USD', '/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">EN</a>
         </div>
         <span id="currencyAutoLabelMobile" class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">EUR auto</span>
       </div>
@@ -243,8 +276,8 @@
         Soluciones digitales prácticas para empresas de servicios, restaurantes y operaciones internas — desde sitios web y flujos de clientes hasta sistemas de pedidos, automatización personalizada y flujos orientados a ERP.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#solutions" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold transition-all transform hover:scale-105 shadow-xl shadow-blue-600/20">Explorar Soluciones</a>
-        <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="hero-consultation-btn bg-slate-900/90 border border-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg transform hover:-translate-y-1">Solicitar Consultoría</button>
+        <a href="/es/features/" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold transition-all transform hover:scale-105 shadow-xl shadow-blue-600/20">Explorar Soluciones</a>
+        <a href="/es/contact/" class="hero-consultation-btn inline-flex items-center justify-center bg-slate-900/90 border border-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg transform hover:-translate-y-1">Solicitar Consultoría</a>
       </div>
     </div>
   </div>
@@ -262,7 +295,7 @@
         <p class="text-slate-400 text-base leading-relaxed mb-6">
           Trabajo con sitios web comerciales, soluciones de automatización, sistemas orientados al cliente, flujos operativos y herramientas digitales personalizadas. Algunas soluciones se entregan como servicios a medida, mientras que otras están estructuradas como productos reutilizables.
         </p>
-        <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg font-semibold transition-colors">Hablar Sobre Tu Proyecto</button>
+        <a href="/es/contact/" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg font-semibold transition-colors">Hablar Sobre Tu Proyecto</a>
       </div>
       <div class="about-panel p-6 md:p-8">
         <h3 class="text-xl font-bold text-slate-100 mb-5">En qué te puedo ayudar</h3>
@@ -469,7 +502,7 @@
           El mantenimiento mensual comienza en <strong class="text-slate-100" data-eur-price="15">15 €</strong> para solo/microempresas. La configuración del piloto se discute tras revisar el alcance.
         </p>
 
-        <button type="button" onclick="openContactForm('light_booking', 'custom_quote')" class="w-full bg-slate-800 border border-blue-700 hover:bg-blue-700 text-slate-100 font-medium py-2.5 rounded-lg transition-colors focus:outline-none mt-auto">Solicitar Consultoría</button>
+        <a href="/es/contact/" class="block text-center w-full bg-slate-800 border border-blue-700 hover:bg-blue-700 text-slate-100 font-medium py-2.5 rounded-lg transition-colors focus:outline-none mt-auto">Solicitar Consultoría</a>
       </div>
     </div>
 
@@ -597,7 +630,7 @@
         <div class="mb-2 text-2xl font-bold text-blue-500">A convenir</div>
         <p class="text-xs text-blue-500 font-medium mb-4">Piloto mensual: <br><span data-eur-range="70,115" class="font-bold text-sm">70–115 €</span> / mes</p>
         <p class="text-xs text-slate-400 mb-4">Construido para restaurantes que desean más pedidos directos y un mejor control operativo.</p>
-        <button type="button" onclick="openContactForm('deliveryhub', 'custom_quote')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Solicitar Demostración de DeliveryHub</button>
+        <a href="/es/contact/" class="block text-center w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Solicitar Demostración de DeliveryHub</a>
       </div>
     </div>
 
@@ -628,7 +661,7 @@
           <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Mantenimiento de formularios y automatizaciones</li>
           <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Verificación de integraciones</li>
         </ul>
-        <button type="button" onclick="openContactForm('three_month', 'custom_quote')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Alcance</button>
+        <a href="/es/contact/" class="block text-center w-full bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Alcance</a>
       </div>
       <div class="bg-slate-950 border-2 border-blue-600 rounded-xl p-6 shadow-sm flex flex-col relative order-first lg:order-none">
         <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-3 rounded">Recomendado</div>
@@ -646,7 +679,7 @@
           <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Análisis básico e informes</li>
           <li class="flex items-start"><span class="text-blue-500 mr-2 font-bold">•</span>Planificación de mejoras de flujo</li>
         </ul>
-        <button type="button" onclick="openContactForm('twelve_month', 'custom_quote')" class="w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Mantenimiento Mensual</button>
+        <a href="/es/contact/" class="block text-center w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Mantenimiento Mensual</a>
       </div>
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm flex flex-col hover:border-slate-700 transition-colors">
         <h3 class="text-lg font-bold mb-1 text-slate-200">Plan 6 Meses</h3>
@@ -662,7 +695,7 @@
           <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Verificación de integraciones</li>
           <li class="flex items-start"><span class="text-slate-400 mr-2 font-bold">•</span>Análisis básico e informes</li>
         </ul>
-        <button type="button" onclick="openContactForm('six_month', 'custom_quote')" class="w-full text-center bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Alcance</button>
+        <a href="/es/contact/" class="block text-center w-full bg-slate-950 hover:bg-slate-800 text-slate-300 border border-slate-700 font-medium py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Alcance</a>
       </div>
     </div>
 
@@ -672,7 +705,7 @@
           <h3 class="text-xl font-bold text-slate-100 mb-2">Resumen de Precios</h3>
           <p class="text-slate-400 text-sm leading-relaxed">Puntos de partida claros para la planificación. El precio final se confirma tras una breve revisión del proyecto y la confirmación del alcance por escrito.</p>
         </div>
-        <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Mi Proyecto</button>
+        <a href="/es/contact/" class="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-lg transition-colors focus:outline-none">Discutir Mi Proyecto</a>
       </div>
 
       <div class="overflow-x-auto border border-slate-800 rounded-lg">
@@ -735,13 +768,13 @@
           <h3 class="font-semibold text-lg mb-1 text-blue-500">Privado por Diseño</h3>
           <p class="text-slate-400 text-sm leading-relaxed">La solución está diseñada en torno a tu proceso de negocio real, no en torno a herramientas innecesarias o plantillas genéricas.</p>
         </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
-          <h3 class="font-semibold text-lg mb-1 text-blue-500">Simple para los Clientes</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">El viaje del cliente se mantiene simple: entender la oferta, actuar, enviar una solicitud, reservar, hacer un pedido o ponerse en contacto contigo.</p>
+          <div class="flex items-center gap-2 mt-4 text-slate-300">
+            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            <span class="text-sm font-semibold">Presupuesto Personalizado Según Alcance</span>
+          </div>
         </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
-          <h3 class="font-semibold text-lg mb-1 text-blue-500">Soporte Post-Lanzamiento</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Tras el lanzamiento, el sistema puede seguir evolucionando a través de soporte mensual, mejoras y asistencia operativa práctica.</p>
+        <div class="w-full md:w-auto mt-4 md:mt-0 shrink-0">
+          <a href="/es/contact/" class="block text-center w-full bg-slate-800 hover:bg-slate-200 text-white border border-slate-700 font-medium py-3 px-6 rounded-lg transition-colors whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400">Discutir Arquitectura</a>
         </div>
       </div>
     </div>
@@ -851,9 +884,9 @@
       <p class="max-w-3xl mx-auto text-blue-50 leading-relaxed mb-8">
         Si tu negocio necesita un sitio web mejor, flujo de reservas, sistema de pedidos, sistema de servicios o automatización práctica, analicemos la idea juntos y definamos la mejor dirección.
       </p>
-      <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="bg-slate-950 text-blue-400 hover:bg-slate-800 px-6 py-3 rounded-lg font-semibold transition-colors">
+      <a href="/es/contact/" class="inline-block bg-slate-950 text-blue-400 hover:bg-slate-800 px-6 py-3 rounded-lg font-semibold transition-colors">
         Enviar un Mensaje
-      </button>
+      </a>
     </div>
   </div>
 </section>
@@ -863,20 +896,31 @@
 <footer class="py-8 bg-slate-950 border-t border-slate-800 text-center text-xs">
   <div class="flex justify-center items-center gap-5 mb-4 text-slate-400">
     <a href="https://www.instagram.com/alansmsolutions/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors" aria-label="AlanSM Solutions Instagram">
-      <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path></svg>
-    </a>
-    <a href="https://www.instagram.com/alanmoraissss/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Alan Personal Instagram">
-      <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path></svg>
+      <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path></svg>
     </a>
     <a href="https://www.facebook.com/alankmorais" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="Alan Facebook">
-      <svg fill="currentColor" viewBox="0 0 24 24" class="w-5 h-5"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path></svg>
+      <svg fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path></svg>
     </a>
   </div>
-  <p class="text-slate-500">© 2026 AlanSM Solutions. Todos los derechos reservados. • Portafolio, Automatización y Sistemas Digitales</p>
-  <div class="mt-3 flex flex-wrap justify-center gap-3 text-[10px]">
-    <button type="button" onclick="openLegalModal('termsModal')" class="text-slate-400 hover:text-blue-400 transition-colors">Términos de Servicio</button>
-    <span class="text-slate-200">|</span>
-    <button type="button" onclick="openLegalModal('privacyModal')" class="text-slate-400 hover:text-blue-400 transition-colors">Aviso de Privacidad</button>
+  
+  <div class="flex flex-wrap justify-center gap-6 mb-6 text-slate-400 text-sm font-medium">
+    <a href="/es/" class="hover:text-blue-400 transition-colors">Inicio</a>
+    <a href="/es/features/" class="hover:text-blue-400 transition-colors">Características</a>
+    <a href="/es/pricing/" class="hover:text-blue-400 transition-colors">Precios</a>
+    <a href="/es/industries/" class="hover:text-blue-400 transition-colors">Industrias</a>
+    <a href="/es/portfolio/" class="hover:text-blue-400 transition-colors">Portafolio</a>
+    <a href="/es/blog/" class="hover:text-blue-400 transition-colors">Blog</a>
+    <a href="/es/resources/" class="hover:text-blue-400 transition-colors">Recursos</a>
+    <a href="/es/contact/" class="hover:text-blue-400 transition-colors">Contacto</a>
+    <a href="/es/free-trial/" class="hover:text-blue-400 transition-colors">Prueba Gratis</a>
+  </div>
+
+  <p class="text-slate-500 mb-4">© 2026 AlanSM Solutions. Todos los derechos reservados. • Automatización de Negocios & Sistemas Digitales</p>
+  
+  <div class="flex flex-wrap justify-center gap-4 text-xs">
+    <a href="/es/terms/" class="text-slate-400 hover:text-blue-400 transition-colors">Términos de Servicio</a>
+    <span class="text-slate-700">|</span>
+    <a href="/es/privacy/" class="text-slate-400 hover:text-blue-400 transition-colors">Aviso de Privacidad</a>
   </div>
 </footer>
 
@@ -884,8 +928,8 @@
   <div class="flex items-start gap-3">
     <div class="flex-1">
       <p class="text-xs font-bold uppercase tracking-wider text-blue-500">Oferta Limitada</p>
-      <p class="text-xs text-slate-300 mt-2 leading-relaxed">Precios de configuración reducidos están disponibles para proyectos de consultoría seleccionados.</p>
-      <button type="button" onclick="claimOffer()" class="mt-3 bg-slate-800 hover:bg-slate-200 border border-slate-700 text-white text-[10px] font-semibold px-4 py-2 rounded transition-colors w-full focus:outline-none">Discutir Tu Proyecto</button>
+      <p class="text-xs text-slate-300 mt-2 leading-relaxed">Precios de configuración reducidos están disponibles para proyectos seleccionados.</p>
+      <a href="/es/contact/" class="mt-3 block text-center bg-slate-800 hover:bg-slate-200 border border-slate-700 text-white hover:text-slate-900 text-[10px] font-semibold px-4 py-2 rounded transition-colors w-full focus:outline-none">Discutir Tu Proyecto</a>
     </div>
     <button type="button" onclick="closeOfferBanner()" aria-label="Cerrar banner" class="text-slate-500 hover:text-slate-100 text-lg leading-none focus:outline-none p-1">&times;</button>
   </div>
