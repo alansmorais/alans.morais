@@ -3,115 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Automação de Negócios e Sistemas de Agendamento | AlanSM Solutions</title>
+  <title>Soluções e Plataforma | AlanSM Solutions</title>
   
   <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" />
 
-  <meta name="description" content="Pare de perder horas com administração manual e de dar 20% para aplicativos de marketplace. Criamos sistemas de agendamento privados, plataformas DeliveryHub e automações customizadas." />
+  <meta name="description" content="Soluções digitais construídas em torno de como seu negócio funciona. Plataformas de agendamento, DeliveryHub para restaurantes, CRM e automação de fluxos de trabalho." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://alansmsolutions.com/br/solutions/"/>
 
-  <meta property="og:title" content="Automação de Negócios e Sistemas de Agendamento | AlanSM Solutions" />
-  <meta property="og:description" content="Pare de perder horas com administração manual e de dar 20% para aplicativos de marketplace. Criamos sistemas de agendamento privados, plataformas DeliveryHub e automações customizadas." />
+  <meta property="og:title" content="Soluções e Plataforma | AlanSM Solutions" />
+  <meta property="og:description" content="Soluções digitais construídas em torno de como seu negócio funciona. Plataformas de agendamento, DeliveryHub, CRM e automação customizada." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" />
-
-  <!-- Rich Snippets: Service Catalog -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@type": "Service",
-          "name": "Sistema de Agendamento Privado",
-          "description": "Motor de reservas sem comissões com sincronização do Google Calendar e lembretes de WhatsApp."
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@type": "Service",
-          "name": "DeliveryHub para Restaurantes",
-          "description": "Pedidos online diretos, sistema de exibição na cozinha e coordenação de entregadores locais."
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@type": "Service",
-          "name": "Automação de Fluxos de Trabalho",
-          "description": "Conecte seus softwares usando Make, Zapier e Google Apps Script."
-        }
-      }
-    ]
-  }
-  </script>
-
-  <!-- Rich Snippets: Local Business / Provider -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "AlanSM Solutions",
-    "image": "https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg",
-    "description": "Sistemas digitais desenvolvidos para eficiência operacional.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Cracóvia",
-      "addressCountry": "PL"
-    },
-    "areaServed": ["Brasil", "Portugal", "Europa", "Remoto"],
-    "priceRange": "$$"
-  }
-  </script>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  
-  <style>
-    body { background: #0f172a; color: #f8fafc; font-family: Inter, system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
-    .top-info-bar { background: #020617; color: #cbd5e1; border-bottom: 1px solid #1e293b; }
-    .main-nav-shell { background: rgba(2, 6, 23, 0.96); backdrop-filter: blur(8px); border-color: #1e293b; }
-    .mobile-drawer-link { display:block; padding: 0.95rem 0; font-size: 1.15rem; line-height: 1.6rem; font-weight: 600; color:#cbd5e1; border-bottom:1px solid #1e293b; }
-    .mobile-drawer-link:last-child { border-bottom: none; }
-    .nav-icon-btn { width: 3rem; height: 3rem; border: 1px solid #334155; border-radius: 0.75rem; display:flex; align-items:center; justify-content:center; background:#0f172a; }
-    .menu-line { width: 1.35rem; height: 2px; background:#cbd5e1; border-radius: 999px; display:block; }
-    .menu-line + .menu-line { margin-top: 0.28rem; }
-    
-    .blob { position: absolute; filter: blur(90px); opacity: 0.15; mix-blend-mode: screen; pointer-events: none; }
-    
-    .fade-in { animation: fadeIn 0.4s ease-in-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-    .solution-card {
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 1.25rem;
-      transition: all 0.3s ease;
-      overflow: hidden;
-    }
-    .solution-card:hover {
-      transform: translateY(-5px);
-      border-color: #3b82f6;
-      box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.15);
-    }
-    .solution-icon-container {
-      width: 3.5rem;
-      height: 3.5rem;
-      border-radius: 0.75rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-  </style>
 
   <script>
     (async function() {
@@ -130,7 +33,6 @@
         else if (esCountries.includes(country)) targetUrl = '/es/solutions/';
 
         if (targetUrl !== currentPath && currentPath.includes('/br/solutions/')) {
-          // Already on BR page
           return;
         } else if (targetUrl !== currentPath && !currentPath.includes(targetUrl)) {
           window.location.replace(targetUrl);
@@ -144,10 +46,35 @@
       window.location.href = url;
     }
   </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    body { background: #0f172a; color: #f8fafc; font-family: Inter, system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+    .top-info-bar { background: #020617; color: #cbd5e1; border-bottom: 1px solid #1e293b; }
+    .main-nav-shell { background: rgba(2, 6, 23, 0.96); backdrop-filter: blur(8px); border-color: #1e293b; }
+    .mobile-drawer-link { display:block; padding: 0.95rem 0; font-size: 1.15rem; line-height: 1.6rem; font-weight: 600; color:#cbd5e1; border-bottom:1px solid #1e293b; }
+    .mobile-drawer-link:last-child { border-bottom: none; }
+    .nav-icon-btn { width: 3rem; height: 3rem; border: 1px solid #334155; border-radius: 0.75rem; display:flex; align-items:center; justify-content:center; background:#0f172a; }
+    .menu-line { width: 1.35rem; height: 2px; background:#cbd5e1; border-radius: 999px; display:block; }
+    .menu-line + .menu-line { margin-top: 0.28rem; }
+    
+    .blob { position: absolute; filter: blur(90px); opacity: 0.15; mix-blend-mode: screen; pointer-events: none; }
+    .fade-in { animation: fadeIn 0.4s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* UI Mockup Styles for Premium Look */
+    .ui-browser { background: #1e293b; border: 1px solid #334155; border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+    .ui-browser-header { background: #0f172a; padding: 12px; border-bottom: 1px solid #334155; display: flex; gap: 6px; }
+    .ui-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .ui-phone { width: 260px; height: 520px; background: #020617; border: 8px solid #1e293b; border-radius: 36px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); position: relative; margin: 0 auto; }
+    .ui-phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100px; height: 24px; background: #1e293b; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; z-index: 10; }
+  </style>
+
 </head>
 <body id="top" class="antialiased" style="padding-top: 132px;">
 
-  <!-- Fixed Header Start -->
   <div class="fixed top-0 inset-x-0 z-50">
     <div class="top-info-bar">
       <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] md:text-[13px] text-center">
@@ -169,7 +96,7 @@
           <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="Logo" width="56" height="56" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-700 bg-slate-950 object-cover" />
           <div class="flex flex-col justify-center min-w-0">
             <span class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-100 leading-none truncate">AlanSM Solutions</span>
-            <span class="text-[11px] md:text-[12px] text-blue-500 font-semibold tracking-[0.18em] uppercase mt-1">Platform Solutions</span>
+            <span class="text-[11px] md:text-[12px] text-blue-500 font-semibold tracking-[0.18em] uppercase mt-1">Plataforma e Soluções</span>
           </div>
         </a>
 
@@ -186,14 +113,14 @@
           <div class="hidden md:flex items-center gap-3">
             <button onclick="switchLang('pt', 'BRL', '/br/solutions/')" class="text-xs font-bold text-blue-500 cursor-pointer">BR</button>
             <button onclick="switchLang('pl', 'PLN', '/pl/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">PL</button>
-            <button onclick="switchLang('es', 'USD', '/es/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">ES</button>
-            <button onclick="switchLang('en', 'EUR', '/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">EN</button>
+            <button onclick="switchLang('es', 'EUR', '/es/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">ES</button>
+            <button onclick="switchLang('en', 'USD', '/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">EN</button>
           </div>
 
           <a href="/br/free-trial/" class="inline-flex items-center bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm font-bold px-4 py-2.5 rounded-lg shadow-md transition-all">Teste Grátis</a>
 
           <button id="mobileMenuButton" type="button" class="lg:hidden nav-icon-btn" onclick="toggleMobileMenu()">
-            <span class="sr-only">Menu</span>
+            <span class="sr-only">Toggle menu</span>
             <div><span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span></div>
           </button>
         </div>
@@ -208,15 +135,6 @@
         <a href="/portfolio/" class="mobile-drawer-link" onclick="closeMobileMenu()">Portfólio</a>
         <a href="/br/#faq" class="mobile-drawer-link" onclick="closeMobileMenu()">FAQ</a>
         <button type="button" class="mobile-drawer-link text-left w-full" onclick="closeMobileMenu(); openContactForm('General Solutions Inquiry');">Contato</button>
-
-        <div class="pt-5 mt-5 border-t border-slate-800 flex items-center justify-between gap-3">
-          <div class="flex items-center gap-3">
-            <button onclick="switchLang('pt', 'BRL', '/br/solutions/')" class="text-xs font-bold text-blue-500">BR</button>
-            <button onclick="switchLang('pl', 'PLN', '/pl/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</button>
-            <button onclick="switchLang('es', 'USD', '/es/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">ES</button>
-            <button onclick="switchLang('en', 'EUR', '/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">EN</button>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -226,183 +144,499 @@
     <div class="blob w-[600px] h-[600px] bg-blue-600 top-[-100px] left-[50%] -translate-x-1/2"></div>
     <div class="blob w-[500px] h-[500px] bg-purple-600 bottom-[20%] right-[-100px]"></div>
     
-    <!-- Hero Section -->
-    <section class="pt-8 pb-12 relative z-10">
-      <div class="max-w-4xl mx-auto px-6 text-center">
-        <p class="text-blue-400 font-bold uppercase tracking-widest text-xs mb-4 fade-in">Capacidades da Plataforma</p>
+    <section class="pt-12 pb-16 relative z-10 text-center">
+      <div class="max-w-4xl mx-auto px-6">
+        <p class="text-blue-400 font-bold uppercase tracking-widest text-xs mb-4 fade-in">Visão Geral da Plataforma</p>
         <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight fade-in" style="animation-delay: 0.1s;">
-          Sistemas Digitais Criados para <br />
-          <span class="text-blue-500">Eficiência Operacional</span>
+          Soluções digitais construídas em torno de <br />
+          <span class="text-blue-500">como o seu negócio funciona.</span>
         </h1>
-        <p class="text-lg text-slate-400 leading-relaxed mb-10 fade-in" style="animation-delay: 0.2s;">
-          A AlanSM Solutions fornece ferramentas de software práticas com foco em resultados. Seja para automatizar agendamentos, otimizar delivery de restaurantes ou criar fluxos de CRM corporativo, temos uma solução projetada para sua indústria.
+        <p class="text-lg text-slate-400 leading-relaxed mb-10 fade-in max-w-3xl mx-auto" style="animation-delay: 0.2s;">
+          Se você precisa de mais agendamentos, pedidos mais rápidos, melhor gestão de clientes ou menos trabalho manual – eu construo sistemas que simplificam as operações e ajudam seu negócio a crescer.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in" style="animation-delay: 0.3s;">
-          <a href="#client-experience" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-colors">Explorar Soluções</a>
-          <button onclick="openContactForm('Needs Assessment')" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-8 rounded-xl border border-slate-700 transition-colors">Solicitar Avaliação</button>
+          <a href="#booking" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg transition-all shadow-blue-500/20">Explorar Soluções</a>
+          <button onclick="openContactForm('Needs Assessment')" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-3.5 px-8 rounded-xl border border-slate-700 transition-colors">Solicitar Consultoria</button>
         </div>
       </div>
     </section>
 
-    <!-- Client Experience & Booking -->
-    <section id="client-experience" class="py-12 md:py-16 border-t border-slate-800/50 bg-slate-900/20 relative z-10 scroll-mt-28">
+    <!-- Choose Your Industry -->
+    <section class="pb-16 relative z-10">
+      <div class="max-w-5xl mx-auto px-6">
+        <p class="text-center text-sm font-semibold text-slate-500 uppercase tracking-widest mb-6">Escolha sua indústria</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+          <a href="#booking" class="bg-slate-900 border border-slate-800 hover:border-blue-500 hover:bg-slate-800 rounded-xl p-4 text-center transition-all group">
+            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🏥</div>
+            <div class="text-xs font-bold text-slate-300">Saúde</div>
+          </a>
+          <a href="#booking" class="bg-slate-900 border border-slate-800 hover:border-pink-500 hover:bg-slate-800 rounded-xl p-4 text-center transition-all group">
+            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">💇</div>
+            <div class="text-xs font-bold text-slate-300">Beleza</div>
+          </a>
+          <a href="#restaurant" class="bg-slate-900 border border-slate-800 hover:border-orange-500 hover:bg-slate-800 rounded-xl p-4 text-center transition-all group">
+            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🍕</div>
+            <div class="text-xs font-bold text-slate-300">Restaurantes</div>
+          </a>
+          <a href="#booking" class="bg-slate-900 border border-slate-800 hover:border-emerald-500 hover:bg-slate-800 rounded-xl p-4 text-center transition-all group">
+            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🏋️</div>
+            <div class="text-xs font-bold text-slate-300">Fitness</div>
+          </a>
+          <a href="#crm" class="bg-slate-900 border border-slate-800 hover:border-yellow-500 hover:bg-slate-800 rounded-xl p-4 text-center transition-all group">
+            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">⚙️</div>
+            <div class="text-xs font-bold text-slate-300">Oficinas</div>
+          </a>
+          <a href="#automation" class="bg-slate-900 border border-slate-800 hover:border-purple-500 hover:bg-slate-800 rounded-xl p-4 text-center transition-all group">
+            <div class="text-2xl mb-2 group-hover:scale-110 transition-transform">🏢</div>
+            <div class="text-xs font-bold text-slate-300">Pequenas Emp.</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- 1. Booking System (Text Left | Image Right) -->
+    <section id="booking" class="py-20 border-t border-slate-800/50 bg-slate-900/20 scroll-mt-28">
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider mb-6">
+            Sistema de Agendamento Privado
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Pare de perder agendamentos porque os clientes não conseguiram marcar.</h2>
+          <p class="text-slate-400 text-lg mb-8 leading-relaxed">Dê aos seus clientes uma experiência de reserva profissional disponível 24/7, com a identidade visual da sua marca. Sem exibir concorrentes, sem idas e vindas manuais.</p>
+          
+          <div class="grid sm:grid-cols-2 gap-4 mb-8">
+            <div class="flex items-center gap-3 text-slate-300 font-medium text-sm"><i class="fas fa-check-circle text-blue-500 text-lg"></i> Reservas online 24/7</div>
+            <div class="flex items-center gap-3 text-slate-300 font-medium text-sm"><i class="fas fa-check-circle text-blue-500 text-lg"></i> Zero comissões de apps</div>
+            <div class="flex items-center gap-3 text-slate-300 font-medium text-sm"><i class="fas fa-check-circle text-blue-500 text-lg"></i> WhatsApp automático</div>
+            <div class="flex items-center gap-3 text-slate-300 font-medium text-sm"><i class="fas fa-check-circle text-blue-500 text-lg"></i> Sincronização Google Calendar</div>
+            <div class="flex items-center gap-3 text-slate-300 font-medium text-sm"><i class="fas fa-check-circle text-blue-500 text-lg"></i> Até 70% menos chamadas</div>
+            <div class="flex items-center gap-3 text-slate-300 font-medium text-sm"><i class="fas fa-check-circle text-blue-500 text-lg"></i> Pagamentos integrados (Pix)</div>
+          </div>
+          
+          <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider mb-3">Perfeito para:</p>
+          <div class="flex flex-wrap gap-2 mb-8">
+            <span class="bg-slate-800 text-slate-300 px-3 py-1 rounded text-xs">Clínicas privadas</span>
+            <span class="bg-slate-800 text-slate-300 px-3 py-1 rounded text-xs">Dentistas</span>
+            <span class="bg-slate-800 text-slate-300 px-3 py-1 rounded text-xs">Salões de beleza</span>
+            <span class="bg-slate-800 text-slate-300 px-3 py-1 rounded text-xs">Barbearias</span>
+            <span class="bg-slate-800 text-slate-300 px-3 py-1 rounded text-xs">Terapeutas</span>
+            <span class="bg-slate-800 text-slate-300 px-3 py-1 rounded text-xs">Treinadores</span>
+          </div>
+
+          <a href="/br/pricing/" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-lg transition-colors">Ver Pacotes e Demo <i class="fas fa-arrow-right"></i></a>
+        </div>
+        
+        <!-- UI Mockup: Calendar -->
+        <div class="ui-browser">
+          <div class="ui-browser-header">
+            <div class="ui-dot bg-red-500"></div><div class="ui-dot bg-yellow-500"></div><div class="ui-dot bg-green-500"></div>
+          </div>
+          <div class="p-6 bg-slate-950 h-[400px] flex flex-col">
+            <div class="flex justify-between items-center mb-6 border-b border-slate-800 pb-4">
+              <div class="flex items-center gap-4"><div class="bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded">Hoje</div><span class="text-white font-semibold">Ter, Nov 12</span></div>
+              <div class="flex -space-x-2"><div class="w-8 h-8 rounded-full bg-slate-700 border-2 border-slate-950 z-20"></div><div class="w-8 h-8 rounded-full bg-slate-600 border-2 border-slate-950 z-10"></div></div>
+            </div>
+            <div class="flex-1 relative border-l border-slate-800 pl-4">
+              <div class="absolute top-[10%] left-4 right-4 bg-slate-900 border-l-4 border-blue-500 p-3 rounded shadow-lg border border-slate-800">
+                <div class="flex justify-between"><span class="text-sm font-bold text-white">Juliana M.</span><span class="text-[10px] text-green-400 bg-green-400/10 px-2 py-0.5 rounded">Pago</span></div>
+                <p class="text-xs text-slate-400 mt-1">Consulta • 45m</p>
+              </div>
+              <div class="absolute top-[45%] left-4 right-4 bg-slate-900 border-l-4 border-purple-500 p-3 rounded shadow-lg border border-slate-800">
+                <div class="flex justify-between"><span class="text-sm font-bold text-white">Marcos S.</span><span class="text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded">Pendente</span></div>
+                <p class="text-xs text-slate-400 mt-1">Revisão • 30m</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Restaurant System (Image Left | Text Right) -->
+    <section id="restaurant" class="py-20 border-t border-slate-800/50 scroll-mt-28">
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- UI Mockup: Phone -->
+        <div class="order-2 lg:order-1 flex justify-center">
+          <div class="ui-phone">
+            <div class="ui-phone-notch"></div>
+            <div class="pt-12 px-5 pb-6 h-full flex flex-col bg-slate-900">
+              <div class="bg-orange-500 text-white text-center py-3 rounded-xl font-bold mb-4 shadow-lg shadow-orange-500/20">Bella Pizza</div>
+              <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Menu Digital</div>
+              <div class="flex-1 overflow-hidden space-y-3">
+                <div class="bg-slate-800 p-3 rounded-lg flex justify-between items-center border border-slate-700">
+                  <div><p class="text-sm font-bold text-white">Margherita</p><p class="text-xs text-slate-400">Tomate, Muçarela, Manjericão</p></div>
+                  <span class="text-orange-400 font-bold text-sm">R$ 54</span>
+                </div>
+                <div class="bg-slate-800 p-3 rounded-lg flex justify-between items-center border border-slate-700">
+                  <div><p class="text-sm font-bold text-white">Pepperoni</p><p class="text-xs text-slate-400">Pepperoni duplo</p></div>
+                  <span class="text-orange-400 font-bold text-sm">R$ 68</span>
+                </div>
+              </div>
+              <div class="mt-4 bg-green-600 text-white text-center py-3 rounded-xl font-bold shadow-lg">Finalizar • R$ 122</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider mb-6">
+            Sistemas para Restaurantes
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Recupere sua margem de lucro dos apps de delivery.</h2>
+          <p class="text-slate-400 text-lg mb-8 leading-relaxed">Uma plataforma operacional completa e leve para restaurantes que precisam de pedidos online diretos, rastreamento de status na cozinha e coordenação de entregadores locais sem abrir mão de 30% por pedido.</p>
+          
+          <div class="grid sm:grid-cols-2 gap-6 mb-8">
+            <div>
+              <h4 class="font-bold text-slate-200 mb-2"><i class="fas fa-mobile-alt text-orange-500 mr-2"></i> Menu Digital</h4>
+              <p class="text-sm text-slate-400">Menus bonitos e otimizados para celular para retirada ou entrega.</p>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-200 mb-2"><i class="fas fa-tv text-orange-500 mr-2"></i> Tela de Cozinha (KDS)</h4>
+              <p class="text-sm text-slate-400">Telas ao vivo para gerenciar pedidos de forma eficiente na cozinha.</p>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-200 mb-2"><i class="fas fa-qrcode text-orange-500 mr-2"></i> Pedidos via QR</h4>
+              <p class="text-sm text-slate-400">Pedidos na mesa diretamente do celular do cliente.</p>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-200 mb-2"><i class="fas fa-motorcycle text-orange-500 mr-2"></i> Painel do Entregador</h4>
+              <p class="text-sm text-slate-400">Despache seus próprios entregadores locais através de um painel dedicado.</p>
+            </div>
+          </div>
+
+          <a href="/br/pricing/#delivery-hub" class="inline-flex items-center gap-2 bg-orange-600 hover:bg-orange-500 text-white font-bold py-3 px-8 rounded-lg transition-colors">Ver DeliveryHub <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Business Websites (Text Left | Image Right) -->
+    <section class="py-20 border-t border-slate-800/50 bg-slate-900/20">
+      <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold uppercase tracking-wider mb-6">
+            Sites Comerciais
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Sites profissionais que convertem visitantes em clientes.</h2>
+          <p class="text-slate-400 text-lg mb-8 leading-relaxed">Cada site é projetado em torno dos seus objetivos de negócio—não apenas estética. Alta performance, carregamento rápido e construído para capturar leads diretamente para seus sistemas.</p>
+          
+          <div class="flex flex-wrap gap-3 mb-8">
+            <span class="bg-slate-900 border border-slate-700 text-slate-300 px-4 py-2 rounded-lg text-sm font-medium"><i class="fas fa-rocket text-indigo-500 mr-2"></i> Landing Pages</span>
+            <span class="bg-slate-900 border border-slate-700 text-slate-300 px-4 py-2 rounded-lg text-sm font-medium"><i class="fas fa-search text-indigo-500 mr-2"></i> SEO Local</span>
+            <span class="bg-slate-900 border border-slate-700 text-slate-300 px-4 py-2 rounded-lg text-sm font-medium"><i class="fas fa-map-marker-alt text-indigo-500 mr-2"></i> Google Maps</span>
+            <span class="bg-slate-900 border border-slate-700 text-slate-300 px-4 py-2 rounded-lg text-sm font-medium"><i class="fas fa-wpforms text-indigo-500 mr-2"></i> Formulários Inteligentes</span>
+            <span class="bg-slate-900 border border-slate-700 text-slate-300 px-4 py-2 rounded-lg text-sm font-medium"><i class="fas fa-chart-bar text-indigo-500 mr-2"></i> Setup de Analytics</span>
+            <span class="bg-slate-900 border border-slate-700 text-slate-300 px-4 py-2 rounded-lg text-sm font-medium"><i class="fas fa-mobile-alt text-indigo-500 mr-2"></i> 100% Responsivo</span>
+          </div>
+
+          <button onclick="openContactForm('Website Project')" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-8 rounded-lg transition-colors">Solicitar Orçamento Web <i class="fas fa-arrow-right"></i></button>
+        </div>
+        
+        <!-- UI Mockup: Website -->
+        <div class="ui-browser">
+          <div class="ui-browser-header">
+            <div class="ui-dot bg-red-500"></div><div class="ui-dot bg-yellow-500"></div><div class="ui-dot bg-green-500"></div>
+          </div>
+          <div class="bg-slate-900 h-[350px] relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-indigo-900/40 to-slate-900"></div>
+            <div class="relative p-8 flex flex-col h-full justify-center text-center">
+              <div class="w-16 h-16 bg-indigo-500 rounded-full mx-auto mb-4 border-4 border-slate-900"></div>
+              <div class="h-6 w-3/4 bg-white/10 rounded mx-auto mb-4"></div>
+              <div class="h-3 w-1/2 bg-white/5 rounded mx-auto mb-8"></div>
+              <div class="w-32 h-10 bg-indigo-500 rounded-lg mx-auto"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Automation & CRM Workflow (Special Layout) -->
+    <section id="automation" class="py-20 border-t border-slate-800/50 scroll-mt-28">
+      <div class="max-w-7xl mx-auto px-6 text-center mb-16">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold uppercase tracking-wider mb-6">
+          CRM e Automação de Fluxos
+        </div>
+        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Ainda confirmando agendamentos manualmente? <br/>Ainda copiando dados entre sistemas?</h2>
+        <p class="text-slate-400 text-lg max-w-2xl mx-auto">Eu construo automações que conectam suas ferramentas, eliminam o trabalho manual repetitivo e estruturam os fluxos de trabalho da sua empresa.</p>
+      </div>
+
+      <div class="max-w-5xl mx-auto bg-slate-900 border border-slate-800 rounded-2xl p-8 md:p-12 shadow-2xl">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-8 relative">
+          <!-- Flow Line (Desktop) -->
+          <div class="hidden md:block absolute top-1/2 left-10 right-10 h-1 bg-slate-800 -translate-y-1/2 z-0"></div>
+          
+          <!-- Step 1 -->
+          <div class="relative z-10 flex flex-col items-center bg-slate-950 border border-slate-700 p-6 rounded-xl shadow-lg w-full md:w-1/4">
+            <div class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-full flex items-center justify-center text-xl mb-3"><i class="fas fa-user-plus"></i></div>
+            <h4 class="font-bold text-white text-center">Novo Lead</h4>
+            <p class="text-xs text-slate-500 text-center mt-2">Cliente preenche formulário</p>
+          </div>
+          <div class="md:hidden text-slate-600"><i class="fas fa-arrow-down"></i></div>
+
+          <!-- Step 2 -->
+          <div class="relative z-10 flex flex-col items-center bg-slate-950 border border-purple-500 p-6 rounded-xl shadow-lg w-full md:w-1/4 transform scale-105 shadow-purple-500/20">
+            <div class="w-12 h-12 bg-purple-500/20 text-purple-400 rounded-full flex items-center justify-center text-xl mb-3"><i class="fas fa-database"></i></div>
+            <h4 class="font-bold text-white text-center">Entrada no CRM</h4>
+            <p class="text-xs text-slate-400 text-center mt-2">Salvo automaticamente</p>
+          </div>
+          <div class="md:hidden text-slate-600"><i class="fas fa-arrow-down"></i></div>
+
+          <!-- Step 3 -->
+          <div class="relative z-10 flex flex-col items-center bg-slate-950 border border-slate-700 p-6 rounded-xl shadow-lg w-full md:w-1/4">
+            <div class="w-12 h-12 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center text-xl mb-3"><i class="fab fa-whatsapp"></i></div>
+            <h4 class="font-bold text-white text-center">Auto-Resposta</h4>
+            <p class="text-xs text-slate-500 text-center mt-2">Orçamento via WhatsApp</p>
+          </div>
+          <div class="md:hidden text-slate-600"><i class="fas fa-arrow-down"></i></div>
+
+          <!-- Step 4 -->
+          <div class="relative z-10 flex flex-col items-center bg-slate-950 border border-slate-700 p-6 rounded-xl shadow-lg w-full md:w-1/4">
+            <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center text-xl mb-3"><i class="fas fa-file-invoice-dollar"></i></div>
+            <h4 class="font-bold text-white text-center">Faturamento</h4>
+            <p class="text-xs text-slate-500 text-center mt-2">Documento gerado</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-10">
+        <a href="/br/pricing/#automation" class="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-8 rounded-lg transition-colors shadow-lg shadow-purple-600/20">Explorar Pacotes de Automação <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </section>
+
+
+    <!-- Comparison Matrix -->
+    <section class="py-20 border-t border-slate-800/50 bg-slate-950">
+      <div class="max-w-4xl mx-auto px-6">
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-white mb-10">Encontre a solução certa</h2>
+        <div class="overflow-x-auto rounded-xl border border-slate-800 bg-slate-900/50 shadow-xl">
+          <table class="w-full text-left">
+            <thead class="bg-slate-900 border-b border-slate-800 text-slate-300">
+              <tr>
+                <th class="p-5 font-bold uppercase text-xs tracking-widest">Se você precisa...</th>
+                <th class="p-5 font-bold uppercase text-xs tracking-widest">A Solução</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800 text-sm">
+              <tr class="hover:bg-slate-800/50 transition-colors">
+                <td class="p-5 text-slate-400 font-medium">Acabar com as faltas e lidar com agendamentos online</td>
+                <td class="p-5 text-blue-400 font-bold"><i class="fas fa-calendar-alt mr-2"></i> Sistema de Agendamento Privado</td>
+              </tr>
+              <tr class="hover:bg-slate-800/50 transition-colors">
+                <td class="p-5 text-slate-400 font-medium">Processar pedidos de comida e gerenciar entregadores</td>
+                <td class="p-5 text-orange-400 font-bold"><i class="fas fa-motorcycle mr-2"></i> DeliveryHub</td>
+              </tr>
+              <tr class="hover:bg-slate-800/50 transition-colors">
+                <td class="p-5 text-slate-400 font-medium">Uma presença profissional para captar leads no Google</td>
+                <td class="p-5 text-indigo-400 font-bold"><i class="fas fa-globe mr-2"></i> Site Comercial</td>
+              </tr>
+              <tr class="hover:bg-slate-800/50 transition-colors">
+                <td class="p-5 text-slate-400 font-medium">Parar com a entrada manual de dados (Zapier/Make)</td>
+                <td class="p-5 text-purple-400 font-bold"><i class="fas fa-bolt mr-2"></i> Automação de Fluxos</td>
+              </tr>
+              <tr class="hover:bg-slate-800/50 transition-colors">
+                <td class="p-5 text-slate-400 font-medium">Gerenciar bancos de dados de clientes e processos empresariais</td>
+                <td class="p-5 text-emerald-400 font-bold"><i class="fas fa-database mr-2"></i> Implementações CRM e ERP</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Us & Process -->
+    <section class="py-20 border-t border-slate-800/50 bg-slate-900/20">
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
+        <div>
+          <h2 class="text-3xl font-bold text-white mb-8">Por que as empresas trabalham comigo</h2>
+          <ul class="space-y-6">
+            <li class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0"><i class="fas fa-check"></i></div>
+              <div>
+                <h4 class="font-bold text-slate-200">Adaptado ao seu fluxo de trabalho</h4>
+                <p class="text-sm text-slate-400 mt-1">Eu construo sistemas em torno de como você realmente trabalha, não de templates rígidos.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0"><i class="fas fa-check"></i></div>
+              <div>
+                <h4 class="font-bold text-slate-200">Sem assinaturas desnecessárias</h4>
+                <p class="text-sm text-slate-400 mt-1">Eu consolido suas ferramentas para que você pare de pagar por 5 aplicativos diferentes.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0"><i class="fas fa-check"></i></div>
+              <div>
+                <h4 class="font-bold text-slate-200">Suporte Pessoal</h4>
+                <p class="text-sm text-slate-400 mt-1">Você fala diretamente com o arquiteto que construiu o seu sistema. Sem call centers.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0"><i class="fas fa-check"></i></div>
+              <div>
+                <h4 class="font-bold text-slate-200">Foco em automação</h4>
+                <p class="text-sm text-slate-400 mt-1">Todo site ou sistema que eu construo é projetado para eliminar tarefas administrativas manuais.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h2 class="text-3xl font-bold text-white mb-8">O Processo</h2>
+          <div class="relative border-l border-slate-700 ml-4 space-y-8 pb-4">
+            <div class="relative pl-8">
+              <div class="absolute w-3 h-3 bg-blue-500 rounded-full -left-[6.5px] top-1.5 border-4 border-slate-900"></div>
+              <h4 class="font-bold text-slate-200">1. Descoberta (Revisão)</h4>
+              <p class="text-sm text-slate-400 mt-1">Uma consultoria gratuita para mapear seus gargalos atuais.</p>
+            </div>
+            <div class="relative pl-8">
+              <div class="absolute w-3 h-3 bg-slate-500 rounded-full -left-[6.5px] top-1.5 border-4 border-slate-900"></div>
+              <h4 class="font-bold text-slate-200">2. Planejamento e Arquitetura</h4>
+              <p class="text-sm text-slate-400 mt-1">Seleção do stack adequado (Web, CRM, Automação).</p>
+            </div>
+            <div class="relative pl-8">
+              <div class="absolute w-3 h-3 bg-slate-500 rounded-full -left-[6.5px] top-1.5 border-4 border-slate-900"></div>
+              <h4 class="font-bold text-slate-200">3. Desenvolvimento e Integrações</h4>
+              <p class="text-sm text-slate-400 mt-1">Construção da plataforma e conexão de APIs.</p>
+            </div>
+            <div class="relative pl-8">
+              <div class="absolute w-3 h-3 bg-slate-500 rounded-full -left-[6.5px] top-1.5 border-4 border-slate-900"></div>
+              <h4 class="font-bold text-slate-200">4. Lançamento e Treinamento</h4>
+              <p class="text-sm text-slate-400 mt-1">Entrada em produção e garantia de que sua equipe sabe usar o sistema.</p>
+            </div>
+            <div class="relative pl-8">
+              <div class="absolute w-3 h-3 bg-slate-500 rounded-full -left-[6.5px] top-1.5 border-4 border-slate-900"></div>
+              <h4 class="font-bold text-slate-200">5. Suporte Tech Ops</h4>
+              <p class="text-sm text-slate-400 mt-1">Manutenção mensal contínua e melhorias.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Portfolio Preview -->
+    <section class="py-20 border-t border-slate-800/50 bg-slate-950">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="mb-8 md:mb-12 text-center flex flex-col items-center">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider mb-4">
-            <i class="fas fa-users"></i> Experiência do Cliente
+        <div class="flex justify-between items-end mb-12">
+          <div>
+            <h2 class="text-3xl font-bold text-white mb-2">Projetos Reais</h2>
+            <p class="text-slate-400">Sistemas construídos para operações comerciais reais.</p>
           </div>
-          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Agendamento e Presença Web</h2>
-          <p class="text-slate-400 max-w-2xl text-lg">Tenha controle total da jornada do seu cliente. Sites profissionais e sistemas de agendamento que mantêm seus clientes interagindo com a sua marca, não com um app de marketplace.</p>
+          <a href="/portfolio/" class="hidden md:inline-flex text-blue-400 hover:text-blue-300 font-semibold gap-2 items-center">Ver Portfólio Completo <i class="fas fa-arrow-right"></i></a>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8">
-          <!-- Solution 1 -->
-          <div class="solution-card p-8 flex flex-col h-full">
-            <div class="solution-icon-container bg-blue-500/10 text-blue-400 border border-blue-500/20">
-              <i class="fas fa-calendar-check"></i>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Project 1 -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden group">
+            <div class="h-48 bg-slate-800 relative overflow-hidden flex items-center justify-center border-b border-slate-700">
+              <img src="https://joannafilek.com/images/logo.png" alt="Joanna Filek" class="h-16 opacity-80 group-hover:scale-110 transition-transform duration-500 filter grayscale group-hover:grayscale-0">
             </div>
-            <h3 class="text-2xl font-bold text-white mb-3">Sistema de Agendamento Privado</h3>
-            <p class="text-slate-400 mb-6 flex-grow">Um motor de reservas White-Label completo para salões, clínicas e consultores. Permite que clientes agendem 24/7 com zero comissões.</p>
-            <ul class="space-y-3 text-sm text-slate-300 mb-8">
-              <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> Sincronização via Google Calendar</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> Lembretes automáticos no WhatsApp</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> Banco de Dados de Clientes Seguro (CRM)</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> Integração com pagamentos online (Pix/Stripe)</li>
-            </ul>
-            <a href="/br/pricing/" class="mt-auto text-blue-400 font-bold hover:text-blue-300 flex items-center gap-2 transition-colors">
-              Ver Planos e Preços <i class="fas fa-arrow-right text-xs"></i>
-            </a>
+            <div class="p-6">
+              <div class="text-[10px] uppercase tracking-wider text-blue-400 font-bold mb-2">Plataforma Web e UX</div>
+              <h4 class="text-lg font-bold text-white mb-2">Joanna Filek</h4>
+              <p class="text-xs text-slate-400 mb-4 h-12">Presença de marca profissional e interface de interação com o cliente otimizada.</p>
+              <a href="https://joannafilek.com" target="_blank" class="text-sm font-semibold text-slate-300 hover:text-white transition-colors">Visitar Projeto →</a>
+            </div>
           </div>
 
-          <!-- Solution 2 -->
-          <div class="solution-card p-8 flex flex-col h-full">
-            <div class="solution-icon-container bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-              <i class="fas fa-laptop-code"></i>
+          <!-- Project 2 -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden group">
+            <div class="h-48 bg-slate-800 relative overflow-hidden flex items-center justify-center border-b border-slate-700">
+              <div class="text-4xl text-slate-600 group-hover:text-blue-500 transition-colors duration-500"><i class="fas fa-calendar-check"></i></div>
             </div>
-            <h3 class="text-2xl font-bold text-white mb-3">Sites Profissionais e Landing Pages</h3>
-            <p class="text-slate-400 mb-6 flex-grow">Sites de alta performance projetados para converter visitantes em clientes. Totalmente responsivos e otimizados para o Google.</p>
-            <ul class="space-y-3 text-sm text-slate-300 mb-8">
-              <li class="flex items-center gap-2"><i class="fas fa-check text-indigo-500"></i> Carregamento ultrarrápido</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-indigo-500"></i> Formulários para captação de Leads</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-indigo-500"></i> Suporte multilíngue integrado</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-indigo-500"></i> Configuração de Google Maps e Analytics</li>
-            </ul>
-            <button onclick="openContactForm('Website Project Inquiry')" class="mt-auto text-indigo-400 font-bold hover:text-indigo-300 flex items-center gap-2 transition-colors text-left">
-              Solicitar um Orçamento <i class="fas fa-arrow-right text-xs"></i>
-            </button>
+            <div class="p-6">
+              <div class="text-[10px] uppercase tracking-wider text-blue-400 font-bold mb-2">Sistema de Reservas</div>
+              <h4 class="text-lg font-bold text-white mb-2">Clínica Privada</h4>
+              <p class="text-xs text-slate-400 mb-4 h-12">Sincronização de calendário personalizada, lembretes automáticos no WhatsApp e CRM seguro.</p>
+              <a href="/br/pricing/" class="text-sm font-semibold text-slate-300 hover:text-white transition-colors">Ver Planos de Agendamento →</a>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden group">
+            <div class="h-48 bg-slate-800 relative overflow-hidden flex items-center justify-center border-b border-slate-700">
+              <div class="text-4xl text-slate-600 group-hover:text-orange-500 transition-colors duration-500"><i class="fas fa-motorcycle"></i></div>
+            </div>
+            <div class="p-6">
+              <div class="text-[10px] uppercase tracking-wider text-orange-400 font-bold mb-2">Plataforma para Restaurante</div>
+              <h4 class="text-lg font-bold text-white mb-2">DeliveryHub</h4>
+              <p class="text-xs text-slate-400 mb-4 h-12">Sistema de pedidos sem comissão com tela de cozinha e controle de entregadores locais.</p>
+              <a href="/br/pricing/#delivery-hub" class="text-sm font-semibold text-slate-300 hover:text-white transition-colors">Ver Detalhes →</a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Operations & Restaurant -->
-    <section class="py-12 md:py-16 border-t border-slate-800/50 relative z-10">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="mb-8 md:mb-12 text-center flex flex-col items-center">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider mb-4">
-            <i class="fas fa-utensils"></i> Operações e Restaurantes
-          </div>
-          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Sistemas de Restaurante e Delivery</h2>
-          <p class="text-slate-400 max-w-2xl text-lg">Recupere suas margens de lucro dos apps de delivery. Construímos plataformas operacionais próprias para restaurantes que querem controle direto sobre seus pedidos.</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8">
-          <!-- Solution 3 -->
-          <div class="solution-card p-8 flex flex-col h-full">
-            <div class="solution-icon-container bg-orange-500/10 text-orange-400 border border-orange-500/20">
-              <i class="fas fa-motorcycle"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-white mb-3">DeliveryHub</h3>
-            <p class="text-slate-400 mb-6 flex-grow">Uma plataforma operacional completa e ágil para restaurantes que precisam de pedidos online diretos, controle de cozinha e coordenação de entregadores.</p>
-            <ul class="space-y-3 text-sm text-slate-300 mb-8">
-              <li class="flex items-center gap-2"><i class="fas fa-check text-orange-500"></i> Cardápios Digitais sem comissão</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-orange-500"></i> Sistema de exibição na Cozinha (KDS)</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-orange-500"></i> Painel de Despacho de Entregadores</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-orange-500"></i> Atualizações de Status no WhatsApp</li>
-            </ul>
-            <a href="/br/pricing/#delivery-hub" class="mt-auto text-orange-400 font-bold hover:text-orange-300 flex items-center gap-2 transition-colors">
-              Ver Detalhes do DeliveryHub <i class="fas fa-arrow-right text-xs"></i>
-            </a>
-          </div>
-
-          <!-- Solution 4 -->
-          <div class="solution-card p-8 flex flex-col h-full">
-            <div class="solution-icon-container bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
-              <i class="fas fa-clipboard-list"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-white mb-3">Sistema de Ordem de Serviço</h3>
-            <p class="text-slate-400 mb-6 flex-grow">Criado para assistências técnicas, oficinas e oficinas de reparo. Acompanhe os serviços desde a entrada até a finalização.</p>
-            <ul class="space-y-3 text-sm text-slate-300 mb-8">
-              <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> Criação de Tickets Digitais</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> Portal de Consulta de Status do Cliente</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> Histórico de Reparos e Anotações Internas</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> Alerta Automático de "Pronto para Retirar"</li>
-            </ul>
-            <button onclick="openContactForm('Service Order System Inquiry')" class="mt-auto text-yellow-400 font-bold hover:text-yellow-300 flex items-center gap-2 transition-colors text-left">
-              Solicitar Demonstração <i class="fas fa-arrow-right text-xs"></i>
-            </button>
-          </div>
+        <div class="mt-8 text-center md:hidden">
+          <a href="/portfolio/" class="inline-flex text-blue-400 font-semibold gap-2 items-center">Ver Portfólio Completo <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </section>
 
-    <!-- Enterprise & Automation -->
-    <section class="py-12 md:py-16 border-t border-slate-800/50 bg-slate-900/20 relative z-10">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="mb-8 md:mb-12 text-center flex flex-col items-center">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold uppercase tracking-wider mb-4">
-            <i class="fas fa-cogs"></i> Corporativo e Escala
-          </div>
-          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Automação de Negócios e CRM</h2>
-          <p class="text-slate-400 max-w-2xl text-lg">Para negócios em crescimento que precisam integrar ferramentas, eliminar a entrada manual de dados e adotar fluxos de trabalho de nível corporativo.</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8">
-          <!-- Solution 5 -->
-          <div class="solution-card p-8 flex flex-col h-full border-purple-500/30">
-            <div class="solution-icon-container bg-purple-500/10 text-purple-400 border border-purple-500/20">
-              <i class="fas fa-project-diagram"></i>
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 border-t border-slate-800/50 bg-slate-900/20">
+      <div class="max-w-3xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center text-white mb-10">Perguntas Frequentes</h2>
+        <div class="space-y-4">
+          <details class="group bg-slate-900 border border-slate-800 rounded-lg [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none font-medium">
+              Eu preciso ter um site existente?
+              <span class="relative size-4 shrink-0 text-blue-500">
+                <svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+                <svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg>
+              </span>
+            </summary>
+            <div class="px-5 pb-5 text-slate-400 text-sm leading-relaxed border-t border-slate-800 pt-4">
+              Não. Podemos construir tudo do zero, incluindo uma landing page otimizada para SEO e de carregamento rápido, que serve como base para o seu sistema de agendamento ou pedidos.
             </div>
-            <h3 class="text-2xl font-bold text-white mb-3">Automação Customizada de Fluxos</h3>
-            <p class="text-slate-400 mb-6 flex-grow">Conecte seus softwares atuais. Construímos integrações via API com Google Apps Script, Make e Zapier para automatizar tarefas repetitivas.</p>
-            <ul class="space-y-3 text-sm text-slate-300 mb-8">
-              <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i> Geração de Documentos/PDFs Automáticos</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i> Direcionamento de Leads e Formatação</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i> Disparos de E-mail Personalizados</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i> Sincronização de Planilhas e Banco de Dados</li>
-            </ul>
-            <a href="/br/pricing/#automation" class="mt-auto text-purple-400 font-bold hover:text-purple-300 flex items-center gap-2 transition-colors">
-              Explorar Planos de Automação <i class="fas fa-arrow-right text-xs"></i>
-            </a>
-          </div>
+          </details>
 
-          <!-- Solution 6 -->
-          <div class="solution-card p-8 flex flex-col h-full">
-            <div class="solution-icon-container bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <i class="fas fa-building"></i>
+          <details class="group bg-slate-900 border border-slate-800 rounded-lg [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none font-medium">
+              Vocês podem integrar com o Google Calendar?
+              <span class="relative size-4 shrink-0 text-blue-500">
+                <svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+                <svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg>
+              </span>
+            </summary>
+            <div class="px-5 pb-5 text-slate-400 text-sm leading-relaxed border-t border-slate-800 pt-4">
+              Com certeza. Nossos sistemas privados de agendamento possuem sincronização bidirecional com o Google Calendar para evitar reservas duplas instantaneamente.
             </div>
-            <h3 class="text-2xl font-bold text-white mb-3">Integrações de CRM e ERP</h3>
-            <p class="text-slate-400 mb-6 flex-grow">Arquitetura de dados de nível corporativo. Oferecemos suporte para implementações complexas do Salesforce e fluxos orientados a ERP.</p>
-            <ul class="space-y-3 text-sm text-slate-300 mb-8">
-              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> Configuração e Otimização Salesforce</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> Gestão de Dados Mestres (MDM)</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> Fluxos para Varejo e Estoque</li>
-              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> Entregue em parceria com SOUBLOX</li>
-            </ul>
-            <button onclick="openContactForm('CRM & ERP Implementation Inquiry')" class="mt-auto text-emerald-400 font-bold hover:text-emerald-300 flex items-center gap-2 transition-colors text-left">
-              Falar sobre Arquitetura <i class="fas fa-arrow-right text-xs"></i>
-            </button>
-          </div>
+          </details>
+
+          <details class="group bg-slate-900 border border-slate-800 rounded-lg [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none font-medium">
+              Posso usar o meu próprio domínio?
+              <span class="relative size-4 shrink-0 text-blue-500">
+                <svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+                <svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg>
+              </span>
+            </summary>
+            <div class="px-5 pb-5 text-slate-400 text-sm leading-relaxed border-t border-slate-800 pt-4">
+              Sim, 100%. Sempre construímos no seu próprio domínio (ex., seunegocio.com.br). Você é dono do tráfego, do SEO e da presença da marca.
+            </div>
+          </details>
+
+          <details class="group bg-slate-900 border border-slate-800 rounded-lg [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-5 text-slate-200 focus:outline-none font-medium">
+              Quanto tempo demora para lançar?
+              <span class="relative size-4 shrink-0 text-blue-500">
+                <svg class="absolute inset-0 size-4 opacity-100 group-open:opacity-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+                <svg class="absolute inset-0 size-4 opacity-0 group-open:opacity-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" /></svg>
+              </span>
+            </summary>
+            <div class="px-5 pb-5 text-slate-400 text-sm leading-relaxed border-t border-slate-800 pt-4">
+              Sistemas de agendamento padrão geralmente levam de 1 a 2 semanas dependendo da sua agilidade com o envio de conteúdos. Automações de fluxo de trabalho e integrações de ERP dependem inteiramente do escopo do projeto.
+            </div>
+          </details>
         </div>
       </div>
     </section>
 
-    <!-- Consultation CTA -->
-    <section class="py-12 md:py-16 border-t border-slate-800 bg-slate-950 relative z-10">
-      <div class="max-w-4xl mx-auto px-6 text-center bg-slate-900 border border-slate-800 p-10 md:p-16 rounded-3xl shadow-2xl">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Não tem certeza de qual é a melhor solução?</h2>
-        <p class="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">Agende uma revisão operacional gratuita. Vamos mapear seus fluxos atuais, identificar os gargalos e recomendar exatamente quais ferramentas você precisa para escalar com eficiência.</p>
-        <button onclick="openContactForm('Operational Review Request')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-blue-500/25 transition-all text-lg">
+    
+    <!-- Big CTA -->
+    <section class="py-24 bg-slate-950 border-t border-slate-800 relative z-10">
+      <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 pointer-events-none"></div>
+      <div class="max-w-4xl mx-auto px-6 text-center bg-blue-600/10 border border-blue-500/20 p-12 md:p-16 rounded-3xl shadow-2xl relative backdrop-blur-sm">
+        <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">Pronto para automatizar seu negócio?</h2>
+        <p class="text-slate-300 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">Vamos construir um sistema que te poupe horas de trabalho administrativo e traga uma experiência premium para os seus clientes.</p>
+        <button onclick="openContactForm('Operational Review Request')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-blue-500/30 transition-all text-lg transform hover:-translate-y-1">
           Agendar uma Consultoria Gratuita
         </button>
       </div>
