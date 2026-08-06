@@ -11,7 +11,7 @@
   <meta name="robots" content="index, follow" />
 
   <link rel="alternate" hreflang="en" href="https://alansmsolutions.com/" />
-  <link rel="alternate" hreflang="pt-br" href="https://alansmsolutions.com/br/" />
+  <link rel="alternate" hreflang="pt" href="https://alansmsolutions.com/pt/" />
   <link rel="alternate" hreflang="pl" href="https://alansmsolutions.com/pl/" />
   <link rel="alternate" hreflang="es" href="https://alansmsolutions.com/es/" />
   <link rel="alternate" hreflang="x-default" href="https://alansmsolutions.com/" />
@@ -208,16 +208,16 @@
 
       <div class="hidden lg:flex items-center justify-center gap-8">
         <a href="/es/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Inicio</a>
-        <a href="/es/features/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Características</a>
+        <a href="#solutions" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Soluciones</a>
         <a href="/es/pricing/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Precios</a>
-        <a href="/es/resources/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Recursos</a>
         <a href="/es/portfolio/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Portafolio</a>
-        <a href="/es/contact/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contacto</a>
+        <a href="#faq" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">FAQ</a>
+        <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contacto</button>
       </div>
 
       <div class="flex items-center justify-end gap-3">
         <div class="hidden md:flex items-center gap-3">
-          <a href="/br/" onclick="switchLang('pt', 'BRL', '/br/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">BR</a>
+          <a href="/pt/" onclick="switchLang('pt', 'BRL', '/pt/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PT</a>
           <a href="/pl/" onclick="switchLang('pl', 'PLN', '/pl/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</a>
           <a href="/es/" onclick="switchLang('es', 'EUR', '/es/')" class="text-xs font-semibold text-blue-500">ES</a>
           <a href="/" onclick="switchLang('en', 'USD', '/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">EN</a>
@@ -241,16 +241,15 @@
   <div id="mobileMenu" class="hidden lg:hidden bg-slate-950 border-b border-slate-800 shadow-sm">
     <div class="px-6 py-5">
       <a href="/es/" class="mobile-drawer-link" onclick="closeMobileMenu()">Inicio</a>
-      <a href="/es/features/" class="mobile-drawer-link" onclick="closeMobileMenu()">Características</a>
+      <a href="#solutions" class="mobile-drawer-link" onclick="closeMobileMenu()">Soluciones</a>
       <a href="/es/pricing/" class="mobile-drawer-link" onclick="closeMobileMenu()">Precios</a>
-      <a href="/es/resources/" class="mobile-drawer-link" onclick="closeMobileMenu()">Recursos</a>
       <a href="/es/portfolio/" class="mobile-drawer-link" onclick="closeMobileMenu()">Portafolio</a>
-      <a href="/es/contact/" class="mobile-drawer-link" onclick="closeMobileMenu()">Contacto</a>
-      <a href="/es/free-trial/" class="mobile-drawer-link text-blue-400" onclick="closeMobileMenu()">Prueba Gratis</a>
+      <a href="#faq" class="mobile-drawer-link" onclick="closeMobileMenu()">FAQ</a>
+      <button type="button" class="mobile-drawer-link text-left w-full" onclick="closeMobileMenu(); openContactForm('offer', 'introductory_offer');">Contacto</button>
 
       <div class="pt-5 mt-5 border-t border-slate-800 flex items-center justify-between gap-3">
         <div class="flex items-center gap-3">
-          <a href="/br/" onclick="switchLang('pt', 'BRL', '/br/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">BR</a>
+          <a href="/pt/" onclick="switchLang('pt', 'BRL', '/pt/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PT</a>
           <a href="/pl/" onclick="switchLang('pl', 'PLN', '/pl/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</a>
           <a href="/es/" onclick="switchLang('es', 'EUR', '/es/')" class="text-xs font-semibold text-blue-500">ES</a>
           <a href="/" onclick="switchLang('en', 'USD', '/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">EN</a>
@@ -903,13 +902,11 @@
   
   <div class="flex flex-wrap justify-center gap-6 mb-6 text-slate-400 text-sm font-medium">
     <a href="/es/" class="hover:text-blue-400 transition-colors">Inicio</a>
-    <a href="/es/features/" class="hover:text-blue-400 transition-colors">Características</a>
-    <a href="/es/pricing/" class="hover:text-blue-400 transition-colors">Precios</a>
+    <a href="#solutions" class="hover:text-blue-400 transition-colors">Soluciones</a>
+    <a href="#pricing" class="hover:text-blue-400 transition-colors">Precios</a>
     <a href="/es/portfolio/" class="hover:text-blue-400 transition-colors">Portafolio</a>
-    <a href="/es/blog/" class="hover:text-blue-400 transition-colors">Blog</a>
-    <a href="/es/resources/" class="hover:text-blue-400 transition-colors">Recursos</a>
-    <a href="/es/contact/" class="hover:text-blue-400 transition-colors">Contacto</a>
-    <a href="/es/free-trial/" class="hover:text-blue-400 transition-colors">Prueba Gratis</a>
+    <a href="#faq" class="hover:text-blue-400 transition-colors">FAQ</a>
+    <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="hover:text-blue-400 transition-colors">Contacto</button>
   </div>
 
   <p class="text-slate-500 mb-4">© 2026 AlanSM Solutions. Todos los derechos reservados. • Automatización de Negocios & Sistemas Digitales</p>
