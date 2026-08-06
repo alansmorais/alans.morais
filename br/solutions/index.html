@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Automação de Negócios e Sistemas de Agendamento | AlanSM Solutions</title>
+  
+  <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" />
+
+  <meta name="description" content="Pare de perder horas com administração manual e de dar 20% para aplicativos de marketplace. Criamos sistemas de agendamento privados, plataformas DeliveryHub e automações customizadas." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://alansmsolutions.com/br/solutions/"/>
+
+  <meta property="og:title" content="Automação de Negócios e Sistemas de Agendamento | AlanSM Solutions" />
+  <meta property="og:description" content="Pare de perder horas com administração manual e de dar 20% para aplicativos de marketplace. Criamos sistemas de agendamento privados, plataformas DeliveryHub e automações customizadas." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" />
+
+  <!-- Rich Snippets: Service Catalog -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Service",
+          "name": "Sistema de Agendamento Privado",
+          "description": "Motor de reservas sem comissões com sincronização do Google Calendar e lembretes de WhatsApp."
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Service",
+          "name": "DeliveryHub para Restaurantes",
+          "description": "Pedidos online diretos, sistema de exibição na cozinha e coordenação de entregadores locais."
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Service",
+          "name": "Automação de Fluxos de Trabalho",
+          "description": "Conecte seus softwares usando Make, Zapier e Google Apps Script."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Rich Snippets: Local Business / Provider -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "AlanSM Solutions",
+    "image": "https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg",
+    "description": "Sistemas digitais desenvolvidos para eficiência operacional.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cracóvia",
+      "addressCountry": "PL"
+    },
+    "areaServed": ["Brasil", "Portugal", "Europa", "Remoto"],
+    "priceRange": "$$"
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    body { background: #0f172a; color: #f8fafc; font-family: Inter, system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+    .top-info-bar { background: #020617; color: #cbd5e1; border-bottom: 1px solid #1e293b; }
+    .main-nav-shell { background: rgba(2, 6, 23, 0.96); backdrop-filter: blur(8px); border-color: #1e293b; }
+    .mobile-drawer-link { display:block; padding: 0.95rem 0; font-size: 1.15rem; line-height: 1.6rem; font-weight: 600; color:#cbd5e1; border-bottom:1px solid #1e293b; }
+    .mobile-drawer-link:last-child { border-bottom: none; }
+    .nav-icon-btn { width: 3rem; height: 3rem; border: 1px solid #334155; border-radius: 0.75rem; display:flex; align-items:center; justify-content:center; background:#0f172a; }
+    .menu-line { width: 1.35rem; height: 2px; background:#cbd5e1; border-radius: 999px; display:block; }
+    .menu-line + .menu-line { margin-top: 0.28rem; }
+    
+    .blob { position: absolute; filter: blur(90px); opacity: 0.15; mix-blend-mode: screen; pointer-events: none; }
+    
+    .fade-in { animation: fadeIn 0.4s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .solution-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 1.25rem;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    .solution-card:hover {
+      transform: translateY(-5px);
+      border-color: #3b82f6;
+      box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.15);
+    }
+    .solution-icon-container {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+
+  <script>
+    (async function() {
+      const manualLang = localStorage.getItem('user_lang');
+      const currentPath = window.location.pathname;
+      if (manualLang) return; 
+      try {
+        const response = await fetch('https://get.geojs.io/v1/ip/country.json');
+        const data = await response.json();
+        const country = data.country;
+        const esCountries = ['ES','MX','AR','CO','CL','PE','VE','EC','GT','CU','BO','DO','HN','PY','SV','NI','CR','PA','PR','UY','GQ'];
+        
+        let targetUrl = '/solutions/'; 
+        if (country === 'BR' || country === 'PT') targetUrl = '/br/solutions/';
+        else if (country === 'PL') targetUrl = '/pl/solutions/';
+        else if (esCountries.includes(country)) targetUrl = '/es/solutions/';
+
+        if (targetUrl !== currentPath && currentPath.includes('/br/solutions/')) {
+          // Already on BR page
+          return;
+        } else if (targetUrl !== currentPath && !currentPath.includes(targetUrl)) {
+          window.location.replace(targetUrl);
+        }
+      } catch(e) {}
+    })();
+
+    function switchLang(lang, currency, url) {
+      localStorage.setItem('user_lang', lang);
+      if(currency) localStorage.setItem('preferredCurrency', currency);
+      window.location.href = url;
+    }
+  </script>
+</head>
+<body id="top" class="antialiased" style="padding-top: 132px;">
+
+  <!-- Fixed Header Start -->
+  <div class="fixed top-0 inset-x-0 z-50">
+    <div class="top-info-bar">
+      <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] md:text-[13px] text-center">
+        <div class="flex items-center justify-center gap-2 sm:gap-5 mx-auto sm:mx-0">
+          <span class="font-medium">📧 contato@alansmsolutions.com</span>
+          <span class="hidden sm:inline text-blue-200">|</span>
+          <span class="font-medium">📍 Brasil • Remoto</span>
+        </div>
+        <div class="flex items-center justify-center gap-4 text-blue-200/80">
+          <a href="https://www.instagram.com/alansmsolutions/" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.facebook.com/alankmorais" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-facebook"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <nav class="main-nav-shell border-b border-slate-800 shadow-sm">
+      <div class="max-w-7xl mx-auto px-6 h-[88px] grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4">
+        <a href="/br/" class="flex items-center gap-3 md:gap-4 min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+          <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="Logo" width="56" height="56" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-700 bg-slate-950 object-cover" />
+          <div class="flex flex-col justify-center min-w-0">
+            <span class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-100 leading-none truncate">AlanSM Solutions</span>
+            <span class="text-[11px] md:text-[12px] text-blue-500 font-semibold tracking-[0.18em] uppercase mt-1">Platform Solutions</span>
+          </div>
+        </a>
+
+        <div class="hidden lg:flex items-center justify-center gap-8">
+          <a href="/br/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Início</a>
+          <a href="/br/solutions/" class="text-sm font-semibold text-slate-100 border-b-2 border-blue-500 pb-1">Soluções</a>
+          <a href="/br/pricing/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Preços</a>
+          <a href="/portfolio/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Portfólio</a>
+          <a href="/br/#faq" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">FAQ</a>
+          <button type="button" onclick="openContactForm('General Solutions Inquiry')" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contato</button>
+        </div>
+
+        <div class="flex items-center justify-end gap-3">
+          <div class="hidden md:flex items-center gap-3">
+            <button onclick="switchLang('pt', 'BRL', '/br/solutions/')" class="text-xs font-bold text-blue-500 cursor-pointer">BR</button>
+            <button onclick="switchLang('pl', 'PLN', '/pl/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">PL</button>
+            <button onclick="switchLang('es', 'USD', '/es/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">ES</button>
+            <button onclick="switchLang('en', 'EUR', '/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">EN</button>
+          </div>
+
+          <a href="/br/free-trial/" class="inline-flex items-center bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm font-bold px-4 py-2.5 rounded-lg shadow-md transition-all">Teste Grátis</a>
+
+          <button id="mobileMenuButton" type="button" class="lg:hidden nav-icon-btn" onclick="toggleMobileMenu()">
+            <span class="sr-only">Menu</span>
+            <div><span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span></div>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mobileMenu" class="hidden lg:hidden bg-slate-950 border-b border-slate-800 shadow-sm">
+      <div class="px-6 py-5">
+        <a href="/br/" class="mobile-drawer-link" onclick="closeMobileMenu()">Início</a>
+        <a href="/br/solutions/" class="mobile-drawer-link text-blue-400" onclick="closeMobileMenu()">Soluções</a>
+        <a href="/br/pricing/" class="mobile-drawer-link" onclick="closeMobileMenu()">Preços</a>
+        <a href="/portfolio/" class="mobile-drawer-link" onclick="closeMobileMenu()">Portfólio</a>
+        <a href="/br/#faq" class="mobile-drawer-link" onclick="closeMobileMenu()">FAQ</a>
+        <button type="button" class="mobile-drawer-link text-left w-full" onclick="closeMobileMenu(); openContactForm('General Solutions Inquiry');">Contato</button>
+
+        <div class="pt-5 mt-5 border-t border-slate-800 flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <button onclick="switchLang('pt', 'BRL', '/br/solutions/')" class="text-xs font-bold text-blue-500">BR</button>
+            <button onclick="switchLang('pl', 'PLN', '/pl/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</button>
+            <button onclick="switchLang('es', 'USD', '/es/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">ES</button>
+            <button onclick="switchLang('en', 'EUR', '/solutions/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">EN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="relative overflow-hidden">
+    <!-- Ambient Background Blobs -->
+    <div class="blob w-[600px] h-[600px] bg-blue-600 top-[-100px] left-[50%] -translate-x-1/2"></div>
+    <div class="blob w-[500px] h-[500px] bg-purple-600 bottom-[20%] right-[-100px]"></div>
+    
+    <!-- Hero Section -->
+    <section class="pt-8 pb-12 relative z-10">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <p class="text-blue-400 font-bold uppercase tracking-widest text-xs mb-4 fade-in">Capacidades da Plataforma</p>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight fade-in" style="animation-delay: 0.1s;">
+          Sistemas Digitais Criados para <br />
+          <span class="text-blue-500">Eficiência Operacional</span>
+        </h1>
+        <p class="text-lg text-slate-400 leading-relaxed mb-10 fade-in" style="animation-delay: 0.2s;">
+          A AlanSM Solutions fornece ferramentas de software práticas com foco em resultados. Seja para automatizar agendamentos, otimizar delivery de restaurantes ou criar fluxos de CRM corporativo, temos uma solução projetada para sua indústria.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in" style="animation-delay: 0.3s;">
+          <a href="#client-experience" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-colors">Explorar Soluções</a>
+          <button onclick="openContactForm('Needs Assessment')" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-8 rounded-xl border border-slate-700 transition-colors">Solicitar Avaliação</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Client Experience & Booking -->
+    <section id="client-experience" class="py-12 md:py-16 border-t border-slate-800/50 bg-slate-900/20 relative z-10 scroll-mt-28">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-8 md:mb-12 text-center flex flex-col items-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider mb-4">
+            <i class="fas fa-users"></i> Experiência do Cliente
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Agendamento e Presença Web</h2>
+          <p class="text-slate-400 max-w-2xl text-lg">Tenha controle total da jornada do seu cliente. Sites profissionais e sistemas de agendamento que mantêm seus clientes interagindo com a sua marca, não com um app de marketplace.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Solution 1 -->
+          <div class="solution-card p-8 flex flex-col h-full">
+            <div class="solution-icon-container bg-blue-500/10 text-blue-400 border border-blue-500/20">
+              <i class="fas fa-calendar-check"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">Sistema de Agendamento Privado</h3>
+            <p class="text-slate-400 mb-6 flex-grow">Um motor de reservas White-Label completo para salões, clínicas e consultores. Permite que clientes agendem 24/7 com zero comissões.</p>
+            <ul class="space-y-3 text-sm text-slate-300 mb-8">
+              <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> Sincronização via Google Calendar</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> Lembretes automáticos no WhatsApp</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> Banco de Dados de Clientes Seguro (CRM)</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> Integração com pagamentos online (Pix/Stripe)</li>
+            </ul>
+            <a href="/br/pricing/" class="mt-auto text-blue-400 font-bold hover:text-blue-300 flex items-center gap-2 transition-colors">
+              Ver Planos e Preços <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+
+          <!-- Solution 2 -->
+          <div class="solution-card p-8 flex flex-col h-full">
+            <div class="solution-icon-container bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">Sites Profissionais e Landing Pages</h3>
+            <p class="text-slate-400 mb-6 flex-grow">Sites de alta performance projetados para converter visitantes em clientes. Totalmente responsivos e otimizados para o Google.</p>
+            <ul class="space-y-3 text-sm text-slate-300 mb-8">
+              <li class="flex items-center gap-2"><i class="fas fa-check text-indigo-500"></i> Carregamento ultrarrápido</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-indigo-500"></i> Formulários para captação de Leads</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-indigo-500"></i> Suporte multilíngue integrado</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-indigo-500"></i> Configuração de Google Maps e Analytics</li>
+            </ul>
+            <button onclick="openContactForm('Website Project Inquiry')" class="mt-auto text-indigo-400 font-bold hover:text-indigo-300 flex items-center gap-2 transition-colors text-left">
+              Solicitar um Orçamento <i class="fas fa-arrow-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Operations & Restaurant -->
+    <section class="py-12 md:py-16 border-t border-slate-800/50 relative z-10">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-8 md:mb-12 text-center flex flex-col items-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider mb-4">
+            <i class="fas fa-utensils"></i> Operações e Restaurantes
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Sistemas de Restaurante e Delivery</h2>
+          <p class="text-slate-400 max-w-2xl text-lg">Recupere suas margens de lucro dos apps de delivery. Construímos plataformas operacionais próprias para restaurantes que querem controle direto sobre seus pedidos.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Solution 3 -->
+          <div class="solution-card p-8 flex flex-col h-full">
+            <div class="solution-icon-container bg-orange-500/10 text-orange-400 border border-orange-500/20">
+              <i class="fas fa-motorcycle"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">DeliveryHub</h3>
+            <p class="text-slate-400 mb-6 flex-grow">Uma plataforma operacional completa e ágil para restaurantes que precisam de pedidos online diretos, controle de cozinha e coordenação de entregadores.</p>
+            <ul class="space-y-3 text-sm text-slate-300 mb-8">
+              <li class="flex items-center gap-2"><i class="fas fa-check text-orange-500"></i> Cardápios Digitais sem comissão</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-orange-500"></i> Sistema de exibição na Cozinha (KDS)</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-orange-500"></i> Painel de Despacho de Entregadores</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-orange-500"></i> Atualizações de Status no WhatsApp</li>
+            </ul>
+            <a href="/br/pricing/#delivery-hub" class="mt-auto text-orange-400 font-bold hover:text-orange-300 flex items-center gap-2 transition-colors">
+              Ver Detalhes do DeliveryHub <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+
+          <!-- Solution 4 -->
+          <div class="solution-card p-8 flex flex-col h-full">
+            <div class="solution-icon-container bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">
+              <i class="fas fa-clipboard-list"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">Sistema de Ordem de Serviço</h3>
+            <p class="text-slate-400 mb-6 flex-grow">Criado para assistências técnicas, oficinas e oficinas de reparo. Acompanhe os serviços desde a entrada até a finalização.</p>
+            <ul class="space-y-3 text-sm text-slate-300 mb-8">
+              <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> Criação de Tickets Digitais</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> Portal de Consulta de Status do Cliente</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> Histórico de Reparos e Anotações Internas</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-yellow-500"></i> Alerta Automático de "Pronto para Retirar"</li>
+            </ul>
+            <button onclick="openContactForm('Service Order System Inquiry')" class="mt-auto text-yellow-400 font-bold hover:text-yellow-300 flex items-center gap-2 transition-colors text-left">
+              Solicitar Demonstração <i class="fas fa-arrow-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enterprise & Automation -->
+    <section class="py-12 md:py-16 border-t border-slate-800/50 bg-slate-900/20 relative z-10">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="mb-8 md:mb-12 text-center flex flex-col items-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold uppercase tracking-wider mb-4">
+            <i class="fas fa-cogs"></i> Corporativo e Escala
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Automação de Negócios e CRM</h2>
+          <p class="text-slate-400 max-w-2xl text-lg">Para negócios em crescimento que precisam integrar ferramentas, eliminar a entrada manual de dados e adotar fluxos de trabalho de nível corporativo.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Solution 5 -->
+          <div class="solution-card p-8 flex flex-col h-full border-purple-500/30">
+            <div class="solution-icon-container bg-purple-500/10 text-purple-400 border border-purple-500/20">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">Automação Customizada de Fluxos</h3>
+            <p class="text-slate-400 mb-6 flex-grow">Conecte seus softwares atuais. Construímos integrações via API com Google Apps Script, Make e Zapier para automatizar tarefas repetitivas.</p>
+            <ul class="space-y-3 text-sm text-slate-300 mb-8">
+              <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i> Geração de Documentos/PDFs Automáticos</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i> Direcionamento de Leads e Formatação</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i> Disparos de E-mail Personalizados</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-purple-500"></i> Sincronização de Planilhas e Banco de Dados</li>
+            </ul>
+            <a href="/br/pricing/#automation" class="mt-auto text-purple-400 font-bold hover:text-purple-300 flex items-center gap-2 transition-colors">
+              Explorar Planos de Automação <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+
+          <!-- Solution 6 -->
+          <div class="solution-card p-8 flex flex-col h-full">
+            <div class="solution-icon-container bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+              <i class="fas fa-building"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-3">Integrações de CRM e ERP</h3>
+            <p class="text-slate-400 mb-6 flex-grow">Arquitetura de dados de nível corporativo. Oferecemos suporte para implementações complexas do Salesforce e fluxos orientados a ERP.</p>
+            <ul class="space-y-3 text-sm text-slate-300 mb-8">
+              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> Configuração e Otimização Salesforce</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> Gestão de Dados Mestres (MDM)</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> Fluxos para Varejo e Estoque</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check text-emerald-500"></i> Entregue em parceria com SOUBLOX</li>
+            </ul>
+            <button onclick="openContactForm('CRM & ERP Implementation Inquiry')" class="mt-auto text-emerald-400 font-bold hover:text-emerald-300 flex items-center gap-2 transition-colors text-left">
+              Falar sobre Arquitetura <i class="fas fa-arrow-right text-xs"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Consultation CTA -->
+    <section class="py-12 md:py-16 border-t border-slate-800 bg-slate-950 relative z-10">
+      <div class="max-w-4xl mx-auto px-6 text-center bg-slate-900 border border-slate-800 p-10 md:p-16 rounded-3xl shadow-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Não tem certeza de qual é a melhor solução?</h2>
+        <p class="text-slate-400 text-lg mb-8 max-w-2xl mx-auto">Agende uma revisão operacional gratuita. Vamos mapear seus fluxos atuais, identificar os gargalos e recomendar exatamente quais ferramentas você precisa para escalar com eficiência.</p>
+        <button onclick="openContactForm('Operational Review Request')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-blue-500/25 transition-all text-lg">
+          Agendar uma Consultoria Gratuita
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="py-12 bg-slate-950 border-t border-slate-800 text-center text-xs">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+        <div class="flex items-center gap-3">
+          <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="AlanSM Solutions logo" width="32" height="32" class="w-10 h-10 rounded-full border border-blue-500/30" />
+          <div class="text-left">
+            <span class="text-base font-extrabold tracking-tight text-white block">AlanSM Solutions</span>
+            <span class="text-blue-400 font-medium">Automação de Negócios e Sistemas</span>
+          </div>
+        </div>
+        
+        <div class="flex gap-4 text-2xl text-slate-600">
+          <i class="fab fa-cc-stripe hover:text-slate-400 transition-colors" title="Stripe Secure"></i>
+          <i class="fab fa-cc-visa hover:text-slate-400 transition-colors"></i>
+          <i class="fab fa-cc-mastercard hover:text-slate-400 transition-colors"></i>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500">
+        <p>© 2026 AlanSM Solutions. Todos os direitos reservados.</p>
+        <div class="flex items-center gap-4 font-medium">
+           <a href="#" class="hover:text-blue-400 transition-colors" onclick="openLegalModal('termsModal')">Termos de Serviço</a>
+           <span class="text-slate-700">|</span>
+           <a href="#" class="hover:text-blue-400 transition-colors" onclick="openLegalModal('privacyModal')"><i class="fas fa-lock text-[10px]"></i> Privacidade e LGPD</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl w-full max-w-md shadow-2xl p-8 relative">
+       <button type="button" onclick="closeContactForm()" class="absolute top-5 right-5 text-slate-500 hover:text-white"><i class="fa fa-times text-xl"></i></button>
+       <h2 class="text-2xl font-bold text-white mb-6">Fale Conosco</h2>
+       <form id="contactForm" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-4">
+          <input type="hidden" name="_subject" id="formSubject" value="Solutions Inquiry" />
+          <input type="text" id="formName" name="name" required placeholder="Nome Completo" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white focus:border-blue-500 outline-none">
+          <input type="email" id="formEmail" name="email" required placeholder="E-mail" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white focus:border-blue-500 outline-none">
+          <input type="tel" id="formPhone" name="phone" required placeholder="Número do WhatsApp" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white focus:border-blue-500 outline-none">
+          <textarea id="formMsg" name="message" rows="3" required placeholder="Fale um pouco sobre o seu projeto..." class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white focus:border-blue-500 outline-none resize-none"></textarea>
+          <label class="flex items-start gap-2 text-xs text-slate-500 mt-2">
+            <input type="checkbox" id="formConsent" required class="mt-0.5"> Concordo com a política de privacidade.
+          </label>
+          <button type="submit" class="bg-blue-600 text-white font-bold py-4 rounded-xl mt-2 hover:bg-blue-500 transition-colors">Enviar Solicitação</button>
+          <p id="formStatus" class="text-xs text-center mt-2 font-bold"></p>
+       </form>
+    </div>
+  </div>
+  
+  <div id="termsModal" class="hidden"></div>
+  <div id="privacyModal" class="hidden"></div>
+
+  <script>
+    const ALANSM_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwxzYWgEdGsUqjokKIMroI1xmZYE1LQcj4sd8EIoODbDWA5MIxa0xEb85JTuvAQnVMtXA/exec";
+    const ALANSM_FORM_TOKEN = "alan_admin_2026";
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('hidden');
+    }
+
+    function openContactForm(subject) {
+      document.getElementById('contactModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      if(subject) document.getElementById('formSubject').value = subject;
+    }
+
+    function closeContactForm() {
+      document.getElementById('contactModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    async function handleFormSubmit(event) {
+        event.preventDefault();
+        const form = event.target;
+        const btn = form.querySelector('button[type="submit"]');
+        const status = document.getElementById('formStatus');
+        btn.disabled = true; btn.textContent = "Enviando...";
+
+        const payload = {
+            action: 'submitLead',
+            token: ALANSM_FORM_TOKEN,
+            Name: document.getElementById('formName').value,
+            Company: 'N/A', 
+            Email: document.getElementById('formEmail').value,
+            Phone: document.getElementById('formPhone').value,
+            Message: document.getElementById('formMsg').value,
+            Package: document.getElementById('formSubject').value,
+            source: 'solutions_page_br'
+        };
+
+        try {
+            const params = new URLSearchParams();
+            for (const key in payload) params.append(key, payload[key]);
+            await fetch(ALANSM_BACKEND_URL, { method: 'POST', body: params });
+            status.textContent = "Solicitação enviada com sucesso!";
+            status.className = "text-green-500 text-xs font-bold text-center mt-2";
+            setTimeout(closeContactForm, 2000);
+        } catch (err) {
+            status.textContent = "Erro. Por favor, tente novamente.";
+            status.className = "text-red-500 text-xs font-bold text-center mt-2";
+        } finally {
+            btn.disabled = false; btn.textContent = "Enviar Solicitação";
+        }
+    }
+  </script>
+
+</body>
+</html>
