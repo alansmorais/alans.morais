@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,49 +7,28 @@
   <title>Alan da Silva Morais | CV & Portfolio | SaaS, Automation & Business Systems</title>
 
   <meta name="description" content="Professional CV and portfolio of Alan da Silva Morais — Partner Success Manager, SaaS Operations professional and Automation & Backend Developer specializing in SAP, business systems, data automation and digital solutions.">
-
   <meta name="keywords" content="Alan da Silva Morais, CV, portfolio, Partner Success Manager, SaaS Operations, SAP S/4HANA, SAP Ariba, Salesforce, automation, business automation, backend developer, web development, data automation, Krakow">
-
   <meta name="author" content="Alan da Silva Morais">
   <meta name="robots" content="index, follow">
 
   <link rel="canonical" href="https://www.alansmsolutions.com/portfolio/">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="profile">
-  <meta property="og:title" content="Alan da Silva Morais | CV & Portfolio">
-  <meta property="og:description" content="Partner Success Manager, SaaS Operations professional and Automation & Backend Developer specializing in enterprise systems, business automation and digital solutions.">
-  <meta property="og:url" content="https://www.alansmsolutions.com/portfolio/">
-  <meta property="og:image" content="https://www.alansmsolutions.com/images/alan.png">
-  <meta property="og:site_name" content="AlanSM Solutions">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Alan da Silva Morais | CV & Portfolio">
-  <meta name="twitter:description" content="Professional CV and portfolio covering SaaS operations, partner success, SAP systems, automation and digital solutions.">
-  <meta name="twitter:image" content="https://www.alansmsolutions.com/images/alam.png">
+  <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" />
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
   <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  >
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
+    html { scroll-behavior: smooth; }
     body {
-      background:
-        radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.06), transparent 35%),
-        #020617;
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 35%),
+                  radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.06), transparent 35%),
+                  #020617;
+      color: #f8fafc;
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
-
     .main-nav-shell {
       background: rgba(2, 6, 23, 0.96);
       backdrop-filter: blur(14px);
@@ -58,1214 +36,325 @@
       position: sticky;
       top: 0;
       z-index: 50;
+      border-bottom: 1px solid #1e293b;
     }
-
     .timeline-dot {
       position: absolute;
-      left: -35px;
-      top: 5px;
-      width: 14px;
-      height: 14px;
-      border-radius: 9999px;
-      background: #2563eb;
-      border: 3px solid #020617;
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.35);
+      left: -31px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #3b82f6;
+      border: 4px solid #020617;
     }
-
     .cv-card {
-      transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
-
     .cv-card:hover {
       transform: translateY(-3px);
       border-color: rgba(71, 85, 105, 0.9);
       box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
     }
-
-    .profile-image {
-      box-shadow:
-        0 0 0 1px rgba(59, 130, 246, 0.25),
-        0 20px 45px rgba(0, 0, 0, 0.35);
-    }
-
-    .nav-icon-btn {
-      width: 42px;
-      height: 42px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #334155;
-      border-radius: 10px;
-      background: #020617;
-      transition: all 0.2s ease;
-    }
-
-    .nav-icon-btn:hover {
-      border-color: #3b82f6;
-      background: #0f172a;
-    }
-
-    .menu-line {
-      display: block;
-      width: 20px;
-      height: 2px;
-      margin: 4px 0;
-      background: #94a3b8;
-      border-radius: 9999px;
-      transition: all 0.2s ease;
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
+    .blob { position: absolute; filter: blur(90px); opacity: 0.15; mix-blend-mode: screen; pointer-events: none; }
   </style>
-
-  <!-- Person Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Alan da Silva Morais",
-    "url": "https://www.alansmsolutions.com/portfolio/",
-    "image": "https://www.alansmsolutions.com/images/alan.png",
-    "jobTitle": "Partner Success Manager",
-    "description": "Partner Success Manager, SaaS Operations professional and Automation & Backend Developer specializing in enterprise systems, business automation and digital solutions.",
-    "sameAs": [
-      "https://www.linkedin.com/in/alandasm",
-      "https://github.com/alansmorais"
-    ],
-    "knowsAbout": [
-      "Partner Success",
-      "SaaS Operations",
-      "SAP S/4HANA",
-      "SAP Ariba",
-      "Salesforce",
-      "Business Automation",
-      "Data Automation",
-      "Web Development",
-      "HTML",
-      "CSS",
-      "Tailwind CSS",
-      "SQL",
-      "VBA"
-    ]
-  }
-  </script>
 </head>
 
-
 <body class="text-slate-300 antialiased">
-
 
   <!-- =========================================================
        HEADER
   ========================================================== -->
-
-  <nav class="main-nav-shell border-b border-slate-800 shadow-sm">
-
+  <nav class="main-nav-shell shadow-sm">
     <div class="max-w-7xl mx-auto px-6 h-[88px] grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4">
-
+      
       <!-- Logo / Brand -->
-
-      <a
-        href="/"
-        class="flex items-center gap-3 md:gap-4 min-w-0 focus:outline-none rounded"
-        aria-label="AlanSM Solutions - Home"
-      >
-
-        <img
-          src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg"
-          alt="AlanSM Solutions"
-          width="56"
-          height="56"
-          class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-700 bg-slate-950 object-cover"
-        >
-
+      <a href="/" class="flex items-center gap-3 md:gap-4 min-w-0 focus:outline-none rounded">
+        <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="AlanSM Solutions" width="56" height="56" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-700 bg-slate-950 object-cover">
         <div class="flex flex-col justify-center min-w-0">
-
-          <span class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-100 leading-none truncate">
-            Alan da Silva Morais
-          </span>
-
-          <span class="text-[11px] md:text-[12px] text-blue-500 font-semibold tracking-[0.18em] uppercase mt-1">
-            AlanSM Solutions
-          </span>
-
+          <span class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-100 leading-none truncate">Alan da Silva Morais</span>
+          <span class="text-[11px] md:text-[12px] text-blue-500 font-semibold tracking-[0.18em] uppercase mt-1">CV & Portfolio</span>
         </div>
-
       </a>
 
-
       <!-- Desktop Navigation -->
-
       <div class="hidden lg:flex items-center justify-center gap-8">
-
-        <a
-          href="/"
-          class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors"
-        >
-          Home
-        </a>
-
-        <a
-          href="/solutions/"
-          class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors"
-        >
-          Solutions
-        </a>
-
-        <a
-          href="/pricing/"
-          class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors"
-        >
-          Pricing
-        </a>
-
-        <a
-          href="/portfolio/"
-          aria-current="page"
-          class="text-sm font-semibold text-blue-500 border-b-2 border-blue-500 pb-1"
-        >
-          Portfolio
-        </a>
-
-        <a
-          href="/resources/faq/"
-          class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors"
-        >
-          FAQ
-        </a>
-
-        <button
-          type="button"
-          onclick="openContactForm('offer', 'introductory_offer')"
-          class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors"
-        >
-          Contact
-        </button>
-
+        <a href="/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Home</a>
+        <a href="/features/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Features</a>
+        <a href="/pricing/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Pricing</a>
+        <a href="/portfolio/" aria-current="page" class="text-sm font-semibold text-blue-500 border-b-2 border-blue-500 pb-1">Portfolio</a>
+        <a href="/contact/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contact</a>
       </div>
 
-
-      <!-- Desktop Languages / Currency + Mobile Menu -->
-
+      <!-- Action Button -->
       <div class="flex items-center justify-end gap-3">
-
-        <div class="hidden md:flex items-center gap-3">
-
-          <button
-            type="button"
-            onclick="switchLang('br', 'BRL', '/br/')"
-            class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors"
-            aria-label="Portuguese - Brazil"
-          >
-            BR
-          </button>
-
-          <button
-            type="button"
-            onclick="switchLang('pl', 'PLN', '/pl/')"
-            class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors"
-            aria-label="Polish"
-          >
-            PL
-          </button>
-
-          <button
-            type="button"
-            onclick="switchLang('es', 'EUR', '/es/')"
-            class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors"
-            aria-label="Spanish"
-          >
-            ES
-          </button>
-
-          <button
-            type="button"
-            onclick="switchLang('en', 'USD', '/')"
-            class="text-xs font-semibold text-blue-500"
-            aria-current="page"
-            aria-label="English"
-          >
-            EN
-          </button>
-
-          <span
-            id="currencyAutoLabel"
-            class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2"
-          >
-            USD auto
-          </span>
-
-        </div>
-
-
-        <!-- Mobile Menu Button -->
-
-        <button
-          id="mobileMenuButton"
-          type="button"
-          class="lg:hidden nav-icon-btn"
-          aria-expanded="false"
-          aria-controls="mobileMenu"
-          aria-label="Open navigation menu"
-          onclick="toggleMobileMenu()"
-        >
-
-          <span class="sr-only">
-            Toggle menu
-          </span>
-
-          <div>
-            <span class="menu-line"></span>
-            <span class="menu-line"></span>
-            <span class="menu-line"></span>
-          </div>
-
-        </button>
-
+        <a href="/free-trial/" class="inline-flex items-center bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm font-bold px-4 py-2.5 rounded-lg shadow-md transition-all">Free Trial</a>
       </div>
-
     </div>
-
-
-    <!-- =======================================================
-         MOBILE NAVIGATION
-    ======================================================== -->
-
-    <div
-      id="mobileMenu"
-      class="hidden lg:hidden border-t border-slate-800 bg-slate-950"
-    >
-
-      <div class="max-w-7xl mx-auto px-6 py-5">
-
-        <div class="flex flex-col gap-1">
-
-          <a
-            href="/"
-            class="px-3 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:text-blue-400 hover:bg-slate-900 transition-colors"
-          >
-            Home
-          </a>
-
-          <a
-            href="/solutions/"
-            class="px-3 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:text-blue-400 hover:bg-slate-900 transition-colors"
-          >
-            Solutions
-          </a>
-
-          <a
-            href="/pricing/"
-            class="px-3 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:text-blue-400 hover:bg-slate-900 transition-colors"
-          >
-            Pricing
-          </a>
-
-          <a
-            href="/portfolio/"
-            class="px-3 py-3 rounded-lg text-sm font-semibold text-blue-400 bg-slate-900 transition-colors"
-            aria-current="page"
-          >
-            Portfolio
-          </a>
-
-          <a
-            href="/resources/faq/"
-            class="px-3 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:text-blue-400 hover:bg-slate-900 transition-colors"
-          >
-            FAQ
-          </a>
-
-          <button
-            type="button"
-            onclick="openContactForm('offer', 'introductory_offer')"
-            class="px-3 py-3 rounded-lg text-sm font-semibold text-slate-300 hover:text-blue-400 hover:bg-slate-900 transition-colors text-left"
-          >
-            Contact
-          </button>
-
-        </div>
-
-
-        <!-- Mobile Language / Currency -->
-
-        <div class="pt-5 mt-5 border-t border-slate-800 flex items-center justify-between gap-3">
-
-          <div class="flex items-center gap-3">
-
-            <button
-              type="button"
-              onclick="switchLang('br', 'BRL', '/br/')"
-              class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors"
-            >
-              br
-            </button>
-
-            <button
-              type="button"
-              onclick="switchLang('pl', 'PLN', '/pl/')"
-              class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors"
-            >
-              PL
-            </button>
-
-            <button
-              type="button"
-              onclick="switchLang('es', 'EUR', '/es/')"
-              class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors"
-            >
-              ES
-            </button>
-
-            <button
-              type="button"
-              onclick="switchLang('en', 'USD', '/')"
-              class="text-xs font-semibold text-blue-500"
-              aria-current="page"
-            >
-              EN
-            </button>
-
-          </div>
-
-          <span
-            id="currencyAutoLabelMobile"
-            class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2"
-          >
-            USD auto
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-
   </nav>
-
 
   <!-- =========================================================
        MAIN CV CONTENT
   ========================================================== -->
-
-  <main>
-
-    <div class="max-w-4xl mx-auto px-6 py-12 md:py-16 relative z-10">
-
+  <main class="relative overflow-hidden py-12 md:py-20">
+    <div class="blob w-[600px] h-[600px] bg-blue-600 top-[-100px] left-[50%] -translate-x-1/2"></div>
+    
+    <div class="max-w-5xl mx-auto px-6 relative z-10">
 
       <!-- =====================================================
-           PROFILE
+           PROFILE (Left Aligned)
       ====================================================== -->
-
-      <section
-        class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 mb-12 shadow-2xl flex flex-col md:flex-row items-start md:items-center gap-8 text-left"
-        aria-labelledby="profile-heading"
-      >
-
-        <img
-          src="images/alan.png"
-          alt="Alan da Silva Morais - Partner Success Manager and Automation Developer"
-          width="320"
-          height="320"
-          class="profile-image w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-blue-500/40 object-cover shrink-0"
-        >
-
-
+      <section class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 mb-12 shadow-2xl flex flex-col md:flex-row items-start md:items-center gap-8 text-left">
+        
+        <!-- FIX: Using Absolute URL from GitHub so the image always loads -->
+        <img 
+          src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/alan-profile.jpg" 
+          alt="Alan da Silva Morais" 
+          onerror="this.src='https://placehold.co/150x150/1e293b/fff?text=AM'" 
+          class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-blue-500/40 object-cover shadow-xl shrink-0" 
+        />
+        
         <div>
-
           <div class="inline-flex items-center px-3 py-1 rounded bg-blue-500/10 border border-blue-500/30 text-xs text-blue-400 font-semibold mb-3">
             Available for Consulting & Development
           </div>
-
-
-          <h1
-            id="profile-heading"
-            class="text-3xl md:text-5xl font-black text-white mb-2"
-          >
-            Alan da Silva Morais
-          </h1>
-
-
-          <p class="text-blue-400 font-semibold text-sm md:text-lg mb-4">
-            Partner Success Manager | SaaS Operations | Automation & Backend Developer
-          </p>
-
-
+          
+          <h1 class="text-3xl md:text-5xl font-black text-white mb-2">Alan da Silva Morais</h1>
+          <p class="text-blue-400 font-semibold text-sm md:text-lg mb-4">Partner Success Manager | SaaS Operations | Automation & Backend Developer</p>
+          
           <p class="text-slate-400 text-sm md:text-base leading-relaxed mb-6">
-            Partner Success and SaaS Operations professional with corporate experience since 2017.
-            I specialize in SAP S/4HANA, Ariba, Salesforce, and Order-to-Cash frameworks.
-            Beyond enterprise operations, I develop single-page private booking web applications.
-            Previously, I also gained hobbyist experience operating commercial laser engraving
-            systems and managing my hospitality business, Familia Brazilian Bistro.
+            Partner Success and SaaS Operations professional with corporate experience since 2017. I specialize in SAP S/4HANA, Ariba, Salesforce, and Order-to-Cash frameworks. Beyond enterprise operations, I develop single-page private booking web applications. Previously, I also gained hobbyist experience operating commercial laser engraving systems and managing my hospitality business, Familia Brazilian Bistro.
           </p>
-
-
+          
           <div class="flex flex-wrap gap-3">
-
-            <a
-              href="https://www.linkedin.com/in/alandasm"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Alan da Silva Morais LinkedIn profile"
-              class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2"
-            >
-              <i class="fab fa-linkedin text-blue-400"></i>
-              LinkedIn Profile
-            </a>
-
-
-            <a
-              href="https://github.com/alansmorais"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View Alan da Silva Morais GitHub repositories"
-              class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2"
-            >
-              <i class="fab fa-github"></i>
-              GitHub Repositories
-            </a>
-
-
-            <a
-              href="/contact/"
-              class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2"
-            >
-              <i class="fa fa-envelope"></i>
-              Send Message
-            </a>
-
+            <a href="https://www.linkedin.com/in/alandasm" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2"><i class="fab fa-linkedin text-blue-400"></i> LinkedIn Profile</a>
+            <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2"><i class="fab fa-github"></i> GitHub Repositories</a>
+            <a href="/contact/" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2"><i class="fa fa-envelope"></i> Send Message</a>
           </div>
-
         </div>
-
       </section>
 
-
       <!-- =====================================================
-           CORE SKILLS
+           CORE SKILLS & ARCHITECTURE (Centralized)
       ====================================================== -->
-
-      <section aria-labelledby="skills-heading">
-
+      <section class="mb-16">
         <div class="text-center mb-10">
-
-          <h2
-            id="skills-heading"
-            class="text-2xl font-bold text-white inline-block pb-2 border-b-2 border-slate-800"
-          >
-            Core Skills & Architecture
-          </h2>
-
+          <h2 class="text-2xl font-bold text-white inline-block pb-2 border-b-2 border-slate-800">Core Skills & Architecture</h2>
         </div>
-
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-
-
-          <article class="cv-card bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center">
-
-            <div class="w-12 h-12 rounded-xl bg-blue-600/10 text-blue-500 flex items-center justify-center text-xl mb-4">
-              <i class="fas fa-handshake"></i>
-            </div>
-
-            <h3 class="font-bold text-white text-base mb-3">
-              SaaS Ops & Partner Success
-            </h3>
-
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Partner onboarding and enablement, customer success, enterprise account support,
-              and ITIL support workflows.
-            </p>
-
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <article class="cv-card bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center hover:border-slate-700">
+            <div class="w-12 h-12 rounded-xl bg-blue-600/10 text-blue-500 flex items-center justify-center text-xl mb-4"><i class="fas fa-handshake"></i></div>
+            <h3 class="font-bold text-white text-base mb-3">SaaS Ops & Partner Success</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Partner onboarding and enablement, customer success, enterprise account support, and ITIL support workflows.</p>
           </article>
 
-
-          <article class="cv-card bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center">
-
-            <div class="w-12 h-12 rounded-xl bg-purple-600/10 text-purple-500 flex items-center justify-center text-xl mb-4">
-              <i class="fas fa-building"></i>
-            </div>
-
-            <h3 class="font-bold text-white text-base mb-3">
-              Corporate Systems
-            </h3>
-
-            <p class="text-xs text-slate-400 leading-relaxed">
-              SAP S/4HANA, SAP SD, Ariba, Salesforce, Order-to-Cash operations,
-              and master data governance.
-            </p>
-
+          <article class="cv-card bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center hover:border-slate-700">
+            <div class="w-12 h-12 rounded-xl bg-purple-600/10 text-purple-500 flex items-center justify-center text-xl mb-4"><i class="fas fa-building"></i></div>
+            <h3 class="font-bold text-white text-base mb-3">Corporate Systems</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">SAP S/4HANA, SAP SD, Ariba, Salesforce, Order-to-Cash operations, and master data governance.</p>
           </article>
 
-
-          <article class="cv-card bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center">
-
-            <div class="w-12 h-12 rounded-xl bg-yellow-600/10 text-yellow-500 flex items-center justify-center text-xl mb-4">
-              <i class="fas fa-bolt"></i>
-            </div>
-
-            <h3 class="font-bold text-white text-base mb-3">
-              Data Automation
-            </h3>
-
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Excel VBA automation, Google Sheets workflows, scripting logic,
-              SQL fundamentals, and structural process improvement.
-            </p>
-
+          <article class="cv-card bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center hover:border-slate-700">
+            <div class="w-12 h-12 rounded-xl bg-yellow-600/10 text-yellow-500 flex items-center justify-center text-xl mb-4"><i class="fas fa-bolt"></i></div>
+            <h3 class="font-bold text-white text-base mb-3">Data Automation</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Excel VBA automation, Google Sheets workflows, scripting logic, SQL fundamentals, and structural process improvement.</p>
           </article>
 
-
-          <article class="cv-card bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center">
-
-            <div class="w-12 h-12 rounded-xl bg-cyan-600/10 text-cyan-500 flex items-center justify-center text-xl mb-4">
-              <i class="fas fa-code"></i>
-            </div>
-
-            <h3 class="font-bold text-white text-base mb-3">
-              Web Engineering
-            </h3>
-
-            <p class="text-xs text-slate-400 leading-relaxed">
-              HTML, CSS, Tailwind CSS. Designing automated private booking systems,
-              single-page SaaS apps, and restaurant UI architecture.
-            </p>
-
+          <article class="cv-card bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center hover:border-slate-700">
+            <div class="w-12 h-12 rounded-xl bg-cyan-600/10 text-cyan-500 flex items-center justify-center text-xl mb-4"><i class="fas fa-code"></i></div>
+            <h3 class="font-bold text-white text-base mb-3">Web Engineering</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">HTML, CSS, Tailwind CSS. Designing automated private booking systems, single-page SaaS apps, and restaurant UI architecture.</p>
           </article>
 
-
-          <article class="cv-card bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center md:col-span-2 lg:col-span-2">
-
-            <div class="w-12 h-12 rounded-xl bg-orange-600/10 text-orange-500 flex items-center justify-center text-xl mb-4">
-              <i class="fas fa-layer-group"></i>
-            </div>
-
-            <h3 class="font-bold text-white text-base mb-3">
-              Past Projects & Fabrication
-            </h3>
-
-            <p class="text-xs text-slate-400 leading-relaxed max-w-lg mx-auto">
-              Cross-functional collaboration. Previous hobbyist experience includes commercial
-              laser engraving operations (5.5W/25W modules) and hospitality management
-              (Familia Brazilian Bistro).
-            </p>
-
+          <article class="cv-card bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col items-center text-center hover:border-slate-700 md:col-span-2 lg:col-span-2">
+            <div class="w-12 h-12 rounded-xl bg-orange-600/10 text-orange-500 flex items-center justify-center text-xl mb-4"><i class="fas fa-layer-group"></i></div>
+            <h3 class="font-bold text-white text-base mb-3">Past Projects & Fabrication</h3>
+            <p class="text-xs text-slate-400 leading-relaxed max-w-lg mx-auto">Cross-functional collaboration. Previous hobbyist experience includes commercial laser engraving operations (5.5W/25W modules) and hospitality management (Familia Brazilian Bistro).</p>
           </article>
-
         </div>
-
       </section>
 
-
       <!-- =====================================================
-           PROFESSIONAL EXPERIENCE
+           PROFESSIONAL EXPERIENCE (Left Aligned)
       ====================================================== -->
-
-      <section
-        class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 mb-16 shadow-xl text-left"
-        aria-labelledby="experience-heading"
-      >
-
-        <h2
-          id="experience-heading"
-          class="text-2xl font-bold text-white mb-8 pb-4 border-b border-slate-800"
-        >
-          Professional Experience
-        </h2>
-
-
+      <section class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 mb-16 shadow-xl text-left">
+        <h2 class="text-2xl font-bold text-white mb-8 pb-4 border-b border-slate-800">Professional Experience</h2>
+        
         <div class="space-y-10 border-l-2 border-slate-800 pl-6 ml-3">
-
-
-          <!-- TTEC -->
-
+          
           <article class="relative">
-
             <div class="timeline-dot"></div>
-
-            <span class="text-xs font-semibold text-blue-500 tracking-wider uppercase">
-              Mar 2025 – Present
-            </span>
-
-            <h3 class="text-xl font-bold text-white mt-1">
-              Partner Success Manager
-            </h3>
-
-            <p class="text-slate-400 text-sm font-medium mb-4">
-              TTEC (Google Travel - Things to Do / Reserve with Google) • Krakow, Poland
-            </p>
-
+            <span class="text-xs font-semibold text-blue-500 tracking-wider uppercase">Mar 2025 – Present[cite: 1]</span>
+            <h3 class="text-xl font-bold text-white mt-1">Partner Success Manager[cite: 1]</h3>
+            <p class="text-slate-400 text-sm font-medium mb-4">TTEC (Google Travel - Things to Do / Reserve with Google) | Krakow, Poland[cite: 1]</p>
             <ul class="text-sm text-slate-300 leading-relaxed list-disc ml-4 space-y-2">
-
-              <li>
-                Lead partner onboarding, qualification, and enablement for Google Things to Do
-                and Reserve with Google products.
-              </li>
-
-              <li>
-                Guide partners through integration requirements, operational readiness,
-                best practices, and platform adoption.
-              </li>
-
-              <li>
-                Act as the primary partner contact, identifying risks, bottlenecks,
-                and growth opportunities while coordinating resolutions with Google
-                and TTEC stakeholders.
-              </li>
-
-              <li>
-                Support long-term partner success through clear communication,
-                proactive follow-up, and cross-functional problem solving.
-              </li>
-
+              <li>Lead partner onboarding, qualification, and enablement for Google Things to Do and Reserve with Google products.[cite: 1]</li>
+              <li>Guide partners through integration requirements, operational readiness, best practices, and platform adoption.[cite: 1]</li>
+              <li>Act as the primary partner contact, identifying risks, bottlenecks, and growth opportunities while coordinating resolutions with Google and TTEC stakeholders.[cite: 1]</li>
+              <li>Support long-term partner success through clear communication, proactive follow-up, and cross-functional problem solving.[cite: 1]</li>
             </ul>
-
           </article>
 
-
-          <!-- SHELL CUSTOMER SUCCESS -->
-
           <article class="relative">
-
             <div class="timeline-dot"></div>
-
-            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">
-              Nov 2021 – Jul 2024
-            </span>
-
-            <h3 class="text-xl font-bold text-white mt-1">
-              Customer Success Specialist - UK Market
-            </h3>
-
-            <p class="text-slate-400 text-sm font-medium mb-4">
-              Shell • Krakow, Poland
-            </p>
-
+            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">Nov 2021 – Jul 2024[cite: 1]</span>
+            <h3 class="text-xl font-bold text-white mt-1">Customer Success Specialist - UK Market[cite: 1]</h3>
+            <p class="text-slate-400 text-sm font-medium mb-4">Shell | Krakow, Poland[cite: 1]</p>
             <ul class="text-sm text-slate-300 leading-relaxed list-disc ml-4 space-y-2">
-
-              <li>
-                Delivered end-to-end support for UK B2B customer portfolios,
-                building trusted relationships with customers and business partners.
-              </li>
-
-              <li>
-                Managed contracts, pricing, master data, and compliance while maintaining
-                strong data integrity and governance standards.
-              </li>
-
-              <li>
-                Supported Order-to-Cash workflows, including order management, disputes,
-                credit management, SAP monitoring, delivery timelines, and exceptions.
-              </li>
-
-              <li>
-                Partnered with Sales, Finance, Demand Planning, Distribution, and carriers
-                to address retention risks and improve service levels.
-              </li>
-
+              <li>Delivered end-to-end support for UK B2B customer portfolios, building trusted relationships with customers and business partners. Managed contracts, pricing, master data, and compliance while maintaining strong data integrity and governance standards.[cite: 1]</li>
+              <li>Supported Order-to-Cash workflows, including order management, disputes, credit management, SAP monitoring, delivery timelines, and exceptions.[cite: 1]</li>
+              <li>Partnered with Sales, Finance, Demand Planning, Distribution, and carriers to address retention risks and improve service levels.[cite: 1]</li>
             </ul>
-
           </article>
 
-
-          <!-- SHELL PROCUREMENT -->
-
           <article class="relative">
-
             <div class="timeline-dot"></div>
-
-            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">
-              Jun 2018 – Nov 2021
-            </span>
-
-            <h3 class="text-xl font-bold text-white mt-1">
-              Contracting & Procurement Data Specialist
-            </h3>
-
-            <p class="text-slate-400 text-sm font-medium mb-4">
-              Shell • Krakow, Poland
-            </p>
-
+            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">Jun 2018 – Nov 2021[cite: 1]</span>
+            <h3 class="text-xl font-bold text-white mt-1">Contracting & Procurement Data Specialist[cite: 1]</h3>
+            <p class="text-slate-400 text-sm font-medium mb-4">Shell | Krakow, Poland[cite: 1]</p>
             <ul class="text-sm text-slate-300 leading-relaxed list-disc ml-4 space-y-2">
-
-              <li>
-                Led supplier qualification and compliance activities, including risk assessments,
-                integrity due diligence, and HSSE standards.
-              </li>
-
-              <li>
-                Managed vendor, material, and contract master data across SAP and Ariba environments.
-              </li>
-
-              <li>
-                Served as SAP SD Super User, resolving data issues, supporting users,
-                and contributing to master data improvement initiatives.
-              </li>
-
-              <li>
-                Created internal documentation, trained end-users, and collaborated with
-                Procurement, Finance, and IT to streamline processes.
-              </li>
-
+              <li>Led supplier qualification and compliance activities, including risk assessments, integrity due diligence, and HSSE standards.[cite: 1]</li>
+              <li>Managed vendor, material, and contract master data across SAP and Ariba environments.[cite: 1]</li>
+              <li>Served as SAP SD Super User, resolving data issues, supporting users, and contributing to master data improvement initiatives.[cite: 1]</li>
+              <li>Created internal documentation, trained end-users, and collaborated with Procurement, Finance, and IT to streamline processes.[cite: 1]</li>
             </ul>
-
           </article>
 
-
-          <!-- HCL -->
-
           <article class="relative">
-
             <div class="timeline-dot"></div>
-
-            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">
-              Jun 2017 – May 2018
-            </span>
-
-            <h3 class="text-xl font-bold text-white mt-1">
-              IT Service Desk Analyst - Portuguese Speaker
-            </h3>
-
-            <p class="text-slate-400 text-sm font-medium mb-4">
-              HCL Technologies • Krakow, Poland
-            </p>
-
+            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">Jun 2017 – May 2018[cite: 1]</span>
+            <h3 class="text-xl font-bold text-white mt-1">IT Service Desk Analyst - Portuguese Speaker[cite: 1]</h3>
+            <p class="text-slate-400 text-sm font-medium mb-4">HCL Technologies | Krakow, Poland[cite: 1]</p>
             <ul class="text-sm text-slate-300 leading-relaxed list-disc ml-4 space-y-2">
-
-              <li>
-                Provided first- and second-line support for hardware, software, and network
-                issues for global users in Brazilian Portuguese and English.
-              </li>
-
-              <li>
-                Logged, tracked, and resolved incidents under ITIL practices while working
-                to SLA and KPI targets.
-              </li>
-
+              <li>Provided first- and second-line support for hardware, software, and network issues for global users in Brazilian Portuguese and English.[cite: 1]</li>
+              <li>Logged, tracked, and resolved incidents under ITIL practices while working to SLA and KPI targets.[cite: 1]</li>
             </ul>
-
           </article>
 
         </div>
-
       </section>
 
-
       <!-- =====================================================
-           FEATURED PROJECTS
+           FEATURED PROJECTS (Left Aligned)
       ====================================================== -->
-
-      <section
-        class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 mb-16 shadow-xl"
-        aria-labelledby="projects-heading"
-      >
-
-        <h2
-          id="projects-heading"
-          class="text-2xl font-bold text-white mb-8 pb-4 border-b border-slate-800"
-        >
-          Software, Scripts & Selected Projects
-        </h2>
-
-
+      <section class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 mb-16 shadow-xl text-left">
+        <h2 class="text-2xl font-bold text-white mb-8 pb-4 border-b border-slate-800">Software, Scripts & Selected Projects[cite: 1]</h2>
+        
         <div class="grid md:grid-cols-2 gap-8">
-
-
-          <!-- Booking -->
+          
+          <article class="cv-card bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-9 h-9 rounded bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-sm"><i class="fa fa-calendar-alt"></i></div>
+                <h3 class="font-bold text-white text-lg">Automation & Solutions Portfolio Website[cite: 1]</h3>
+              </div>
+              <p class="text-sm text-slate-400 leading-relaxed mb-6">Designed and published a responsive web portfolio presenting automation services, enterprise operations experience, and practical workflow examples.[cite: 1]</p>
+            </div>
+            <a href="/" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">Live site[cite: 1] <i class="fa fa-external-link-alt text-[10px]"></i></a>
+          </article>
 
           <article class="cv-card bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between">
-
             <div>
-
               <div class="flex items-center gap-3 mb-4">
-
-                <div class="w-9 h-9 rounded bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-sm">
-                  <i class="fa fa-calendar-alt"></i>
-                </div>
-
-                <h3 class="font-bold text-white text-lg">
-                  SaaS Private Booking Systems
-                </h3>
-
+                <div class="w-9 h-9 rounded bg-yellow-600/20 text-yellow-500 flex items-center justify-center font-bold text-sm"><i class="fa fa-file-excel"></i></div>
+                <h3 class="font-bold text-white text-lg">Excel VBA: SAP Payment Block & Vendor Data Automation[cite: 1]</h3>
               </div>
-
-              <p class="text-sm text-slate-400 leading-relaxed mb-6">
-                Designed and published a responsive web portfolio presenting automation services,
-                enterprise operations experience, and practical workflow examples.
-              </p>
-
+              <p class="text-sm text-slate-400 leading-relaxed mb-6">VBA-driven workflow concept for invoice data validation, payment-block reviews, discrepancy flagging, and repetitive spreadsheet filtering in procurement and accounts-payable scenarios.[cite: 1]</p>
             </div>
-
-            <a
-              href="/"
-              class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1"
-            >
-              Live site
-              <i class="fa fa-external-link-alt text-[10px]"></i>
-            </a>
-
+            <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">View on GitHub[cite: 1] <i class="fa fa-external-link-alt text-[10px]"></i></a>
           </article>
-
-
-          <!-- VBA -->
-
-          <article class="cv-card bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between">
-
-            <div>
-
-              <div class="flex items-center gap-3 mb-4">
-
-                <div class="w-9 h-9 rounded bg-yellow-600/20 text-yellow-500 flex items-center justify-center font-bold text-sm">
-                  <i class="fa fa-file-excel"></i>
-                </div>
-
-                <h3 class="font-bold text-white text-lg">
-                  SAP Payment Block & Vendor VBA
-                </h3>
-
-              </div>
-
-              <p class="text-sm text-slate-400 leading-relaxed mb-6">
-                VBA-driven workflow concept for invoice data validation, payment-block reviews,
-                discrepancy flagging, and repetitive spreadsheet filtering in procurement
-                and accounts-payable scenarios.
-              </p>
-
-            </div>
-
-            <a
-              href="https://github.com/alansmorais"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1"
-            >
-              View on GitHub
-              <i class="fa fa-external-link-alt text-[10px]"></i>
-            </a>
-
-          </article>
-
-
-          <!-- Data Extraction -->
 
           <article class="cv-card bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between md:col-span-2 lg:col-span-1">
-
             <div>
-
               <div class="flex items-center gap-3 mb-4">
-
-                <div class="w-9 h-9 rounded bg-purple-600/20 text-purple-400 flex items-center justify-center font-bold text-sm">
-                  <i class="fa fa-database"></i>
-                </div>
-
-                <h3 class="font-bold text-white text-lg">
-                  Data Extraction & Reporting
-                </h3>
-
+                <div class="w-9 h-9 rounded bg-purple-600/20 text-purple-400 flex items-center justify-center font-bold text-sm"><i class="fa fa-database"></i></div>
+                <h3 class="font-bold text-white text-lg">Automated Data Extraction & Reporting Solutions[cite: 1]</h3>
               </div>
-
-              <p class="text-sm text-slate-400 leading-relaxed mb-6">
-                Reporting-automation framework for extracting, transforming, and staging
-                fragmented data into structured outputs and Google Sheets-oriented workflows.
-              </p>
-
+              <p class="text-sm text-slate-400 leading-relaxed mb-6">Reporting-automation framework for extracting, transforming, and staging fragmented data into structured outputs and Google Sheets-oriented workflows.[cite: 1]</p>
             </div>
-
-            <a
-              href="https://github.com/alansmorais"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1"
-            >
-              View on GitHub
-              <i class="fa fa-external-link-alt text-[10px]"></i>
-            </a>
-
+            <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">View on GitHub[cite: 1] <i class="fa fa-external-link-alt text-[10px]"></i></a>
           </article>
 
-
-          <!-- SAP Master Data -->
-
           <article class="cv-card bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between md:col-span-2 lg:col-span-1">
-
             <div>
-
               <div class="flex items-center gap-3 mb-4">
-
-                <div class="w-9 h-9 rounded bg-green-600/20 text-green-400 flex items-center justify-center font-bold text-sm">
-                  <i class="fa fa-server"></i>
-                </div>
-
-                <h3 class="font-bold text-white text-lg">
-                  SAP Master Data & Material
-                </h3>
-
+                <div class="w-9 h-9 rounded bg-green-600/20 text-green-400 flex items-center justify-center font-bold text-sm"><i class="fa fa-server"></i></div>
+                <h3 class="font-bold text-white text-lg">SAP Master Data & Material Listing Automation[cite: 1]</h3>
               </div>
-
-              <p class="text-sm text-slate-400 leading-relaxed mb-6">
-                Data-staging automation concept for organizing, validating, and tracking
-                material listings before enterprise-system entry, with a focus on structural
-                consistency and data quality.
-              </p>
-
+              <p class="text-sm text-slate-400 leading-relaxed mb-6">Data-staging automation concept for organizing, validating, and tracking material listings before enterprise-system entry, with a focus on structural consistency and data quality.[cite: 1]</p>
             </div>
-
-            <a
-              href="https://github.com/alansmorais"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1"
-            >
-              View on GitHub
-              <i class="fa fa-external-link-alt text-[10px]"></i>
-            </a>
-
+            <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">View on GitHub[cite: 1] <i class="fa fa-external-link-alt text-[10px]"></i></a>
           </article>
 
         </div>
-
       </section>
 
-
       <!-- =====================================================
-           EDUCATION & LANGUAGES
+           EDUCATION & LANGUAGES (Left Aligned)
       ====================================================== -->
-
       <section class="grid md:grid-cols-2 gap-8 mb-16">
-
-
+        
         <!-- Education -->
-
         <article class="cv-card bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-xl text-left">
-
-          <h2 class="text-xl font-bold text-white mb-6 pb-2 border-b border-slate-800">
-            Education & Training
-          </h2>
-
-
+          <h2 class="text-xl font-bold text-white mb-6 pb-2 border-b border-slate-800">Education & Training[cite: 1]</h2>
           <div class="mb-6">
-
-            <h3 class="font-bold text-white text-base">
-              Certificate in Business Management
-            </h3>
-
-            <p class="text-blue-400 text-xs font-semibold mb-2">
-              SEDA College • Dublin, Ireland | 2008-2010
-            </p>
-
-            <p class="text-sm text-slate-400">
-              Coursework: Management, Marketing, Numeracy & Statistics,
-              International Relations.
-            </p>
-
+            <h3 class="font-bold text-white text-base">Certificate in Business Management[cite: 1]</h3>
+            <p class="text-blue-400 text-xs font-semibold mb-2">SEDA College • Dublin, Ireland | 2008-2010[cite: 1]</p>
+            <p class="text-sm text-slate-400">Coursework: Management, Marketing, Numeracy & Statistics, International Relations.[cite: 1]</p>
           </div>
-
-
           <div>
-
-            <h3 class="font-bold text-white text-sm mb-2">
-              Selected Training
-            </h3>
-
-            <p class="text-sm text-slate-400">
-              SAP S/4HANA: Beyond the Basics; Asset Accounting:
-              Acquisitions in SAP S/4HANA; Data Analytics:
-              Graph Analytics; Learning SQL Programming.
-            </p>
-
+            <h3 class="font-bold text-white text-sm mb-2">Selected Training[cite: 1]</h3>
+            <p class="text-sm text-slate-400">SAP S/4HANA: Beyond the Basics; Asset Accounting: Acquisitions in SAP S/4HANA; Data Analytics: Graph Analytics; Learning SQL Programming.[cite: 1]</p>
           </div>
-
         </article>
-
 
         <!-- Languages -->
-
         <article class="cv-card bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-xl text-left">
-
-          <h2 class="text-xl font-bold text-white mb-6 pb-2 border-b border-slate-800">
-            Languages
-          </h2>
-
-
+          <h2 class="text-xl font-bold text-white mb-6 pb-2 border-b border-slate-800">Languages[cite: 1]</h2>
           <ul class="space-y-4">
-
             <li class="flex justify-between items-center text-sm border-b border-slate-800/50 pb-2">
-
-              <span class="text-white font-semibold">
-                Portuguese
-              </span>
-
-              <span class="text-slate-400 text-xs">
-                Native / Bilingual
-              </span>
-
+              <span class="text-white font-semibold">Portuguese[cite: 1]</span>
+              <span class="text-slate-400 text-xs">Native / Bilingual[cite: 1]</span>
             </li>
-
-
             <li class="flex justify-between items-center text-sm border-b border-slate-800/50 pb-2">
-
-              <span class="text-white font-semibold">
-                English
-              </span>
-
-              <span class="text-slate-400 text-xs">
-                Fluent - Full Professional
-              </span>
-
+              <span class="text-white font-semibold">English[cite: 1]</span>
+              <span class="text-slate-400 text-xs">Fluent - Full Professional[cite: 1]</span>
             </li>
-
-
             <li class="flex justify-between items-center text-sm border-b border-slate-800/50 pb-2">
-
-              <span class="text-white font-semibold">
-                Spanish
-              </span>
-
-              <span class="text-slate-400 text-xs">
-                Professional Working Proficiency
-              </span>
-
+              <span class="text-white font-semibold">Spanish[cite: 1]</span>
+              <span class="text-slate-400 text-xs">Professional Working Proficiency[cite: 1]</span>
             </li>
-
-
             <li class="flex justify-between items-center text-sm">
-
-              <span class="text-white font-semibold">
-                Polish
-              </span>
-
-              <span class="text-slate-400 text-xs">
-                Elementary / Communicative
-              </span>
-
+              <span class="text-white font-semibold">Polish[cite: 1]</span>
+              <span class="text-slate-400 text-xs">Elementary / Communicative[cite: 1]</span>
             </li>
-
           </ul>
-
         </article>
 
       </section>
 
     </div>
-
   </main>
 
-
   <!-- =========================================================
-       ORIGINAL FOOTER
+       FOOTER
   ========================================================== -->
-
   <footer class="border-t border-slate-800 bg-slate-950">
-
     <div class="max-w-7xl mx-auto px-6 py-8">
-
       <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-
         <p class="text-xs text-slate-500">
-          © 2026 AlanSM Solutions. Wszelkie prawa zastrzeżone.
-          • Automatyzacja Biznesu & Systemy Cyfrowe
+          © 2026 AlanSM Solutions. All rights reserved.
+          • Business Automation & Systems
         </p>
-
-
         <div class="flex flex-wrap items-center justify-center gap-4 text-xs">
-
-          <a
-            href="/terms/"
-            class="text-slate-500 hover:text-blue-400 transition-colors"
-          >
-            Regulamin i Warunki Usług
-          </a>
-
-          <span class="text-slate-700">
-            |
-          </span>
-
-          <a
-            href="/privacy/"
-            class="text-slate-500 hover:text-blue-400 transition-colors"
-          >
-            Polityka Prywatności
-          </a>
-
+          <a href="/terms/" class="text-slate-500 hover:text-blue-400 transition-colors">Terms of Service</a>
+          <span class="text-slate-700">|</span>
+          <a href="/privacy/" class="text-slate-500 hover:text-blue-400 transition-colors">Privacy Policy</a>
         </div>
-
       </div>
-
     </div>
-
   </footer>
-
-
-  <!-- =========================================================
-       MOBILE MENU SCRIPT
-  ========================================================== -->
-
-  <script>
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobileMenu');
-      const button = document.getElementById('mobileMenuButton');
-
-      if (!menu || !button) return;
-
-      const isOpen = !menu.classList.contains('hidden');
-
-      if (isOpen) {
-        menu.classList.add('hidden');
-        button.setAttribute('aria-expanded', 'false');
-        button.setAttribute('aria-label', 'Open navigation menu');
-      } else {
-        menu.classList.remove('hidden');
-        button.setAttribute('aria-expanded', 'true');
-        button.setAttribute('aria-label', 'Close navigation menu');
-      }
-    }
-
-
-    /*
-      Close mobile menu after selecting a navigation link.
-    */
-    document.addEventListener('DOMContentLoaded', function () {
-
-      const mobileMenu = document.getElementById('mobileMenu');
-
-      if (!mobileMenu) return;
-
-      const mobileLinks = mobileMenu.querySelectorAll('a');
-
-      mobileLinks.forEach(function (link) {
-
-        link.addEventListener('click', function () {
-
-          mobileMenu.classList.add('hidden');
-
-          const button = document.getElementById('mobileMenuButton');
-
-          if (button) {
-            button.setAttribute('aria-expanded', 'false');
-            button.setAttribute('aria-label', 'Open navigation menu');
-          }
-
-        });
-
-      });
-
-    });
-  </script>
-
 
 </body>
 </html>
-```
