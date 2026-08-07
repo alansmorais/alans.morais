@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alternative to Booksy & Calendly | Custom Online Booking System</title>
+  <meta name="description" content="Create a custom online booking system for your business. The perfect alternative to Booksy, Fresha, AppBarber, and Calendly with your own brand, domain, and no commissions.">
+  <meta name="keywords" content="online booking system, clinic reservations, alternative to Booksy, alternative to Calendly">
+  <meta name="author" content="Alan da Silva Morais">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://www.alansmsolutions.com/faq/">
+  <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" />
+
+  <link rel="alternate" hreflang="en" href="https://alansmsolutions.com/faq/" />
+  <link rel="alternate" hreflang="pt-BR" href="https://alansmsolutions.com/br/faq/" />
+  <link rel="alternate" hreflang="pl" href="https://alansmsolutions.com/pl/faq/" />
+  <link rel="alternate" hreflang="es" href="https://alansmsolutions.com/es/faq/" />
+  <link rel="alternate" hreflang="x-default" href="https://alansmsolutions.com/faq/" />
+
+  <meta property="og:title" content="Custom Online Booking System | AlanSM">
+  <meta property="og:description" content="Alternative to Booksy with your own brand and zero commissions.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
+  
+  <style>
+    body { background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 35%), radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.06), transparent 35%), #0f172a; color: #f8fafc; font-family: Inter, system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
+    .top-info-bar { background: #020617; color: #cbd5e1; border-bottom: 1px solid #1e293b; }
+    .main-nav-shell { background: rgba(2, 6, 23, 0.96); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-color: #1e293b; }
+    .mobile-drawer-link { display:block; padding: 0.95rem 0; font-size: 1.15rem; line-height: 1.6rem; font-weight: 600; color:#cbd5e1; border-bottom:1px solid #1e293b; }
+    .mobile-drawer-link:last-child { border-bottom: none; }
+    .nav-icon-btn { width: 3rem; height: 3rem; border: 1px solid #334155; border-radius: 0.75rem; display:flex; align-items:center; justify-content:center; background:#0f172a; }
+    .menu-line { width: 1.35rem; height: 2px; background:#cbd5e1; border-radius: 999px; display:block; margin-top: 0.28rem; }
+    .blob { position: absolute; filter: blur(90px); opacity: 0.15; mix-blend-mode: screen; pointer-events: none; }
+    .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease-out; }
+    .faq-answer > div { overflow: hidden; }
+    .faq-item.active .faq-answer { grid-template-rows: 1fr; }
+    .faq-icon { transition: transform 0.3s ease-out; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+  </style>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.alansmsolutions.com/"
+    },{
+      "@type": "ListItem", "position": 2, "name": "Online Booking System", "item": "https://www.alansmsolutions.com/faq/"
+    }]
+  }
+  </script>
+
+  <!-- Complete FAQ Schema JSON-LD for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Do I need to abandon Booksy, AppBarber, or my current platform?", "acceptedAnswer": { "@type": "Answer", "text": "No. You can use a custom system as a complementary channel. Many businesses start by placing the link on Instagram, WhatsApp, or Google Business Profile and observe client adoption." } },
+      { "@type": "Question", "name": "Does it work for Instagram and WhatsApp?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The link can be used in your Instagram bio, in WhatsApp messages, on Google Business Profile, in QR Codes, in ads, and on your website." } },
+      { "@type": "Question", "name": "Will this appear on Google (Local SEO)?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. As a public and optimized page (SEO), it can be indexed by Google. The technical structure helps your brand appear for direct searches for your service in your area." } },
+      { "@type": "Question", "name": "Does the client need to download an app?", "acceptedAnswer": { "@type": "Answer", "text": "No. It is a responsive web-app (SaaS) that runs directly in the client's mobile browser, removing the barrier of having to download a new app." } },
+      { "@type": "Question", "name": "How much does a custom booking system cost?", "acceptedAnswer": { "@type": "Answer", "text": "Our pricing structure charges zero commissions per booking. You pay an initial Setup Fee and a fixed monthly plan (Tech Ops) for server maintenance. You keep 100% of your service revenue." } },
+      { "@type": "Question", "name": "Can I accept online payments (Credit Card, Stripe)?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We can integrate your system with payment gateways like Stripe, allowing you to collect deposits or full payments at the time of booking." } },
+      { "@type": "Question", "name": "Does the system send automated WhatsApp or SMS reminders?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! We can automate the sending of confirmations, day-before reminders, and rescheduling messages directly to your client's WhatsApp to reduce no-shows." } },
+      { "@type": "Question", "name": "Can clients reschedule or cancel their own appointments?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, depending on your preference. We can include secure links in the confirmation email or WhatsApp that allow the client to reschedule according to defined rules (e.g., minimum 24h notice)." } },
+      { "@type": "Question", "name": "Is it possible to add multiple professionals and services to the same calendar?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The system allows listing different professionals from your team, each with their own schedule, specific services, and distinct appointment durations." } },
+      { "@type": "Question", "name": "How does the Google Calendar integration work?", "acceptedAnswer": { "@type": "Answer", "text": "The system syncs bookings in real-time with Google Calendar. If you block a time on your phone, it automatically becomes unavailable on the site, preventing double bookings." } },
+      { "@type": "Question", "name": "Is the system secure and GDPR compliant?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. The system runs under an SSL certificate (encryption), and your clients' data belongs entirely to you, with no sharing with third parties, operating in full compliance with GDPR." } },
+      { "@type": "Question", "name": "Do you offer technical support and maintenance after launch?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your monthly 'Tech Ops' fee covers continuous security updates, high-speed cloud hosting, and direct technical support from our team." } }
+    ]
+  }
+  </script>
+</head>
+<body id="top">
+
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-blue-600 focus:text-white focus:p-4 focus:rounded-br-lg">Skip to main content</a>
+
+  <!-- =========================================================
+       HEADER (EXACTLY MATCHING SCREENSHOT)
+  ========================================================== -->
+  <div class="top-info-bar relative z-40">
+    <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] md:text-[13px] text-center">
+      <div class="flex items-center justify-center gap-2 sm:gap-5 mx-auto sm:mx-0">
+        <span class="font-medium flex items-center gap-2"><img src="https://flagcdn.com/w20/br.png" alt="BR" class="w-4 h-auto rounded-sm"> kontakt@alansmsolutions.com</span>
+        <span class="hidden sm:inline text-blue-200">|</span>
+        <span class="font-medium text-pink-500">📍 <span class="text-slate-200">Kraków, Poland • Remote</span></span>
+      </div>
+      <div class="flex items-center justify-center gap-4 text-blue-200/80">
+        <a href="https://www.instagram.com/alansmsolutions/" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/alankmorais" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sticky top-0 inset-x-0 z-50">
+    <nav class="main-nav-shell border-b border-slate-800 shadow-sm">
+      <div class="max-w-7xl mx-auto px-6 h-[88px] grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4">
+        
+        <a href="/" class="flex items-center gap-3 md:gap-4 min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+          <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="Logo ASM Solutions" width="56" height="56" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-700 bg-slate-950 object-cover" />
+          <div class="flex flex-col justify-center min-w-0">
+            <span class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-100 leading-none truncate">AlanSM Solutions</span>
+            <span class="text-[9px] md:text-[10px] text-blue-500 font-semibold tracking-widest uppercase mt-1">PORTFOLIO • AUTOMATION • DIGITAL SYSTEMS</span>
+          </div>
+        </a>
+
+        <div class="hidden lg:flex items-center justify-center gap-6 xl:gap-8">
+          <a href="/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Home</a>
+          <a href="/solutions/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Solutions</a>
+          <a href="/pricing/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Pricing</a>
+          <a href="/portfolio/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">CV / Portfolio</a>
+          <a href="/faq/" aria-current="page" class="text-sm font-semibold text-blue-500 pb-1">FAQ</a>
+          <button type="button" onclick="openContactForm()" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contact</button>
+        </div>
+
+        <div class="flex items-center justify-end gap-3">
+          <div class="hidden md:flex items-center gap-3">
+            <button onclick="switchLang('pt', 'BRL', '/br/faq/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">BR</button>
+            <button onclick="switchLang('pl', 'PLN', '/pl/faq/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">PL</button>
+            <button onclick="switchLang('es', 'EUR', '/es/faq/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">ES</button>
+            <button onclick="switchLang('en', 'USD')" class="text-xs font-semibold text-blue-500 cursor-pointer">EN</button>
+          </div>
+          <div class="hidden md:flex">
+            <span class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2 bg-slate-900/50">USD auto</span>
+          </div>
+          <button id="mobileMenuButton" type="button" class="lg:hidden nav-icon-btn" onclick="toggleMobileMenu()" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle navigation menu">
+            <div><span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span></div>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mobileMenu" class="hidden lg:hidden bg-slate-950 border-b border-slate-800 shadow-sm p-6 text-center flex flex-col gap-4">
+      <a href="/" class="text-slate-300 font-bold">Home</a>
+      <a href="/solutions/" class="text-slate-300 font-bold">Solutions</a>
+      <a href="/pricing/" class="text-slate-300 font-bold">Pricing</a>
+      <a href="/portfolio/" class="text-slate-300 font-bold">CV / Portfolio</a>
+      <a href="/faq/" class="text-blue-400 font-bold">FAQ</a>
+      <button type="button" onclick="openContactForm();" class="text-slate-300 font-bold">Contact</button>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MAIN CONTENT (SHORTER TOP PADDING: pt-4 md:pt-6)
+  ========================================================== -->
+  <main id="main-content" class="relative overflow-hidden pt-4 pb-12 md:pt-6 md:pb-16">
+    <div class="blob w-[600px] h-[600px] bg-blue-600 top-[-100px] left-[50%] -translate-x-1/2"></div>
+    
+    <div class="max-w-5xl mx-auto px-6 relative z-10">
+
+      <!-- Breadcrumb -->
+      <nav class="text-xs text-slate-500 mb-8" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-blue-400 transition-colors">Home</a>
+        <span class="mx-2">/</span>
+        <span class="text-slate-400">Online Booking System</span>
+      </nav>
+
+      <!-- Hero Section -->
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-xs font-bold text-blue-400 mb-6 tracking-widest uppercase">
+          Custom Platform
+        </div>
+        <h1 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+          Custom Online Booking System<br/>
+          <span class="text-blue-400">Alternative to Booksy, Fresha & Calendly</span>
+        </h1>
+        
+        <p class="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          Create an online booking system with your own brand, domain, and workflow. A customized alternative to off-the-shelf platforms for businesses that want more control over their clients and reservations.
+        </p>
+
+        <!-- Trust Indicators -->
+        <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mt-8 text-xs sm:text-sm font-semibold text-slate-400">
+          <span class="flex items-center gap-1"><i class="fas fa-check text-green-500"></i> Zero commissions</span>
+          <span class="flex items-center gap-1"><i class="fas fa-check text-green-500"></i> Your brand & domain</span>
+          <span class="flex items-center gap-1"><i class="fas fa-check text-green-500"></i> Google Calendar</span>
+          <span class="flex items-center gap-1"><i class="fas fa-check text-green-500"></i> WhatsApp integrated</span>
+        </div>
+        
+        <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+          <button onclick="openContactForm('Demo Request', 'Alternatives')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-lg shadow-blue-500/25">
+            Request a demo for my business
+          </button>
+          <a href="#comparativo" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-3.5 px-8 rounded-xl transition-all">
+            View comparison
+          </a>
+        </div>
+      </div>
+
+      <!-- Como Funciona (4 Steps) -->
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mb-20 text-center">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-blue-600/20 text-blue-500 flex items-center justify-center text-xl mx-auto mb-4"><i class="fas fa-link"></i></div>
+          <h3 class="font-bold text-white mb-2">Direct Booking</h3>
+          <p class="text-xs text-slate-400">A simple flow to convert Instagram, WhatsApp, or Google visitors into bookings.</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-purple-600/20 text-purple-500 flex items-center justify-center text-xl mx-auto mb-4"><i class="fas fa-paint-brush"></i></div>
+          <h3 class="font-bold text-white mb-2">Your Brand</h3>
+          <p class="text-xs text-slate-400">The client books on a page with your colors and messages, with no competitor distractions.</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-green-600/20 text-green-500 flex items-center justify-center text-xl mx-auto mb-4"><i class="fas fa-hand-pointer"></i></div>
+          <h3 class="font-bold text-white mb-2">Client Chooses</h3>
+          <p class="text-xs text-slate-400">Easy selection of service, time, and professional with details filled quickly.</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-yellow-600/20 text-yellow-500 flex items-center justify-center text-xl mx-auto mb-4"><i class="fas fa-sliders-h"></i></div>
+          <h3 class="font-bold text-white mb-2">Total Control</h3>
+          <p class="text-xs text-slate-400">Manage everything via Dashboard, receive by email, or sync with Google Calendar.</p>
+        </div>
+      </div>
+
+      <!-- Para quem é -->
+      <section class="mb-20">
+        <h2 class="text-2xl md:text-3xl font-bold text-white text-center mb-8">Who is a custom booking system for?</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <h3 class="text-lg font-bold text-blue-400 mb-2">Barbershops</h3>
+            <p class="text-sm text-slate-400">Organize barbers, services, schedules, and bookings in one place with total predictability.</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <h3 class="text-lg font-bold text-blue-400 mb-2">Clinics & Professionals</h3>
+            <p class="text-sm text-slate-400">Receive structured bookings and collect accurate information without relying solely on manual WhatsApp messages.</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <h3 class="text-lg font-bold text-blue-400 mb-2">Salons & Spas</h3>
+            <p class="text-sm text-slate-400">Deliver a premium booking experience reflecting your visual identity and retain your clients.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tabela Comparativa -->
+      <div id="comparativo" class="mb-20 scroll-mt-28">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 text-center">Custom system vs. Off-the-shelf platform</h2>
+        <p class="text-slate-400 text-center text-sm max-w-2xl mx-auto mb-8">
+          Off-the-shelf platforms work well for many businesses. The difference is that a custom system can be designed for your brand, your workflow, and your way of receiving bookings.
+        </p>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-x-auto shadow-2xl">
+          <table class="w-full min-w-[800px] text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-950 border-b border-slate-800 text-sm">
+                <th class="py-5 px-6 text-slate-300 font-bold w-1/3">Criteria</th>
+                <th class="py-5 px-6 text-blue-400 font-bold w-1/3 border-l border-slate-800 bg-blue-900/10">ASM Custom System</th>
+                <th class="py-5 px-6 text-slate-400 font-bold w-1/3 border-l border-slate-800">Off-the-shelf Platforms</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm">
+              <tr class="border-b border-slate-800 hover:bg-slate-800/20 transition-colors">
+                <td class="py-4 px-6 font-medium text-white">Visual identity</td>
+                <td class="py-4 px-6 text-slate-300 border-l border-slate-800 bg-blue-900/5"><i class="fas fa-check text-blue-500 mr-2"></i> Page with your brand and colors</td>
+                <td class="py-4 px-6 text-slate-500 border-l border-slate-800">Usually follows platform standard</td>
+              </tr>
+              <tr class="border-b border-slate-800 hover:bg-slate-800/20 transition-colors">
+                <td class="py-4 px-6 font-medium text-white">Direct link</td>
+                <td class="py-4 px-6 text-slate-300 border-l border-slate-800 bg-blue-900/5"><i class="fas fa-check text-blue-500 mr-2"></i> Uses your domain or subdomain</td>
+                <td class="py-4 px-6 text-slate-500 border-l border-slate-800">Depends on tool and plan</td>
+              </tr>
+              <tr class="border-b border-slate-800 hover:bg-slate-800/20 transition-colors">
+                <td class="py-4 px-6 font-medium text-white">Client experience</td>
+                <td class="py-4 px-6 text-slate-300 border-l border-slate-800 bg-blue-900/5"><i class="fas fa-check text-blue-500 mr-2"></i> Focus solely on your business</td>
+                <td class="py-4 px-6 text-slate-500 border-l border-slate-800">Might show competitors on the same screen</td>
+              </tr>
+              <tr class="border-b border-slate-800 hover:bg-slate-800/20 transition-colors">
+                <td class="py-4 px-6 font-medium text-white">Flow customization</td>
+                <td class="py-4 px-6 text-slate-300 border-l border-slate-800 bg-blue-900/5"><i class="fas fa-check text-blue-500 mr-2"></i> Tailored fields and steps</td>
+                <td class="py-4 px-6 text-slate-500 border-l border-slate-800">Limited to what the platform offers</td>
+              </tr>
+              <tr class="border-b border-slate-800 hover:bg-slate-800/20 transition-colors">
+                <td class="py-4 px-6 font-medium text-white">Integrations</td>
+                <td class="py-4 px-6 text-slate-300 border-l border-slate-800 bg-blue-900/5"><i class="fas fa-check text-blue-500 mr-2"></i> Google Calendar, WhatsApp, Automations</td>
+                <td class="py-4 px-6 text-slate-500 border-l border-slate-800">Depends on platform, plan, and country</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-[10px] text-slate-500 mt-4 text-center">Note: this comparison is general. Features and conditions of third-party tools may vary.</p>
+      </div>
+
+      <!-- Seção Comparativa por Plataforma -->
+      <section class="mb-20">
+        <div class="text-center mb-10">
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Comparison with popular booking platforms</h2>
+          <p class="text-slate-400 text-sm max-w-2xl mx-auto">
+            The idea is not to attack market solutions, but to help you understand if your business needs to evolve into its own digital environment.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+            <h3 class="text-xl font-bold text-white mb-1">Booksy</h3>
+            <p class="text-xs text-blue-400 font-bold mb-3 uppercase tracking-wider">For beauty businesses</p>
+            <p class="text-sm text-slate-400 leading-relaxed">For businesses that already get clients via Instagram or Google, a custom system replaces the generic platform with a direct channel using your brand and domain.</p>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+            <h3 class="text-xl font-bold text-white mb-1">AppBarber</h3>
+            <p class="text-xs text-blue-400 font-bold mb-3 uppercase tracking-wider">For barbershops</p>
+            <p class="text-sm text-slate-400 leading-relaxed">If you need to organize barbers and schedules, ASM creates a booking page focused solely on client retention, without showing nearby competing barbershops.</p>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+            <h3 class="text-xl font-bold text-white mb-1">Fresha</h3>
+            <p class="text-xs text-blue-400 font-bold mb-3 uppercase tracking-wider">For salons and spas</p>
+            <p class="text-sm text-slate-400 leading-relaxed">Can be used as a complementary channel when the business decides to strengthen its authority, directing VIP clients to an exclusive, commission-free booking link.</p>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+            <h3 class="text-xl font-bold text-white mb-1">Calendly & Reservio</h3>
+            <p class="text-xs text-blue-400 font-bold mb-3 uppercase tracking-wider">For professional services</p>
+            <p class="text-sm text-slate-400 leading-relaxed">While excellent for general meetings, the difference with a custom system is adapting the journey with specific fields, contracts, and flows designed exactly for your consultancy or clinic.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Como Construir / O que Incluir -->
+      <section class="grid md:grid-cols-2 gap-12 mb-20">
+        <div>
+          <h2 class="text-2xl font-bold text-white mb-6">What can the first version include?</h2>
+          <p class="text-sm text-slate-400 mb-6">The page can start simple to validate demand and quickly evolve into more complete features. <a href="/features/" class="text-blue-400 font-medium hover:underline transition-colors">View all booking system features</a>.</p>
+          
+          <div class="space-y-4">
+            <div class="bg-slate-900 p-5 rounded-xl border border-slate-800">
+              <strong class="text-blue-400 text-sm block mb-1">For the client</strong>
+              <span class="text-xs text-slate-400">Mobile-first page, quick choice of services, times and professionals, custom questions, and a direct WhatsApp button.</span>
+            </div>
+            <div class="bg-slate-900 p-5 rounded-xl border border-slate-800">
+              <strong class="text-blue-400 text-sm block mb-1">For the business</strong>
+              <span class="text-xs text-slate-400">Lightweight admin dashboard, request list, status organization, notifications, and contact base export.</span>
+            </div>
+            <div class="bg-slate-900 p-5 rounded-xl border border-slate-800">
+              <strong class="text-blue-400 text-sm block mb-1">For growth</strong>
+              <span class="text-xs text-slate-400">Native integration with Google Calendar, data reports, and technical readiness for advanced business automations.</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 sticky top-32">
+            <h2 class="text-2xl font-bold text-white mb-4">How to build without complicating it</h2>
+            <p class="text-sm text-slate-400 mb-8">The goal is to create an agile and functional version, validating the sales channel before implementing heavy logic.</p>
+            
+            <div class="space-y-6">
+              <div class="flex">
+                <div class="mr-4 flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white text-xs">1</div>
+                  <div class="w-px h-full bg-slate-800 mt-2"></div>
+                </div>
+                <div class="pb-6">
+                  <h4 class="text-white font-bold mb-1">Analysis</h4>
+                  <p class="text-xs text-slate-400">Review of your social networks, services, current workflow, and friction points with clients.</p>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="mr-4 flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white text-xs">2</div>
+                  <div class="w-px h-full bg-slate-800 mt-2"></div>
+                </div>
+                <div class="pb-6">
+                  <h4 class="text-white font-bold mb-1">Development / Demo</h4>
+                  <p class="text-xs text-slate-400">Creation of the online structure applying your colors, texts, and establishing the logical booking flow.</p>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="mr-4 flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white text-xs">3</div>
+                  <div class="w-px h-full bg-slate-800 mt-2"></div>
+                </div>
+                <div class="pb-6">
+                  <h4 class="text-white font-bold mb-1">Dashboard & Control</h4>
+                  <p class="text-xs text-slate-400">Configuration of necessary integrations, email notifications, and data receipt organization.</p>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="mr-4 flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white text-xs">4</div>
+                </div>
+                <div>
+                  <h4 class="text-white font-bold mb-1">Launch</h4>
+                  <p class="text-xs text-slate-400">Publication on your own domain (e.g., bookings.yourbrand.com) to receive the first official clients.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Principal -->
+      <section class="bg-blue-600/10 border border-blue-500/30 rounded-3xl p-10 md:p-14 text-center mb-20 shadow-lg">
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">Want to test a system built for your business?</h2>
+        <p class="text-slate-300 mb-8 max-w-2xl mx-auto text-lg">
+          We create a personalized demo with your services, your brand, and your booking flow, with no initial commitment.
+        </p>
+        <button onclick="openContactForm('Demo Request', 'Final CTA')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-10 rounded-xl transition-all shadow-lg shadow-blue-500/30 text-lg">
+          Request a free demo
+        </button>
+      </section>
+
+      <!-- FAQ Accordion -->
+      <section class="mb-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 text-center">Frequently Asked Questions (FAQ)</h2>
+        <div class="space-y-4 max-w-3xl mx-auto">
+          
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Do I need to abandon Booksy, AppBarber, or my current platform?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                No. You can use a custom system as a complementary channel. Many businesses start by placing the link on Instagram, WhatsApp, or Google Business Profile and observe client adoption.
+              </div>
+            </div>
+          </div>
+          
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Does it work for Instagram and WhatsApp?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Yes. The link can be used in your Instagram bio, in WhatsApp messages, on Google Business Profile, in QR Codes, in ads, and on your website. The flow is fully optimized for mobile screens.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Will this appear on Google (Local SEO)?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Yes. As a public and optimized page (SEO), it can be indexed by Google. The technical structure helps your brand appear for direct searches for your service in your area.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Does the client need to download an app?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                No. It is a responsive web-app (SaaS) that runs directly in the client's mobile browser, removing the barrier of having to download a new app from the store.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">How much does a custom booking system cost?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Our pricing structure charges zero commissions per booking. You pay an initial Setup Fee (quoted) and a fixed monthly plan (Tech Ops) for server maintenance, starting at accessible rates. You keep 100% of your service revenue.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Can I accept online payments (Credit Card, Stripe)?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Yes. We can integrate your system with payment gateways like Stripe, allowing you to collect deposits or full payments at the time of booking.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Does the system send automated WhatsApp or SMS reminders?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Yes! We can automate the sending of confirmations, day-before reminders, and rescheduling messages directly to your client's WhatsApp to reduce no-shows.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Can clients reschedule or cancel their own appointments?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Yes, depending on your preference. We can include secure links in the confirmation email or WhatsApp that allow the client to reschedule according to defined rules (e.g., minimum 24h notice).
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Is it possible to add multiple professionals and services to the same calendar?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Yes. The system allows listing different professionals from your team, each with their own schedule, specific services, and distinct appointment durations.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">How does the Google Calendar integration work?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                The system syncs bookings in real-time with Google Calendar. If you block a time on your phone, it automatically becomes unavailable on the site, preventing double bookings.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Is the system secure and GDPR compliant?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Absolutely. The system runs under an SSL certificate (encryption), and your clients' data belongs entirely to you, with no sharing with third parties, operating in full compliance with GDPR.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Do you offer technical support and maintenance after launch?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Yes. Your monthly 'Tech Ops' fee covers continuous security updates, high-speed cloud hosting, and direct technical support from our team.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+  <footer class="py-12 bg-slate-950 border-t border-slate-800 text-center text-xs">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+        <div class="flex items-center gap-3">
+          <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="AlanSM Solutions logo" width="32" height="32" class="w-10 h-10 rounded-full border border-blue-500/30" />
+          <div class="text-left">
+            <span class="text-base font-extrabold tracking-tight text-white block">AlanSM Solutions</span>
+            <span class="text-blue-400 font-medium">Business Automation & Systems</span>
+          </div>
+        </div>
+        <div class="flex gap-4 text-2xl text-slate-600">
+          <i class="fab fa-cc-stripe hover:text-slate-400 transition-colors" title="Stripe Secure"></i>
+          <i class="fab fa-cc-visa hover:text-slate-400 transition-colors"></i>
+          <i class="fab fa-cc-mastercard hover:text-slate-400 transition-colors"></i>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500">
+        <p>© 2026 AlanSM Solutions. All rights reserved.</p>
+        <div class="flex items-center gap-4 font-medium">
+           <a href="/terms/" class="hover:text-blue-400 transition-colors">Terms of Service</a>
+           <span class="text-slate-700">|</span>
+           <a href="/privacy/" class="hover:text-blue-400 transition-colors"><i class="fas fa-lock text-[10px]"></i> Privacy & GDPR</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       CONTACT MODAL & SCRIPTS
+  ========================================================== -->
+  <div id="contactModal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl w-full max-w-md shadow-2xl p-8 relative">
+       <button type="button" onclick="closeContactForm()" class="absolute top-5 right-5 text-slate-500 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded" aria-label="Close modal"><i class="fa fa-times text-xl"></i></button>
+       <h2 id="modalTitle" class="text-2xl font-bold text-white mb-6">Request Demo</h2>
+       
+       <form id="contactForm" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-4">
+          <input type="hidden" id="formSubject" value="FAQ Lead" />
+          
+          <label for="formName" class="sr-only">Full Name</label>
+          <input type="text" id="formName" name="name" required placeholder="Full Name" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white outline-none focus:border-blue-500 transition-colors">
+          
+          <label for="formEmail" class="sr-only">Email</label>
+          <input type="email" id="formEmail" name="email" required placeholder="Email" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white outline-none focus:border-blue-500 transition-colors">
+          
+          <label for="formPhone" class="sr-only">Phone Number</label>
+          <input type="tel" id="formPhone" name="phone" required placeholder="WhatsApp" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white outline-none focus:border-blue-500 transition-colors">
+          
+          <label for="formMsg" class="sr-only">Message</label>
+          <textarea id="formMsg" name="message" required placeholder="Tell us about your business..." class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white outline-none focus:border-blue-500 transition-colors resize-none"></textarea>
+          
+          <button type="submit" class="bg-blue-600 text-white font-bold py-4 rounded-xl mt-2 hover:bg-blue-500 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-slate-900">Send Request</button>
+          <p id="formStatus" class="text-xs text-center mt-2 font-bold" aria-live="polite"></p>
+       </form>
+    </div>
+  </div>
+
+  <script>
+    // Accessibility: Toggle FAQ
+    function toggleFaq(el) { 
+      const parent = el.parentElement;
+      parent.classList.toggle('active'); 
+      const isExpanded = parent.classList.contains('active');
+      el.setAttribute('aria-expanded', isExpanded); 
+    }
+
+    function switchLang(lang, cur, url) { 
+      if(url) window.location.href = url; 
+    }
+
+    // Modal Focus Trap
+    function openContactForm(subject) { 
+      const modal = document.getElementById('contactModal');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      if(subject) document.getElementById('formSubject').value = subject;
+      
+      setTimeout(() => {
+        const firstInput = document.getElementById('formName');
+        if (firstInput) firstInput.focus();
+      }, 50);
+    }
+    
+    function closeContactForm() { 
+      document.getElementById('contactModal').classList.add('hidden'); 
+      document.body.style.overflow = '';
+    }
+
+    // Mobile Menu Focus Trap
+    function toggleMobileMenu() { 
+      const menu = document.getElementById('mobileMenu');
+      const button = document.getElementById('mobileMenuButton');
+      const isHidden = menu.classList.contains('hidden');
+      
+      menu.classList.toggle('hidden'); 
+      button.setAttribute('aria-expanded', isHidden); 
+
+      if (isHidden) { 
+        const firstLink = menu.querySelector('a'); 
+        if (firstLink) firstLink.focus(); 
+      } else {
+        button.focus();
+      }
+    }
+
+    // Global Keydown (Escape key)
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('contactModal');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        if (modal && !modal.classList.contains('hidden')) {
+          closeContactForm();
+        }
+        
+        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+          toggleMobileMenu();
+        }
+      }
+    });
+
+    async function handleFormSubmit(e) { 
+      e.preventDefault(); 
+      const ALANSM_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwxzYWgEdGsUqjokKIMroI1xmZYE1LQcj4sd8EIoODbDWA5MIxa0xEb85JTuvAQnVMtXA/exec";
+      const form = e.target;
+      const btn = form.querySelector('button[type="submit"]');
+      const status = document.getElementById('formStatus');
+      btn.disabled = true; btn.textContent = "Sending...";
+
+      try {
+          const params = new URLSearchParams();
+          params.append('action', 'submitLead');
+          params.append('token', 'alan_admin_2026');
+          params.append('Name', document.getElementById('formName').value);
+          params.append('Email', document.getElementById('formEmail').value);
+          params.append('Phone', document.getElementById('formPhone').value);
+          params.append('Message', document.getElementById('formMsg').value);
+          params.append('Package', document.getElementById('formSubject').value);
+          params.append('source', 'booking_seo_en');
+
+          await fetch(ALANSM_BACKEND_URL, { method: 'POST', body: params });
+          status.textContent = "Request sent successfully!";
+          status.className = "text-green-500 text-xs font-bold text-center mt-2";
+          setTimeout(() => { closeContactForm(); form.reset(); status.textContent=""; }, 2500);
+      } catch (err) {
+          status.textContent = "Connection error. Please try again.";
+          status.className = "text-red-500 text-xs font-bold text-center mt-2";
+      } finally {
+          btn.disabled = false; btn.textContent = "Send Request";
+      }
+    }
+  </script>
+</body>
+</html>
