@@ -1,198 +1,1742 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CV & Professional Portfolio | Alan da Silva Morais</title>
-  
-  <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" />
+  <meta charset="UTF-8">
 
-  <meta name="description" content="Professional CV and Portfolio of Alan da Silva Morais — Automation Specialist, Web Developer, and Enterprise Operations Consultant based in Kraków, Poland." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://alansmsolutions.com/portfolio/"/>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
+  <title>
+    Alan da Silva Morais | Partner Success Manager, SaaS & Automation
+  </title>
+
+  <meta
+    name="description"
+    content="Alan da Silva Morais is a Partner Success Manager specializing in SaaS operations, partner onboarding, SAP, automation, process improvement and web solutions."
+  >
+
+  <meta
+    name="keywords"
+    content="Alan da Silva Morais, Partner Success Manager, SaaS Operations, SaaS, Automation, Process Improvement, SAP S/4HANA, SAP SD, Ariba, Salesforce, Order-to-Cash, Excel VBA, Google Sheets, Python, SQL, Krakow"
+  >
+
+  <meta
+    name="author"
+    content="Alan da Silva Morais"
+  >
+
+  <meta
+    name="robots"
+    content="index, follow, max-image-preview:large"
+  >
+
+  <link
+    rel="canonical"
+    href="https://www.alansmsolutions.com/portfolio/"
+  >
+
+  <!-- Open Graph -->
+  <meta
+    property="og:type"
+    content="profile"
+  >
+
+  <meta
+    property="og:title"
+    content="Alan da Silva Morais | Partner Success, SaaS & Automation"
+  >
+
+  <meta
+    property="og:description"
+    content="Partner Success Manager specializing in SaaS operations, enterprise systems, automation and process improvement."
+  >
+
+  <meta
+    property="og:url"
+    content="https://www.alansmsolutions.com/portfolio/"
+  >
+
+  <meta
+    property="og:image"
+    content="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/alan-profile.jpg"
+  >
+
+  <meta
+    property="og:image:alt"
+    content="Alan da Silva Morais"
+  >
+
+  <!-- Twitter -->
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  >
+
+  <meta
+    name="twitter:title"
+    content="Alan da Silva Morais | Partner Success, SaaS & Automation"
+  >
+
+  <meta
+    name="twitter:description"
+    content="Partner Success Manager specializing in SaaS operations, enterprise systems, automation and process improvement."
+  >
+
+  <meta
+    name="twitter:image"
+    content="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/alan-profile.jpg"
+  >
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Alan da Silva Morais",
+    "jobTitle": "Partner Success Manager",
+    "description": "Partner Success Manager specializing in SaaS operations, automation, enterprise systems and process improvement.",
+    "url": "https://www.alansmsolutions.com/portfolio/",
+    "image": "https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/alan-profile.jpg",
+    "sameAs": [
+      "https://www.linkedin.com/in/alandasm",
+      "https://github.com/alansmorais"
+    ],
+    "knowsAbout": [
+      "Partner Success",
+      "SaaS Operations",
+      "SaaS",
+      "Automation",
+      "Process Improvement",
+      "SAP S/4HANA",
+      "SAP SD",
+      "SAP Ariba",
+      "Salesforce",
+      "Order-to-Cash",
+      "Excel VBA",
+      "Google Sheets",
+      "Python",
+      "SQL",
+      "HTML",
+      "CSS",
+      "Tailwind CSS",
+      "ITIL"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Krakow",
+      "addressCountry": "PL"
+    }
+  }
+  </script>
+
+  <!-- Custom Styles -->
   <style>
-    body { background: #020617; color: #f8fafc; font-family: Inter, system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
-    .top-info-bar { background: #020617; color: #cbd5e1; border-bottom: 1px solid #1e293b; }
-    .main-nav-shell { background: rgba(2, 6, 23, 0.96); backdrop-filter: blur(8px); border-color: #1e293b; }
-    .nav-icon-btn { width: 3rem; height: 3rem; border: 1px solid #334155; border-radius: 0.75rem; display:flex; align-items:center; justify-content:center; background:#0f172a; }
-    .menu-line { width: 1.35rem; height: 2px; background:#cbd5e1; border-radius: 999px; display:block; }
-    .menu-line + .menu-line { margin-top: 0.28rem; }
-    .blob { position: absolute; filter: blur(90px); opacity: 0.15; mix-blend-mode: screen; pointer-events: none; }
-    .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: #3b82f6; position: absolute; left: -31px; top: 6px; border: 4px solid #020617; }
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(37, 99, 235, 0.08),
+          transparent 35%
+        ),
+        #020617;
+    }
+
+    ::selection {
+      background: rgba(37, 99, 235, 0.35);
+      color: white;
+    }
+
+    .timeline-line {
+      background: linear-gradient(
+        to bottom,
+        rgba(59, 130, 246, 0.8),
+        rgba(71, 85, 105, 0.5),
+        transparent
+      );
+    }
+
+    .glass {
+      background: rgba(15, 23, 42, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .card-hover {
+      transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+    }
+
+    .section-label {
+      letter-spacing: 0.2em;
+    }
   </style>
 </head>
-<body id="top" class="antialiased" style="padding-top: 132px;">
 
-  <!-- Fixed Header -->
-  <div class="fixed top-0 inset-x-0 z-50">
-    <div class="top-info-bar">
-      <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] md:text-[13px] text-center">
-        <div class="flex items-center justify-center gap-2 sm:gap-5 mx-auto sm:mx-0">
-          <span class="font-medium">📧 kontakt@alansmsolutions.com</span>
-          <span class="hidden sm:inline text-blue-200">|</span>
-          <span class="font-medium">📍 Kraków, Poland • Remote</span>
-        </div>
-        <div class="flex items-center justify-center gap-4 text-blue-200/80">
-          <a href="https://www.linkedin.com/in/alandasm" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors"><i class="fab fa-linkedin text-sm"></i></a>
-          <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors"><i class="fab fa-github text-sm"></i></a>
-        </div>
-      </div>
-    </div>
 
-    <nav class="main-nav-shell border-b border-slate-800 shadow-sm">
-      <div class="max-w-7xl mx-auto px-6 h-[88px] grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4">
-        <a href="/" class="flex items-center gap-3 md:gap-4 min-w-0 focus:outline-none rounded">
-          <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="Alan da Silva Morais" width="56" height="56" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-700 bg-slate-950 object-cover" />
-          <div class="flex flex-col justify-center min-w-0">
-            <span class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-100 leading-none truncate">Alan da Silva Morais</span>
-            <span class="text-[11px] md:text-[12px] text-blue-500 font-semibold tracking-[0.18em] uppercase mt-1">CV & Portfolio</span>
+<body class="min-h-screen text-slate-200 antialiased">
+
+  <!-- ========================================================= -->
+  <!-- NAVIGATION -->
+  <!-- ========================================================= -->
+
+  <nav
+    class="sticky top-0 z-50 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-xl shadow-lg shadow-black/10"
+    aria-label="Main navigation"
+  >
+
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+
+      <div class="h-[76px] lg:h-[82px] flex items-center justify-between gap-6">
+
+        <!-- Brand -->
+
+        <a
+          href="/"
+          class="group flex items-center gap-3 min-w-0 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+          aria-label="Alan da Silva Morais — Home"
+        >
+
+          <div class="relative shrink-0">
+
+            <div
+              class="absolute -inset-1 rounded-full bg-blue-500/10 opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-100"
+              aria-hidden="true"
+            ></div>
+
+            <img
+              src="/images/IMG_20260407_110135.png"
+              alt="Alan da Silva Morais logo"
+              width="48"
+              height="48"
+              class="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-slate-700 bg-slate-900 object-cover"
+            >
+
           </div>
+
+          <div class="hidden sm:flex flex-col min-w-0">
+
+            <span
+              class="text-base sm:text-lg font-extrabold tracking-tight text-white leading-tight truncate"
+            >
+              Alan da Silva Morais
+            </span>
+
+            <span
+              class="text-[10px] sm:text-[11px] text-blue-400 font-bold tracking-[0.18em] uppercase mt-0.5"
+            >
+              Partner Success · SaaS · Automation
+            </span>
+
+          </div>
+
         </a>
 
-        <div class="hidden lg:flex items-center justify-center gap-8">
-          <a href="/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Home</a>
-          <a href="/features/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Features</a>
-          <a href="/pricing/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Pricing</a>
-          <a href="/portfolio/" class="text-sm font-semibold text-slate-100 border-b-2 border-blue-500 pb-1">Portfolio</a>
-          <a href="/contact/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contact</a>
+
+        <!-- Desktop Navigation -->
+
+        <div
+          class="hidden lg:flex items-center gap-1 p-1 rounded-xl border border-slate-800 bg-slate-900/60"
+        >
+
+          <a
+            href="/"
+            class="px-4 py-2 rounded-lg text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition-all duration-200"
+          >
+            Home
+          </a>
+
+          <a
+            href="/features/"
+            class="px-4 py-2 rounded-lg text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition-all duration-200"
+          >
+            Features
+          </a>
+
+          <a
+            href="/pricing/"
+            class="px-4 py-2 rounded-lg text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition-all duration-200"
+          >
+            Pricing
+          </a>
+
+          <a
+            href="/portfolio/"
+            aria-current="page"
+            class="px-4 py-2 rounded-lg text-sm font-bold text-white bg-slate-800 shadow-sm"
+          >
+            Portfolio
+          </a>
+
+          <a
+            href="/contact/"
+            class="px-4 py-2 rounded-lg text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800 transition-all duration-200"
+          >
+            Contact
+          </a>
+
         </div>
 
-        <div class="flex items-center justify-end gap-3">
-          <a href="/free-trial/" class="inline-flex items-center bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm font-bold px-4 py-2.5 rounded-lg shadow-md transition-all">Free Trial</a>
+
+        <!-- CTA -->
+
+        <div class="flex items-center justify-end shrink-0">
+
+          <a
+            href="/free-trial/"
+            class="group inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-bold px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl shadow-lg shadow-blue-900/20 hover:shadow-blue-900/30 transition-all duration-200"
+            aria-label="Start a free trial"
+          >
+
+            <span>Free Trial</span>
+
+            <i
+              class="fas fa-arrow-right text-[10px] transition-transform duration-200 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            ></i>
+
+          </a>
+
         </div>
-      </div>
-    </nav>
-  </div>
 
-  <main class="relative overflow-hidden py-12 md:py-20">
-    <div class="blob w-[600px] h-[600px] bg-blue-600 top-[-100px] left-[50%] -translate-x-1/2"></div>
-    
-    <div class="max-w-5xl mx-auto px-6 relative z-10">
-      
-      <!-- Bio Header -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 mb-12 shadow-2xl flex flex-col md:flex-row items-center gap-8">
-        <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/alan-profile.jpg" alt="Alan da Silva Morais" onerror="this.src='https://placehold.co/150x150/1e293b/fff?text=AM'" class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-blue-500/40 object-cover shadow-xl shrink-0" />
-        <div class="text-center md:text-left">
-          <div class="inline-flex items-center px-3 py-1 rounded bg-blue-500/10 border border-blue-500/30 text-xs text-blue-400 font-semibold mb-3">
-            Available for Consulting & Development
-          </div>
-          <h1 class="text-3xl md:text-4xl font-black text-white mb-2">Alan da Silva Morais</h1>
-          <p class="text-blue-400 font-semibold text-sm md:text-base mb-4">Automation Specialist, Web Developer & Enterprise Operations Consultant</p>
-          <p class="text-slate-400 text-sm leading-relaxed mb-6">
-            Combining nearly a decade of experience across global corporate environments (Shell, TTEC Digital / Google Partnership) with practical full-stack web engineering and workflow automation.
-          </p>
-          <div class="flex flex-wrap justify-center md:justify-start gap-3">
-            <a href="https://www.linkedin.com/in/alandasm" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-2"><i class="fab fa-linkedin text-blue-400"></i> LinkedIn Profile</a>
-            <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-2"><i class="fab fa-github"></i> GitHub Repositories</a>
-            <a href="/contact/" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-colors inline-flex items-center gap-2"><i class="fa fa-envelope"></i> Send Message</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Core Competencies Grid -->
-      <div class="grid md:grid-cols-3 gap-6 mb-16">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-          <div class="w-10 h-10 rounded-xl bg-blue-600/10 text-blue-500 flex items-center justify-center text-lg mb-4"><i class="fas fa-bolt"></i></div>
-          <h3 class="font-bold text-white text-base mb-2">Data Automation</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Google Apps Script, VBA Macros, Excel Automation, Google Sheets API, Custom Workflow Pipelines.</p>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-          <div class="w-10 h-10 rounded-xl bg-green-600/10 text-green-500 flex items-center justify-center text-lg mb-4"><i class="fas fa-code"></i></div>
-          <h3 class="font-bold text-white text-base mb-2">Web Engineering</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">HTML5, Modern CSS, Tailwind CSS, Responsive Design, Landing Pages, Client Portals, SaaS frontends.</p>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
-          <div class="w-10 h-10 rounded-xl bg-purple-600/10 text-purple-500 flex items-center justify-center text-lg mb-4"><i class="fas fa-building"></i></div>
-          <h3 class="font-bold text-white text-base mb-2">Corporate Systems</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">SAP S/4HANA, SAP GUI (MM, SD, TS), Ariba, Salesforce, Master Data Management, Order-to-Cash.</p>
-        </div>
-      </div>
-
-      <!-- Professional Experience -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 mb-16 shadow-xl">
-        <h2 class="text-2xl font-bold text-white mb-8 pb-4 border-b border-slate-800">Professional Experience</h2>
-        
-        <div class="space-y-10 border-l-2 border-slate-800 pl-6 ml-3">
-          <div class="relative">
-            <div class="timeline-dot"></div>
-            <span class="text-xs font-semibold text-blue-500 tracking-wider uppercase">March 2025 – Present</span>
-            <h3 class="text-xl font-bold text-white mt-1">Partner Success Manager</h3>
-            <p class="text-slate-400 text-sm font-medium mb-2">TTEC Digital Global Google Partnership • Kraków, Poland</p>
-            <p class="text-xs text-slate-400 leading-relaxed">Managing partner success workflows, optimizing operational frameworks, and coordinating high-impact digital initiatives within global Google partnership environments.</p>
-          </div>
-
-          <div class="relative">
-            <div class="timeline-dot"></div>
-            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">November 2021 – July 2024</span>
-            <h3 class="text-xl font-bold text-white mt-1">Customer Success Specialist</h3>
-            <p class="text-slate-400 text-sm font-medium mb-2">Shell Business Operations • Kraków, Poland</p>
-            <p class="text-xs text-slate-400 leading-relaxed">Spearheaded customer satisfaction workflows, optimized global support operations, and leveraged data analysis to streamline recurring operational bottlenecks.</p>
-          </div>
-
-          <div class="relative">
-            <div class="timeline-dot"></div>
-            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">June 2018 – November 2021</span>
-            <h3 class="text-xl font-bold text-white mt-1">Procurement Data Specialist</h3>
-            <p class="text-slate-400 text-sm font-medium mb-2">Shell Business Operations • Kraków, Poland</p>
-            <p class="text-xs text-slate-400 leading-relaxed">Managed complex Master Data Management workflows within SAP S/4HANA and Ariba, ensuring high data integrity across large-scale Order-to-Cash operations.</p>
-          </div>
-
-          <div class="relative">
-            <div class="timeline-dot"></div>
-            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">June 2017 – May 2018</span>
-            <h3 class="text-xl font-bold text-white mt-1">IT Service Desk Analyst</h3>
-            <p class="text-slate-400 text-sm font-medium mb-2">HTC Technologies • Kraków, Poland</p>
-            <p class="text-xs text-slate-400 leading-relaxed">Provided technical troubleshooting, ITIL-compliant incident management, and user support for enterprise IT infrastructure.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Featured Projects -->
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 shadow-xl">
-        <h2 class="text-2xl font-bold text-white mb-8 pb-4 border-b border-slate-800">Featured Web & Partner Projects</h2>
-        
-        <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-3 mb-4">
-                <img src="https://joannafilek.com/images/logo.png" alt="Joanna Filek Logo" width="36" height="36" class="w-9 h-9 object-contain rounded bg-white p-1" />
-                <h3 class="font-bold text-white text-lg">Joanna Filek Web Platform</h3>
-              </div>
-              <p class="text-xs text-slate-400 leading-relaxed mb-6">A collaborative web-development and UX project built to elevate professional brand presence, optimize user journeys, and streamline client interaction.</p>
-            </div>
-            <a href="https://joannafilek.com/" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">Visit Live Project <i class="fa fa-external-link-alt text-[10px]"></i></a>
-          </div>
-
-          <div class="bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center gap-3 mb-4">
-                <div class="w-9 h-9 rounded bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-sm"><i class="fa fa-rocket"></i></div>
-                <h3 class="font-bold text-white text-lg">AlanSM Solutions Platform</h3>
-              </div>
-              <p class="text-xs text-slate-400 leading-relaxed mb-6">Multi-lingual SaaS ecosystem (EN, PL, PT, ES) featuring IP auto-redirection, dynamic currency converters, interactive ROI calculators, and Google Apps Script CRM integration.</p>
-            </div>
-            <a href="/" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">Explore Platform <i class="fa fa-arrow-right text-[10px]"></i></a>
-          </div>
-        </div>
       </div>
 
     </div>
+
+  </nav>
+
+
+  <!-- ========================================================= -->
+  <!-- MAIN -->
+  <!-- ========================================================= -->
+
+  <main>
+
+    <!-- ======================================================= -->
+    <!-- HERO / PROFILE -->
+    <!-- ======================================================= -->
+
+    <section
+      class="relative py-14 md:py-20 overflow-hidden"
+      aria-labelledby="portfolio-heading"
+    >
+
+      <!-- Background -->
+
+      <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"
+        aria-hidden="true"
+      ></div>
+
+
+      <div class="max-w-5xl mx-auto px-5 sm:px-6 relative z-10">
+
+        <div
+          class="relative overflow-hidden glass border border-slate-800 rounded-[2rem] p-7 sm:p-9 md:p-12 shadow-2xl"
+        >
+
+          <!-- Top accent -->
+
+          <div
+            class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/70 to-transparent"
+            aria-hidden="true"
+          ></div>
+
+
+          <div class="flex flex-col md:flex-row items-start gap-8 md:gap-10">
+
+            <!-- Profile Image -->
+
+            <div class="relative shrink-0 mx-auto md:mx-0">
+
+              <div
+                class="absolute -inset-2 rounded-full bg-blue-500/10 blur-xl"
+                aria-hidden="true"
+              ></div>
+
+              <img
+                src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/alan-profile.jpg"
+                alt="Alan da Silva Morais, Partner Success Manager and SaaS Operations professional"
+                width="160"
+                height="160"
+                loading="eager"
+                fetchpriority="high"
+                onerror="this.src='https://placehold.co/160x160/0f172a/ffffff?text=AM'"
+                class="relative w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-blue-500/50 object-cover shadow-xl"
+              >
+
+              <div
+                class="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-emerald-400 border-4 border-slate-900"
+                title="Available for consulting and development"
+                aria-label="Available for consulting and development"
+              ></div>
+
+            </div>
+
+
+            <!-- Profile Content -->
+
+            <div class="flex-1 text-center md:text-left">
+
+              <div
+                class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[11px] font-bold uppercase tracking-wider mb-4"
+              >
+
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+
+                Available for Consulting & Development
+
+              </div>
+
+
+              <h1
+                id="portfolio-heading"
+                class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white leading-tight mb-3"
+              >
+                Alan da Silva Morais
+              </h1>
+
+
+              <p
+                class="text-base md:text-xl font-semibold text-blue-400 leading-relaxed mb-5"
+              >
+                Partner Success Manager · SaaS Operations · Automation & Process Improvement
+              </p>
+
+
+              <p
+                class="max-w-3xl text-sm md:text-base text-slate-400 leading-7 mb-7"
+              >
+                Partner Success and SaaS Operations professional with corporate
+                experience since 2017 and extensive international experience
+                across customer-facing and operational environments. Currently
+                working with Google Travel products at TTEC, with professional
+                experience across partner onboarding, SaaS operations,
+                SAP S/4HANA, Ariba, Salesforce, Order-to-Cash, master data
+                governance, process improvement and ITIL support.
+              </p>
+
+
+              <!-- Credibility -->
+
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-7">
+
+                <div
+                  class="rounded-xl bg-slate-950/70 border border-slate-800 p-3 text-center md:text-left"
+                >
+                  <div class="text-lg font-extrabold text-white">
+                    2017+
+                  </div>
+
+                  <div class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                    Corporate Experience
+                  </div>
+                </div>
+
+
+                <div
+                  class="rounded-xl bg-slate-950/70 border border-slate-800 p-3 text-center md:text-left"
+                >
+                  <div class="text-lg font-extrabold text-white">
+                    SaaS
+                  </div>
+
+                  <div class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                    Operations
+                  </div>
+                </div>
+
+
+                <div
+                  class="rounded-xl bg-slate-950/70 border border-slate-800 p-3 text-center md:text-left"
+                >
+                  <div class="text-lg font-extrabold text-white">
+                    SAP
+                  </div>
+
+                  <div class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                    Enterprise Systems
+                  </div>
+                </div>
+
+
+                <div
+                  class="rounded-xl bg-slate-950/70 border border-slate-800 p-3 text-center md:text-left"
+                >
+                  <div class="text-lg font-extrabold text-white">
+                    Automation
+                  </div>
+
+                  <div class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+                    Process Improvement
+                  </div>
+                </div>
+
+              </div>
+
+
+              <!-- Buttons -->
+
+              <div
+                class="flex flex-wrap justify-center md:justify-start gap-3"
+              >
+
+                <a
+                  href="https://www.linkedin.com/in/alandasm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View Alan da Silva Morais on LinkedIn"
+                  class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold transition-all"
+                >
+                  <i
+                    class="fab fa-linkedin text-blue-400"
+                    aria-hidden="true"
+                  ></i>
+                  LinkedIn
+                </a>
+
+
+                <a
+                  href="https://github.com/alansmorais"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View Alan da Silva Morais GitHub repositories"
+                  class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-bold transition-all"
+                >
+                  <i
+                    class="fab fa-github"
+                    aria-hidden="true"
+                  ></i>
+                  GitHub
+                </a>
+
+
+                <a
+                  href="/contact/"
+                  class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-lg shadow-blue-900/20 transition-all"
+                >
+                  <i
+                    class="fas fa-paper-plane"
+                    aria-hidden="true"
+                  ></i>
+                  Contact Me
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================= -->
+    <!-- SKILLS -->
+    <!-- ======================================================= -->
+
+    <section
+      class="max-w-5xl mx-auto px-5 sm:px-6 mb-20"
+      aria-labelledby="skills-heading"
+    >
+
+      <div class="max-w-3xl mb-10">
+
+        <span
+          class="text-xs font-bold uppercase tracking-[0.2em] text-blue-400"
+        >
+          Expertise
+        </span>
+
+        <h2
+          id="skills-heading"
+          class="text-3xl md:text-4xl font-black text-white mt-2 mb-4"
+        >
+          Core Skills & Professional Expertise
+        </h2>
+
+        <p
+          class="text-sm md:text-base text-slate-400 leading-relaxed"
+        >
+          A combination of partner management, enterprise systems, SaaS
+          operations, automation, data workflows and process improvement
+          developed across international business environments.
+        </p>
+
+      </div>
+
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+
+        <!-- Partner Success -->
+
+        <article
+          class="card-hover bg-slate-900/80 border border-slate-800 rounded-2xl p-6 hover:border-blue-500/40"
+        >
+
+          <div
+            class="w-11 h-11 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-5"
+          >
+            <i class="fas fa-handshake" aria-hidden="true"></i>
+          </div>
+
+          <h3 class="font-bold text-white text-base mb-2">
+            Partner Success & SaaS Operations
+          </h3>
+
+          <p class="text-sm text-slate-400 leading-6">
+            Partner onboarding, enablement, customer success, enterprise
+            account support, stakeholder management and operational readiness.
+          </p>
+
+        </article>
+
+
+        <!-- Enterprise -->
+
+        <article
+          class="card-hover bg-slate-900/80 border border-slate-800 rounded-2xl p-6 hover:border-purple-500/40"
+        >
+
+          <div
+            class="w-11 h-11 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-5"
+          >
+            <i class="fas fa-building" aria-hidden="true"></i>
+          </div>
+
+          <h3 class="font-bold text-white text-base mb-2">
+            Enterprise Systems
+          </h3>
+
+          <p class="text-sm text-slate-400 leading-6">
+            SAP S/4HANA, SAP SD, Ariba, Salesforce, Order-to-Cash operations
+            and vendor, material and contract master data.
+          </p>
+
+        </article>
+
+
+        <!-- Automation -->
+
+        <article
+          class="card-hover bg-slate-900/80 border border-slate-800 rounded-2xl p-6 hover:border-amber-500/40"
+        >
+
+          <div
+            class="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-5"
+          >
+            <i class="fas fa-bolt" aria-hidden="true"></i>
+          </div>
+
+          <h3 class="font-bold text-white text-base mb-2">
+            Automation & Data
+          </h3>
+
+          <p class="text-sm text-slate-400 leading-6">
+            Excel VBA, Google Sheets workflows, scripting logic, Python
+            fundamentals, SQL fundamentals and repetitive-process optimization.
+          </p>
+
+        </article>
+
+
+        <!-- Web -->
+
+        <article
+          class="card-hover bg-slate-900/80 border border-slate-800 rounded-2xl p-6 hover:border-cyan-500/40"
+        >
+
+          <div
+            class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-5"
+          >
+            <i class="fas fa-code" aria-hidden="true"></i>
+          </div>
+
+          <h3 class="font-bold text-white text-base mb-2">
+            Web Development
+          </h3>
+
+          <p class="text-sm text-slate-400 leading-6">
+            HTML, CSS, Tailwind CSS, responsive web design and practical
+            web applications for automation and booking workflows.
+          </p>
+
+        </article>
+
+
+        <!-- Process -->
+
+        <article
+          class="card-hover bg-slate-900/80 border border-slate-800 rounded-2xl p-6 hover:border-emerald-500/40"
+        >
+
+          <div
+            class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-5"
+          >
+            <i class="fas fa-chart-line" aria-hidden="true"></i>
+          </div>
+
+          <h3 class="font-bold text-white text-base mb-2">
+            Process Improvement
+          </h3>
+
+          <p class="text-sm text-slate-400 leading-6">
+            Workflow optimization, documentation, data quality, operational
+            controls, KPI-driven support and cross-functional collaboration.
+          </p>
+
+        </article>
+
+
+        <!-- ITIL -->
+
+        <article
+          class="card-hover bg-slate-900/80 border border-slate-800 rounded-2xl p-6 hover:border-orange-500/40"
+        >
+
+          <div
+            class="w-11 h-11 rounded-xl bg-orange-500/10 text-orange-400 flex items-center justify-center mb-5"
+          >
+            <i class="fas fa-life-ring" aria-hidden="true"></i>
+          </div>
+
+          <h3 class="font-bold text-white text-base mb-2">
+            ITIL & Operational Support
+          </h3>
+
+          <p class="text-sm text-slate-400 leading-6">
+            Incident management, SLA and KPI-driven support, end-user
+            training, documentation and structured problem solving.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================= -->
+    <!-- EXPERIENCE -->
+    <!-- ======================================================= -->
+
+    <section
+      class="max-w-5xl mx-auto px-5 sm:px-6 mb-20"
+      aria-labelledby="experience-heading"
+    >
+
+      <div class="max-w-3xl mb-10">
+
+        <span
+          class="text-xs font-bold uppercase tracking-[0.2em] text-blue-400"
+        >
+          Career
+        </span>
+
+        <h2
+          id="experience-heading"
+          class="text-3xl md:text-4xl font-black text-white mt-2 mb-4"
+        >
+          Professional Experience
+        </h2>
+
+        <p class="text-sm md:text-base text-slate-400 leading-relaxed">
+          Experience across partner success, customer operations, procurement
+          data, enterprise systems and IT support in international business
+          environments.
+        </p>
+
+      </div>
+
+
+      <div class="relative">
+
+        <!-- Timeline -->
+
+        <div
+          class="absolute left-[11px] top-3 bottom-3 w-px timeline-line"
+          aria-hidden="true"
+        ></div>
+
+
+        <div class="space-y-8">
+
+
+          <!-- TTEC -->
+
+          <article class="relative pl-10">
+
+            <div
+              class="absolute left-0 top-2 w-[23px] h-[23px] rounded-full bg-slate-950 border-2 border-blue-500 flex items-center justify-center"
+              aria-hidden="true"
+            >
+              <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+            </div>
+
+
+            <div
+              class="bg-slate-900/80 border border-blue-500/20 rounded-2xl p-6 md:p-8 shadow-lg shadow-blue-950/5"
+            >
+
+              <div
+                class="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-5"
+              >
+
+                <div>
+
+                  <span
+                    class="text-[11px] font-bold uppercase tracking-wider text-blue-400"
+                  >
+                    Mar 2025 — Present
+                  </span>
+
+                  <h3
+                    class="text-xl md:text-2xl font-bold text-white mt-1"
+                  >
+                    Partner Success Manager
+                  </h3>
+
+                  <p class="text-sm text-slate-400 mt-1">
+                    TTEC · Google Travel — Things to Do / Reserve with Google
+                    <span class="text-slate-600">·</span>
+                    Krakow, Poland
+                  </p>
+
+                </div>
+
+
+                <span
+                  class="self-start text-[10px] font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full px-3 py-1"
+                >
+                  Current Role
+                </span>
+
+              </div>
+
+
+              <ul
+                class="space-y-2.5 text-sm text-slate-300 leading-6 list-disc pl-5 marker:text-blue-500"
+              >
+
+                <li>
+                  Lead partner onboarding, qualification, and enablement for
+                  Google Things to Do and Reserve with Google products.
+                </li>
+
+                <li>
+                  Guide partners through integration requirements, operational
+                  readiness, best practices, and platform adoption.
+                </li>
+
+                <li>
+                  Act as the primary partner contact, identifying risks,
+                  bottlenecks, and growth opportunities while coordinating
+                  resolutions with Google and TTEC stakeholders.
+                </li>
+
+                <li>
+                  Support long-term partner success through clear communication,
+                  proactive follow-up, and cross-functional problem solving.
+                </li>
+
+              </ul>
+
+            </div>
+
+          </article>
+
+
+          <!-- SHELL CUSTOMER SUCCESS -->
+
+          <article class="relative pl-10">
+
+            <div
+              class="absolute left-0 top-2 w-[23px] h-[23px] rounded-full bg-slate-950 border-2 border-slate-600"
+              aria-hidden="true"
+            ></div>
+
+
+            <div
+              class="card-hover bg-slate-900/70 border border-slate-800 rounded-2xl p-6 md:p-8"
+            >
+
+              <span
+                class="text-[11px] font-bold uppercase tracking-wider text-slate-500"
+              >
+                Nov 2021 — Jul 2024
+              </span>
+
+              <h3
+                class="text-xl md:text-2xl font-bold text-white mt-1"
+              >
+                Customer Success Specialist — UK Market
+              </h3>
+
+              <p class="text-sm text-slate-400 mt-1 mb-5">
+                Shell · Krakow Metropolitan Area, Poland
+              </p>
+
+
+              <ul
+                class="space-y-2.5 text-sm text-slate-300 leading-6 list-disc pl-5 marker:text-slate-600"
+              >
+
+                <li>
+                  Delivered end-to-end support for UK B2B customer portfolios,
+                  building trusted relationships with customers and business
+                  partners.
+                </li>
+
+                <li>
+                  Managed contracts, pricing, master data, and compliance while
+                  maintaining strong data integrity and governance standards.
+                </li>
+
+                <li>
+                  Supported Order-to-Cash workflows, including order management,
+                  disputes, credit management, SAP monitoring, delivery
+                  timelines, and exceptions.
+                </li>
+
+                <li>
+                  Partnered with Sales, Finance, Demand Planning, Distribution,
+                  and carriers to address retention risks and improve service
+                  levels.
+                </li>
+
+              </ul>
+
+            </div>
+
+          </article>
+
+
+          <!-- SHELL PROCUREMENT -->
+
+          <article class="relative pl-10">
+
+            <div
+              class="absolute left-0 top-2 w-[23px] h-[23px] rounded-full bg-slate-950 border-2 border-slate-600"
+              aria-hidden="true"
+            ></div>
+
+
+            <div
+              class="card-hover bg-slate-900/70 border border-slate-800 rounded-2xl p-6 md:p-8"
+            >
+
+              <span
+                class="text-[11px] font-bold uppercase tracking-wider text-slate-500"
+              >
+                Jun 2018 — Nov 2021
+              </span>
+
+              <h3
+                class="text-xl md:text-2xl font-bold text-white mt-1"
+              >
+                Contracting & Procurement Data Specialist
+              </h3>
+
+              <p class="text-sm text-slate-400 mt-1 mb-5">
+                Shell · Krakow Area, Poland
+              </p>
+
+
+              <ul
+                class="space-y-2.5 text-sm text-slate-300 leading-6 list-disc pl-5 marker:text-slate-600"
+              >
+
+                <li>
+                  Led supplier qualification and compliance activities,
+                  including risk assessments, integrity due diligence, and
+                  HSSE standards.
+                </li>
+
+                <li>
+                  Managed vendor, material, and contract master data across
+                  SAP and Ariba environments.
+                </li>
+
+                <li>
+                  Served as SAP SD Super User, resolving data issues,
+                  supporting users, and contributing to master data improvement
+                  initiatives.
+                </li>
+
+                <li>
+                  Created internal documentation, trained end-users, and
+                  collaborated with Procurement, Finance, and IT to streamline
+                  processes.
+                </li>
+
+              </ul>
+
+            </div>
+
+          </article>
+
+
+          <!-- HCL -->
+
+          <article class="relative pl-10">
+
+            <div
+              class="absolute left-0 top-2 w-[23px] h-[23px] rounded-full bg-slate-950 border-2 border-slate-600"
+              aria-hidden="true"
+            ></div>
+
+
+            <div
+              class="card-hover bg-slate-900/70 border border-slate-800 rounded-2xl p-6 md:p-8"
+            >
+
+              <span
+                class="text-[11px] font-bold uppercase tracking-wider text-slate-500"
+              >
+                Jun 2017 — May 2018
+              </span>
+
+              <h3
+                class="text-xl md:text-2xl font-bold text-white mt-1"
+              >
+                IT Service Desk Analyst — Portuguese Speaker
+              </h3>
+
+              <p class="text-sm text-slate-400 mt-1 mb-5">
+                HCL Technologies · Krakow Area, Poland
+              </p>
+
+
+              <ul
+                class="space-y-2.5 text-sm text-slate-300 leading-6 list-disc pl-5 marker:text-slate-600"
+              >
+
+                <li>
+                  Provided first- and second-line support for hardware,
+                  software, and network issues for global users in Brazilian
+                  Portuguese and English.
+                </li>
+
+                <li>
+                  Logged, tracked, and resolved incidents under ITIL practices
+                  while working to SLA and KPI targets.
+                </li>
+
+              </ul>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================= -->
+    <!-- PROJECTS -->
+    <!-- ======================================================= -->
+
+    <section
+      class="max-w-5xl mx-auto px-5 sm:px-6 mb-20"
+      aria-labelledby="projects-heading"
+    >
+
+      <div class="max-w-3xl mb-10">
+
+        <span
+          class="text-xs font-bold uppercase tracking-[0.2em] text-blue-400"
+        >
+          Portfolio
+        </span>
+
+        <h2
+          id="projects-heading"
+          class="text-3xl md:text-4xl font-black text-white mt-2 mb-4"
+        >
+          Selected Automation Projects & Solutions
+        </h2>
+
+        <p class="text-sm md:text-base text-slate-400 leading-relaxed">
+          Practical automation concepts covering enterprise data workflows,
+          reporting, process improvement and small-business web solutions.
+        </p>
+
+      </div>
+
+
+      <div class="grid md:grid-cols-2 gap-5">
+
+
+        <!-- Project 1 -->
+
+        <article
+          class="card-hover bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-7 hover:border-blue-500/40"
+        >
+
+          <div class="flex items-start justify-between gap-4 mb-5">
+
+            <div
+              class="w-11 h-11 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0"
+            >
+              <i class="fas fa-file-excel" aria-hidden="true"></i>
+            </div>
+
+            <span
+              class="text-[10px] uppercase tracking-wider font-bold text-slate-600"
+            >
+              VBA · SAP
+            </span>
+
+          </div>
+
+
+          <h3 class="text-lg font-bold text-white mb-3">
+            SAP Payment Block & Vendor Data Automation
+          </h3>
+
+
+          <p class="text-sm text-slate-400 leading-6 mb-6">
+            VBA-driven workflow concept for invoice data validation,
+            payment-block reviews, discrepancy flagging and repetitive
+            spreadsheet filtering in procurement and accounts-payable scenarios.
+          </p>
+
+
+          <a
+            href="https://github.com/alansmorais"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-xs font-bold text-blue-400 hover:text-blue-300"
+          >
+            View on GitHub
+
+            <i
+              class="fas fa-arrow-right text-[10px]"
+              aria-hidden="true"
+            ></i>
+          </a>
+
+        </article>
+
+
+        <!-- Project 2 -->
+
+        <article
+          class="card-hover bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-7 hover:border-emerald-500/40"
+        >
+
+          <div class="flex items-start justify-between gap-4 mb-5">
+
+            <div
+              class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0"
+            >
+              <i class="fas fa-database" aria-hidden="true"></i>
+            </div>
+
+            <span
+              class="text-[10px] uppercase tracking-wider font-bold text-slate-600"
+            >
+              SAP · Data
+            </span>
+
+          </div>
+
+
+          <h3 class="text-lg font-bold text-white mb-3">
+            SAP Master Data & Material Listing Automation
+          </h3>
+
+
+          <p class="text-sm text-slate-400 leading-6 mb-6">
+            Data-staging automation concept for organizing, validating and
+            tracking material listings before enterprise-system entry, with a
+            focus on structural consistency and data quality.
+          </p>
+
+
+          <a
+            href="https://github.com/alansmorais"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-xs font-bold text-blue-400 hover:text-blue-300"
+          >
+            View on GitHub
+
+            <i
+              class="fas fa-arrow-right text-[10px]"
+              aria-hidden="true"
+            ></i>
+          </a>
+
+        </article>
+
+
+        <!-- Project 3 -->
+
+        <article
+          class="card-hover bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-7 hover:border-purple-500/40"
+        >
+
+          <div class="flex items-start justify-between gap-4 mb-5">
+
+            <div
+              class="w-11 h-11 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center shrink-0"
+            >
+              <i class="fas fa-chart-line" aria-hidden="true"></i>
+            </div>
+
+            <span
+              class="text-[10px] uppercase tracking-wider font-bold text-slate-600"
+            >
+              Reporting · Sheets
+            </span>
+
+          </div>
+
+
+          <h3 class="text-lg font-bold text-white mb-3">
+            Automated Data Extraction & Reporting
+          </h3>
+
+
+          <p class="text-sm text-slate-400 leading-6 mb-6">
+            Reporting-automation framework for extracting, transforming and
+            staging fragmented data into structured outputs and Google
+            Sheets-oriented workflows.
+          </p>
+
+
+          <a
+            href="https://github.com/alansmorais"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-xs font-bold text-blue-400 hover:text-blue-300"
+          >
+            View on GitHub
+
+            <i
+              class="fas fa-arrow-right text-[10px]"
+              aria-hidden="true"
+            ></i>
+          </a>
+
+        </article>
+
+
+        <!-- Project 4 -->
+
+        <article
+          class="card-hover bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-7 hover:border-cyan-500/40"
+        >
+
+          <div class="flex items-start justify-between gap-4 mb-5">
+
+            <div
+              class="w-11 h-11 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0"
+            >
+              <i class="fas fa-globe" aria-hidden="true"></i>
+            </div>
+
+            <span
+              class="text-[10px] uppercase tracking-wider font-bold text-slate-600"
+            >
+              Web · SaaS
+            </span>
+
+          </div>
+
+
+          <h3 class="text-lg font-bold text-white mb-3">
+            Automation & Solutions Portfolio
+          </h3>
+
+
+          <p class="text-sm text-slate-400 leading-6 mb-6">
+            Responsive web portfolio presenting automation services,
+            enterprise operations experience, practical workflow concepts
+            and web-based business solutions.
+          </p>
+
+
+          <a
+            href="/"
+            class="inline-flex items-center gap-2 text-xs font-bold text-blue-400 hover:text-blue-300"
+          >
+            Visit Live Portfolio
+
+            <i
+              class="fas fa-arrow-right text-[10px]"
+              aria-hidden="true"
+            ></i>
+          </a>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================= -->
+    <!-- TECHNICAL SKILLS -->
+    <!-- ======================================================= -->
+
+    <section
+      class="max-w-5xl mx-auto px-5 sm:px-6 mb-20"
+      aria-labelledby="technical-heading"
+    >
+
+      <div class="max-w-3xl mb-10">
+
+        <span
+          class="text-xs font-bold uppercase tracking-[0.2em] text-blue-400"
+        >
+          Technology
+        </span>
+
+        <h2
+          id="technical-heading"
+          class="text-3xl md:text-4xl font-black text-white mt-2 mb-4"
+        >
+          Technical Skills
+        </h2>
+
+        <p class="text-sm md:text-base text-slate-400 leading-relaxed">
+          Enterprise platforms, automation technologies and web development
+          tools used across professional and portfolio projects.
+        </p>
+
+      </div>
+
+
+      <div
+        class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
+      >
+
+
+        <div
+          class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5"
+        >
+
+          <div class="text-blue-400 text-sm font-bold mb-3">
+            Enterprise Systems
+          </div>
+
+          <p class="text-sm text-slate-400 leading-6">
+            SAP S/4HANA<br>
+            SAP SD<br>
+            Ariba<br>
+            Salesforce
+          </p>
+
+        </div>
+
+
+        <div
+          class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5"
+        >
+
+          <div class="text-amber-400 text-sm font-bold mb-3">
+            Automation & Data
+          </div>
+
+          <p class="text-sm text-slate-400 leading-6">
+            Excel VBA<br>
+            Google Sheets<br>
+            Python Fundamentals<br>
+            SQL Fundamentals
+          </p>
+
+        </div>
+
+
+        <div
+          class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5"
+        >
+
+          <div class="text-cyan-400 text-sm font-bold mb-3">
+            Web Development
+          </div>
+
+          <p class="text-sm text-slate-400 leading-6">
+            HTML<br>
+            CSS<br>
+            Tailwind CSS<br>
+            Responsive Web Design
+          </p>
+
+        </div>
+
+
+        <div
+          class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5"
+        >
+
+          <div class="text-emerald-400 text-sm font-bold mb-3">
+            Methods & Processes
+          </div>
+
+          <p class="text-sm text-slate-400 leading-6">
+            ITIL<br>
+            Order-to-Cash<br>
+            Master Data<br>
+            Process Improvement
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================= -->
+    <!-- EDUCATION + LANGUAGES -->
+    <!-- ======================================================= -->
+
+    <section
+      class="max-w-5xl mx-auto px-5 sm:px-6 mb-20"
+    >
+
+      <div class="grid md:grid-cols-2 gap-5">
+
+
+        <!-- Education -->
+
+        <article
+          class="bg-slate-900/80 border border-slate-800 rounded-2xl p-7 md:p-8"
+        >
+
+          <div
+            class="w-11 h-11 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center mb-5"
+          >
+            <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+          </div>
+
+
+          <h2 class="text-2xl font-bold text-white mb-6">
+            Education & Training
+          </h2>
+
+
+          <div class="mb-7">
+
+            <h3 class="font-bold text-white text-base">
+              Certificate in Business Management
+            </h3>
+
+            <p
+              class="text-blue-400 text-xs font-semibold mt-1 mb-3"
+            >
+              SEDA College · Dublin, Ireland · 2008–2010
+            </p>
+
+            <p class="text-sm text-slate-400 leading-6">
+              Coursework covering Management, Marketing, Numeracy &
+              Statistics and International Relations.
+            </p>
+
+          </div>
+
+
+          <div>
+
+            <h3 class="font-bold text-white text-sm mb-3">
+              Selected Training
+            </h3>
+
+            <p class="text-sm text-slate-400 leading-6">
+              SAP S/4HANA: Beyond the Basics;
+              Asset Accounting: Acquisitions in SAP S/4HANA;
+              Data Analytics: Graph Analytics;
+              Learning SQL Programming.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- Languages -->
+
+        <article
+          class="bg-slate-900/80 border border-slate-800 rounded-2xl p-7 md:p-8"
+        >
+
+          <div
+            class="w-11 h-11 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-5"
+          >
+            <i class="fas fa-language" aria-hidden="true"></i>
+          </div>
+
+
+          <h2 class="text-2xl font-bold text-white mb-6">
+            Languages
+          </h2>
+
+
+          <div class="space-y-4">
+
+
+            <div
+              class="flex items-center justify-between gap-4 border-b border-slate-800 pb-4"
+            >
+
+              <span class="text-white font-semibold">
+                Portuguese
+              </span>
+
+              <span class="text-slate-500 text-xs text-right">
+                Native / Bilingual
+              </span>
+
+            </div>
+
+
+            <div
+              class="flex items-center justify-between gap-4 border-b border-slate-800 pb-4"
+            >
+
+              <span class="text-white font-semibold">
+                English
+              </span>
+
+              <span class="text-slate-500 text-xs text-right">
+                Fluent / Full Professional
+              </span>
+
+            </div>
+
+
+            <div
+              class="flex items-center justify-between gap-4 border-b border-slate-800 pb-4"
+            >
+
+              <span class="text-white font-semibold">
+                Spanish
+              </span>
+
+              <span class="text-slate-500 text-xs text-right">
+                Professional Working
+              </span>
+
+            </div>
+
+
+            <div
+              class="flex items-center justify-between gap-4"
+            >
+
+              <span class="text-white font-semibold">
+                Polish
+              </span>
+
+              <span class="text-slate-500 text-xs text-right">
+                Elementary / Communicative
+              </span>
+
+            </div>
+
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- ======================================================= -->
+    <!-- CONTACT CTA -->
+    <!-- ======================================================= -->
+
+    <section
+      class="max-w-5xl mx-auto px-5 sm:px-6 pb-20"
+      aria-labelledby="contact-heading"
+    >
+
+      <div
+        class="relative overflow-hidden rounded-[2rem] border border-blue-500/20 bg-gradient-to-br from-blue-950/40 via-slate-900 to-slate-950 p-8 md:p-12 text-center"
+      >
+
+        <div
+          class="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-32 bg-blue-500/10 blur-3xl rounded-full"
+          aria-hidden="true"
+        ></div>
+
+
+        <div class="relative">
+
+          <span
+            class="text-xs font-bold uppercase tracking-[0.2em] text-blue-400"
+          >
+            Let's Connect
+          </span>
+
+
+          <h2
+            id="contact-heading"
+            class="text-3xl md:text-4xl font-black text-white mt-3 mb-4"
+          >
+            Have a project or opportunity?
+          </h2>
+
+
+          <p
+            class="max-w-2xl mx-auto text-sm md:text-base text-slate-400 leading-7 mb-7"
+          >
+            Whether you are looking for partner success expertise, SaaS
+            operations support, workflow automation or a practical web solution,
+            feel free to get in touch.
+          </p>
+
+
+          <div class="flex flex-wrap justify-center gap-3">
+
+            <a
+              href="/contact/"
+              class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold shadow-lg shadow-blue-900/20 transition-all"
+            >
+              <i class="fas fa-envelope" aria-hidden="true"></i>
+              Contact Me
+            </a>
+
+
+            <a
+              href="https://www.linkedin.com/in/alandasm"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-sm font-bold transition-all"
+            >
+              <i class="fab fa-linkedin text-blue-400" aria-hidden="true"></i>
+              LinkedIn
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
   </main>
 
-  <footer class="py-10 bg-slate-950 border-t border-slate-800 text-center text-xs text-slate-500">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p>© 2026 Alan da Silva Morais. All rights reserved.</p>
-      <div class="flex gap-4">
-        <a href="/" class="hover:text-blue-400 transition-colors">Home</a>
-        <a href="/pricing/" class="hover:text-blue-400 transition-colors">Pricing</a>
-        <a href="/contact/" class="hover:text-blue-400 transition-colors">Contact</a>
+
+  <!-- ========================================================= -->
+  <!-- FOOTER -->
+  <!-- ========================================================= -->
+
+  <footer
+    class="border-t border-slate-800/80 bg-slate-950"
+  >
+
+    <div
+      class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-8"
+    >
+
+      <div
+        class="flex flex-col md:flex-row items-center justify-between gap-5"
+      >
+
+        <div class="text-center md:text-left">
+
+          <div class="font-bold text-white">
+            Alan da Silva Morais
+          </div>
+
+          <p class="text-xs text-slate-500 mt-1">
+            Partner Success · SaaS Operations · Automation
+          </p>
+
+        </div>
+
+
+        <div class="flex items-center gap-5">
+
+          <a
+            href="https://www.linkedin.com/in/alandasm"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            class="text-slate-500 hover:text-blue-400 transition-colors"
+          >
+            <i class="fab fa-linkedin text-lg"></i>
+          </a>
+
+
+          <a
+            href="https://github.com/alansmorais"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="text-slate-500 hover:text-white transition-colors"
+          >
+            <i class="fab fa-github text-lg"></i>
+          </a>
+
+
+          <a
+            href="/contact/"
+            aria-label="Contact"
+            class="text-slate-500 hover:text-blue-400 transition-colors"
+          >
+            <i class="fas fa-envelope text-lg"></i>
+          </a>
+
+        </div>
+
+
+        <p class="text-xs text-slate-600 text-center md:text-right">
+          © <span id="current-year"></span>
+          Alan da Silva Morais. All rights reserved.
+        </p>
+
       </div>
+
     </div>
+
   </footer>
+
+
+  <!-- Current Year -->
+
+  <script>
+    document.getElementById("current-year").textContent =
+      new Date().getFullYear();
+  </script>
 
 </body>
 </html>
