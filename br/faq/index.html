@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Meta SEO -->
+  <title>Alternativa ao Booksy e Calendly | Sistema de Agendamento Online Personalizado</title>
+  <meta name="description" content="Crie um sistema de agendamento online personalizado para sua empresa. Alternativa ao Booksy, Fresha, AppBarber e Calendly com sua própria marca, domínio e reservas online.">
+  <meta name="keywords" content="sistema de agendamento online, agenda online para barbearia, sistema de reservas personalizado, alternativa ao Booksy, alternativa ao Calendly">
+  <meta name="author" content="Alan da Silva Morais">
+  <meta name="robots" content="index, follow">
+
+  <link rel="canonical" href="https://www.alansmsolutions.com/br/faq/">
+  <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" />
+
+  <!-- SEO Hreflang Tags -->
+  <link rel="alternate" hreflang="en" href="https://alansmsolutions.com/faq/" />
+  <link rel="alternate" hreflang="pt-BR" href="https://alansmsolutions.com/br/faq/" />
+  <link rel="alternate" hreflang="pl" href="https://alansmsolutions.com/pl/faq/" />
+  <link rel="alternate" hreflang="es" href="https://alansmsolutions.com/es/faq/" />
+  <link rel="alternate" hreflang="x-default" href="https://alansmsolutions.com/faq/" />
+
+  <!-- Tailwind CSS & Icons -->
+  <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 35%),
+                  radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.06), transparent 35%),
+                  #0f172a;
+      color: #f8fafc;
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .top-info-bar { background: #020617; color: #cbd5e1; border-bottom: 1px solid #1e293b; }
+    .main-nav-shell { background: rgba(2, 6, 23, 0.96); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-color: #1e293b; }
+    .mobile-drawer-link { display:block; padding: 0.95rem 0; font-size: 1.15rem; line-height: 1.6rem; font-weight: 600; color:#cbd5e1; border-bottom:1px solid #1e293b; }
+    .mobile-drawer-link:last-child { border-bottom: none; }
+    .nav-icon-btn { width: 3rem; height: 3rem; border: 1px solid #334155; border-radius: 0.75rem; display:flex; align-items:center; justify-content:center; background:#0f172a; }
+    .menu-line { width: 1.35rem; height: 2px; background:#cbd5e1; border-radius: 999px; display:block; margin-top: 0.28rem; }
+    
+    .blob { position: absolute; filter: blur(90px); opacity: 0.15; mix-blend-mode: screen; pointer-events: none; }
+    
+    /* FAQ Accordion Transitions */
+    .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease-out; }
+    .faq-answer > div { overflow: hidden; }
+    .faq-item.active .faq-answer { grid-template-rows: 1fr; }
+    .faq-icon { transition: transform 0.3s ease-out; }
+    .faq-item.active .faq-icon { transform: rotate(180deg); }
+  </style>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.alansmsolutions.com/"
+    },{
+      "@type": "ListItem", "position": 2, "name": "Sistema de Agendamento Online", "item": "https://www.alansmsolutions.com/br/faq/"
+    }]
+  }
+  </script>
+
+  <!-- FAQ Schema JSON-LD (Extended for SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Preciso abandonar Booksy, AppBarber ou outra plataforma?", "acceptedAnswer": { "@type": "Answer", "text": "Não. Você pode usar um sistema próprio como canal complementar. Muitos negócios começam colocando o link no Instagram, WhatsApp ou Google Perfil da Empresa e observam se os clientes usam." } },
+      { "@type": "Question", "name": "Funciona para Instagram e WhatsApp?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. O link pode ser usado na bio do Instagram, em mensagens de WhatsApp, no Google Perfil da Empresa, em QR Code, em anúncios e no site da empresa." } },
+      { "@type": "Question", "name": "Isso pode aparecer no Google (SEO Local)?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. Sendo uma página pública e otimizada (SEO), ela pode ser indexada pelo Google. A estrutura técnica ajuda sua marca a aparecer para buscas diretas pelo seu serviço na sua região." } },
+      { "@type": "Question", "name": "O cliente precisa baixar um aplicativo?", "acceptedAnswer": { "@type": "Answer", "text": "Não. É uma aplicação web responsiva (SaaS web-app) que roda diretamente no navegador do celular do cliente, eliminando a barreira de ter que baixar um aplicativo novo na loja." } },
+      { "@type": "Question", "name": "Quanto custa um sistema de agendamento personalizado?", "acceptedAnswer": { "@type": "Answer", "text": "Nossa estrutura de preços não cobra comissões por agendamento. Você paga uma Taxa de Setup inicial e um plano fixo mensal (Tech Ops) para manutenção do servidor. Você fica com 100% do valor dos seus serviços." } },
+      { "@type": "Question", "name": "Posso aceitar pagamentos online (Pix, Cartão, Stripe)?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. Podemos integrar o seu sistema a gateways de pagamento como Stripe ou Mercado Pago, permitindo a cobrança de sinais (adiantamentos) ou pagamentos integrais no momento da reserva." } },
+      { "@type": "Question", "name": "O sistema envia lembretes automáticos por WhatsApp ou SMS?", "acceptedAnswer": { "@type": "Answer", "text": "Sim! Podemos automatizar envios de confirmações, lembretes de véspera e mensagens de remarcação diretamente para o WhatsApp do seu cliente para reduzir faltas (no-shows)." } },
+      { "@type": "Question", "name": "Os clientes podem reagendar ou cancelar as próprias consultas?", "acceptedAnswer": { "@type": "Answer", "text": "Sim, dependendo da sua preferência. Podemos incluir links seguros no e-mail ou WhatsApp de confirmação que permitem ao cliente reagendar de acordo com regras definidas (ex: aviso prévio mínimo de 24h)." } },
+      { "@type": "Question", "name": "É possível adicionar vários profissionais e serviços na mesma agenda?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. O sistema permite listar diferentes profissionais da sua equipe, cada um com sua própria grade de horários, serviços específicos e durações de atendimento distintas." } },
+      { "@type": "Question", "name": "Como funciona a integração com o Google Agenda?", "acceptedAnswer": { "@type": "Answer", "text": "O sistema sincroniza as reservas em tempo real com o Google Agenda. Se você bloquear um horário no seu celular, ele ficará indisponível no site automaticamente, evitando agendamentos duplos." } },
+      { "@type": "Question", "name": "O sistema é seguro e atende às leis de proteção de dados (LGPD/GDPR)?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutamente. O sistema roda sob certificado SSL (criptografia), e os dados dos seus clientes pertencem inteiramente a você, sem compartilhamento com terceiros, operando em conformidade com a LGPD e GDPR." } },
+      { "@type": "Question", "name": "Vocês oferecem suporte e manutenção após o lançamento?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. A sua mensalidade de 'Tech Ops' cobre atualizações de segurança contínuas, hospedagem em nuvem de alta velocidade e suporte técnico direto com a nossa equipe." } }
+    ]
+  }
+  </script>
+</head>
+
+<body id="top">
+
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-blue-600 focus:text-white focus:p-4 focus:rounded-br-lg">Saltar para o conteúdo principal</a>
+
+  <!-- =========================================================
+       HEADER (EXACTLY MATCHING SCREENSHOT)
+  ========================================================== -->
+  <div class="top-info-bar relative z-40">
+    <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] md:text-[13px] text-center">
+      <div class="flex items-center justify-center gap-2 sm:gap-5 mx-auto sm:mx-0">
+        <span class="font-medium flex items-center gap-2"><img src="https://flagcdn.com/w20/br.png" alt="BR" class="w-4 h-auto rounded-sm"> kontakt@alansmsolutions.com</span>
+        <span class="hidden sm:inline text-blue-200">|</span>
+        <span class="font-medium text-pink-500">📍 <span class="text-slate-200">Cracóvia, Polônia • Remoto</span></span>
+      </div>
+      <div class="flex items-center justify-center gap-4 text-blue-200/80">
+        <a href="https://www.instagram.com/alansmsolutions/" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/alankmorais" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sticky top-0 inset-x-0 z-50">
+    <nav class="main-nav-shell border-b border-slate-800 shadow-sm">
+      <div class="max-w-7xl mx-auto px-6 h-[88px] grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4">
+        
+        <a href="/" class="flex items-center gap-3 md:gap-4 min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+          <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="Logo ASM Solutions" width="56" height="56" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-700 bg-slate-950 object-cover" />
+          <div class="flex flex-col justify-center min-w-0">
+            <span class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-100 leading-none truncate">AlanSM Solutions</span>
+            <span class="text-[9px] md:text-[10px] text-blue-500 font-semibold tracking-widest uppercase mt-1">PORTFÓLIO • AUTOMAÇÃO • SISTEMAS DIGITAIS</span>
+          </div>
+        </a>
+
+        <div class="hidden lg:flex items-center justify-center gap-6 xl:gap-8">
+          <a href="/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Início</a>
+          <a href="/solutions/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Soluções</a>
+          <a href="/br/pricing/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Preços</a>
+          <a href="/portfolio/" class="text-sm font-semibold text-blue-500 transition-colors">CV / Portfólio</a>
+          <a href="/br/faq/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">FAQ</a>
+          <button type="button" onclick="openContactForm()" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contato</button>
+        </div>
+
+        <div class="flex items-center justify-end gap-3">
+          <div class="hidden md:flex items-center gap-3">
+            <button onclick="switchLang('pt', 'BRL')" class="text-xs font-semibold text-blue-500 cursor-pointer">BR</button>
+            <button onclick="switchLang('pl', 'PLN', '/pl/faq/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">PL</button>
+            <button onclick="switchLang('es', 'EUR', '/es/faq/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">ES</button>
+            <button onclick="switchLang('en', 'USD', '/faq/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">EN</button>
+          </div>
+          <div class="hidden md:flex">
+            <span class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2 bg-slate-900/50">BRL auto</span>
+          </div>
+          <button id="mobileMenuButton" type="button" class="lg:hidden nav-icon-btn" onclick="toggleMobileMenu()" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menu de navegação">
+            <div><span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span></div>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mobileMenu" class="hidden lg:hidden bg-slate-950 border-b border-slate-800 shadow-sm p-6 text-center flex flex-col gap-4">
+      <a href="/" class="text-slate-300 font-bold">Início</a>
+      <a href="/solutions/" class="text-slate-300 font-bold">Soluções</a>
+      <a href="/br/pricing/" class="text-slate-300 font-bold">Preços</a>
+      <a href="/portfolio/" class="text-slate-300 font-bold">CV / Portfólio</a>
+      <a href="/br/faq/" class="text-blue-400 font-bold">FAQ</a>
+      <button type="button" onclick="openContactForm();" class="text-slate-300 font-bold">Contato</button>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MAIN CONTENT (SHORTER TOP PADDING: pt-4 md:pt-6)
+  ========================================================== -->
+  <main id="main-content" class="relative overflow-hidden pt-4 pb-12 md:pt-6 md:pb-16">
+    <div class="blob w-[600px] h-[600px] bg-blue-600 top-[-100px] left-[50%] -translate-x-1/2"></div>
+    
+    <div class="max-w-5xl mx-auto px-6 relative z-10">
+
+      <!-- Breadcrumb -->
+      <nav class="text-xs text-slate-500 mb-6" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-blue-400 transition-colors">Home</a>
+        <span class="mx-2">/</span>
+        <span class="text-slate-400">Sistema de Agendamento Online</span>
+      </nav>
+
+      <!-- Hero Section -->
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-xs font-bold text-blue-400 mb-6 tracking-widest uppercase">
+          Plataforma Customizada
+        </div>
+        <h1 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+          Sistema de Agendamento Online Personalizado<br/>
+          <span class="text-blue-400">Alternativa ao Booksy, Fresha e Calendly</span>
+        </h1>
+        
+        <p class="text-lg text-slate-400 max-w-3xl mx-auto leading-relaxed">
+          Crie um sistema de agendamento online com sua própria marca, domínio e fluxo de atendimento. Uma alternativa personalizada às plataformas prontas como Booksy, Fresha, AppBarber, Reservio e Calendly, para negócios que querem mais controle sobre seus clientes e reservas.
+        </p>
+
+        <!-- Trust Indicators -->
+        <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mt-8 text-xs sm:text-sm font-semibold text-slate-400">
+          <span class="flex items-center gap-1"><i class="fas fa-check text-green-500"></i> Sem taxa por reserva</span>
+          <span class="flex items-center gap-1"><i class="fas fa-check text-green-500"></i> Sua marca e domínio</span>
+          <span class="flex items-center gap-1"><i class="fas fa-check text-green-500"></i> Google Agenda</span>
+          <span class="flex items-center gap-1"><i class="fas fa-check text-green-500"></i> WhatsApp integrado</span>
+        </div>
+        
+        <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+          <button onclick="openContactForm('Demo Request', 'Alternativas')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-8 rounded-xl transition-all shadow-lg shadow-blue-500/25">
+            Quero uma demo para meu negócio
+          </button>
+          <a href="#comparativo" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-3.5 px-8 rounded-xl transition-all">
+            Ver comparativo
+          </a>
+        </div>
+      </div>
+
+      <!-- Como Funciona (4 Steps) -->
+      <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 mb-20 text-center">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-blue-600/20 text-blue-500 flex items-center justify-center text-xl mx-auto mb-4"><i class="fas fa-link"></i></div>
+          <h3 class="font-bold text-white mb-2">Reserva Direta</h3>
+          <p class="text-xs text-slate-400">Um fluxo simples para transformar visitantes do Instagram, WhatsApp ou Google em reservas.</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-purple-600/20 text-purple-500 flex items-center justify-center text-xl mx-auto mb-4"><i class="fas fa-paint-brush"></i></div>
+          <h3 class="font-bold text-white mb-2">Sua Marca</h3>
+          <p class="text-xs text-slate-400">O cliente agenda em uma página com suas cores e mensagens, sem distrações de concorrentes.</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-green-600/20 text-green-500 flex items-center justify-center text-xl mx-auto mb-4"><i class="fas fa-hand-pointer"></i></div>
+          <h3 class="font-bold text-white mb-2">Cliente Escolhe</h3>
+          <p class="text-xs text-slate-400">Seleção fácil de serviço, horário e profissional com dados preenchidos rapidamente.</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+          <div class="w-12 h-12 rounded-full bg-yellow-600/20 text-yellow-500 flex items-center justify-center text-xl mx-auto mb-4"><i class="fas fa-sliders-h"></i></div>
+          <h3 class="font-bold text-white mb-2">Controle Total</h3>
+          <p class="text-xs text-slate-400">Gerencie tudo por um Painel Administrativo, receba por e-mail ou sincronize com o Google Agenda.</p>
+        </div>
+      </div>
+
+      <!-- Para quem é -->
+      <section class="mb-20">
+        <h2 class="text-2xl md:text-3xl font-bold text-white text-center mb-8">Para quem é um sistema de agendamento personalizado?</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <h3 class="text-lg font-bold text-blue-400 mb-2">Barbearias</h3>
+            <p class="text-sm text-slate-400">Organize barbeiros, serviços, horários e reservas em um único lugar com total previsibilidade.</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <h3 class="text-lg font-bold text-blue-400 mb-2">Clínicas e Profissionais</h3>
+            <p class="text-sm text-slate-400">Receba agendamentos estruturados e colete informações precisas sem depender apenas de mensagens manuais no WhatsApp.</p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <h3 class="text-lg font-bold text-blue-400 mb-2">Salões e Estética</h3>
+            <p class="text-sm text-slate-400">Tenha uma experiência de reserva premium, refletindo a sua própria identidade visual e retenha os seus clientes.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tabela Comparativa -->
+      <div id="comparativo" class="mb-20 scroll-mt-28">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 text-center">Sistema próprio vs. Plataforma pronta</h2>
+        <p class="text-slate-400 text-center text-sm max-w-2xl mx-auto mb-8">
+          Plataformas prontas podem funcionar bem para muitos negócios. A diferença é que um sistema próprio pode ser desenhado para sua marca, seu atendimento e sua forma de receber reservas.
+        </p>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-x-auto shadow-2xl">
+          <table class="w-full min-w-[800px] text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-950 border-b border-slate-800 text-sm">
+                <th class="py-5 px-6 text-slate-300 font-bold w-1/3">Critério</th>
+                <th class="py-5 px-6 text-blue-400 font-bold w-1/3 border-l border-slate-800 bg-blue-900/10">Sistema Próprio ASM</th>
+                <th class="py-5 px-6 text-slate-400 font-bold w-1/3 border-l border-slate-800">Plataformas Prontas</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm">
+              <tr class="border-b border-slate-800 hover:bg-slate-800/20 transition-colors">
+                <td class="py-4 px-6 font-medium text-white">Identidade visual</td>
+                <td class="py-4 px-6 text-slate-300 border-l border-slate-800 bg-blue-900/5"><i class="fas fa-check text-blue-500 mr-2"></i> Página com sua marca e cores</td>
+                <td class="py-4 px-6 text-slate-500 border-l border-slate-800">Geralmente segue o padrão da plataforma</td>
+              </tr>
+              <tr class="border-b border-slate-800 hover:bg-slate-800/20 transition-colors">
+                <td class="py-4 px-6 font-medium text-white">Link direto</td>
+                <td class="py-4 px-6 text-slate-300 border-l border-slate-800 bg-blue-900/5"><i class="fas fa-check text-blue-500 mr-2"></i> Usa seu domínio ou subdomínio</td>
+                <td class="py-4 px-6 text-slate-500 border-l border-slate-800">Depende da ferramenta e do plano</td>
+              </tr>
+              <tr class="border-b border-slate-800 hover:bg-slate-800/20 transition-colors">
+                <td class="py-4 px-6 font-medium text-white">Experiência do cliente</td>
+                <td class="py-4 px-6 text-slate-300 border-l border-slate-800 bg-blue-900/5"><i class="fas fa-check text-blue-500 mr-2"></i> Foco apenas no seu negócio</td>
+                <td class="py-4 px-6 text-slate-500 border-l border-slate-800">Pode mostrar concorrentes na mesma tela</td>
+              </tr>
+              <tr class="border-b border-slate-800 hover:bg-slate-800/20 transition-colors">
+                <td class="py-4 px-6 font-medium text-white">Personalização do fluxo</td>
+                <td class="py-4 px-6 text-slate-300 border-l border-slate-800 bg-blue-900/5"><i class="fas fa-check text-blue-500 mr-2"></i> Campos e etapas sob medida</td>
+                <td class="py-4 px-6 text-slate-500 border-l border-slate-800">Limitado ao que a plataforma oferece</td>
+              </tr>
+              <tr class="border-b border-slate-800 hover:bg-slate-800/20 transition-colors">
+                <td class="py-4 px-6 font-medium text-white">Integrações</td>
+                <td class="py-4 px-6 text-slate-300 border-l border-slate-800 bg-blue-900/5"><i class="fas fa-check text-blue-500 mr-2"></i> Google Agenda, WhatsApp, Automações</td>
+                <td class="py-4 px-6 text-slate-500 border-l border-slate-800">Depende da plataforma, plano e país</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-[10px] text-slate-500 mt-4 text-center">Observação: esta comparação é geral. Recursos e condições de ferramentas terceiras podem variar.</p>
+      </div>
+
+      <!-- Seção Comparativa por Plataforma -->
+      <section class="mb-20">
+        <div class="text-center mb-10">
+          <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Comparação com plataformas populares de agendamento</h2>
+          <p class="text-slate-400 text-sm max-w-2xl mx-auto">
+            A ideia não é atacar soluções do mercado, mas ajudar você a entender se o seu negócio já precisa evoluir para um ambiente digital próprio.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+            <h3 class="text-xl font-bold text-white mb-1">Booksy</h3>
+            <p class="text-xs text-blue-400 font-bold mb-3 uppercase tracking-wider">Para negócios de beleza</p>
+            <p class="text-sm text-slate-400 leading-relaxed">Para negócios que já recebem clientes pelo Instagram ou Google, um sistema próprio substitui a plataforma genérica por um canal direto com sua marca e seu domínio.</p>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+            <h3 class="text-xl font-bold text-white mb-1">AppBarber</h3>
+            <p class="text-xs text-blue-400 font-bold mb-3 uppercase tracking-wider">Para barbearias</p>
+            <p class="text-sm text-slate-400 leading-relaxed">Se você precisa organizar barbeiros e horários, a ASM cria uma página de reserva focada unicamente na retenção dos seus clientes, sem apresentar outras barbearias próximas.</p>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+            <h3 class="text-xl font-bold text-white mb-1">Fresha</h3>
+            <p class="text-xs text-blue-400 font-bold mb-3 uppercase tracking-wider">Para salões e estética</p>
+            <p class="text-sm text-slate-400 leading-relaxed">Pode ser usado como canal complementar quando o negócio decide fortalecer sua autoridade, direcionando clientes VIP para um link de reserva exclusivo e livre de taxas.</p>
+          </div>
+
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-colors">
+            <h3 class="text-xl font-bold text-white mb-1">Calendly & Reservio</h3>
+            <p class="text-xs text-blue-400 font-bold mb-3 uppercase tracking-wider">Para serviços profissionais</p>
+            <p class="text-sm text-slate-400 leading-relaxed">Embora excelentes para reuniões gerais, a diferença de um sistema personalizado é adaptar a jornada com campos específicos, contratos e fluxos desenhados exatamente para sua consultoria ou clínica.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Como Construir / O que Incluir -->
+      <section class="grid md:grid-cols-2 gap-12 mb-20">
+        <div>
+          <h2 class="text-2xl font-bold text-white mb-6">O que a primeira versão pode incluir?</h2>
+          <p class="text-sm text-slate-400 mb-6">A página pode começar simples para validar a demanda e evoluir rapidamente para funcionalidades mais completas. <a href="/features/" class="text-blue-400 font-medium hover:underline transition-colors">Conheça todos os recursos do sistema de reservas</a>.</p>
+          
+          <div class="space-y-4">
+            <div class="bg-slate-900 p-5 rounded-xl border border-slate-800">
+              <strong class="text-blue-400 text-sm block mb-1">Para o cliente</strong>
+              <span class="text-xs text-slate-400">Página mobile-first, escolha rápida de serviços, horários e profissionais, perguntas personalizadas e botão direto para WhatsApp.</span>
+            </div>
+            <div class="bg-slate-900 p-5 rounded-xl border border-slate-800">
+              <strong class="text-blue-400 text-sm block mb-1">Para a empresa</strong>
+              <span class="text-xs text-slate-400">Painel administrativo leve, lista de solicitações, organização de status, notificações e exportação da base de contatos.</span>
+            </div>
+            <div class="bg-slate-900 p-5 rounded-xl border border-slate-800">
+              <strong class="text-blue-400 text-sm block mb-1">Para o crescimento</strong>
+              <span class="text-xs text-slate-400">Integração nativa com o Google Agenda, relatórios de dados e preparação técnica para automações empresariais.</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 sticky top-32">
+            <h2 class="text-2xl font-bold text-white mb-4">Como construir sem complicar</h2>
+            <p class="text-sm text-slate-400 mb-8">O objetivo é criar uma versão ágil e funcional, validando o canal de vendas antes de implementar lógicas pesadas.</p>
+            
+            <div class="space-y-6">
+              <div class="flex">
+                <div class="mr-4 flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white text-xs">1</div>
+                  <div class="w-px h-full bg-slate-800 mt-2"></div>
+                </div>
+                <div class="pb-6">
+                  <h4 class="text-white font-bold mb-1">Análise</h4>
+                  <p class="text-xs text-slate-400">Revisão das suas redes sociais, serviços, forma de atendimento atual e pontos de fricção com clientes.</p>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="mr-4 flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white text-xs">2</div>
+                  <div class="w-px h-full bg-slate-800 mt-2"></div>
+                </div>
+                <div class="pb-6">
+                  <h4 class="text-white font-bold mb-1">Desenvolvimento / Demo</h4>
+                  <p class="text-xs text-slate-400">Criação da estrutura online aplicando suas cores, textos e estabelecendo o fluxo lógico da reserva.</p>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="mr-4 flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white text-xs">3</div>
+                  <div class="w-px h-full bg-slate-800 mt-2"></div>
+                </div>
+                <div class="pb-6">
+                  <h4 class="text-white font-bold mb-1">Painel e Controle</h4>
+                  <p class="text-xs text-slate-400">Configuração das integrações necessárias, notificações via e-mail e organização do recebimento de dados.</p>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="mr-4 flex flex-col items-center">
+                  <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white text-xs">4</div>
+                </div>
+                <div>
+                  <h4 class="text-white font-bold mb-1">Lançamento</h4>
+                  <p class="text-xs text-slate-400">Publicação no seu domínio próprio para receber os primeiros clientes oficiais.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Principal -->
+      <section class="bg-blue-600/10 border border-blue-500/30 rounded-3xl p-10 md:p-14 text-center mb-20 shadow-lg">
+        <h2 class="text-3xl md:text-4xl font-black text-white mb-4">Quer testar um sistema feito para o seu negócio?</h2>
+        <p class="text-slate-300 mb-8 max-w-2xl mx-auto text-lg">
+          Criamos uma demonstração personalizada com seus serviços, sua marca e seu fluxo de reservas, sem compromisso inicial.
+        </p>
+        <button onclick="openContactForm('Demo Request', 'Final CTA')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-10 rounded-xl transition-all shadow-lg shadow-blue-500/30 text-lg">
+          Solicitar demonstração gratuita
+        </button>
+      </section>
+
+      <!-- FAQ Accordion (Expanded for SEO) -->
+      <section class="mb-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 text-center">Perguntas Frequentes (FAQ)</h2>
+        <div class="space-y-4 max-w-3xl mx-auto">
+          
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Preciso abandonar Booksy, AppBarber ou outra plataforma?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Não. Você pode usar um sistema próprio como canal complementar. Muitos negócios começam colocando o link no Instagram, WhatsApp ou Google Perfil da Empresa e observam se os clientes usam.
+              </div>
+            </div>
+          </div>
+          
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Funciona para Instagram e WhatsApp?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Sim. O link pode ser usado na bio do Instagram, em mensagens de WhatsApp, no Google Perfil da Empresa, em QR Code, em anúncios e no site da empresa. O fluxo é totalmente adaptado para telas de celular.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Isso pode aparecer no Google (SEO Local)?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Sim. Sendo uma página pública e otimizada (SEO), ela pode ser indexada pelo Google. A estrutura técnica que criamos ajuda sua marca a aparecer para buscas diretas pelo seu serviço na sua região.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">O cliente precisa baixar um aplicativo?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Não. É uma aplicação web responsiva (SaaS web-app). Ela roda diretamente no navegador (Safari, Chrome) do celular ou computador do cliente, eliminando a barreira de ter que baixar um aplicativo novo na loja.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Quanto custa um sistema de agendamento personalizado?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Nossa estrutura de preços não cobra comissões por agendamento. Você paga uma Taxa de Setup inicial (sob orçamento) e um plano fixo mensal (Tech Ops) para manutenção do servidor, a partir de valores acessíveis. Você fica com 100% do valor dos seus serviços.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Posso aceitar pagamentos online (Pix, Cartão, Stripe)?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Sim. Podemos integrar o seu sistema a gateways de pagamento como o Stripe ou Mercado Pago, permitindo a cobrança de sinais ou pagamentos integrais no momento da reserva.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">O sistema envia lembretes automáticos pelo WhatsApp?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Sim! Podemos automatizar envios de confirmações, lembretes de véspera e mensagens de remarcação diretamente para o WhatsApp do seu cliente para reduzir faltas (no-shows).
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">O cliente pode cancelar ou remarcar sozinho?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Depende da sua preferência. Podemos incluir links seguros no e-mail ou WhatsApp de confirmação que permitem ao cliente reagendar de acordo com as regras que você definir (ex: não permitir reagendamento com menos de 24h).
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">É possível adicionar vários profissionais na mesma agenda?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Sim. O sistema permite listar diferentes profissionais da sua equipe, cada um com sua própria grade de horários, serviços específicos e durações de atendimento distintas.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Como funciona a integração com o Google Agenda?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                O sistema sincroniza as reservas em tempo real com o Google Agenda. Se você bloquear um horário no seu celular, ele ficará indisponível no site automaticamente, evitando agendamentos duplos.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">O sistema é seguro e atende à LGPD/GDPR?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Absolutamente. O sistema roda sob certificado SSL (criptografia), e os dados dos seus clientes pertencem inteiramente a você, sem compartilhamento com terceiros, operando em conformidade com a LGPD e GDPR.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden cursor-pointer hover:border-slate-700 transition-colors" onclick="toggleFaq(this)">
+            <div class="p-6 flex items-center justify-between gap-4 select-none outline-none focus:bg-slate-800" role="button" aria-expanded="false" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleFaq(this); }">
+              <h3 class="font-bold text-white text-lg">Vocês oferecem suporte e manutenção após o lançamento?</h3>
+              <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 shrink-0 faq-icon"><i class="fas fa-chevron-down text-sm"></i></div>
+            </div>
+            <div class="faq-answer border-t border-slate-800/50">
+              <div class="px-6 pb-6 pt-4 text-sm text-slate-400 leading-relaxed">
+                Sim. A sua mensalidade de 'Tech Ops' cobre atualizações de segurança contínuas, hospedagem em nuvem de alta velocidade e suporte técnico direto com a nossa equipe.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+  <footer class="py-12 bg-slate-950 border-t border-slate-800 text-center text-xs">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+        <div class="flex items-center gap-3">
+          <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="AlanSM Solutions logo" width="32" height="32" class="w-10 h-10 rounded-full border border-blue-500/30" />
+          <div class="text-left">
+            <span class="text-base font-extrabold tracking-tight text-white block">AlanSM Solutions</span>
+            <span class="text-blue-400 font-medium">Business Automation & Systems</span>
+          </div>
+        </div>
+        <div class="flex gap-4 text-2xl text-slate-600">
+          <i class="fab fa-cc-stripe hover:text-slate-400 transition-colors" title="Stripe Secure"></i>
+          <i class="fab fa-cc-visa hover:text-slate-400 transition-colors"></i>
+          <i class="fab fa-cc-mastercard hover:text-slate-400 transition-colors"></i>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500">
+        <p>© 2026 AlanSM Solutions. All rights reserved.</p>
+        <div class="flex items-center gap-4 font-medium">
+           <a href="/terms/" class="hover:text-blue-400 transition-colors">Terms of Service</a>
+           <span class="text-slate-700">|</span>
+           <a href="/privacy/" class="hover:text-blue-400 transition-colors"><i class="fas fa-lock text-[10px]"></i> Privacy & GDPR</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       CONTACT MODAL & SCRIPTS
+  ========================================================== -->
+  <div id="contactModal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl w-full max-w-md shadow-2xl p-8 relative">
+       <button type="button" onclick="closeContactForm()" class="absolute top-5 right-5 text-slate-500 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded" aria-label="Fechar formulário"><i class="fa fa-times text-xl"></i></button>
+       <h2 id="modalTitle" class="text-2xl font-bold text-white mb-6">Solicitar Demonstração</h2>
+       
+       <form id="contactForm" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-4">
+          <input type="hidden" id="formSubject" value="FAQ Lead" />
+          
+          <label for="formName" class="sr-only">Nome Completo</label>
+          <input type="text" id="formName" name="name" required placeholder="Nome Completo" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white outline-none focus:border-blue-500 transition-colors">
+          
+          <label for="formEmail" class="sr-only">E-mail</label>
+          <input type="email" id="formEmail" name="email" required placeholder="E-mail" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white outline-none focus:border-blue-500 transition-colors">
+          
+          <label for="formPhone" class="sr-only">WhatsApp</label>
+          <input type="tel" id="formPhone" name="phone" required placeholder="Número do WhatsApp" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white outline-none focus:border-blue-500 transition-colors">
+          
+          <label for="formMsg" class="sr-only">Mensagem</label>
+          <textarea id="formMsg" name="message" required placeholder="Conte um pouco sobre o seu negócio (ex: Barbearia, Clínica)..." class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white outline-none focus:border-blue-500 transition-colors resize-none"></textarea>
+          
+          <button type="submit" class="bg-blue-600 text-white font-bold py-4 rounded-xl mt-2 hover:bg-blue-500 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-slate-900">Enviar Solicitação</button>
+          <p id="formStatus" class="text-xs text-center mt-2 font-bold" aria-live="polite"></p>
+       </form>
+    </div>
+  </div>
+
+  <script>
+    function toggleFaq(el) { 
+      const parent = el.parentElement;
+      parent.classList.toggle('active'); 
+      const isExpanded = parent.classList.contains('active');
+      el.setAttribute('aria-expanded', isExpanded); 
+    }
+
+    function switchLang(lang, cur, url) { 
+      if(url) window.location.href = url; 
+    }
+
+    function openContactForm(subject) { 
+      const modal = document.getElementById('contactModal');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      if(subject) document.getElementById('formSubject').value = subject;
+      
+      setTimeout(() => {
+        const firstInput = document.getElementById('formName');
+        if (firstInput) firstInput.focus();
+      }, 50);
+    }
+    
+    function closeContactForm() { 
+      document.getElementById('contactModal').classList.add('hidden'); 
+      document.body.style.overflow = '';
+    }
+
+    function toggleMobileMenu() { 
+      const menu = document.getElementById('mobileMenu');
+      const button = document.getElementById('mobileMenuButton');
+      const isHidden = menu.classList.contains('hidden');
+      
+      menu.classList.toggle('hidden'); 
+      button.setAttribute('aria-expanded', isHidden); 
+
+      if (isHidden) { 
+        const firstLink = menu.querySelector('a'); 
+        if (firstLink) firstLink.focus(); 
+      } else {
+        button.focus();
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('contactModal');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        if (modal && !modal.classList.contains('hidden')) {
+          closeContactForm();
+        }
+        
+        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+          toggleMobileMenu();
+        }
+      }
+    });
+
+    async function handleFormSubmit(e) { 
+      e.preventDefault(); 
+      const ALANSM_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwxzYWgEdGsUqjokKIMroI1xmZYE1LQcj4sd8EIoODbDWA5MIxa0xEb85JTuvAQnVMtXA/exec";
+      const form = e.target;
+      const btn = form.querySelector('button[type="submit"]');
+      const status = document.getElementById('formStatus');
+      btn.disabled = true; btn.textContent = "Enviando...";
+
+      try {
+          const params = new URLSearchParams();
+          params.append('action', 'submitLead');
+          params.append('token', 'alan_admin_2026');
+          params.append('Name', document.getElementById('formName').value);
+          params.append('Email', document.getElementById('formEmail').value);
+          params.append('Phone', document.getElementById('formPhone').value);
+          params.append('Message', document.getElementById('formMsg').value);
+          params.append('Package', document.getElementById('formSubject').value);
+          params.append('source', 'booking_seo_br');
+
+          await fetch(ALANSM_BACKEND_URL, { method: 'POST', body: params });
+          status.textContent = "Solicitação enviada com sucesso!";
+          status.className = "text-green-500 text-xs font-bold text-center mt-2";
+          setTimeout(() => { closeContactForm(); form.reset(); status.textContent=""; }, 2500);
+      } catch (err) {
+          status.textContent = "Erro de conexão. Tente novamente.";
+          status.className = "text-red-500 text-xs font-bold text-center mt-2";
+      } finally {
+          btn.disabled = false; btn.textContent = "Enviar Solicitação";
+      }
+    }
+  </script>
+</body>
+</html>
