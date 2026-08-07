@@ -73,24 +73,25 @@
     input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 8px; cursor: pointer; background: #1e293b; border-radius: 4px; }
   </style>
 </head>
-<body id="top" class="antialiased" style="padding-top: 132px;">
+<body id="top" class="antialiased">
 
-  <!-- Fixed Header Start -->
-  <div class="fixed top-0 inset-x-0 z-50">
-    <div class="top-info-bar">
-      <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] md:text-[13px] text-center">
-        <div class="flex items-center justify-center gap-2 sm:gap-5 mx-auto sm:mx-0">
-          <span class="font-medium">📧 kontakt@alansmsolutions.com</span>
-          <span class="hidden sm:inline text-blue-200">|</span>
-          <span class="font-medium">📍 Kraków, Poland • Remote</span>
-        </div>
-        <div class="flex items-center justify-center gap-4 text-blue-200/80">
-          <a href="https://www.instagram.com/alansmsolutions/" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.facebook.com/alankmorais" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-facebook"></i></a>
-        </div>
+  <!-- Info Bar (Scrolls with page) -->
+  <div class="top-info-bar relative z-40">
+    <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] md:text-[13px] text-center">
+      <div class="flex items-center justify-center gap-2 sm:gap-5 mx-auto sm:mx-0">
+        <span class="font-medium">📧 kontakt@alansmsolutions.com</span>
+        <span class="hidden sm:inline text-blue-200">|</span>
+        <span class="font-medium">📍 Kraków, Poland • Remote</span>
+      </div>
+      <div class="flex items-center justify-center gap-4 text-blue-200/80">
+        <a href="https://www.instagram.com/alansmsolutions/" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/alankmorais" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-facebook"></i></a>
       </div>
     </div>
+  </div>
 
+  <!-- Sticky Main Nav -->
+  <div class="sticky top-0 inset-x-0 z-50">
     <nav class="main-nav-shell border-b border-slate-800 shadow-sm">
       <div class="max-w-7xl mx-auto px-6 h-[88px] grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4">
         <a href="/" class="flex items-center gap-3 md:gap-4 min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
@@ -115,7 +116,7 @@
             <button onclick="switchLang('pl', 'PLN', '/pl/pricing/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">PL</button>
             <button onclick="switchLang('es', 'EUR', '/es/pricing/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">ES</button>
             <button onclick="switchLang('en', 'PLN', '/pricing/')" class="text-xs font-semibold text-blue-500 cursor-pointer">EN</button>
-            <span id="currencyAutoLabel" class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">PLN auto</span>
+            <span id="currencyAutoLabel" class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">Currency: PLN</span>
           </div>
 
           <a href="/free-trial/" class="inline-flex items-center bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm font-bold px-4 py-2.5 rounded-lg shadow-md transition-all">Free Trial</a>
@@ -136,125 +137,196 @@
         <a href="/portfolio/" class="mobile-drawer-link" onclick="closeMobileMenu()">Portfolio</a>
         <button type="button" class="mobile-drawer-link text-left w-full" onclick="closeMobileMenu(); openContactForm();">Contact</button>
 
-        <div class="pt-5 mt-5 border-t border-slate-800 flex items-center justify-between gap-3">
+        <div class="pt-5 mt-5 border-t border-slate-800 flex items-center justify-between gap-3 w-full">
           <div class="flex items-center gap-3">
             <button onclick="switchLang('pt', 'BRL', '/br/pricing/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">BR</button>
             <button onclick="switchLang('pl', 'PLN', '/pl/pricing/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</button>
             <button onclick="switchLang('es', 'EUR', '/es/pricing/')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">ES</button>
             <button onclick="switchLang('en', 'PLN', '/pricing/')" class="text-xs font-semibold text-blue-500">EN</button>
           </div>
-          <span id="currencyAutoLabelMobile" class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">PLN auto</span>
+          <span id="currencyAutoLabelMobile" class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">Currency: PLN</span>
         </div>
       </div>
     </div>
   </div>
 
-  <main class="relative overflow-hidden">
+  <main class="relative overflow-hidden pt-10">
     <div class="blob w-[600px] h-[600px] bg-blue-600 top-[-100px] left-[50%] -translate-x-1/2"></div>
     
-    <section class="pt-6 pb-12 md:pt-10 md:pb-16 relative z-10">
+    <section class="pb-12 md:pb-16 relative z-10">
       <div class="max-w-7xl mx-auto px-6 text-center">
         <p class="text-blue-400 font-bold uppercase tracking-widest text-xs mb-4">Simple & Predictable</p>
         <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Invest in your own platform.<br />Stop paying rent on clients.</h1>
-        <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-16">All packages are split into a one-time <strong>Setup Fee</strong> (architecture & design) and a flat <strong>Monthly Tech Ops Fee</strong> (hosting, maintenance, & support).</p>
+        <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-12">All packages are split into a one-time <strong>Setup Fee</strong> (architecture & design) and a flat <strong>Monthly Tech Ops Fee</strong> (hosting, maintenance, & support).</p>
 
-        <!-- Product Toggle -->
-        <div class="inline-flex bg-slate-900 border border-slate-800 rounded-lg p-1 mb-12 shadow-lg">
-          <button class="px-6 py-2.5 rounded-md bg-slate-800 text-white font-medium text-sm shadow-sm">Booking Systems</button>
-          <a href="#delivery-hub" class="px-6 py-2.5 rounded-md text-slate-400 hover:text-slate-200 font-medium text-sm transition-colors">DeliveryHub</a>
-          <a href="#automation" class="px-6 py-2.5 rounded-md text-slate-400 hover:text-slate-200 font-medium text-sm transition-colors">Custom Automation</a>
+        <!-- Product JavaScript Tabs -->
+        <div class="inline-flex bg-slate-900 border border-slate-800 rounded-lg p-1 mb-12 shadow-lg z-20 relative">
+          <button id="tabBtn-booking" onclick="switchTab('booking')" class="px-6 py-2.5 rounded-md bg-slate-800 text-white font-medium text-sm shadow-sm transition-all focus:outline-none">Booking Systems</button>
+          <button id="tabBtn-delivery" onclick="switchTab('delivery')" class="px-6 py-2.5 rounded-md text-slate-400 hover:text-slate-200 font-medium text-sm transition-all focus:outline-none">DeliveryHub</button>
+          <button id="tabBtn-automation" onclick="switchTab('automation')" class="px-6 py-2.5 rounded-md text-slate-400 hover:text-slate-200 font-medium text-sm transition-all focus:outline-none">Custom Automation</button>
         </div>
 
-        <!-- Booking System Pricing Cards -->
-        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left">
-          
-          <!-- Tier 1 -->
-          <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-slate-600 transition-colors backdrop-blur-sm">
-            <h3 class="text-2xl font-bold text-white mb-2">Solo</h3>
-            <p class="text-slate-400 text-sm mb-6">Perfect for independent professionals.</p>
-            <div class="mb-2">
-              <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Monthly Care from</span>
-            </div>
-            <div class="mb-6 flex items-end gap-1">
-              <span class="text-5xl font-black text-white" data-price-display="11">49 PLN</span>
-              <span class="text-slate-500 font-medium mb-1">/mo</span>
-            </div>
-            <div class="bg-slate-950 rounded-lg p-3 mb-6 border border-slate-800/50">
-              <p class="text-[10px] text-slate-500 uppercase font-bold mb-1">Setup Fee</p>
-              <p class="text-sm font-semibold text-slate-300">Quoted after scope review</p>
-            </div>
-            <ul class="space-y-4 mb-8 flex-grow">
-              <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> 1 Calendar Sync</li>
-              <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Custom Landing Page</li>
-              <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Email Notifications</li>
-              <li class="flex items-start text-sm text-slate-500 opacity-50"><i class="fas fa-times mt-1 mr-3"></i> Automated WhatsApp</li>
-            </ul>
-            <a href="/free-trial/" class="text-center w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl transition-colors font-bold">Start Free Trial</a>
-          </div>
-
-          <!-- Tier 2 (Highlighted) -->
-          <div class="flex flex-col rounded-3xl p-[2px] bg-gradient-to-b from-blue-500 to-indigo-600 shadow-2xl shadow-blue-500/20 transform md:-translate-y-2">
-            <div class="bg-slate-900 p-8 rounded-[22px] flex-grow flex flex-col relative h-full">
-              <div class="absolute top-0 right-0 bg-blue-600 text-white text-[11px] uppercase tracking-widest px-4 py-1.5 rounded-bl-xl rounded-tr-[20px] font-black">Most Popular</div>
-              
-              <h3 class="text-2xl font-bold text-blue-400 mb-2">Pro Team</h3>
-              <p class="text-slate-400 text-sm mb-6">Best for salons & clinics with multiple staff.</p>
+        <!-- TAB CONTENT: Booking Systems -->
+        <div id="tabContent-booking" class="fade-in block">
+          <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left">
+            
+            <!-- Tier 1 -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-slate-600 transition-colors backdrop-blur-sm">
+              <h3 class="text-2xl font-bold text-white mb-2">Solo</h3>
+              <p class="text-slate-400 text-sm mb-6">Perfect for independent professionals.</p>
               <div class="mb-2">
                 <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Monthly Care from</span>
               </div>
               <div class="mb-6 flex items-end gap-1">
-                <span class="text-5xl font-black text-white" data-price-display="30">129 PLN</span>
+                <span class="text-5xl font-black text-white" data-price-display="11">49 PLN</span>
                 <span class="text-slate-500 font-medium mb-1">/mo</span>
               </div>
-              <div class="bg-slate-950 rounded-lg p-3 mb-6 border border-blue-900/30">
-                <p class="text-[10px] text-blue-500 uppercase font-bold mb-1">Setup Fee</p>
-                <p class="text-sm font-semibold text-slate-300">Quoted after scope review</p>
+              <div class="bg-slate-950 rounded-lg p-3 mb-6 border border-slate-800/50" title="A one-time architectural investment tailored to your exact workflows.">
+                <p class="text-[10px] text-slate-500 uppercase font-bold mb-1">Setup Fee <i class="fas fa-info-circle ml-1"></i></p>
+                <p class="text-sm font-semibold text-slate-300">Custom scope review</p>
               </div>
               <ul class="space-y-4 mb-8 flex-grow">
-                <li class="flex items-start text-sm text-white font-medium"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Up to 5 Calendars</li>
-                <li class="flex items-start text-sm text-white font-medium"><i class="fab fa-whatsapp text-green-500 text-lg mt-0.5 mr-3"></i> Automated WhatsApp Reminders</li>
-                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Client CRM Database</li>
-                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Review Collection Flow</li>
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> 1 Calendar Sync</li>
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Custom Landing Page</li>
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Email Notifications</li>
+                <li class="flex items-start text-sm text-slate-500 opacity-50"><i class="fas fa-times mt-1 mr-3"></i> Automated WhatsApp</li>
               </ul>
-              <a href="/free-trial/" class="text-center w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-all font-bold shadow-lg shadow-blue-500/25">Start Free Trial</a>
+              <a href="/free-trial/" class="text-center w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl transition-colors font-bold">Start Free Trial</a>
             </div>
-          </div>
 
-          <!-- Tier 3 -->
-          <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-slate-600 transition-colors backdrop-blur-sm">
-            <h3 class="text-2xl font-bold text-white mb-2">Enterprise</h3>
-            <p class="text-slate-400 text-sm mb-6">For franchises & complex workflows.</p>
-            <div class="mb-2">
-              <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Monthly Care from</span>
+            <!-- Tier 2 (Highlighted) -->
+            <div class="flex flex-col rounded-3xl p-[2px] bg-gradient-to-b from-blue-500 to-indigo-600 shadow-2xl shadow-blue-500/20 transform md:-translate-y-2">
+              <div class="bg-slate-900 p-8 rounded-[22px] flex-grow flex flex-col relative h-full">
+                <div class="absolute top-0 right-0 bg-blue-600 text-white text-[11px] uppercase tracking-widest px-4 py-1.5 rounded-bl-xl rounded-tr-[20px] font-black">Most Popular</div>
+                
+                <h3 class="text-2xl font-bold text-blue-400 mb-2">Pro Team</h3>
+                <p class="text-slate-400 text-sm mb-6">Best for salons & clinics with multiple staff.</p>
+                <div class="mb-2">
+                  <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Monthly Care from</span>
+                </div>
+                <div class="mb-6 flex items-end gap-1">
+                  <span class="text-5xl font-black text-white" data-price-display="30">129 PLN</span>
+                  <span class="text-slate-500 font-medium mb-1">/mo</span>
+                </div>
+                <div class="bg-slate-950 rounded-lg p-3 mb-6 border border-blue-900/30" title="A one-time architectural investment tailored to your exact workflows.">
+                  <p class="text-[10px] text-blue-500 uppercase font-bold mb-1">Setup Fee <i class="fas fa-info-circle ml-1"></i></p>
+                  <p class="text-sm font-semibold text-slate-300">Custom scope review</p>
+                </div>
+                <ul class="space-y-4 mb-8 flex-grow">
+                  <li class="flex items-start text-sm text-white font-medium"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Up to 5 Calendars</li>
+                  <li class="flex items-start text-sm text-white font-medium"><i class="fab fa-whatsapp text-blue-400 text-lg mt-0.5 mr-3"></i> Automated WhatsApp Reminders</li>
+                  <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Client CRM Database</li>
+                  <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Review Collection Flow</li>
+                </ul>
+                <a href="/free-trial/" class="text-center w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-all font-bold shadow-lg shadow-blue-500/25 animate-[pulse_3s_ease-in-out_infinite]">Start Free Trial</a>
+              </div>
             </div>
-            <div class="mb-6 flex items-end gap-1">
-              <span class="text-5xl font-black text-white" data-price-display="60">260 PLN</span>
-              <span class="text-slate-500 font-medium mb-1">/mo</span>
-            </div>
-            <div class="bg-slate-950 rounded-lg p-3 mb-6 border border-slate-800/50">
-              <p class="text-[10px] text-slate-500 uppercase font-bold mb-1">Setup Fee</p>
-              <p class="text-sm font-semibold text-slate-300">Custom Architecture Required</p>
-            </div>
-            <ul class="space-y-4 mb-8 flex-grow">
-              <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Unlimited Calendars</li>
-              <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Custom ERP Integrations</li>
-              <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Electronic Signatures</li>
-              <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Dedicated Support Rep</li>
-            </ul>
-            <button type="button" onclick="openContactForm('Enterprise Booking System', 'Custom')" class="text-center w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl transition-colors font-bold">Contact Sales</button>
-          </div>
 
+            <!-- Tier 3 -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-slate-600 transition-colors backdrop-blur-sm">
+              <h3 class="text-2xl font-bold text-white mb-2">Enterprise</h3>
+              <p class="text-slate-400 text-sm mb-6">For franchises & complex workflows.</p>
+              <div class="mb-2">
+                <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Monthly Care from</span>
+              </div>
+              <div class="mb-6 flex items-end gap-1">
+                <span class="text-5xl font-black text-white" data-price-display="60">260 PLN</span>
+                <span class="text-slate-500 font-medium mb-1">/mo</span>
+              </div>
+              <div class="bg-slate-950 rounded-lg p-3 mb-6 border border-slate-800/50">
+                <p class="text-[10px] text-slate-500 uppercase font-bold mb-1">Setup Fee</p>
+                <p class="text-sm font-semibold text-slate-300">Custom Architecture Required</p>
+              </div>
+              <ul class="space-y-4 mb-8 flex-grow">
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Unlimited Calendars</li>
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Custom ERP Integrations</li>
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Electronic Signatures</li>
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Dedicated Support Rep</li>
+              </ul>
+              <button type="button" onclick="openContactForm('Enterprise Booking System', 'Custom')" class="text-center w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl transition-colors font-bold">Contact Sales</button>
+            </div>
+
+          </div>
         </div>
+
+        <!-- TAB CONTENT: DeliveryHub -->
+        <div id="tabContent-delivery" class="hidden fade-in text-left">
+           <div class="bg-slate-950 border border-slate-800 rounded-3xl p-8 md:p-12 shadow-2xl grid lg:grid-cols-[1fr_20rem] gap-12 relative overflow-hidden max-w-5xl mx-auto">
+            <div class="absolute top-0 right-0 bg-orange-600 text-white text-[10px] font-bold uppercase tracking-wider py-1.5 px-4 rounded-bl-lg z-10">Restaurant Platform</div>
+            
+            <div>
+              <h3 class="text-3xl font-bold mb-4 text-slate-100">DeliveryHub for Restaurants</h3>
+              <p class="text-slate-400 mb-8 text-lg leading-relaxed">A lightweight operational platform for restaurants that need direct online orders, kitchen status control (KDS), and local delivery driver coordination without marketplace dependency.</p>
+              
+              <div class="grid sm:grid-cols-2 gap-4 text-sm text-slate-300 mb-8">
+                <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Personalized ordering page</div>
+                <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Digital menu and cart</div>
+                <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Restaurant order dashboard</div>
+                <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Delivery driver dashboard</div>
+                <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Order and delivery status flow</div>
+                <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Regional driver assignment</div>
+              </div>
+              <p class="text-xs text-slate-500 leading-relaxed max-w-2xl">Third-party payment tools (Stripe/Blik), paid messaging services, custom domains and external delivery costs are billed separately.</p>
+            </div>
+            
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center flex flex-col justify-center shadow-inner">
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Pilot Setup</p>
+              <div class="mb-4 text-2xl font-bold text-orange-500">To be discussed</div>
+              <div class="w-12 h-px bg-slate-800 mx-auto my-4"></div>
+              <p class="text-xs text-orange-400 font-bold uppercase tracking-widest mb-1">Monthly Pilot</p>
+              <div class="text-3xl font-black text-white mb-6" data-price-range="70,115">300–500 PLN <span class="text-sm font-normal text-slate-500">/mo</span></div>
+              <button type="button" onclick="openContactForm('DeliveryHub Demo', 'Custom')" class="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-3.5 rounded-xl transition-colors focus:outline-none shadow-lg shadow-orange-600/20">Request Demo</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB CONTENT: Custom Automation -->
+        <div id="tabContent-automation" class="hidden fade-in">
+           <div class="text-center max-w-3xl mx-auto mb-10">
+            <h2 class="text-xs uppercase tracking-[0.2em] text-purple-500 font-bold mb-3">Enterprise & Custom</h2>
+            <h3 class="text-3xl md:text-4xl font-bold text-slate-100 mb-4">Automation Architecture & Implementation</h3>
+            <p class="text-slate-400 text-base leading-relaxed">Multi-page web structure, advanced forms, lead capture, CRM/Salesforce/ERP implementation support, integration planning, and workflow testing.</p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto text-left">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-lg">
+              <h4 class="text-2xl font-bold text-white mb-2">Phase 1: Setup & Architecture</h4>
+              <p class="text-slate-400 text-sm mb-8">One-time project fee based on the complexity of your workflows and integrations.</p>
+              <div class="text-4xl font-black text-purple-400 mb-8">Starting at <span data-price-display="390">1,690 PLN</span></div>
+              <ul class="space-y-4 text-slate-300 text-sm">
+                <li class="flex items-start gap-3"><i class="fas fa-cog text-purple-500 mt-1"></i> Custom workflow design</li>
+                <li class="flex items-start gap-3"><i class="fas fa-plug text-purple-500 mt-1"></i> API Integrations (Make/Zapier)</li>
+                <li class="flex items-start gap-3"><i class="fas fa-database text-purple-500 mt-1"></i> CRM & Database setup</li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-lg">
+              <h4 class="text-2xl font-bold text-white mb-2">Phase 2: Tech Ops & Support</h4>
+              <p class="text-slate-400 text-sm mb-8">Ongoing monthly care to ensure your automations run smoothly and securely.</p>
+              <div class="text-4xl font-black text-purple-400 mb-8">Custom Quote</div>
+              <ul class="space-y-4 text-slate-300 text-sm">
+                <li class="flex items-start gap-3"><i class="fas fa-shield-alt text-purple-500 mt-1"></i> Server & Security Maintenance</li>
+                <li class="flex items-start gap-3"><i class="fas fa-sync text-purple-500 mt-1"></i> API Monitoring & Fixes</li>
+                <li class="flex items-start gap-3"><i class="fas fa-chart-line text-purple-500 mt-1"></i> Monthly Performance Reports</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="mt-12 text-center">
+            <button type="button" onclick="openContactForm('Custom Automation', 'Quote')" class="bg-purple-600 hover:bg-purple-500 text-white font-bold py-4 px-10 rounded-xl transition-colors shadow-lg shadow-purple-600/20">Discuss Your Architecture</button>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <!-- ROI Calculator Section -->
-    <section class="py-12 md:py-16 bg-slate-950 border-t border-slate-800">
+    <section class="py-12 md:py-16 bg-slate-950 border-t border-slate-800 relative z-10">
       <div class="max-w-6xl mx-auto px-6">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-3">ROI Calculator</h2>
-            <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">Stop paying 20% to public marketplaces.</h3>
+            <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">Stop paying rent on your clients.</h3>
             <p class="text-slate-400 text-lg leading-relaxed mb-8">
               Apps like Booksy or Treatwell charge a commission for every new client they bring, and sometimes for returning ones. With a private system, you pay one flat monthly tech ops fee. You keep 100% of your service price.
             </p>
@@ -271,29 +343,51 @@
             <div class="space-y-8 mb-8 mt-2">
               <div>
                 <div class="flex justify-between mb-2">
-                  <label class="text-sm font-bold text-slate-300">Appointments per month</label>
+                  <label for="apptCount" class="text-sm font-bold text-slate-300">Appointments per month</label>
                   <span class="text-blue-400 font-bold" id="apptVal">200</span>
                 </div>
-                <input type="range" id="apptCount" min="50" max="1000" step="10" value="200" oninput="updateCalculator()">
+                <input type="range" id="apptCount" name="apptCount" min="50" max="1000" step="10" value="200" oninput="updateCalculator()">
               </div>
               
               <div>
                 <div class="flex justify-between mb-2">
-                  <label class="text-sm font-bold text-slate-300">Average Service Price</label>
+                  <label for="avgPrice" class="text-sm font-bold text-slate-300">Average Service Price</label>
                   <span class="text-blue-400 font-bold" id="priceVal">100 PLN</span>
                 </div>
-                <input type="range" id="avgPrice" min="40" max="400" step="10" value="100" oninput="updateCalculator()">
+                <input type="range" id="avgPrice" name="avgPrice" min="40" max="400" step="10" value="100" oninput="updateCalculator()">
+              </div>
+              
+              <!-- NEW: Percentage Slider -->
+              <div>
+                <div class="flex justify-between mb-2">
+                  <label for="feePercent" class="text-sm font-bold text-slate-300">Marketplace Commission</label>
+                  <span class="text-blue-400 font-bold" id="feePercentVal">20%</span>
+                </div>
+                <input type="range" id="feePercent" name="feePercent" min="5" max="50" step="1" value="20" oninput="updateCalculator()">
               </div>
             </div>
 
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 text-center">
-              <p class="text-sm text-slate-400 font-medium mb-1">With a 20% marketplace fee, you lose:</p>
-              <div class="text-4xl font-black text-red-400 mb-4" id="marketplaceFee">4,000 PLN <span class="text-lg font-normal text-slate-500">/mo</span></div>
               
-              <div class="w-full h-px bg-slate-800 my-4"></div>
-              
-              <p class="text-sm text-slate-400 font-medium mb-1">Our Pro Plan Flat Fee:</p>
-              <div class="text-2xl font-bold text-green-400 mb-6" data-price-display="30">129 PLN <span class="text-sm font-normal text-slate-500">/mo</span></div>
+              <div class="mb-6">
+                <!-- Visual Bars -->
+                <div class="flex items-center justify-between text-xs font-bold mb-1">
+                   <!-- Label updates dynamically based on slider -->
+                   <span class="text-slate-400" id="marketplaceBarLabel">Marketplace App (20%)</span>
+                   <span id="marketplaceFee" class="text-red-400">4,000 PLN/mo</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-3 mb-4">
+                  <div id="barMarketplace" class="bg-red-500 h-3 rounded-full transition-all duration-300 ease-out" style="width: 100%"></div>
+                </div>
+
+                <div class="flex items-center justify-between text-xs font-bold mb-1">
+                   <span class="text-slate-400">AlanSM Flat Fee</span>
+                   <span class="text-green-400" data-price-display="30">129 PLN/mo</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-3">
+                  <div id="barFlatFee" class="bg-green-500 h-3 rounded-full transition-all duration-300 ease-out" style="width: 3%"></div>
+                </div>
+              </div>
 
               <div class="bg-blue-600/10 border border-blue-500/30 rounded-lg p-4">
                 <p class="text-xs uppercase tracking-widest text-blue-400 font-bold mb-1">Your Monthly Savings</p>
@@ -301,78 +395,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- DeliveryHub Section -->
-    <section id="delivery-hub" class="py-12 md:py-16 bg-slate-900 border-t border-slate-800 scroll-mt-28">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="bg-slate-950 border border-slate-800 rounded-3xl p-8 md:p-12 shadow-2xl grid lg:grid-cols-[1fr_20rem] gap-12 relative overflow-hidden">
-          <div class="absolute top-0 right-0 bg-orange-600 text-white text-[10px] font-bold uppercase tracking-wider py-1.5 px-4 rounded-bl-lg z-10">Restaurant Platform</div>
-          
-          <div>
-            <h3 class="text-3xl font-bold mb-4 text-slate-100">DeliveryHub for Restaurants</h3>
-            <p class="text-slate-400 mb-8 text-lg leading-relaxed">A lightweight operational platform for restaurants that need direct online orders, kitchen status control (KDS), and local delivery driver coordination without marketplace dependency.</p>
-            
-            <div class="grid sm:grid-cols-2 gap-4 text-sm text-slate-300 mb-8">
-              <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Personalized ordering page</div>
-              <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Digital menu and cart</div>
-              <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Restaurant order dashboard</div>
-              <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Delivery driver dashboard</div>
-              <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Order and delivery status flow</div>
-              <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Regional driver assignment</div>
-            </div>
-            <p class="text-xs text-slate-500 leading-relaxed max-w-2xl">Third-party payment tools (Stripe/Blik), paid messaging services, custom domains and external delivery costs are billed separately.</p>
-          </div>
-          
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center flex flex-col justify-center shadow-inner">
-            <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Pilot Setup</p>
-            <div class="mb-4 text-2xl font-bold text-orange-500">To be discussed</div>
-            <div class="w-12 h-px bg-slate-800 mx-auto my-4"></div>
-            <p class="text-xs text-orange-400 font-bold uppercase tracking-widest mb-1">Monthly Pilot</p>
-            <div class="text-3xl font-black text-white mb-6" data-price-range="70,115">300–500 PLN <span class="text-sm font-normal text-slate-500">/mo</span></div>
-            <button type="button" onclick="openContactForm('DeliveryHub Demo', 'Custom')" class="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-3.5 rounded-xl transition-colors focus:outline-none shadow-lg shadow-orange-600/20">Request Demo</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Custom Automation Section -->
-    <section id="automation" class="py-12 md:py-16 bg-slate-950 border-t border-slate-800 scroll-mt-28">
-      <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-          <h2 class="text-xs uppercase tracking-[0.2em] text-purple-500 font-bold mb-3">Enterprise & Custom</h2>
-          <h3 class="text-3xl md:text-4xl font-bold text-slate-100 mb-4">Automation Architecture & Implementation</h3>
-          <p class="text-slate-400 text-base leading-relaxed">Multi-page web structure, advanced forms, lead capture, CRM/Salesforce/ERP implementation support, integration planning, and workflow testing.</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-lg">
-            <h4 class="text-2xl font-bold text-white mb-2">Phase 1: Setup & Architecture</h4>
-            <p class="text-slate-400 text-sm mb-8">One-time project fee based on the complexity of your workflows and integrations.</p>
-            <div class="text-4xl font-black text-purple-400 mb-8">Starting at <span data-price-display="390">1,690 PLN</span></div>
-            <ul class="space-y-4 text-slate-300 text-sm">
-              <li class="flex items-start gap-3"><i class="fas fa-cog text-purple-500 mt-1"></i> Custom workflow design</li>
-              <li class="flex items-start gap-3"><i class="fas fa-plug text-purple-500 mt-1"></i> API Integrations (Make/Zapier)</li>
-              <li class="flex items-start gap-3"><i class="fas fa-database text-purple-500 mt-1"></i> CRM & Database setup</li>
-            </ul>
-          </div>
-
-          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-lg">
-            <h4 class="text-2xl font-bold text-white mb-2">Phase 2: Tech Ops & Support</h4>
-            <p class="text-slate-400 text-sm mb-8">Ongoing monthly care to ensure your automations run smoothly and securely.</p>
-            <div class="text-4xl font-black text-purple-400 mb-8">Custom Quote</div>
-            <ul class="space-y-4 text-slate-300 text-sm">
-              <li class="flex items-start gap-3"><i class="fas fa-shield-alt text-purple-500 mt-1"></i> Server & Security Maintenance</li>
-              <li class="flex items-start gap-3"><i class="fas fa-sync text-purple-500 mt-1"></i> API Monitoring & Fixes</li>
-              <li class="flex items-start gap-3"><i class="fas fa-chart-line text-purple-500 mt-1"></i> Monthly Performance Reports</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="mt-12 text-center">
-          <button type="button" onclick="openContactForm('Custom Automation', 'Quote')" class="bg-purple-600 hover:bg-purple-500 text-white font-bold py-4 px-10 rounded-xl transition-colors shadow-lg shadow-purple-600/20">Discuss Your Architecture</button>
         </div>
       </div>
     </section>
@@ -461,7 +483,7 @@
     function updateDynamicContent() {
         const label = document.getElementById('currencyAutoLabel');
         const labelMobile = document.getElementById('currencyAutoLabelMobile');
-        const text = currentCurrency + ' auto';
+        const text = 'Currency: ' + currentCurrency;
         if (label) label.textContent = text;
         if (labelMobile) labelMobile.textContent = text;
 
@@ -484,10 +506,13 @@
     function updateCalculator() {
         const apptCount = document.getElementById('apptCount').value;
         const avgPrice = document.getElementById('avgPrice').value;
+        const feePercent = document.getElementById('feePercent').value;
         
         let currencySymbol = currentCurrency === 'PLN' ? ' PLN' : (currentCurrency === 'EUR' ? '€' : (currentCurrency === 'BRL' ? 'R$ ' : '$'));
         
         document.getElementById('apptVal').innerText = apptCount;
+        document.getElementById('feePercentVal').innerText = feePercent + '%';
+        document.getElementById('marketplaceBarLabel').innerText = 'Marketplace App (' + feePercent + '%)';
         
         if (currentCurrency === 'PLN') {
              document.getElementById('priceVal').innerText = avgPrice + currencySymbol;
@@ -495,7 +520,8 @@
              document.getElementById('priceVal').innerText = currencySymbol + avgPrice;
         }
 
-        const marketplaceFee = Math.round(apptCount * avgPrice * 0.20);
+        // Use the dynamic percentage for the fee calculation
+        const marketplaceFee = Math.round(apptCount * avgPrice * (feePercent / 100));
         let ourFee = 129; 
         if(currentCurrency === 'EUR') ourFee = 30;
         if(currentCurrency === 'BRL') ourFee = 190;
@@ -503,13 +529,46 @@
 
         const savings = marketplaceFee - ourFee;
 
+        // Update Text
         if (currentCurrency === 'PLN') {
-             document.getElementById('marketplaceFee').innerHTML = marketplaceFee.toLocaleString() + currencySymbol + " <span class='text-lg font-normal text-slate-500'>/mo</span>";
+             document.getElementById('marketplaceFee').innerHTML = marketplaceFee.toLocaleString() + currencySymbol + " /mo";
              document.getElementById('savingsAmount').innerText = (savings > 0 ? savings.toLocaleString() : 0) + currencySymbol;
         } else {
-             document.getElementById('marketplaceFee').innerHTML = currencySymbol + marketplaceFee.toLocaleString() + " <span class='text-lg font-normal text-slate-500'>/mo</span>";
+             document.getElementById('marketplaceFee').innerHTML = currencySymbol + marketplaceFee.toLocaleString() + " /mo";
              document.getElementById('savingsAmount').innerText = currencySymbol + (savings > 0 ? savings.toLocaleString() : 0);
         }
+
+        // Update Visual Bars
+        const barMarketplace = document.getElementById('barMarketplace');
+        const barFlatFee = document.getElementById('barFlatFee');
+        
+        barMarketplace.style.width = '100%'; // Always maxes out visual scale
+        const flatFeePercentage = Math.min((ourFee / marketplaceFee) * 100, 100);
+        // Fallback to 100% width for our fee if marketplace fee is somehow 0 (e.g. settings are broken)
+        barFlatFee.style.width = isNaN(flatFeePercentage) || !isFinite(flatFeePercentage) ? '100%' : `${flatFeePercentage}%`;
+    }
+
+    // Tab Switching Logic
+    function switchTab(tabId) {
+        const tabs = ['booking', 'delivery', 'automation'];
+        
+        tabs.forEach(tab => {
+            // Content Toggle
+            const content = document.getElementById('tabContent-' + tab);
+            const btn = document.getElementById('tabBtn-' + tab);
+            
+            if (tab === tabId) {
+                content.classList.remove('hidden');
+                content.classList.add('block');
+                btn.classList.add('bg-slate-800', 'text-white', 'shadow-sm');
+                btn.classList.remove('text-slate-400', 'hover:text-slate-200');
+            } else {
+                content.classList.add('hidden');
+                content.classList.remove('block');
+                btn.classList.remove('bg-slate-800', 'text-white', 'shadow-sm');
+                btn.classList.add('text-slate-400', 'hover:text-slate-200');
+            }
+        });
     }
 
     function toggleMobileMenu() {
