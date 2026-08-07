@@ -6,7 +6,7 @@
   <title>Precios de la Plataforma | AlanSM Solutions</title>
   
   <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" />
-  <meta name="description" content="Precios transparentes para sistemas de reservas, DeliveryHub y automatización. Cero comisiones de marketplace." />
+  <meta name="description" content="Precios transparentes y de tarifa plana para sistemas de reservas privados, DeliveryHub y automatización. Cero comisiones de marketplace." />
   <link rel="canonical" href="https://alansmsolutions.com/es/pricing/"/>
 
   <!-- SEO Hreflang Tags -->
@@ -23,8 +23,14 @@
     body { background: #0f172a; color: #f8fafc; font-family: Inter, system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; }
     .top-info-bar { background: #020617; color: #cbd5e1; border-bottom: 1px solid #1e293b; }
     .main-nav-shell { background: rgba(2, 6, 23, 0.96); backdrop-filter: blur(8px); border-color: #1e293b; }
+    .mobile-drawer-link { display:block; padding: 0.95rem 0; font-size: 1.15rem; line-height: 1.6rem; font-weight: 600; color:#cbd5e1; border-bottom:1px solid #1e293b; }
+    .mobile-drawer-link:last-child { border-bottom: none; }
+    .nav-icon-btn { width: 3rem; height: 3rem; border: 1px solid #334155; border-radius: 0.75rem; display:flex; align-items:center; justify-content:center; background:#0f172a; }
+    .menu-line { width: 1.35rem; height: 2px; background:#cbd5e1; border-radius: 999px; display:block; }
+    .menu-line + .menu-line { margin-top: 0.28rem; }
     .blob { position: absolute; filter: blur(90px); opacity: 0.15; mix-blend-mode: screen; pointer-events: none; }
-    .fade-in { animation: fadeIn 0.4s ease-in-out; } @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-in { animation: fadeIn 0.4s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
     input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: #3b82f6; cursor: pointer; margin-top: -8px; box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
     input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 8px; cursor: pointer; background: #1e293b; border-radius: 4px; }
@@ -32,6 +38,22 @@
 </head>
 <body id="top" class="antialiased">
 
+  <!-- Info Bar -->
+  <div class="top-info-bar relative z-40">
+    <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] md:text-[13px] text-center">
+      <div class="flex items-center justify-center gap-2 sm:gap-5 mx-auto sm:mx-0">
+        <span class="font-medium">📧 kontakt@alansmsolutions.com</span>
+        <span class="hidden sm:inline text-blue-200">|</span>
+        <span class="font-medium">📍 Kraków, Poland • Remote</span>
+      </div>
+      <div class="flex items-center justify-center gap-4 text-blue-200/80">
+        <a href="https://www.instagram.com/alansmsolutions/" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/alankmorais" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-facebook"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Main Nav -->
   <div class="sticky top-0 inset-x-0 z-50">
     <nav class="main-nav-shell border-b border-slate-800 shadow-sm">
       <div class="max-w-7xl mx-auto px-6 h-[88px] grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4">
@@ -39,52 +61,216 @@
           <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="Logo" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-700 bg-slate-950 object-cover" />
           <div class="flex flex-col justify-center min-w-0">
             <span class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-100 leading-none truncate">AlanSM Solutions</span>
-            <span class="text-[11px] md:text-[12px] text-blue-500 font-semibold tracking-[0.18em] uppercase mt-1">Precios</span>
+            <span class="text-[11px] md:text-[12px] text-blue-500 font-semibold tracking-[0.18em] uppercase mt-1">Precios de la Plataforma</span>
           </div>
         </a>
+
         <div class="hidden lg:flex items-center justify-center gap-8">
-          <a href="/" class="text-sm font-semibold text-slate-400 hover:text-blue-400">Inicio</a>
+          <a href="/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Inicio</a>
+          <a href="/features/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Características</a>
           <a href="/es/pricing/" class="text-sm font-semibold text-slate-100 border-b-2 border-blue-500 pb-1">Precios</a>
+          <a href="/portfolio/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Portafolio</a>
+          <button type="button" onclick="openContactForm('Consulta de Precios', 'Cotización')" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contacto</button>
         </div>
+
         <div class="flex items-center justify-end gap-3">
           <div class="hidden md:flex items-center gap-3">
-            <a href="/br/pricing/" class="text-xs font-semibold text-slate-500 hover:text-blue-400">BR</a>
-            <a href="/pl/pricing/" class="text-xs font-semibold text-slate-500 hover:text-blue-400">PL</a>
+            <a href="/br/pricing/" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">BR</a>
+            <a href="/pl/pricing/" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</a>
             <a href="/es/pricing/" class="text-xs font-semibold text-blue-500">ES</a>
-            <a href="/pricing/" class="text-xs font-semibold text-slate-500 hover:text-blue-400">EN</a>
+            <a href="/pricing/" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">EN</a>
             <span class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">Moneda: EUR</span>
           </div>
+          <a href="/free-trial/" class="inline-flex items-center bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm font-bold px-4 py-2.5 rounded-lg shadow-md transition-all">Prueba Gratis</a>
+          
+          <button type="button" class="lg:hidden nav-icon-btn" onclick="toggleMobileMenu()">
+            <span class="sr-only">Toggle menu</span>
+            <div><span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span></div>
+          </button>
         </div>
       </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-slate-950 border-b border-slate-800 shadow-sm">
+      <div class="px-6 py-5">
+        <a href="/" class="mobile-drawer-link">Inicio</a>
+        <a href="/features/" class="mobile-drawer-link">Características</a>
+        <a href="/es/pricing/" class="mobile-drawer-link text-blue-400">Precios</a>
+        <a href="/portfolio/" class="mobile-drawer-link">Portafolio</a>
+        <button type="button" class="mobile-drawer-link text-left w-full" onclick="openContactForm();">Contacto</button>
+        <div class="pt-5 mt-5 border-t border-slate-800 flex items-center justify-between gap-3 w-full">
+          <div class="flex items-center gap-3">
+            <a href="/br/pricing/" class="text-xs font-semibold text-slate-500">BR</a>
+            <a href="/pl/pricing/" class="text-xs font-semibold text-slate-500">PL</a>
+            <a href="/es/pricing/" class="text-xs font-semibold text-blue-500">ES</a>
+            <a href="/pricing/" class="text-xs font-semibold text-slate-500">EN</a>
+          </div>
+          <span class="text-xs font-bold text-blue-500 border border-slate-700 rounded-lg px-3 py-2">EUR</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <main class="relative overflow-hidden pt-10">
     <div class="blob w-[600px] h-[600px] bg-blue-600 top-[-100px] left-[50%] -translate-x-1/2"></div>
+    
     <section class="pb-12 md:pb-16 relative z-10">
       <div class="max-w-7xl mx-auto px-6 text-center">
         <p class="text-blue-400 font-bold uppercase tracking-widest text-xs mb-4">Simple y Predecible</p>
-        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Invierte en tu propia plataforma.<br />Deja de pagar alquiler.</h1>
-        <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-12">Todos los paquetes se dividen en un <strong>Costo de Configuración</strong> único y un <strong>Costo Mensual de Operación</strong> fijo.</p>
-        
+        <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">Invierte en tu propia plataforma.<br />Deja de pagar alquiler por tus clientes.</h1>
+        <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-12">Todos los paquetes se dividen en un <strong>Costo de Configuración</strong> único (arquitectura y diseño) y un <strong>Costo Mensual de Operación</strong> fijo (alojamiento, mantenimiento y soporte).</p>
+
+        <!-- Product JavaScript Tabs -->
         <div class="inline-flex bg-slate-900 border border-slate-800 rounded-lg p-1 mb-12 shadow-lg z-20 relative">
           <button id="tabBtn-booking" onclick="switchTab('booking')" class="px-6 py-2.5 rounded-md bg-slate-800 text-white font-medium text-sm shadow-sm transition-all focus:outline-none">Sistemas de Reservas</button>
+          <button id="tabBtn-delivery" onclick="switchTab('delivery')" class="px-6 py-2.5 rounded-md text-slate-400 hover:text-slate-200 font-medium text-sm transition-all focus:outline-none">DeliveryHub</button>
+          <button id="tabBtn-automation" onclick="switchTab('automation')" class="px-6 py-2.5 rounded-md text-slate-400 hover:text-slate-200 font-medium text-sm transition-all focus:outline-none">Automatización a Medida</button>
         </div>
 
+        <!-- TAB CONTENT: Booking Systems -->
         <div id="tabContent-booking" class="fade-in block">
           <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left">
-             <div class="flex flex-col rounded-3xl p-[2px] bg-gradient-to-b from-blue-500 to-indigo-600 shadow-2xl col-start-2">
-              <div class="bg-slate-900 p-8 rounded-[22px] flex-grow flex flex-col relative h-full">
-                <h3 class="text-2xl font-bold text-blue-400 mb-2">Pro Team</h3>
-                <p class="text-slate-400 text-sm mb-6">Lo mejor para salones y clínicas.</p>
-                <div class="mb-6 flex items-end gap-1"><span class="text-5xl font-black text-white">€30</span><span class="text-slate-500 font-medium mb-1">/mes</span></div>
-                <ul class="space-y-4 mb-8 flex-grow">
-                  <li class="flex items-start text-sm text-white font-medium"><i class="fab fa-whatsapp text-blue-400 text-lg mt-0.5 mr-3"></i> Recordatorios WhatsApp</li>
-                </ul>
+            
+            <!-- Tier 1 -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-slate-600 transition-colors backdrop-blur-sm">
+              <h3 class="text-2xl font-bold text-white mb-2">Solo</h3>
+              <p class="text-slate-400 text-sm mb-6">Perfecto para profesionales independientes.</p>
+              <div class="mb-2"><span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Suscripción desde</span></div>
+              <div class="mb-6 flex items-end gap-1">
+                <span class="text-5xl font-black text-white">€15</span>
+                <span class="text-slate-500 font-medium mb-1">/mes</span>
               </div>
+              <div class="bg-slate-950 rounded-lg p-3 mb-6 border border-slate-800/50">
+                <p class="text-[10px] text-slate-500 uppercase font-bold mb-1">Costo de Configuración</p>
+                <p class="text-sm font-semibold text-slate-300">Cotización a medida</p>
+              </div>
+              <ul class="space-y-4 mb-8 flex-grow">
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Sincronización de 1 Calendario</li>
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Landing Page Personalizada</li>
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Notificaciones por Email</li>
+                <li class="flex items-start text-sm text-slate-500 opacity-50"><i class="fas fa-times mt-1 mr-3"></i> WhatsApp Automatizado</li>
+              </ul>
+              <a href="/free-trial/" class="text-center w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl transition-colors font-bold">Iniciar Prueba Gratis</a>
+            </div>
+
+            <!-- Tier 2 -->
+            <div class="flex flex-col rounded-3xl p-[2px] bg-gradient-to-b from-blue-500 to-indigo-600 shadow-2xl shadow-blue-500/20 transform md:-translate-y-2">
+              <div class="bg-slate-900 p-8 rounded-[22px] flex-grow flex flex-col relative h-full">
+                <div class="absolute top-0 right-0 bg-blue-600 text-white text-[11px] uppercase tracking-widest px-4 py-1.5 rounded-bl-xl rounded-tr-[20px] font-black">Más Popular</div>
+                <h3 class="text-2xl font-bold text-blue-400 mb-2">Pro Team</h3>
+                <p class="text-slate-400 text-sm mb-6">Lo mejor para salones y clínicas con varios empleados.</p>
+                <div class="mb-2"><span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Suscripción desde</span></div>
+                <div class="mb-6 flex items-end gap-1">
+                  <span class="text-5xl font-black text-white">€30</span>
+                  <span class="text-slate-500 font-medium mb-1">/mes</span>
+                </div>
+                <div class="bg-slate-950 rounded-lg p-3 mb-6 border border-blue-900/30">
+                  <p class="text-[10px] text-blue-500 uppercase font-bold mb-1">Costo de Configuración</p>
+                  <p class="text-sm font-semibold text-slate-300">Cotización a medida</p>
+                </div>
+                <ul class="space-y-4 mb-8 flex-grow">
+                  <li class="flex items-start text-sm text-white font-medium"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Hasta 5 Calendarios</li>
+                  <li class="flex items-start text-sm text-white font-medium"><i class="fab fa-whatsapp text-blue-400 text-lg mt-0.5 mr-3"></i> Recordatorios Automáticos por WhatsApp</li>
+                  <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Base de Datos CRM de Clientes</li>
+                  <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Flujo de Recopilación de Reseñas</li>
+                </ul>
+                <a href="/free-trial/" class="text-center w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl transition-all font-bold shadow-lg shadow-blue-500/25 animate-[pulse_3s_ease-in-out_infinite]">Iniciar Prueba Gratis</a>
+              </div>
+            </div>
+
+            <!-- Tier 3 -->
+            <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-slate-600 transition-colors backdrop-blur-sm">
+              <h3 class="text-2xl font-bold text-white mb-2">Enterprise</h3>
+              <p class="text-slate-400 text-sm mb-6">Para franquias y flujos de trabajo complejos.</p>
+              <div class="mb-2"><span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Suscripción desde</span></div>
+              <div class="mb-6 flex items-end gap-1">
+                <span class="text-5xl font-black text-white">€60</span>
+                <span class="text-slate-500 font-medium mb-1">/mes</span>
+              </div>
+              <div class="bg-slate-950 rounded-lg p-3 mb-6 border border-slate-800/50">
+                <p class="text-[10px] text-slate-500 uppercase font-bold mb-1">Costo de Configuración</p>
+                <p class="text-sm font-semibold text-slate-300">Requiere Arquitectura Personalizada</p>
+              </div>
+              <ul class="space-y-4 mb-8 flex-grow">
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Calendarios Ilimitados</li>
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Integraciones ERP Personalizadas</li>
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Firmas Electrónicas</li>
+                <li class="flex items-start text-sm text-slate-300"><i class="fas fa-check text-blue-500 mt-1 mr-3"></i> Representante de Soporte Dedicado</li>
+              </ul>
+              <button type="button" onclick="openContactForm('Enterprise Booking System', 'Custom')" class="text-center w-full py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-xl transition-colors font-bold">Contactar Ventas</button>
             </div>
           </div>
         </div>
+
+        <!-- TAB CONTENT: DeliveryHub -->
+        <div id="tabContent-delivery" class="hidden fade-in text-left">
+           <div class="bg-slate-950 border border-slate-800 rounded-3xl p-8 md:p-12 shadow-2xl grid lg:grid-cols-[1fr_20rem] gap-12 relative overflow-hidden max-w-5xl mx-auto">
+            <div class="absolute top-0 right-0 bg-orange-600 text-white text-[10px] font-bold uppercase tracking-wider py-1.5 px-4 rounded-bl-lg z-10">Plataforma de Restaurantes</div>
+            
+            <div>
+              <h3 class="text-3xl font-bold mb-4 text-slate-100">DeliveryHub para Restaurantes</h3>
+              <p class="text-slate-400 mb-8 text-lg leading-relaxed">Una plataforma operativa ligera para restaurantes que necesitan pedidos online directos, control de estado en la cocina (KDS) y coordinación de repartidores sin dependencia del mercado (marketplace).</p>
+              
+              <div class="grid sm:grid-cols-2 gap-4 text-sm text-slate-300 mb-8">
+                <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Página de pedidos personalizada</div>
+                <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Menú digital y carrito</div>
+                <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Panel de pedidos del restaurante</div>
+                <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Panel del conductor repartidor</div>
+                <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Flujo de estado de pedidos y entregas</div>
+                <div class="flex items-start"><span class="text-orange-500 mr-3 font-bold"><i class="fas fa-check"></i></span>Asignación de conductor regional</div>
+              </div>
+              <p class="text-xs text-slate-500 leading-relaxed max-w-2xl">Las herramientas de pago de terceros (Stripe/Blik), los servicios de mensajería pagos, los dominios personalizados y los costos de envío externos se facturan por separado.</p>
+            </div>
+            
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center flex flex-col justify-center shadow-inner">
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-2">Configuración Piloto</p>
+              <div class="mb-4 text-2xl font-bold text-orange-500">A discutir</div>
+              <div class="w-12 h-px bg-slate-800 mx-auto my-4"></div>
+              <p class="text-xs text-orange-400 font-bold uppercase tracking-widest mb-1">Piloto Mensal</p>
+              <div class="text-3xl font-black text-white mb-6">€70–115 <span class="text-sm font-normal text-slate-500">/mes</span></div>
+              <button type="button" onclick="openContactForm('DeliveryHub Demo', 'Custom')" class="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-3.5 rounded-xl transition-colors focus:outline-none shadow-lg shadow-orange-600/20">Solicitar Demo</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB CONTENT: Custom Automation -->
+        <div id="tabContent-automation" class="hidden fade-in">
+           <div class="text-center max-w-3xl mx-auto mb-10">
+            <h2 class="text-xs uppercase tracking-[0.2em] text-purple-500 font-bold mb-3">Empresarial y Personalizado</h2>
+            <h3 class="text-3xl md:text-4xl font-bold text-slate-100 mb-4">Arquitectura e Implementación de Automatización</h3>
+            <p class="text-slate-400 text-base leading-relaxed">Estructura web de múltiples páginas, formularios avanzados, captura de clientes potenciales, soporte de implementación CRM/Salesforce/ERP, planificación de integración y prueba de flujos de trabajo.</p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto text-left">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-lg">
+              <h4 class="text-2xl font-bold text-white mb-2">Fase 1: Configuración y Arquitectura</h4>
+              <p class="text-slate-400 text-sm mb-8">Tarifa de proyecto única según la complejidad de sus flujos de trabajo e integraciones.</p>
+              <div class="text-4xl font-black text-purple-400 mb-8">A partir de €390</div>
+              <ul class="space-y-4 text-slate-300 text-sm">
+                <li class="flex items-start gap-3"><i class="fas fa-cog text-purple-500 mt-1"></i> Diseño de flujo de trabajo personalizado</li>
+                <li class="flex items-start gap-3"><i class="fas fa-plug text-purple-500 mt-1"></i> Integraciones de API (Make/Zapier)</li>
+                <li class="flex items-start gap-3"><i class="fas fa-database text-purple-500 mt-1"></i> Configuración de CRM y base de datos</li>
+              </ul>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-10 shadow-lg">
+              <h4 class="text-2xl font-bold text-white mb-2">Fase 2: Operaciones y Soporte</h4>
+              <p class="text-slate-400 text-sm mb-8">Atención mensual continua para garantizar que sus automatizaciones se ejecuten de manera fluida y segura.</p>
+              <div class="text-4xl font-black text-purple-400 mb-8">Cotización Personalizada</div>
+              <ul class="space-y-4 text-slate-300 text-sm">
+                <li class="flex items-start gap-3"><i class="fas fa-shield-alt text-purple-500 mt-1"></i> Mantenimiento del servidor y seguridad</li>
+                <li class="flex items-start gap-3"><i class="fas fa-sync text-purple-500 mt-1"></i> Monitoreo y correcciones de API</li>
+                <li class="flex items-start gap-3"><i class="fas fa-chart-line text-purple-500 mt-1"></i> Informes de rendimiento mensuales</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="mt-12 text-center">
+            <button type="button" onclick="openContactForm('Custom Automation', 'Quote')" class="bg-purple-600 hover:bg-purple-500 text-white font-bold py-4 px-10 rounded-xl transition-colors shadow-lg shadow-purple-600/20">Discuta su Arquitectura</button>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -92,32 +278,53 @@
     <section class="py-12 md:py-16 bg-slate-950 border-t border-slate-800 relative z-10">
       <div class="max-w-6xl mx-auto px-6">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
-          <div><h3 class="text-3xl md:text-4xl font-bold text-white mb-6">Calculadora de ROI</h3></div>
-          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
+          <div>
+            <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-3">Calculadora de ROI</h2>
+            <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">Deja de pagar alquiler por tus clientes.</h3>
+            <p class="text-slate-400 text-lg leading-relaxed mb-8">Aplicaciones como Booksy o Treatwell cobran comisiones por cada cliente nuevo que traen y, a veces, por los que regresan. Con un sistema privado, pagas una tarifa plana mensual y mantienes el 100% del precio de tu servicio.</p>
+            <ul class="space-y-4 text-slate-300 font-medium">
+              <li class="flex items-center gap-3"><i class="fa fa-times text-red-500"></i> No se deduce ningún porcentaje de tus servicios.</li>
+              <li class="flex items-center gap-3"><i class="fa fa-times text-red-500"></i> No se muestran competidores junto a tu perfil.</li>
+              <li class="flex items-center gap-3"><i class="fa fa-check text-green-500"></i> Tarifa plana, crecimiento predecible.</li>
+            </ul>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-red-500/10 text-red-400 text-[10px] uppercase tracking-widest px-4 py-1.5 rounded-bl-lg font-bold border-b border-l border-red-500/20">Tarifas del Marketplace</div>
             <div class="space-y-8 mb-8 mt-2">
               <div>
-                <div class="flex justify-between mb-2"><label class="text-sm font-bold text-slate-300">Citas por mes</label><span class="text-blue-400 font-bold" id="apptVal">200</span></div>
-                <input type="range" id="apptCount" min="50" max="1000" step="10" value="200" oninput="updateCalculator()">
+                <div class="flex justify-between mb-2">
+                  <label for="apptCount" class="text-sm font-bold text-slate-300">Citas por mes</label>
+                  <span class="text-blue-400 font-bold" id="apptVal">200</span>
+                </div>
+                <input type="range" id="apptCount" name="apptCount" min="50" max="1000" step="10" value="200" oninput="updateCalculator()">
               </div>
               <div>
-                <div class="flex justify-between mb-2"><label class="text-sm font-bold text-slate-300">Precio Medio</label><span class="text-blue-400 font-bold" id="priceVal">€100</span></div>
-                <input type="range" id="avgPrice" min="40" max="400" step="10" value="100" oninput="updateCalculator()">
+                <div class="flex justify-between mb-2">
+                  <label for="avgPrice" class="text-sm font-bold text-slate-300">Precio Medio del Servicio</label>
+                  <span class="text-blue-400 font-bold" id="priceVal">€100</span>
+                </div>
+                <input type="range" id="avgPrice" name="avgPrice" min="40" max="400" step="10" value="100" oninput="updateCalculator()">
               </div>
               <div>
-                <div class="flex justify-between mb-2"><label class="text-sm font-bold text-slate-300">Comisión Marketplace</label><span class="text-blue-400 font-bold" id="feePercentVal">20%</span></div>
-                <input type="range" id="feePercent" min="5" max="50" step="1" value="20" oninput="updateCalculator()">
+                <div class="flex justify-between mb-2">
+                  <label for="feePercent" class="text-sm font-bold text-slate-300">Comisión del Marketplace</label>
+                  <span class="text-blue-400 font-bold" id="feePercentVal">20%</span>
+                </div>
+                <input type="range" id="feePercent" name="feePercent" min="5" max="50" step="1" value="20" oninput="updateCalculator()">
               </div>
             </div>
             <div class="bg-slate-950 border border-slate-800 rounded-xl p-6 text-center">
               <div class="mb-6">
                 <div class="flex items-center justify-between text-xs font-bold mb-1">
-                   <span class="text-slate-400" id="marketplaceBarLabel">App Marketplace (20%)</span><span id="marketplaceFee" class="text-red-400">€4,000 /mes</span>
+                   <span class="text-slate-400" id="marketplaceBarLabel">App Marketplace (20%)</span>
+                   <span id="marketplaceFee" class="text-red-400">€4,000 /mes</span>
                 </div>
-                <div class="w-full bg-slate-800 rounded-full h-3 mb-4"><div id="barMarketplace" class="bg-red-500 h-3 rounded-full" style="width: 100%"></div></div>
+                <div class="w-full bg-slate-800 rounded-full h-3 mb-4"><div id="barMarketplace" class="bg-red-500 h-3 rounded-full transition-all duration-300 ease-out" style="width: 100%"></div></div>
                 <div class="flex items-center justify-between text-xs font-bold mb-1">
-                   <span class="text-slate-400">Tarifa Plana</span><span class="text-green-400">€30 /mes</span>
+                   <span class="text-slate-400">Tarifa Plana AlanSM</span>
+                   <span class="text-green-400">€30 /mes</span>
                 </div>
-                <div class="w-full bg-slate-800 rounded-full h-3"><div id="barFlatFee" class="bg-green-500 h-3 rounded-full" style="width: 3%"></div></div>
+                <div class="w-full bg-slate-800 rounded-full h-3"><div id="barFlatFee" class="bg-green-500 h-3 rounded-full transition-all duration-300 ease-out" style="width: 3%"></div></div>
               </div>
               <div class="bg-blue-600/10 border border-blue-500/30 rounded-lg p-4">
                 <p class="text-xs uppercase tracking-widest text-blue-400 font-bold mb-1">Tus Ahorros Mensuales</p>
@@ -129,10 +336,67 @@
       </div>
     </section>
   </main>
+
+  <!-- Footer -->
+  <footer class="py-12 bg-slate-950 border-t border-slate-800 text-center text-xs">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+        <div class="flex items-center gap-3">
+          <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="AlanSM Solutions logo" class="w-10 h-10 rounded-full border border-blue-500/30" />
+          <div class="text-left">
+            <span class="text-base font-extrabold tracking-tight text-white block">AlanSM Solutions</span>
+            <span class="text-blue-400 font-medium">Automatización y Sistemas Empresariales</span>
+          </div>
+        </div>
+        <div class="flex gap-4 text-2xl text-slate-600">
+          <i class="fab fa-cc-stripe hover:text-slate-400 transition-colors" title="Stripe Secure"></i>
+          <i class="fab fa-cc-visa hover:text-slate-400 transition-colors"></i>
+          <i class="fab fa-cc-mastercard hover:text-slate-400 transition-colors"></i>
+        </div>
+      </div>
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500">
+        <p>© 2026 AlanSM Solutions. Todos los derechos reservados.</p>
+        <div class="flex items-center gap-4 font-medium">
+           <a href="#" class="hover:text-blue-400 transition-colors" onclick="openLegalModal('termsModal')">Términos de Servicio</a>
+           <span class="text-slate-700">|</span>
+           <a href="#" class="hover:text-blue-400 transition-colors" onclick="openLegalModal('privacyModal')"><i class="fas fa-lock text-[10px]"></i> Privacidad y RGPD</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl w-full max-w-md shadow-2xl p-8 relative">
+       <button type="button" onclick="closeContactForm()" class="absolute top-5 right-5 text-slate-500 hover:text-white"><i class="fa fa-times text-xl"></i></button>
+       <h2 class="text-2xl font-bold text-white mb-6">Contáctenos</h2>
+       <form id="contactForm" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-4">
+          <input type="hidden" name="_subject" id="formSubject" value="Pricing Inquiry" />
+          <input type="text" id="formName" name="name" required placeholder="Nombre Completo" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white focus:border-blue-500 outline-none">
+          <input type="email" id="formEmail" name="email" required placeholder="Correo Electrónico" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white focus:border-blue-500 outline-none">
+          <input type="tel" id="formPhone" name="phone" required placeholder="Número de WhatsApp" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white focus:border-blue-500 outline-none">
+          <textarea id="formMsg" name="message" rows="3" required placeholder="Cuéntanos sobre tu proyecto..." class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white focus:border-blue-500 outline-none resize-none"></textarea>
+          <label class="flex items-start gap-2 text-xs text-slate-500 mt-2">
+            <input type="checkbox" id="formConsent" required class="mt-0.5"> Acepto la política de privacidad.
+          </label>
+          <button type="submit" class="bg-blue-600 text-white font-bold py-4 rounded-xl mt-2 hover:bg-blue-500 transition-colors">Enviar Solicitud</button>
+          <p id="formStatus" class="text-xs text-center mt-2 font-bold"></p>
+       </form>
+    </div>
+  </div>
   
+  <div id="termsModal" class="hidden"></div>
+  <div id="privacyModal" class="hidden"></div>
+
   <script>
-    const ourFee = 30;
-    function formatNumber(num) { return '€' + num.toLocaleString('es-ES'); }
+    const ALANSM_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwxzYWgEdGsUqjokKIMroI1xmZYE1LQcj4sd8EIoODbDWA5MIxa0xEb85JTuvAQnVMtXA/exec";
+    const ALANSM_FORM_TOKEN = "alan_admin_2026";
+    const ourFee = 30; // Pro Plan EUR Price
+
+    function formatNumber(num) { 
+        return '€' + num.toLocaleString('es-ES'); 
+    }
+
     function updateCalculator() {
         const apptCount = document.getElementById('apptCount').value;
         const avgPrice = document.getElementById('avgPrice').value;
@@ -140,7 +404,7 @@
         
         document.getElementById('apptVal').innerText = apptCount;
         document.getElementById('feePercentVal').innerText = feePercent + '%';
-        document.getElementById('marketplaceBarLabel').innerText = `Marketplace (${feePercent}%)`;
+        document.getElementById('marketplaceBarLabel').innerText = `App Marketplace (${feePercent}%)`;
         document.getElementById('priceVal').innerText = formatNumber(avgPrice);
 
         const marketplaceFee = Math.round(apptCount * avgPrice * (feePercent / 100));
@@ -148,8 +412,73 @@
 
         document.getElementById('marketplaceFee').innerHTML = formatNumber(marketplaceFee) + " /mes";
         document.getElementById('savingsAmount').innerText = formatNumber(savings > 0 ? savings : 0);
-        document.getElementById('barFlatFee').style.width = `${Math.min((ourFee / marketplaceFee) * 100, 100)}%`;
+
+        const barFlatFee = document.getElementById('barFlatFee');
+        const flatFeePercentage = Math.min((ourFee / marketplaceFee) * 100, 100);
+        barFlatFee.style.width = isNaN(flatFeePercentage) || !isFinite(flatFeePercentage) ? '100%' : `${flatFeePercentage}%`;
     }
+
+    function switchTab(tabId) {
+        ['booking', 'delivery', 'automation'].forEach(tab => {
+            const content = document.getElementById('tabContent-' + tab);
+            const btn = document.getElementById('tabBtn-' + tab);
+            if (tab === tabId) {
+                content.classList.remove('hidden'); content.classList.add('block');
+                btn.classList.add('bg-slate-800', 'text-white', 'shadow-sm'); btn.classList.remove('text-slate-400', 'hover:text-slate-200');
+            } else {
+                content.classList.add('hidden'); content.classList.remove('block');
+                btn.classList.remove('bg-slate-800', 'text-white', 'shadow-sm'); btn.classList.add('text-slate-400', 'hover:text-slate-200');
+            }
+        });
+    }
+
+    function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('hidden'); }
+    function openContactForm(subject, type) { 
+        document.getElementById('contactModal').classList.remove('hidden'); 
+        document.body.style.overflow = 'hidden'; 
+        if(subject) document.getElementById('formSubject').value = subject; 
+    }
+    function closeContactForm() { 
+        document.getElementById('contactModal').classList.add('hidden'); 
+        document.body.style.overflow = ''; 
+    }
+
+    async function handleFormSubmit(event) {
+        event.preventDefault();
+        const form = event.target; 
+        const btn = form.querySelector('button[type="submit"]'); 
+        const status = document.getElementById('formStatus');
+        btn.disabled = true; 
+        btn.textContent = "Enviando...";
+        
+        const payload = { 
+            action: 'submitLead', 
+            token: ALANSM_FORM_TOKEN, 
+            Name: document.getElementById('formName').value, 
+            Company: 'N/A', 
+            Email: document.getElementById('formEmail').value, 
+            Phone: document.getElementById('formPhone').value, 
+            Message: document.getElementById('formMsg').value, 
+            Package: document.getElementById('formSubject').value, 
+            source: 'pricing_page_es' 
+        };
+        
+        try {
+            const params = new URLSearchParams(); 
+            for (const key in payload) params.append(key, payload[key]);
+            await fetch(ALANSM_BACKEND_URL, { method: 'POST', body: params });
+            status.textContent = "Solicitud enviada!"; 
+            status.className = "text-green-500 text-xs font-bold text-center mt-2";
+            setTimeout(closeContactForm, 2000);
+        } catch (err) { 
+            status.textContent = "Error. Inténtalo de nuevo."; 
+            status.className = "text-red-500 text-xs font-bold text-center mt-2"; 
+        } finally { 
+            btn.disabled = false; 
+            btn.textContent = "Enviar Solicitud"; 
+        }
+    }
+    
     document.addEventListener('DOMContentLoaded', updateCalculator);
   </script>
 </body>
