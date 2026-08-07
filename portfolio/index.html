@@ -24,20 +24,24 @@
     body {
       background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 35%),
                   radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.06), transparent 35%),
-                  #020617;
+                  #0f172a;
       color: #f8fafc;
       font-family: Inter, system-ui, -apple-system, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
+    .top-info-bar { background: #020617; color: #cbd5e1; border-bottom: 1px solid #1e293b; }
     .main-nav-shell {
       background: rgba(2, 6, 23, 0.96);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      border-bottom: 1px solid #1e293b;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-color: #1e293b;
     }
+    .mobile-drawer-link { display:block; padding: 0.95rem 0; font-size: 1.15rem; line-height: 1.6rem; font-weight: 600; color:#cbd5e1; border-bottom:1px solid #1e293b; }
+    .mobile-drawer-link:last-child { border-bottom: none; }
+    .nav-icon-btn { width: 3rem; height: 3rem; border: 1px solid #334155; border-radius: 0.75rem; display:flex; align-items:center; justify-content:center; background:#0f172a; }
+    .menu-line { width: 1.35rem; height: 2px; background:#cbd5e1; border-radius: 999px; display:block; }
+    .menu-line + .menu-line { margin-top: 0.28rem; }
+    
     .timeline-dot {
       position: absolute;
       left: -31px;
@@ -60,38 +64,85 @@
   </style>
 </head>
 
-<body class="text-slate-300 antialiased">
+<body id="top" class="text-slate-300 antialiased">
 
   <!-- =========================================================
        HEADER
   ========================================================== -->
-  <nav class="main-nav-shell shadow-sm">
-    <div class="max-w-7xl mx-auto px-6 h-[88px] grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4">
-      
-      <!-- Logo / Brand -->
-      <a href="/" class="flex items-center gap-3 md:gap-4 min-w-0 focus:outline-none rounded">
-        <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="AlanSM Solutions" width="56" height="56" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-700 bg-slate-950 object-cover">
-        <div class="flex flex-col justify-center min-w-0">
-          <span class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-100 leading-none truncate">Alan da Silva Morais</span>
-          <span class="text-[11px] md:text-[12px] text-blue-500 font-semibold tracking-[0.18em] uppercase mt-1">CV & Portfolio</span>
-        </div>
-      </a>
-
-      <!-- Desktop Navigation -->
-      <div class="hidden lg:flex items-center justify-center gap-8">
-        <a href="/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Home</a>
-        <a href="/features/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Features</a>
-        <a href="/pricing/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Pricing</a>
-        <a href="/portfolio/" aria-current="page" class="text-sm font-semibold text-blue-500 border-b-2 border-blue-500 pb-1">Portfolio</a>
-        <a href="/contact/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contact</a>
+  
+  <!-- Info Bar -->
+  <div class="top-info-bar relative z-40">
+    <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] md:text-[13px] text-center">
+      <div class="flex items-center justify-center gap-2 sm:gap-5 mx-auto sm:mx-0">
+        <span class="font-medium">📧 kontakt@alansmsolutions.com</span>
+        <span class="hidden sm:inline text-blue-200">|</span>
+        <span class="font-medium">📍 Kraków, Poland • Remote</span>
       </div>
-
-      <!-- Action Button -->
-      <div class="flex items-center justify-end gap-3">
-        <a href="/free-trial/" class="inline-flex items-center bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm font-bold px-4 py-2.5 rounded-lg shadow-md transition-all">Free Trial</a>
+      <div class="flex items-center justify-center gap-4 text-blue-200/80">
+        <a href="https://www.instagram.com/alansmsolutions/" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/alankmorais" target="_blank" class="hover:text-white transition-colors"><i class="fab fa-facebook"></i></a>
       </div>
     </div>
-  </nav>
+  </div>
+
+  <!-- Sticky Main Nav -->
+  <div class="sticky top-0 inset-x-0 z-50">
+    <nav class="main-nav-shell border-b border-slate-800 shadow-sm">
+      <div class="max-w-7xl mx-auto px-6 h-[88px] grid grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4">
+        
+        <a href="/" class="flex items-center gap-3 md:gap-4 min-w-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">
+          <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="Logo" width="56" height="56" class="w-12 h-12 md:w-14 md:h-14 rounded-full border border-slate-700 bg-slate-950 object-cover" />
+          <div class="flex flex-col justify-center min-w-0">
+            <span class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-100 leading-none truncate">AlanSM Solutions</span>
+            <span class="text-[11px] md:text-[12px] text-blue-500 font-semibold tracking-[0.18em] uppercase mt-1">CV & Portfolio</span>
+          </div>
+        </a>
+
+        <div class="hidden lg:flex items-center justify-center gap-8">
+          <a href="/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Home</a>
+          <a href="/features/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Features</a>
+          <a href="/pricing/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Pricing</a>
+          <a href="/portfolio/" class="text-sm font-semibold text-slate-100 border-b-2 border-blue-500 pb-1">Portfolio</a>
+          <button type="button" onclick="openContactForm('General Inquiry', 'Contact')" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contact</button>
+        </div>
+
+        <div class="flex items-center justify-end gap-3">
+          <div class="hidden md:flex items-center gap-3">
+            <button onclick="switchLang('pt', 'BRL')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">BR</button>
+            <button onclick="switchLang('pl', 'PLN')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">PL</button>
+            <button onclick="switchLang('es', 'EUR')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors cursor-pointer">ES</button>
+            <button onclick="switchLang('en', 'USD')" class="text-xs font-semibold text-blue-500 cursor-pointer">EN</button>
+          </div>
+
+          <button id="mobileMenuButton" type="button" class="lg:hidden nav-icon-btn" onclick="toggleMobileMenu()">
+            <span class="sr-only">Toggle menu</span>
+            <div><span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span></div>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-slate-950 border-b border-slate-800 shadow-sm">
+      <div class="px-6 py-5">
+        <a href="/" class="mobile-drawer-link" onclick="closeMobileMenu()">Home</a>
+        <a href="/features/" class="mobile-drawer-link" onclick="closeMobileMenu()">Features</a>
+        <a href="/pricing/" class="mobile-drawer-link" onclick="closeMobileMenu()">Pricing</a>
+        <a href="/portfolio/" class="mobile-drawer-link text-blue-400" onclick="closeMobileMenu()">Portfolio</a>
+        <button type="button" class="mobile-drawer-link text-left w-full" onclick="closeMobileMenu(); openContactForm();">Contact</button>
+
+        <div class="pt-5 mt-5 border-t border-slate-800 flex items-center justify-between gap-3 w-full">
+          <div class="flex items-center gap-3">
+            <button onclick="switchLang('pt', 'BRL')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">BR</button>
+            <button onclick="switchLang('pl', 'PLN')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">PL</button>
+            <button onclick="switchLang('es', 'EUR')" class="text-xs font-semibold text-slate-500 hover:text-blue-400 transition-colors">ES</button>
+            <button onclick="switchLang('en', 'USD')" class="text-xs font-semibold text-blue-500">EN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- =========================================================
        MAIN CV CONTENT
@@ -106,11 +157,10 @@
       ====================================================== -->
       <section class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 mb-12 shadow-2xl flex flex-col md:flex-row items-start md:items-center gap-8 text-left">
         
-        <!-- FIX: Using Absolute URL from GitHub so the image always loads -->
+        <!-- Puxando a imagem diretamente do seu repositório no GitHub para não quebrar -->
         <img 
-          src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/alan-profile.jpg" 
+          src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/alan.png" 
           alt="Alan da Silva Morais" 
-          onerror="this.src='https://placehold.co/150x150/1e293b/fff?text=AM'" 
           class="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-blue-500/40 object-cover shadow-xl shrink-0" 
         />
         
@@ -129,7 +179,7 @@
           <div class="flex flex-wrap gap-3">
             <a href="https://www.linkedin.com/in/alandasm" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2"><i class="fab fa-linkedin text-blue-400"></i> LinkedIn Profile</a>
             <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2"><i class="fab fa-github"></i> GitHub Repositories</a>
-            <a href="/contact/" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2"><i class="fa fa-envelope"></i> Send Message</a>
+            <button onclick="openContactForm()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-5 py-3 rounded-xl transition-colors inline-flex items-center gap-2"><i class="fa fa-envelope"></i> Send Message</button>
           </div>
         </div>
       </section>
@@ -185,50 +235,50 @@
           
           <article class="relative">
             <div class="timeline-dot"></div>
-            <span class="text-xs font-semibold text-blue-500 tracking-wider uppercase">Mar 2025 – Present[cite: 1]</span>
-            <h3 class="text-xl font-bold text-white mt-1">Partner Success Manager[cite: 1]</h3>
-            <p class="text-slate-400 text-sm font-medium mb-4">TTEC (Google Travel - Things to Do / Reserve with Google) | Krakow, Poland[cite: 1]</p>
+            <span class="text-xs font-semibold text-blue-500 tracking-wider uppercase">Mar 2025 – Present</span>
+            <h3 class="text-xl font-bold text-white mt-1">Partner Success Manager</h3>
+            <p class="text-slate-400 text-sm font-medium mb-4">TTEC (Google Travel - Things to Do / Reserve with Google) | Krakow, Poland</p>
             <ul class="text-sm text-slate-300 leading-relaxed list-disc ml-4 space-y-2">
-              <li>Lead partner onboarding, qualification, and enablement for Google Things to Do and Reserve with Google products.[cite: 1]</li>
-              <li>Guide partners through integration requirements, operational readiness, best practices, and platform adoption.[cite: 1]</li>
-              <li>Act as the primary partner contact, identifying risks, bottlenecks, and growth opportunities while coordinating resolutions with Google and TTEC stakeholders.[cite: 1]</li>
-              <li>Support long-term partner success through clear communication, proactive follow-up, and cross-functional problem solving.[cite: 1]</li>
+              <li>Lead partner onboarding, qualification, and enablement for Google Things to Do and Reserve with Google products.</li>
+              <li>Guide partners through integration requirements, operational readiness, best practices, and platform adoption.</li>
+              <li>Act as the primary partner contact, identifying risks, bottlenecks, and growth opportunities while coordinating resolutions with Google and TTEC stakeholders.</li>
+              <li>Support long-term partner success through clear communication, proactive follow-up, and cross-functional problem solving.</li>
             </ul>
           </article>
 
           <article class="relative">
             <div class="timeline-dot"></div>
-            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">Nov 2021 – Jul 2024[cite: 1]</span>
-            <h3 class="text-xl font-bold text-white mt-1">Customer Success Specialist - UK Market[cite: 1]</h3>
-            <p class="text-slate-400 text-sm font-medium mb-4">Shell | Krakow, Poland[cite: 1]</p>
+            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">Nov 2021 – Jul 2024</span>
+            <h3 class="text-xl font-bold text-white mt-1">Customer Success Specialist - UK Market</h3>
+            <p class="text-slate-400 text-sm font-medium mb-4">Shell | Krakow, Poland</p>
             <ul class="text-sm text-slate-300 leading-relaxed list-disc ml-4 space-y-2">
-              <li>Delivered end-to-end support for UK B2B customer portfolios, building trusted relationships with customers and business partners. Managed contracts, pricing, master data, and compliance while maintaining strong data integrity and governance standards.[cite: 1]</li>
-              <li>Supported Order-to-Cash workflows, including order management, disputes, credit management, SAP monitoring, delivery timelines, and exceptions.[cite: 1]</li>
-              <li>Partnered with Sales, Finance, Demand Planning, Distribution, and carriers to address retention risks and improve service levels.[cite: 1]</li>
+              <li>Delivered end-to-end support for UK B2B customer portfolios, building trusted relationships with customers and business partners. Managed contracts, pricing, master data, and compliance while maintaining strong data integrity and governance standards.</li>
+              <li>Supported Order-to-Cash workflows, including order management, disputes, credit management, SAP monitoring, delivery timelines, and exceptions.</li>
+              <li>Partnered with Sales, Finance, Demand Planning, Distribution, and carriers to address retention risks and improve service levels.</li>
             </ul>
           </article>
 
           <article class="relative">
             <div class="timeline-dot"></div>
-            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">Jun 2018 – Nov 2021[cite: 1]</span>
-            <h3 class="text-xl font-bold text-white mt-1">Contracting & Procurement Data Specialist[cite: 1]</h3>
-            <p class="text-slate-400 text-sm font-medium mb-4">Shell | Krakow, Poland[cite: 1]</p>
+            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">Jun 2018 – Nov 2021</span>
+            <h3 class="text-xl font-bold text-white mt-1">Contracting & Procurement Data Specialist</h3>
+            <p class="text-slate-400 text-sm font-medium mb-4">Shell | Krakow, Poland</p>
             <ul class="text-sm text-slate-300 leading-relaxed list-disc ml-4 space-y-2">
-              <li>Led supplier qualification and compliance activities, including risk assessments, integrity due diligence, and HSSE standards.[cite: 1]</li>
-              <li>Managed vendor, material, and contract master data across SAP and Ariba environments.[cite: 1]</li>
-              <li>Served as SAP SD Super User, resolving data issues, supporting users, and contributing to master data improvement initiatives.[cite: 1]</li>
-              <li>Created internal documentation, trained end-users, and collaborated with Procurement, Finance, and IT to streamline processes.[cite: 1]</li>
+              <li>Led supplier qualification and compliance activities, including risk assessments, integrity due diligence, and HSSE standards.</li>
+              <li>Managed vendor, material, and contract master data across SAP and Ariba environments.</li>
+              <li>Served as SAP SD Super User, resolving data issues, supporting users, and contributing to master data improvement initiatives.</li>
+              <li>Created internal documentation, trained end-users, and collaborated with Procurement, Finance, and IT to streamline processes.</li>
             </ul>
           </article>
 
           <article class="relative">
             <div class="timeline-dot"></div>
-            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">Jun 2017 – May 2018[cite: 1]</span>
-            <h3 class="text-xl font-bold text-white mt-1">IT Service Desk Analyst - Portuguese Speaker[cite: 1]</h3>
-            <p class="text-slate-400 text-sm font-medium mb-4">HCL Technologies | Krakow, Poland[cite: 1]</p>
+            <span class="text-xs font-semibold text-slate-500 tracking-wider uppercase">Jun 2017 – May 2018</span>
+            <h3 class="text-xl font-bold text-white mt-1">IT Service Desk Analyst - Portuguese Speaker</h3>
+            <p class="text-slate-400 text-sm font-medium mb-4">HCL Technologies | Krakow, Poland</p>
             <ul class="text-sm text-slate-300 leading-relaxed list-disc ml-4 space-y-2">
-              <li>Provided first- and second-line support for hardware, software, and network issues for global users in Brazilian Portuguese and English.[cite: 1]</li>
-              <li>Logged, tracked, and resolved incidents under ITIL practices while working to SLA and KPI targets.[cite: 1]</li>
+              <li>Provided first- and second-line support for hardware, software, and network issues for global users in Brazilian Portuguese and English.</li>
+              <li>Logged, tracked, and resolved incidents under ITIL practices while working to SLA and KPI targets.</li>
             </ul>
           </article>
 
@@ -239,7 +289,7 @@
            FEATURED PROJECTS (Left Aligned)
       ====================================================== -->
       <section class="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 mb-16 shadow-xl text-left">
-        <h2 class="text-2xl font-bold text-white mb-8 pb-4 border-b border-slate-800">Software, Scripts & Selected Projects[cite: 1]</h2>
+        <h2 class="text-2xl font-bold text-white mb-8 pb-4 border-b border-slate-800">Software, Scripts & Selected Projects</h2>
         
         <div class="grid md:grid-cols-2 gap-8">
           
@@ -247,44 +297,44 @@
             <div>
               <div class="flex items-center gap-3 mb-4">
                 <div class="w-9 h-9 rounded bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-sm"><i class="fa fa-calendar-alt"></i></div>
-                <h3 class="font-bold text-white text-lg">Automation & Solutions Portfolio Website[cite: 1]</h3>
+                <h3 class="font-bold text-white text-lg">Automation & Solutions Portfolio Website</h3>
               </div>
-              <p class="text-sm text-slate-400 leading-relaxed mb-6">Designed and published a responsive web portfolio presenting automation services, enterprise operations experience, and practical workflow examples.[cite: 1]</p>
+              <p class="text-sm text-slate-400 leading-relaxed mb-6">Designed and published a responsive web portfolio presenting automation services, enterprise operations experience, and practical workflow examples.</p>
             </div>
-            <a href="/" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">Live site[cite: 1] <i class="fa fa-external-link-alt text-[10px]"></i></a>
+            <a href="/" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">Live site <i class="fa fa-external-link-alt text-[10px]"></i></a>
           </article>
 
           <article class="cv-card bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between">
             <div>
               <div class="flex items-center gap-3 mb-4">
                 <div class="w-9 h-9 rounded bg-yellow-600/20 text-yellow-500 flex items-center justify-center font-bold text-sm"><i class="fa fa-file-excel"></i></div>
-                <h3 class="font-bold text-white text-lg">Excel VBA: SAP Payment Block & Vendor Data Automation[cite: 1]</h3>
+                <h3 class="font-bold text-white text-lg">Excel VBA: SAP Payment Block & Vendor Data Automation</h3>
               </div>
-              <p class="text-sm text-slate-400 leading-relaxed mb-6">VBA-driven workflow concept for invoice data validation, payment-block reviews, discrepancy flagging, and repetitive spreadsheet filtering in procurement and accounts-payable scenarios.[cite: 1]</p>
+              <p class="text-sm text-slate-400 leading-relaxed mb-6">VBA-driven workflow concept for invoice data validation, payment-block reviews, discrepancy flagging, and repetitive spreadsheet filtering in procurement and accounts-payable scenarios.</p>
             </div>
-            <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">View on GitHub[cite: 1] <i class="fa fa-external-link-alt text-[10px]"></i></a>
+            <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">View on GitHub <i class="fa fa-external-link-alt text-[10px]"></i></a>
           </article>
 
           <article class="cv-card bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between md:col-span-2 lg:col-span-1">
             <div>
               <div class="flex items-center gap-3 mb-4">
                 <div class="w-9 h-9 rounded bg-purple-600/20 text-purple-400 flex items-center justify-center font-bold text-sm"><i class="fa fa-database"></i></div>
-                <h3 class="font-bold text-white text-lg">Automated Data Extraction & Reporting Solutions[cite: 1]</h3>
+                <h3 class="font-bold text-white text-lg">Automated Data Extraction & Reporting Solutions</h3>
               </div>
-              <p class="text-sm text-slate-400 leading-relaxed mb-6">Reporting-automation framework for extracting, transforming, and staging fragmented data into structured outputs and Google Sheets-oriented workflows.[cite: 1]</p>
+              <p class="text-sm text-slate-400 leading-relaxed mb-6">Reporting-automation framework for extracting, transforming, and staging fragmented data into structured outputs and Google Sheets-oriented workflows.</p>
             </div>
-            <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">View on GitHub[cite: 1] <i class="fa fa-external-link-alt text-[10px]"></i></a>
+            <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">View on GitHub <i class="fa fa-external-link-alt text-[10px]"></i></a>
           </article>
 
           <article class="cv-card bg-slate-950 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between md:col-span-2 lg:col-span-1">
             <div>
               <div class="flex items-center gap-3 mb-4">
                 <div class="w-9 h-9 rounded bg-green-600/20 text-green-400 flex items-center justify-center font-bold text-sm"><i class="fa fa-server"></i></div>
-                <h3 class="font-bold text-white text-lg">SAP Master Data & Material Listing Automation[cite: 1]</h3>
+                <h3 class="font-bold text-white text-lg">SAP Master Data & Material Listing Automation</h3>
               </div>
-              <p class="text-sm text-slate-400 leading-relaxed mb-6">Data-staging automation concept for organizing, validating, and tracking material listings before enterprise-system entry, with a focus on structural consistency and data quality.[cite: 1]</p>
+              <p class="text-sm text-slate-400 leading-relaxed mb-6">Data-staging automation concept for organizing, validating, and tracking material listings before enterprise-system entry, with a focus on structural consistency and data quality.</p>
             </div>
-            <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">View on GitHub[cite: 1] <i class="fa fa-external-link-alt text-[10px]"></i></a>
+            <a href="https://github.com/alansmorais" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors inline-flex items-center gap-1">View on GitHub <i class="fa fa-external-link-alt text-[10px]"></i></a>
           </article>
 
         </div>
@@ -297,37 +347,37 @@
         
         <!-- Education -->
         <article class="cv-card bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-xl text-left">
-          <h2 class="text-xl font-bold text-white mb-6 pb-2 border-b border-slate-800">Education & Training[cite: 1]</h2>
+          <h2 class="text-xl font-bold text-white mb-6 pb-2 border-b border-slate-800">Education & Training</h2>
           <div class="mb-6">
-            <h3 class="font-bold text-white text-base">Certificate in Business Management[cite: 1]</h3>
-            <p class="text-blue-400 text-xs font-semibold mb-2">SEDA College • Dublin, Ireland | 2008-2010[cite: 1]</p>
-            <p class="text-sm text-slate-400">Coursework: Management, Marketing, Numeracy & Statistics, International Relations.[cite: 1]</p>
+            <h3 class="font-bold text-white text-base">Certificate in Business Management</h3>
+            <p class="text-blue-400 text-xs font-semibold mb-2">SEDA College • Dublin, Ireland | 2008-2010</p>
+            <p class="text-sm text-slate-400">Coursework: Management, Marketing, Numeracy & Statistics, International Relations.</p>
           </div>
           <div>
-            <h3 class="font-bold text-white text-sm mb-2">Selected Training[cite: 1]</h3>
-            <p class="text-sm text-slate-400">SAP S/4HANA: Beyond the Basics; Asset Accounting: Acquisitions in SAP S/4HANA; Data Analytics: Graph Analytics; Learning SQL Programming.[cite: 1]</p>
+            <h3 class="font-bold text-white text-sm mb-2">Selected Training</h3>
+            <p class="text-sm text-slate-400">SAP S/4HANA: Beyond the Basics; Asset Accounting: Acquisitions in SAP S/4HANA; Data Analytics: Graph Analytics; Learning SQL Programming.</p>
           </div>
         </article>
 
         <!-- Languages -->
         <article class="cv-card bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-xl text-left">
-          <h2 class="text-xl font-bold text-white mb-6 pb-2 border-b border-slate-800">Languages[cite: 1]</h2>
+          <h2 class="text-xl font-bold text-white mb-6 pb-2 border-b border-slate-800">Languages</h2>
           <ul class="space-y-4">
             <li class="flex justify-between items-center text-sm border-b border-slate-800/50 pb-2">
-              <span class="text-white font-semibold">Portuguese[cite: 1]</span>
-              <span class="text-slate-400 text-xs">Native / Bilingual[cite: 1]</span>
+              <span class="text-white font-semibold">Portuguese</span>
+              <span class="text-slate-400 text-xs">Native / Bilingual</span>
             </li>
             <li class="flex justify-between items-center text-sm border-b border-slate-800/50 pb-2">
-              <span class="text-white font-semibold">English[cite: 1]</span>
-              <span class="text-slate-400 text-xs">Fluent - Full Professional[cite: 1]</span>
+              <span class="text-white font-semibold">English</span>
+              <span class="text-slate-400 text-xs">Fluent - Full Professional</span>
             </li>
             <li class="flex justify-between items-center text-sm border-b border-slate-800/50 pb-2">
-              <span class="text-white font-semibold">Spanish[cite: 1]</span>
-              <span class="text-slate-400 text-xs">Professional Working Proficiency[cite: 1]</span>
+              <span class="text-white font-semibold">Spanish</span>
+              <span class="text-slate-400 text-xs">Professional Working Proficiency</span>
             </li>
             <li class="flex justify-between items-center text-sm">
-              <span class="text-white font-semibold">Polish[cite: 1]</span>
-              <span class="text-slate-400 text-xs">Elementary / Communicative[cite: 1]</span>
+              <span class="text-white font-semibold">Polish</span>
+              <span class="text-slate-400 text-xs">Elementary / Communicative</span>
             </li>
           </ul>
         </article>
@@ -340,21 +390,124 @@
   <!-- =========================================================
        FOOTER
   ========================================================== -->
-  <footer class="border-t border-slate-800 bg-slate-950">
-    <div class="max-w-7xl mx-auto px-6 py-8">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-        <p class="text-xs text-slate-500">
-          © 2026 AlanSM Solutions. All rights reserved.
-          • Business Automation & Systems
-        </p>
-        <div class="flex flex-wrap items-center justify-center gap-4 text-xs">
-          <a href="/terms/" class="text-slate-500 hover:text-blue-400 transition-colors">Terms of Service</a>
-          <span class="text-slate-700">|</span>
-          <a href="/privacy/" class="text-slate-500 hover:text-blue-400 transition-colors">Privacy Policy</a>
+  <footer class="py-12 bg-slate-950 border-t border-slate-800 text-center text-xs">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+        
+        <div class="flex items-center gap-3">
+          <img src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" alt="AlanSM Solutions logo" width="32" height="32" class="w-10 h-10 rounded-full border border-blue-500/30" />
+          <div class="text-left">
+            <span class="text-base font-extrabold tracking-tight text-white block">AlanSM Solutions</span>
+            <span class="text-blue-400 font-medium">Business Automation & Systems</span>
+          </div>
+        </div>
+        
+        <div class="flex gap-4 text-2xl text-slate-600">
+          <i class="fab fa-cc-stripe hover:text-slate-400 transition-colors" title="Stripe Secure"></i>
+          <i class="fab fa-cc-visa hover:text-slate-400 transition-colors"></i>
+          <i class="fab fa-cc-mastercard hover:text-slate-400 transition-colors"></i>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-slate-500">
+        <p>© 2026 AlanSM Solutions. All rights reserved.</p>
+        <div class="flex items-center gap-4 font-medium">
+           <a href="/terms/" class="hover:text-blue-400 transition-colors">Terms of Service</a>
+           <span class="text-slate-700">|</span>
+           <a href="/privacy/" class="hover:text-blue-400 transition-colors"><i class="fas fa-lock text-[10px]"></i> Privacy & GDPR</a>
         </div>
       </div>
     </div>
   </footer>
+
+  <!-- =========================================================
+       CONTACT MODAL & SCRIPTS
+  ========================================================== -->
+  <div id="contactModal" class="fixed inset-0 z-[70] hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+    <div class="bg-slate-900 border border-slate-700 rounded-3xl w-full max-w-md shadow-2xl p-8 relative">
+       <button type="button" onclick="closeContactForm()" class="absolute top-5 right-5 text-slate-500 hover:text-white"><i class="fa fa-times text-xl"></i></button>
+       <h2 class="text-2xl font-bold text-white mb-6">Contact Us</h2>
+       <form id="contactForm" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-4">
+          <input type="hidden" name="_subject" id="formSubject" value="Portfolio Inquiry" />
+          <input type="text" id="formName" name="name" required placeholder="Full Name" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white focus:border-blue-500 outline-none">
+          <input type="email" id="formEmail" name="email" required placeholder="Email" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white focus:border-blue-500 outline-none">
+          <input type="tel" id="formPhone" name="phone" required placeholder="WhatsApp Number" class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white focus:border-blue-500 outline-none">
+          <textarea id="formMsg" name="message" rows="3" required placeholder="Tell us about your project..." class="bg-slate-950 border border-slate-700 rounded-xl p-4 text-white focus:border-blue-500 outline-none resize-none"></textarea>
+          <label class="flex items-start gap-2 text-xs text-slate-500 mt-2">
+            <input type="checkbox" id="formConsent" required class="mt-0.5"> I agree to the privacy policy.
+          </label>
+          <button type="submit" class="bg-blue-600 text-white font-bold py-4 rounded-xl mt-2 hover:bg-blue-500 transition-colors">Send Request</button>
+          <p id="formStatus" class="text-xs text-center mt-2 font-bold"></p>
+       </form>
+    </div>
+  </div>
+
+  <script>
+    function switchLang(lang, currency) {
+      localStorage.setItem('user_lang', lang);
+      localStorage.setItem('preferredCurrency', currency);
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) {
+        menu.classList.toggle('hidden');
+      }
+    }
+
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu) {
+        menu.classList.add('hidden');
+      }
+    }
+
+    function openContactForm(subject, type) {
+      document.getElementById('contactModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      if(subject) document.getElementById('formSubject').value = subject;
+    }
+
+    function closeContactForm() {
+      document.getElementById('contactModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    async function handleFormSubmit(event) {
+        event.preventDefault();
+        const ALANSM_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwxzYWgEdGsUqjokKIMroI1xmZYE1LQcj4sd8EIoODbDWA5MIxa0xEb85JTuvAQnVMtXA/exec";
+        const form = event.target;
+        const btn = form.querySelector('button[type="submit"]');
+        const status = document.getElementById('formStatus');
+        btn.disabled = true; btn.textContent = "Sending...";
+
+        const payload = {
+            action: 'submitLead',
+            token: "alan_admin_2026",
+            Name: document.getElementById('formName').value,
+            Company: 'N/A',
+            Email: document.getElementById('formEmail').value,
+            Phone: document.getElementById('formPhone').value,
+            Message: document.getElementById('formMsg').value,
+            Package: document.getElementById('formSubject').value,
+            source: 'portfolio_page'
+        };
+
+        try {
+            const params = new URLSearchParams();
+            for (const key in payload) params.append(key, payload[key]);
+            await fetch(ALANSM_BACKEND_URL, { method: 'POST', body: params });
+            status.textContent = "Request sent successfully!";
+            status.className = "text-green-500 text-xs font-bold text-center mt-2";
+            setTimeout(closeContactForm, 2000);
+        } catch (err) {
+            status.textContent = "Error. Please try again.";
+            status.className = "text-red-500 text-xs font-bold text-center mt-2";
+        } finally {
+            btn.disabled = false; btn.textContent = "Send Request";
+        }
+    }
+  </script>
 
 </body>
 </html>
