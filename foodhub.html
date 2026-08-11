@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DeliveryHub Ilhabela | Sistema Completo</title>
+  <title>Food Hub | Sistema Completo</title>
   <style>
     :root {
       --bg: #f5f4ef;
@@ -32,12 +32,21 @@
     .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
     .badge { border: 1px solid rgba(255, 255, 255, .25); background: rgba(255, 255, 255, .12); padding: 8px 10px; border-radius: 999px; font-size: 13px; }
     
+    /* FEATURES SECTION */
+    .features-card { background: white; border-radius: 22px; padding: 28px; margin-top: 24px; box-shadow: 0 10px 30px rgba(15, 23, 42, .05); border: 1px solid var(--line); }
+    .features-card h2 { text-align: center; font-size: 22px; margin-bottom: 24px; color: var(--dark); }
+    .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .feature-group h3 { color: var(--brand); display: flex; align-items: center; gap: 8px; font-size: 18px; border-bottom: 2px solid var(--line); padding-bottom: 10px; margin-bottom: 14px; }
+    .feature-list { list-style: none; padding: 0; margin: 0; }
+    .feature-list li { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-weight: 500; color: #475467; font-size: 15px; }
+    .feature-list li::before { content: "✓"; background: #dcfce7; color: var(--green); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
+
     .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: 18px; }
     .card { grid-column: span 6; background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 18px; box-shadow: 0 10px 30px rgba(15, 23, 42, .07); }
     .card.full { grid-column: 1 / -1; }
     .card.third { grid-column: span 4; }
     
-    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0; justify-content: space-between; align-items: center; }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 24px 0 18px; justify-content: space-between; align-items: center; }
     .tabs-group { display: flex; gap: 8px; flex-wrap: wrap; }
     .tab { border: 1px solid var(--line); background: white; color: var(--ink); border-radius: 999px; padding: 10px 14px; cursor: pointer; font-weight: 700; transition: 0.2s; }
     .tab.active { background: var(--dark); color: white; border-color: var(--dark); }
@@ -89,6 +98,7 @@
       .row { grid-template-columns: 1fr; }
       .card, .card.third { grid-column: 1 / -1; }
       .menu { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; gap: 20px; }
     }
   </style>
 </head>
@@ -108,17 +118,45 @@
 
   <main class="wrap">
     
+    <!-- FEATURES PRESENTATION -->
+    <section class="features-card">
+      <h2>Tudo que você precisa para receber pedidos online e organizar sua operação.</h2>
+      <div class="features-grid">
+        <div class="feature-group">
+          <h3>Recursos Operacionais</h3>
+          <ul class="feature-list">
+            <li>Cardápio digital completo</li>
+            <li>Painel de pedidos em tempo real</li>
+            <li>Relatórios completos</li>
+            <li>Gestão dos motoboys</li>
+            <li>Domínio próprio</li>
+            <li>Cadastro de produtos</li>
+            <li>Agendamento de pedidos</li>
+          </ul>
+        </div>
+        <div class="feature-group">
+          <h3>Ferramentas de Marketing</h3>
+          <ul class="feature-list">
+            <li>Sistema de fidelidade</li>
+            <li>Sistema de sorteios</li>
+            <li>Cupom de desconto</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAVIGATION TABS -->
     <div class="tabs">
       <div class="tabs-group">
-        <button class="tab active" onclick="showSection('cliente', this)">Área do Cliente</button>
+        <button class="tab active" onclick="showSection('cliente', this)">Cardápio (Menu)</button>
         <button class="tab" onclick="showSection('motoboy', this)">Portal do Motoboy</button>
-        <button class="tab" onclick="showSection('restaurante', this)">Painel do Restaurante</button>
+        <button class="tab" onclick="showSection('restaurante', this)">Painel (Dashboard)</button>
       </div>
       <!-- Botão utilitário caso queiram limpar cache local em testes -->
       <button onclick="resetLocal()" class="light" style="font-size: 12px; padding: 8px 12px;">Limpar Cache App</button>
     </div>
 
-    <!-- ÁREA DO CLIENTE -->
+    <!-- ÁREA DO CLIENTE / MENU -->
     <section id="cliente" class="section active">
       <div class="grid">
         <div class="card">
@@ -209,7 +247,7 @@
       </div>
     </section>
 
-    <!-- ÁREA DO RESTAURANTE -->
+    <!-- ÁREA DO RESTAURANTE / DASHBOARD -->
     <section id="restaurante" class="section">
       <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
         <button onclick="refreshFromBackend()" class="light">
@@ -747,7 +785,25 @@
     }
 
     function renderOrders() {
-      $('restaurantOrders').innerHTML = orders.length ? orders.map(o => `
+      // 1. Filtra os pedidos: Esconde os que já foram entregues ao motoboy, finalizados ou cancelados
+      const activeOrders = orders.filter(o => !['Saiu para entrega', 'Finalizado', 'Cancelado'].includes(o.status));
+
+      $('restaurantOrders').innerHTML = activeOrders.length ? activeOrders.map(o => {
+        
+        // 2. Lógica Dinâmica dos Botões
+        // Só mostra "Aceitar" se for um Novo Pedido
+        const btnAceitar = o.status === 'Novo pedido' ? `<button class="light" onclick="updateOrder('${o.id}','Aceito')">Aceitar Recebimento</button>` : '';
+        
+        // Só mostra "Em preparo" se for Novo ou já estiver Aceito
+        const btnPreparo = ['Novo pedido', 'Aceito'].includes(o.status) ? `<button class="orange" onclick="updateOrder('${o.id}','Em preparo')">Cozinha / Em preparo</button>` : '';
+        
+        // Verifica se já foi despachado (mas ainda está esperando o motoboy chegar no balcão)
+        const isDispatched = ['Aguardando motoboy', 'Motoboy designado'].includes(o.status);
+        const btnDespachar = `<button class="blue" onclick="releaseDelivery('${o.id}')" style="margin-left:auto" ${isDispatched ? 'disabled' : ''}>
+                                ${isDispatched ? 'Aguardando Retirada...' : 'Despachar Entrega'}
+                              </button>`;
+
+        return `
         <article class="item">
           <div class="itemTop">
             <div><strong>#${escapeHtml(o.id.slice(-6))}</strong><br><small>Cliente: ${escapeHtml(o.customerName)} (${escapeHtml(o.customerPhone)})</small></div>
@@ -762,13 +818,14 @@
             ${o.notes ? `<div style="color:var(--orange)">📝 Nota: ${escapeHtml(o.notes)}</div>` : ''}
           </div>
           <div class="actions">
-            <button class="light" onclick="updateOrder('${o.id}','Aceito')">Aceitar Recebimento</button>
-            <button class="orange" onclick="updateOrder('${o.id}','Em preparo')">Cozinha / Em preparo</button>
-            <button class="blue" onclick="releaseDelivery('${o.id}')" style="margin-left:auto">Despachar Entrega</button>
+            ${btnAceitar}
+            ${btnPreparo}
+            ${btnDespachar}
             <button class="red" onclick="updateOrder('${o.id}','Cancelado')">X</button>
           </div>
         </article>
-      `).join('') : '<div class="notice">Caixa de entrada vazia. Aguardando novos clientes.</div>';
+        `;
+      }).join('') : '<div class="notice">Caixa de entrada limpa. Nenhum pedido pendente de preparo no momento.</div>';
     }
 
     function renderDeliveries() {
