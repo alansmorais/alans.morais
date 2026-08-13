@@ -1,0 +1,1026 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ASM FoodHub | Premium Dashboard</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* AlanSM Solutions Dark Theme Palette */
+      --bg-dark: #0f1523;        
+      --bg-card: #161d2d;        
+      --bg-hover: #1e2638;       
+      --border: #273142;         
+      --text-main: #f8fafc;      
+      --text-muted: #94a3b8;     
+      
+      --accent-blue: #2563eb;    
+      --accent-blue-hover: #1d4ed8;
+      --accent-green: #10b981;   
+      --accent-yellow: #eab308;  
+      --accent-red: #ef4444;     
+      --accent-purple: #8b5cf6;  
+      
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; display: flex; flex-direction: column; min-height: 100vh; }
+    button { font-family: inherit; cursor: pointer; outline: none; border: none; transition: 0.2s; }
+    input, select, textarea { font-family: inherit; outline: none; }
+    a { text-decoration: none; color: inherit; transition: 0.2s; }
+    
+    .hide-mob { display: inline-block; }
+
+    /* ========== HEADER (CENTRALIZED) ========== */
+    header { background-color: var(--bg-card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 40; }
+    .header-inner { max-width: 1400px; margin: 0 auto; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    
+    .header-left { display: flex; align-items: center; gap: 16px; }
+    .header-logo-icon { font-size: 28px; }
+    .header-brand h1 { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; color: var(--text-main); }
+    .header-badge { background-color: rgba(37, 99, 235, 0.2); color: #60a5fa; font-size: 11px; padding: 2px 8px; border-radius: 999px; font-weight: 600; text-transform: uppercase; border: 1px solid rgba(37, 99, 235, 0.3); }
+    .header-brand p { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+    
+    .header-right { display: flex; align-items: center; gap: 12px; }
+    .status-btn { display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; background: transparent; }
+    .status-btn.green { border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; background: rgba(16, 185, 129, 0.1); }
+    .status-btn.yellow { border: 1px solid rgba(234, 179, 8, 0.3); color: #fde047; background: rgba(234, 179, 8, 0.1); }
+    .status-btn.purple { border: 1px solid rgba(139, 92, 246, 0.3); color: #c4b5fd; background: rgba(139, 92, 246, 0.1); }
+    .status-btn.gray { border: 1px solid var(--border); color: var(--text-main); }
+    .status-btn.gray:hover { background: var(--bg-hover); }
+    .status-btn.solid-blue { background: var(--accent-blue); color: white; }
+    .status-btn.solid-blue:hover { background: var(--accent-blue-hover); }
+
+    .lang-selector { background: var(--bg-dark); border: 1px solid var(--border); color: var(--text-main); border-radius: 999px; padding: 8px 14px; font-size: 12px; font-weight: 600; outline: none; cursor: pointer; }
+
+    /* ========== TABS NAV (CENTRALIZED) ========== */
+    .top-nav-wrap { background-color: var(--bg-card); border-bottom: 1px solid var(--border); }
+    .top-nav { max-width: 1400px; margin: 0 auto; padding: 0 32px; display: flex; gap: 24px; overflow-x: auto; }
+    .top-nav::-webkit-scrollbar { display: none; }
+    .nav-tab { padding: 16px 0; background: transparent; color: var(--text-muted); font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; border-bottom: 2px solid transparent; white-space: nowrap; flex-shrink: 0; }
+    .nav-tab:hover { color: var(--text-main); }
+    .nav-tab.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
+
+    /* ========== MAIN CONTAINER ========== */
+    .wrap { max-width: 1400px; margin: 0 auto; padding: 24px 32px; flex: 1; width: 100%; }
+    .section { display: none; animation: fadeIn 0.3s ease; }
+    .section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ========== FEATURES BANNER ========== */
+    .features-banner { background-color: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .features-banner-left .f-badges { display: flex; gap: 12px; margin-bottom: 12px; }
+    .f-badge { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 6px; border: 1px solid; }
+    .f-badge.blue { background: rgba(37, 99, 235, 0.1); color: #60a5fa; border-color: rgba(37, 99, 235, 0.2); }
+    .f-badge.yellow { background: rgba(234, 179, 8, 0.1); color: #fde047; border-color: rgba(234, 179, 8, 0.2); }
+    .features-banner h2 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .features-banner p { color: var(--text-muted); font-size: 14px; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 10px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; white-space: nowrap; }
+    .btn-outline:hover { background: var(--bg-hover); }
+
+    /* ========== MENU TOOLBAR & GRID ========== */
+    .menu-toolbar { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 24px; }
+    .search-row { display: flex; align-items: center; background: var(--bg-dark); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 16px; }
+    .search-row i { color: var(--text-muted); margin-right: 12px; }
+    .search-row input { flex: 1; background: transparent; border: none; color: var(--text-main); font-size: 14px; }
+    .search-row input::placeholder { color: var(--text-muted); }
+    .search-row span { color: var(--text-muted); font-size: 13px; white-space: nowrap; }
+    .filter-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+    .filter-pill { background: var(--bg-dark); border: 1px solid var(--border); color: var(--text-muted); padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+    .filter-pill.active { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 24px; }
+    .menu-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: 0.2s; }
+    .menu-card:hover { border-color: #3b82f655; transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+    .mc-img { height: 180px; background-size: cover; background-position: center; position: relative; padding: 12px; }
+    .mc-badges-top { display: flex; gap: 8px; }
+    .mc-badge { background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.1); color: white; font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 6px; }
+    .mc-badge-time { position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.8); color: white; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .mc-content { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .mc-category { color: #60a5fa; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .mc-content h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .mc-content p { color: var(--text-muted); font-size: 13px; line-height: 1.5; flex: 1; margin-bottom: 20px; }
+    .mc-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+    .mc-price { font-size: 12px; color: var(--text-muted); }
+    .mc-price strong { display: block; font-size: 18px; color: var(--text-main); margin-top: 2px; }
+    .btn-add { background: var(--accent-blue); color: white; padding: 10px 20px; border-radius: 999px; font-weight: 600; font-size: 13px; }
+    .btn-add:hover { background: var(--accent-blue-hover); }
+
+    /* ========== SHARED FORMS ========== */
+    .panel-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; }
+    .panel-box h3 { font-size: 18px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--bg-dark); border: 1px solid var(--border); color: var(--text-main); padding: 12px; border-radius: var(--radius-sm); font-size: 14px; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent-blue); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .btn-submit { width: 100%; background: var(--accent-blue); color: white; padding: 14px; border-radius: var(--radius-sm); font-weight: 600; font-size: 14px; margin-top: 8px; display: flex; justify-content: center; gap: 8px; }
+    .btn-submit:hover { background: var(--accent-blue-hover); }
+
+    /* ========== PORTAL DO MOTOBOY ========== */
+    .motoboy-layout { display: grid; grid-template-columns: 380px 1fr; gap: 24px; align-items: start; }
+    
+    .driver-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
+    .driver-info h2 { font-size: 20px; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+    .driver-info p { color: var(--text-muted); font-size: 13px; }
+    .driver-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .stat-box { background: var(--bg-dark); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; text-align: center; }
+    .stat-box span { display: block; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; }
+    .stat-box strong { font-size: 20px; font-weight: 700; }
+    .stat-box strong.green { color: #34d399; }
+    .stat-box strong.yellow { color: #fde047; }
+
+    .delivery-card { background: var(--bg-dark); border: 1px solid var(--accent-yellow); border-radius: var(--radius-md); padding: 20px; margin-bottom: 16px; }
+    .dc-header { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 12px; flex-wrap: wrap; gap: 12px; }
+    .dc-header p { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600; }
+    .dc-header h4 { font-size: 16px; margin-top: 4px; }
+    .dc-header .dc-fee { text-align: right; }
+    .dc-header .dc-fee strong { color: #34d399; font-size: 18px; display: block; margin-top: 2px; }
+    .dc-info p { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+    .dc-info strong { color: var(--text-main); }
+    .dc-actions { display: flex; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .btn-action { padding: 10px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; justify-content: center; }
+    .btn-action.green { background: var(--accent-green); color: white; }
+    .btn-action.green:hover { filter: brightness(1.1); }
+    .btn-action.red-outline { background: transparent; border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171; }
+    .btn-action.red-outline:hover { background: rgba(239, 68, 68, 0.1); }
+    .btn-action.blue-outline { background: transparent; border: 1px solid rgba(37, 99, 235, 0.3); color: #60a5fa; }
+    .btn-action.blue-outline:hover { background: rgba(37, 99, 235, 0.1); }
+
+    /* ========== DASHBOARD VIEW ========== */
+    .dash-stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 24px; }
+    .dash-stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; display: flex; align-items: center; gap: 16px; }
+    .dsc-icon { width: 48px; height: 48px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .dsc-icon.yellow { background: rgba(234, 179, 8, 0.1); color: #fde047; }
+    .dsc-icon.red { background: rgba(239, 68, 68, 0.1); color: #f87171; }
+    .dsc-icon.purple { background: rgba(139, 92, 246, 0.1); color: #c4b5fd; }
+    .dsc-icon.gray { background: rgba(148, 163, 184, 0.1); color: #94a3b8; }
+    .dsc-info p { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
+    .dsc-info h3 { font-size: 20px; font-weight: 700; }
+
+    .dash-sub-nav { display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .dash-sub-nav::-webkit-scrollbar { display: none; }
+    .dsn-btn { background: transparent; color: var(--text-muted); border: 1px solid transparent; padding: 8px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; white-space: nowrap; flex-shrink: 0; }
+    .dsn-btn:hover { color: var(--text-main); }
+    .dsn-btn.active { background: var(--accent-blue); color: white; }
+
+    .dash-filters { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+    .df-left { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+    .df-left::-webkit-scrollbar { display: none; }
+    .df-left button { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted); padding: 6px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+    .df-left button.active { background: rgba(37, 99, 235, 0.1); border-color: rgba(37, 99, 235, 0.3); color: var(--accent-blue); }
+    .btn-smart { background: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.3); color: #fde047; padding: 8px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+    .btn-smart:hover { background: rgba(234, 179, 8, 0.2); }
+
+    .orders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    
+    .order-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px; }
+    .oc-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+    .oc-header h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .oc-header p { font-size: 13px; color: var(--text-muted); }
+    .oc-status { padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; border: 1px solid; white-space: nowrap; }
+    .oc-status.prep { background: rgba(234, 179, 8, 0.1); color: #fde047; border-color: rgba(234, 179, 8, 0.3); }
+    .oc-status.wait { background: rgba(148, 163, 184, 0.1); color: #94a3b8; border-color: rgba(148, 163, 184, 0.3); }
+    .oc-status.done { background: rgba(16, 185, 129, 0.1); color: #34d399; border-color: rgba(16, 185, 129, 0.3); }
+    .oc-status.red { background: rgba(239, 68, 68, 0.1); color: #f87171; border-color: rgba(239, 68, 68, 0.3); }
+
+    .oc-details { border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 16px; }
+    .oc-details p { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
+    .oc-details p strong { color: var(--text-main); }
+    .oc-details .oc-total { color: #60a5fa; font-weight: 700; margin-left: 8px; }
+
+    .oc-items p { font-size: 13px; color: var(--text-muted); display: flex; justify-content: space-between; margin-bottom: 6px; }
+    .oc-items p strong { color: var(--text-main); }
+    .oc-notes { background: rgba(234, 179, 8, 0.05); border: 1px solid rgba(234, 179, 8, 0.2); padding: 10px; border-radius: var(--radius-sm); margin-top: 12px; font-size: 12px; color: #fde047; }
+
+    .oc-actions { display: flex; gap: 12px; margin-top: 20px; }
+    .btn-dispatch { background: var(--accent-blue); color: white; padding: 10px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; flex: 1; }
+    .btn-dispatch:hover { background: var(--accent-blue-hover); }
+    .btn-dispatch:disabled { background: var(--bg-dark); color: var(--text-muted); border: 1px solid var(--border); cursor: not-allowed; }
+    .btn-icon { width: 38px; height: 38px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; background: transparent; border: 1px solid; flex-shrink: 0; }
+    .btn-icon.green { border-color: rgba(16, 185, 129, 0.3); color: #34d399; }
+    .btn-icon.green:hover { background: rgba(16, 185, 129, 0.1); }
+    .btn-icon.red { border-color: rgba(239, 68, 68, 0.3); color: #f87171; }
+    .btn-icon.red:hover { background: rgba(239, 68, 68, 0.1); }
+
+    /* ========== RIGHT CART ========== */
+    .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 90; display: none; }
+    .cart-panel { position: fixed; top: 0; right: -400px; width: 400px; height: 100vh; background: var(--bg-card); border-left: 1px solid var(--border); z-index: 100; transition: 0.3s ease; display: flex; flex-direction: column; }
+    .cart-panel.open { right: 0; }
+    .cart-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .cart-header h3 { font-size: 18px; }
+    .cart-close { background: transparent; color: var(--text-muted); font-size: 20px; }
+    .cart-body { flex: 1; overflow-y: auto; padding: 24px; }
+    
+    .cart-items { margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+    .cart-item-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 12px; }
+    .cart-total { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; color: #60a5fa; margin-bottom: 24px; }
+
+    /* ========== ALANSM FOOTER ========== */
+    .site-footer { background-color: var(--bg-card); border-top: 1px solid var(--border); padding: 40px 32px 24px; margin-top: auto; }
+    .footer-inner { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+    .footer-nav { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; }
+    .footer-nav a { color: var(--text-muted); font-size: 14px; font-weight: 500; }
+    .footer-nav a:hover { color: var(--text-main); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-copy { color: var(--text-muted); font-size: 13px; }
+    .footer-legal { display: flex; gap: 16px; align-items: center; }
+    .footer-legal a { color: var(--text-muted); font-size: 13px; }
+    .footer-legal a:hover { color: var(--text-main); }
+    .footer-sep { color: var(--border); }
+
+    /* ========== UTILS ========== */
+    .toast { position: fixed; bottom: 24px; right: 24px; background: var(--bg-card); border: 1px solid var(--accent-blue); color: white; padding: 16px 24px; border-radius: var(--radius-md); box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; opacity: 0; transform: translateY(20px); transition: 0.3s ease; font-weight: 500; font-size: 14px; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .notice { padding: 12px; border-radius: var(--radius-sm); font-size: 13px; text-align: center; border: 1px solid; margin-bottom: 16px; }
+    .notice.info { background: rgba(37, 99, 235, 0.1); border-color: rgba(37, 99, 235, 0.2); color: #60a5fa; }
+    .notice.warn { background: rgba(234, 179, 8, 0.1); border-color: rgba(234, 179, 8, 0.2); color: #fde047; }
+    .notice.ok { background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2); color: #34d399; }
+
+    @media (max-width: 1000px) { .orders-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 860px) {
+      .header-inner { padding: 12px 16px; flex-wrap: wrap; gap: 12px; }
+      .header-brand h1 { font-size: 18px; }
+      .hide-mob { display: none !important; }
+      .header-right { width: 100%; justify-content: flex-start; overflow-x: auto; padding-bottom: 6px; gap: 8px; -webkit-overflow-scrolling: touch; }
+      .header-right::-webkit-scrollbar { display: none; }
+      .status-btn { padding: 8px 12px; font-size: 12px; white-space: nowrap; flex-shrink: 0; }
+      .top-nav { padding: 0 16px; -webkit-overflow-scrolling: touch; }
+      .wrap { padding: 16px; }
+      .features-banner { flex-direction: column; text-align: center; gap: 16px; padding: 20px; }
+      .features-banner-left .f-badges { justify-content: center; flex-wrap: wrap; }
+      .btn-outline { width: 100%; }
+      .search-row { flex-direction: column; align-items: stretch; gap: 12px; }
+      .filter-pills { overflow-x: auto; padding-bottom: 8px; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+      .filter-pills::-webkit-scrollbar { display: none; }
+      .filter-pill { white-space: nowrap; flex-shrink: 0; }
+      .menu-grid { grid-template-columns: 1fr; gap: 16px; }
+      .motoboy-layout { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .dash-stats-row { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .dash-filters { flex-direction: column; align-items: stretch; gap: 12px; }
+      .df-left { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+      .df-left button { white-space: nowrap; flex-shrink: 0; }
+      .btn-smart { justify-content: center; }
+      .oc-actions { flex-wrap: wrap; }
+      .btn-dispatch { width: 100%; flex: unset; }
+      .cart-panel { width: 100%; right: -100%; border-left: none; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-legal { justify-content: center; width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .dash-stats-row { grid-template-columns: 1fr; }
+      .driver-stats-grid { grid-template-columns: 1fr; }
+      .dc-actions { flex-direction: column; }
+      .dc-actions .btn-action { width: 100%; margin-left: 0 !important; }
+      .dc-header .dc-fee { text-align: left; margin-top: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="header-inner">
+      <div class="header-left">
+        <div class="header-logo-icon">🍔</div>
+        <div class="header-brand">
+          <h1 data-i18n="brand">ASM FoodHub</h1>
+          <p class="hide-mob" data-i18n="heroSub">Sistema de Pedidos, Gestão de Entregadores e Despacho em Tempo Real</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <select id="lang-select" class="lang-selector" onchange="changeLanguage(this.value)">
+          <option value="br">🇧🇷 BR</option>
+          <option value="pl">🇵🇱 PL</option>
+          <option value="es">🇪🇸 ES</option>
+          <option value="en">🇬🇧 EN</option>
+        </select>
+        <button class="status-btn green"><i class="fa-solid fa-store"></i> <span class="hide-mob" data-i18n="resOpen">Restaurante Aberto</span></button>
+        <button class="status-btn yellow"><i class="fa-solid fa-motorcycle"></i> <span id="hdr-orders-count">0</span> <span class="hide-mob" data-i18n="ordProg">Pedido(s) em Andamento</span></button>
+        <button class="status-btn purple hide-mob"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="aiAssist">Assistente AI</span></button>
+        <button class="status-btn gray" onclick="refreshFromBackend()"><i class="fa-solid fa-rotate-right"></i> <span class="hide-mob" data-i18n="sync">Sincronizar</span></button>
+        <button class="status-btn solid-blue" onclick="toggleCart()"><i class="fa-solid fa-cart-shopping"></i> <span data-i18n="cart">Carrinho</span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== TOP NAV ========== -->
+  <div class="top-nav-wrap">
+    <nav class="top-nav">
+      <button class="nav-tab active" onclick="showSection('cliente', this)"><i class="fa-solid fa-utensils"></i> <span data-i18n="navMenu">Cardápio (Menu)</span></button>
+      <button class="nav-tab" onclick="showSection('reserva', this)"><i class="fa-solid fa-chair"></i> <span data-i18n="navRes">Reservar Mesa</span></button>
+      <button class="nav-tab" onclick="showSection('motoboy', this)"><i class="fa-solid fa-motorcycle"></i> <span data-i18n="navMoto">Portal do Motoboy</span></button>
+      <button class="nav-tab" onclick="showSection('restaurante', this)"><i class="fa-solid fa-table-cells-large"></i> <span data-i18n="navDash">Painel (Dashboard)</span></button>
+    </nav>
+  </div>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="wrap">
+    
+    <!-- FEATURES BANNER -->
+    <div class="features-banner" id="featuresBanner">
+      <div class="features-banner-left">
+        <div class="f-badges">
+          <span class="f-badge blue"><i class="fa-solid fa-microchip"></i> <span data-i18n="featBadge">Recursos do Sistema</span></span>
+        </div>
+        <h2 data-i18n="featTitle">Tudo o que seu restaurante precisa para vender online e gerenciar entregas</h2>
+        <p data-i18n="featSub">Módulo completo para clientes, entregadores e equipe de cozinha.</p>
+      </div>
+      <div>
+        <button class="btn-outline" onclick="resetLocal()"><span data-i18n="viewAll">Ver Todos os Recursos</span> <i class="fa-solid fa-chevron-down"></i></button>
+      </div>
+    </div>
+
+    <!-- 1. ÁREA DO CLIENTE / MENU -->
+    <section id="cliente" class="section active">
+      <div class="menu-toolbar">
+        <div class="search-row">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Buscar pelo nome do prato, ingrediente, pizza...">
+          <span data-i18n="itemsAvail">4 itens disponíveis</span>
+        </div>
+        <div class="filter-pills">
+          <button class="filter-pill active" data-i18n="catAll">Todos</button>
+          <button class="filter-pill" data-i18n="catExec">Pratos Executivos</button>
+          <button class="filter-pill" data-i18n="catPizza">Pizzas Artesanais</button>
+          <button class="filter-pill" data-i18n="catBurger">Lanches & Burgers</button>
+          <button class="filter-pill" data-i18n="catDessert">Açaí & Sobremesas</button>
+          <button class="filter-pill" data-i18n="catDrink">Bebidas</button>
+        </div>
+      </div>
+      <div class="menu-grid" id="menuGrid"></div>
+    </section>
+
+    <!-- 2. ÁREA DO CLIENTE / RESERVAR MESA -->
+    <section id="reserva" class="section">
+      <div class="panel-box" style="max-width: 600px; margin: 0 auto;">
+        <h3><i class="fa-solid fa-calendar-check text-blue-500"></i> <span data-i18n="bookTable">Reservar uma Mesa</span></h3>
+        <form id="reservationForm">
+          <div class="form-group">
+            <label data-i18n="fullName">Nome Completo *</label>
+            <input id="resName" required placeholder="Ex: Mariana Costa">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label data-i18n="whatsapp">WhatsApp *</label>
+              <input id="resPhone" required placeholder="(12) 99999-9999">
+            </div>
+            <div class="form-group">
+              <label data-i18n="guests">Nº de Pessoas *</label>
+              <input type="number" id="resGuests" required min="1" max="20" placeholder="Ex: 4">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label data-i18n="date">Data *</label>
+              <input type="date" id="resDate" required>
+            </div>
+            <div class="form-group">
+              <label data-i18n="time">Horário *</label>
+              <input type="time" id="resTime" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="notes">Observações Especiais</label>
+            <textarea id="resNotes" placeholder="..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit"><i class="fa-regular fa-paper-plane"></i> <span data-i18n="confirmRes">Confirmar Solicitação de Reserva</span></button>
+        </form>
+        <div id="resStatus" class="notice ok" style="display:none; margin-top:16px;"></div>
+      </div>
+    </section>
+
+    <!-- 3. ÁREA DO MOTOBOY -->
+    <section id="motoboy" class="section">
+      <div class="motoboy-layout">
+        <div class="panel-box">
+          <h3><i class="fa-solid fa-user-plus text-blue-500"></i> <span data-i18n="driverReg">Cadastro de Entregador</span></h3>
+          <form id="driverForm">
+            <div class="form-group">
+              <label data-i18n="fullName">Nome Completo *</label>
+              <input id="driverName" required placeholder="Ex: Carlos Eduardo Silva">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label data-i18n="whatsapp">WhatsApp / Celular *</label>
+                <input id="driverPhone" required placeholder="(12) 99999-9999">
+              </div>
+              <div class="form-group">
+                <label data-i18n="vehicle">Veículo *</label>
+                <select id="driverVehicle"><option>Moto</option><option>Bicicleta</option><option>Carro</option></select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label data-i18n="mainArea">Bairro Principal de Atuação *</label>
+              <input id="driverNeighborhood" required list="bairros" placeholder="Perequê">
+            </div>
+            <div class="form-group">
+              <label data-i18n="otherAreas">Outros Bairros Atendidos</label>
+              <input id="driverAreas" placeholder="Perequê, Centro, Barra Velha">
+            </div>
+            <div class="form-group">
+              <label data-i18n="avail">Turnos de Disponibilidade</label>
+              <input id="driverAvailability" placeholder="Almoço e Jantar">
+            </div>
+            <div class="form-group">
+              <label data-i18n="notesExp">Observações / Experiência</label>
+              <textarea id="driverNotes" placeholder="..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit"><i class="fa-regular fa-paper-plane"></i> <span data-i18n="sendReq">Enviar Solicitação de Cadastro</span></button>
+          </form>
+          <div id="driverStatus" class="notice info" style="margin-top: 16px; display:none;"></div>
+        </div>
+
+        <div>
+          <div class="features-banner" style="margin-bottom: 24px; padding: 20px;">
+            <div class="features-banner-left" style="display:flex; align-items:center; gap: 16px; text-align:left;">
+              <div style="width: 48px; height: 48px; background: rgba(239, 68, 68, 0.1); color: #ef4444; border-radius: 12px; display:flex; align-items:center; justify-content:center; font-size: 20px; flex-shrink:0;">
+                <i class="fa-solid fa-motorcycle"></i>
+              </div>
+              <div>
+                <h2 style="font-size: 18px; margin: 0;" data-i18n="driverPortal">Portal do Entregador</h2>
+                <p style="font-size: 13px;" data-i18n="driverPortalSub">Cadastre-se para gerenciar entregas.</p>
+              </div>
+            </div>
+            <div style="text-align:left; margin-top: 12px;">
+              <label style="font-size:10px; text-transform:uppercase; margin:0 0 4px; display:block;" data-i18n="driverSim">Simular Acesso do Entregador</label>
+              <select id="driverLogin" onchange="renderDriverPanel()" style="width: 100%; max-width: 250px; padding: 8px 12px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: var(--radius-sm);"></select>
+            </div>
+          </div>
+          <div class="panel-box" id="driverPanelContainer">
+            <div class="notice info">Aguardando login.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PAINEL (DASHBOARD) -->
+    <section id="restaurante" class="section">
+      <div class="dash-stats-row">
+        <div class="dash-stat-card">
+          <div class="dsc-icon yellow"><i class="fa-solid fa-sack-dollar"></i></div>
+          <div class="dsc-info">
+            <p data-i18n="revToday">Faturamento Hoje</p>
+            <h3 id="stat-revenue">R$ 0,00</h3>
+          </div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dsc-icon red"><i class="fa-solid fa-moped"></i></div>
+          <div class="dsc-info">
+            <p data-i18n="actOrders">Pedidos Ativos</p>
+            <h3 id="stat-active-orders">0</h3>
+          </div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dsc-icon purple"><i class="fa-solid fa-user-check"></i></div>
+          <div class="dsc-info">
+            <p data-i18n="appDrivers">Motoboys Aprovados</p>
+            <h3 id="stat-motoboys">0</h3>
+          </div>
+        </div>
+        <div class="dash-stat-card">
+          <div class="dsc-icon gray"><i class="fa-solid fa-stopwatch"></i></div>
+          <div class="dsc-info">
+            <p data-i18n="avgTime">Tempo Médio Entrega</p>
+            <h3>~28 Min</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="dash-sub-nav">
+        <button class="dsn-btn active" onclick="switchDashTab('orders', this)"><i class="fa-solid fa-list-check"></i> <span data-i18n="tabOrders">Gestão de Pedidos</span> <span id="tab-badge-orders"></span></button>
+        <button class="dsn-btn" onclick="switchDashTab('reservations', this)"><i class="fa-solid fa-chair"></i> <span data-i18n="tabRes">Reservas de Mesas</span> <span id="tab-badge-reservations"></span></button>
+        <button class="dsn-btn" onclick="switchDashTab('approvals', this)"><i class="fa-solid fa-user-plus"></i> <span data-i18n="tabMoto">Aprovação de Motoboys</span> <span id="tab-badge-moto"></span></button>
+        <button class="dsn-btn" onclick="switchDashTab('dispatch', this)"><i class="fa-regular fa-paper-plane"></i> <span data-i18n="tabDisp">Central de Despacho</span></button>
+      </div>
+
+      <div class="dash-filters">
+        <div class="df-left">
+          <button class="active" data-i18n="filterAct">Ativos</button>
+          <button data-i18n="filterFin">Finalizados</button>
+          <button data-i18n="filterCan">Cancelados</button>
+          <button data-i18n="filterAll">Todos</button>
+        </div>
+        <button class="btn-smart"><i class="fa-solid fa-shuffle"></i> <span data-i18n="smartDisp">Despacho Inteligente por Fila</span></button>
+      </div>
+
+      <div id="dash-orders-grid" class="orders-grid"></div>
+      <div id="dash-reservations-grid" class="orders-grid" style="display: none;"></div>
+      <div id="dash-approvals-grid" class="orders-grid" style="display: none;"></div>
+      <div id="dash-dispatch-grid" class="orders-grid" style="display: none;"></div>
+    </section>
+  </main>
+
+  <!-- ========== RIGHT CART SIDEBAR ========== -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-panel" id="cartPanel">
+    <div class="cart-header">
+      <h3 data-i18n="yourOrder">Seu Pedido</h3>
+      <button class="cart-close" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-body">
+      <div id="cartItems" class="cart-items">
+        <div class="notice info" data-i18n="cartEmpty">Seu carrinho está vazio.</div>
+      </div>
+      <div class="cart-total" id="cartTotalDisplay" style="display: none;">
+        <span data-i18n="total">Total</span>
+        <span id="cartTotalValue">R$ 0,00</span>
+      </div>
+      
+      <form id="orderForm" style="display: none;">
+        <div class="form-group">
+          <label data-i18n="fullName">Nome Completo</label>
+          <input id="customerName" required placeholder="Ex: Mariana Costa">
+        </div>
+        <div class="form-group">
+          <label data-i18n="whatsapp">WhatsApp</label>
+          <input id="customerPhone" required placeholder="(12) 99999-9999">
+        </div>
+        <div class="form-group">
+          <label data-i18n="address">Endereço Completo</label>
+          <input id="customerAddress" required placeholder="Rua, número, complemento">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="neighborhood">Bairro</label>
+            <input id="customerNeighborhood" required list="bairros" placeholder="Perequê">
+          </div>
+          <div class="form-group">
+            <label data-i18n="payment">Pagamento</label>
+            <select id="paymentMethod"><option>Pix</option><option>Cartão</option><option>Dinheiro</option></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label data-i18n="notes">Observações</label>
+          <textarea id="orderNotes" placeholder="Sem cebola, levar maquininha..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit" style="font-size: 16px; padding: 16px;"><span data-i18n="checkout">Finalizar Pedido Agora</span></button>
+      </form>
+      <div id="orderStatus" class="notice ok" style="display: none; margin-top: 16px;"></div>
+    </div>
+  </div>
+
+  <!-- ========== ALANSM FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-nav">
+        <a href="#">Home</a>
+        <a href="#">Solutions</a>
+        <a href="#">Pricing</a>
+        <a href="#">Portfolio</a>
+        <a href="#">FAQ</a>
+        <a href="#">Contact</a>
+      </nav>
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          &copy; 2026 ASM FoodHub. <span data-i18n="footerRights">All rights reserved. • Business Automation & Digital Systems</span>
+        </div>
+        <div class="footer-legal">
+          <a href="#">Terms of Service</a>
+          <span class="footer-sep">|</span>
+          <a href="#">Privacy Notice</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <datalist id="bairros">
+    <option value="Centro (Vila)"></option>
+    <option value="Perequê"></option>
+    <option value="Barra Velha"></option>
+    <option value="Itaguaçu"></option>
+    <option value="Água Branca"></option>
+    <option value="Saco da Capela"></option>
+  </datalist>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ========== I18N DICTIONARY ==========
+    const i18n = {
+      br: {
+        brand: "ASM FoodHub", heroSub: "Sistema de Pedidos, Gestão de Entregadores e Despacho em Tempo Real",
+        resOpen: "Restaurante Aberto", ordProg: "Pedido(s) em Andamento", aiAssist: "Assistente AI", sync: "Sincronizar", cart: "Carrinho",
+        navMenu: "Cardápio (Menu)", navRes: "Reservar Mesa", navMoto: "Portal do Motoboy", navDash: "Painel (Dashboard)",
+        featBadge: "Recursos do Sistema", featTitle: "Tudo o que seu restaurante precisa para vender online e gerenciar entregas",
+        featSub: "Módulo completo para clientes, entregadores e equipe de cozinha.", viewAll: "Ver Todos os Recursos",
+        search: "Buscar pelo nome do prato, ingrediente...", itemsAvail: "itens disponíveis",
+        catAll: "Todos", catExec: "Pratos Executivos", catPizza: "Pizzas Artesanais", catBurger: "Lanches & Burgers", catDessert: "Açaí & Sobremesas", catDrink: "Bebidas",
+        bookTable: "Reservar uma Mesa", fullName: "Nome Completo *", whatsapp: "WhatsApp *", guests: "Nº de Pessoas *", date: "Data *", time: "Horário *", notes: "Observações",
+        confirmRes: "Confirmar Solicitação de Reserva", driverReg: "Cadastro de Entregador", vehicle: "Veículo *", mainArea: "Bairro Principal *", otherAreas: "Outros Bairros",
+        avail: "Disponibilidade", notesExp: "Observações / Experiência", sendReq: "Enviar Solicitação", driverPortal: "Portal do Entregador", driverPortalSub: "Cadastre-se para gerenciar entregas.",
+        driverSim: "Simular Acesso do Entregador", revToday: "Faturamento Hoje", actOrders: "Pedidos Ativos", appDrivers: "Motoboys Aprovados", avgTime: "Tempo Médio Entrega",
+        tabOrders: "Gestão de Pedidos", tabRes: "Reservas de Mesas", tabMoto: "Aprovação de Motoboys", tabDisp: "Central de Despacho",
+        filterAct: "Ativos", filterFin: "Finalizados", filterCan: "Cancelados", filterAll: "Todos", smartDisp: "Despacho Inteligente por Fila",
+        yourOrder: "Seu Pedido", cartEmpty: "Seu carrinho está vazio.", total: "Total", address: "Endereço Completo", neighborhood: "Bairro", payment: "Pagamento", checkout: "Finalizar Pedido Agora",
+        footerRights: "Todos os direitos reservados. • Automação de Negócios",
+        itemAdded: "adicionado!", syncing: "Sincronizando com o servidor...", syncOk: "Sincronização concluída!",
+        btnAcceptPrep: "Aceitar & Preparar", btnDispDel: "Despachar Entrega", btnWaitMot: "Aguardando Motoboy", btnAcceptDel: "Assumir Corrida", btnStartDel: "Iniciar Rota", btnEndDel: "Concluir Entrega", btnReject: "Recusar",
+        msgPending: "Aguardando vínculo", msgEmptyDash: "Caixa limpa.", "Novo pedido": "Novo pedido", "Em preparo": "Em preparo", "Aguardando motoboy": "Aguardando motoboy", "Motoboy designado": "Motoboy designado", "Saiu para entrega": "Saiu para entrega", "Finalizado": "Finalizado", "Cancelado": "Cancelado", "Aprovado": "Aprovado", "Recusado": "Recusado", "Aguardando aprovação": "Aguardando aprovação", "Oferecida ao motoboy": "Oferecida ao motoboy", "Aceita": "Aceita", "Em rota": "Em rota", "Entregue": "Entregue", "Disponível": "Disponível", "Pendente": "Pendente", "Confirmada": "Confirmada", "Cancelada": "Cancelada",
+        valGain: "Ganho da Corrida:", valFee: "Taxa da Corrida"
+      },
+      en: {
+        brand: "ASM FoodHub", heroSub: "Real-time Order System, Delivery Management and Dispatch",
+        resOpen: "Restaurant Open", ordProg: "Active Order(s)", aiAssist: "AI Assistant", sync: "Sync", cart: "Cart",
+        navMenu: "Menu", navRes: "Book a Table", navMoto: "Driver Portal", navDash: "Dashboard",
+        featBadge: "System Features", featTitle: "Everything your restaurant needs to sell online and manage deliveries",
+        featSub: "Complete module for customers, drivers, and kitchen staff.", viewAll: "View All Features",
+        search: "Search for dishes, ingredients...", itemsAvail: "items available",
+        catAll: "All", catExec: "Executive Meals", catPizza: "Artisan Pizzas", catBurger: "Burgers & Snacks", catDessert: "Desserts", catDrink: "Drinks",
+        bookTable: "Book a Table", fullName: "Full Name *", whatsapp: "WhatsApp *", guests: "No. of Guests *", date: "Date *", time: "Time *", notes: "Notes",
+        confirmRes: "Confirm Reservation", driverReg: "Driver Registration", vehicle: "Vehicle *", mainArea: "Main Area *", otherAreas: "Other Areas",
+        avail: "Availability", notesExp: "Notes / Experience", sendReq: "Send Request", driverPortal: "Driver Portal", driverPortalSub: "Register to manage deliveries.",
+        driverSim: "Simulate Driver Login", revToday: "Today's Revenue", actOrders: "Active Orders", appDrivers: "Approved Drivers", avgTime: "Avg. Delivery Time",
+        tabOrders: "Order Management", tabRes: "Table Reservations", tabMoto: "Driver Approvals", tabDisp: "Dispatch Center",
+        filterAct: "Active", filterFin: "Finished", filterCan: "Cancelled", filterAll: "All", smartDisp: "Smart Queue Dispatch",
+        yourOrder: "Your Order", cartEmpty: "Your cart is empty.", total: "Total", address: "Full Address", neighborhood: "Neighborhood", payment: "Payment", checkout: "Checkout Now",
+        footerRights: "All rights reserved. • Business Automation & Digital Systems",
+        itemAdded: "added!", syncing: "Syncing with server...", syncOk: "Sync complete!",
+        btnAcceptPrep: "Accept & Prepare", btnDispDel: "Dispatch Delivery", btnWaitMot: "Waiting Driver", btnAcceptDel: "Accept Delivery", btnStartDel: "Start Route", btnEndDel: "Complete Delivery", btnReject: "Reject",
+        msgPending: "Waiting link.", msgEmptyDash: "Inbox clean.", "Novo pedido": "New Order", "Em preparo": "Preparing", "Aguardando motoboy": "Waiting Driver", "Motoboy designado": "Driver Assigned", "Saiu para entrega": "Out for Delivery", "Finalizado": "Completed", "Cancelado": "Cancelled", "Aprovado": "Approved", "Recusado": "Rejected", "Aguardando aprovação": "Pending Approval", "Oferecida ao motoboy": "Offered to Driver", "Aceita": "Accepted", "Em rota": "En Route", "Entregue": "Delivered", "Disponível": "Available", "Pendente": "Pending", "Confirmada": "Confirmed", "Cancelada": "Cancelled",
+        valGain: "Delivery Gain:", valFee: "Delivery Fee"
+      },
+      pl: {
+        brand: "ASM FoodHub", heroSub: "System Zamówień, Zarządzanie Dostawami i Śledzenie w Czasie Rzeczywistym",
+        resOpen: "Restauracja Otwarta", ordProg: "Aktywne Zamówienia", aiAssist: "Asystent AI", sync: "Synchronizuj", cart: "Koszyk",
+        navMenu: "Menu", navRes: "Rezerwacja", navMoto: "Portal Dostawcy", navDash: "Panel (Dashboard)",
+        featBadge: "Funkcje Systemu", featTitle: "Wszystko, czego potrzebuje Twoja restauracja do sprzedaży online i dostaw",
+        featSub: "Kompletny moduł dla klientów, kierowców i kuchni.", viewAll: "Zobacz Wszystkie",
+        search: "Szukaj dań, składników...", itemsAvail: "dostępnych",
+        catAll: "Wszystkie", catExec: "Zestawy obiadowe", catPizza: "Pizze rzemieślnicze", catBurger: "Burgery", catDessert: "Desery", catDrink: "Napoje",
+        bookTable: "Zarezerwuj Stół", fullName: "Imię i Nazwisko *", whatsapp: "WhatsApp *", guests: "Liczba osób *", date: "Data *", time: "Godzina *", notes: "Uwagi",
+        confirmRes: "Potwierdź Rezerwację", driverReg: "Rejestracja Dostawcy", vehicle: "Pojazd *", mainArea: "Główny Obszar *", otherAreas: "Inne Obszary",
+        avail: "Dostępność", notesExp: "Uwagi / Doświadczenie", sendReq: "Wyślij Wniosek", driverPortal: "Portal Dostawcy", driverPortalSub: "Zarejestruj się, aby zarządzać dostawami.",
+        driverSim: "Symuluj Logowanie", revToday: "Dzisiejszy Przychód", actOrders: "Aktywne Zam.", appDrivers: "Zatwierdzeni", avgTime: "Średni Czas",
+        tabOrders: "Zamówienia", tabRes: "Rezerwacje", tabMoto: "Kierowcy", tabDisp: "Dyspozytornia",
+        filterAct: "Aktywne", filterFin: "Zakończone", filterCan: "Anulowane", filterAll: "Wszystkie", smartDisp: "Inteligentna Kolejka",
+        yourOrder: "Twoje Zamówienie", cartEmpty: "Twój koszyk jest pusty.", total: "Suma", address: "Pełny Adres", neighborhood: "Dzielnica", payment: "Płatność", checkout: "Zamawiam",
+        footerRights: "Wszelkie prawa zastrzeżone. • Automatyzacja Biznesu",
+        itemAdded: "dodane!", syncing: "Synchronizacja...", syncOk: "Zsynchronizowano!",
+        btnAcceptPrep: "Akceptuj i Przygotuj", btnDispDel: "Wyślij Dostawę", btnWaitMot: "Czekam na Dostawcę", btnAcceptDel: "Przyjmij Dostawę", btnStartDel: "Rozpocznij Trasę", btnEndDel: "Zakończ Dostawę", btnReject: "Odrzuć",
+        msgPending: "Oczekiwanie na połączenie.", msgEmptyDash: "Skrzynka pusta.", "Novo pedido": "Nowe Zam.", "Em preparo": "W Przygotowaniu", "Aguardando motoboy": "Czekam na Dostawcę", "Motoboy designado": "Dostawca Przypisany", "Saiu para entrega": "W Drodze", "Finalizado": "Zakończone", "Cancelado": "Anulowane", "Aprovado": "Zatwierdzony", "Recusado": "Odrzucony", "Aguardando aprovação": "Oczekuje na akceptację", "Oferecida ao motoboy": "Zaoferowano Dostawcy", "Aceita": "Zaakceptowana", "Em rota": "W Trasie", "Entregue": "Dostarczona", "Disponível": "Dostępna", "Pendente": "Oczekująca", "Confirmada": "Potwierdzona", "Cancelada": "Anulowana",
+        valGain: "Zarobek:", valFee: "Opłata za Dostawę"
+      },
+      es: {
+        brand: "ASM FoodHub", heroSub: "Sistema de Pedidos, Gestión de Repartidores y Despacho en Tiempo Real",
+        resOpen: "Restaurante Abierto", ordProg: "Pedido(s) Activo(s)", aiAssist: "Asistente AI", sync: "Sincronizar", cart: "Carrito",
+        navMenu: "Menú", navRes: "Reservar Mesa", navMoto: "Portal Repartidor", navDash: "Panel (Dashboard)",
+        featBadge: "Recursos del Sistema", featTitle: "Todo lo que tu restaurante necesita para vender online y gestionar entregas",
+        featSub: "Módulo completo para clientes, repartidores y equipo de cocina.", viewAll: "Ver Todo",
+        search: "Buscar platos, ingredientes...", itemsAvail: "artículos disponibles",
+        catAll: "Todos", catExec: "Platos Ejecutivos", catPizza: "Pizzas Artesanales", catBurger: "Hamburguesas", catDessert: "Postres", catDrink: "Bebidas",
+        bookTable: "Reservar una Mesa", fullName: "Nombre Completo *", whatsapp: "WhatsApp *", guests: "Nº Personas *", date: "Fecha *", time: "Hora *", notes: "Notas",
+        confirmRes: "Confirmar Reserva", driverReg: "Registro Repartidor", vehicle: "Vehículo *", mainArea: "Zona Principal *", otherAreas: "Otras Zonas",
+        avail: "Disponibilidad", notesExp: "Notas / Experiencia", sendReq: "Enviar Solicitud", driverPortal: "Portal Repartidor", driverPortalSub: "Regístrate para gestionar entregas.",
+        driverSim: "Simular Acceso", revToday: "Ingresos Hoy", actOrders: "Pedidos Activos", appDrivers: "Repartidores Aprob.", avgTime: "Tiempo Medio",
+        tabOrders: "Gestión Pedidos", tabRes: "Reservas de Mesas", tabMoto: "Aprobación Repart.", tabDisp: "Central Despachos",
+        filterAct: "Activos", filterFin: "Finalizados", filterCan: "Cancelados", filterAll: "Todos", smartDisp: "Despacho Inteligente",
+        yourOrder: "Tu Pedido", cartEmpty: "Tu carrito está vacío.", total: "Total", address: "Dirección Completa", neighborhood: "Barrio", payment: "Pago", checkout: "Finalizar Pedido",
+        footerRights: "Todos los derechos reservados. • Automatización de Negocios",
+        itemAdded: "¡añadido!", syncing: "Sincronizando...", syncOk: "¡Sincronización completa!",
+        btnAcceptPrep: "Aceptar y Preparar", btnDispDel: "Despachar Entrega", btnWaitMot: "Esperando Repartidor", btnAcceptDel: "Asumir Entrega", btnStartDel: "Iniciar Ruta", btnEndDel: "Concluir Entrega", btnReject: "Rechazar",
+        msgPending: "Esperando vínculo.", msgEmptyDash: "Bandeja limpia.", "Novo pedido": "Nuevo Pedido", "Em preparo": "En preparación", "Aguardando motoboy": "Esperando repartidor", "Motoboy designado": "Repartidor Asignado", "Saiu para entrega": "En Camino", "Finalizado": "Finalizado", "Cancelado": "Cancelado", "Aprovado": "Aprobado", "Recusado": "Rechazado", "Aguardando aprovação": "Esperando aprobación", "Oferecida ao motoboy": "Ofrecida al repartidor", "Aceita": "Aceptada", "Em rota": "En Ruta", "Entregue": "Entregada", "Disponível": "Disponible", "Pendente": "Pendiente", "Confirmada": "Confirmada", "Cancelada": "Cancelada",
+        valGain: "Ganancia:", valFee: "Tarifa de Entrega"
+      }
+    };
+
+    let currentLang = 'en';
+    function t(key) { return i18n[currentLang] && i18n[currentLang][key] ? i18n[currentLang][key] : (i18n['br'][key] || key); }
+
+    function applyTranslations() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t(key)) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = t(key);
+          else el.innerHTML = t(key);
+        }
+      });
+      document.getElementById('searchInput').placeholder = t('search');
+    }
+
+    function changeLanguage(lang) {
+      currentLang = lang;
+      applyTranslations();
+      renderAll();
+    }
+
+    // IP Geolocation
+    fetch('https://get.geojs.io/v1/ip/country.json')
+      .then(response => response.json())
+      .then(data => {
+        const c = data.country;
+        if (c === 'BR') currentLang = 'br';
+        else if (c === 'PL') currentLang = 'pl';
+        else if (['ES', 'MX', 'AR', 'CO', 'CL', 'PE'].includes(c)) currentLang = 'es';
+        else currentLang = 'en';
+        document.getElementById('lang-select').value = currentLang;
+        changeLanguage(currentLang);
+      }).catch(err => { changeLanguage('en'); });
+
+
+    // ========== CORE LOGIC & STATE ==========
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzEHeYQm4gsQa1s_KhCEodbpXproeYESNoe8uhjJaKRQ0ab3-9drjx2yGpXrWZyfkTA/exec';
+    const RESTAURANT_ID = 'REST-DEMO';
+    const currency = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+    const $ = id => document.getElementById(id);
+
+    let motoboys = JSON.parse(localStorage.getItem('dh_motoboys') || '[]');
+    let orders = JSON.parse(localStorage.getItem('dh_orders') || '[]');
+    let deliveries = JSON.parse(localStorage.getItem('dh_deliveries') || '[]');
+    let reservations = JSON.parse(localStorage.getItem('dh_reservations') || '[]');
+    let cart = [];
+
+    const menuItems = [
+      { id: 'm1', catKey: 'catExec', name: 'Combo Executivo Ilhabela', price: 42.90, desc: 'Filé de peixe fresco da ilha grelhado com alho poró, arroz com brócolis, pirão e salada tropical.', img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=600&h=400', badges: ['Destaque'], time: '~25 min' },
+      { id: 'm2', catKey: 'catExec', name: 'Marmita Fit Proteica', price: 36.90, desc: 'Sobrecoxa assada sem pele, purê de mandioquinha cremoso, legumes no vapor e quinoa aromática.', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=600&h=400', badges: ['Fit'], time: '~20 min' },
+      { id: 'm3', catKey: 'catPizza', name: 'Pizza Artesanal Marguerita', price: 54.90, desc: 'Massa de fermentação natural de 48h, molho de tomate pelati, muçarela de búfala e manjericão.', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=600&h=400', badges: ['Forno a Lenha'], time: '~30 min' },
+      { id: 'm4', catKey: 'catDessert', name: 'Açaí Premium 500ml', price: 24.90, desc: 'Açaí puro batido com xarope de guaraná. Acompanha banana fatiada, morango e granola.', img: 'https://images.unsplash.com/photo-1590584558509-08a6e873ec8b?auto=format&fit=crop&q=80&w=600&h=400', badges: ['Refrescante'], time: '~15 min' },
+    ];
+
+    function saveLocal() {
+      localStorage.setItem('dh_motoboys', JSON.stringify(motoboys));
+      localStorage.setItem('dh_orders', JSON.stringify(orders));
+      localStorage.setItem('dh_deliveries', JSON.stringify(deliveries));
+      localStorage.setItem('dh_reservations', JSON.stringify(reservations));
+    }
+
+    function resetLocal() {
+      if (!confirm('Reset Demo Data?')) return;
+      motoboys = []; orders = []; deliveries = []; reservations = []; cart = [];
+      saveLocal(); renderAll(); toast('Reset OK');
+    }
+
+    function toast(msg) {
+      const el = $('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 3000);
+    }
+
+    const todayISO = new Date().toISOString().split('T')[0];
+    const dateInput = $('resDate');
+    if(dateInput) dateInput.min = todayISO;
+
+    function showSection(id, btn) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      $(id).classList.add('active');
+      btn.classList.add('active');
+      if(id === 'restaurante') updateDashboardStats();
+    }
+
+    function switchDashTab(tab, btn) {
+      document.querySelectorAll('.dsn-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      $('dash-orders-grid').style.display = 'none'; $('dash-approvals-grid').style.display = 'none';
+      $('dash-dispatch-grid').style.display = 'none'; $('dash-reservations-grid').style.display = 'none';
+      if(tab === 'orders') $('dash-orders-grid').style.display = 'grid';
+      if(tab === 'reservations') $('dash-reservations-grid').style.display = 'grid';
+      if(tab === 'approvals') $('dash-approvals-grid').style.display = 'grid';
+      if(tab === 'dispatch') $('dash-dispatch-grid').style.display = 'grid';
+    }
+
+    function toggleCart() {
+      const panel = $('cartPanel'); const overlay = $('cartOverlay');
+      if (panel.classList.contains('open')) { panel.classList.remove('open'); overlay.style.display = 'none'; }
+      else { panel.classList.add('open'); overlay.style.display = 'block'; }
+    }
+
+    function makeId(prefix) { return prefix + '-' + (Math.floor(Math.random() * 9000) + 1000); }
+
+    async function sendToBackend(payload) {
+      try { await fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); } catch (err) { }
+    }
+
+    function readFromBackend(action, params = {}) {
+      return new Promise((resolve, reject) => {
+        const cb = 'dh_cb_' + Date.now();
+        const qs = new URLSearchParams({ ...params, action, callback: cb });
+        const s = document.createElement('script');
+        window[cb] = data => { resolve(data); delete window[cb]; s.remove(); };
+        s.src = WEB_APP_URL + '?' + qs.toString();
+        document.body.appendChild(s);
+        setTimeout(() => reject(new Error('Timeout')), 12000);
+      });
+    }
+
+    async function refreshFromBackend() {
+      toast(t('syncing'));
+      try {
+        const data = await readFromBackend('getDashboardData', { restaurantId: RESTAURANT_ID });
+        if (data.status === 'ok') {
+          motoboys = (data.motoboys || []).map(r => ({ id: r.id||r['Motoboy ID'], name: r.Name, phone: r.Phone, vehicle: r.Vehicle||'Moto', neighborhood: r['Main Neighborhood']||'', status: r.Status||'Aguardando aprovação' }));
+          orders = (data.orders || []).map(r => ({ id: r.id||r['Order ID'], customerName: r['Customer Name'], customerPhone: r['Customer Phone'], items: JSON.parse(r.Items||'[]'), total: Number(r.Total||0), paymentMethod: r['Payment Method'], address: r.Address, neighborhood: r.Neighborhood, status: r['Order Status']||'Novo pedido', notes: r.Notes }));
+          deliveries = (data.deliveries || []).map(r => ({ id: r.id||r['Delivery ID'], orderId: r['Order ID'], motoboyId: r['Motoboy ID'], neighborhood: r['Delivery Neighborhood'], fee: Number(r['Delivery Fee']||0), status: r['Delivery Status']||'Disponível' }));
+          saveLocal(); renderAll(); toast(t('syncOk'));
+        }
+      } catch (err) { console.log('Offline'); }
+    }
+
+    function renderMenu() {
+      $('menuGrid').innerHTML = menuItems.map(i => `
+        <div class="menu-card">
+          <div class="mc-img" style="background-image: url('${i.img}')">
+            <div class="mc-badges-top">${i.badges.map(b => `<span class="mc-badge">${b}</span>`).join('')}</div>
+            <div class="mc-badge-time"><i class="fa-regular fa-clock"></i> ${i.time}</div>
+          </div>
+          <div class="mc-content">
+            <div class="mc-category">${t(i.catKey)}</div>
+            <h3>${i.name}</h3>
+            <p>${i.desc}</p>
+            <div class="mc-footer">
+              <div class="mc-price"><strong>${currency.format(i.price)}</strong></div>
+              <button class="btn-add" onclick="addToCart('${i.id}')">+ Adicionar</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addToCart(id) {
+      const item = menuItems.find(i => i.id === id);
+      const existing = cart.find(i => i.id === id);
+      if (existing) existing.qty++; else cart.push({ ...item, qty: 1 });
+      renderCart(); toast(`${item.name} ${t('itemAdded')}`);
+      if(!$('cartPanel').classList.contains('open')) toggleCart();
+    }
+
+    function renderCart() {
+      const cItems = $('cartItems'), cForm = $('orderForm'), cTotal = $('cartTotalDisplay');
+      if (!cart.length) { cItems.innerHTML = `<div class="notice info">${t('cartEmpty')}</div>`; cForm.style.display = 'none'; cTotal.style.display = 'none'; return; }
+      
+      const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      cItems.innerHTML = cart.map(i => `<div class="cart-item-row"><span><b>${i.qty}x</b> ${i.name}</span><span style="color: var(--text-muted)">${currency.format(i.price * i.qty)}</span></div>`).join('');
+      $('cartTotalValue').textContent = currency.format(total);
+      cForm.style.display = 'block'; cTotal.style.display = 'flex'; $('orderStatus').style.display = 'none';
+    }
+
+    $('reservationForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const id = makeId('RES');
+      const res = { id, name: $('resName').value.trim(), phone: $('resPhone').value.trim(), guests: $('resGuests').value, date: $('resDate').value, time: $('resTime').value, notes: $('resNotes').value.trim(), status: 'Pendente' };
+      reservations.unshift(res); saveLocal(); renderAll();
+      const st = $('resStatus'); st.style.display = 'block'; st.className = 'notice ok'; st.innerHTML = `<strong>${t('resOk')}</strong>`;
+      $('reservationForm').reset();
+      await sendToBackend({ action: 'createReservation', ...res, restaurantId: RESTAURANT_ID });
+    });
+
+    $('orderForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const id = makeId('2'); 
+      const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      const order = { id, restaurantId: RESTAURANT_ID, customerName: $('customerName').value.trim(), customerPhone: $('customerPhone').value.trim(), items: [...cart], total, paymentMethod: $('paymentMethod').value, address: $('customerAddress').value.trim(), neighborhood: $('customerNeighborhood').value.trim(), status: 'Novo pedido', notes: $('orderNotes').value.trim() };
+      
+      orders.unshift(order); saveLocal(); renderAll();
+      $('orderForm').style.display = 'none'; $('cartItems').style.display = 'none'; $('cartTotalDisplay').style.display = 'none';
+      const st = $('orderStatus'); st.style.display = 'block'; st.className = 'notice info'; st.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Processing...`;
+      await sendToBackend({ action: 'createOrder', orderId: id, ...order, items: order.items.map(i=>({name:i.name, qty:i.qty})) });
+      cart = []; $('orderForm').reset(); renderCart();
+      st.className = 'notice ok'; st.innerHTML = `<strong>${t('ordOk')}</strong>`;
+    });
+
+    $('driverForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const id = makeId('MOT');
+      const driver = { id, name: $('driverName').value.trim(), phone: $('driverPhone').value.trim(), vehicle: $('driverVehicle').value, neighborhood: $('driverNeighborhood').value.trim(), status: 'Aguardando aprovação' };
+      motoboys.unshift(driver); saveLocal(); renderAll();
+      $('driverStatus').style.display = 'block'; $('driverStatus').className = 'notice ok'; $('driverStatus').textContent = 'OK!'; $('driverForm').reset();
+      await sendToBackend({ action: 'createMotoboy', motoboyId: id, ...driver });
+    });
+
+    function updateDashboardStats() {
+      const active = orders.filter(o => !['Saiu para entrega', 'Finalizado', 'Cancelado'].includes(o.status));
+      const revenue = orders.filter(o => o.status !== 'Cancelado').reduce((sum, o) => sum + o.total, 0);
+      const mAtivos = motoboys.filter(m => m.status === 'Aprovado').length;
+      $('stat-revenue').textContent = currency.format(revenue);
+      $('stat-active-orders').textContent = active.length;
+      $('stat-motoboys').textContent = mAtivos;
+      $('hdr-orders-count').textContent = active.length;
+      $('tab-badge-orders').textContent = `(${active.length})`;
+    }
+
+    function renderOrders() {
+      const activeOrders = orders.filter(o => !['Saiu para entrega', 'Finalizado', 'Cancelado'].includes(o.status));
+      $('dash-orders-grid').innerHTML = activeOrders.length ? activeOrders.map(o => {
+        let statusClass = 'wait'; if(o.status === 'Em preparo') statusClass = 'prep';
+        let btnMain = '';
+        if(o.status === 'Novo pedido') btnMain = `<button class="btn-dispatch" onclick="updateOrder('${o.id}','Em preparo')">${t('btnAcceptPrep')}</button>`;
+        else if(o.status === 'Em preparo') btnMain = `<button class="btn-dispatch" onclick="releaseDelivery('${o.id}')">${t('btnDispDel')}</button>`;
+        else btnMain = `<button class="btn-dispatch" disabled>${t('btnWaitMot')}</button>`;
+        return `
+        <div class="order-card">
+          <div class="oc-header"><div><p style="color:var(--text-muted);font-size:11px;font-weight:700;">#${o.id}</p><h4>${escapeHtml(o.customerName)}</h4><p>${escapeHtml(o.customerPhone)}</p></div><div class="oc-status ${statusClass}">${t(o.status)}</div></div>
+          <div class="oc-details"><p>📍 <strong>${escapeHtml(o.neighborhood)}</strong> · ${escapeHtml(o.address)}</p><p>💳 ${escapeHtml(o.paymentMethod)} <span class="oc-total">${t('total')}: ${currency.format(o.total)}</span></p></div>
+          <div class="oc-items">${o.items.map(i => `<p><strong>${i.qty}x</strong> ${escapeHtml(i.name)} <span>${currency.format(i.price*i.qty)}</span></p>`).join('')}</div>
+          ${o.notes ? `<div class="oc-notes">📝 ${escapeHtml(o.notes)}</div>` : ''}
+          <div class="oc-actions">${btnMain}<button class="btn-icon green"><i class="fa-brands fa-whatsapp"></i></button><button class="btn-icon red" onclick="updateOrder('${o.id}','Cancelado')"><i class="fa-solid fa-xmark"></i></button></div>
+        </div>`;
+      }).join('') : `<div class="notice info" style="grid-column: 1/-1;">${t('msgEmptyDash')}</div>`;
+      updateDashboardStats();
+    }
+
+    function renderReservations() {
+      const activeRes = reservations.filter(r => !['Cancelada', 'Finalizada'].includes(r.status));
+      $('tab-badge-reservations').textContent = activeRes.length ? `(${activeRes.length})` : '';
+      $('dash-reservations-grid').innerHTML = activeRes.length ? activeRes.map(r => {
+        let statusClass = 'wait'; if (r.status === 'Confirmada') statusClass = 'done';
+        return `
+        <div class="order-card">
+          <div class="oc-header"><div><p style="color:var(--text-muted);font-size:11px;font-weight:700;">#${r.id}</p><h4>${escapeHtml(r.name)}</h4><p>${escapeHtml(r.phone)}</p></div><div class="oc-status ${statusClass}">${t(r.status)}</div></div>
+          <div class="oc-details"><p>📅 <strong>${r.date.split('-').reverse().join('/')}</strong> | <strong>${r.time}</strong></p><p>👥 <strong>${r.guests}</strong></p></div>
+          ${r.notes ? `<div class="oc-notes">📝 ${escapeHtml(r.notes)}</div>` : ''}
+          <div class="oc-actions">
+            <button class="btn-dispatch" style="background:var(--accent-green)" onclick="updateReservation('${r.id}','Confirmada')" ${r.status==='Confirmada'?'disabled':''}>Ok</button>
+            <button class="btn-icon red" onclick="updateReservation('${r.id}','Cancelada')"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        </div>`;
+      }).join('') : `<div class="notice info" style="grid-column: 1/-1;">${t('msgEmptyDash')}</div>`;
+    }
+
+    function renderApprovals() {
+      const pends = motoboys.filter(d => d.status === 'Aguardando aprovação');
+      $('tab-badge-moto').textContent = pends.length ? `(${pends.length})` : '';
+      $('dash-approvals-grid').innerHTML = motoboys.length ? motoboys.map(d => `
+        <div class="order-card" style="border-color: ${d.status==='Aprovado'?'rgba(16,185,129,0.3)':'var(--border)'}">
+          <div class="oc-header"><div><h4>${escapeHtml(d.name)}</h4><p>${escapeHtml(d.phone)} · ${escapeHtml(d.vehicle)}</p></div><div class="oc-status ${d.status==='Aprovado'?'done':(d.status==='Recusado'?'red':'wait')}">${t(d.status)}</div></div>
+          <div class="oc-details" style="border:none; margin:0; padding:0;"><p>📍 <strong>${escapeHtml(d.neighborhood)}</strong></p></div>
+          <div class="oc-actions"><button class="btn-dispatch" style="background:var(--accent-green)" onclick="approveDriver('${d.id}','Aprovado')" ${d.status==='Aprovado'?'disabled':''}>OK</button><button class="btn-icon red" onclick="approveDriver('${d.id}','Recusado')"><i class="fa-solid fa-ban"></i></button></div>
+        </div>`).join('') : `<div class="notice info" style="grid-column: 1/-1;">${t('msgEmptyDash')}</div>`;
+    }
+
+    function renderDeliveries() {
+      $('dash-dispatch-grid').innerHTML = deliveries.length ? deliveries.map(d => {
+        const driver = motoboys.find(m => m.id === d.motoboyId);
+        return `
+        <div class="order-card">
+          <div class="oc-header"><div><p style="font-size:11px; font-weight:700;">#${d.id.slice(-4)}</p><h4>#${d.orderId}</h4></div><div class="oc-status ${d.status==='Aceita'?'done':'prep'}">${t(d.status)}</div></div>
+          <div class="oc-details" style="border:none;"><p>📍 <strong>${escapeHtml(d.neighborhood)}</strong></p><p>🏍️ <strong>${driver ? escapeHtml(driver.name) : '...'}</strong></p><p>💵 <strong style="color:var(--accent-green)">${currency.format(d.fee)}</strong></p></div>
+        </div>`;
+      }).join('') : `<div class="notice info" style="grid-column: 1/-1;">${t('msgEmptyDash')}</div>`;
+    }
+
+    function renderDriverPanel() {
+      const approved = motoboys.filter(d => d.status === 'Aprovado');
+      const select = $('driverLogin'); const currentVal = select.value;
+      select.innerHTML = approved.length ? approved.map(d => `<option value="${d.id}">${escapeHtml(d.name)}</option>`).join('') : '<option value="">-</option>';
+      if(currentVal && approved.find(d=>d.id===currentVal)) select.value = currentVal;
+      const motoboyId = select.value;
+      if (!motoboyId) { $('driverPanelContainer').innerHTML = `<div class="notice info">${t('msgPending')}</div>`; return; }
+      
+      const driver = approved.find(d => d.id === motoboyId);
+      const mine = deliveries.filter(d => (d.motoboyId === motoboyId && ['Oferecida ao motoboy', 'Aceita', 'Em rota'].includes(d.status)) || (!d.motoboyId && d.status === 'Disponível'));
+      const dayEarnings = deliveries.filter(d => d.motoboyId === motoboyId && d.status === 'Entregue').reduce((s,d)=>s+d.fee, 0);
+
+      let html = `<div class="driver-header"><div class="driver-info"><h2>${escapeHtml(driver.name)} <span class="tag green">OK</span></h2><p>${driver.vehicle}</p></div><div class="status-btn green" style="border-radius:6px;"><i class="fa-solid fa-circle text-[10px]"></i> Online</div></div>
+        <div class="driver-stats-grid"><div class="stat-box"><span>Ganho</span><strong class="green">${currency.format(dayEarnings)}</strong></div><div class="stat-box"><span><i class="fa-solid fa-star yellow"></i> 5.0</span></div></div>`;
+
+      html += mine.length ? mine.map(d => {
+        const order = orders.find(o => o.id === d.orderId) || {};
+        return `
+        <div class="delivery-card" style="${d.status==='Em rota' ? 'border-color: var(--accent-blue)' : ''}">
+          <div class="dc-header"><div><p>#${d.id.slice(-4)}</p><h4>#${d.orderId}</h4></div><div class="dc-fee">${t('valFee')}<strong>${currency.format(d.fee)}</strong></div></div>
+          <div class="dc-info"><p>📍 <strong>${escapeHtml(d.neighborhood)}</strong></p><p>${escapeHtml(order.customerName)} | ${escapeHtml(order.address)}</p></div>
+          <div class="dc-actions">
+            <button class="btn-action green" onclick="acceptDelivery('${d.id}','${motoboyId}')" ${d.status !== 'Oferecida ao motoboy' ? 'style="display:none"' : ''}><i class="fa-solid fa-check"></i> ${t('btnAcceptDel')}</button>
+            <button class="btn-action blue-outline" onclick="updateDelivery('${d.id}','Em rota')" ${d.status !== 'Aceita' ? 'style="display:none"' : ''} style="margin:0;"><i class="fa-solid fa-motorcycle"></i> ${t('btnStartDel')}</button>
+            <button class="btn-action green" onclick="updateDelivery('${d.id}','Entregue')" ${d.status !== 'Em rota' ? 'style="display:none"' : ''}><i class="fa-solid fa-flag-checkered"></i> ${t('btnEndDel')}</button>
+            <button class="btn-action red-outline" onclick="rejectDelivery('${d.id}','${motoboyId}')" ${['Em rota', 'Entregue'].includes(d.status) ? 'style="display:none"' : ''}>${t('btnReject')}</button>
+          </div>
+        </div>`;
+      }).join('') : `<div class="notice info">${t('msgEmptyDash')}</div>`;
+      $('driverPanelContainer').innerHTML = html;
+    }
+
+    function updateOrder(id, status) { orders = orders.map(o => o.id === id ? { ...o, status } : o); saveLocal(); renderAll(); toast(t(status)); }
+    function updateReservation(id, status) { reservations = reservations.map(r => r.id === id ? { ...r, status } : r); saveLocal(); renderAll(); toast(t(status)); }
+    function approveDriver(id, status) { motoboys = motoboys.map(d => d.id === id ? { ...d, status } : d); saveLocal(); renderAll(); toast(t(status)); }
+
+    function releaseDelivery(id) {
+      const order = orders.find(o => o.id === id); const driver = motoboys.find(d => d.status === 'Aprovado');
+      deliveries.unshift({ id: makeId('DEL'), orderId: id, motoboyId: driver?driver.id:'', neighborhood: order.neighborhood, fee: 10, status: driver?'Oferecida ao motoboy':'Disponível' });
+      orders = orders.map(o => o.id === id ? { ...o, status: 'Aguardando motoboy' } : o);
+      saveLocal(); renderAll(); toast('OK');
+    }
+
+    function acceptDelivery(delId, motoboyId) { deliveries = deliveries.map(d => d.id === delId ? { ...d, status: 'Aceita', motoboyId } : d); saveLocal(); renderAll(); toast('OK'); }
+    function rejectDelivery(delId, motoboyId) { deliveries = deliveries.map(d => d.id === delId ? { ...d, status: 'Disponível', motoboyId: '' } : d); saveLocal(); renderAll(); toast('OK'); }
+    function updateDelivery(delId, status) {
+      deliveries = deliveries.map(d => d.id === delId ? { ...d, status } : d); const del = deliveries.find(d => d.id === delId);
+      if(status === 'Em rota') orders = orders.map(o => o.id === del.orderId ? { ...o, status: 'Saiu para entrega' } : o);
+      if(status === 'Entregue') orders = orders.map(o => o.id === del.orderId ? { ...o, status: 'Finalizado' } : o);
+      saveLocal(); renderAll();
+    }
+
+    function renderAll() { renderMenu(); renderCart(); renderOrders(); renderReservations(); renderApprovals(); renderDeliveries(); renderDriverPanel(); }
+    function escapeHtml(v) { return String(v??'').replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s])); }
+  </script>
+</body>
+</html>
