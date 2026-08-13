@@ -1,43 +1,176 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset 
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <url>
-    <loc>https://alansmsolutions.com/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alansmsolutions.com/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://alansmsolutions.com/pl/" />
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://alansmsolutions.com/br/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alansmsolutions.com/" />
-    <lastmod>2026-07-05</lastmod>
-  </url>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <url>
-    <loc>https://alansmsolutions.com/pl/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alansmsolutions.com/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://alansmsolutions.com/pl/" />
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://alansmsolutions.com/br/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alansmsolutions.com/" />
-    <lastmod>2026-07-05</lastmod>
-  </url>
+    <!-- ===================================================== -->
+    <!-- ENGLISH -->
+    <!-- ===================================================== -->
 
-  <url>
-    <loc>https://alansmsolutions.com/br/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://alansmsolutions.com/" />
-    <xhtml:link rel="alternate" hreflang="pl" href="https://alansmsolutions.com/pl/" />
-    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://alansmsolutions.com/br/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://alansmsolutions.com/" />
-    <lastmod>2026-07-05</lastmod>
-  </url>
+    <url>
+        <loc>https://alansmsolutions.com/</loc>
+        <lastmod>2026-08-13</lastmod>
+        <xhtml:link rel="alternate" hreflang="en"
+            href="https://alansmsolutions.com/" />
+        <xhtml:link rel="alternate" hreflang="pl"
+            href="https://alansmsolutions.com/pl/" />
+        <xhtml:link rel="alternate" hreflang="pt-BR"
+            href="https://alansmsolutions.com/br/" />
+        <xhtml:link rel="alternate" hreflang="es"
+            href="https://alansmsolutions.com/es/" />
+        <xhtml:link rel="alternate" hreflang="x-default"
+            href="https://alansmsolutions.com/" />
+    </url>
 
-  <url>
-    <loc>https://alansmsolutions.com/br/alternativas-agendamentos-reservas/</loc>
-    <lastmod>2026-07-05</lastmod>
-  </url>
+    <url>
+        <loc>https://alansmsolutions.com/solutions/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
 
-  <url>
-    <loc>https://alansmsolutions.com/portfolio.html</loc>
-    <lastmod>2026-07-05</lastmod>
-  </url>
+    <url>
+        <loc>https://alansmsolutions.com/pricing/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/portfolio/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/faq/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/barbershop/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/beauty/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+
+    <!-- ===================================================== -->
+    <!-- POLISH -->
+    <!-- ===================================================== -->
+
+    <url>
+        <loc>https://alansmsolutions.com/pl/</loc>
+        <lastmod>2026-08-13</lastmod>
+        <xhtml:link rel="alternate" hreflang="en"
+            href="https://alansmsolutions.com/" />
+        <xhtml:link rel="alternate" hreflang="pl"
+            href="https://alansmsolutions.com/pl/" />
+        <xhtml:link rel="alternate" hreflang="pt-BR"
+            href="https://alansmsolutions.com/br/" />
+        <xhtml:link rel="alternate" hreflang="es"
+            href="https://alansmsolutions.com/es/" />
+        <xhtml:link rel="alternate" hreflang="x-default"
+            href="https://alansmsolutions.com/" />
+    </url>
+
+
+    <!-- ===================================================== -->
+    <!-- BRAZILIAN PORTUGUESE -->
+    <!-- ===================================================== -->
+
+    <url>
+        <loc>https://alansmsolutions.com/br/</loc>
+        <lastmod>2026-08-13</lastmod>
+        <xhtml:link rel="alternate" hreflang="en"
+            href="https://alansmsolutions.com/" />
+        <xhtml:link rel="alternate" hreflang="pl"
+            href="https://alansmsolutions.com/pl/" />
+        <xhtml:link rel="alternate" hreflang="pt-BR"
+            href="https://alansmsolutions.com/br/" />
+        <xhtml:link rel="alternate" hreflang="es"
+            href="https://alansmsolutions.com/es/" />
+        <xhtml:link rel="alternate" hreflang="x-default"
+            href="https://alansmsolutions.com/" />
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/br/alternativas-agendamentos-reservas/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/br/faq/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/br/pricing/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/br/solutions/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+
+    <!-- ===================================================== -->
+    <!-- SPANISH -->
+    <!-- ===================================================== -->
+
+    <url>
+        <loc>https://alansmsolutions.com/es/</loc>
+        <lastmod>2026-08-13</lastmod>
+        <xhtml:link rel="alternate" hreflang="en"
+            href="https://alansmsolutions.com/" />
+        <xhtml:link rel="alternate" hreflang="pl"
+            href="https://alansmsolutions.com/pl/" />
+        <xhtml:link rel="alternate" hreflang="pt-BR"
+            href="https://alansmsolutions.com/br/" />
+        <xhtml:link rel="alternate" hreflang="es"
+            href="https://alansmsolutions.com/es/" />
+        <xhtml:link rel="alternate" hreflang="x-default"
+            href="https://alansmsolutions.com/" />
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/es/portfolio/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/es/pricing/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/es/solutions/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+
+    <!-- ===================================================== -->
+    <!-- INDUSTRY / SERVICE PAGES -->
+    <!-- ===================================================== -->
+
+    <url>
+        <loc>https://alansmsolutions.com/barbershop/br/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/barbershop/pl/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/beauty/br/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://alansmsolutions.com/beauty/pl/</loc>
+        <lastmod>2026-08-13</lastmod>
+    </url>
 
 </urlset>
