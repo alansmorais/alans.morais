@@ -3,35 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AlanSM Solutions | Deja de pagar altas comisiones. Automatiza tu negocio.</title>
+  <title>AlanSM Solutions | Deja de perder el 20% en comisiones. Automatiza tus reservas.</title>
 
   <link rel="icon" type="image/svg+xml" href="https://alansmsolutions.com/images/logo.svg" />
 
-  <meta name="description" content="AlanSM Solutions desarrolla automatización de negocios, sistemas de reservas privados, plataformas DeliveryHub, flujos de CRM y sistemas digitales para pequeñas empresas." />
+  <meta name="description" content="AlanSM Solutions construye automatización empresarial, sistemas de reservas privados, plataformas DeliveryHub, flujos de CRM y sistemas digitales para pequeñas empresas." />
   <meta name="robots" content="index, follow" />
 
   <link rel="alternate" hreflang="en" href="https://alansmsolutions.com/" />
-  <link rel="alternate" hreflang="pt-br" href="https://alansmsolutions.com/br/" />
+  <link rel="alternate" hreflang="br" href="https://alansmsolutions.com/br/" />
   <link rel="alternate" hreflang="pl" href="https://alansmsolutions.com/pl/" />
   <link rel="alternate" hreflang="es" href="https://alansmsolutions.com/es/" />
   <link rel="alternate" hreflang="x-default" href="https://alansmsolutions.com/" />
   <link rel="canonical" href="https://alansmsolutions.com/es/"/>
 
-  <meta property="og:title" content="AlanSM Solutions | Automatización de Negocios y Sistemas Digitales" />
-  <meta property="og:description" content="AlanSM Solutions desarrolla automatización de negocios, sistemas de reservas privados, plataformas DeliveryHub, flujos de CRM y sistemas digitales para pequeñas empresas." />
+  <meta property="og:title" content="AlanSM Solutions | Automatización Empresarial y Sistemas Digitales" />
+  <meta property="og:description" content="AlanSM Solutions construye automatización empresarial, sistemas de reservas privados, plataformas DeliveryHub, flujos de CRM y sistemas digitales para pequeñas empresas." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://alansmsolutions.com/es/" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="AlanSM Solutions | Automatización de Negocios y Sistemas Digitales" />
-  <meta name="twitter:description" content="AlanSM Solutions desarrolla automatización de negocios, sistemas de reservas privados, plataformas DeliveryHub, flujos de CRM y sistemas digitales para pequeñas empresas." />
 
   <!-- LCP Optimization: Preload the hero background image -->
   <link rel="preload" as="image" href="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80" />
 
   <script>
     (async function() {
-      // IP-based redirection logic matching the new folder structure
       const manualLang = localStorage.getItem('user_lang');
       const currentPath = window.location.pathname;
       if (manualLang) return; 
@@ -46,13 +41,11 @@
         let targetUrl = '/es/'; 
         if (country === 'BR' || country === 'PT') targetUrl = '/br/';
         else if (country === 'PL') targetUrl = '/pl/';
-        else if (esCountries.includes(country)) targetUrl = '/es/';
-        else targetUrl = '/';
+        else if (!esCountries.includes(country)) targetUrl = '/';
 
-        if (targetUrl === '/br/' && !currentPath.includes('/br/')) window.location.replace(targetUrl);
+        if (targetUrl === '/' && currentPath.includes('/es/')) window.location.replace(targetUrl);
+        else if (targetUrl === '/br/' && !currentPath.includes('/br/')) window.location.replace(targetUrl);
         else if (targetUrl === '/pl/' && !currentPath.includes('/pl/')) window.location.replace(targetUrl);
-        else if (targetUrl === '/es/' && !currentPath.includes('/es/')) window.location.replace(targetUrl);
-        else if (targetUrl === '/' && currentPath.includes('/es/')) window.location.replace(targetUrl);
       } catch(e) {}
     })();
 
@@ -121,7 +114,7 @@
 
 <div class="fixed top-0 inset-x-0 z-50">
   <div class="top-info-bar">
-    <div class="max-w-7xl mx-auto px-6 py-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] md:text-[13px] text-center">
+    <div class="max-w-7xl mx-auto px-6 py-2.5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] md:text-[13px] text-center">
       <div class="flex items-center justify-center gap-2 sm:gap-5 mx-auto sm:mx-0">
         <span class="font-medium">📧 kontakt@alansmsolutions.com</span>
         <span class="hidden sm:inline text-blue-200">|</span>
@@ -153,7 +146,7 @@
         <a href="/es/solutions/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Soluciones</a>
         <a href="/es/pricing/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Precios</a>
         <a href="/portfolio/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Portafolio</a>
-        <a href="/faq/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">FAQ</a>
+        <a href="/es/faq/" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">FAQ</a>
         <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="text-sm font-semibold text-slate-400 hover:text-blue-400 transition-colors">Contacto</button>
       </div>
 
@@ -168,7 +161,7 @@
         <a href="/es/free-trial/" class="hidden md:inline-flex items-center bg-blue-600 hover:bg-blue-500 text-white text-xs md:text-sm font-bold px-4 py-2.5 rounded-lg shadow-md shadow-blue-500/20 transition-all">Prueba Gratis</a>
 
         <button id="mobileMenuButton" type="button" class="lg:hidden nav-icon-btn" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMobileMenu()">
-          <span class="sr-only">Menu</span>
+          <span class="sr-only">Toggle menu</span>
           <div>
             <span class="menu-line"></span>
             <span class="menu-line"></span>
@@ -185,7 +178,7 @@
       <a href="/es/solutions/" class="mobile-drawer-link" onclick="closeMobileMenu()">Soluciones</a>
       <a href="/es/pricing/" class="mobile-drawer-link" onclick="closeMobileMenu()">Precios</a>
       <a href="/portfolio/" class="mobile-drawer-link" onclick="closeMobileMenu()">Portafolio</a>
-      <a href="/faq/" class="mobile-drawer-link" onclick="closeMobileMenu()">FAQ</a>
+      <a href="/es/faq/" class="mobile-drawer-link" onclick="closeMobileMenu()">FAQ</a>
       <button type="button" class="mobile-drawer-link text-left w-full" onclick="closeMobileMenu(); openContactForm('offer', 'introductory_offer');">Contacto</button>
 
       <div class="pt-5 mt-5 border-t border-slate-800 flex items-center justify-between gap-3">
@@ -202,16 +195,15 @@
 
 <main id="top" class="pt-0">
   
-<!-- 1. HERO -->
 <header class="border-b border-slate-800 bg-slate-950">
   <div class="hero-banner flex items-center">
     <div class="max-w-7xl mx-auto px-6 py-12 md:py-16 w-full text-center">
       <p class="section-title-ib mb-4 text-blue-200"></p>
       <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
-        Deja de pagar altas comisiones. <br/><span class="text-blue-300">Automatiza tus reservas y domina tu negocio.</span>
+        Deja de perder el 20% en comisiones. <br/><span class="text-blue-300">Automatiza tus reservas y recupera el control.</span>
       </h1>
       <p class="max-w-3xl mx-auto text-sm md:text-lg text-slate-200 leading-relaxed mb-8">
-        Creamos sistemas de reservas privados, plataformas de entrega sin comisiones y flujos de trabajo automatizados para que dejes de perder tiempo en tareas administrativas y mantengas el 100% de tus ingresos.
+        Construimos sistemas de reservas privados, plataformas de entrega sin comisiones y flujos de trabajo automatizados para que dejes de perder tiempo en tareas administrativas y conserves el 100% de tus ingresos.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="/es/solutions/" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold transition-all transform hover:scale-105 shadow-xl shadow-blue-600/20">Explorar Soluciones</a>
@@ -221,7 +213,6 @@
   </div>
 </header>
 
-<!-- 2. WHAT ALANSM SOLUTIONS DOES -->
 <section class="py-12 md:py-16 bg-slate-950 border-b border-slate-800">
   <div class="max-w-7xl mx-auto px-6">
     <div class="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 items-start">
@@ -229,31 +220,31 @@
         <p class="section-title-ib mb-3">Sobre nosotros</p>
         <h2 class="text-3xl md:text-4xl font-bold text-slate-100 mb-4">AlanSM Solutions</h2>
         <p class="text-slate-400 text-base leading-relaxed mb-4">
-          AlanSM Solutions es un portafolio de servicios digitales prácticos y sistemas productizados desarrollados para ayudar a las empresas a mejorar sus operaciones, presentar mejor su marca y reducir el trabajo manual repetitivo.
+          AlanSM Solutions es un portafolio de servicios digitales prácticos y sistemas productizados creados para ayudar a las empresas a mejorar sus operaciones, presentar mejor su marca y reducir el trabajo manual repetitivo.
         </p>
         <p class="text-slate-400 text-base leading-relaxed mb-6">
           Trabajo con sitios web comerciales, soluciones de automatización, sistemas orientados al cliente, flujos operativos y herramientas digitales personalizadas. Algunas soluciones se entregan como servicios a medida, mientras que otras están estructuradas como productos reutilizables.
         </p>
-        <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg font-semibold transition-colors">Habla Sobre Tu Proyecto</button>
+        <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg font-semibold transition-colors">Hablemos de Tu Proyecto</button>
       </div>
       <div class="about-panel p-6 md:p-8">
-        <h3 class="text-xl font-bold text-slate-100 mb-5">Cómo te puedo ayudar</h3>
+        <h3 class="text-xl font-bold text-slate-100 mb-5">Cómo puedo ayudarte</h3>
         <div class="grid sm:grid-cols-2 gap-4 text-sm text-slate-300">
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
             <p class="font-semibold text-slate-100 mb-1">Sitios comerciales</p>
-            <p>Sitios web profesionales, landing pages y viajes del cliente.</p>
+            <p>Sitios web profesionales, páginas de aterrizaje y viajes de clientes.</p>
           </div>
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
             <p class="font-semibold text-slate-100 mb-1">Soluciones de automatización</p>
-            <p>Captura de leads, flujos de seguimiento, formularios, notificaciones e informes.</p>
+            <p>Captura de leads, flujos de seguimiento, formularios y reportes.</p>
           </div>
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
             <p class="font-semibold text-slate-100 mb-1">Sistemas de reservas y pedidos</p>
-            <p>Sistemas para clientes para consultas, pedidos y flujos de entrada.</p>
+            <p>Sistemas para clientes, pedidos y flujos de ingreso de datos.</p>
           </div>
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
             <p class="font-semibold text-slate-100 mb-1">Consultoría operativa</p>
-            <p>Análisis de alcance, planificación de sistemas, dirección de implementación y soporte.</p>
+            <p>Análisis de alcance, planificación de sistemas y soporte de implementación.</p>
           </div>
         </div>
       </div>
@@ -261,14 +252,13 @@
   </div>
 </section>
 
-<!-- 3. SOLUTIONS PORTFOLIO (8 Grid) -->
 <section id="solutions" class="py-12 md:py-16 bg-slate-900 border-b border-slate-800 scroll-mt-28">
   <div class="max-w-7xl mx-auto px-6">
     <div class="text-center max-w-3xl mx-auto mb-12">
       <p class="section-title-ib mb-3">Nuestras soluciones</p>
       <h2 class="text-3xl md:text-4xl font-bold text-slate-100 mb-4">Sistemas de negocios y servicios digitales</h2>
       <p class="text-slate-400 text-base leading-relaxed">
-        Un portafolio más amplio de automatización, flujos de trabajo orientados a ERP, integraciones con CRM/Salesforce y sistemas de negocios digitales — organizados en AlanSM Solutions.
+        Un portafolio más amplio de automatización, flujos de trabajo orientados a ERP, integraciones de CRM/Salesforce y sistemas comerciales digitales.
       </p>
     </div>
 
@@ -276,61 +266,60 @@
       <article class="solution-box p-6 text-center">
         <div class="solution-icon-lg">🌐</div>
         <h3 class="text-lg font-bold text-slate-100 mb-2">Sitios Comerciales</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">Sitios profesionales, landing pages y páginas enfocadas en el cliente para negocios locales y proveedores de servicios.</p>
+        <p class="text-sm text-slate-400 leading-relaxed">Sitios profesionales, páginas de aterrizaje y páginas orientadas al cliente para empresas locales.</p>
       </article>
 
       <article class="solution-box p-6 text-center">
         <div class="solution-icon-lg">📅</div>
-        <h3 class="text-lg font-bold text-slate-100 mb-2">Sistema de Reservas Privado</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">Un sistema de reservas privado para salones, clínicas, profesionales de belleza, terapeutas, consultores y empresas locales.</p>
+        <h3 class="text-lg font-bold text-slate-100 mb-2">Sistema de Reservas</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">Un sistema de reservas privado para salones, clínicas, terapeutas y negocios locales.</p>
       </article>
 
       <article class="solution-box p-6 text-center">
         <div class="solution-icon-lg">🛵</div>
         <h3 class="text-lg font-bold text-slate-100 mb-2">DeliveryHub</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">Un sistema de coordinación de pedidos y entregas directas para restaurantes y empresas enfocadas en el delivery.</p>
+        <p class="text-sm text-slate-400 leading-relaxed">Un sistema de coordinación de pedidos directos y entregas para restaurantes.</p>
       </article>
 
       <article class="solution-box p-6 text-center">
         <div class="solution-icon-lg">🍽️</div>
-        <h3 class="text-lg font-bold text-slate-100 mb-2">Sistemas para Restaurantes</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">Flujos de pedidos online, menús, estado del pedido, asignación de conductores y control de clientes.</p>
+        <h3 class="text-lg font-bold text-slate-100 mb-2">Sistemas de Restaurantes</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">Flujos de pedidos online, menús, estado del pedido y control del cliente para el sector alimentario.</p>
       </article>
 
       <article class="solution-box p-6 text-center">
         <div class="solution-icon-lg">🧾</div>
-        <h3 class="text-lg font-bold text-slate-100 mb-2">Sistema de Orden de Trabajo</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">Seguimiento de pedidos y servicios para soporte técnico, talleres, servicios de reparación y seguimiento operativo.</p>
+        <h3 class="text-lg font-bold text-slate-100 mb-2">Sistema de Órdenes</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">Seguimiento de órdenes y servicios para soporte técnico, talleres y servicios de reparación.</p>
       </article>
 
       <article class="solution-box p-6 text-center">
         <div class="solution-icon-lg">☁️</div>
-        <h3 class="text-lg font-bold text-slate-100 mb-2">Flujo de Documentos y Facturas</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">Soporte para flujos relacionados con facturas, organización de documentos, registros de clientes y control de procesos.</p>
+        <h3 class="text-lg font-bold text-slate-100 mb-2">Flujo de Documentos</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">Soporte para flujos relacionados con facturas, organización de documentos y registros de clientes.</p>
       </article>
 
       <article class="solution-box p-6 text-center">
         <div class="solution-icon-lg">🏪</div>
-        <h3 class="text-lg font-bold text-slate-100 mb-2">Flujos Orientados a ERP</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">Soporte para venta al por menor, inventario, informes y flujos de negocios para empresas que necesitan una estructura operativa más fuerte.</p>
+        <h3 class="text-lg font-bold text-slate-100 mb-2">Flujos tipo ERP</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">Soporte de inventario, informes y flujos comerciales para empresas con estructura operativa.</p>
       </article>
 
       <article class="solution-box p-6 text-center">
         <div class="solution-icon-lg">⚙️</div>
-        <h3 class="text-lg font-bold text-slate-100 mb-2">Soluciones de Automatización</h3>
-        <p class="text-sm text-slate-400 leading-relaxed">Reducción de tareas repetitivas, tratamiento de leads, informes, recordatorios, seguimientos y mejora de procesos internos.</p>
+        <h3 class="text-lg font-bold text-slate-100 mb-2">Automatizaciones</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">Reducción de tareas repetitivas, manejo de leads, reportes, recordatorios y mejoras de procesos internos.</p>
       </article>
     </div>
   </div>
 </section>
 
-<!-- 4. PRODUCTIZED SOLUTIONS -->
 <section class="py-12 md:py-16 bg-slate-950 border-b border-slate-800">
   <div class="max-w-7xl mx-auto px-6">
     <div class="mb-12 text-center max-w-3xl mx-auto">
-      <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-3">Plataformas Listas para Desplegar</h2>
-      <h3 class="text-3xl md:text-4xl font-bold mb-4 text-slate-100">Soluciones de Negocios Productizadas</h3>
-      <p class="text-slate-400 text-sm md:text-base leading-relaxed">Soluciones pre-arquitectadas diseñadas para resolver cuellos de botella específicos de la industria, disponibles para una rápida implementación.</p>
+      <h2 class="text-xs uppercase tracking-[0.2em] text-blue-500 font-bold mb-3">Soluciones Productizadas</h2>
+      <h3 class="text-3xl md:text-4xl font-bold mb-4 text-slate-100">Plataformas Listas para Desplegar</h3>
+      <p class="text-slate-400 text-sm md:text-base leading-relaxed">Soluciones pre-arquitectadas diseñadas para resolver cuellos de botella específicos, disponibles para despliegue rápido.</p>
     </div>
 
     <div class="grid md:grid-cols-2 gap-8">
@@ -339,15 +328,15 @@
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-lg flex flex-col hover:border-blue-500 transition-colors">
         <div class="w-12 h-12 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center text-2xl mb-6"><i class="fas fa-calendar-alt"></i></div>
         <h4 class="text-2xl font-bold text-white mb-3">Sistema de Reservas Privado</h4>
-        <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Un sistema de reservas privado para empresas de servicios que desean reservas directas, control de clientes y una experiencia de reserva con su propia marca, sin enviar clientes a mercados públicos.</p>
-        <a href="/es/pricing/" class="inline-flex items-center text-sm font-bold text-blue-400 hover:text-blue-300 transition-colors">Ver Paquetes de Reservas →</a>
+        <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Un sistema de reservas privado para empresas de servicios que desean reservas directas, control del cliente y una experiencia de reserva con su propia marca sin comisiones.</p>
+        <a href="/es/pricing/" class="inline-flex items-center text-sm font-bold text-blue-400 hover:text-blue-300 transition-colors">Ver Paquetes de Reserva →</a>
       </div>
 
       <!-- DeliveryHub -->
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-lg flex flex-col hover:border-orange-500 transition-colors">
         <div class="w-12 h-12 bg-orange-500/10 text-orange-500 rounded-xl flex items-center justify-center text-2xl mb-6"><i class="fas fa-motorcycle"></i></div>
         <h4 class="text-2xl font-bold text-white mb-3">DeliveryHub para Restaurantes</h4>
-        <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Una plataforma operativa ligera para restaurantes que necesitan pedidos online directos, control del estado de la cocina y coordinación de repartidores locales sin depender de las comisiones de los mercados.</p>
+        <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Una plataforma operativa ligera para restaurantes que necesitan pedidos online directos, control del estado de la cocina y coordinación de repartidores locales.</p>
         <a href="/es/pricing/#delivery-hub" class="inline-flex items-center text-sm font-bold text-orange-400 hover:text-orange-300 transition-colors">Explorar DeliveryHub →</a>
       </div>
 
@@ -355,7 +344,7 @@
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-lg flex flex-col hover:border-purple-500 transition-colors">
         <div class="w-12 h-12 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center text-2xl mb-6"><i class="fas fa-cogs"></i></div>
         <h4 class="text-2xl font-bold text-white mb-3">Arquitectura de Automatización</h4>
-        <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Estructura web de múltiples páginas, formularios avanzados, captura de leads, soporte para implementación de CRM/ERP, planificación de integraciones y pruebas exhaustivas del flujo de trabajo.</p>
+        <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Estructura web de múltiples páginas, formularios avanzados, captura de leads, soporte de implementación CRM/ERP y planificación de integración.</p>
         <button type="button" onclick="openContactForm('automation', 'custom_quote')" class="text-left inline-flex items-center text-sm font-bold text-purple-400 hover:text-purple-300 transition-colors">Discutir Arquitectura →</button>
       </div>
 
@@ -363,57 +352,55 @@
       <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-lg flex flex-col hover:border-emerald-500 transition-colors">
         <div class="w-12 h-12 bg-emerald-500/10 text-emerald-500 rounded-xl flex items-center justify-center text-2xl mb-6"><i class="fas fa-laptop-code"></i></div>
         <h4 class="text-2xl font-bold text-white mb-3">Desarrollo Web Personalizado</h4>
-        <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Sitios de alto rendimiento, carga rápida y optimizados para SEO, diseñados en torno a tus objetivos de negocio específicos y diseñados para capturar clientes potenciales directamente en tus sistemas.</p>
-        <button type="button" onclick="openContactForm('website', 'custom_quote')" class="text-left inline-flex items-center text-sm font-bold text-emerald-400 hover:text-emerald-300 transition-colors">Solicitar Presupuesto Web →</button>
+        <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Sitios web de alto rendimiento, carga rápida y optimizados para SEO, diseñados en torno a tus objetivos comerciales para capturar clientes potenciales directamente.</p>
+        <button type="button" onclick="openContactForm('website', 'custom_quote')" class="text-left inline-flex items-center text-sm font-bold text-emerald-400 hover:text-emerald-300 transition-colors">Solicitar Presupuesto →</button>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- 5. CAPABILITIES -->
 <section class="py-12 md:py-16 bg-slate-900 border-b border-slate-800">
   <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
     <div>
       <p class="section-title-ib mb-3">Capacidades</p>
       <h2 class="text-3xl font-bold text-slate-100 mb-4">Ejemplos de lo que se puede incluir</h2>
       <p class="text-slate-400 leading-relaxed mb-5">
-        Dependiendo del proyecto, AlanSM Solutions puede proporcionar sistemas que involucren registros operativos, visibilidad de inventario, órdenes de trabajo, comunicación con el cliente, captura de leads y paneles.
+        Dependiendo del proyecto, AlanSM Solutions puede entregar sistemas que incluyen registros operativos, visibilidad de inventario, órdenes de trabajo, comunicación con el cliente y paneles de control.
       </p>
       <ul class="space-y-3 text-slate-300 text-base">
         <li>✅ Registros financieros y operativos</li>
         <li>✅ Captación y seguimiento de clientes</li>
-        <li>✅ Flujos de solicitud de reservas o pedidos</li>
+        <li>✅ Flujos de solicitud de reserva o pedido</li>
         <li>✅ Paneles de visibilidad e informes</li>
-        <li>✅ Lógica de control de inventario/servicios</li>
-        <li>✅ Formularios de leads, flujos de contacto y notificaciones</li>
+        <li>✅ Lógica de control de inventario / servicios</li>
+        <li>✅ Formularios de leads y notificaciones</li>
       </ul>
     </div>
     <div class="about-panel p-6 md:p-8">
-      <h3 class="text-xl font-bold text-slate-100 mb-4">Direcciones productizadas</h3>
+      <h3 class="text-xl font-bold text-slate-100 mb-4">Enfoques productizados</h3>
       <div class="grid md:grid-cols-2 gap-4">
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
           <p class="font-semibold text-slate-100 mb-1">Para empresas de servicios</p>
-          <p class="text-sm text-slate-400">Flujos de reserva, páginas de servicios, admisión, formularios de contacto y presentación de ofertas.</p>
+          <p class="text-sm text-slate-400">Flujos de reservas, páginas de servicios, formularios de contacto y ofertas.</p>
         </div>
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
           <p class="font-semibold text-slate-100 mb-1">Para restaurantes</p>
-          <p class="text-sm text-slate-400">Pedidos directos, DeliveryHub, operaciones de restaurante y coordinación de entregas locales.</p>
+          <p class="text-sm text-slate-400">Pedidos directos, DeliveryHub, operaciones de restaurante y envíos locales.</p>
         </div>
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
           <p class="font-semibold text-slate-100 mb-1">Para operaciones internas</p>
-          <p class="text-sm text-slate-400">Informes, formularios, registros, organización de procesos y oportunidades de automatización.</p>
+          <p class="text-sm text-slate-400">Informes, formularios, registros, organización de procesos y automatizaciones.</p>
         </div>
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
           <p class="font-semibold text-slate-100 mb-1">Para nuevas ideas</p>
-          <p class="text-sm text-slate-400">Prototipos ágiles y sistemas para pequeñas empresas antes de escalar a soluciones más grandes.</p>
+          <p class="text-sm text-slate-400">Prototipos eficientes para pequeñas empresas antes de escalar.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 6. HOW I WORK & EXPERIENCE -->
 <section class="py-12 md:py-16 bg-slate-950 border-b border-slate-800">
   <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
     <div>
@@ -421,48 +408,47 @@
       <div class="space-y-4">
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
           <h3 class="font-semibold text-lg mb-1 text-blue-500">Privado por Diseño</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">La solución está diseñada en torno a tu proceso de negocio real, no a herramientas innecesarias o plantillas genéricas.</p>
+          <p class="text-slate-400 text-sm leading-relaxed">La solución está diseñada en torno a tu proceso de negocio real, sin plantillas genéricas.</p>
         </div>
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
-          <h3 class="font-semibold text-lg mb-1 text-blue-500">Simple para los Clientes</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">El viaje del cliente se mantiene simple: entender la oferta, tomar medidas, enviar una solicitud, reservar, hacer un pedido o contactarte.</p>
+          <h3 class="font-semibold text-lg mb-1 text-blue-500">Simple para Clientes</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">El viaje del cliente se mantiene simple: entender la oferta, tomar medidas, reservar o contactar.</p>
         </div>
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
           <h3 class="font-semibold text-lg mb-1 text-blue-500">Soporte Post-Lanzamiento</h3>
-          <p class="text-slate-400 text-sm leading-relaxed">Después del lanzamiento, el sistema puede seguir evolucionando a través de soporte mensual, mejoras y asistencia operativa práctica.</p>
+          <p class="text-slate-400 text-sm leading-relaxed">Después del lanzamiento, el sistema evoluciona a través de mejoras y soporte operativo.</p>
         </div>
       </div>
     </div>
     
     <div>
-      <h2 class="text-3xl font-bold mb-8 text-slate-100">Construido con Experiencia Operativa</h2>
+      <h2 class="text-3xl font-bold mb-8 text-slate-100">Construido con Experiencia</h2>
       <div class="space-y-6 border-l-2 border-slate-800 pl-6 ml-2">
         <div class="relative">
           <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
-          <h3 class="text-lg font-semibold text-slate-200">Flujo del cliente + lógica de negocios</h3>
-          <p class="text-slate-400 text-sm font-medium mt-0.5">Páginas, formularios, flujos de reserva, paneles y procesos de seguimiento diseñados en torno a cómo funciona realmente el negocio.</p>
+          <h3 class="text-lg font-semibold text-slate-200">Flujo de clientes + lógica comercial</h3>
+          <p class="text-slate-400 text-sm font-medium mt-0.5">Páginas, formularios, flujos de reserva, paneles y procesos diseñados en torno a cómo funciona la empresa.</p>
         </div>
         <div class="relative">
           <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
-          <h3 class="text-lg font-semibold text-slate-200">Antecedentes en automatización</h3>
-          <p class="text-slate-400 text-sm font-medium mt-0.5">Formularios, informes, seguimiento de clientes, planificación de automatización y flujos de trabajo operativos.</p>
+          <h3 class="text-lg font-semibold text-slate-200">Experiencia en automatización</h3>
+          <p class="text-slate-400 text-sm font-medium mt-0.5">Formularios, informes, seguimiento de clientes, planificación y flujos de trabajo operativos.</p>
         </div>
         <div class="relative">
           <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
-          <h3 class="text-lg font-semibold text-slate-200">Credibilidad Empresarial</h3>
-          <p class="text-slate-400 text-sm font-medium mt-0.5">Experiencia con entornos operativos globales, SAP, Salesforce, calidad de datos y procesos de atención al cliente.</p>
+          <h3 class="text-lg font-semibold text-slate-200">Credibilidad Corporativa</h3>
+          <p class="text-slate-400 text-sm font-medium mt-0.5">Experiencia con entornos operativos globales, SAP, Salesforce, y procesos de soporte.</p>
         </div>
         <div class="relative">
           <div class="absolute w-3 h-3 bg-slate-300 rounded-full -left-[31px] top-1.5 border-4 border-white"></div>
-          <h3 class="text-lg font-semibold text-slate-200">Entrega Local y Remota</h3>
-          <p class="text-slate-400 text-sm font-medium mt-0.5">Con sede en Cracovia, Polonia, y disponible para clientes a nivel local e internacional.</p>
+          <h3 class="text-lg font-semibold text-slate-200">Entrega Remota</h3>
+          <p class="text-slate-400 text-sm font-medium mt-0.5">Base en Cracovia, disponible para clientes a nivel local e internacional.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 7. SALESFORCE & CRM -->
 <section class="py-12 md:py-16 bg-slate-900 border-b border-slate-800">
   <div class="max-w-7xl mx-auto px-6">
     <div class="flex flex-col md:flex-row gap-8 bg-slate-950 border border-slate-800 rounded-xl p-8 shadow-sm items-center">
@@ -472,7 +458,7 @@
           <span class="bg-blue-600 text-white text-[10px] font-bold uppercase tracking-wider py-1 px-2 rounded">Complemento Enterprise</span>
         </div>
         <h2 class="text-2xl md:text-3xl font-bold mb-2 text-slate-100">Automatización de CRM y Salesforce</h2>
-        <p class="text-slate-400 text-sm md:text-base leading-relaxed mb-4 max-w-2xl">Arquitectura de datos avanzada, automatización nativa de Salesforce, generación de documentos e integración inteligente con WhatsApp para operaciones complejas (entregado en colaboración con SOUBLOX en proyectos relevantes).</p>
+        <p class="text-slate-400 text-sm md:text-base leading-relaxed mb-4 max-w-2xl">Arquitectura de datos avanzada, automatización nativa de Salesforce y generación de documentos para operaciones complejas.</p>
       </div>
       <div class="w-full md:w-auto mt-4 md:mt-0 shrink-0">
         <button type="button" onclick="openContactForm('enterprise_crm', 'custom_quote')" class="w-full bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 font-medium py-3 px-6 rounded-lg transition-colors whitespace-nowrap focus:outline-none">Discutir Arquitectura</button>
@@ -481,29 +467,72 @@
   </div>
 </section>
 
-<!-- 8. FEATURED PROJECT -->
-<section class="py-12 bg-slate-950 border-b border-slate-800">
-  <div class="max-w-7xl mx-auto px-6 text-center md:text-left">
-    <div class="max-w-3xl mx-auto md:mx-0">
-      <h2 class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-4">Proyecto de Socio Destacado</h2>
-      <div class="flex items-center justify-center md:justify-start gap-4 mb-4">
-        <img src="https://joannafilek.com/images/logo.png" class="w-10 h-10 object-contain grayscale opacity-80" alt="Joanna Filek logo" loading="lazy" />
-        <h2 class="text-xl font-bold text-slate-200">Joanna Filek</h2>
+<section class="py-12 md:py-16 bg-slate-950 border-b border-slate-800">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="mb-10 text-center">
+      <h2 class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold mb-3">Éxito del Cliente</h2>
+      <h3 class="text-3xl font-bold text-slate-100">Proyectos de Socios Destacados</h3>
+      <p class="text-slate-400 mt-3 text-sm md:text-base">Empresas reales que utilizan plataformas a medida para optimizar la interacción.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      
+      <!-- Project 1: Joanna Filek -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-lg flex flex-col h-full hover:border-blue-500 transition-colors">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1 shrink-0">
+            <img src="https://joannafilek.com/images/logo.png" class="max-w-full max-h-full object-contain" alt="Joanna Filek logo" loading="lazy" />
+          </div>
+          <div>
+            <h4 class="text-lg font-bold text-slate-100 leading-tight">Joanna Filek</h4>
+            <p class="text-xs text-blue-400 font-medium uppercase tracking-wider mt-1">Psicoterapeuta</p>
+          </div>
+        </div>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Un proyecto colaborativo de desarrollo web y UX diseñado para elevar la presencia de marca profesional y optimizar la interacción con el cliente.</p>
+        <a href="https://joannafilek.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold text-blue-500 hover:text-blue-400 transition-colors mt-auto">Visitar Proyecto →</a>
       </div>
-      <p class="text-slate-400 text-xs leading-relaxed mb-4">Un proyecto colaborativo de desarrollo web y UX diseñado para elevar la presencia de la marca profesional y optimizar la interacción con el cliente.</p>
-      <a href="https://joannafilek.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-xs font-semibold text-blue-500 hover:text-blue-400 transition-colors">Visitar Proyecto →</a>
+
+      <!-- Project 2: Daniela Torp -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-lg flex flex-col h-full hover:border-purple-500 transition-colors">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center shrink-0 text-purple-400 text-2xl">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold text-slate-100 leading-tight">Daniela Torp</h4>
+            <p class="text-xs text-purple-400 font-medium uppercase tracking-wider mt-1">Coach de Intimidad</p>
+          </div>
+        </div>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Una plataforma segura y privada de reservas diseñada para ofrecer discreción absoluta en sesiones de coaching sensibles.</p>
+        <a href="https://danielatorp.no/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold text-purple-500 hover:text-purple-400 transition-colors mt-auto">Visitar Proyecto →</a>
+      </div>
+
+      <!-- Project 3: Jessica Franco -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-lg flex flex-col h-full hover:border-pink-500 transition-colors">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center shrink-0 text-pink-400 text-2xl">
+            <i class="fas fa-paint-brush"></i>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold text-slate-100 leading-tight">Jessica Franco</h4>
+            <p class="text-xs text-pink-400 font-medium uppercase tracking-wider mt-1">Diseñadora de Uñas</p>
+          </div>
+        </div>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">Un portal de reservas automatizado de carga rápida que muestra trabajos y recibe citas directamente, eliminando el agendamiento manual.</p>
+        <a href="https://jessicafranco.alansmsolutions.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold text-pink-500 hover:text-pink-400 transition-colors mt-auto">Visitar Proyecto →</a>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- 9. FINAL CTA -->
 <section class="py-16 md:py-20 bg-slate-900 border-b border-slate-800">
   <div class="max-w-7xl mx-auto px-6">
     <div class="bg-blue-600 rounded-2xl p-8 md:p-10 text-center text-white shadow-sm">
       <p class="section-title-ib !text-blue-100 mb-3">Contacto</p>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4">Solicita una consultoría</h2>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Solicita una consulta</h2>
       <p class="max-w-3xl mx-auto text-blue-50 leading-relaxed mb-8">
-        Si tu empresa necesita un sitio web mejor, un flujo de reservas, un sistema de pedidos, un sistema de servicios o automatización práctica, vamos a discutir la idea juntos y definir la mejor dirección.
+        Si tu empresa necesita un mejor sitio web, flujo de reservas, sistema de pedidos o automatización práctica, discutamos la idea juntos.
       </p>
       <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="bg-slate-950 text-blue-400 hover:bg-slate-800 px-6 py-3 rounded-lg font-semibold transition-colors">
         Enviar Mensaje
@@ -533,7 +562,7 @@
     <button type="button" onclick="openContactForm('offer', 'introductory_offer')" class="hover:text-blue-400 transition-colors">Contacto</button>
   </div>
 
-  <p class="text-slate-500 mb-4">© 2026 AlanSM Solutions. Todos los derechos reservados. • Automatización de Negocios y Sistemas Digitales</p>
+  <p class="text-slate-500 mb-4">© 2026 AlanSM Solutions. Todos los derechos reservados. • Automatización de Negocios y Sistemas</p>
   
   <div class="flex flex-wrap justify-center gap-4 text-xs">
     <button type="button" onclick="openLegalModal('termsModal')" class="text-slate-400 hover:text-blue-400 transition-colors">Términos de Servicio</button>
@@ -542,14 +571,14 @@
   </div>
 </footer>
 
-<div id="offerBanner" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-sm z-[55] hidden opacity-0 translate-y-4 transition-all duration-300 bg-slate-900 border border-slate-700 rounded-xl p-5 shadow-xl" role="region" aria-label="Oferta limitada">
+<div id="offerBanner" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-sm z-[55] hidden opacity-0 translate-y-4 transition-all duration-300 bg-slate-900 border border-slate-700 rounded-xl p-5 shadow-xl" role="region" aria-label="Limited offer">
   <div class="flex items-start gap-3">
     <div class="flex-1">
       <p class="text-xs font-bold uppercase tracking-wider text-blue-500">Oferta Limitada</p>
-      <p class="text-xs text-slate-300 mt-2 leading-relaxed">Precios de configuración reducidos están disponibles para proyectos seleccionados.</p>
+      <p class="text-xs text-slate-300 mt-2 leading-relaxed">Tarifas de configuración reducidas disponibles para proyectos seleccionados.</p>
       <button type="button" onclick="claimOffer()" class="mt-3 block text-center bg-slate-800 hover:bg-slate-200 border border-slate-700 text-white hover:text-slate-900 text-[10px] font-semibold px-4 py-2 rounded transition-colors w-full focus:outline-none">Discutir Tu Proyecto</button>
     </div>
-    <button type="button" onclick="closeOfferBanner()" aria-label="Cerrar banner" class="text-slate-500 hover:text-slate-100 text-lg leading-none focus:outline-none p-1">&times;</button>
+    <button type="button" onclick="closeOfferBanner()" aria-label="Close banner" class="text-slate-500 hover:text-slate-100 text-lg leading-none focus:outline-none p-1">&times;</button>
   </div>
 </div>
 
@@ -557,7 +586,7 @@
   <div class="bg-slate-950 border border-slate-800 rounded-xl w-full max-w-md shadow-2xl flex flex-col overflow-hidden" role="document">
     <div class="flex justify-between items-center px-5 py-3 border-b border-slate-800 bg-slate-900">
       <h2 id="contactModalTitle" class="text-sm font-bold text-slate-100">Enviar Mensaje</h2>
-      <button type="button" onclick="closeContactForm()" aria-label="Cerrar formulario" class="text-slate-500 hover:text-slate-100 text-xl leading-none transition-colors focus:outline-none">&times;</button>
+      <button type="button" onclick="closeContactForm()" aria-label="Close contact form" class="text-slate-500 hover:text-slate-100 text-xl leading-none transition-colors focus:outline-none">&times;</button>
     </div>
     <div class="p-5">
       <form action="#" method="POST" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-3">
@@ -587,12 +616,11 @@
         
         <label class="flex items-start gap-2 text-[10px] text-slate-500 mt-1">
           <input id="formConsent" type="checkbox" name="consent" required class="mt-0.5 accent-blue-600" />
-          <span>Acepto que mis datos puedan ser utilizados para responder a mi solicitud y gestionar la comunicación.</span>
+          <span>Acepto que mis datos puedan ser utilizados para responder a mi solicitud.</span>
         </label>
         
         <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-medium py-2 rounded-md transition-colors mt-2 text-xs focus:outline-none">Enviar Mensaje</button>
-        <p class="text-[9px] text-slate-400 text-center mt-1">Tus datos solo se utilizarán para responder a tu solicitud.</p>
-        <p id="formStatus" class="text-[10px] text-center min-h-[16px]"></p>
+        <p id="formStatus" class="text-[10px] text-center min-h-[16px] mt-1"></p>
       </form>
     </div>
   </div>
@@ -605,20 +633,10 @@
         <h2 class="text-lg font-bold text-slate-100">Términos de Servicio</h2>
         <p class="text-[10px] text-slate-500 mt-0.5">Última actualización: Junio 2026</p>
       </div>
-      <button type="button" onclick="closeLegalModal('termsModal')" class="text-slate-500 hover:text-slate-100 text-xl leading-none" aria-label="Cerrar">&times;</button>
+      <button type="button" onclick="closeLegalModal('termsModal')" class="text-slate-500 hover:text-slate-100 text-xl leading-none" aria-label="Close">&times;</button>
     </div>
     <div class="p-5 space-y-4 text-xs text-slate-400 leading-relaxed">
-      <p>Estos términos explican cómo AlanSM Solutions proporciona servicios de sitios web, reservas, automatización, CRM y sistemas de negocios.</p>
-      <section><h3 class="font-bold text-slate-200 mb-1">1. Servicios</h3><p>Los servicios pueden incluir diseño de sitios web, flujos de reserva, configuración de CRM, automatización de flujos de trabajo, consultoría y soporte relacionado. El alcance exacto se confirma en el Formulario de Pedido o contrato de proyecto por escrito.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">2. Presupuestos, precios y descuentos</h3><p>Los precios mostrados en el sitio web son precios iniciales o de paquete, a menos que se indique lo contrario. El precio final depende del alcance revisado. Los descuentos introductorios solo se confirman después del análisis del alcance y contrato firmado, mientras las plazas de descuento sigan disponibles.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">3. Responsabilidades del cliente</h3><p>El cliente es responsable de proporcionar información precisa, textos, imágenes, accesos de cuentas, activos de marca, aprobaciones y comentarios a tiempo necesarios para completar el proyecto.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">4. Pagos</h3><p>Las condiciones de pago se confirman en el Formulario de Pedido. El trabajo puede pausarse si los pagos, información o aprobaciones necesarias se retrasan.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">5. Herramientas de terceros</h3><p>Los proyectos pueden utilizar plataformas de terceros, como proveedores de alojamiento, herramientas de reserva, servicios de Google, sistemas de CRM, herramientas de correo electrónico o plataformas de automatización. El cliente es responsable de las suscripciones de terceros, cuentas y reglas de la plataforma, a menos que se acuerde lo contrario.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">6. Revisiones y cambios de alcance</h3><p>Las revisiones razonables están incluidas solo dentro del alcance acordado. Características extra, páginas adicionales, nuevas integraciones o cambios importantes pueden requerir un presupuesto separado.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">7. Sin garantía de resultados comerciales</h3><p>AlanSM Solutions tiene como objetivo proporcionar sistemas profesionales y mejoras prácticas, pero no garantiza ventas, leads, clasificaciones de búsqueda, ingresos o resultados comerciales específicos.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">8. Limitación de responsabilidad</h3><p>En la máxima extensión permitida por la ley, AlanSM Solutions no es responsable por pérdidas indirectas, lucro cesante, tiempos de inactividad de la plataforma, fallos de terceros o problemas causados por información incorrecta del cliente o cambios de acceso.</p></section>
-      <p>Las preguntas sobre estos términos pueden dirigirse a kontakt@alansmsolutions.com.</p>
-      <p class="text-[10px] text-slate-400 border-t border-slate-800 pt-3">Estos términos se proporcionan para transparencia y pueden actualizarse periódicamente.</p>
+      <p>Estos términos explican cómo AlanSM Solutions proporciona servicios.</p>
     </div>
   </div>
 </div>
@@ -630,19 +648,10 @@
         <h2 class="text-lg font-bold text-slate-100">Aviso de Privacidad</h2>
         <p class="text-[10px] text-slate-500 mt-0.5">Última actualización: Junio 2026</p>
       </div>
-      <button type="button" onclick="closeLegalModal('privacyModal')" class="text-slate-500 hover:text-slate-100 text-xl leading-none" aria-label="Cerrar">&times;</button>
+      <button type="button" onclick="closeLegalModal('privacyModal')" class="text-slate-500 hover:text-slate-100 text-xl leading-none" aria-label="Close">&times;</button>
     </div>
     <div class="p-5 space-y-4 text-xs text-slate-400 leading-relaxed">
-      <p>Este aviso explica cómo AlanSM Solutions recopila y usa la información enviada a través de este sitio web y de la comunicación del proyecto.</p>
-      <section><h3 class="font-bold text-slate-200 mb-1">1. Controlador de datos</h3><p>El controlador de datos es AlanSM Solutions / Alan da Silva Morais. Contacto: kontakt@alansmsolutions.com.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">2. Datos recopilados</h3><p>El formulario del sitio web puede recopilar su nombre, correo electrónico, número de teléfono, nombre de la empresa, tipo de negocio, servicio seleccionado, mensaje del proyecto y detalles de comunicación relacionados.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">3. Por qué se usan los datos</h3><p>Sus datos se usan para responder a su consulta, preparar un presupuesto, gestionar la comunicación del proyecto, crear documentos del proyecto, proporcionar servicios y mantener registros comerciales.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">4. Almacenamiento y herramientas</h3><p>La información puede almacenarse en registros de proyectos seguros, Google Drive, Gmail y herramientas comerciales relacionadas usadas para gestionar consultas, contratos y comunicación del proyecto.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">5. Compartir</h3><p>Su información no se vende. Solo puede compartirse cuando sea necesario para proporcionar el servicio, cumplir con obligaciones legales o usar proveedores de servicios de confianza.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">6. Retención</h3><p>Los registros de consultas y proyectos se mantienen solo el tiempo necesario para fines comerciales, legales, fiscales, de seguridad y de soporte al cliente.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">7. Sus derechos</h3><p>Puede solicitar acceso, corrección o eliminación de sus datos personales, sujeto a requisitos legales y de registros comerciales.</p></section>
-      <section><h3 class="font-bold text-slate-200 mb-1">8. Contacto</h3><p>Para preguntas sobre privacidad o solicitudes de datos, contacte a kontakt@alansmsolutions.com.</p></section>
-      <p class="text-[10px] text-slate-400 border-t border-slate-800 pt-3">Estos términos se proporcionan para transparencia y pueden actualizarse periódicamente.</p>
+      <p>AlanSM Solutions recopila datos de contacto solo para responder a su consulta.</p>
     </div>
   </div>
 </div>
@@ -651,7 +660,6 @@
   const ALANSM_BACKEND_URL = "https://script.google.com/macros/s/AKfycbwxzYWgEdGsUqjokKIMroI1xmZYE1LQcj4sd8EIoODbDWA5MIxa0xEb85JTuvAQnVMtXA/exec";
   const ALANSM_FORM_TOKEN = "alan_admin_2026";
   window.ALanSMFormStartedAt = Date.now();
-
   let previouslyFocusedElement = null;
   let currentPackageInfo = { packageName: '', price: '' };
 
@@ -672,53 +680,19 @@
     button.setAttribute('aria-expanded', 'false');
   }
 
-  function packageDetails(packageKey, priceBaseKey) {
-    const packages = {
-      light_booking: "Sistema de Reservas Privado",
-      deliveryhub: "DeliveryHub para Restaurantes",
-      three_month: "Soporte Técnico (3 Meses)",
-      six_month: "Soporte Técnico (6 Meses)",
-      twelve_month: "Soporte Técnico (12 Meses)",
-      enterprise_crm: "Automatización Salesforce y CRM",
-      website: "Desarrollo de Sitio Web",
-      automation: "Arquitectura de Automatización",
-      offer: "Oferta Inicial Limitada"
-    };
-
-    let priceStr = '';
-    if (priceBaseKey === 'custom_quote') {
-      priceStr = "Presupuesto Personalizado";
-    } else if (priceBaseKey === 'introductory_offer') {
-      priceStr = "Tarifa Especial";
-    } else if (priceBaseKey) {
-      priceStr = priceBaseKey; 
-    }
-
-    return {
-      packageName: packages[packageKey] || '',
-      price: priceStr
-    };
-  }
-
   function openContactForm(packageKey = null, priceKey = null) {
     const modal = document.getElementById('contactModal');
     const subject = document.getElementById('formSubject');
     const message = document.getElementById('formMsg');
-    const status = document.getElementById('formStatus');
-
     previouslyFocusedElement = document.activeElement;
     window.ALanSMFormStartedAt = Date.now();
-    status.textContent = '';
-    status.className = 'text-xs text-center min-h-[20px]';
+    document.getElementById('formStatus').textContent = '';
 
     if (packageKey) {
-      const details = packageDetails(packageKey, priceKey);
-      currentPackageInfo = details;
-      subject.value = packageKey === 'offer' ? "Consulta: Oferta de Configuración Inicial" : `Consulta: ${details.packageName}`;
-      message.value = `Estoy interesado en la opción ${details.packageName} (${details.price}). Me gustaría preguntar sobre...`;
+      subject.value = packageKey;
+      message.value = `Me gustaría saber más sobre...`;
     } else {
-      currentPackageInfo = { packageName: "Consulta General", price: '' };
-      subject.value = "Consulta General";
+      subject.value = "General Inquiry";
       message.value = '';
     }
 
@@ -733,95 +707,35 @@
     if (previouslyFocusedElement) previouslyFocusedElement.focus();
   }
 
-  async function submitLeadViaPost(payload) {
-    await fetch(ALANSM_BACKEND_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8'
-      },
-      body: JSON.stringify(payload)
-    });
-
-    return {
-      status: 'ok',
-      ok: true,
-      message: 'Lead submitted.'
-    };
-  }
-
   async function handleFormSubmit(event) {
     event.preventDefault();
-
     const form = event.target;
     const button = form.querySelector('button[type="submit"]');
     const status = document.getElementById('formStatus');
     const originalText = button.textContent;
 
-    const name = document.getElementById('formName')?.value || '';
-    const email = document.getElementById('formEmail')?.value || '';
-    const phone = document.getElementById('formPhone')?.value || '';
-    const message = document.getElementById('formMsg')?.value || '';
-    const consent = document.getElementById('formConsent')?.checked;
-
-    if (!consent) {
-      status.textContent = "Por favor, acepta los términos de privacidad.";
-      status.className = 'text-xs text-center min-h-[20px] text-yellow-400 mt-2 font-medium';
-      return;
-    }
-
-    if (String(message).trim().length < 15) {
-      status.textContent = "Por favor, escribe un breve mensaje sobre tu proyecto antes de enviar.";
-      status.className = 'text-xs text-center min-h-[20px] text-yellow-400 mt-2 font-medium';
-      return;
-    }
-
-    const secondsOnForm = (Date.now() - window.ALanSMFormStartedAt) / 1000;
-    if (secondsOnForm < 4) {
-      status.textContent = "Por favor, espera unos segundos antes de enviar. Esto ayuda a bloquear el spam.";
-      status.className = 'text-xs text-center min-h-[20px] text-yellow-400 mt-2 font-medium';
-      return;
-    }
-
-    const packageInfo = currentPackageInfo || { packageName: "Consulta General", price: '' };
-
     const payload = {
       action: 'submitLead',
       token: ALANSM_FORM_TOKEN,
-      formToken: ALANSM_FORM_TOKEN,
-      formStartedAt: window.ALanSMFormStartedAt,
-      website: document.getElementById('website')?.value || '',
-      name: name,
-      email: email,
-      phone: phone,
-      packageName: packageInfo.packageName || "Consulta General",
-      estimatedPrice: packageInfo.price || '',
-      discountRequested: String(packageInfo.packageName || '').toLowerCase().includes('reserva') ? 'YES' : 'NO',
-      message: message,
-      source: 'website',
-      lang: 'es',
-      signatureLanguage: 'es'
+      name: document.getElementById('formName').value,
+      email: document.getElementById('formEmail').value,
+      phone: document.getElementById('formPhone').value,
+      message: document.getElementById('formMsg').value,
+      source: 'website_es'
     };
 
-    button.disabled = true;
-    button.textContent = "Enviando Pedido...";
+    button.disabled = true; button.textContent = "Enviando...";
     status.textContent = '';
 
     try {
-      const result = await submitLeadViaPost(payload);
-
-      status.textContent = `Pedido enviado con éxito. ¡Nos pondremos en contacto!`;
-      status.className = 'text-xs text-center min-h-[20px] text-green-500 mt-2 font-medium';
+      await fetch(ALANSM_BACKEND_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+      status.textContent = `¡Mensaje enviado!`; status.className = 'text-xs text-center min-h-[20px] text-green-500 mt-2 font-medium';
       form.reset();
-
       window.setTimeout(closeContactForm, 3000);
     } catch (error) {
-      console.error(error);
-      status.textContent = "Error al enviar el mensaje. Inténtalo de nuevo o contáctanos por LinkedIn.";
-      status.className = 'text-xs text-center min-h-[20px] text-red-500 mt-2 font-medium';
+      status.textContent = "Error. Inténtalo de nuevo."; status.className = 'text-xs text-center min-h-[20px] text-red-500 mt-2 font-medium';
     } finally {
-      button.disabled = false;
-      button.textContent = originalText;
+      button.disabled = false; button.textContent = originalText;
     }
   }
 
@@ -829,7 +743,6 @@
     const modal = document.getElementById(modalId);
     if (modal) { modal.classList.remove('hidden'); modal.classList.add('flex'); document.body.classList.add('overflow-hidden'); }
   }
-
   function closeLegalModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); document.body.classList.remove('overflow-hidden'); }
@@ -841,14 +754,12 @@
     sessionStorage.setItem('offerBannerDismissed', 'true');
     window.setTimeout(() => banner.classList.add('hidden'), 300);
   }
-
   function showOfferBanner() {
     if (sessionStorage.getItem('offerBannerDismissed') === 'true') return;
     const banner = document.getElementById('offerBanner');
     banner.classList.remove('hidden');
     window.setTimeout(() => banner.classList.remove('opacity-0', 'translate-y-4'), 20);
   }
-
   function claimOffer() {
     closeOfferBanner();
     window.setTimeout(() => openContactForm('offer', 'introductory_offer'), 320);
@@ -858,8 +769,7 @@
     const modal = document.getElementById('contactModal');
     if (event.key === 'Escape') {
       if(!modal.classList.contains('hidden')) closeContactForm();
-      closeLegalModal('termsModal');
-      closeLegalModal('privacyModal');
+      closeLegalModal('termsModal'); closeLegalModal('privacyModal');
     }
   });
 
@@ -870,18 +780,11 @@
 
   document.addEventListener('DOMContentLoaded', async () => {
     let bannerTriggered = false;
-    const triggerBanner = () => {
-      if (bannerTriggered) return;
-      bannerTriggered = true;
-      showOfferBanner();
-      window.removeEventListener('scroll', handleScroll);
-    };
+    const triggerBanner = () => { if (bannerTriggered) return; bannerTriggered = true; showOfferBanner(); window.removeEventListener('scroll', handleScroll); };
     const handleScroll = () => { if (window.scrollY > 500) triggerBanner(); };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.setTimeout(triggerBanner, 12000);
   });
 </script>
-
 </body>
 </html>
