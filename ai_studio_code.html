@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AlanSM Solutions - Assinatura de Contrato / Podpis Umowy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8fafc; }
+    #signature-pad { border: 2px dashed #cbd5e1; border-radius: 12px; background: #ffffff; cursor: crosshair; touch-action: none; }
+    .loading-overlay { background: rgba(255,255,255,0.92); z-index: 50; }
+    .contract-body { max-height: 540px; overflow-y: auto; padding: 1.25rem; background: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0; }
+    .contract-section { margin-bottom: 1.25rem; }
+    .contract-title { font-weight: 700; margin-bottom: 0.5rem; color: #0f172a; font-size: 0.95rem; }
+    .muted { color: #64748b; font-size: 0.875rem; line-height: 1.6; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    pre { white-space: pre-wrap; font-family: inherit; font-size: 0.875rem; color: #334155; }
+    .preserve-breaks { white-space: pre-wrap; word-wrap: break-word; }
+  </style>
+</head>
+<body class="min-h-screen p-3 md:p-8 text-slate-800 antialiased flex flex-col justify-between">
+
+  <!-- Loading Spinner Overlay -->
+  <div id="loader" class="fixed inset-0 loading-overlay flex items-center justify-center">
+    <div class="text-center">
+      <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-blue-600 border-t-transparent"></div>
+      <p id="loader-text" class="mt-3 text-sm font-semibold text-slate-700">Carregando contrato...</p>
+    </div>
+  </div>
+
+  <div class="max-w-4xl w-full mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200/80">
+    
+    <!-- Top Header -->
+    <div class="bg-slate-900 text-white p-6 md:p-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
+        <div>
+          <h1 id="ui-header-title" class="text-xl md:text-2xl font-extrabold tracking-tight">AlanSM Solutions • Assinatura de Contrato</h1>
+          <p class="text-slate-400 text-xs md:text-sm mt-0.5">
+            <span id="ui-label-contract-id">ID do Contrato</span>: <strong id="display-contract-id" class="text-slate-200 font-mono">...</strong>
+          </p>
+        </div>
+
+        <!-- Language Selector & Status -->
+        <div class="flex items-center gap-2 self-start sm:self-auto">
+          <!-- Language Buttons -->
+          <div class="inline-flex bg-slate-800 p-1 rounded-xl border border-slate-700">
+            <button type="button" onclick="setLanguage('pt')" id="lang-btn-pt" class="px-2.5 py-1 text-xs font-bold rounded-lg transition-all bg-blue-600 text-white shadow-sm">
+              🇧🇷 PT
+            </button>
+            <button type="button" onclick="setLanguage('pl')" id="lang-btn-pl" class="px-2.5 py-1 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white">
+              🇵🇱 PL
+            </button>
+            <button type="button" onclick="setLanguage('en')" id="lang-btn-en" class="px-2.5 py-1 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white">
+              🇬🇧 EN
+            </button>
+          </div>
+
+          <span id="badge-status" class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1.5 rounded-xl border border-amber-500/30">
+            Pendente
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contract Summary Bar -->
+    <div class="p-6 md:p-8 border-b border-slate-100 bg-slate-50/75">
+      <h2 id="ui-summary-title" class="font-bold text-base md:text-lg mb-4 text-slate-800">Resumo do Pedido & Cliente</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+        <div>
+          <p id="ui-summary-client" class="text-slate-400 text-xs uppercase font-bold tracking-wider">Cliente</p>
+          <p id="display-name" class="font-semibold text-slate-800 mt-0.5">...</p>
+        </div>
+        <div>
+          <p id="ui-summary-email" class="text-slate-400 text-xs uppercase font-bold tracking-wider">E-mail</p>
+          <p id="display-email" class="font-medium text-slate-700 mt-0.5 break-all">...</p>
+        </div>
+        <div>
+          <p id="ui-summary-package" class="text-slate-400 text-xs uppercase font-bold tracking-wider">Serviço / Pacote</p>
+          <p id="display-package" class="font-medium text-slate-700 mt-0.5 preserve-breaks">...</p>
+        </div>
+        <div>
+          <p id="ui-summary-price" class="text-slate-400 text-xs uppercase font-bold tracking-wider">Valor Estimado</p>
+          <p id="display-price" class="font-bold text-emerald-600 mt-0.5 preserve-breaks">...</p>
+        </div>
+      </div>
+
+      <p id="ui-review-hint" class="text-xs text-slate-500 mt-4 leading-relaxed">
+        Por favor, leia atentamente os termos contratuais abaixo antes de assinar. A assinatura eletrônica tem validade jurídica e confirma a aceitação plena das condições.
+      </p>
+    </div>
+
+    <!-- Contract Document Body -->
+    <div class="p-6 md:p-8">
+      <div id="contract-container" class="contract-body">
+        <div id="contract-content" class="prose max-w-none"></div>
+      </div>
+    </div>
+
+    <!-- Signature Pad & Submission Area -->
+    <div class="p-6 md:p-8 bg-slate-50 border-t border-slate-200">
+      <form id="signature-form" onsubmit="submitSignature(event)">
+        
+        <div class="grid md:grid-cols-2 gap-4 mb-5">
+          <div>
+            <label id="ui-form-name-label" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+              Nome Completo do Responsável *
+            </label>
+            <input 
+              type="text" 
+              id="signer-name" 
+              required 
+              placeholder="Seu nome completo"
+              class="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600" 
+            />
+          </div>
+          <div>
+            <label id="ui-form-email-label" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">
+              E-mail para Confirmação e Cópia *
+            </label>
+            <input 
+              type="email" 
+              id="signer-email" 
+              required 
+              placeholder="seu.email@empresa.com"
+              class="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600" 
+            />
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <div class="flex items-center justify-between mb-2">
+            <label id="ui-form-signature-label" class="block text-xs font-bold text-slate-600 uppercase tracking-wider">
+              Desenhe sua Assinatura Digital Abaixo *
+            </label>
+            <button type="button" id="clear-btn" class="text-xs text-red-500 font-bold hover:text-red-700 transition">
+              <span id="ui-clear-btn-text">Limpar Assinatura</span> ↺
+            </button>
+          </div>
+          <canvas id="signature-pad" class="w-full h-44 md:h-48"></canvas>
+          <p id="ui-signature-instruction" class="text-[11px] text-slate-400 mt-1.5">
+            Use o mouse ou a tela sensível ao toque para assinar.
+          </p>
+        </div>
+
+        <button 
+          type="submit" 
+          id="submit-btn" 
+          class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl flex justify-center items-center gap-2 cursor-pointer disabled:opacity-50"
+        >
+          <span id="ui-submit-btn-text">Confirmar & Assinar Documento</span>
+        </button>
+
+        <div id="status-message" class="text-center text-sm font-semibold mt-4 hidden p-3 rounded-xl"></div>
+      </form>
+    </div>
+
+  </div>
+
+  <footer class="text-center py-6 text-xs text-slate-400">
+    AlanSM Solutions © 2026 • Sistema de Assinatura Digital com Trilha de Auditoria & IP
+  </footer>
+
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+  <script>
+    // ---------- CONFIG ----------
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwxzYWgEdGsUqjokKIMroI1xmZYE1LQcj4sd8EIoODbDWA5MIxa0xEb85JTuvAQnVMtXA/exec";
+
+    // ---------- STATE ----------
+    let contractData = null;
+    let currentLang = 'pt';
+    let hasDrawn = false;
+
+    const params = new URLSearchParams(window.location.search);
+    const leadId = params.get('leadId') || params.get('id');
+    const contractId = params.get('contractId') || 'default';
+
+    // Auto-detect language if specified in URL (?lang=pt, ?lang=pl, ?lang=en)
+    const initialLang = (params.get('lang') || params.get('idioma') || navigator.language || 'pt').toLowerCase();
+    if (initialLang.startsWith('pl')) {
+      currentLang = 'pl';
+    } else if (initialLang.startsWith('en')) {
+      currentLang = 'en';
+    } else {
+      currentLang = 'pt';
+    }
+
+    // UI Dictionary for Multi-language interface
+    const I18N = {
+      pt: {
+        loaderText: 'Carregando contrato...',
+        headerTitle: 'AlanSM Solutions • Assinatura de Contrato',
+        contractIdLabel: 'ID do Contrato',
+        statusPending: 'Pendente',
+        statusSigned: 'Assinado',
+        summaryTitle: 'Resumo do Pedido & Cliente',
+        summaryClient: 'Cliente',
+        summaryEmail: 'E-mail',
+        summaryPackage: 'Serviço / Pacote',
+        summaryPrice: 'Valor Estimado',
+        reviewHint: 'Por favor, leia atentamente os termos contratuais abaixo antes de assinar. A assinatura eletrônica tem validade jurídica e confirma a aceitação plena das condições.',
+        formNameLabel: 'Nome Completo do Responsável *',
+        formEmailLabel: 'E-mail para Confirmação e Cópia *',
+        formSignatureLabel: 'Desenhe sua Assinatura Digital Abaixo *',
+        clearBtnText: 'Limpar Assinatura',
+        signatureInstruction: 'Use o mouse ou a tela touch para assinar.',
+        submitBtnText: 'Confirmar & Assinar Documento',
+        sendingText: 'Enviando assinatura para a nuvem...',
+        successText: '✅ Contrato assinado com sucesso! Uma cópia foi registrada no sistema.',
+        btnSigned: 'Assinado com Sucesso',
+        errorEmptySignature: 'Por favor, faça sua assinatura digital no quadro antes de enviar.',
+        errorNetwork: 'Erro de conexão: não foi possível contactar o servidor.'
+      },
+      pl: {
+        loaderText: 'Ładowanie umowy...',
+        headerTitle: 'AlanSM Solutions • Podpis Umowy',
+        contractIdLabel: 'Numer Umowy',
+        statusPending: 'Oczekuje na podpis',
+        statusSigned: 'Podpisano',
+        summaryTitle: 'Podsumowanie Zamówienia i Klient',
+        summaryClient: 'Klient',
+        summaryEmail: 'E-mail',
+        summaryPackage: 'Pakiet / Usługa',
+        summaryPrice: 'Szacowana Cena',
+        reviewHint: 'Prosimy o dokładne zapoznanie się z poniższymi warunkami przed podpisaniem. Podpis elektroniczny jest prawnie wiążący i stanowi pełną akceptację warunków.',
+        formNameLabel: 'Imię i Nazwisko Osoby Podpisującej *',
+        formEmailLabel: 'E-mail do Potwierdzenia i Kopii *',
+        formSignatureLabel: 'Złóż Swój Podpis Cyfrowy Poniżej *',
+        clearBtnText: 'Wyczyść Podpis',
+        signatureInstruction: 'Użyj myszy lub ekranu dotykowego, aby złożyć podpis.',
+        submitBtnText: 'Podpisz i Zaakceptuj Dokument',
+        sendingText: 'Wysyłanie podpisu...',
+        successText: '✅ Umowa została pomyślnie podpisana! Kopia została zapisana w systemie.',
+        btnSigned: 'Podpisano Pomyślnie',
+        errorEmptySignature: 'Proszę złożyć podpis cyfrowy przed wysłaniem formularza.',
+        errorNetwork: 'Błąd sieci: nie można połączyć się z serwerem.'
+      },
+      en: {
+        loaderText: 'Loading contract...',
+        headerTitle: 'AlanSM Solutions • Contract Signature',
+        contractIdLabel: 'Contract ID',
+        statusPending: 'Pending Signature',
+        statusSigned: 'Signed',
+        summaryTitle: 'Contract Summary & Client Details',
+        summaryClient: 'Client',
+        summaryEmail: 'Email',
+        summaryPackage: 'Package / Service',
+        summaryPrice: 'Estimated Price',
+        reviewHint: 'Please review the contract terms below carefully before signing. Electronic signature is legally binding and confirms acceptance of all terms.',
+        formNameLabel: 'Signer Full Name *',
+        formEmailLabel: 'Email for Copy & Confirmation *',
+        formSignatureLabel: 'Draw Your Digital Signature Below *',
+        clearBtnText: 'Clear Signature',
+        signatureInstruction: 'Use your mouse or touchscreen to draw your signature.',
+        submitBtnText: 'Sign & Accept Document',
+        sendingText: 'Submitting signature to server...',
+        successText: '✅ Contract signed successfully! A copy has been registered in the system.',
+        btnSigned: 'Document Signed',
+        errorEmptySignature: 'Please provide your digital signature on the pad before submitting.',
+        errorNetwork: 'Network error: cannot reach backend server.'
+      }
+    };
+
+    // ---------- INIT ----------
+    window.addEventListener('DOMContentLoaded', () => {
+      setLanguage(currentLang, false);
+      if (!leadId) return showError('Link inválido: Lead ID não fornecido / Invalid link: missing leadId');
+      initCanvas();
+      loadInitialData();
+      document.getElementById('clear-btn').addEventListener('click', clearCanvas);
+      window.addEventListener('resize', resizeCanvas);
+    });
+
+    function showLoader(show) {
+      document.getElementById('loader').style.display = show ? 'flex' : 'none';
+    }
+
+    // ---------- LANGUAGE SWITCHER ----------
+    function setLanguage(lang, reRender = true) {
+      currentLang = lang;
+      const dict = I18N[lang] || I18N.pt;
+
+      // Update button styles
+      ['pt', 'pl', 'en'].forEach(l => {
+        const btn = document.getElementById('lang-btn-' + l);
+        if (btn) {
+          if (l === lang) {
+            btn.className = 'px-2.5 py-1 text-xs font-bold rounded-lg transition-all bg-blue-600 text-white shadow-sm';
+          } else {
+            btn.className = 'px-2.5 py-1 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white';
+          }
+        }
+      });
+
+      // Update UI labels
+      document.getElementById('loader-text').textContent = dict.loaderText;
+      document.getElementById('ui-header-title').textContent = dict.headerTitle;
+      document.getElementById('ui-label-contract-id').textContent = dict.contractIdLabel;
+      document.getElementById('ui-summary-title').textContent = dict.summaryTitle;
+      document.getElementById('ui-summary-client').textContent = dict.summaryClient;
+      document.getElementById('ui-summary-email').textContent = dict.summaryEmail;
+      document.getElementById('ui-summary-package').textContent = dict.summaryPackage;
+      document.getElementById('ui-summary-price').textContent = dict.summaryPrice;
+      document.getElementById('ui-review-hint').textContent = dict.reviewHint;
+      document.getElementById('ui-form-name-label').textContent = dict.formNameLabel;
+      document.getElementById('ui-form-email-label').textContent = dict.formEmailLabel;
+      document.getElementById('ui-form-signature-label').textContent = dict.formSignatureLabel;
+      document.getElementById('ui-clear-btn-text').textContent = dict.clearBtnText;
+      document.getElementById('ui-signature-instruction').textContent = dict.signatureInstruction;
+      document.getElementById('ui-submit-btn-text').textContent = dict.submitBtnText;
+
+      const badge = document.getElementById('badge-status');
+      if (badge && !badge.dataset.signed) {
+        badge.textContent = dict.statusPending;
+      }
+
+      if (reRender && contractData) {
+        populateUI(contractData);
+      }
+    }
+
+    // ---------- JSONP LOAD FROM BACKEND ----------
+    function loadInitialData() {
+      showLoader(true);
+      const cb = 'cb_' + Date.now();
+      const url = `${SCRIPT_URL}?action=getSignatureData&leadId=${encodeURIComponent(leadId)}&contractId=${encodeURIComponent(contractId)}&callback=${cb}`;
+      const script = document.createElement('script');
+
+      window[cb] = function(resp) {
+        showLoader(false);
+        try {
+          if (resp && resp.success && resp.data) {
+            contractData = resp.data;
+            populateUI(contractData);
+          } else {
+            const err = (resp && resp.error) ? resp.error : 'Contrato não encontrado ou indisponível.';
+            showError(err);
+          }
+        } catch (err) {
+          showError('Resposta inválida do servidor.');
+        }
+        script.remove();
+        delete window[cb];
+      };
+
+      script.onerror = function() {
+        showLoader(false);
+        showError(I18N[currentLang].errorNetwork);
+        script.remove();
+        delete window[cb];
+      };
+
+      script.src = url;
+      document.body.appendChild(script);
+    }
+
+    // ---------- RENDER CONTRACT INTO PAGE ----------
+    function populateUI(data) {
+      document.getElementById('display-contract-id').textContent = data.contractId || contractId || '—';
+      document.getElementById('display-name').textContent = data.clientLegalName || data.name || data.businessName || '—';
+      document.getElementById('display-email').textContent = data.clientEmail || data.email || '—';
+      document.getElementById('display-package').textContent = data.packageName || data.service || '—';
+      document.getElementById('display-price').textContent = data.estimatedPrice || data.price || '—';
+
+      if (!document.getElementById('signer-name').value) {
+        document.getElementById('signer-name').value = data.clientLegalName || data.name || '';
+      }
+      if (!document.getElementById('signer-email').value) {
+        document.getElementById('signer-email').value = data.clientEmail || data.email || '';
+      }
+
+      // Build contract HTML based on current language
+      const filled = fillContractTemplate(currentLang, {
+        DATE: formatDate(new Date()),
+        LEAD_ID: data.leadId || leadId || '',
+        CLIENT_LEGAL_NAME: data.clientLegalName || data.name || data.businessName || '',
+        TAX_ID: data.taxIdNumber || data.taxId || data.cnpj || data.nip || '',
+        ADDRESS: data.address || '',
+        POSTAL_CODE: data.postalCode || data.cep || '',
+        CITY: data.city || data.place || '',
+        EMAIL: data.clientEmail || data.email || '',
+        PACKAGE: data.packageName || data.service || '',
+        PRICE: data.estimatedPrice || data.price || '',
+        CONTRACT_RAW_TEXT: data.contractText || ''
+      });
+
+      const container = document.getElementById('contract-content');
+      container.innerHTML = filled;
+    }
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Fill the contract template with multi-language terms
+    function fillContractTemplate(lang, vals) {
+      if (vals.CONTRACT_RAW_TEXT && String(vals.CONTRACT_RAW_TEXT).trim().length > 20) {
+        return '<div class="contract-section preserve-breaks">' + escapeHtml(vals.CONTRACT_RAW_TEXT) + '</div>';
+      }
+
+      // --- 1. PORTUGUESE (PT) TEMPLATE ---
+      if (lang === 'pt') {
+        const tplPt = `
+          <div class="contract-section border-b border-slate-200 pb-3">
+            <div class="contract-title text-blue-900 text-base">ORDEM DE SERVIÇO & TERMO DE CONTRATAÇÃO DIGITAL</div>
+            <div class="muted font-medium">Data de Emissão: <strong>{{DATE}}</strong> &nbsp;•&nbsp; Código do Projeto: <strong>{{LEAD_ID}}</strong></div>
+          </div>
+
+          <div class="contract-section bg-slate-50 p-3.5 rounded-lg border border-slate-200/80">
+            <div class="contract-title">CONTRATADA (PRESTADORA DE SERVIÇOS):</div>
+            <pre>AlanSM Solutions - Alan da Silva Morais
+E-mail: kontakt@alansmsolutions.com
+Tax / PESEL / Identificação: 87092016359
+Website: https://alansmsolutions.com</pre>
+          </div>
+
+          <div class="contract-section bg-slate-50 p-3.5 rounded-lg border border-slate-200/80">
+            <div class="contract-title">CONTRATANTE (CLIENTE):</div>
+            <div class="two-col">
+              <div>
+                <strong>Razão Social / Nome:</strong><div class="preserve-breaks text-slate-800">{{CLIENT_LEGAL_NAME}}</div>
+              </div>
+              <div>
+                <strong>CNPJ / CPF / Tax ID (NIP):</strong><div class="preserve-breaks text-slate-800">{{TAX_ID}}</div>
+              </div>
+            </div>
+            <div style="margin-top:.75rem;">
+              <strong>Endereço Completo:</strong><div class="preserve-breaks text-slate-800">{{ADDRESS}}</div>
+              <div class="muted preserve-breaks" style="margin-top:.25rem;">CEP / Código Postal e Cidade: <strong>{{POSTAL_CODE}} {{CITY}}</strong></div>
+              <div class="muted preserve-breaks" style="margin-top:.25rem;">E-mail de Contato: <strong>{{EMAIL}}</strong></div>
+            </div>
+          </div>
+
+          <div class="contract-section bg-blue-50/50 p-3.5 rounded-lg border border-blue-100">
+            <div class="contract-title text-blue-900">ESPECIFICAÇÕES DO SERVIÇO CONTRATADO:</div>
+            <div><strong>Serviço / Pacote Selecionado:</strong></div>
+            <div style="margin:0.5rem 0 0.75rem 0;" class="preserve-breaks text-slate-900 font-semibold">{{PACKAGE}}</div>
+            <div><strong>Investimento Total / Valor Acordado:</strong> <span class="preserve-breaks text-emerald-700 font-bold text-base">{{PRICE}}</span></div>
+          </div>
+
+          <div class="contract-section">
+            <div class="contract-title">TERMOS GERAIS DE PRESTAÇÃO DE SERVIÇOS DIGITAIS (MSA)</div>
+
+            <div style="margin-bottom:0.75rem;">
+              <strong>1. Responsabilidades do Contratante</strong>
+              <div class="muted">O Contratante compromete-se a fornecer pontualmente todo o material necessário (textos, logotipos, credenciais e acessos) para a execução do projeto. Atrasos na entrega de materiais por parte do Contratante resultarão na prorrogação proporcional dos prazos de entrega acordados.</div>
+            </div>
+
+            <div style="margin-bottom:0.75rem;">
+              <strong>2. Escopo e Alterações (Scope Changes)</strong>
+              <div class="muted">O projeto inclui estritamente as funcionalidades e entregáveis descritos nas Especificações do Serviço. Solicitações de páginas extras, novas integrações complexas ou recursos não listados inicialmente serão orçados e tratados como escopo adicional.</div>
+            </div>
+
+            <div style="margin-bottom:0.75rem;">
+              <strong>3. Ferramentas de Terceiros, Domínios e Hospedagem</strong>
+              <div class="muted">A AlanSM Solutions não se responsabiliza por instabilidades, alterações de preços, interrupções ou falhas técnicas em plataformas de terceiros (ex.: serviços de hospedagem, servidores, registradores de domínio, APIs, gateways de pagamento, CRMs e plataformas de automação). Os custos de assinaturas diretas destas ferramentas são de responsabilidade do Contratante.</div>
+            </div>
+
+            <div style="margin-bottom:0.75rem;">
+              <strong>4. Propriedade Intelectual e Licenciamento</strong>
+              <div class="muted">Após a quitação integral do valor acordado, o Contratante recebe os direitos de uso e exploração da solução desenvolvida e de seus respectivos conteúdos. A AlanSM Solutions retém os direitos autorais e propriedade intelectual sobre seus códigos-base, frameworks proprietários, automações e know-how técnico empregados no desenvolvimento.</div>
+            </div>
+
+            <div style="margin-bottom:0.75rem;">
+              <strong>5. Limitação de Responsabilidade</strong>
+              <div class="muted">A AlanSM Solutions aplica as melhores práticas de mercado na execução técnica, contudo não garante resultados comerciais fixos, volumes específicos de vendas ou posicionamento orgânico garantido em motores de busca. A responsabilidade financeira máxima da Prestadora limita-se ao valor total efetivamente pago pelo Contratante pelo respectivo projeto.</div>
+            </div>
+
+            <div>
+              <strong>6. Foro e Legislação Aplicável</strong>
+              <div class="muted">As partes elegem a mediação e a resolução amigável para quaisquer divergências decorrentes deste instrumento. Na impossibilidade de conciliação, as questões serão resolvidas perante a jurisdição competente da sede da AlanSM Solutions.</div>
+            </div>
+          </div>
+
+          <div class="contract-section bg-slate-100 p-3.5 rounded-lg border border-slate-300">
+            <div class="contract-title">ACEITAÇÃO & ASSINATURA ELETRÔNICA</div>
+            <div class="muted">Ao apor a assinatura digital abaixo, o Contratante declara ter lido, compreendido e concordado integralmente com todos os termos deste contrato e autoriza o início da execução dos serviços. Esta operação registra endereço IP, carimbo de data/hora (timestamp) e evidências criptográficas no Certificado de Auditoria.</div>
+          </div>
+        `;
+
+        return tplPt
+          .replace(/{{DATE}}/g, escapeHtml(vals.DATE))
+          .replace(/{{LEAD_ID}}/g, escapeHtml(vals.LEAD_ID))
+          .replace(/{{CLIENT_LEGAL_NAME}}/g, escapeHtml(vals.CLIENT_LEGAL_NAME))
+          .replace(/{{TAX_ID}}/g, escapeHtml(vals.TAX_ID))
+          .replace(/{{ADDRESS}}/g, escapeHtml(vals.ADDRESS))
+          .replace(/{{POSTAL_CODE}}/g, escapeHtml(vals.POSTAL_CODE))
+          .replace(/{{CITY}}/g, escapeHtml(vals.CITY))
+          .replace(/{{EMAIL}}/g, escapeHtml(vals.EMAIL))
+          .replace(/{{PACKAGE}}/g, escapeHtml(vals.PACKAGE))
+          .replace(/{{PRICE}}/g, escapeHtml(vals.PRICE));
+      }
+
+      // --- 2. POLISH (PL) TEMPLATE ---
+      if (lang === 'pl') {
+        const tplPl = `
+          <div class="contract-section border-b border-slate-200 pb-3">
+            <div class="contract-title text-blue-900 text-base">ZAMÓWIENIE USŁUGI / SERVICE ORDER</div>
+            <div class="muted font-medium">Data: <strong>{{DATE}}</strong> &nbsp;•&nbsp; Numer Projektu: <strong>{{LEAD_ID}}</strong></div>
+          </div>
+
+          <div class="contract-section bg-slate-50 p-3.5 rounded-lg border border-slate-200/80">
+            <div class="contract-title">WYKONAWCA (SERVICE PROVIDER):</div>
+            <pre>AlanSM Solutions - Alan da Silva Morais
+Email: kontakt@alansmsolutions.com
+PESEL: 87092016359
+Kraków, Polska</pre>
+          </div>
+
+          <div class="contract-section bg-slate-50 p-3.5 rounded-lg border border-slate-200/80">
+            <div class="contract-title">ZAMAWIAJĄCY (CLIENT):</div>
+            <div class="two-col">
+              <div>
+                <strong>Nazwa firmy (Company Legal Name):</strong><div class="preserve-breaks text-slate-800">{{CLIENT_LEGAL_NAME}}</div>
+              </div>
+              <div>
+                <strong>NIP (Tax ID):</strong><div class="preserve-breaks text-slate-800">{{TAX_ID}}</div>
+              </div>
+            </div>
+            <div style="margin-top:.75rem;">
+              <strong>Adres siedziby (Address):</strong><div class="preserve-breaks text-slate-800">{{ADDRESS}}</div>
+              <div class="muted preserve-breaks" style="margin-top:.25rem;">Kod pocztowy i miasto: <strong>{{POSTAL_CODE}} {{CITY}}</strong></div>
+              <div class="muted preserve-breaks" style="margin-top:.25rem;">Email kontaktowy: <strong>{{EMAIL}}</strong></div>
+            </div>
+          </div>
+
+          <div class="contract-section bg-blue-50/50 p-3.5 rounded-lg border border-blue-100">
+            <div class="contract-title text-blue-900">SZCZEGÓŁY ZAMÓWIENIA (PROJECT DETAILS):</div>
+            <div><strong>Wybrany Pakiet (Package):</strong></div>
+            <div style="margin:0.5rem 0 0.75rem 0;" class="preserve-breaks text-slate-900 font-semibold">{{PACKAGE}}</div>
+            <div><strong>Szacowana Cena (Estimated Price):</strong> <span class="preserve-breaks text-emerald-700 font-bold text-base">{{PRICE}}</span></div>
+          </div>
+
+          <div class="contract-section">
+            <div class="contract-title">OGÓLNE WARUNKI ŚWIADCZENIA USŁUG (MASTER SERVICE AGREEMENT)</div>
+
+            <div style="margin-bottom:0.75rem;">
+              <strong>1. Obowiązki Klienta / Client Responsibilities</strong>
+              <div class="muted">Klient zobowiązuje się do terminowego dostarczania wszelkich niezbędnych materiałów (teksty, logotypy, dostępy do kont) potrzebnych do realizacji projektu. Opóźnienia po stronie Klienta mogą skutkować przesunięciem terminu realizacji.</div>
+            </div>
+
+            <div style="margin-bottom:0.75rem;">
+              <strong>2. Zmiany w Zakresie / Scope Changes</strong>
+              <div class="muted">Projekt obejmuje wyłącznie funkcjonalności określone w Zamówieniu. Wszelkie dodatkowe poprawki, nowe strony, zaawansowane integracje lub funkcje wykraczające poza ten zakres będą traktowane jako dodatkowa praca i wyceniane osobno.</div>
+            </div>
+
+            <div style="margin-bottom:0.75rem;">
+              <strong>3. Narzędzia Trzecie i Hosting / Third-Party Tools & Hosting</strong>
+              <div class="muted">AlanSM Solutions nie ponosi odpowiedzialności za awarie, zmiany cen, przerwy w działaniu ani błędy oprogramowania firm trzecich (np. hosting, domeny, systemy CRM, bramki płatności, narzędzia do rezerwacji). Koszty subskrypcji tych narzędzi pokrywa Klient.</div>
+            </div>
+
+            <div style="margin-bottom:0.75rem;">
+              <strong>4. Własność Intelektualna / Intellectual Property</strong>
+              <div class="muted">Po zaksięgowaniu pełnej płatności Klient otrzymuje pełne prawa do korzystania z gotowego systemu/strony oraz własnych treści. AlanSM Solutions zachowuje pełne prawa autorskie do swoich szablonów, kodów źródłowych, skryptów automatyzacji i metodologii (know-how).</div>
+            </div>
+
+            <div style="margin-bottom:0.75rem;">
+              <strong>5. Ograniczenie Odpowiedzialności / Limitation of Liability</strong>
+              <div class="muted">AlanSM Solutions dostarcza systemy z najwyższą starannością, jednak nie gwarantuje konkretnych wyników biznesowych, poziomu sprzedaży ani pozycji w wyszukiwarkach. Całkowita odpowiedzialność finansowa jest ograniczona do kwoty faktycznie zapłaconej przez Klienta.</div>
+            </div>
+
+            <div>
+              <strong>6. Prawo Właściwe / Governing Law</strong>
+              <div class="muted">Niniejsza umowa podlega prawu polskiemu. Wszelkie spory będą rozstrzygane polubownie, a w przypadku braku porozumienia – przez sąd właściwy dla siedziby AlanSM Solutions.</div>
+            </div>
+          </div>
+
+          <div class="contract-section bg-slate-100 p-3.5 rounded-lg border border-slate-300">
+            <div class="contract-title">AKCEPTACJA WARUNKÓW</div>
+            <div class="muted">Poprzez podpis elektroniczny Klient potwierdza, że przeczytał, zrozumiał i akceptuje powyższe warunki oraz zgadza się na realizację Zamówienia. Logi IP oraz znacznik czasu zostaną dołączone do Certyfikatu Podpisu.</div>
+          </div>
+        `;
+
+        return tplPl
+          .replace(/{{DATE}}/g, escapeHtml(vals.DATE))
+          .replace(/{{LEAD_ID}}/g, escapeHtml(vals.LEAD_ID))
+          .replace(/{{CLIENT_LEGAL_NAME}}/g, escapeHtml(vals.CLIENT_LEGAL_NAME))
+          .replace(/{{TAX_ID}}/g, escapeHtml(vals.TAX_ID))
+          .replace(/{{ADDRESS}}/g, escapeHtml(vals.ADDRESS))
+          .replace(/{{POSTAL_CODE}}/g, escapeHtml(vals.POSTAL_CODE))
+          .replace(/{{CITY}}/g, escapeHtml(vals.CITY))
+          .replace(/{{EMAIL}}/g, escapeHtml(vals.EMAIL))
+          .replace(/{{PACKAGE}}/g, escapeHtml(vals.PACKAGE))
+          .replace(/{{PRICE}}/g, escapeHtml(vals.PRICE));
+      }
+
+      // --- 3. ENGLISH (EN) TEMPLATE ---
+      const tplEn = `
+        <div class="contract-section border-b border-slate-200 pb-3">
+          <div class="contract-title text-blue-900 text-base">SERVICE ORDER & DIGITAL AGREEMENT</div>
+          <div class="muted font-medium">Date: <strong>{{DATE}}</strong> &nbsp;•&nbsp; Project Number: <strong>{{LEAD_ID}}</strong></div>
+        </div>
+
+        <div class="contract-section bg-slate-50 p-3.5 rounded-lg border border-slate-200/80">
+          <div class="contract-title">SERVICE PROVIDER:</div>
+          <pre>AlanSM Solutions - Alan da Silva Morais
+Email: kontakt@alansmsolutions.com
+Tax ID / PESEL: 87092016359
+Website: https://alansmsolutions.com</pre>
+        </div>
+
+        <div class="contract-section bg-slate-50 p-3.5 rounded-lg border border-slate-200/80">
+          <div class="contract-title">CLIENT:</div>
+          <div class="two-col">
+            <div>
+              <strong>Company Legal Name:</strong><div class="preserve-breaks text-slate-800">{{CLIENT_LEGAL_NAME}}</div>
+            </div>
+            <div>
+              <strong>Tax ID / VAT / Registration:</strong><div class="preserve-breaks text-slate-800">{{TAX_ID}}</div>
+            </div>
+          </div>
+          <div style="margin-top:.75rem;">
+            <strong>Registered Address:</strong><div class="preserve-breaks text-slate-800">{{ADDRESS}}</div>
+            <div class="muted preserve-breaks" style="margin-top:.25rem;">City & Postal Code: <strong>{{POSTAL_CODE}} {{CITY}}</strong></div>
+            <div class="muted preserve-breaks" style="margin-top:.25rem;">Contact Email: <strong>{{EMAIL}}</strong></div>
+          </div>
+        </div>
+
+        <div class="contract-section bg-blue-50/50 p-3.5 rounded-lg border border-blue-100">
+          <div class="contract-title text-blue-900">PROJECT SPECIFICATIONS:</div>
+          <div><strong>Selected Package / Scope:</strong></div>
+          <div style="margin:0.5rem 0 0.75rem 0;" class="preserve-breaks text-slate-900 font-semibold">{{PACKAGE}}</div>
+          <div><strong>Estimated Total Price:</strong> <span class="preserve-breaks text-emerald-700 font-bold text-base">{{PRICE}}</span></div>
+        </div>
+
+        <div class="contract-section">
+          <div class="contract-title">MASTER SERVICE AGREEMENT (MSA) TERMS</div>
+
+          <div style="margin-bottom:0.75rem;">
+            <strong>1. Client Responsibilities</strong>
+            <div class="muted">The Client agrees to provide all necessary materials (texts, logos, account access) required for the project in a timely manner. Delays on the Client's side may result in project deadlines being extended accordingly.</div>
+          </div>
+
+          <div style="margin-bottom:0.75rem;">
+            <strong>2. Scope Changes & Revisions</strong>
+            <div class="muted">The project strictly includes the features specified in the Service Order. Any additional pages, complex third-party integrations, or extra revisions outside this scope will be quoted separately.</div>
+          </div>
+
+          <div style="margin-bottom:0.75rem;">
+            <strong>3. Third-Party Tools & Hosting</strong>
+            <div class="muted">AlanSM Solutions is not liable for outages, price changes, downtime, or software bugs of third-party providers (e.g., hosting, domains, CRMs, payment gateways). The Client is responsible for any third-party subscription costs.</div>
+          </div>
+
+          <div style="margin-bottom:0.75rem;">
+            <strong>4. Intellectual Property Rights</strong>
+            <div class="muted">Upon full payment, the Client receives rights to use the final system/website. AlanSM Solutions retains all copyright and intellectual property rights to its proprietary templates, source codes, and automation methodologies (know-how).</div>
+          </div>
+
+          <div style="margin-bottom:0.75rem;">
+            <strong>5. Limitation of Liability</strong>
+            <div class="muted">AlanSM Solutions delivers systems with utmost diligence but does not guarantee specific business turnover or search engine rankings. Total financial liability is limited to the amount actually paid by the Client for the specific project.</div>
+          </div>
+
+          <div>
+            <strong>6. Governing Law & Dispute Resolution</strong>
+            <div class="muted">This agreement is governed by the laws applicable to AlanSM Solutions' registered seat. Any disputes shall be resolved amicably before resorting to the competent courts.</div>
+          </div>
+        </div>
+
+        <div class="contract-section bg-slate-100 p-3.5 rounded-lg border border-slate-300">
+          <div class="contract-title">ACCEPTANCE & SIGNATURE</div>
+          <div class="muted">By executing this electronic signature, the Client confirms that they have read, understood, and accept the terms above. Audit proofs including IP address and timestamp are recorded in the Signature Audit Log.</div>
+        </div>
+      `;
+
+      return tplEn
+        .replace(/{{DATE}}/g, escapeHtml(vals.DATE))
+        .replace(/{{LEAD_ID}}/g, escapeHtml(vals.LEAD_ID))
+        .replace(/{{CLIENT_LEGAL_NAME}}/g, escapeHtml(vals.CLIENT_LEGAL_NAME))
+        .replace(/{{TAX_ID}}/g, escapeHtml(vals.TAX_ID))
+        .replace(/{{ADDRESS}}/g, escapeHtml(vals.ADDRESS))
+        .replace(/{{POSTAL_CODE}}/g, escapeHtml(vals.POSTAL_CODE))
+        .replace(/{{CITY}}/g, escapeHtml(vals.CITY))
+        .replace(/{{EMAIL}}/g, escapeHtml(vals.EMAIL))
+        .replace(/{{PACKAGE}}/g, escapeHtml(vals.PACKAGE))
+        .replace(/{{PRICE}}/g, escapeHtml(vals.PRICE));
+    }
+
+    function formatDate(d) {
+      const dd = String(d.getDate()).padStart(2, '0');
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const yyyy = d.getFullYear();
+      return `${dd}/${mm}/${yyyy}`;
+    }
+
+    function showError(msg) {
+      showLoader(false);
+      const status = document.getElementById('status-message');
+      status.classList.remove('hidden', 'text-emerald-700', 'bg-emerald-50', 'border-emerald-200');
+      status.classList.add('text-red-700', 'bg-red-50', 'border', 'border-red-200');
+      status.textContent = '❌ ' + msg;
+      document.getElementById('submit-btn').disabled = true;
+    }
+
+    // ---------- SIGNATURE CANVAS LOGIC ----------
+    const canvas = document.getElementById('signature-pad');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+
+    function initCanvas() {
+      resizeCanvas();
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = '#0f172a';
+
+      // Mouse events
+      canvas.addEventListener('mousedown', (e) => {
+        isDrawing = true;
+        hasDrawn = true;
+        const p = pointerPos(e);
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+      });
+
+      canvas.addEventListener('mousemove', (e) => {
+        if (!isDrawing) return;
+        const p = pointerPos(e);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+      });
+
+      window.addEventListener('mouseup', () => { isDrawing = false; });
+
+      // Touch events
+      canvas.addEventListener('touchstart', (e) => {
+        isDrawing = true;
+        hasDrawn = true;
+        const p = pointerPos(e.touches[0]);
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        e.preventDefault();
+      }, { passive: false });
+
+      canvas.addEventListener('touchmove', (e) => {
+        if (!isDrawing) return;
+        const p = pointerPos(e.touches[0]);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+        e.preventDefault();
+      }, { passive: false });
+
+      canvas.addEventListener('touchend', () => { isDrawing = false; });
+    }
+
+    function resizeCanvas() {
+      const ratio = window.devicePixelRatio || 1;
+      const w = canvas.offsetWidth;
+      const h = canvas.offsetHeight;
+      canvas.width = Math.round(w * ratio);
+      canvas.height = Math.round(h * ratio);
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      clearCanvas();
+    }
+
+    function pointerPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.clientX || 0) - rect.left;
+      const y = (e.clientY || 0) - rect.top;
+      return { x, y };
+    }
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hasDrawn = false;
+    }
+
+    // ---------- SUBMIT SIGNATURE TO BACKEND ----------
+    async function submitSignature(ev) {
+      if (ev) ev.preventDefault();
+
+      const dict = I18N[currentLang] || I18N.pt;
+      const btn = document.getElementById('submit-btn');
+      const status = document.getElementById('status-message');
+
+      if (!hasDrawn) {
+        status.classList.remove('hidden', 'text-emerald-700', 'bg-emerald-50', 'border-emerald-200');
+        status.classList.add('text-amber-800', 'bg-amber-50', 'border', 'border-amber-200');
+        status.textContent = '⚠️ ' + dict.errorEmptySignature;
+        return;
+      }
+
+      status.classList.remove('hidden', 'text-red-700', 'text-emerald-700', 'bg-red-50', 'bg-emerald-50');
+      status.classList.add('text-slate-700', 'bg-slate-100', 'border', 'border-slate-300');
+      status.textContent = dict.sendingText;
+      btn.disabled = true;
+
+      const payload = {
+        action: 'signContract',
+        leadId: leadId,
+        contractId: contractId,
+        signatureData: canvas.toDataURL('image/png'),
+        clientName: document.getElementById('signer-name').value,
+        clientEmail: document.getElementById('signer-email').value,
+        language: currentLang,
+        timestamp: new Date().toISOString()
+      };
+
+      // 1. Primary POST (JSON)
+      try {
+        const resp = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          credentials: 'omit'
+        });
+
+        if (!resp.ok) {
+          throw new Error('HTTP ' + resp.status);
+        }
+
+        const json = await resp.json();
+        if (json && (json.success || json.status === 'ok' || json.status === 'success')) {
+          onSignatureSuccess(dict);
+          return;
+        } else {
+          throw new Error((json && json.error) ? json.error : 'O servidor recusou a assinatura.');
+        }
+      } catch (err) {
+        console.warn('Primary fetch POST failed, attempting fallback to hidden iframe form...', err);
+        // 2. Fallback: Hidden iframe form post (works reliably across CORS environments)
+        try {
+          iframeFormPost(payload);
+          setTimeout(() => {
+            onSignatureSuccess(dict);
+          }, 1800);
+        } catch (e2) {
+          status.classList.remove('text-slate-700', 'bg-slate-100');
+          status.classList.add('text-red-700', 'bg-red-50', 'border-red-200');
+          status.textContent = '❌ Falha ao enviar: ' + (e2.message || e2);
+          btn.disabled = false;
+        }
+      }
+    }
+
+    function onSignatureSuccess(dict) {
+      const btn = document.getElementById('submit-btn');
+      const status = document.getElementById('status-message');
+      const badge = document.getElementById('badge-status');
+
+      status.classList.remove('hidden', 'text-slate-700', 'text-red-700', 'bg-slate-100', 'bg-red-50');
+      status.classList.add('text-emerald-800', 'bg-emerald-50', 'border', 'border-emerald-200');
+      status.textContent = dict.successText;
+
+      btn.innerHTML = '<span>' + dict.btnSigned + ' ✅</span>';
+      btn.classList.remove('bg-slate-900', 'hover:bg-slate-800');
+      btn.classList.add('bg-emerald-600', 'cursor-default');
+      btn.disabled = true;
+
+      badge.dataset.signed = 'true';
+      badge.textContent = dict.statusSigned;
+      badge.className = 'bg-emerald-500/20 text-emerald-300 text-xs font-bold px-3 py-1.5 rounded-xl border border-emerald-500/30';
+    }
+
+    // ---------- IFRAME FORM FALLBACK ----------
+    function iframeFormPost(payload) {
+      const form = document.createElement('form');
+      form.action = SCRIPT_URL;
+      form.method = 'POST';
+      form.target = 'hidden_iframe';
+      form.style.display = 'none';
+
+      Object.keys(payload).forEach(k => {
+        const inp = document.createElement('input');
+        inp.type = 'hidden';
+        inp.name = k;
+        inp.value = payload[k];
+        form.appendChild(inp);
+      });
+
+      document.body.appendChild(form);
+      form.submit();
+      setTimeout(() => form.remove(), 4000);
+      return true;
+    }
+  </script>
+</body>
+</html>
