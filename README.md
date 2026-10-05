@@ -56,4 +56,4 @@ To run this application, you need to set the following environment variables:
 
 **Developed with Precision by AlanSM Solutions.**
 *Kraków, PL • São Sebastião, BR • Remote*
-<!-- Build Version: 2.1.0 — Sync Trigger: 2026-10-05 18:47 UTC -->
+<!-- Build Version: 2.1.1 — Sync Trigger: 2026-10-05 20:00 UTC (Direct Push) -->
