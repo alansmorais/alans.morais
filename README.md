@@ -1,11 +1,59 @@
-<div align="center">
+# AlanSM Solutions - Business Automation Portal
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Professional business automation platform focusing on **0% commission systems** (DeliveryHub), booking platforms, and CRM solutions for the **European (Kraków, Poland)** and **Latin American (São Sebastião, Brazil)** markets.
 
-  <h1>Built with AI Studio</h2>
+## 🚀 Deployment (GitHub Pages)
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+This application is now a **pure static SPA**, making it extremely easy to host for free on **GitHub Pages**.
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+1.  **Export to GitHub**: Use the AI Studio settings to push your code.
+2.  **Enable GitHub Pages**:
+    - Go to your repository **Settings > Pages**.
+    - Under **Build and deployment > Source**, select **GitHub Actions**.
+3.  **Automatic Deployment**: Every push to the `main` branch will now automatically build and deploy your site.
 
-</div>
+---
+
+## 🛠 Tech Stack (Simplified)
+
+- **Frontend**: React 18, Vite (Static SPA).
+- **Backend**: Google Apps Script (Serverless Lead Capture).
+- **Hosting**: GitHub Pages (Free).
+
+## ⚙️ Configuration
+
+To run this application, you need to set the following environment variables:
+
+| Variable | Description |
+|----------|-------------|
+| `GEMINI_API_KEY` | Your Google Gemini API Key for AI features. |
+| `VITE_CONTACT_API_URL` | URL for the Lead Capture endpoint (Google Apps Script). |
+
+## 🏗 Local Development
+
+1.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
+2.  **Start development server**:
+    ```bash
+    npm run dev
+    ```
+3.  **Build for production**:
+    ```bash
+    npm run build
+    ```
+
+---
+
+## 🌐 Live URLs
+
+- **Main Portal**: [alansmsolutions.com](https://alansmsolutions.com/)
+- **Referral Program**: [alansmsolutions.com/referral.html](https://alansmsolutions.com/referral.html)
+- **Direct ERP Referral Intake**: [alansmsolutions.com/referal-index.html](https://alansmsolutions.com/referal-index.html)
+
+---
+
+**Developed with Precision by AlanSM Solutions.**
+*Kraków, PL • São Sebastião, BR • Remote*
+<!-- Build Version: 2.1.0 — Sync Trigger: 2026-10-05 18:47 UTC -->
