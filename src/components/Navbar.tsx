@@ -200,9 +200,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-5xl mx-auto px-4 sm:px-6 h-13 flex items-center justify-between">
         <a href="/" className="flex items-center gap-2.5 group">
           <img 
-            src="https://raw.githubusercontent.com/alansmorais/alans.morais/main/images/logo.svg" 
+            src="https://raw.githubusercontent.com/alansmorais/alansmsolutions/refs/heads/main/Logo_Transparent.png" 
             alt="AlanSM Solutions logo" 
-            className={`w-7.5 h-7.5 rounded-full object-cover transition-transform group-hover:scale-105 ${
+            className={`w-8 h-8 rounded-lg object-contain p-0.5 transition-transform group-hover:scale-105 ${
               isDark ? 'bg-slate-900 border border-slate-800' : 'bg-slate-100 border border-slate-300'
             }`} 
           />
